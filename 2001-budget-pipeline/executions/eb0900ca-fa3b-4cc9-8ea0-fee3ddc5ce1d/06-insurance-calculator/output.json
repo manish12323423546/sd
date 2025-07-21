@@ -1,0 +1,354 @@
+{
+  "model_name": "insuranceCalculator",
+  "execution_id": "eb0900ca-fa3b-4cc9-8ea0-fee3ddc5ce1d",
+  "timestamp": "2025-07-21T12:27:31.097445",
+  "success": true,
+  "processing_time": 87.47851533399995,
+  "output_data": {
+    "projectId": "proj_2001_space_odyssey",
+    "insuranceAnalysisTimestamp": "2024-07-21T10:30:00Z",
+    "processingEvidence": [
+      {
+        "processName": "Coverage Requirements Calculation Processing",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:25:15Z",
+        "summary": "Determined comprehensive coverage requirements based on project scale, technical complexity, and high-risk activities. Policy limits were set to address catastrophic loss potential from experimental technology, animal handling, and stunts."
+      },
+      {
+        "processName": "Risk Factor Assessment Processing",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:26:30Z",
+        "summary": "Assessed and classified risks as 'Extreme' due to unprecedented technical innovation (centrifuge, slit-scan), international locations with wildlife, and complex stunt sequences. All major risk categories were evaluated and assigned high-impact ratings."
+      },
+      {
+        "processName": "Actuarial Table Application Processing",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:27:45Z",
+        "summary": "Applied industry-specific rating factors and production scale multipliers to calculate premiums. Significant premium loading was applied for custom-built equipment, stunt work, animal scenes, and the experimental nature of the production."
+      },
+      {
+        "processName": "Deductible Factor Processing",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:28:50Z",
+        "summary": "Optimized deductible levels to balance premium cost with risk retention. Higher deductibles were assigned to high-value, custom-built equipment to incentivize stringent safety and operational protocols."
+      },
+      {
+        "processName": "Completion Bond Processing",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:29:55Z",
+        "summary": "Confirmed completion bond is mandatory. Calculated a high-end premium rate of 5% based on extreme technical and schedule risks. Assessed bondability as conditional upon strict oversight and contingency funding."
+      }
+    ],
+    "insuranceAnalysisSummary": {
+      "totalEstimatedPremium": 1238650,
+      "completionBondFee": 600000,
+      "totalInsuranceCost": 1838650,
+      "currency": "USD",
+      "overallRiskRating": "Extreme",
+      "keyRiskDrivers": [
+        "Experimental Technology (Centrifuge, Slit-Scan)",
+        "High-Value Custom Equipment & Sets",
+        "Stunt Work (Space Accidents, Explosions)",
+        "Animal Handling (Trained Lion)",
+        "International Remote Locations"
+      ],
+      "notes": "The insurance package reflects a pioneering production with unprecedented risk factors. Premiums are significantly loaded to account for the unproven nature of core production technologies and high-risk sequences."
+    },
+    "detailedCoverageAnalysis": [
+      {
+        "coverageCategory": "General Liability",
+        "recommendedLimit": "10,000,000 per Occurrence / 10,000,000 Aggregate",
+        "recommendedDeductible": 25000,
+        "estimatedPremium": 155000,
+        "calculationFactors": {
+          "basePremium": 50000,
+          "premiumLoadings": [
+            {
+              "factor": "Stunt Work Multiplier (1.5x)",
+              "amount": 25000,
+              "justification": "Multiple high-risk stunts including explosions and space accidents."
+            },
+            {
+              "factor": "Animal Work Multiplier (1.6x)",
+              "amount": 30000,
+              "justification": "Use of a trained lion and other wild animals on set."
+            },
+            {
+              "factor": "International Location Multiplier (1.2x)",
+              "amount": 10000,
+              "justification": "Filming in remote African locations with increased logistical and environmental risks."
+            },
+            {
+              "factor": "Technical Innovation Surcharge",
+              "amount": 40000,
+              "justification": "Operation of a massive, custom-built rotating centrifuge set and other experimental rigs, increasing risk to cast and crew."
+            }
+          ]
+        }
+      },
+      {
+        "coverageCategory": "Equipment and Property Insurance",
+        "recommendedLimit": 2550000,
+        "recommendedDeductible": "Blended: $10,000 (Standard), $50,000 (Centrifuge), $25,000 (Other Custom)",
+        "estimatedPremium": 138000,
+        "calculationFactors": {
+          "insuredValues": [
+            {
+              "type": "Standard Rental Equipment",
+              "value": 500000,
+              "rate": "3.0%",
+              "premium": 15000
+            },
+            {
+              "type": "Custom-Built & Experimental Equipment",
+              "value": 2050000,
+              "rate": "6.0%",
+              "premium": 123000,
+              "justification": "High rate due to irreplaceable nature, unproven technology, and high risk of failure/damage for items like the centrifuge and slit-scan machine."
+            }
+          ],
+          "specialCoverageIncluded": [
+            "Worldwide Transit",
+            "Mysterious Disappearance",
+            "Faulty Stock, Camera & Processing"
+          ]
+        }
+      },
+      {
+        "coverageCategory": "Cast and Key Personnel Insurance",
+        "recommendedLimit": "Variable per individual, up to 5,000,000",
+        "recommendedDeductible": "7-day waiting period plus 25,000 monetary",
+        "estimatedPremium": 160000,
+        "calculationFactors": {
+          "essentialElements": [
+            {
+              "name": "Director (Stanley Kubrick)",
+              "coverage": 5000000,
+              "rate": "1.0%",
+              "premium": 50000,
+              "justification": "Irreplaceable essential element."
+            },
+            {
+              "name": "Dave Bowman (Lead Actor)",
+              "coverage": 2000000,
+              "rate": "2.5%",
+              "premium": 50000,
+              "justification": "High rate due to involvement in zero-gravity rigs, space suit work, and stunts."
+            },
+            {
+              "name": "Frank Poole (Supporting Lead)",
+              "coverage": 1500000,
+              "rate": "3.0%",
+              "premium": 45000,
+              "justification": "Highest rate due to direct involvement in high-risk space accident stunt sequence."
+            },
+            {
+              "name": "Dr. Heywood Floyd (Lead Actor)",
+              "coverage": 1000000,
+              "rate": "1.5%",
+              "premium": 15000,
+              "justification": "Standard rate for lead actor with moderate physical requirements."
+            }
+          ],
+          "medicalRequirements": "Comprehensive medical examinations required for all insured individuals."
+        }
+      },
+      {
+        "coverageCategory": "Errors and Omissions (E&O)",
+        "recommendedLimit": "5,000,000 per Claim / 5,000,000 Aggregate",
+        "recommendedDeductible": 25000,
+        "estimatedPremium": 30000,
+        "calculationFactors": {
+          "basePremium": 30000,
+          "term": "3 Years",
+          "requirements": "Full script clearance, chain of title verification, and music rights clearance required prior to binding coverage."
+        }
+      },
+      {
+        "coverageCategory": "Workers' Compensation",
+        "recommendedLimit": "Statutory Limits per Jurisdiction",
+        "recommendedDeductible": 0,
+        "estimatedPremium": 267650,
+        "calculationFactors": {
+          "totalPayroll": 8294462,
+          "jurisdictions": [
+            "UK (Studio Crew)",
+            "USA (SAG Cast)",
+            "International (Africa Location Crew)"
+          ],
+          "blendedRateCalculation": [
+            {
+              "class": "Stunts",
+              "payroll": 71000,
+              "rate": "15.0%",
+              "premium": 10650
+            },
+            {
+              "class": "Production Crew (High Risk)",
+              "payroll": 4000000,
+              "rate": "5.0%",
+              "premium": 200000
+            },
+            {
+              "class": "Cast (Hazardous Scenes)",
+              "payroll": 500000,
+              "rate": "4.0%",
+              "premium": 20000
+            },
+            {
+              "class": "Office/Low Risk",
+              "payroll": 3723462,
+              "rate": "1.0%",
+              "premium": 37000
+            }
+          ],
+          "specialExtensions": "Foreign Voluntary Compensation and Medical Evacuation coverage included."
+        }
+      },
+      {
+        "coverageCategory": "Specialized Risk Policies",
+        "recommendedLimit": "Various",
+        "recommendedDeductible": "Various",
+        "estimatedPremium": 58000,
+        "calculationFactors": {
+          "policies": [
+            {
+              "type": "Extra Expense",
+              "limit": 2000000,
+              "premium": 20000,
+              "justification": "High limit to cover costs of delays resulting from failure of critical custom equipment like the centrifuge."
+            },
+            {
+              "type": "Animal Mortality & Liability",
+              "limit": "1,000,000",
+              "premium": 15000,
+              "justification": "Dedicated policy for the trained lion, covering liability, mortality, and safe transport."
+            },
+            {
+              "type": "Political Risk & Currency Fluctuation",
+              "limit": "1,000,000",
+              "premium": 23000,
+              "justification": "Covers risks of civil unrest, government interference, or adverse currency exchange rates for the Africa shoot."
+            }
+          ]
+        }
+      }
+    ],
+    "riskAssessmentSummary": {
+      "primaryRisks": [
+        {
+          "riskId": "RISK-TECH-001",
+          "category": "Technical Innovation",
+          "description": "Failure or significant delay caused by the custom-built 30-ton rotating centrifuge set. This is a single point of failure for a large portion of the schedule.",
+          "mitigationRecommendations": "On-site engineering support from fabricator (Vickers-Armstrong). Pre-stocked critical spare parts. Extensive, budgeted testing period prior to photography. Enhanced Extra Expense coverage."
+        },
+        {
+          "riskId": "RISK-EQUIP-001",
+          "category": "Custom Equipment",
+          "description": "Breakdown or unsatisfactory performance of the experimental front projection and slit-scan VFX systems, jeopardizing key visual sequences.",
+          "mitigationRecommendations": "Budget for backup components and R&D iterations. Schedule VFX photography late to maximize development time. Ensure VFX supervisor has final sign-off on equipment readiness."
+        },
+        {
+          "riskId": "RISK-SAFE-001",
+          "category": "Stunts & Animals",
+          "description": "High potential for injury or incident during stunt sequences (space accident, explosion) and scenes involving a trained lion.",
+          "mitigationRecommendations": "Mandatory presence of dedicated Stunt Coordinator and Head Animal Wrangler for all related scenes. Strict adherence to pre-approved safety protocols. Clear exclusion zones for non-essential personnel."
+        },
+        {
+          "riskId": "RISK-LOG-001",
+          "category": "International Location",
+          "description": "Logistical failures, medical emergencies, or political instability during the remote Africa shoot.",
+          "mitigationRecommendations": "Engage experienced local fixers. Pre-plan medical evacuation routes and facilities. Secure Political Risk insurance. Establish robust communication protocols."
+        }
+      ]
+    },
+    "complianceVerification": {
+      "workersCompensation": {
+        "status": "COMPLIANT",
+        "details": "The proposed Workers' Compensation plan meets statutory requirements for all identified jurisdictions (UK, USA, International). Includes Foreign Voluntary coverage and Medical Evacuation for the Africa unit."
+      },
+      "autoLiability": {
+        "status": "COMPLIANT",
+        "details": "Standard Hired & Non-Owned Auto Liability coverage is included in the General Liability package, sufficient for all production vehicles."
+      },
+      "childLaborLaws": {
+        "status": "COMPLIANT",
+        "details": "Production budget includes provisions for certified tutors and welfare coordinators, ensuring compliance with child labor laws during scenes involving children."
+      }
+    },
+    "completionBondAnalysis": {
+      "bondabilityAssessment": "Conditional",
+      "justification": "The project is bondable, but its reliance on unproven technology, a perfectionist director, and a high budget presents extreme risk to the guarantor. The bond will only be issued under stringent conditions.",
+      "estimatedBondableBudget": 12000000,
+      "rateStructure": {
+        "rate": "5.0%",
+        "justification": "High-end rate due to extreme technical, schedule, and creative risks."
+      },
+      "calculatedFee": 600000,
+      "rebatePotential": {
+        "percentage": "30%",
+        "amount": 180000,
+        "conditions": "Contingent on on-time, on-budget delivery with no claims against the bond."
+      },
+      "requiredConditions": [
+        "Approval of key personnel, budget, and schedule.",
+        "A separately held and funded contingency of no less than 12.5% of the budget.",
+        "Third-party engineering certification for the centrifuge set.",
+        "Regular, detailed progress reports and on-set monitoring by a bond company representative.",
+        "Full chain of title, script clearance, and lab/post-production access letters."
+      ]
+    },
+    "alternativeScenarios": [
+      {
+        "scenario": "Cost Reduction Strategy",
+        "description": "Increase deductibles across major policies to reduce upfront premium costs. This transfers a higher level of risk to the production.",
+        "adjustments": [
+          "Increase Equipment deductible for custom items to $75,000.",
+          "Increase General Liability deductible to $50,000.",
+          "Increase Cast Insurance waiting period to 14 days."
+        ],
+        "estimatedPremiumSavings": "Approx. $125,000",
+        "costBenefitAnalysis": "Reduces immediate cash outlay but significantly increases financial exposure in the event of a claim. Not recommended given the high probability of incidents with experimental equipment."
+      },
+      {
+        "scenario": "Enhanced Risk Aversion Strategy",
+        "description": "Increase coverage limits for key catastrophic risks, particularly production delays caused by equipment failure.",
+        "adjustments": [
+          "Increase Extra Expense limit to $4,000,000.",
+          "Add specific 'Imminent Peril' coverage for the centrifuge set.",
+          "Secure a higher sub-limit for miscellaneous un-named equipment."
+        ],
+        "estimatedPremiumIncrease": "Approx. $75,000",
+        "costBenefitAnalysis": "Provides a much stronger financial safety net against the most likely cause of a budget overage (technical failure). Recommended for consideration by producers and financiers."
+      }
+    ],
+    "claimsPreventionRecommendations": [
+      {
+        "recommendationId": "CP-001",
+        "area": "Technical Equipment",
+        "action": "Obtain third-party professional engineering (PE) certification for the design, fabrication, and operation of the centrifuge set and all zero-gravity wire rigs. No personnel are to use the equipment until certification is complete."
+      },
+      {
+        "recommendationId": "CP-002",
+        "area": "Safety Protocols",
+        "action": "Institute mandatory daily safety meetings on set, led by the 1st AD and Safety Coordinator. All high-risk activities (stunts, animal work, SFX) require a specific, documented safety plan reviewed and signed by all involved personnel."
+      },
+      {
+        "recommendationId": "CP-003",
+        "area": "Animal Handling",
+        "action": "The trained lion is to be on set only during actual rehearsal and filming. A perimeter must be maintained at all times. The Head Animal Wrangler must have absolute authority to halt production if they deem conditions unsafe."
+      },
+      {
+        "recommendationId": "CP-004",
+        "area": "VFX & Post-Production",
+        "action": "Maintain meticulous records and backups of all film elements, especially for complex optical printing and VFX shots. Implement a rigorous QC process for all processed negatives to catch errors early and mitigate the need for costly reshoots."
+      }
+    ]
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 13286
+  }
+}

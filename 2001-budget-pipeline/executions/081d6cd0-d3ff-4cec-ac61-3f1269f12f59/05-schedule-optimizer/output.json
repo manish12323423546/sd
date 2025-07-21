@@ -1,0 +1,23 @@
+{
+  "model_name": "scheduleOptimizer",
+  "execution_id": "081d6cd0-d3ff-4cec-ac61-3f1269f12f59",
+  "timestamp": "2025-07-21T12:48:49.418277",
+  "success": true,
+  "processing_time": 88.50068245800001,
+  "output_data": {
+    "error": "JSON_PARSING_FAILED",
+    "model_name": "scheduleOptimizer",
+    "response_preview": "{\n  \"scheduleId\": \"sched_2001_19651229_v1\",\n  \"projectId\": \"proj_2001_space_odyssey\",\n  \"processingLog\": [\n    {\n      \"step\": 1,\n      \"processName\": \"Scene Location Grouping Processing\",\n      \"stat",
+    "success": false,
+    "processing_evidence": {
+      "status": "FAILED",
+      "summary": "JSON parsing failed, using fallback structure"
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 438
+  }
+}

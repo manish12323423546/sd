@@ -1,0 +1,23 @@
+{
+  "model_name": "budgetAggregator",
+  "execution_id": "eb0900ca-fa3b-4cc9-8ea0-fee3ddc5ce1d",
+  "timestamp": "2025-07-21T12:28:56.280932",
+  "success": true,
+  "processing_time": 85.14816091700004,
+  "output_data": {
+    "error": "JSON_PARSING_FAILED",
+    "model_name": "budgetAggregator",
+    "response_preview": "{\n  \"projectId\": \"proj_2001_space_odyssey\",\n  \"budgetName\": \"2001: A Space Odyssey - Aggregated Production Budget\",\n  \"currency\": \"USD\",\n  \"historicalContext\": \"1965-1968\",\n  \"processingEvidence\": [\n ",
+    "success": false,
+    "processing_evidence": {
+      "status": "FAILED",
+      "summary": "JSON parsing failed, using fallback structure"
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 437
+  }
+}

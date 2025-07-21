@@ -1,0 +1,14 @@
+{
+  "model_name": "postProductionEstimator",
+  "execution_id": "d7483364-b818-4117-81a3-ff96110cda54",
+  "timestamp": "2025-07-21T11:25:00.043564",
+  "success": false,
+  "processing_time": 257.41173875,
+  "output_data": {},
+  "error": "RetryError[<Future at 0x106ec04f0 state=finished raised ValueError>]",
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 0
+  }
+}

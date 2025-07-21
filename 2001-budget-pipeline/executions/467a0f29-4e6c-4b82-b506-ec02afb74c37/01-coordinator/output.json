@@ -1,0 +1,243 @@
+{
+  "model_name": "coordinator",
+  "execution_id": "467a0f29-4e6c-4b82-b506-ec02afb74c37",
+  "timestamp": "2025-07-21T12:10:23.005969",
+  "success": true,
+  "processing_time": 60.606377041,
+  "output_data": {
+    "budgetCoordinatorOutput": {
+      "projectId": "proj_2001_space_odyssey",
+      "processingTimestamp": "2024-07-22T14:30:00Z",
+      "systemStatusReport": {
+        "intakeStatus": "SUCCESS",
+        "validationStatus": "CONDITIONAL",
+        "dataCompleteness": "95%",
+        "missingInformation": [
+          "Union jurisdictions (e.g., SAG, DGA, IATSE) for accurate labor rates.",
+          "Specific vendor tiers for equipment pricing.",
+          "Crew residency information for tax incentive analysis.",
+          "Funding sources and drawdown schedule for cash flow projection.",
+          "Specific cast availability constraints and blackout dates."
+        ],
+        "identifiedRisks": [
+          {
+            "riskId": "RISK-TECH-001",
+            "description": "Project relies on groundbreaking and unproven special effects, including a large-scale rotating centrifuge set, extensive zero-gravity wire-work, and the 'Stargate' slit-scan sequence. Technical failures could cause significant delays and budget overruns.",
+            "mitigation": "Allocate substantial R&D budget and time. Hire top-tier SFX/VFX supervisors and engineering teams. Build and test prototypes well before principal photography."
+          },
+          {
+            "riskId": "RISK-SAFETY-001",
+            "description": "Scenes involve multiple wild and trained animals, including a trained lion, in close proximity to actors. Poses a significant safety risk to cast and crew and risk of shooting delays.",
+            "mitigation": "Engage experienced, certified animal wranglers and a dedicated safety coordinator. Adhere strictly to animal welfare guidelines. Schedule animal scenes with buffer days."
+          },
+          {
+            "riskId": "RISK-BUILD-001",
+            "description": "Numerous large, complex, and futuristic sets are required (Discovery Centrifuge, Space Station, Moon Base). Construction timelines and costs are substantial.",
+            "mitigation": "Detailed pre-visualization and architectural plans. Lock designs early. Secure large soundstages well in advance. Multiple construction crews may be needed."
+          },
+          {
+            "riskId": "RISK-SCHED-001",
+            "description": "Extremely long and complex shooting schedule (145 days) with multiple distinct production phases (Africa, Space Station, Discovery, Stargate). A delay in one phase will cascade and impact the entire production.",
+            "mitigation": "Modular scheduling. Build contingency days into each major location/set block. Empower a highly experienced 1st AD and UPM."
+          },
+          {
+            "riskId": "RISK-VFX-001",
+            "description": "Unprecedented number of complex VFX shots (205+) requiring techniques like front projection, model photography, and optical printing. Post-production timeline is a major risk.",
+            "mitigation": "Integrate VFX supervisor from pre-production. Begin VFX work during principal photography. Secure contracts with multiple VFX vendors to distribute workload."
+          }
+        ]
+      },
+      "modelDataPackets": {
+        "scheduleOptimizer": {
+          "model": "Schedule Optimizer",
+          "priority": "FIRST",
+          "description": "Generates the master production schedule based on all known constraints.",
+          "inputs": {
+            "scenes": "Full list of 71 scenes with page counts, cast, and location requirements.",
+            "castConstraints": "List of principal cast with estimated shooting days.",
+            "locationConstraints": "List of all locations with estimated shooting days and access restrictions.",
+            "unionRules": {
+              "sixDayWeeks": false,
+              "holidaysOff": [
+                "christmas",
+                "new_year"
+              ],
+              "turnaround": "12 hours (default)",
+              "mealPenalties": "Standard (default)"
+            },
+            "dependencies": {
+              "specialEquipment": "Full list of required special equipment.",
+              "stunts": "List of all stunt sequences and required performers.",
+              "animalWorkDays": 8,
+              "childActorWorkDays": 3
+            }
+          }
+        },
+        "laborCostCalculator": {
+          "model": "Labor Cost Calculator",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Schedule Optimizer"
+          ],
+          "inputs": {
+            "schedule": "Awaited from Schedule Optimizer",
+            "castManifest": {
+              "principals": 5,
+              "supporting": 4,
+              "dayPlayers": 5,
+              "extrasManDays": 450
+            },
+            "jurisdiction": "UNSPECIFIED - Requires manual input",
+            "unionRates": "Awaited based on jurisdiction"
+          }
+        },
+        "equipmentPricingEngine": {
+          "model": "Equipment Pricing Engine",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Schedule Optimizer"
+          ],
+          "inputs": {
+            "schedule": "Awaited from Schedule Optimizer",
+            "requiredEquipment": [
+              "centrifuge_camera_mount",
+              "zero_gravity_wire_rig",
+              "rotating_set_mechanism",
+              "front_projection_system",
+              "motion_control_camera",
+              "underwater_tank",
+              "wind_machines",
+              "space_suit_life_support"
+            ],
+            "vfxRequirements": {
+              "totalShots": 205,
+              "complexity": "High"
+            },
+            "heroProps": 4,
+            "vendorTier": "UNSPECIFIED - Defaulting to Tier 2 (Standard Industry Rates)"
+          }
+        },
+        "locationCostEstimator": {
+          "model": "Location Cost Estimator",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Schedule Optimizer"
+          ],
+          "inputs": {
+            "schedule": "Awaited from Schedule Optimizer",
+            "locationList": "Full list of 13 unique location groups.",
+            "locationTypes": {
+              "practical": 3,
+              "studio": 9,
+              "practical_studio_hybrid": 1
+            },
+            "setConstructionNeeds": "Extensive; includes multiple spacecraft interiors, space station, moon base, and excavation site."
+          }
+        },
+        "insuranceCalculator": {
+          "model": "Insurance Calculator",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Schedule Optimizer",
+            "Equipment Pricing Engine",
+            "Labor Cost Calculator"
+          ],
+          "inputs": {
+            "riskFactors": {
+              "stunts": 3,
+              "animals": "Trained Lion, Zebras, Gazelles",
+              "children": 8,
+              "hazardousSets": [
+                "rotating_centrifuge",
+                "excavation_site",
+                "zero_gravity_rigs"
+              ],
+              "internationalTravel": "Africa"
+            },
+            "castForBonding": [
+              "DAVE_BOWMAN",
+              "FRANK_POOLE"
+            ],
+            "equipmentValue": "Awaited from Equipment Pricing Engine",
+            "totalLaborCost": "Awaited from Labor Cost Calculator"
+          }
+        },
+        "postProductionEstimator": {
+          "model": "Post-Production Estimator",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Schedule Optimizer"
+          ],
+          "inputs": {
+            "genre": [
+              "sci-fi",
+              "drama",
+              "thriller"
+            ],
+            "estimatedRuntime": 149,
+            "vfxBreakdown": {
+              "totalShots": 205,
+              "complexShots": 55,
+              "specialSequences": [
+                "Stargate Sequence"
+              ]
+            },
+            "soundDesign": "Complex; includes unique computer voices, space silence, and cosmic effects.",
+            "music": "Requires licensing of major classical pieces and original score composition."
+          }
+        },
+        "taxIncentiveAnalyzer": {
+          "model": "Tax Incentive Analyzer",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Labor Cost Calculator",
+            "Location Cost Estimator"
+          ],
+          "inputs": {
+            "shootingLocations": {
+              "primary": "UK (Studio - Assumed)",
+              "secondary": "Africa (Practical)"
+            },
+            "crewResidency": "UNSPECIFIED - Requires manual input",
+            "estimatedSpend": "Awaited from cost-generating models"
+          }
+        },
+        "budgetAggregator": {
+          "model": "Budget Aggregator",
+          "priority": "FINAL_COMPILATION",
+          "dependencies": [
+            "Labor Cost Calculator",
+            "Equipment Pricing Engine",
+            "Location Cost Estimator",
+            "Insurance Calculator",
+            "Post-Production Estimator",
+            "Tax Incentive Analyzer"
+          ],
+          "inputs": {
+            "departmentalCosts": "Awaited from all parallel models",
+            "scheduleData": "Awaited from Schedule Optimizer"
+          }
+        },
+        "cashFlowProjector": {
+          "model": "Cash Flow Projector",
+          "priority": "FINAL_COMPILATION",
+          "dependencies": [
+            "Budget Aggregator",
+            "Schedule Optimizer"
+          ],
+          "inputs": {
+            "aggregatedBudget": "Awaited from Budget Aggregator",
+            "productionTimeline": "Awaited from Schedule Optimizer",
+            "fundingSources": "UNSPECIFIED - Requires manual input"
+          }
+        }
+      }
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 6991
+  }
+}

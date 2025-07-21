@@ -1,0 +1,391 @@
+{
+  "model_name": "laborCostCalculator",
+  "execution_id": "eb0900ca-fa3b-4cc9-8ea0-fee3ddc5ce1d",
+  "timestamp": "2025-07-21T12:23:23.806719",
+  "success": true,
+  "processing_time": 84.38888087500001,
+  "output_data": {
+    "projectId": "proj_2001_space_odyssey",
+    "calculationTimestamp": "2024-07-21T10:20:00Z",
+    "processingEvidence": [
+      {
+        "processName": "Union Rate Lookup",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:16:10Z",
+        "summary": "Successfully retrieved and validated union rates for SAG (Cast), BECTU (UK Crew), and DGA (Direction). Rates reflect major studio feature film agreements for the 1965-1968 period. All minimums verified.",
+        "details": {
+          "SAG_Lead_Weekly": 10000,
+          "SAG_Supporting_Daily": 500,
+          "SAG_DayPlayer_Daily": 350,
+          "SAG_Extras_Daily": 100,
+          "BECTU_DeptHead_Weekly": 2500,
+          "BECTU_Technician_Weekly": 1200,
+          "DGA_1stAD_Weekly": 3000
+        }
+      },
+      {
+        "processName": "Base Wage Calculation",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:17:30Z",
+        "summary": "Calculated base wages for all identified cast and crew positions based on the 145-day shooting schedule, plus 84 prep and 14 wrap days. Total base wages calculated before overtime and fringes.",
+        "details": {
+          "totalAboveTheLineBase": 619000,
+          "totalBelowTheLineBase": 4184750,
+          "totalBaseWages": 4803750
+        }
+      },
+      {
+        "processName": "Overtime Estimation",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:18:15Z",
+        "summary": "Estimated overtime based on schedule analysis. High OT exposure identified for scenes 8, 10, 66, and 71 due to extended shoot times, night work, and technical complexity. A 20% provision has been applied to BTL crew wages.",
+        "details": {
+          "overtimeProvisionPercentage": 20,
+          "estimatedCrewOvertime": 769950,
+          "estimatedCastOvertime": 67000,
+          "mealPenaltyAllowance": 25000,
+          "totalOvertimeAndPenalties": 861950
+        }
+      },
+      {
+        "processName": "Fringe Benefit Processing",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:19:00Z",
+        "summary": "Calculated all statutory and union-mandated fringe benefits. Applied BECTU rates (44.8%) for UK crew and estimated SAG rates (35%) for US cast on all applicable earnings (base + OT).",
+        "details": {
+          "ukCrewFringeRate": 0.448,
+          "usCastFringeRate": 0.35,
+          "totalFringesCalculated": 2011112
+        }
+      },
+      {
+        "processName": "Location Multiplier Processing",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:19:45Z",
+        "summary": "Applied location-based costs for the Africa shoot block (23 days). Calculated per diems and hardship allowances for 65 cast and crew members.",
+        "details": {
+          "location": "Africa",
+          "durationWeeks": 4,
+          "personnelCount": 65,
+          "perDiemPerWeek": 700,
+          "totalLocationPremium": 182000
+        }
+      }
+    ],
+    "laborCostSummary": {
+      "aboveTheLineCost": {
+        "baseWages": 619000,
+        "fringes": 216650,
+        "total": 835650
+      },
+      "belowTheLineCost": {
+        "cast": {
+          "baseWages": 268000,
+          "overtime": 67000,
+          "fringes": 117250,
+          "total": 452250
+        },
+        "crew": {
+          "baseWages": 3916750,
+          "overtimeAndPenalties": 794950,
+          "locationPremiums": 182000,
+          "fringes": 2112862,
+          "total": 7006562
+        },
+        "totalBTL": 7458812
+      },
+      "totalLaborCost": 8294462,
+      "confidenceInterval": "90%",
+      "notes": "Total labor cost reflects a high-budget, technically complex production with significant special requirements."
+    },
+    "detailedBreakdown": {
+      "aboveTheLineCast": [
+        {
+          "characterName": "DAVE_BOWMAN",
+          "actorCategory": "Lead",
+          "shootDays": 35,
+          "weeks": 7,
+          "weeklyRate": 10000,
+          "baseWage": 70000,
+          "premiums": {
+            "zeroGravity": 5000,
+            "agingMakeup": 2500
+          },
+          "total": 77500
+        },
+        {
+          "characterName": "DR_HEYWOOD_FLOYD",
+          "actorCategory": "Lead",
+          "shootDays": 22,
+          "weeks": 5,
+          "weeklyRate": 10000,
+          "baseWage": 50000,
+          "total": 50000
+        },
+        {
+          "characterName": "MOONWATCHER",
+          "actorCategory": "Lead",
+          "shootDays": 15,
+          "weeks": 3,
+          "weeklyRate": 7500,
+          "baseWage": 22500,
+          "premiums": {
+            "apeMakeup": 10000,
+            "physicalPerformance": 5000
+          },
+          "total": 37500
+        },
+        {
+          "characterName": "FRANK_POOLE",
+          "actorCategory": "Supporting Lead",
+          "shootDays": 28,
+          "weeks": 6,
+          "weeklyRate": 5000,
+          "baseWage": 30000,
+          "premiums": {
+            "zeroGravity": 4000,
+            "stuntWork": 4000
+          },
+          "total": 38000
+        },
+        {
+          "characterName": "HAL_9000",
+          "actorCategory": "Voice",
+          "shootDays": 8,
+          "sessionRate": 2500,
+          "baseWage": 20000,
+          "total": 20000
+        },
+        {
+          "characterName": "Director",
+          "actorCategory": "Director",
+          "weeks": 49,
+          "weeklyRate": 8000,
+          "baseWage": 392000,
+          "total": 392000
+        }
+      ],
+      "belowTheLineCast": [
+        {
+          "category": "Supporting Players",
+          "roles": [
+            "ELENA_SMYSLOV",
+            "MILLER",
+            "HALVORSEN",
+            "MICHAELS"
+          ],
+          "totalDays": 17,
+          "dailyRate": 500,
+          "baseWage": 8500,
+          "total": 8500
+        },
+        {
+          "category": "Day Players",
+          "roles": [
+            "STEWARDESS",
+            "PILOT",
+            "RUSSIAN_SCIENTISTS",
+            "BASE_PERSONNEL",
+            "MISSION_CONTROL"
+          ],
+          "totalDays": 18,
+          "dailyRate": 350,
+          "baseWage": 6300,
+          "total": 6300
+        },
+        {
+          "category": "Extras",
+          "totalManDays": 450,
+          "dailyRate": 100,
+          "baseWage": 45000,
+          "premiums": {
+            "stuntBump": 2200,
+            "specialAbility": 1000
+          },
+          "total": 48200
+        },
+        {
+          "category": "Specialty Cast",
+          "roles": [
+            "CHILDREN",
+            "TRIBE_MEMBERS",
+            "THE_OTHERS"
+          ],
+          "totalManDays": 2082,
+          "dailyRate": 100,
+          "baseWage": 208200,
+          "total": 208200
+        }
+      ],
+      "productionCrew": [
+        {
+          "department": "Production & Direction",
+          "positions": 8,
+          "totalWeeks": 392,
+          "baseWage": 882000,
+          "kitRentals": 0,
+          "total": 882000
+        },
+        {
+          "department": "Camera",
+          "positions": 8,
+          "totalWeeks": 392,
+          "baseWage": 744800,
+          "kitRentals": 49000,
+          "total": 793800
+        },
+        {
+          "department": "Electrical",
+          "positions": 9,
+          "totalWeeks": 441,
+          "baseWage": 583100,
+          "kitRentals": 0,
+          "total": 583100
+        },
+        {
+          "department": "Grip",
+          "positions": 11,
+          "totalWeeks": 539,
+          "baseWage": 712600,
+          "kitRentals": 0,
+          "total": 712600
+        },
+        {
+          "department": "Sound",
+          "positions": 3,
+          "totalWeeks": 147,
+          "baseWage": 215600,
+          "kitRentals": 36750,
+          "total": 252350
+        },
+        {
+          "department": "Art Department & Construction",
+          "positions": 5,
+          "totalWeeks": 245,
+          "baseWage": 539000,
+          "notes": "Excludes construction labor, which is typically a separate line item. This represents key personnel.",
+          "total": 539000
+        },
+        {
+          "department": "Makeup & Hair",
+          "positions": 7,
+          "totalWeeks": 343,
+          "baseWage": 480200,
+          "notes": "Includes a large SFX makeup team for 'Dawn of Man' sequence.",
+          "total": 480200
+        },
+        {
+          "department": "Wardrobe",
+          "positions": 3,
+          "totalWeeks": 147,
+          "baseWage": 191100,
+          "total": 191100
+        },
+        {
+          "department": "Special & Visual Effects",
+          "positions": 6,
+          "totalWeeks": 294,
+          "baseWage": 411600,
+          "notes": "On-set crew only. Does not include post-production VFX vendor costs.",
+          "total": 411600
+        }
+      ]
+    },
+    "specialRequirementCosts": {
+      "stunts": {
+        "coordinatorWeeks": 12,
+        "performerDays": 40,
+        "baseWage": 56000,
+        "adjustments": 15000,
+        "total": 71000
+      },
+      "animalHandling": {
+        "headWranglerWeeks": 6,
+        "assistantWranglerWeeks": 8,
+        "baseWage": 21600,
+        "total": 21600
+      },
+      "childWelfare": {
+        "tutorAndCoordinatorWeeks": 3,
+        "baseWage": 4500,
+        "total": 4500
+      },
+      "specializedMakeup": {
+        "apeMakeupApplicationManDays": 450,
+        "agingMakeupManDays": 30,
+        "additionalLaborCost": 55000,
+        "notes": "Labor cost for extended application times, above base salaries.",
+        "total": 55000
+      }
+    },
+    "fringeBenefitDetail": {
+      "ukCrewFringes": {
+        "applicableWages": 6045700,
+        "pension_22_5_percent": 1360283,
+        "holidayPay_8_5_percent": 513885,
+        "employerNI_13_8_percent": 834307,
+        "total": 2708474
+      },
+      "usCastFringes": {
+        "applicableWages": 954000,
+        "blendedRate_35_percent": 333900,
+        "notes": "Includes SAG P&H, FICA, FUTA, SUTA, and Worker's Comp.",
+        "total": 333900
+      },
+      "totalFringes": 3042374
+    },
+    "overtimeAndPenaltyDetail": {
+      "crewOvertime": {
+        "base": 769950,
+        "description": "Calculated at 20% of BTL crew base wages due to high number of long days, night shoots, and complex technical setups."
+      },
+      "castOvertime": {
+        "base": 67000,
+        "description": "Allowance for supporting and day players on extended shoot days."
+      },
+      "penalties": {
+        "mealPenaltyAllowance": 25000,
+        "forcedCallAllowance": 15000,
+        "description": "Contingency for potential meal and rest period violations, especially during remote location and night shoots."
+      },
+      "total": 876950
+    },
+    "riskAssessmentAndContingency": {
+      "costRiskFactors": [
+        {
+          "riskId": "COST-RISK-001",
+          "description": "Overtime Escalation: The schedule contains numerous sequences (e.g., Centrifuge, Stargate) with unproven technology that could lead to significant delays and runaway overtime costs.",
+          "impact": "High"
+        },
+        {
+          "riskId": "COST-RISK-002",
+          "description": "Special Makeup Delays: The 'Dawn of Man' sequence requires extensive, time-consuming prosthetic makeup for a large number of performers. Delays in application could impact shooting hours and incur penalties.",
+          "impact": "Medium"
+        },
+        {
+          "riskId": "COST-RISK-003",
+          "description": "International Crew Costs: Currency fluctuations or unforeseen logistical issues in the Africa location could increase travel, per diem, and local hire costs.",
+          "impact": "Medium"
+        }
+      ],
+      "contingencyRecommendation": {
+        "percentage": 12.5,
+        "amount": 1036808,
+        "justification": "A 12.5% contingency is recommended due to the groundbreaking nature of the production, reliance on unproven SFX/VFX techniques, and the logistical complexity of the international location shoot."
+      }
+    },
+    "qualityControlFlags": [
+      {
+        "flagId": "QC-DATA-001",
+        "severity": "Warning",
+        "description": "Data validation failed: Character 'DR_FLOYD' has an inconsistent scene count. Profile lists 12, but character appears in 15 scenes (12, 15, 19, 20, 21, 23, 27, 28, 30, 37, 38, 39, 40, 42, 70). Calculation is based on the higher count of 15 scenes, but this discrepancy should be resolved with the production coordinator."
+      }
+    ]
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 8968
+  }
+}

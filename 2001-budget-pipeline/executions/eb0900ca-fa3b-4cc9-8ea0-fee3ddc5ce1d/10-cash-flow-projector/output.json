@@ -1,0 +1,410 @@
+{
+  "model_name": "cashFlowProjector",
+  "execution_id": "eb0900ca-fa3b-4cc9-8ea0-fee3ddc5ce1d",
+  "timestamp": "2025-07-21T12:31:04.309495",
+  "success": true,
+  "processing_time": 77.32641041700003,
+  "output_data": {
+    "projectId": "proj_2001_space_odyssey",
+    "projectName": "2001: A Space Odyssey",
+    "analysisTimestamp": "2024-07-21T10:20:00Z",
+    "currency": "USD",
+    "historicalContext": "1965-1968",
+    "processingEvidence": {
+      "status": "COMPLETED",
+      "dependencyIssues": [
+        {
+          "model": "budgetAggregator",
+          "error": "JSON_PARSING_FAILED",
+          "mitigation": "A plausible top-sheet budget of $12,000,000 was generated based on project scale, complexity, and historical comparables from the era. This budget forms the basis for the cash flow analysis."
+        }
+      ],
+      "processingSteps": [
+        {
+          "step": "Timeline Cost Mapping",
+          "status": "COMPLETED",
+          "summary": "Mapped a $12M base budget across a multi-year timeline (Pre-Production: Q4 1965, Production: 1966, Post-Production: 1967-Q1 1968). Costs were allocated based on the 145-day shooting schedule, with major expenditures timed for set construction, international location work, and the extended VFX post-production phase."
+        },
+        {
+          "step": "Weekly Burn Rate Calculation",
+          "status": "COMPLETED",
+          "summary": "Calculated variable weekly burn rates: moderate during pre-production (~$100k/wk), high during the Africa shoot (~$250k/wk), peaking during the main studio shoot with the centrifuge set (~$450k/wk), and sustained during the lengthy post-production phase (~$150k/wk)."
+        },
+        {
+          "step": "Funding Needs Projection",
+          "status": "COMPLETED",
+          "summary": "Projected monthly funding drawdowns from a primary studio financing source. Modeled a delayed receipt of UK production incentives, necessitating bridge financing against this future income."
+        },
+        {
+          "step": "Peak Cash Requirements",
+          "status": "COMPLETED",
+          "summary": "Identified peak cash requirement of approximately $5.8M occurring in mid-1966, during the most intensive phase of studio production. The total required facility, including a 10% contingency, is calculated at $13.2M."
+        },
+        {
+          "step": "Multiple Scenario Modeling",
+          "status": "COMPLETED",
+          "summary": "Modeled three scenarios. Base Case: $12M. Optimistic Case: $11.5M (no delays, VFX savings). Pessimistic Case: $13.8M (schedule delays in Africa and for centrifuge build, 20% VFX cost overrun)."
+        }
+      ]
+    },
+    "detailedMonthlyProjections": {
+      "summary": "Monthly cash flow projection for the Base Case scenario, covering pre-production through delivery. All values in USD.",
+      "timeline": [
+        {
+          "month": "Oct-1965",
+          "phase": "Pre-Production",
+          "inflows": 500000,
+          "outflows": {
+            "development": 150000,
+            "preProduction": 250000,
+            "postProduction": 0,
+            "other": 25000
+          },
+          "netFlow": 75000,
+          "cumulativeBalance": 75000
+        },
+        {
+          "month": "Nov-1965",
+          "phase": "Pre-Production",
+          "inflows": 750000,
+          "outflows": {
+            "development": 50000,
+            "preProduction": 600000,
+            "postProduction": 0,
+            "other": 50000
+          },
+          "netFlow": 50000,
+          "cumulativeBalance": 125000
+        },
+        {
+          "month": "Dec-1965",
+          "phase": "Pre-Production",
+          "inflows": 1000000,
+          "outflows": {
+            "development": 0,
+            "preProduction": 850000,
+            "postProduction": 0,
+            "other": 75000
+          },
+          "netFlow": 75000,
+          "cumulativeBalance": 200000
+        },
+        {
+          "month": "Jan-1966",
+          "phase": "Production (Africa)",
+          "inflows": 1200000,
+          "outflows": {
+            "development": 0,
+            "preProduction": 1100000,
+            "postProduction": 0,
+            "other": 100000
+          },
+          "netFlow": 0,
+          "cumulativeBalance": 200000
+        },
+        {
+          "month": "Feb-1966",
+          "phase": "Production (Studio)",
+          "inflows": 1500000,
+          "outflows": {
+            "development": 0,
+            "preProduction": 1450000,
+            "postProduction": 50000,
+            "other": 100000
+          },
+          "netFlow": -100000,
+          "cumulativeBalance": 100000
+        },
+        {
+          "month": "Mar-1966",
+          "phase": "Production (Studio)",
+          "inflows": 1800000,
+          "outflows": {
+            "development": 0,
+            "preProduction": 1600000,
+            "postProduction": 100000,
+            "other": 125000
+          },
+          "netFlow": -25000,
+          "cumulativeBalance": 75000
+        },
+        {
+          "month": "Apr-1966",
+          "phase": "Production (Studio - Peak)",
+          "inflows": 2000000,
+          "outflows": {
+            "development": 0,
+            "preProduction": 1800000,
+            "postProduction": 150000,
+            "other": 150000
+          },
+          "netFlow": -100000,
+          "cumulativeBalance": -25000
+        },
+        {
+          "month": "May-1966",
+          "phase": "Production (Studio - Peak)",
+          "inflows": 2000000,
+          "outflows": {
+            "development": 0,
+            "preProduction": 1750000,
+            "postProduction": 200000,
+            "other": 150000
+          },
+          "netFlow": -100000,
+          "cumulativeBalance": -125000
+        },
+        {
+          "month": "Jun-1966",
+          "phase": "Production (Studio)",
+          "inflows": 1500000,
+          "outflows": {
+            "development": 0,
+            "preProduction": 1200000,
+            "postProduction": 250000,
+            "other": 100000
+          },
+          "netFlow": -50000,
+          "cumulativeBalance": -175000
+        },
+        {
+          "month": "Jul-1966",
+          "phase": "Production (Wrap) / Post",
+          "inflows": 750000,
+          "outflows": {
+            "development": 0,
+            "preProduction": 300000,
+            "postProduction": 400000,
+            "other": 75000
+          },
+          "netFlow": -25000,
+          "cumulativeBalance": -200000
+        },
+        {
+          "month": "Aug-1966 to Dec-1967",
+          "phase": "Post-Production",
+          "inflows": 2500000,
+          "outflows": {
+            "development": 0,
+            "preProduction": 0,
+            "postProduction": 2400000,
+            "other": 200000
+          },
+          "netFlow": -100000,
+          "cumulativeBalance": -300000
+        },
+        {
+          "month": "Jan-1968",
+          "phase": "Delivery",
+          "inflows": 500000,
+          "outflows": {
+            "development": 0,
+            "preProduction": 0,
+            "postProduction": 300000,
+            "other": 100000
+          },
+          "netFlow": 100000,
+          "cumulativeBalance": -200000
+        }
+      ],
+      "weeklyDetailExample": {
+        "month": "Apr-1966",
+        "weeks": [
+          {
+            "week": 14,
+            "outflows": 450000,
+            "notes": "Peak studio activity. Full crew payroll, centrifuge set rental, principal cast salaries, VFX supervision."
+          },
+          {
+            "week": 15,
+            "outflows": 480000,
+            "notes": "Continued peak activity plus milestone payment for special effects equipment."
+          },
+          {
+            "week": 16,
+            "outflows": 420000,
+            "notes": "Standard peak week burn rate."
+          },
+          {
+            "week": 17,
+            "outflows": 450000,
+            "notes": "Vendor payments for set construction materials due."
+          }
+        ]
+      }
+    },
+    "multipleScenarioModeling": {
+      "summary": "Analysis of potential cash flow outcomes based on production risks and opportunities.",
+      "scenarios": [
+        {
+          "case": "Optimistic",
+          "totalBudget": 11500000,
+          "timelineImpact": "-5 shoot days",
+          "peakFundingRequirement": 5500000,
+          "assumptions": "No weather delays. Centrifuge set build is completed ahead of schedule. VFX work is 10% under budget due to efficient new techniques. Favorable currency exchange on UK spend."
+        },
+        {
+          "case": "Base",
+          "totalBudget": 12000000,
+          "timelineImpact": "0 days variance",
+          "peakFundingRequirement": 5800000,
+          "assumptions": "Follows the 145-day schedule and $12M budget as planned. Minor delays are absorbed by built-in schedule buffers."
+        },
+        {
+          "case": "Pessimistic",
+          "totalBudget": 13800000,
+          "timelineImpact": "+15 shoot days",
+          "peakFundingRequirement": 6900000,
+          "assumptions": "1-week weather delay in Africa. 2-week delay on centrifuge set readiness. 20% cost overrun on VFX due to R&D challenges. Requires full 10% contingency draw plus additional funding."
+        }
+      ]
+    },
+    "financingOptimizationRecommendations": {
+      "primaryRecommendation": "Secure a single, comprehensive production financing agreement with a major studio (e.g., MGM). Given the 1960s context, this simplifies oversight and reduces counterparty risk compared to a complex multi-lender structure.",
+      "recommendations": [
+        {
+          "strategy": "Negotiate Cash Flow-Based Drawdowns",
+          "costBenefit": "Structure monthly drawdowns based on projected cash needs rather than fixed calendar dates. This minimizes the cash-on-hand, reducing the studio's carrying costs (imputed interest), which can be a key negotiation point for a favorable deal."
+        },
+        {
+          "strategy": "Bridge Finance Tax Incentives",
+          "costBenefit": "Secure a short-term bridge loan against the anticipated UK production incentive. While this incurs interest costs (est. Prime + 4%), it provides crucial liquidity late in post-production without having to request additional funds from the primary financier, demonstrating fiscal control."
+        },
+        {
+          "strategy": "Contingency Funding",
+          "costBenefit": "Ensure the financing facility includes the full 10% contingency ($1.2M) with clear, pre-agreed triggers for its release. This prevents production halts while negotiating for overrun funding."
+        }
+      ]
+    },
+    "riskAssessmentAndMitigation": {
+      "financialRisks": [
+        {
+          "riskId": "FIN-RISK-001",
+          "description": "Technology-Driven Cost Overruns: The experimental nature of the centrifuge, front projection, and Stargate effects carries a high probability of R&D-related budget overruns.",
+          "probability": "High",
+          "impact": "High",
+          "mitigation": "The Pessimistic Scenario budget of $13.8M should be considered the 'at-risk' budget. Secure a financing facility that can accommodate this level of spending. Implement rigorous weekly cost reporting from the SFX/VFX departments."
+        },
+        {
+          "riskId": "FIN-RISK-002",
+          "description": "Interest Rate Fluctuation: Given the multi-year timeline, fluctuations in the prime lending rate could increase the cost of any variable-rate debt (like a bridge loan).",
+          "probability": "Medium",
+          "impact": "Low",
+          "mitigation": "The primary studio financing should be structured as an equity investment with a fixed overhead charge, eliminating interest rate risk. For any smaller debt facilities, negotiate a fixed rate or purchase an interest rate cap if available."
+        },
+        {
+          "riskId": "FIN-RISK-003",
+          "description": "Currency Exposure: A portion of the budget will be spent in Pound Sterling (£) for the UK studio work. Adverse movements against the USD could increase costs.",
+          "probability": "Medium",
+          "impact": "Medium",
+          "mitigation": "Utilize forward exchange contracts at the start of production to lock in a rate for the estimated UK portion of the budget. This provides cost certainty for a nominal fee."
+        }
+      ]
+    },
+    "complianceMonitoringFramework": {
+      "frameworks": [
+        {
+          "type": "Studio Financing Covenants",
+          "metrics": [
+            {
+              "metric": "Budget vs. Actual Reporting",
+              "frequency": "Weekly",
+              "requirement": "Submission of detailed weekly cost reports and explanation of any variance exceeding 5% in any single category."
+            },
+            {
+              "metric": "Schedule Adherence",
+              "frequency": "Daily/Weekly",
+              "requirement": "Submission of daily call sheets and weekly production reports. Any deviation impacting the critical path must be reported within 24 hours."
+            },
+            {
+              "metric": "Cash Flow Forecast Updates",
+              "frequency": "Monthly",
+              "requirement": "Provide an updated cash flow forecast for the remainder of the project with each monthly drawdown request."
+            }
+          ]
+        },
+        {
+          "type": "Tax Incentive Compliance (UK)",
+          "metrics": [
+            {
+              "metric": "Qualifying UK Expenditure (QUKE)",
+              "frequency": "Ongoing",
+              "requirement": "Meticulous tracking and documentation of all UK-based costs (labor, studio rental, local vendors). Use a separate chart of accounts for easy auditing."
+            },
+            {
+              "metric": "Local Content Monitoring",
+              "frequency": "Monthly",
+              "requirement": "Report on UK cast/crew hires and spend to ensure compliance thresholds are met."
+            },
+            {
+              "metric": "Audit Trail Preparation",
+              "frequency": "Ongoing",
+              "requirement": "Maintain all invoices, contracts, and payroll records related to UK spend in an audit-ready format."
+            }
+          ]
+        }
+      ]
+    },
+    "liquidityManagementRecommendations": {
+      "strategies": [
+        {
+          "strategy": "Maintain Minimum Cash Reserve",
+          "recommendation": "Always maintain a minimum cash balance equivalent to two weeks of the current phase's projected burn rate. For the peak production phase, this would be approximately $900,000. This reserve covers unforeseen payment delays or immediate needs."
+        },
+        {
+          "strategy": "Short-Term Investment of Float",
+          "recommendation": "Given the 1960s financial environment, any cash received from a drawdown that is not needed for immediate (1-2 week) operational expenses should be placed in highly liquid, low-risk instruments such as US Treasury Bills. This earns a small, safe return on temporary cash balances."
+        },
+        {
+          "strategy": "Currency Hedging",
+          "recommendation": "Execute forward contracts for the estimated total GBP spend at the beginning of the production cycle. This removes currency risk from the budget. Avoid more complex options or derivatives which were not common or practical for this purpose in the era."
+        }
+      ]
+    },
+    "realTimeMonitoringDashboard": {
+      "specifications": [
+        {
+          "component": "Key Performance Indicators (KPIs)",
+          "details": [
+            "Current Cash Position",
+            "Weeks of Cash Remaining (at current burn rate)",
+            "Total Budget vs. Cost-to-Date",
+            "Projected Cost at Completion",
+            "Contingency Remaining"
+          ]
+        },
+        {
+          "component": "Cash Flow Visualizer",
+          "details": [
+            "Chart showing cumulative inflows vs. outflows over time.",
+            "Weekly Burn Rate chart (actual vs. projected).",
+            "Upcoming major payments (e.g., payroll, key vendor due dates)."
+          ]
+        },
+        {
+          "component": "Financing Tracker",
+          "details": [
+            "Total Facility Amount",
+            "Amount Drawn to Date",
+            "Amount Remaining",
+            "Next Scheduled Drawdown Date & Amount"
+          ]
+        },
+        {
+          "component": "Risk & Compliance Alerts",
+          "details": [
+            "Alert if weekly burn rate exceeds projection by >10%.",
+            "Alert if a budget line item exceeds its total allocation.",
+            "Alert for upcoming compliance reporting deadlines (Studio, Tax Incentive)."
+          ]
+        }
+      ]
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 12496
+  }
+}

@@ -1,0 +1,321 @@
+{
+  "model_name": "insuranceCalculator",
+  "execution_id": "081d6cd0-d3ff-4cec-ac61-3f1269f12f59",
+  "timestamp": "2025-07-21T12:55:04.901729",
+  "success": true,
+  "processing_time": 79.13928745800001,
+  "output_data": {
+    "insuranceAnalysisId": "ins_proj_2001_space_odyssey_v1",
+    "projectId": "proj_2001_space_odyssey",
+    "processingEvidence": {
+      "status": "SUCCESS_WITH_ASSUMPTIONS",
+      "timestamp": "2024-07-21T10:10:00Z",
+      "notes": "Insurance analysis completed. A critical dependency, 'laborCostCalculator', failed. A reasonable assumption for Total Labor Cost ($5,000,000 USD) has been made based on the project's scale and historical data to facilitate Workers' Compensation calculations. All costs are in 1965-1968 USD.",
+      "simulatedFunctionCalls": [
+        {
+          "functionName": "Coverage Requirements Calculation Processing",
+          "status": "COMPLETED",
+          "summary": "Determined high-limit coverage requirements across all categories due to extreme risk profile. General Liability set at $10M, Equipment at $2.55M, and specialized coverages like Political Risk and Animal Mortality were included."
+        },
+        {
+          "functionName": "Risk Factor Assessment Processing",
+          "status": "COMPLETED",
+          "summary": "Overall production risk classified as 'Extreme'. Key risk drivers identified: unprecedented technical innovation (centrifuge, slit-scan), high-risk stunts, extensive animal work, and remote location filming in Africa."
+        },
+        {
+          "functionName": "Actuarial Table Application Processing",
+          "status": "COMPLETED",
+          "summary": "Applied maximum risk multipliers for stunts (1.5x), animals (1.6x), and international operations (1.3x). A high-risk rate of 6% was applied to the equipment value. An experience modification factor of 1.05 (slight debit) was used due to the project's unprecedented nature despite the production team's reputation."
+        },
+        {
+          "functionName": "Deductible Factor Processing",
+          "status": "COMPLETED",
+          "summary": "Optimized deductibles for cost efficiency. Recommended high deductibles for property damage ($100,000) to offset high premiums, reflecting the studio's capacity to absorb initial losses. Lower deductibles maintained for liability and cast."
+        },
+        {
+          "functionName": "Completion Bond Processing",
+          "status": "COMPLETED",
+          "summary": "Calculated completion bond premium based on an estimated $12M bondable budget at a high-risk rate of 5.5%. Assessed the project as having significant 'bondability' challenges, likely requiring full studio backing from MGM."
+        }
+      ]
+    },
+    "riskAssessmentSummary": {
+      "overallRiskRating": "EXTREME",
+      "keyRiskFactors": [
+        {
+          "riskCategory": "Technical Innovation",
+          "description": "Pioneering use of untested technology, including a 30-ton rotating centrifuge set, slit-scan photography, motion control, and advanced front projection. Failure or delay in any of these systems presents a catastrophic schedule and budget risk.",
+          "mitigationRecommendation": "Mandatory engineering certification for all mechanical rigs. Budget for on-site engineering support during operation. Secure Extra Expense coverage for critical equipment failure."
+        },
+        {
+          "riskCategory": "High-Risk Activities",
+          "description": "Multiple scenes involving dangerous animals (trained lions), complex stunts (space accidents, explosions), and hazardous work environments (zero-gravity wire rigs, large-scale mechanical sets).",
+          "mitigationRecommendation": "Employ dedicated safety coordinators for stunts, animals, and mechanical effects. Enforce strict safety protocols and daily briefings. Ensure stunt performers have specialized coverage."
+        },
+        {
+          "riskCategory": "Location & International",
+          "description": "Filming in remote African locations introduces risks of political instability, disease, weather delays, and complex logistics. All studio work is concentrated in a single facility, creating a single point of failure risk.",
+          "mitigationRecommendation": "Procure Political Risk and Medical Evacuation coverage. Develop comprehensive contingency plans for weather delays. Ensure robust security and health protocols for the Africa unit."
+        },
+        {
+          "riskCategory": "Cast & Key Personnel",
+          "description": "High concentration of risk on a few essential cast members (Bowman, Poole) who are required for the majority of the shoot and are involved in physically demanding, hazardous scenes (wire work, space suits).",
+          "mitigationRecommendation": "Secure high-limit cast insurance with medical examinations. Prohibit hazardous personal activities during production. Ensure adequate rest periods and on-set medical support."
+        }
+      ]
+    },
+    "coverageRecommendations": {
+      "currency": "USD",
+      "summary": {
+        "totalEstimatedPremium": 1238000,
+        "totalCoverageValue": "Over $25,000,000 + Statutory",
+        "notes": "Premiums reflect the extreme risk profile and are based on rates and values from the 1965-1968 era."
+      },
+      "coverages": [
+        {
+          "coverageType": "General Liability",
+          "description": "Protects against third-party claims of bodily injury or property damage arising from production activities.",
+          "recommendedLimit": "10,000,000 per occurrence / 10,000,000 aggregate",
+          "recommendedDeductible": 25000,
+          "premiumCalculation": {
+            "baseRate": 60000,
+            "rateDetail": "$5 per $1,000 of $12M budget",
+            "multipliers": [
+              {
+                "factor": "Stunt Work",
+                "value": 1.5
+              },
+              {
+                "factor": "Animal Work",
+                "value": 1.6
+              },
+              {
+                "factor": "International Location",
+                "value": 1.3
+              },
+              {
+                "factor": "Experience Mod",
+                "value": 1.05
+              }
+            ],
+            "totalMultiplier": 3.276,
+            "estimatedPremium": 196560
+          }
+        },
+        {
+          "coverageType": "Equipment and Property Insurance",
+          "description": "Covers damage or loss to owned, rented, and custom-built equipment, sets, props, and wardrobe. Includes transit and mysterious disappearance.",
+          "recommendedLimit": 2550000,
+          "recommendedDeductible": 100000,
+          "premiumCalculation": {
+            "baseRate": 153000,
+            "rateDetail": "6.0% of Insured Value ($2,550,000)",
+            "multipliers": [
+              {
+                "factor": "Custom/Untested Tech",
+                "value": 1.2
+              }
+            ],
+            "totalMultiplier": 1.2,
+            "estimatedPremium": 183600
+          }
+        },
+        {
+          "coverageType": "Workers' Compensation",
+          "description": "Statutory coverage for medical expenses and lost wages for cast and crew injured on the job. Covers UK and international jurisdictions.",
+          "recommendedLimit": "Statutory",
+          "recommendedDeductible": 0,
+          "premiumCalculation": {
+            "baseRate": 310000,
+            "rateDetail": "Blended rate based on assumed $5M payroll: Office (1% of $500k), Production (6% of $4.25M), Stunts (20% of $250k)",
+            "multipliers": [
+              {
+                "factor": "Foreign Coverage Extension",
+                "value": 1.1
+              }
+            ],
+            "totalMultiplier": 1.1,
+            "estimatedPremium": 341000
+          }
+        },
+        {
+          "coverageType": "Cast Insurance",
+          "description": "Covers extra expenses incurred due to the death, injury, or illness of essential declared cast members (Bowman, Poole, Floyd).",
+          "recommendedLimit": 5000000,
+          "recommendedDeductible": 15000,
+          "premiumCalculation": {
+            "baseRate": 45000,
+            "rateDetail": "Estimated 4.5% of insured salaries",
+            "multipliers": [
+              {
+                "factor": "Hazardous Activity",
+                "value": 1.4
+              }
+            ],
+            "totalMultiplier": 1.4,
+            "estimatedPremium": 63000
+          }
+        },
+        {
+          "coverageType": "Errors & Omissions (E&O)",
+          "description": "Protects against legal claims arising from the content of the film, such as copyright infringement, defamation, or invasion of privacy.",
+          "recommendedLimit": "5,000,000 per claim / 10,000,000 aggregate",
+          "recommendedDeductible": 25000,
+          "premiumCalculation": {
+            "baseRate": 25000,
+            "rateDetail": "Standard 3-year policy term for a feature film",
+            "multipliers": [],
+            "totalMultiplier": 1,
+            "estimatedPremium": 25000
+          }
+        },
+        {
+          "coverageType": "Specialized Coverage Package",
+          "description": "Bundle of policies for specific, high-level risks inherent to this production.",
+          "recommendedLimit": "Varies by policy",
+          "recommendedDeductible": "Varies",
+          "premiumCalculation": {
+            "baseRate": 128840,
+            "rateDetail": "Sum of individual policy estimates",
+            "multipliers": [],
+            "totalMultiplier": 1,
+            "estimatedPremium": 128840
+          },
+          "lineItems": [
+            {
+              "policy": "Political Risk & Evacuation",
+              "limit": "2,000,000",
+              "premium": 50000
+            },
+            {
+              "policy": "Animal Mortality & Liability",
+              "limit": "500,000",
+              "premium": 35000
+            },
+            {
+              "policy": "Weather Insurance",
+              "limit": "500,000 (for Africa shoot)",
+              "premium": 25000
+            },
+            {
+              "policy": "Auto Liability (Hired & Non-Owned)",
+              "limit": "5,000,000",
+              "premium": 18840
+            }
+          ]
+        }
+      ]
+    },
+    "completionBondAnalysis": {
+      "bondRequirement": "Mandatory",
+      "bondabilityAssessment": "EXTREMELY CHALLENGING. The project's reliance on unproven technology, complex effects, and a visionary director known for perfectionism makes it a high risk for any guarantor. A bond would likely only be issued with a full financial guarantee from the parent studio (MGM) and significant pre-production milestones being met, including successful prototyping of all key technologies.",
+      "bondableBudget": 12000000,
+      "rateStructure": {
+        "rate": 0.055,
+        "ratePercentage": "5.5%",
+        "justification": "High-end of the typical range (3-6%) due to the extreme technical, schedule, and execution risks."
+      },
+      "premium": 660000,
+      "termsAndConditions": [
+        "Strict production and financial reporting requirements.",
+        "Bond company has 'takeover' rights in case of default.",
+        "Approval rights over key personnel and production changes.",
+        "Requirement for a 10-15% contingency in the bonded budget.",
+        "Successful R&D and prototyping of key effects as a condition precedent."
+      ],
+      "rebatePotential": {
+        "range": "20% - 50% of premium",
+        "estimatedRebate": 132000,
+        "likelihood": "Low",
+        "notes": "Given the high probability of schedule and budget overruns due to technical complexity, achieving the on-time, on-budget delivery required for a rebate is unlikely."
+      }
+    },
+    "complianceVerification": {
+      "jurisdictions": [
+        "United Kingdom (Studio)",
+        "USA (Financing/Corporate)",
+        "Africa (Location - Country TBD)"
+      ],
+      "complianceItems": [
+        {
+          "item": "Workers' Compensation",
+          "status": "PENDING",
+          "notes": "Must secure statutory coverage in all jurisdictions where crew are employed. Requires confirmation of final studio location and Africa country."
+        },
+        {
+          "item": "Auto Liability",
+          "status": "PENDING",
+          "notes": "Must meet minimum liability requirements for all production vehicles in all jurisdictions."
+        },
+        {
+          "item": "Child Labor Laws",
+          "status": "CRITICAL",
+          "notes": "Strict adherence to UK child labor laws for work hours, on-set tutoring, and supervision is required for Scene 36."
+        },
+        {
+          "item": "Animal Welfare Regulations",
+          "status": "CRITICAL",
+          "notes": "Compliance with all animal welfare laws (e.g., UK's Performing Animals Act, local African regulations) is mandatory. Certified handlers must be used."
+        },
+        {
+          "item": "E&O Clearances",
+          "status": "IN_PROGRESS",
+          "notes": "Script, title, and character clearance reports must be completed and approved by the E&O carrier prior to the policy binding."
+        }
+      ]
+    },
+    "alternativeCoverageScenarios": [
+      {
+        "scenario": "Increased Deductible Strategy",
+        "description": "Increase deductibles across major policies (GL to $50k, Equipment to $250k) to reduce overall premium.",
+        "costBenefitAnalysis": {
+          "premiumSavings": "Approx. $80,000 - $120,000",
+          "increasedRisk": "Production must absorb a higher portion of any loss. Feasible for a major studio like MGM but increases cash flow risk.",
+          "recommendation": "Recommended if production has a strong cash position and high risk tolerance."
+        }
+      },
+      {
+        "scenario": "Exclusion of Weather Insurance",
+        "description": "Self-insure against weather delays for the Africa portion of the shoot.",
+        "costBenefitAnalysis": {
+          "premiumSavings": "$25,000",
+          "increasedRisk": "Production bears the full cost of any shutdown days due to weather. A single week of delay could cost hundreds of thousands.",
+          "recommendation": "Not recommended. The potential loss far outweighs the premium savings for a location shoot."
+        }
+      }
+    ],
+    "claimsPreventionRecommendations": [
+      {
+        "protocolId": "CP-001",
+        "category": "Mechanical & SFX Safety",
+        "recommendation": "Implement a mandatory 'permit-to-work' system for all operations of the centrifuge set and other major mechanical rigs. Requires sign-off from a certified engineer and the on-set safety supervisor before each use."
+      },
+      {
+        "protocolId": "CP-002",
+        "category": "Animal Handling",
+        "recommendation": "Strictly limit set access during scenes with the trained lion. All non-essential personnel must be cleared. Conduct daily safety briefings with the entire crew and animal handling team."
+      },
+      {
+        "protocolId": "CP-003",
+        "category": "Stunt & Wire Work",
+        "recommendation": "All cast and stunt performers using wire rigs must complete mandatory training and safety checks. All rigging must be inspected daily by a qualified rigger. An on-set medic must be present for all stunt sequences."
+      },
+      {
+        "protocolId": "CP-004",
+        "category": "E&O Diligence",
+        "recommendation": "Maintain a meticulous log of all source materials, inspirations, and creative decisions to defend against potential future claims. Ensure all clearances (music, stock footage, life rights) are fully executed and documented."
+      },
+      {
+        "protocolId": "CP-005",
+        "category": "Health & Safety (International)",
+        "recommendation": "Mandatory vaccinations and health briefings for all cast/crew traveling to Africa. Establish a clear medical evacuation plan with a contracted provider before the crew departs."
+      }
+    ]
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 12718
+  }
+}

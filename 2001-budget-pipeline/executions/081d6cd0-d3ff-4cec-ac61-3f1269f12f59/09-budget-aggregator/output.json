@@ -1,0 +1,233 @@
+{
+  "model_name": "budgetAggregator",
+  "execution_id": "081d6cd0-d3ff-4cec-ac61-3f1269f12f59",
+  "timestamp": "2025-07-21T12:56:33.974288",
+  "success": true,
+  "processing_time": 89.01558012499993,
+  "output_data": {
+    "budgetId": "agg_proj_2001_space_odyssey_v1",
+    "projectId": "proj_2001_space_odyssey",
+    "projectName": "2001: A Space Odyssey",
+    "currency": "USD",
+    "currencyYear": 1966,
+    "processingEvidence": {
+      "aggregatorModel": "Budget Aggregator",
+      "timestamp": "2024-07-21T10:15:00Z",
+      "status": "SUCCESS_WITH_ASSUMPTIONS",
+      "notes": "Budget aggregated from all available model outputs. A critical dependency, 'laborCostCalculator', failed. Labor costs were estimated based on assumptions provided by the 'insuranceCalculator' model to ensure a complete budget. All costs are presented in 1966 USD to reflect the production era.",
+      "simulatedFunctionCalls": [
+        {
+          "functionName": "Department Cost Summation Processing",
+          "status": "COMPLETED_WITH_RECONCILIATION",
+          "summary": "Aggregated costs from successful models: Equipment ($2.04M), Locations/Sets ($4.71M), Post-Production ($7.70M), and Insurance ($1.24M). Reconciled failed 'laborCostCalculator' by adopting the $5M labor cost assumption from the 'insuranceCalculator' model. Assumed ATL/BTL labor split of 25/75. Added assumed ATL non-labor costs ($1.5M) for key creatives."
+        },
+        {
+          "functionName": "Contingency Application Processing",
+          "status": "COMPLETED",
+          "summary": "Calculated a total direct cost of $22.33M. Applied a 15% contingency ($3.35M) across all direct costs, reflecting the 'EXTREME' risk rating identified by multiple models due to pioneering technology, complex logistics, and unprecedented scale."
+        },
+        {
+          "functionName": "Above/Below Line Ratio Calculation Processing",
+          "status": "COMPLETED",
+          "summary": "Categorized all aggregated and assumed costs into Above-the-Line ($2.75M), Below-the-Line ($10.50M), and Post-Production ($7.70M). Calculated final ratios for executive review and comparison against industry benchmarks."
+        },
+        {
+          "functionName": "Overhead and Fee Processing",
+          "status": "COMPLETED",
+          "summary": "Added a Completion Bond premium of $660,000 as specified by the 'insuranceCalculator'. Applied a standard 15% Studio Overhead fee ($3.35M) to the total direct costs, a common practice for major studio productions."
+        },
+        {
+          "functionName": "Industry Standard Formatting Processing",
+          "status": "COMPLETED",
+          "summary": "Formatted the final aggregated data into a comprehensive JSON structure, including an executive summary, financial analysis, and a detailed line-item budget organized by standard industry account codes (PGA format)."
+        }
+      ]
+    },
+    "budgetSummary": {
+      "aboveTheLine": 2750000,
+      "belowTheLine": 10499300,
+      "postProduction": 7695000,
+      "otherCosts": 1388000,
+      "subtotalDirectCosts": 22332300,
+      "contingency": {
+        "percentage": 15,
+        "amount": 3349845
+      },
+      "totalDirectAndContingency": 25682145,
+      "feesAndOverhead": {
+        "completionBond": 660000,
+        "studioOverhead": 3349845
+      },
+      "grandTotal": 29691990
+    },
+    "financialAnalysis": {
+      "ratioAnalysis": {
+        "aboveTheLinePercentage": 12.3,
+        "belowTheLinePercentage": 47.0,
+        "postProductionPercentage": 34.5,
+        "contingencyOfDirectsPercentage": 15.0,
+        "fringesOfLaborPercentage": 30.0,
+        "notes": "Post-Production percentage is significantly higher than the typical 15-25% due to the revolutionary and R&D-intensive nature of the visual effects. ATL percentage is lower, reflecting a budget heavily weighted towards technical execution over talent fees."
+      },
+      "costDriverIdentification": [
+        {
+          "driver": "Post-Production & Visual Effects",
+          "cost": 7695000,
+          "impact": "Represents 34.5% of the total direct budget. Driven by the development of new technologies like Slit-Scan photography and motion control, and the execution of 205 complex VFX shots.",
+          "sourceModel": "postProductionEstimator"
+        },
+        {
+          "driver": "Set Construction & Location Costs",
+          "cost": 4706500,
+          "impact": "Represents 21.1% of the total direct budget. Dominated by the fabrication of massive, high-detail sets, including the $1.25M, 30-ton rotating centrifuge.",
+          "sourceModel": "locationCostEstimator"
+        },
+        {
+          "driver": "Labor",
+          "cost": 5000000,
+          "impact": "Represents 22.4% of the total direct budget. A large, highly skilled crew is required for an extended period to manage the technical and logistical complexity.",
+          "sourceModel": "insuranceCalculator (Assumption)"
+        },
+        {
+          "driver": "Specialty & Custom Equipment",
+          "cost": 2042800,
+          "impact": "Represents 9.1% of the total direct budget. Includes over $1.3M in custom-built, first-of-their-kind camera and effects systems.",
+          "sourceModel": "equipmentPricingEngine"
+        }
+      ],
+      "riskAssessmentIntegration": {
+        "overallRiskRating": "EXTREME",
+        "summary": "The budget reflects the extreme risk profile identified by the system. The 15% contingency, high insurance premiums ($1.24M), and mandatory completion bond ($660k) are direct financial mitigations for risks associated with untested technology, complex stunts, animal work, and the ambitious production schedule."
+      }
+    },
+    "detailedBudget": {
+      "aboveTheLine": {
+        "accountCode": "1000-1999",
+        "total": 2750000,
+        "lineItems": [
+          {
+            "account": "1010 - Story & Rights",
+            "description": "Acquisition of rights to Arthur C. Clarke's 'The Sentinel' and novel collaboration.",
+            "amount": 250000,
+            "notes": "Assumed cost for a high-profile sci-fi property."
+          },
+          {
+            "account": "1110 - Producer Fee",
+            "description": "Fee for Producer Stanley Kubrick.",
+            "amount": 500000,
+            "notes": "Assumed fee, does not include profit participation."
+          },
+          {
+            "account": "1210 - Director Fee",
+            "description": "Fee for Director Stanley Kubrick.",
+            "amount": 750000,
+            "notes": "Assumed fee, does not include profit participation."
+          },
+          {
+            "account": "1300 - Cast",
+            "description": "Salaries and fringes for all principal, supporting, and voice cast.",
+            "amount": 1250000,
+            "notes": "Estimated ATL portion (25%) of the $5M total labor cost assumed from the 'insuranceCalculator' model due to 'laborCostCalculator' model failure."
+          }
+        ]
+      },
+      "belowTheLine": {
+        "accountCode": "2000-3999",
+        "total": 10499300,
+        "lineItems": [
+          {
+            "account": "2000 - Production Staff & Crew",
+            "description": "Salaries and fringes for all BTL production staff and department crews (Camera, Grip, Electric, Art, SFX, etc.).",
+            "amount": 3750000,
+            "notes": "Estimated BTL portion (75%) of the $5M total labor cost assumed from the 'insuranceCalculator' model."
+          },
+          {
+            "account": "2500 - Art Dept & Construction",
+            "description": "Construction of all major sets, including Discovery, Space Station, Moon Base, and TMA-1 site.",
+            "amount": 2700000,
+            "sourceModel": "locationCostEstimator"
+          },
+          {
+            "account": "2700 - Special Effects",
+            "description": "Custom-built equipment for practical effects, including the rotating centrifuge, slit-scan system, and zero-gravity rigs.",
+            "amount": 1185000,
+            "sourceModel": "equipmentPricingEngine"
+          },
+          {
+            "account": "3000 - Location Costs",
+            "description": "Fees, permits, security, and support services for practical locations in Africa and studio complex rental.",
+            "amount": 2006500,
+            "sourceModel": "locationCostEstimator"
+          },
+          {
+            "account": "3300 - Equipment Rental",
+            "description": "Rental of camera, lighting, grip, and standard post-production equipment.",
+            "amount": 857800,
+            "sourceModel": "equipmentPricingEngine"
+          }
+        ]
+      },
+      "postProduction": {
+        "accountCode": "4000-4999",
+        "total": 7695000,
+        "sourceModel": "postProductionEstimator",
+        "lineItems": [
+          {
+            "account": "4000 - Editorial",
+            "description": "Supervising Editor, assistants, facility rental, and supplies for a 54-week editorial period.",
+            "amount": 788000
+          },
+          {
+            "account": "4100 - Sound Post-Production",
+            "description": "Sound design, editing, ADR, Foley, and final 6-track stereo mix.",
+            "amount": 651500
+          },
+          {
+            "account": "4200 - Music",
+            "description": "Composer fee, orchestral recording sessions, licensing for existing works, and music editorial.",
+            "amount": 810500
+          },
+          {
+            "account": "4300 - Visual Effects",
+            "description": "Execution of 205 VFX shots, including model photography, optical compositing, matte paintings, and development of custom systems.",
+            "amount": 3417500
+          },
+          {
+            "account": "4400 - Color & Finishing",
+            "description": "Lab services for color timing, creation of answer prints, and 70mm blow-up process.",
+            "amount": 753000
+          },
+          {
+            "account": "4500 - Delivery & Distribution Prep",
+            "description": "Creation of all mastering elements, international versioning (M&E, dubbing), and release prints.",
+            "amount": 1274500
+          }
+        ]
+      },
+      "otherCosts": {
+        "accountCode": "5000-5999",
+        "total": 1388000,
+        "lineItems": [
+          {
+            "account": "5000 - Insurance",
+            "description": "Package of General Liability, Equipment, Workers' Comp, Cast, E&O, and other specialized policies.",
+            "amount": 1238000,
+            "sourceModel": "insuranceCalculator"
+          },
+          {
+            "account": "5100 - Legal & Accounting",
+            "description": "Fees for production legal counsel and accounting services.",
+            "amount": 150000,
+            "notes": "Assumed cost."
+          }
+        ]
+      }
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 8513
+  }
+}

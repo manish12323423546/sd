@@ -1,0 +1,14 @@
+{
+  "model_name": "scheduleOptimizer",
+  "execution_id": "dac481a9-7614-4cc6-8e5f-2f5eb2569101",
+  "timestamp": "2025-07-21T11:30:06.155009",
+  "success": false,
+  "processing_time": 276.09085458300007,
+  "output_data": {},
+  "error": "RetryError[<Future at 0x107008340 state=finished raised ValueError>]",
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 0
+  }
+}

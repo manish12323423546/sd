@@ -1,0 +1,430 @@
+{
+  "model_name": "equipmentPricingEngine",
+  "execution_id": "eb0900ca-fa3b-4cc9-8ea0-fee3ddc5ce1d",
+  "timestamp": "2025-07-21T12:24:47.380845",
+  "success": true,
+  "processing_time": 83.57096741699996,
+  "output_data": {
+    "projectId": "proj_2001_space_odyssey",
+    "pricingEngineOutput": {
+      "processingLog": [
+        {
+          "step": 1,
+          "process": "Equipment-Vendor Catalog Matching Processing",
+          "timestamp": "2024-07-21T10:15:10Z",
+          "status": "COMPLETED",
+          "summary": "Matched equipment needs to appropriate vendor tiers based on 1960s context. Standard camera/lens packages assigned to Premium Tier (Panavision). General lighting and grip assigned to Standard Tier (Samuelson Film Service). Revolutionary equipment (Centrifuge, Motion Control, Front Projection) assigned to Custom Build Tier, reflecting in-house development and specialized engineering contracts (Vickers-Armstrong). Post-production equipment assigned to an in-house studio facility.",
+          "details": [
+            {
+              "equipmentCategory": "Camera",
+              "assignedVendor": "Panavision Camera Systems",
+              "vendorTier": "Premium Tier",
+              "rationale": "Requirement for high-quality 65mm camera systems and lenses for Super Panavision 70 format."
+            },
+            {
+              "equipmentCategory": "Lighting & Grip",
+              "assignedVendor": "Samuelson Film Service, UK",
+              "vendorTier": "Standard Tier",
+              "rationale": "Established UK vendor capable of supplying large-scale studio and location lighting packages for a 145-day shoot."
+            },
+            {
+              "equipmentCategory": "Specialty Equipment - Centrifuge",
+              "assignedVendor": "Vickers-Armstrong Engineering / MGM SFX Dept.",
+              "vendorTier": "Custom Build",
+              "rationale": "A 38-foot diameter, 30-ton rotating set does not exist commercially. Requires custom design, engineering, and fabrication."
+            },
+            {
+              "equipmentCategory": "Specialty Equipment - Front Projection",
+              "assignedVendor": "MGM SFX Dept. (Tom Howard)",
+              "vendorTier": "Custom Build",
+              "rationale": "Requires custom-built high-intensity projection rig and sourcing of massive Scotchlite reflective screens for realistic background plates (e.g., Africa scenes)."
+            },
+            {
+              "equipmentCategory": "Specialty Equipment - Motion Control & Slit-Scan",
+              "assignedVendor": "MGM SFX Dept. (Douglas Trumbull)",
+              "vendorTier": "Custom Build",
+              "rationale": "Pioneering VFX requires development of custom motion control rigs for model photography and the experimental slit-scan machine for the Stargate sequence."
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "process": "Daily/Weekly Rate Calculation Processing",
+          "timestamp": "2024-07-21T10:15:25Z",
+          "status": "COMPLETED",
+          "summary": "Calculated base rates for all equipment. Standard rentals priced on a weekly basis for the 29-week shoot. Custom builds priced as a total project cost (R&D, materials, labor, testing). Setup and operational costs for complex rigs are included.",
+          "details": [
+            {
+              "item": "Super Panavision 70 Camera Package",
+              "rateType": "Weekly Rental",
+              "rate": 5000,
+              "durationWeeks": 29,
+              "baseCost": 145000
+            },
+            {
+              "item": "Studio & Location Lighting/Grip Package",
+              "rateType": "Weekly Rental",
+              "rate": 7450,
+              "durationWeeks": 29,
+              "baseCost": 216050
+            },
+            {
+              "item": "Centrifuge Set Construction",
+              "rateType": "Custom Build Project Cost",
+              "rate": 750000,
+              "durationWeeks": 0,
+              "baseCost": 750000
+            },
+            {
+              "item": "Front Projection System Build",
+              "rateType": "Custom Build Project Cost",
+              "rate": 170000,
+              "durationWeeks": 0,
+              "baseCost": 170000
+            },
+            {
+              "item": "Motion Control & Slit-Scan R&D/Build",
+              "rateType": "Custom Build Project Cost",
+              "rate": 120000,
+              "durationWeeks": 0,
+              "baseCost": 120000
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "process": "Volume Discount Processing",
+          "timestamp": "2024-07-21T10:15:35Z",
+          "status": "COMPLETED",
+          "summary": "Applied long-term rental discounts to standard equipment packages due to the 29-week duration. Package deal savings were factored into the lighting and grip quote. Custom-built items are not eligible for volume discounts.",
+          "details": [
+            {
+              "item": "Super Panavision 70 Camera Package",
+              "baseCost": 145000,
+              "discountType": "Long-Term Rental (30%)",
+              "discountAmount": 43500,
+              "costAfterDiscount": 101500
+            },
+            {
+              "item": "Studio & Location Lighting/Grip Package",
+              "baseCost": 216050,
+              "discountType": "Package & Long-Term (25%)",
+              "discountAmount": 54013,
+              "costAfterDiscount": 162037
+            },
+            {
+              "item": "Custom Build Items",
+              "baseCost": 1040000,
+              "discountType": "N/A",
+              "discountAmount": 0,
+              "costAfterDiscount": 1040000
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "process": "Insurance Requirements Processing",
+          "timestamp": "2024-07-21T10:15:45Z",
+          "status": "COMPLETED",
+          "summary": "Calculated insurance premiums based on equipment value and risk. A higher premium rate was applied to the high-value, one-of-a-kind custom-built equipment due to the significant financial risk of damage or failure.",
+          "details": [
+            {
+              "category": "Standard Rental Equipment",
+              "replacementValue": 500000,
+              "premiumRate": "3.0%",
+              "insuranceCost": 15000
+            },
+            {
+              "category": "Custom-Built Specialty Equipment",
+              "replacementValue": 2050000,
+              "premiumRate": "5.0%",
+              "insuranceCost": 102500
+            },
+            {
+              "category": "Total",
+              "totalInsuranceCost": 117500
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "process": "Transportation Cost Processing",
+          "timestamp": "2024-07-21T10:15:55Z",
+          "status": "COMPLETED",
+          "summary": "Calculated transportation costs, including international freight for the Africa location shoot, specialized heavy haulage for the centrifuge set, and general local transport for the duration of the UK studio shoot.",
+          "details": [
+            {
+              "type": "International Freight (Africa)",
+              "description": "Air and sea freight for camera, lighting, and support gear for the Africa block.",
+              "cost": 35000
+            },
+            {
+              "type": "Specialized Heavy Haulage",
+              "description": "Transport of centrifuge components from Vickers-Armstrong factory to MGM Borehamwood studios.",
+              "cost": 25000
+            },
+            {
+              "type": "Local Transport",
+              "description": "General equipment trucks for 29 weeks of studio production.",
+              "cost": 14500
+            },
+            {
+              "type": "Total",
+              "totalTransportationCost": 74500
+            }
+          ]
+        }
+      ],
+      "equipmentSummary": {
+        "totalBaseRentalCost": 361050,
+        "totalCustomBuildCost": 1040000,
+        "totalDiscounts": -97513,
+        "subtotalEquipmentCost": 1303537,
+        "totalInsuranceCost": 117500,
+        "totalTransportationCost": 74500,
+        "grandTotalEstimatedCost": 1495537
+      },
+      "equipmentBreakdown": [
+        {
+          "category": "Camera Equipment",
+          "description": "Primary camera packages, lenses, and support for Super Panavision 70mm photography.",
+          "lineItems": [
+            {
+              "itemId": "CAM-001",
+              "itemName": "Super Panavision 70 Camera Package (x3)",
+              "description": "Includes three 65mm cameras, prime and zoom lens sets, magazines, and standard support (tripods, heads).",
+              "vendor": {
+                "name": "Panavision Camera Systems",
+                "tier": "Premium Tier"
+              },
+              "rentalDuration": "29 Weeks",
+              "costComponents": {
+                "baseRental": 145000,
+                "discounts": -43500,
+                "insurance": 7500,
+                "transport": 10000,
+                "lineItemTotal": 119000
+              }
+            },
+            {
+              "itemId": "CAM-002",
+              "itemName": "Aerial Cinematography Mount",
+              "description": "Helicopter mount for 65mm camera, for 'drone footage' equivalent shots in Africa. Includes operator for 5 days.",
+              "vendor": {
+                "name": "AeroVision UK",
+                "tier": "Premium Tier"
+              },
+              "rentalDuration": "1 Week",
+              "costComponents": {
+                "baseRental": 8000,
+                "discounts": 0,
+                "insurance": 500,
+                "transport": 1500,
+                "lineItemTotal": 10000
+              }
+            }
+          ],
+          "categoryTotal": 129000
+        },
+        {
+          "category": "Lighting & Grip Equipment",
+          "description": "All lighting, power, and grip equipment for both location and studio shooting.",
+          "lineItems": [
+            {
+              "itemId": "LTG-001",
+              "itemName": "Location Lighting & Power Package (Africa)",
+              "description": "HMI and Tungsten lights, generators, cabling, and grip for 4 weeks of remote shooting.",
+              "vendor": {
+                "name": "Samuelson Film Service, UK",
+                "tier": "Standard Tier"
+              },
+              "rentalDuration": "4 Weeks",
+              "costComponents": {
+                "baseRental": 16000,
+                "discounts": 0,
+                "insurance": 1000,
+                "transport": 20000,
+                "lineItemTotal": 37000
+              }
+            },
+            {
+              "itemId": "LTG-002",
+              "itemName": "Studio Lighting & Rigging Package",
+              "description": "Extensive lighting grid, Brutes, Dinos, and grip equipment for multiple large-scale studio sets.",
+              "vendor": {
+                "name": "Samuelson Film Service, UK",
+                "tier": "Standard Tier"
+              },
+              "rentalDuration": "25 Weeks",
+              "costComponents": {
+                "baseRental": 200050,
+                "discounts": -54013,
+                "insurance": 6000,
+                "transport": 4500,
+                "lineItemTotal": 156537
+              }
+            }
+          ],
+          "categoryTotal": 193537
+        },
+        {
+          "category": "Specialty & Custom Equipment",
+          "description": "Pioneering, custom-built equipment for special and visual effects. Costs are for build/R&D, not rental.",
+          "lineItems": [
+            {
+              "itemId": "SFX-001",
+              "itemName": "Discovery Centrifuge Set",
+              "description": "Design, engineering, fabrication, installation, and testing of a 38-foot diameter, 30-ton rotating set for artificial gravity simulation.",
+              "vendor": {
+                "name": "Vickers-Armstrong Engineering / MGM SFX Dept.",
+                "tier": "Custom Build"
+              },
+              "rentalDuration": "N/A (Build)",
+              "costComponents": {
+                "baseRental": 750000,
+                "discounts": 0,
+                "insurance": 50000,
+                "transport": 25000,
+                "lineItemTotal": 825000
+              }
+            },
+            {
+              "itemId": "SFX-002",
+              "itemName": "Front Projection System",
+              "description": "Build of a high-intensity 8x10 plate projector, alignment rig, and procurement of a 40x90 foot Scotchlite screen.",
+              "vendor": {
+                "name": "MGM SFX Dept. (Tom Howard)",
+                "tier": "Custom Build"
+              },
+              "rentalDuration": "N/A (Build)",
+              "costComponents": {
+                "baseRental": 170000,
+                "discounts": 0,
+                "insurance": 15000,
+                "transport": 5000,
+                "lineItemTotal": 190000
+              }
+            },
+            {
+              "itemId": "SFX-003",
+              "itemName": "Zero-Gravity Wire Rigs",
+              "description": "Multiple wire rigs for simulating zero-g and low-g movement in spacecraft and moon base sets.",
+              "vendor": {
+                "name": "MGM SFX Dept.",
+                "tier": "Custom Build"
+              },
+              "rentalDuration": "N/A (Build)",
+              "costComponents": {
+                "baseRental": 45000,
+                "discounts": 0,
+                "insurance": 2500,
+                "transport": 1000,
+                "lineItemTotal": 48500
+              }
+            }
+          ],
+          "categoryTotal": 1063500
+        },
+        {
+          "category": "Post-Production & VFX Equipment",
+          "description": "Specialized equipment for visual effects photography and post-production processes.",
+          "lineItems": [
+            {
+              "itemId": "VFX-001",
+              "itemName": "Motion Control & Model Photography Rig",
+              "description": "Custom-built rig for repeatable, precise camera movements for photographing spacecraft models. Includes R&D.",
+              "vendor": {
+                "name": "MGM SFX Dept. (Douglas Trumbull)",
+                "tier": "Custom Build"
+              },
+              "rentalDuration": "N/A (Build)",
+              "costComponents": {
+                "baseRental": 80000,
+                "discounts": 0,
+                "insurance": 10000,
+                "transport": 2000,
+                "lineItemTotal": 92000
+              }
+            },
+            {
+              "itemId": "VFX-002",
+              "itemName": "Slit-Scan Photography Machine",
+              "description": "Experimental machine built from an old animation stand and custom parts for creating the Stargate corridor effect.",
+              "vendor": {
+                "name": "MGM SFX Dept. (Douglas Trumbull)",
+                "tier": "Custom Build"
+              },
+              "rentalDuration": "N/A (Build)",
+              "costComponents": {
+                "baseRental": 40000,
+                "discounts": 0,
+                "insurance": 5000,
+                "transport": 500,
+                "lineItemTotal": 45500
+              }
+            },
+            {
+              "itemId": "VFX-003",
+              "itemName": "Optical Printer & Animation Stand Rental",
+              "description": "Use of in-house optical printing facilities for compositing all VFX shots, including matte paintings and model work.",
+              "vendor": {
+                "name": "MGM Animation/VFX Dept.",
+                "tier": "In-House"
+              },
+              "rentalDuration": "52 Weeks (Post)",
+              "costComponents": {
+                "baseRental": 72000,
+                "discounts": 0,
+                "insurance": 20000,
+                "transport": 0,
+                "lineItemTotal": 92000
+              }
+            }
+          ],
+          "categoryTotal": 229500
+        }
+      ],
+      "riskAssessment": {
+        "equipmentFailureProvisions": [
+          {
+            "riskId": "EQUIP-RISK-001",
+            "description": "Failure of the custom-built centrifuge mechanism (motors, bearings) during the critical Discovery shoot block.",
+            "mitigation": "Budget includes on-site engineering support from Vickers-Armstrong during operation. A stock of critical spare parts (motors, control units) is included in the build cost. Extensive pre-shoot testing period is scheduled.",
+            "costImpact": 50000
+          },
+          {
+            "riskId": "EQUIP-RISK-002",
+            "description": "Breakdown or unsatisfactory performance of the Front Projection system, compromising all Africa backdrop shots.",
+            "mitigation": "Budget for a backup high-intensity projector and spare parts. Extensive calibration and testing with camera department before principal photography begins.",
+            "costImpact": 25000
+          },
+          {
+            "riskId": "EQUIP-RISK-003",
+            "description": "Development delays or failure of the experimental Slit-Scan and Motion Control rigs, jeopardizing all VFX sequences.",
+            "mitigation": "VFX photography is scheduled at the end of the main shoot, allowing maximum R&D time. Budget allows for multiple prototype iterations. Fallback plan involves more traditional (but less dynamic) animation stand techniques.",
+            "costImpact": 40000
+          }
+        ],
+        "contingencyAllowance": 115000
+      },
+      "totalEquipmentCost": {
+        "subtotal": 1495537,
+        "contingency": 115000,
+        "grandTotal": 1610537,
+        "currency": "USD",
+        "notes": "All costs are estimates based on 1965-1968 pricing. The confidence interval is wide due to the pioneering and custom-built nature of the majority of the key equipment.",
+        "confidenceInterval": {
+          "level": "90%",
+          "lowerBound": 1288430,
+          "upperBound": 1932644
+        }
+      }
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 12503
+  }
+}

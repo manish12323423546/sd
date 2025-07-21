@@ -1,0 +1,315 @@
+2025-07-21 16:50:42,608 - __main__ - INFO - 🎬 Starting 2001 Budget Pipeline Test
+2025-07-21 16:50:42,608 - __main__ - INFO - 🎯 Starting Pipeline Test Loop
+2025-07-21 16:50:42,608 - __main__ - INFO - 📋 Max Attempts: 5
+2025-07-21 16:50:42,608 - __main__ - INFO - 🎯 Target Quality: 80.0
+2025-07-21 16:50:42,608 - __main__ - INFO - ⏰ Time Limit: 3600s
+2025-07-21 16:50:42,609 - __main__ - INFO - ✅ Loaded coordinator input from: /Users/varunisrani/Desktop/mckays-app-template 3/2001-budget-system/01-coordinator/input.json
+2025-07-21 16:50:42,609 - __main__ - INFO - 📊 Input contains 71 scenes
+2025-07-21 16:50:42,609 - pipeline.memory_state_manager - INFO - Memory state manager initialized
+2025-07-21 16:50:42,610 - models.model_processor - INFO - Loaded system prompt for laborCostCalculator
+2025-07-21 16:50:42,610 - models.model_processor - INFO - Loaded sample input for laborCostCalculator
+2025-07-21 16:50:42,610 - models.model_processor - INFO - Loaded sample output for laborCostCalculator
+2025-07-21 16:50:42,610 - models.model_processor - INFO - Loaded complete configuration for laborCostCalculator
+2025-07-21 16:50:42,611 - models.model_processor - INFO - Loaded system prompt for equipmentPricingEngine
+2025-07-21 16:50:42,611 - models.model_processor - INFO - Loaded sample input for equipmentPricingEngine
+2025-07-21 16:50:42,611 - models.model_processor - INFO - Loaded sample output for equipmentPricingEngine
+2025-07-21 16:50:42,611 - models.model_processor - INFO - Loaded complete configuration for equipmentPricingEngine
+2025-07-21 16:50:42,612 - models.model_processor - INFO - Loaded system prompt for locationCostEstimator
+2025-07-21 16:50:42,612 - models.model_processor - INFO - Loaded sample input for locationCostEstimator
+2025-07-21 16:50:42,612 - models.model_processor - INFO - Loaded sample output for locationCostEstimator
+2025-07-21 16:50:42,612 - models.model_processor - INFO - Loaded complete configuration for locationCostEstimator
+2025-07-21 16:50:42,613 - models.model_processor - INFO - Loaded system prompt for scheduleOptimizer
+2025-07-21 16:50:42,613 - models.model_processor - INFO - Loaded sample input for scheduleOptimizer
+2025-07-21 16:50:42,613 - models.model_processor - INFO - Loaded sample output for scheduleOptimizer
+2025-07-21 16:50:42,613 - models.model_processor - INFO - Loaded complete configuration for scheduleOptimizer
+2025-07-21 16:50:42,613 - models.model_processor - INFO - Loaded system prompt for insuranceCalculator
+2025-07-21 16:50:42,614 - models.model_processor - INFO - Loaded sample input for insuranceCalculator
+2025-07-21 16:50:42,614 - models.model_processor - INFO - Loaded sample output for insuranceCalculator
+2025-07-21 16:50:42,614 - models.model_processor - INFO - Loaded complete configuration for insuranceCalculator
+2025-07-21 16:50:42,614 - models.model_processor - INFO - Loaded system prompt for postProductionEstimator
+2025-07-21 16:50:42,615 - models.model_processor - INFO - Loaded sample input for postProductionEstimator
+2025-07-21 16:50:42,615 - models.model_processor - INFO - Loaded sample output for postProductionEstimator
+2025-07-21 16:50:42,615 - models.model_processor - INFO - Loaded complete configuration for postProductionEstimator
+2025-07-21 16:50:42,615 - models.model_processor - INFO - Loaded system prompt for taxIncentiveAnalyzer
+2025-07-21 16:50:42,616 - models.model_processor - INFO - Loaded sample input for taxIncentiveAnalyzer
+2025-07-21 16:50:42,616 - models.model_processor - INFO - Loaded sample output for taxIncentiveAnalyzer
+2025-07-21 16:50:42,616 - models.model_processor - INFO - Loaded complete configuration for taxIncentiveAnalyzer
+2025-07-21 16:50:42,616 - models.model_processor - INFO - Loaded system prompt for budgetAggregator
+2025-07-21 16:50:42,617 - models.model_processor - INFO - Loaded sample input for budgetAggregator
+2025-07-21 16:50:42,617 - models.model_processor - INFO - Loaded sample output for budgetAggregator
+2025-07-21 16:50:42,617 - models.model_processor - INFO - Loaded complete configuration for budgetAggregator
+2025-07-21 16:50:42,617 - models.model_processor - INFO - Loaded system prompt for cashFlowProjector
+2025-07-21 16:50:42,618 - models.model_processor - INFO - Loaded sample input for cashFlowProjector
+2025-07-21 16:50:42,618 - models.model_processor - INFO - Loaded sample output for cashFlowProjector
+2025-07-21 16:50:42,618 - models.model_processor - INFO - Loaded complete configuration for cashFlowProjector
+2025-07-21 16:50:42,618 - models.model_processor - INFO - Loaded 9 model configurations
+2025-07-21 16:50:42,618 - models.model_processor - INFO - Initialized 9 model processors
+2025-07-21 16:50:42,618 - pipeline.orchestrator - INFO - Pipeline orchestrator initialized successfully
+2025-07-21 16:50:42,618 - __main__ - INFO - 
+============================================================
+2025-07-21 16:50:42,618 - __main__ - INFO - 🔄 ATTEMPT 1/5
+2025-07-21 16:50:42,618 - __main__ - INFO - ============================================================
+2025-07-21 16:50:42,618 - __main__ - INFO - 🚀 Starting Test #1
+2025-07-21 16:50:42,618 - pipeline.memory_state_manager - INFO - Created execution d7483364-b818-4117-81a3-ff96110cda54
+2025-07-21 16:50:42,618 - pipeline.orchestrator - INFO - Starting pipeline execution d7483364-b818-4117-81a3-ff96110cda54
+2025-07-21 16:50:42,619 - models.io_logger - INFO - Created execution folder structure: executions/d7483364-b818-4117-81a3-ff96110cda54
+2025-07-21 16:50:42,619 - pipeline.memory_state_manager - INFO - Updated execution d7483364-b818-4117-81a3-ff96110cda54 status to RUNNING
+2025-07-21 16:50:42,619 - pipeline.dependency_manager - INFO - Initialized 9 model executions
+2025-07-21 16:50:42,619 - pipeline.orchestrator - INFO - Executing Tier 1: ['scheduleOptimizer', 'postProductionEstimator']
+2025-07-21 16:50:42,619 - pipeline.memory_state_manager - INFO - Updated execution d7483364-b818-4117-81a3-ff96110cda54 status to RUNNING
+2025-07-21 16:50:42,620 - pipeline.dependency_manager - INFO - Model scheduleOptimizer status: pending -> running
+2025-07-21 16:50:42,620 - pipeline.orchestrator - INFO - Processing model: scheduleOptimizer
+2025-07-21 16:50:42,620 - models.model_processor - INFO - Processing model: scheduleOptimizer
+2025-07-21 16:50:42,622 - models.io_logger - INFO - Logged input for scheduleOptimizer: executions/d7483364-b818-4117-81a3-ff96110cda54/05-schedule-optimizer/input.json
+2025-07-21 16:50:42,622 - models.gemini_client - INFO - Processing scheduleOptimizer with thinking mode: True
+2025-07-21 16:50:42,626 - pipeline.dependency_manager - INFO - Model postProductionEstimator status: pending -> running
+2025-07-21 16:50:42,626 - pipeline.orchestrator - INFO - Processing model: postProductionEstimator
+2025-07-21 16:50:42,626 - models.model_processor - INFO - Processing model: postProductionEstimator
+2025-07-21 16:50:42,634 - models.io_logger - INFO - Logged input for postProductionEstimator: executions/d7483364-b818-4117-81a3-ff96110cda54/07-post-production-estimator/input.json
+2025-07-21 16:50:42,634 - models.gemini_client - INFO - Processing postProductionEstimator with thinking mode: True
+2025-07-21 16:51:58,529 - models.gemini_client - WARNING - scheduleOptimizer: Missing processingLog - processing functions may not have executed
+2025-07-21 16:51:58,530 - models.gemini_client - ERROR - Response validation error for scheduleOptimizer: Missing required field 'scheduleModelOutput' in scheduleOptimizer response
+2025-07-21 16:51:58,530 - models.gemini_client - ERROR - Error processing scheduleOptimizer: Missing required field 'scheduleModelOutput' in scheduleOptimizer response
+2025-07-21 16:52:02,532 - models.gemini_client - INFO - Processing scheduleOptimizer with thinking mode: True
+2025-07-21 16:52:05,408 - models.gemini_client - ERROR - JSON parsing error for postProductionEstimator: Expecting value: line 370 column 21 (char 9093)
+2025-07-21 16:52:05,409 - models.gemini_client - ERROR - Response text: {
+  "projectId": "proj_2001_space_odyssey",
+  "postProductionBudgetSummary": {
+    "totalEditorialCost": 801200,
+    "totalVisualEffectsCost": 5584000,
+    "totalSoundPostCost": 1614300,
+    "totalColorAndFinishingCost": 984000,
+    "totalDeliveryAndArchivingCost": 960000,
+    "subtotal": 9943500,
+    "contingency": 3050155,
+    "grandTotal": 12993655
+  },
+  "processingEvidence": [
+    {
+      "functionName": "estimate_editorial_costs",
+      "parameters": {
+        "runtimeMinutes": 149,
+      ...
+2025-07-21 16:52:05,409 - models.gemini_client - ERROR - Error processing postProductionEstimator: Invalid JSON response: Expecting value: line 370 column 21 (char 9093)
+2025-07-21 16:52:09,411 - models.gemini_client - INFO - Processing postProductionEstimator with thinking mode: True
+2025-07-21 16:53:16,348 - models.gemini_client - WARNING - scheduleOptimizer: Missing processingLog - processing functions may not have executed
+2025-07-21 16:53:16,350 - models.gemini_client - ERROR - Response validation error for scheduleOptimizer: Missing required field 'scheduleModelOutput' in scheduleOptimizer response
+2025-07-21 16:53:16,350 - models.gemini_client - ERROR - Error processing scheduleOptimizer: Missing required field 'scheduleModelOutput' in scheduleOptimizer response
+2025-07-21 16:53:20,352 - models.gemini_client - INFO - Processing scheduleOptimizer with thinking mode: True
+2025-07-21 16:53:32,051 - models.gemini_client - ERROR - JSON parsing error for postProductionEstimator: Expecting property name enclosed in double quotes: line 161 column 24 (char 5776)
+2025-07-21 16:53:32,057 - models.gemini_client - ERROR - Response text: {
+  "postProductionBudget": {
+    "projectId": "proj_2001_space_odyssey",
+    "title": "2001: A Space Odyssey",
+    "version": "1.0",
+    "currency": "USD",
+    "context": "1960s Post-Production Environment",
+    "summary": {
+      "totalEstimatedCost": 14402000,
+      "contingency": {
+        "vfxContingency": 2530000,
+        "generalContingency": 832050,
+        "totalContingency": 3362050
+      },
+      "grandTotal": 17764050,
+      "releasePrintsCost": 450000
+    },
+    "processingEvidence"...
+2025-07-21 16:53:32,057 - models.gemini_client - ERROR - Error processing postProductionEstimator: Invalid JSON response: Expecting property name enclosed in double quotes: line 161 column 24 (char 5776)
+2025-07-21 16:53:36,059 - models.gemini_client - INFO - Processing postProductionEstimator with thinking mode: True
+2025-07-21 16:54:48,448 - models.gemini_client - ERROR - JSON parsing error for scheduleOptimizer: Unterminated string starting at: line 576 column 23 (char 18204)
+2025-07-21 16:54:48,448 - models.gemini_client - ERROR - Response text: {
+  "projectId": "proj_2001_space_odyssey",
+  "scheduleVersion": "1.0",
+  "generationTimestamp": "2024-07-21T11:30:00Z",
+  "processingEvidence": {
+    "sceneLocationGrouping": {
+      "status": "COMPLETE",
+      "summary": "Scenes grouped into 5 primary production blocks to maximize location/set efficiency and minimize company moves. Remote practical locations are scheduled first.",
+      "groups": [
+        {
+          "groupName": "Phase 1: The Dawn of Man (Africa Location)",
+          "locati...
+2025-07-21 16:54:48,449 - models.gemini_client - ERROR - Error processing scheduleOptimizer: Invalid JSON response: Unterminated string starting at: line 576 column 23 (char 18204)
+2025-07-21 16:54:48,451 - models.io_logger - INFO - Logged output for scheduleOptimizer: executions/d7483364-b818-4117-81a3-ff96110cda54/05-schedule-optimizer/output.json
+2025-07-21 16:54:48,451 - models.model_processor - ERROR - Error processing model scheduleOptimizer: RetryError[<Future at 0x106ec0a60 state=finished raised ValueError>]
+2025-07-21 16:54:48,451 - pipeline.orchestrator - ERROR - Model scheduleOptimizer failed: RetryError[<Future at 0x106ec0a60 state=finished raised ValueError>]
+2025-07-21 16:54:48,451 - pipeline.dependency_manager - INFO - Model scheduleOptimizer status: running -> completed
+2025-07-21 16:55:00,040 - models.gemini_client - ERROR - JSON parsing error for postProductionEstimator: Expecting property name enclosed in double quotes: line 312 column 56 (char 8187)
+2025-07-21 16:55:00,041 - models.gemini_client - ERROR - Response text: {
+  "projectId": "proj_2001_space_odyssey",
+  "postProductionBudgetSummary": {
+    "totalEditorialCost": 526000,
+    "totalVisualEffectsCost": 5807500,
+    "totalSoundCost": 1577000,
+    "totalColorAndFinishingCost": 1163500,
+    "totalDeliveryAndArchivingCost": 900000,
+    "postProductionSubtotal": 9974000,
+    "contingency": {
+      "percentage": 35,
+      "amount": 3490900
+    },
+    "grandTotal": 13464900,
+    "currency": "USD",
+    "year": 1968
+  },
+  "detailedBreakdowns": {
+    "editorial"...
+2025-07-21 16:55:00,041 - models.gemini_client - ERROR - Error processing postProductionEstimator: Invalid JSON response: Expecting property name enclosed in double quotes: line 312 column 56 (char 8187)
+2025-07-21 16:55:00,044 - models.io_logger - INFO - Logged output for postProductionEstimator: executions/d7483364-b818-4117-81a3-ff96110cda54/07-post-production-estimator/output.json
+2025-07-21 16:55:00,044 - models.model_processor - ERROR - Error processing model postProductionEstimator: RetryError[<Future at 0x106ec04f0 state=finished raised ValueError>]
+2025-07-21 16:55:00,044 - pipeline.orchestrator - ERROR - Model postProductionEstimator failed: RetryError[<Future at 0x106ec04f0 state=finished raised ValueError>]
+2025-07-21 16:55:00,044 - pipeline.dependency_manager - INFO - Model postProductionEstimator status: running -> completed
+2025-07-21 16:55:00,045 - pipeline.memory_state_manager - ERROR - Marked scheduleOptimizer as failed in execution d7483364-b818-4117-81a3-ff96110cda54: RetryError[<Future at 0x106ec0a60 state=finished raised ValueError>]
+2025-07-21 16:55:00,045 - pipeline.memory_state_manager - INFO - Updated execution d7483364-b818-4117-81a3-ff96110cda54 status to FAILED
+2025-07-21 16:55:00,045 - pipeline.orchestrator - ERROR - Pipeline execution d7483364-b818-4117-81a3-ff96110cda54 failed: Model scheduleOptimizer failed: RetryError[<Future at 0x106ec0a60 state=finished raised ValueError>]
+2025-07-21 16:55:00,045 - __main__ - INFO - ❌ Test #1 - Status: FAILED
+2025-07-21 16:55:00,047 - __main__ - INFO - 📊 Quality Score: 0.00/100
+2025-07-21 16:55:00,047 - __main__ - INFO - ⏱️  Total Time: 257.4s
+2025-07-21 16:55:00,047 - __main__ - INFO - 🎯 Models: 0/6 tiers
+2025-07-21 16:55:00,048 - __main__ - INFO - 🏆 NEW BEST RESULT! Quality: 0.0
+2025-07-21 16:55:00,048 - __main__ - INFO - ⏳ Waiting 30s before next attempt...
+2025-07-21 16:55:30,051 - __main__ - INFO - 
+============================================================
+2025-07-21 16:55:30,053 - __main__ - INFO - 🔄 ATTEMPT 2/5
+2025-07-21 16:55:30,053 - __main__ - INFO - ============================================================
+2025-07-21 16:55:30,054 - __main__ - INFO - 🚀 Starting Test #2
+2025-07-21 16:55:30,055 - pipeline.memory_state_manager - INFO - Created execution dac481a9-7614-4cc6-8e5f-2f5eb2569101
+2025-07-21 16:55:30,055 - pipeline.orchestrator - INFO - Starting pipeline execution dac481a9-7614-4cc6-8e5f-2f5eb2569101
+2025-07-21 16:55:30,057 - models.io_logger - INFO - Created execution folder structure: executions/dac481a9-7614-4cc6-8e5f-2f5eb2569101
+2025-07-21 16:55:30,057 - pipeline.memory_state_manager - INFO - Updated execution dac481a9-7614-4cc6-8e5f-2f5eb2569101 status to RUNNING
+2025-07-21 16:55:30,058 - pipeline.dependency_manager - INFO - Initialized 9 model executions
+2025-07-21 16:55:30,058 - pipeline.orchestrator - INFO - Executing Tier 1: ['scheduleOptimizer', 'postProductionEstimator']
+2025-07-21 16:55:30,058 - pipeline.memory_state_manager - INFO - Updated execution dac481a9-7614-4cc6-8e5f-2f5eb2569101 status to RUNNING
+2025-07-21 16:55:30,058 - pipeline.dependency_manager - INFO - Model scheduleOptimizer status: pending -> running
+2025-07-21 16:55:30,058 - pipeline.orchestrator - INFO - Processing model: scheduleOptimizer
+2025-07-21 16:55:30,058 - models.model_processor - INFO - Processing model: scheduleOptimizer
+2025-07-21 16:55:30,064 - models.io_logger - INFO - Logged input for scheduleOptimizer: executions/dac481a9-7614-4cc6-8e5f-2f5eb2569101/05-schedule-optimizer/input.json
+2025-07-21 16:55:30,064 - models.gemini_client - INFO - Processing scheduleOptimizer with thinking mode: True
+2025-07-21 16:55:30,066 - pipeline.dependency_manager - INFO - Model postProductionEstimator status: pending -> running
+2025-07-21 16:55:30,070 - pipeline.orchestrator - INFO - Processing model: postProductionEstimator
+2025-07-21 16:55:30,070 - models.model_processor - INFO - Processing model: postProductionEstimator
+2025-07-21 16:55:30,073 - models.io_logger - INFO - Logged input for postProductionEstimator: executions/dac481a9-7614-4cc6-8e5f-2f5eb2569101/07-post-production-estimator/input.json
+2025-07-21 16:55:30,073 - models.gemini_client - INFO - Processing postProductionEstimator with thinking mode: True
+2025-07-21 16:56:55,043 - models.gemini_client - ERROR - JSON parsing error for postProductionEstimator: Expecting property name enclosed in double quotes: line 320 column 14 (char 10162)
+2025-07-21 16:56:55,044 - models.gemini_client - ERROR - Response text: {
+  "postProductionBudget": {
+    "projectId": "proj_2001_space_odyssey",
+    "title": "2001: A Space Odyssey",
+    "version": "1.0",
+    "currency": "USD",
+    "context": "1960s Production Rates and Technology",
+    "processingEvidence": [
+      {
+        "function": "estimateEditorialCosts",
+        "status": "completed",
+        "timestamp": "2024-07-21T10:00:01Z",
+        "summary": "Calculated editorial personnel, facility, and timeline costs based on 149-minute runtime and high complexity....
+2025-07-21 16:56:55,045 - models.gemini_client - ERROR - Error processing postProductionEstimator: Invalid JSON response: Expecting property name enclosed in double quotes: line 320 column 14 (char 10162)
+2025-07-21 16:56:59,048 - models.gemini_client - INFO - Processing postProductionEstimator with thinking mode: True
+2025-07-21 16:57:01,363 - models.gemini_client - ERROR - JSON parsing error for scheduleOptimizer: Unterminated string starting at: line 422 column 23 (char 13335)
+2025-07-21 16:57:01,363 - models.gemini_client - ERROR - Response text: {
+  "scheduleId": "sched_2001_v1.0",
+  "projectId": "proj_2001_space_odyssey",
+  "scheduleVersion": "1.0",
+  "generatedAt": "2024-07-21T12:00:00Z",
+  "scheduleSummary": {
+    "totalShootDays": 145,
+    "totalContingencyDays": 5,
+    "startDate": "1965-12-29",
+    "estimatedWrapDate": "1966-07-27",
+    "workingWeek": "5-Day Week (Monday-Friday)",
+    "productionPhases": [
+      {
+        "phaseName": "Phase 1: The Dawn of Man (Practical Location)",
+        "estimatedDays": 22,
+        "locations"...
+2025-07-21 16:57:01,363 - models.gemini_client - ERROR - Error processing scheduleOptimizer: Invalid JSON response: Unterminated string starting at: line 422 column 23 (char 13335)
+2025-07-21 16:57:05,365 - models.gemini_client - INFO - Processing scheduleOptimizer with thinking mode: True
+2025-07-21 16:58:21,855 - models.gemini_client - ERROR - JSON parsing error for postProductionEstimator: Expecting ',' delimiter: line 275 column 29 (char 8126)
+2025-07-21 16:58:21,857 - models.gemini_client - ERROR - Response text: {
+  "postProductionEstimate": {
+    "projectId": "proj_2001_space_odyssey",
+    "summary": {
+      "totalPostProductionCost": 11802820,
+      "editorialCost": 830600,
+      "vfxCost": 5804000,
+      "soundCost": 1550500,
+      "colorAndFinishingCost": 895000,
+      "deliveryCost": 860000,
+      "contingency": 1862720,
+      "totalPostProductionTimelineWeeks": 104
+    },
+    "processingEvidence": [
+      {
+        "function": "Editorial Time Estimation Processing",
+        "status": "Completed",
+...
+2025-07-21 16:58:21,857 - models.gemini_client - ERROR - Error processing postProductionEstimator: Invalid JSON response: Expecting ',' delimiter: line 275 column 29 (char 8126)
+2025-07-21 16:58:25,864 - models.gemini_client - INFO - Processing postProductionEstimator with thinking mode: True
+2025-07-21 16:58:34,755 - models.gemini_client - WARNING - scheduleOptimizer: Missing processingLog - processing functions may not have executed
+2025-07-21 16:58:34,756 - models.gemini_client - ERROR - Response validation error for scheduleOptimizer: Missing required field 'scheduleModelOutput' in scheduleOptimizer response
+2025-07-21 16:58:34,756 - models.gemini_client - ERROR - Error processing scheduleOptimizer: Missing required field 'scheduleModelOutput' in scheduleOptimizer response
+2025-07-21 16:58:38,759 - models.gemini_client - INFO - Processing scheduleOptimizer with thinking mode: True
+2025-07-21 16:59:55,234 - models.gemini_client - ERROR - JSON parsing error for postProductionEstimator: Expecting property name enclosed in double quotes: line 395 column 14 (char 13093)
+2025-07-21 16:59:55,235 - models.gemini_client - ERROR - Response text: {
+  "postProductionBudget": {
+    "projectId": "proj_2001_space_odyssey",
+    "summary": {
+      "totalEstimatedCost": 12356370,
+      "subtotal": 9504900,
+      "contingency": 2851470,
+      "costsByDepartment": {
+        "editorial": 927400,
+        "visualEffects": 5887000,
+        "soundPostProduction": 1265500,
+        "colorAndFinishing": 625000,
+        "deliveryAndMasters": 800000
+      },
+      "currency": "USD",
+      "budgetYear": 1968
+    },
+    "timelineAnalysis": {
+      "totalPost...
+2025-07-21 16:59:55,235 - models.gemini_client - ERROR - Error processing postProductionEstimator: Invalid JSON response: Expecting property name enclosed in double quotes: line 395 column 14 (char 13093)
+2025-07-21 16:59:55,239 - models.io_logger - INFO - Logged output for postProductionEstimator: executions/dac481a9-7614-4cc6-8e5f-2f5eb2569101/07-post-production-estimator/output.json
+2025-07-21 16:59:55,239 - models.model_processor - ERROR - Error processing model postProductionEstimator: RetryError[<Future at 0x107008460 state=finished raised ValueError>]
+2025-07-21 16:59:55,239 - pipeline.orchestrator - ERROR - Model postProductionEstimator failed: RetryError[<Future at 0x107008460 state=finished raised ValueError>]
+2025-07-21 16:59:55,239 - pipeline.dependency_manager - INFO - Model postProductionEstimator status: running -> completed
+2025-07-21 17:00:06,153 - models.gemini_client - WARNING - scheduleOptimizer: Missing processingLog - processing functions may not have executed
+2025-07-21 17:00:06,154 - models.gemini_client - ERROR - Response validation error for scheduleOptimizer: Missing required field 'scheduleModelOutput' in scheduleOptimizer response
+2025-07-21 17:00:06,154 - models.gemini_client - ERROR - Error processing scheduleOptimizer: Missing required field 'scheduleModelOutput' in scheduleOptimizer response
+2025-07-21 17:00:06,155 - models.io_logger - INFO - Logged output for scheduleOptimizer: executions/dac481a9-7614-4cc6-8e5f-2f5eb2569101/05-schedule-optimizer/output.json
+2025-07-21 17:00:06,156 - models.model_processor - ERROR - Error processing model scheduleOptimizer: RetryError[<Future at 0x107008340 state=finished raised ValueError>]
+2025-07-21 17:00:06,156 - pipeline.orchestrator - ERROR - Model scheduleOptimizer failed: RetryError[<Future at 0x107008340 state=finished raised ValueError>]
+2025-07-21 17:00:06,156 - pipeline.dependency_manager - INFO - Model scheduleOptimizer status: running -> completed
+2025-07-21 17:00:06,156 - pipeline.memory_state_manager - ERROR - Marked scheduleOptimizer as failed in execution dac481a9-7614-4cc6-8e5f-2f5eb2569101: RetryError[<Future at 0x107008340 state=finished raised ValueError>]
+2025-07-21 17:00:06,156 - pipeline.memory_state_manager - INFO - Updated execution dac481a9-7614-4cc6-8e5f-2f5eb2569101 status to FAILED
+2025-07-21 17:00:06,157 - pipeline.orchestrator - ERROR - Pipeline execution dac481a9-7614-4cc6-8e5f-2f5eb2569101 failed: Model scheduleOptimizer failed: RetryError[<Future at 0x107008340 state=finished raised ValueError>]
+2025-07-21 17:00:06,157 - __main__ - INFO - ❌ Test #2 - Status: FAILED
+2025-07-21 17:00:06,157 - __main__ - INFO - 📊 Quality Score: 0.00/100
+2025-07-21 17:00:06,157 - __main__ - INFO - ⏱️  Total Time: 276.1s
+2025-07-21 17:00:06,157 - __main__ - INFO - 🎯 Models: 0/6 tiers
+2025-07-21 17:00:06,157 - __main__ - INFO - ⏳ Waiting 30s before next attempt...
+2025-07-21 17:00:36,161 - __main__ - INFO - 
+============================================================
+2025-07-21 17:00:36,163 - __main__ - INFO - 🔄 ATTEMPT 3/5
+2025-07-21 17:00:36,163 - __main__ - INFO - ============================================================
+2025-07-21 17:00:36,163 - __main__ - INFO - 🚀 Starting Test #3
+2025-07-21 17:00:36,165 - pipeline.memory_state_manager - INFO - Created execution 8963eaa9-0822-4392-9a13-f79ebd626c8e
+2025-07-21 17:00:36,165 - pipeline.orchestrator - INFO - Starting pipeline execution 8963eaa9-0822-4392-9a13-f79ebd626c8e
+2025-07-21 17:00:36,168 - models.io_logger - INFO - Created execution folder structure: executions/8963eaa9-0822-4392-9a13-f79ebd626c8e
+2025-07-21 17:00:36,169 - pipeline.memory_state_manager - INFO - Updated execution 8963eaa9-0822-4392-9a13-f79ebd626c8e status to RUNNING
+2025-07-21 17:00:36,169 - pipeline.dependency_manager - INFO - Initialized 9 model executions
+2025-07-21 17:00:36,169 - pipeline.orchestrator - INFO - Executing Tier 1: ['scheduleOptimizer', 'postProductionEstimator']
+2025-07-21 17:00:36,169 - pipeline.memory_state_manager - INFO - Updated execution 8963eaa9-0822-4392-9a13-f79ebd626c8e status to RUNNING
+2025-07-21 17:00:36,170 - pipeline.dependency_manager - INFO - Model scheduleOptimizer status: pending -> running
+2025-07-21 17:00:36,170 - pipeline.orchestrator - INFO - Processing model: scheduleOptimizer
+2025-07-21 17:00:36,171 - models.model_processor - INFO - Processing model: scheduleOptimizer
+2025-07-21 17:00:36,176 - models.io_logger - INFO - Logged input for scheduleOptimizer: executions/8963eaa9-0822-4392-9a13-f79ebd626c8e/05-schedule-optimizer/input.json
+2025-07-21 17:00:36,176 - models.gemini_client - INFO - Processing scheduleOptimizer with thinking mode: True
+2025-07-21 17:00:36,180 - pipeline.dependency_manager - INFO - Model postProductionEstimator status: pending -> running
+2025-07-21 17:00:36,183 - pipeline.orchestrator - INFO - Processing model: postProductionEstimator
+2025-07-21 17:00:36,183 - models.model_processor - INFO - Processing model: postProductionEstimator
+2025-07-21 17:00:36,187 - models.io_logger - INFO - Logged input for postProductionEstimator: executions/8963eaa9-0822-4392-9a13-f79ebd626c8e/07-post-production-estimator/input.json
+2025-07-21 17:00:36,188 - models.gemini_client - INFO - Processing postProductionEstimator with thinking mode: True

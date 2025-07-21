@@ -1,0 +1,504 @@
+{
+  "model_name": "postProductionEstimator",
+  "execution_id": "eb0900ca-fa3b-4cc9-8ea0-fee3ddc5ce1d",
+  "timestamp": "2025-07-21T12:21:59.410554",
+  "success": true,
+  "processing_time": 77.927845333,
+  "output_data": {
+    "postProductionBudget": {
+      "projectId": "proj_2001_space_odyssey",
+      "title": "2001: A Space Odyssey",
+      "version": "1.0",
+      "estimationDate": "2024-07-21T10:00:00Z",
+      "summary": {
+        "totalEstimatedCost": 9518000,
+        "totalWeeks": 92,
+        "baseCost": 7565100,
+        "contingency": {
+          "percentage": 25.8,
+          "amount": 1952900
+        },
+        "currency": "USD",
+        "notes": "Budget reflects the revolutionary and technically unprecedented nature of the production in the 1960s. Significant costs are allocated to VFX R&D, custom equipment, and an extended post-production timeline."
+      },
+      "timelineAnalysis": {
+        "totalPostProductionDurationWeeks": 92,
+        "startDate": "1966-06-01",
+        "endDate": "1968-03-01",
+        "criticalPath": [
+          "VFX R&D and Custom Equipment Build",
+          "VFX Shot Production",
+          "Fine Cut Editorial",
+          "Final Sound Mix",
+          "70mm Blow-up and Mastering"
+        ],
+        "phases": [
+          {
+            "phase": "Editorial",
+            "startWeek": 1,
+            "endWeek": 46,
+            "durationWeeks": 46
+          },
+          {
+            "phase": "VFX",
+            "startWeek": -24,
+            "endWeek": 80,
+            "durationWeeks": 104,
+            "note": "VFX work begins 6 months prior to main post-production start."
+          },
+          {
+            "phase": "Sound Post",
+            "startWeek": 30,
+            "endWeek": 84,
+            "durationWeeks": 54
+          },
+          {
+            "phase": "Color & Finishing",
+            "startWeek": 80,
+            "endWeek": 90,
+            "durationWeeks": 10
+          },
+          {
+            "phase": "Delivery & Mastering",
+            "startWeek": 88,
+            "endWeek": 92,
+            "durationWeeks": 4
+          }
+        ]
+      },
+      "detailedBreakdown": {
+        "editorial": {
+          "totalCost": 699100,
+          "timelineWeeks": 46,
+          "personnel": [
+            {
+              "role": "Supervising Editor",
+              "weeks": 46,
+              "ratePerWeek": 3000,
+              "cost": 138000
+            },
+            {
+              "role": "Editor",
+              "count": 2,
+              "weeks": 46,
+              "ratePerWeek": 2000,
+              "cost": 184000
+            },
+            {
+              "role": "Assistant Editor",
+              "count": 4,
+              "weeks": 46,
+              "ratePerWeek": 900,
+              "cost": 165600
+            },
+            {
+              "role": "Apprentice Editor",
+              "count": 2,
+              "weeks": 40,
+              "ratePerWeek": 450,
+              "cost": 36000
+            },
+            {
+              "role": "Editorial Coordinator",
+              "weeks": 46,
+              "ratePerWeek": 1000,
+              "cost": 46000
+            }
+          ],
+          "facilitiesAndEquipment": [
+            {
+              "item": "Editing Suites",
+              "count": 3,
+              "months": 11,
+              "ratePerMonth": 3500,
+              "cost": 115500
+            },
+            {
+              "item": "Screening Room Rental",
+              "days": 50,
+              "ratePerDay": 300,
+              "cost": 15000
+            }
+          ],
+          "supplies": {
+            "item": "Film Stock, Magnetic Stock, Storage",
+            "cost": 25000
+          }
+        },
+        "visualEffects": {
+          "totalCost": 3914000,
+          "timelineMonths": 24,
+          "shotCosts": [
+            {
+              "complexity": "Simple",
+              "count": 65,
+              "avgCostPerShot": 3000,
+              "total": 195000
+            },
+            {
+              "complexity": "Medium",
+              "count": 85,
+              "avgCostPerShot": 10000,
+              "total": 850000
+            },
+            {
+              "complexity": "Complex (incl. Stargate)",
+              "count": 55,
+              "avgCostPerShot": 35000,
+              "total": 1925000
+            }
+          ],
+          "customEquipmentDevelopment": [
+            {
+              "item": "Slit-Scan Apparatus",
+              "cost": 100000
+            },
+            {
+              "item": "Motion Control Systems (Multiple Rigs)",
+              "cost": 200000
+            },
+            {
+              "item": "Specialized Optical Printers",
+              "cost": 50000
+            },
+            {
+              "item": "Front Projection System",
+              "cost": 75000
+            }
+          ],
+          "vendorAndFacility": {
+            "description": "Model shop, optical house, R&D facility overhead",
+            "cost": 519000
+          }
+        },
+        "sound": {
+          "totalCost": 1402000,
+          "timelineWeeks": 54,
+          "dialogueAndADR": [
+            {
+              "item": "Dialogue Editor",
+              "weeks": 20,
+              "ratePerWeek": 2000,
+              "cost": 40000
+            },
+            {
+              "item": "ADR Sessions (incl. HAL)",
+              "days": 20,
+              "ratePerDay": 1500,
+              "cost": 30000
+            }
+          ],
+          "soundEffectsAndDesign": [
+            {
+              "item": "Sound Designer",
+              "weeks": 24,
+              "ratePerWeek": 2500,
+              "cost": 60000
+            },
+            {
+              "item": "Custom Sound Library Creation (Space, Monolith)",
+              "cost": 150000
+            },
+            {
+              "item": "Foley Recording & Editing",
+              "days": 15,
+              "ratePerDay": 1000,
+              "cost": 15000
+            }
+          ],
+          "music": [
+            {
+              "item": "Composer Fee (Major Production)",
+              "cost": 500000
+            },
+            {
+              "item": "Orchestra Recording Sessions (Full Orchestra)",
+              "cost": 300000
+            },
+            {
+              "item": "Music Editor",
+              "weeks": 12,
+              "ratePerWeek": 1500,
+              "cost": 18000
+            },
+            {
+              "item": "Music Mixing",
+              "weeks": 4,
+              "ratePerWeek": 3500,
+              "cost": 14000
+            }
+          ],
+          "finalMix": [
+            {
+              "item": "6-Track Stereo Mixing Stage",
+              "weeks": 8,
+              "ratePerWeek": 10000,
+              "cost": 80000
+            },
+            {
+              "item": "Mixing Team (Re-recording Mixers, Techs)",
+              "weeks": 8,
+              "ratePerWeek": 15000,
+              "cost": 120000
+            },
+            {
+              "item": "Print Mastering (Mono, Stereo, M&E)",
+              "cost": 75000
+            }
+          ]
+        },
+        "colorAndFinishing": {
+          "totalCost": 750000,
+          "timelineWeeks": 10,
+          "colorTimingAndGrading": [
+            {
+              "item": "Color Timer & Supervisor",
+              "weeks": 10,
+              "cost": 70000
+            },
+            {
+              "item": "Laboratory Services (Timing & Processing)",
+              "cost": 400000
+            }
+          ],
+          "printProduction": [
+            {
+              "item": "Answer Prints (35mm & 70mm)",
+              "cost": 30000
+            },
+            {
+              "item": "70mm Blow-up Negative Creation",
+              "cost": 150000
+            },
+            {
+              "item": "Release Prints (Initial Run)",
+              "count": 100,
+              "costPerPrint": 1000,
+              "total": 100000
+            }
+          ]
+        },
+        "delivery": {
+          "totalCost": 800000,
+          "timelineWeeks": 4,
+          "masterElements": [
+            {
+              "item": "35mm Interpositive/Internegative",
+              "cost": 100000
+            },
+            {
+              "item": "70mm Master Elements",
+              "cost": 200000
+            },
+            {
+              "item": "6-Track Magnetic Sound Masters",
+              "cost": 50000
+            },
+            {
+              "item": "Archival Preservation Elements",
+              "cost": 100000
+            }
+          ],
+          "internationalVersioning": [
+            {
+              "item": "International M&E Track Creation",
+              "cost": 150000
+            },
+            {
+              "item": "Dubbing",
+              "languages": 3,
+              "costPerLanguage": 50000,
+              "total": 150000
+            },
+            {
+              "item": "Subtitling",
+              "languages": 5,
+              "costPerLanguage": 10000,
+              "total": 50000
+            }
+          ]
+        },
+        "contingency": {
+          "totalCost": 1952900,
+          "breakdown": [
+            {
+              "area": "VFX Technical Innovation",
+              "percentage": 35,
+              "baseAmount": 3914000,
+              "contingencyAmount": 1369900
+            },
+            {
+              "area": "Sound Design Innovation",
+              "percentage": 25,
+              "baseAmount": 1402000,
+              "contingencyAmount": 350500
+            },
+            {
+              "area": "General Post-Production",
+              "percentage": 15,
+              "baseAmount": 1550000,
+              "contingencyAmount": 232500
+            }
+          ]
+        }
+      },
+      "riskAssessment": {
+        "overallRisk": "Very High",
+        "factors": [
+          {
+            "riskId": "POST-RISK-VFX-01",
+            "category": "Technical",
+            "description": "Failure or significant delay in developing custom VFX equipment (Slit-Scan, Motion Control) could jeopardize key sequences.",
+            "mitigation": "Early R&D start, parallel development paths, securing top-tier engineering talent. Budget includes 35% contingency on VFX.",
+            "impact": "High",
+            "probability": "Medium"
+          },
+          {
+            "riskId": "POST-RISK-SCHED-01",
+            "category": "Schedule",
+            "description": "The sheer volume and complexity of VFX shots (205) creates a high risk of timeline overruns, impacting all subsequent post-production stages.",
+            "mitigation": "Dedicated VFX production management team. Milestone-based reviews. Pre-vetted vendors for overflow work.",
+            "impact": "High",
+            "probability": "High"
+          },
+          {
+            "riskId": "POST-RISK-AUDIO-01",
+            "category": "Creative/Technical",
+            "description": "Creating a completely novel soundscape for space and AI consciousness is creatively demanding and may require more iteration than planned.",
+            "mitigation": "Early engagement of a visionary Sound Designer. Budget for extensive sound library creation and a 25% sound contingency.",
+            "impact": "Medium",
+            "probability": "Medium"
+          },
+          {
+            "riskId": "POST-RISK-FORMAT-01",
+            "category": "Technical",
+            "description": "The 70mm blow-up process from 35mm negative is technically complex and can introduce quality control issues, requiring multiple attempts.",
+            "mitigation": "Use a premier lab with proven large-format experience. Allocate budget for multiple answer prints and QC sessions.",
+            "impact": "Medium",
+            "probability": "Low"
+          }
+        ]
+      },
+      "alternativeScenarioPlanning": {
+        "scenarios": [
+          {
+            "name": "Reduced VFX Complexity",
+            "description": "An approach where certain complex shots are simplified or replaced with practical alternatives to reduce VFX costs and timeline.",
+            "costImpact": "-$1,500,000",
+            "timelineImpact": "-12 weeks",
+            "creativeImpact": "Significant compromise on the film's visionary scope, particularly the Stargate sequence. Not recommended."
+          },
+          {
+            "name": "Standard Stereo Mix (No 6-Track)",
+            "description": "Mixing in a standard 2.0 or 4.0 stereo format instead of the premium 6-track magnetic stereo.",
+            "costImpact": "-$150,000",
+            "timelineImpact": "-2 weeks",
+            "creativeImpact": "Reduced audio immersion, which is a key component of the intended theatrical experience."
+          }
+        ]
+      },
+      "qualityControlAndDeliverySpecs": {
+        "vfxStandards": "All VFX shots must be approved by the Director and VFX Supervisor. Elements must be delivered as 35mm VistaVision 8-perf negatives for maximum quality before optical compositing.",
+        "audioStandards": "Final mix to be delivered as a 6-track magnetic master, a 4-track magnetic master, and a mono optical track master. All tracks must be free of noise and distortion, with dialogue intelligibility paramount.",
+        "colorStandards": "Final 70mm answer print must be approved by the Director and Cinematographer in a certified reference theater. Color density and stability must be consistent across all prints.",
+        "deliveryElements": [
+          "Conformed 35mm Original Negative",
+          "70mm Interpositive and Internegative",
+          "6-Track Magnetic Sound Master",
+          "M&E Tracks",
+          "Archival Fine Grain Master Positive"
+        ]
+      },
+      "processingEvidence": {
+        "system": "Post-Production Estimator",
+        "processingSequence": [
+          "Editorial Time Estimation Processing",
+          "VFX Cost Calculation Processing",
+          "Sound Design and Mixing Processing",
+          "Color Correction Processing",
+          "Delivery Cost Processing"
+        ],
+        "functionCalls": [
+          {
+            "function": "estimateEditorial",
+            "parameters": {
+              "runtimeMinutes": 149,
+              "complexity": "high",
+              "historicalContext": "1960s"
+            },
+            "status": "SUCCESS",
+            "outputSummary": "Calculated 46-week schedule with costs for a full editorial team and facilities."
+          },
+          {
+            "function": "calculateVFX",
+            "parameters": {
+              "shotCounts": {
+                "simple": 65,
+                "medium": 85,
+                "complex": 55
+              },
+              "specialTechniques": [
+                "slit_scan",
+                "motion_control",
+                "front_projection"
+              ],
+              "vfxTimelineMonths": 24
+            },
+            "status": "SUCCESS",
+            "outputSummary": "Calculated costs for 205 VFX shots plus significant R&D for custom equipment."
+          },
+          {
+            "function": "estimateSound",
+            "parameters": {
+              "runtimeMinutes": 149,
+              "complexity": "revolutionary",
+              "musicRequirements": {
+                "composer": "major",
+                "orchestra": "full"
+              },
+              "mixFormat": "6_track_stereo"
+            },
+            "status": "SUCCESS",
+            "outputSummary": "Calculated costs for custom sound design, major composer/orchestra, and premium 6-track mixing."
+          },
+          {
+            "function": "calculateColorAndFinishing",
+            "parameters": {
+              "runtimeMinutes": 149,
+              "printFormats": [
+                "35mm",
+                "70mm_blowup"
+              ],
+              "labComplexity": "high"
+            },
+            "status": "SUCCESS",
+            "outputSummary": "Calculated costs for extensive lab services, color timing, and 70mm blow-up."
+          },
+          {
+            "function": "calculateDelivery",
+            "parameters": {
+              "masterFormats": [
+                "35mm_negative",
+                "70mm_master",
+                "magnetic_masters",
+                "archival"
+              ],
+              "internationalLanguages": {
+                "dubbing": 3,
+                "subtitling": 5
+              }
+            },
+            "status": "SUCCESS",
+            "outputSummary": "Calculated costs for creating multiple master elements and international versions."
+          }
+        ]
+      }
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 10235
+  }
+}

@@ -1,0 +1,363 @@
+{
+  "model_name": "scheduleOptimizer",
+  "execution_id": "eb0900ca-fa3b-4cc9-8ea0-fee3ddc5ce1d",
+  "timestamp": "2025-07-21T12:20:41.475123",
+  "success": true,
+  "processing_time": 90.559230084,
+  "output_data": {
+    "scheduleOptimizerOutput": {
+      "projectId": "proj_2001_space_odyssey",
+      "scheduleVersion": "1.0",
+      "generationTimestamp": "2024-07-21T10:15:00Z",
+      "optimizationLog": {
+        "processingSequence": [
+          {
+            "step": 1,
+            "process": "Scene Location Grouping",
+            "status": "COMPLETED",
+            "summary": "Scenes were grouped into five distinct shooting blocks to maximize efficiency. The schedule prioritizes remote/practical locations (Africa) first, followed by sequential studio set builds (Space Station, Moon Base, Discovery), and concludes with specialized VFX work (Stargate). This strategy minimizes company moves and allows for streamlined set construction and striking."
+          },
+          {
+            "step": 2,
+            "process": "Company Move Minimization",
+            "status": "COMPLETED",
+            "summary": "The schedule is optimized to require only two major company moves: [1] Home Base to Africa, [2] Africa to Studio Base. All subsequent work is planned within the studio complex, transitioning between major set builds without requiring a full company move, thus saving significant time and transportation costs."
+          },
+          {
+            "step": 3,
+            "process": "Cast Schedule Optimization",
+            "status": "COMPLETED",
+            "summary": "Cast schedules are block-booked according to location groups. Moon-Watcher's work is consolidated in the Africa block. Dr. Floyd's work is contained within the Space Station and Moon blocks. Bowman and Poole's schedules are optimized for the extensive Discovery block, grouping their scenes to reduce idle time. This minimizes hold days and travel for principal actors."
+          },
+          {
+            "step": 4,
+            "process": "Day/Night Shoot Balancing",
+            "status": "COMPLETED",
+            "summary": "The Africa block schedule is structured to group Day, Night, and Dawn shoots logically, minimizing crew fatigue and avoiding turnaround violations. A sequence of Day -> Day-to-Night -> Night -> Dawn shoots is planned, with appropriate rest periods. All studio work is scheduled as 'N/A' Day/Night, allowing for a consistent daily work schedule."
+          },
+          {
+            "step": 5,
+            "process": "Constraint Respect Processing",
+            "status": "COMPLETED",
+            "summary": "The 145-day schedule adheres to the 5-day work week, starting on 1965-12-29 and concluding within the required timeframe. All specified holiday blackout dates are respected. High-complexity scenes (e.g., Scene 8, 66, 71) are allocated multiple days. Dependencies such as animal handling, child actors, and stunts are flagged and scheduled accordingly."
+          }
+        ]
+      },
+      "scheduleSummary": {
+        "totalShootDays": 145,
+        "contingencyDays": 5,
+        "totalWeeks": 29,
+        "startDate": "1965-12-29",
+        "estimatedWrapDate": "1966-07-15",
+        "companyMoves": 2,
+        "locationsUsed": 13,
+        "scenesScheduled": 71,
+        "totalPages": 145,
+        "averagePagesPerDay": 1.0,
+        "vfxSupervisionDays": 123,
+        "stuntDays": 8,
+        "animalWorkDays": 10,
+        "childActorDays": 3
+      },
+      "costImpactAnalysis": {
+        "castHoldDays": "Minimized by block shooting principals (Floyd, Bowman, Poole). Moon-Watcher has zero hold days within his block.",
+        "overtimeExposure": "High risk on days with complex technical setups (Scenes 8, 66, 71) and night shoots in Africa. Schedule attempts to mitigate by allocating multiple days for complex scenes.",
+        "mealPenalties": "Low risk due to structured studio schedule. Higher risk during remote Africa shoot; requires diligent on-set AD team.",
+        "equipmentIdleTime": "Minimized by grouping all scenes requiring specialized gear (e.g., Centrifuge, Monolith, Space Pods) into dedicated blocks, maximizing utilization during rental periods.",
+        "locationCosts": "Africa location costs are concentrated at the start. Studio costs are extensive due to the need for multiple large-scale stages and long-term builds, particularly for the Discovery Centrifuge set."
+      },
+      "riskAssessment": {
+        "criticalPath": [
+          {
+            "riskId": "SCHED-RISK-001",
+            "description": "The Discovery Centrifuge set build and operation is the primary critical path. Any delays in its construction or functionality will have a cascading impact on the longest and most expensive block of the schedule.",
+            "mitigation": "Schedule includes a 1-week buffer before the Discovery block begins for set testing and calibration. VFX supervisor and SFX coordinator integrated from pre-production."
+          },
+          {
+            "riskId": "SCHED-RISK-002",
+            "description": "Weather dependency in the initial Africa block. Delays here could postpone the entire studio production timeline.",
+            "mitigation": "Schedule includes 3 contingency days within the Africa block. A list of weather-independent insert shots/cave interiors is prepared to be shot if exteriors are delayed."
+          },
+          {
+            "riskId": "SCHED-RISK-003",
+            "description": "Technical failure of unproven VFX technology (front projection, slit-scan for Stargate).",
+            "mitigation": "The Stargate sequence is scheduled at the very end, isolating its risk from principal photography. This allows maximum R&D time and prevents a failure from halting the main unit."
+          }
+        ]
+      },
+      "detailedSchedule": [
+        {
+          "dayNumber": 1,
+          "date": "1965-12-29",
+          "dayOfWeek": "Wednesday",
+          "scenesToShoot": [
+            {
+              "sceneId": 2,
+              "sceneName": "EXT. AFRICAN PLAIN – HERBIVORES",
+              "pages": 1.5,
+              "notes": "Day 1 of 2 for this scene. Focus on wide shots and animal action."
+            }
+          ],
+          "castCall": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "location": "AFRICAN_PLAINS",
+          "estimatedWrap": "19:00",
+          "notes": "COMPANY MOVE 1: ARRIVAL & SETUP. Animal wranglers on set. Drone unit required."
+        },
+        {
+          "dayNumber": 2,
+          "date": "1965-12-30",
+          "dayOfWeek": "Thursday",
+          "scenesToShoot": [
+            {
+              "sceneId": 2,
+              "sceneName": "EXT. AFRICAN PLAIN – HERBIVORES",
+              "pages": 0,
+              "notes": "Day 2 of 2. Focus on close-ups and interactions."
+            }
+          ],
+          "castCall": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "location": "AFRICAN_PLAINS",
+          "estimatedWrap": "19:00",
+          "notes": "Animal wranglers on set. Wide lens package."
+        },
+        {
+          "dayNumber": 3,
+          "date": "1965-12-31",
+          "dayOfWeek": "Friday",
+          "scenesToShoot": [
+            {
+              "sceneId": 3,
+              "sceneName": "EXT. PARCHED COUNTRYSIDE – THE LION",
+              "pages": 1.25,
+              "notes": "Full day for lion sequence. Safety meeting mandatory."
+            }
+          ],
+          "castCall": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "location": "AFRICAN_PLAINS",
+          "estimatedWrap": "18:00",
+          "notes": "Trained Lion on set. Animal wranglers, Safety Coordinator, multiple cameras required."
+        },
+        {
+          "dayNumber": 4,
+          "date": "1966-01-03",
+          "dayOfWeek": "Monday",
+          "scenesToShoot": [
+            {
+              "sceneId": 1,
+              "sceneName": "EXT. THE STREAM – THE OTHERS",
+              "pages": 1.75,
+              "notes": "DAWN shoot. Establish conflict at the waterhole."
+            }
+          ],
+          "castCall": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS",
+            "THE_OTHERS"
+          ],
+          "location": "AFRICAN_STREAM",
+          "estimatedWrap": "16:00",
+          "notes": "Early call time for dawn lighting. Water safety team present."
+        },
+        {
+          "dayNumber": 5,
+          "date": "1966-01-04",
+          "dayOfWeek": "Tuesday",
+          "scenesToShoot": [
+            {
+              "sceneId": 5,
+              "sceneName": "EXT. THE STREAM – INVASION",
+              "pages": 2.75,
+              "notes": "DAWN shoot. Large fight sequence."
+            }
+          ],
+          "castCall": [
+            "MOONWATCHER",
+            "BIG_TOOTH",
+            "TRIBE_MEMBERS",
+            "THE_OTHERS"
+          ],
+          "location": "AFRICAN_STREAM",
+          "estimatedWrap": "17:00",
+          "notes": "Fight choreographer, makeup effects, multiple cameras, water safety."
+        },
+        {
+          "dayNumber": 6,
+          "date": "1966-01-05",
+          "dayOfWeek": "Wednesday",
+          "scenesToShoot": [
+            {
+              "sceneId": 11,
+              "sceneName": "EXT. STREAM – MASTER OF THE WORLD",
+              "pages": 2.5,
+              "notes": "DAWN shoot. Final confrontation."
+            }
+          ],
+          "castCall": [
+            "MOONWATCHER",
+            "ONE_EAR",
+            "TRIBE_MEMBERS",
+            "THE_OTHERS"
+          ],
+          "location": "AFRICAN_STREAM",
+          "estimatedWrap": "17:00",
+          "notes": "Fight choreographer, makeup effects, lion head prop."
+        },
+        {
+          "dayNumber": 7,
+          "date": "1966-01-06",
+          "dayOfWeek": "Thursday",
+          "scenesToShoot": [
+            {
+              "sceneId": 4,
+              "sceneName": "EXT. DEAD TREE / INT./EXT. CAVES – NIGHT TERRORS",
+              "pages": 3.5,
+              "notes": "DAY TO NIGHT shoot. Start with day exteriors, move to cave interiors for night."
+            }
+          ],
+          "castCall": [
+            "MOONWATCHER",
+            "ONE_EYE",
+            "TRIBE_MEMBERS"
+          ],
+          "location": "AFRICAN_CAVES",
+          "estimatedWrap": "23:00",
+          "notes": "Transitions crew to night work. Requires bee effects, night lighting rig."
+        },
+        {
+          "dayNumber": 8,
+          "date": "1966-01-07",
+          "dayOfWeek": "Friday",
+          "scenesToShoot": [
+            {
+              "sceneId": 6,
+              "sceneName": "EXT. CAVE – NEW SOUND",
+              "pages": 1.0
+            },
+            {
+              "sceneId": 10,
+              "sceneName": "EXT. CAVES – KILLING THE LION",
+              "pages": 2.0,
+              "notes": "NIGHT shoot. Stunt rehearsal for boulder rig in afternoon."
+            }
+          ],
+          "castCall": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "location": "AFRICAN_CAVES",
+          "estimatedWrap": "04:00",
+          "notes": "NIGHT SHOOT. Stunt coordinator, boulder rig, animal safety."
+        },
+        {
+          "dayNumber": 23,
+          "date": "1966-01-28",
+          "dayOfWeek": "Friday",
+          "scenesToShoot": [],
+          "castCall": [],
+          "location": "TRAVEL / STUDIO PREP",
+          "estimatedWrap": "N/A",
+          "notes": "END OF AFRICA BLOCK. COMPANY MOVE 2: Travel from Africa to Studio. Prep for Space Station set build."
+        },
+        {
+          "dayNumber": 26,
+          "date": "1966-02-02",
+          "dayOfWeek": "Wednesday",
+          "scenesToShoot": [
+            {
+              "sceneId": 19,
+              "sceneName": "INT. SPACE STATION RECEPTION AREA",
+              "pages": 4.0,
+              "notes": "Day 1 of 2. Establish Dr. Floyd's arrival."
+            }
+          ],
+          "castCall": [
+            "DR_FLOYD",
+            "MILLER",
+            "RECEPTIONIST",
+            "PASSPORT_GIRL"
+          ],
+          "location": "SPACE_STATION (Studio)",
+          "estimatedWrap": "19:00",
+          "notes": "First day of studio shoot. Voice print booth prop ready."
+        },
+        {
+          "dayNumber": 80,
+          "date": "1966-04-25",
+          "dayOfWeek": "Monday",
+          "scenesToShoot": [
+            {
+              "sceneId": 47,
+              "sceneName": "INT. CENTRIFUGE HUB",
+              "pages": 4.5,
+              "notes": "Day 1 of 3. Introduction to Discovery and life in the centrifuge."
+            }
+          ],
+          "castCall": [
+            "BOWMAN",
+            "POOLE",
+            "HAL",
+            "HIBERNATING_CREW"
+          ],
+          "location": "DISCOVERY (Studio)",
+          "estimatedWrap": "20:00",
+          "notes": "First day on Centrifuge set. Rotating camera rig operational. VFX Supervisor on set."
+        },
+        {
+          "dayNumber": 115,
+          "date": "1966-06-14",
+          "dayOfWeek": "Tuesday",
+          "scenesToShoot": [
+            {
+              "sceneId": 66,
+              "sceneName": "INT. CENTRIFUGE",
+              "pages": 4.5,
+              "notes": "Day 2 of 3. Poole's EVA and death sequence."
+            }
+          ],
+          "castCall": [
+            "BOWMAN",
+            "POOLE",
+            "HAL"
+          ],
+          "location": "DISCOVERY (Studio)",
+          "estimatedWrap": "21:00",
+          "notes": "STUNT DAY. Pod accident sequence. Stunt coordination required. Frank Poole wraps after this sequence."
+        },
+        {
+          "dayNumber": 135,
+          "date": "1966-07-12",
+          "dayOfWeek": "Tuesday",
+          "scenesToShoot": [
+            {
+              "sceneId": 71,
+              "sceneName": "STARGATE SEQUENCE / HOTEL ROOM / STAR CHILD",
+              "pages": 8.0,
+              "notes": "Day 1 of 10. Slit-scan photography tests and initial corridor shots."
+            }
+          ],
+          "castCall": [
+            "BOWMAN"
+          ],
+          "location": "MULTIPLE_COSMIC (VFX Stage)",
+          "estimatedWrap": "19:00",
+          "notes": "Specialized VFX unit. Main unit wrapped. Focus on experimental photography."
+        }
+      ]
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 10274
+  }
+}

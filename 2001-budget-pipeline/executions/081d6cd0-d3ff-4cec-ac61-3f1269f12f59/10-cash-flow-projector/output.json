@@ -1,0 +1,23 @@
+{
+  "model_name": "cashFlowProjector",
+  "execution_id": "081d6cd0-d3ff-4cec-ac61-3f1269f12f59",
+  "timestamp": "2025-07-21T12:59:12.969129",
+  "success": true,
+  "processing_time": 94.7946958330001,
+  "output_data": {
+    "error": "JSON_PARSING_FAILED",
+    "model_name": "cashFlowProjector",
+    "response_preview": "{\n  \"cashFlowAnalysis\": {\n    \"projectId\": \"proj_2001_space_odyssey\",\n    \"analysisTimestamp\": \"2024-07-21T10:18:00Z\",\n    \"currency\": \"USD\",\n    \"currencyYear\": 1966,\n    \"summary\": \"This cash flow p",
+    "success": false,
+    "processing_evidence": {
+      "status": "FAILED",
+      "summary": "JSON parsing failed, using fallback structure"
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 439
+  }
+}

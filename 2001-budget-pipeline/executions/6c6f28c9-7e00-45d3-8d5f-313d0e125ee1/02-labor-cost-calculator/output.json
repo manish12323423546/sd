@@ -1,0 +1,342 @@
+{
+  "model_name": "laborCostCalculator",
+  "execution_id": "6c6f28c9-7e00-45d3-8d5f-313d0e125ee1",
+  "timestamp": "2025-07-21T11:55:11.173623",
+  "success": true,
+  "processing_time": 84.46599137500002,
+  "output_data": {
+    "projectId": "proj_2001_space_odyssey",
+    "laborCostSummary": {
+      "totalLaborCost": 28891563,
+      "totalAboveTheLineCost": 6972000,
+      "totalBelowTheLineCost": 21919563,
+      "totalFringes": 7109563,
+      "totalOvertimeAndPenalties": 3255000,
+      "confidenceInterval": "90% +/- 7.5%",
+      "currency": "USD"
+    },
+    "processingEvidence": {
+      "unionRateLookup": {
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:05:10Z",
+        "unionsConsulted": [
+          "DGA (Directors Guild of America)",
+          "SAG-AFTRA (Screen Actors Guild - American Federation of Television and Radio Artists)",
+          "BECTU (Broadcasting, Entertainment, Communications and Theatre Union - UK)",
+          "IATSE (International Alliance of Theatrical Stage Employees)"
+        ],
+        "findings": "Current union minimums, tier structures, and classification requirements for a major feature film have been verified. Rates used in this calculation meet or exceed all applicable minimum standards for the assumed jurisdictions (UK/USA)."
+      },
+      "baseWageCalculation": {
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:05:15Z",
+        "methodology": "Base wages calculated based on negotiated rates for ATL talent and departmental crew heads. BTL crew wages based on standard weekly rates for a 49-week period (12 weeks prep, 30.6 weeks shoot, 6.4 weeks wrap, rounded up). Cast wages calculated based on guaranteed weeks derived from the optimized schedule phases. Prep and wrap periods are fully factored for all departments."
+      },
+      "overtimeEstimation": {
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:05:20Z",
+        "methodology": "A blended overtime rate of 30% has been applied to the BTL crew base wages, reflecting the high number of long shoot days (10-12+ hours), night shoots, and complex setups. A specific allowance for meal penalties and potential turnaround violations is included.",
+        "factors": [
+          "12-hour+ shoot days for scenes 8, 66, 71.",
+          "8 scheduled night shoots.",
+          "DAY_TO_NIGHT transitions requiring extended lighting setups.",
+          "Forced call potential during Africa-to-Studio transition."
+        ]
+      },
+      "fringeBenefitProcessing": {
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:05:25Z",
+        "ratesApplied": [
+          {
+            "jurisdiction": "UK (BECTU)",
+            "description": "Applied to all BTL Crew.",
+            "components": {
+              "Pension": "22.5%",
+              "Holiday Pay": "8.5%",
+              "Employer National Insurance": "13.8%"
+            },
+            "totalRate": "44.8%"
+          },
+          {
+            "jurisdiction": "USA (SAG-AFTRA/DGA)",
+            "description": "Applied to all ATL and BTL Cast.",
+            "components": {
+              "FICA/Medicare": "7.65%",
+              "FUTA/SUTA": "6.5%",
+              "Workers Compensation": "4.85%",
+              "Pension & Health": "19.0%"
+            },
+            "totalRate": "38.0%"
+          }
+        ]
+      },
+      "locationMultiplierProcessing": {
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:05:30Z",
+        "methodology": "Costs associated with the Phase 1 (Africa) remote location shoot have been calculated and added.",
+        "allowances": [
+          {
+            "item": "Travel & Accommodation",
+            "cost": 250000,
+            "notes": "Airfare, lodging, and local transport for 75 cast/crew for 28 days."
+          },
+          {
+            "item": "Per Diems",
+            "cost": 157500,
+            "notes": "75 cast/crew * $75/day * 28 days."
+          },
+          {
+            "item": "Remote Location Premium",
+            "cost": 125000,
+            "notes": "A 20% wage uplift applied to key crew for the 4-week duration of the Africa shoot."
+          },
+          {
+            "item": "Visas, Carnets & Local Fixers",
+            "cost": 50000,
+            "notes": "Administrative and logistical support for international work."
+          }
+        ]
+      }
+    },
+    "costBreakdown": {
+      "aboveTheLine": {
+        "total": 6972000,
+        "talent": [
+          {
+            "characterName": "DAVE_BOWMAN",
+            "basePay": 800000,
+            "fringes": 304000,
+            "total": 1104000,
+            "notes": "16-week guarantee @ $50k/wk. Includes $50k adjustment for zero-g/aging makeup."
+          },
+          {
+            "characterName": "DR_HEYWOOD_FLOYD",
+            "basePay": 550000,
+            "fringes": 209000,
+            "total": 759000,
+            "notes": "11-week guarantee @ $50k/wk."
+          },
+          {
+            "characterName": "FRANK_POOLE",
+            "basePay": 450000,
+            "fringes": 171000,
+            "total": 621000,
+            "notes": "15-week guarantee @ $30k/wk. Includes stunt adjustment."
+          },
+          {
+            "characterName": "MOONWATCHER",
+            "basePay": 200000,
+            "fringes": 76000,
+            "total": 276000,
+            "notes": "8-week guarantee @ $25k/wk. Includes special performance/makeup premium."
+          }
+        ],
+        "director": {
+          "basePay": 2500000,
+          "fringes": 950000,
+          "total": 3450000,
+          "notes": "Negotiated flat fee for directing services."
+        },
+        "writer": {
+          "basePay": 400000,
+          "fringes": 152000,
+          "total": 552000,
+          "notes": "Fee for screenplay."
+        },
+        "producer": {
+          "basePay": 150000,
+          "fringes": 57000,
+          "total": 210000,
+          "notes": "Producer fee (assumes Director is also primary producer)."
+        }
+      },
+      "belowTheLine": {
+        "total": 21919563,
+        "cast": {
+          "total": 1195388,
+          "supporting": [
+            {
+              "characterName": "ELENA_SMYSLOV",
+              "basePay": 10000,
+              "fringes": 3800,
+              "total": 13800
+            },
+            {
+              "characterName": "MILLER",
+              "basePay": 15000,
+              "fringes": 5700,
+              "total": 20700
+            },
+            {
+              "characterName": "HALVORSEN",
+              "basePay": 30000,
+              "fringes": 11400,
+              "total": 41400
+            },
+            {
+              "characterName": "MICHAELS",
+              "basePay": 30000,
+              "fringes": 11400,
+              "total": 41400
+            }
+          ],
+          "dayPlayers": {
+            "basePay": 44000,
+            "fringes": 16720,
+            "total": 60720,
+            "notes": "18 total days @ avg $2,444/day."
+          },
+          "extras": {
+            "basePay": 112500,
+            "fringes": 42750,
+            "total": 155250,
+            "notes": "450 man-days @ $250/day avg, includes bumps for makeup/performance."
+          },
+          "stunts": {
+            "basePay": 200000,
+            "fringes": 76000,
+            "total": 276000,
+            "notes": "Stunt Coordinator (15 wks @ $5k) + 4 performers (10 wks @ $3k) + adjustments."
+          },
+          "voiceOver": {
+            "characterName": "HAL_9000",
+            "basePay": 100000,
+            "fringes": 38000,
+            "total": 138000,
+            "notes": "8 sessions @ $12.5k/session."
+          },
+          "specialCasting": {
+            "basePay": 350000,
+            "fringes": 98118,
+            "total": 448118,
+            "notes": "Allowance for unlisted speaking roles, child actors, and their welfare/tutoring."
+          }
+        },
+        "crew": {
+          "total": 15686675,
+          "notes": "Crew costs include base pay and 44.8% UK fringe rate. Overtime is listed separately.",
+          "departments": [
+            {
+              "department": "Production",
+              "cost": 1332240,
+              "notes": "UPM, Supervisor, Coordinator, APOC, PAs for 49 weeks."
+            },
+            {
+              "department": "Director's Team",
+              "cost": 1230696,
+              "notes": "1st AD, 2nd AD, 2nd 2nd AD, PAs for 35 weeks."
+            },
+            {
+              "department": "Camera",
+              "cost": 1954800,
+              "notes": "DP, 2x Ops, 2x 1st AC, 2x 2nd AC, DIT, Stills for 35 weeks. Includes kit rentals."
+            },
+            {
+              "department": "Electrical",
+              "cost": 1592400,
+              "notes": "Gaffer, BB Electric, 6x Electricians, Genny Op for 35 weeks."
+            },
+            {
+              "department": "Grip",
+              "cost": 1592400,
+              "notes": "Key Grip, BB Grip, 6x Grips, Dolly Grip for 35 weeks."
+            },
+            {
+              "department": "Sound",
+              "cost": 651480,
+              "notes": "Mixer, Boom Op, Utility for 32 weeks. Includes kit rental."
+            },
+            {
+              "department": "Art Department",
+              "cost": 2605920,
+              "notes": "Prod Designer, Art Director, Set Dec, Props, etc. for 49 weeks."
+            },
+            {
+              "department": "Makeup & Hair",
+              "cost": 1158120,
+              "notes": "Dept Heads, Keys, and SFX Makeup Supervisor for 35 weeks."
+            },
+            {
+              "department": "Wardrobe",
+              "cost": 940920,
+              "notes": "Costume Designer, Supervisor, Set Costumers for 45 weeks."
+            },
+            {
+              "department": "Special Effects (Practical)",
+              "cost": 1158120,
+              "notes": "SFX Supervisor & 4 Techs for 35 weeks."
+            },
+            {
+              "department": "Visual Effects (On-Set)",
+              "cost": 651480,
+              "notes": "VFX Supervisor & Coordinator for 49 weeks."
+            },
+            {
+              "department": "Locations",
+              "cost": 583099,
+              "notes": "Location Manager & ALM for 20 weeks."
+            },
+            {
+              "department": "Animal Handling",
+              "cost": 226000,
+              "notes": "2 Wranglers for 6 weeks, plus on-call Vet."
+            }
+          ]
+        },
+        "overtimeAndPenalties": {
+          "total": 3255000,
+          "crewOvertime": 3000000,
+          "mealAndOtherPenalties": 255000,
+          "notes": "Calculated at 30% of BTL crew base pay, plus an allowance for penalties."
+        },
+        "locationAndTravel": {
+          "total": 582500,
+          "travelAndAccommodation": 250000,
+          "perDiems": 157500,
+          "locationPremiums": 125000,
+          "visasAndLogistics": 50000,
+          "notes": "Costs associated with the Africa location shoot."
+        },
+        "specializedLaborContingency": {
+          "total": 1200000,
+          "notes": "Contingency for labor related to high-risk areas: Zero-G rigging safety crew, additional SFX/VFX technicians for R&D, and stunt rigging specialists."
+        }
+      }
+    },
+    "riskAssessmentAndContingencies": {
+      "costEscalationFactors": [
+        {
+          "riskId": "RISK-VFX-001",
+          "description": "Pioneering VFX work (Stargate, zero-g) carries a high risk of R&D overruns and requiring more on-set supervision and labor than budgeted.",
+          "impact": "High"
+        },
+        {
+          "riskId": "RISK-SFX-002",
+          "description": "The operational complexity of the rotating centrifuge set could lead to downtime, requiring crew standby costs and potential overtime to catch up.",
+          "impact": "High"
+        },
+        {
+          "riskId": "RISK-SCHED-005",
+          "description": "A 145-day shoot increases exposure to potential union rate increases mid-production and general cost inflation.",
+          "impact": "Medium"
+        },
+        {
+          "riskId": "RISK-ANIMAL-004",
+          "description": "Work with wild animals can cause unpredictable delays, leading to crew overtime and extended location costs.",
+          "impact": "Medium"
+        }
+      ],
+      "recommendedContingency": {
+        "percentage": "12.0%",
+        "amount": 2630348,
+        "notes": "A 12% contingency on total Below-The-Line costs is recommended to mitigate the identified labor-related risks."
+      }
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 8723
+  }
+}

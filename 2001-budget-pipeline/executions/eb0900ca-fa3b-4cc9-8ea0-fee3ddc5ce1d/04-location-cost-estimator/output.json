@@ -1,0 +1,293 @@
+{
+  "model_name": "locationCostEstimator",
+  "execution_id": "eb0900ca-fa3b-4cc9-8ea0-fee3ddc5ce1d",
+  "timestamp": "2025-07-21T12:26:03.611211",
+  "success": true,
+  "processing_time": 76.225060875,
+  "output_data": {
+    "locationCostEstimate": {
+      "projectId": "proj_2001_space_odyssey",
+      "estimatorVersion": "1.1.0",
+      "generationTimestamp": "2024-07-21T10:20:00Z",
+      "currency": "USD",
+      "historicalContext": "All costs are estimated based on production standards and values of the mid-1960s.",
+      "processingEvidence": [
+        {
+          "functionName": "process_location_fees",
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:16:15Z",
+          "summary": "Calculated fees for 3 practical African locations and a long-term studio lease. Factored in prep/hold periods for extensive set builds.",
+          "details": {
+            "practicalLocationFees": {
+              "description": "Block booking fee for exclusive access to African plains, stream, and cave exterior locations for the duration of the Africa shoot block (~25 days).",
+              "cost": 25000
+            },
+            "studioRentalFees": {
+              "description": "Long-term lease of multiple sound stages and ancillary facilities (workshops, offices, backlot) at a major UK studio (e.g., MGM-British Studios) for approximately 12 months to accommodate extensive prep, shoot, and strike.",
+              "cost": 350000
+            },
+            "governmentLiaisonFees": {
+              "description": "Fees for a dedicated local fixer/liaison in Africa to negotiate access, fees, and manage community relations.",
+              "cost": 10000
+            }
+          },
+          "total": 385000
+        },
+        {
+          "functionName": "process_permit_costs",
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:16:45Z",
+          "summary": "Calculated international and domestic permit costs, including special clearances for construction and animal handling.",
+          "details": {
+            "internationalPermits": {
+              "description": "Governmental filming permits, national park access fees, and environmental clearances for shooting in Africa.",
+              "cost": 15000
+            },
+            "animalWelfarePermits": {
+              "description": "Special permits for the use of a trained lion and other wildlife, including oversight from humane organizations.",
+              "cost": 5000
+            },
+            "constructionAndSafetyPermits": {
+              "description": "Fees for engineering review, safety certification, and regulatory approval for unprecedented set construction, particularly the rotating centrifuge.",
+              "cost": 12000
+            }
+          },
+          "total": 32000
+        },
+        {
+          "functionName": "process_security_requirements",
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:17:10Z",
+          "summary": "Assessed and costed security for both high-risk remote locations and high-confidentiality studio sets.",
+          "details": {
+            "remoteLocationSecurity": {
+              "description": "Team of local security personnel for 24/7 base camp and equipment protection in Africa, including wildlife perimeter control.",
+              "cost": 18000
+            },
+            "studioSecurity": {
+              "description": "Enhanced 24/7 security for the studio complex, including strict access control for stages with confidential sets (Discovery, Monolith) and high-value equipment.",
+              "cost": 25000
+            }
+          },
+          "total": 43000
+        },
+        {
+          "functionName": "process_restoration_costs",
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:17:40Z",
+          "summary": "Factored in costs for site restoration, damage bonds, and large-scale set striking.",
+          "details": {
+            "practicalLocationRestoration": {
+              "description": "Cost of cleanup crew and environmental remediation to return African locations to their original state ('leave no trace'). Includes non-refundable portion of damage bond.",
+              "cost": 20000
+            },
+            "studioSetStrikeAndCleanup": {
+              "description": "Labor and disposal costs for the complete teardown and removal of all large-scale sets (Centrifuge, Space Station, Moon Base, etc.) and restoration of studio stages.",
+              "cost": 75000
+            }
+          },
+          "total": 95000
+        },
+        {
+          "functionName": "process_parking_and_facilities",
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:18:05Z",
+          "summary": "Calculated costs for establishing a remote base camp and managing high-demand studio utilities.",
+          "details": {
+            "remoteBaseCampFacilities": {
+              "description": "Rental and setup of a full base camp in Africa, including generators, water bowsers, mobile toilets, catering tents, and staging areas.",
+              "cost": 30000
+            },
+            "studioPowerAndUtilities": {
+              "description": "Significant utility costs for powering massive sets, especially the rotating centrifuge mechanism and extensive lighting grids, over the entire production period.",
+              "cost": 80000
+            },
+            "studioParkingAndSupport": {
+              "description": "Costs for overflow parking for a large crew and management of ancillary support areas within the studio lot.",
+              "cost": 10000
+            }
+          },
+          "total": 120000
+        }
+      ],
+      "locationCostSummary": {
+        "totalEstimatedCost": 2863000,
+        "confidenceInterval": {
+          "lowerBound": 2650000,
+          "upperBound": 3250000
+        },
+        "summaryNotes": "Total reflects the immense scale of the production, dominated by the cost of pioneering custom set construction. The high-end of the confidence interval accounts for significant R&D and technical challenges inherent in the project's design."
+      },
+      "detailedBreakdown": {
+        "practicalLocations": {
+          "locationGroup": "Africa (Dawn of Man Sequence)",
+          "totalCost": 123000,
+          "breakdown": [
+            {
+              "item": "Location Fees (Block Booking)",
+              "cost": 25000,
+              "notes": "Covers AFRICAN_STREAM, AFRICAN_PLAINS, AFRICAN_CAVES."
+            },
+            {
+              "item": "Permits (Government & Wildlife)",
+              "cost": 20000,
+              "notes": "Includes national filming permits and animal welfare clearances."
+            },
+            {
+              "item": "Local Fixer & Liaison Services",
+              "cost": 10000,
+              "notes": "Essential for navigating local logistics and regulations."
+            },
+            {
+              "item": "Security Services",
+              "cost": 18000,
+              "notes": "24/7 protection for crew, cast, and equipment in a remote environment."
+            },
+            {
+              "item": "Base Camp & Facilities Rental",
+              "cost": 30000,
+              "notes": "Power, water, shelter, and sanitation for the entire Africa unit."
+            },
+            {
+              "item": "Site Restoration & Cleanup",
+              "cost": 20000,
+              "notes": "Mandatory environmental restoration post-filming."
+            }
+          ]
+        },
+        "studioFacilitiesAndConstruction": {
+          "locationGroup": "UK Studio (All Space Sequences)",
+          "totalCost": 2192000,
+          "breakdown": [
+            {
+              "item": "Studio Facilities Lease",
+              "cost": 350000,
+              "notes": "Long-term package deal for multiple stages, workshops, and offices."
+            },
+            {
+              "item": "Custom Set Construction",
+              "cost": 1650000,
+              "notes": "The largest single location-related expense. See sub-breakdown.",
+              "subBreakdown": [
+                {
+                  "set": "Discovery Centrifuge (Rotating Set)",
+                  "cost": 750000,
+                  "details": "Design, engineering, construction, and operation of the 38-foot diameter, 30-ton rotating set. A pioneering and costly piece of infrastructure."
+                },
+                {
+                  "set": "Moon Base & TMA-1 Excavation Site",
+                  "cost": 300000,
+                  "details": "Includes the large Clavius Base conference room, reception, airlocks, and the multi-level Tycho excavation set with lunar surface effects."
+                },
+                {
+                  "set": "Spacecraft Interiors (Orion, Aries, Discovery)",
+                  "cost": 250000,
+                  "details": "Construction of multiple high-fidelity cockpits, passenger areas, pod bays, and the Discovery command module and brain room."
+                },
+                {
+                  "set": "Space Station 5 (Rotating Set)",
+                  "cost": 200000,
+                  "details": "Construction of the reception area, Hilton lounge, and restaurant sets with integrated viewscreens and futuristic furniture."
+                },
+                {
+                  "set": "VFX & Specialized Sets",
+                  "cost": 150000,
+                  "details": "Includes the Stargate slit-scan rig, model photography stages, and the final 'Hotel Room' set."
+                }
+              ]
+            },
+            {
+              "item": "Power & Utilities",
+              "cost": 80000,
+              "notes": "High consumption due to set mechanics and extensive lighting."
+            },
+            {
+              "item": "Set Strike & Stage Restoration",
+              "cost": 75000,
+              "notes": "Labor and disposal for all constructed sets."
+            },
+            {
+              "item": "Studio Security & Access Control",
+              "cost": 25000,
+              "notes": "Enhanced security for high-confidentiality production."
+            },
+            {
+              "item": "Construction & Safety Permits",
+              "cost": 12000,
+              "notes": "Engineering and safety certification fees."
+            }
+          ]
+        },
+        "logisticsAndSupport": {
+          "category": "General Location Support",
+          "totalCost": 90000,
+          "breakdown": [
+            {
+              "item": "International Shipping & Customs",
+              "cost": 50000,
+              "notes": "Freight, carnets, and brokerage for shipping equipment to and from Africa."
+            },
+            {
+              "item": "Location Scouting & Prep",
+              "cost": 40000,
+              "notes": "Pre-production travel and surveys for both international and potential domestic locations."
+            }
+          ]
+        },
+        "riskAssessmentAndContingency": {
+          "totalContingency": 458000,
+          "contingencyPercentage": 19.0,
+          "notes": "A substantial contingency is allocated due to the unprecedented technical and logistical risks of the production.",
+          "riskFactors": [
+            {
+              "riskId": "LOC-RISK-001",
+              "description": "Failure or delay of the custom-built centrifuge mechanism.",
+              "mitigation": "Allocate contingency funds for extended R&D, on-site engineers, and potential rebuilds. Schedule buffer already in place.",
+              "costImpact": "High"
+            },
+            {
+              "riskId": "LOC-RISK-002",
+              "description": "Weather or logistical delays during the Africa shoot impacting the master schedule.",
+              "mitigation": "Contingency funds for extra days, transport, or securing alternative sub-locations.",
+              "costImpact": "Medium"
+            },
+            {
+              "riskId": "LOC-RISK-003",
+              "description": "Cost overruns in materials and labor for massive set construction due to the novelty and scale of the designs.",
+              "mitigation": "Contingency covers potential increases in raw material prices and specialized labor rates.",
+              "costImpact": "High"
+            },
+            {
+              "riskId": "LOC-RISK-004",
+              "description": "Regulatory hurdles or safety compliance issues with novel set designs.",
+              "mitigation": "Budget for additional consultants and potential modifications required by authorities.",
+              "costImpact": "Medium"
+            }
+          ]
+        },
+        "alternativeLocationOptions": [
+          {
+            "option": "Simulate Africa in a controlled environment",
+            "description": "Use a large backlot or a location like the Canary Islands or southern Spain to replicate African landscapes. Build cave sets entirely in-studio.",
+            "pros": "Greater control over weather, logistics, and animal handling. Reduced company move costs and security risks.",
+            "cons": "May lack the authentic scale and lighting of the African plains. Potential for higher construction costs to replicate nature.",
+            "estimatedCostImpact": "-$50,000 to +$100,000 depending on construction complexity."
+          },
+          {
+            "option": "Consolidate all construction in a US studio",
+            "description": "Base the entire studio portion of the shoot in Hollywood instead of the UK.",
+            "pros": "Proximity to top-tier VFX houses and specialized engineering talent of the era.",
+            "cons": "Potentially higher labor and studio rental costs compared to the UK in the 1960s. Loss of potential UK tax incentives/Eady Levy benefits.",
+            "estimatedCostImpact": "+$250,000 to +$500,000."
+          }
+        ]
+      }
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 10177
+  }
+}

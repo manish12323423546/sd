@@ -1,0 +1,247 @@
+{
+  "model_name": "coordinator",
+  "execution_id": "eb0900ca-fa3b-4cc9-8ea0-fee3ddc5ce1d",
+  "timestamp": "2025-07-21T12:19:10.859967",
+  "success": true,
+  "processing_time": 59.852422708,
+  "output_data": {
+    "budgetCoordinatorOutput": {
+      "projectId": "proj_2001_space_odyssey",
+      "processingTimestamp": "2024-07-21T10:05:00Z",
+      "systemStatusReport": {
+        "intakeStatus": "SUCCESS",
+        "validationStatus": "CONDITIONAL",
+        "dataCompleteness": "99.0%",
+        "missingInformation": [
+          "Data validation failed: Character 'DR_FLOYD' has an inconsistent scene count. Profile lists 12, but character appears in 15 scenes (12, 15, 19, 20, 21, 23, 27, 28, 30, 37, 38, 39, 40, 42, 70)."
+        ],
+        "identifiedRisks": [
+          {
+            "riskId": "RISK-TECH-001",
+            "description": "Project requires groundbreaking and unproven special effects, including a large-scale rotating centrifuge set, advanced front projection, and complex zero-gravity simulations.",
+            "mitigation": "Allocate significant budget for R&D, pre-visualization, and hire top-tier SFX/VFX supervisors. Build and test prototypes well in advance of principal photography."
+          },
+          {
+            "riskId": "RISK-LOG-001",
+            "description": "Coordination of practical international locations with animal wranglers, extensive studio set construction, and numerous specialized props presents significant logistical challenges.",
+            "mitigation": "Engage experienced Production Manager and Location Manager early. Develop detailed build, transport, and logistics schedules with contingencies."
+          },
+          {
+            "riskId": "RISK-SAFE-001",
+            "description": "Multiple high-risk elements including animal handling (trained lion), stunts (space accident, explosions), and complex mechanical rigs (centrifuge).",
+            "mitigation": "Hire dedicated Safety Coordinator for all high-risk sequences. Adhere strictly to safety protocols for animals, stunts, and set mechanics."
+          },
+          {
+            "riskId": "RISK-POST-001",
+            "description": "Extremely high number of VFX shots (205+) and complex sequences like the 'Stargate' will require a lengthy and expensive post-production phase.",
+            "mitigation": "Integrate VFX supervisor from pre-production. Secure post-production vendor capacity and budget accordingly. Plan for extended post-production timeline."
+          }
+        ]
+      },
+      "modelDataPackets": {
+        "scheduleOptimizer": {
+          "model": "Schedule Optimizer",
+          "priority": "FIRST",
+          "description": "Provides complete scene, cast, and location data to generate an optimized shooting schedule.",
+          "inputs": {
+            "scenes": "71 scenes with page counts, cast, locations, and special requirements.",
+            "locations": "13 unique locations with types, restrictions, and estimated days.",
+            "cast": "40+ cast members with scene appearances and estimated day requirements.",
+            "constraints": {
+              "totalShootDays": 145,
+              "prepDays": 84,
+              "wrapDays": 14,
+              "unionRules": "5-day weeks, standard holidays off.",
+              "dependencies": "Animal work, child actor hours, stunt coordination, VFX supervision days."
+            }
+          }
+        },
+        "laborCostCalculator": {
+          "model": "Labor Cost Calculator",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Schedule Optimizer"
+          ],
+          "inputs": {
+            "castBreakdown": {
+              "principals": 5,
+              "supporting": 4,
+              "dayPlayers": 5,
+              "voice": 1
+            },
+            "extrasSummary": {
+              "totalManDays": 450,
+              "maxInScene": 36
+            },
+            "specialRequirements": [
+              "stunt_performers",
+              "ape_makeup",
+              "aging_makeup"
+            ],
+            "jurisdictions": [
+              "International (Africa)",
+              "Studio (UK/USA)"
+            ]
+          }
+        },
+        "equipmentPricingEngine": {
+          "model": "Equipment Pricing Engine",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Schedule Optimizer"
+          ],
+          "inputs": {
+            "specialEquipment": [
+              "centrifuge_camera_mount",
+              "zero_gravity_wire_rig",
+              "rotating_set_mechanism",
+              "front_projection_system",
+              "motion_control_camera",
+              "underwater_tank"
+            ],
+            "vfxRequirements": {
+              "totalShots": 205,
+              "complexity": "High",
+              "supervisionDays": 60
+            },
+            "generalRequirements": [
+              "drone_package",
+              "multiple_cameras",
+              "specialized_lenses"
+            ],
+            "rentalDurationDays": 145
+          }
+        },
+        "locationCostEstimator": {
+          "model": "Location Cost Estimator",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Schedule Optimizer"
+          ],
+          "inputs": {
+            "locationBreakdown": [
+              {
+                "type": "practical",
+                "count": 3,
+                "details": "Africa locations requiring animal wranglers, water safety, and security."
+              },
+              {
+                "type": "studio/set_build",
+                "count": 10,
+                "details": "Multiple large-scale, complex sets including spacecraft interiors, space station, moon base, and excavation site. Requires significant construction, prep, and strike."
+              }
+            ],
+            "totalLocationDays": 145
+          }
+        },
+        "insuranceCalculator": {
+          "model": "Insurance Calculator",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Schedule Optimizer",
+            "Equipment Pricing Engine",
+            "Labor Cost Calculator"
+          ],
+          "inputs": {
+            "riskFactors": {
+              "stunts": [
+                "boulder_drop",
+                "space_pod_accident",
+                "airlock_explosion"
+              ],
+              "animals": "Trained lion, zebras, gazelles.",
+              "childActors": "8 children, including scenes with low-gravity wire work.",
+              "hazardousSets": "Rotating centrifuge, zero-gravity rigs, water scenes.",
+              "internationalTravel": "Cast and crew travel to African locations."
+            },
+            "insuredValueCategories": [
+              "Principal Cast",
+              "Specialized Camera & SFX Equipment",
+              "Custom Sets & Props"
+            ]
+          }
+        },
+        "postProductionEstimator": {
+          "model": "Post-Production Estimator",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Schedule Optimizer"
+          ],
+          "inputs": {
+            "vfxBreakdown": {
+              "totalShots": 205,
+              "complexShots": 55,
+              "keySequences": [
+                "Stargate",
+                "Zero-Gravity",
+                "Space Travel Model Work"
+              ]
+            },
+            "soundDesign": {
+              "complexity": "High",
+              "requirements": [
+                "Unique computer voice (HAL)",
+                "Space vacuum effects",
+                "Monolith sound",
+                "Extensive ADR"
+              ]
+            },
+            "runtimeMinutes": 149,
+            "genre": "Sci-Fi"
+          }
+        },
+        "taxIncentiveAnalyzer": {
+          "model": "Tax Incentive Analyzer",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Schedule Optimizer",
+            "Labor Cost Calculator",
+            "Location Cost Estimator"
+          ],
+          "inputs": {
+            "shootingLocations": {
+              "international": "AFRICA",
+              "studio": "UK/USA (assumed)"
+            },
+            "expenditureCategories": [
+              "Labor (Local and International)",
+              "Set Construction",
+              "VFX (Potentially qualifying)",
+              "Equipment Rental"
+            ]
+          }
+        },
+        "budgetAggregator": {
+          "model": "Budget Aggregator",
+          "priority": "FINAL_COMPILATION",
+          "description": "Aggregates costs from all parallel models to create a top-sheet budget.",
+          "dependencies": [
+            "Labor Cost Calculator",
+            "Equipment Pricing Engine",
+            "Location Cost Estimator",
+            "Insurance Calculator",
+            "Post-Production Estimator",
+            "Tax Incentive Analyzer"
+          ],
+          "inputs": null
+        },
+        "cashFlowProjector": {
+          "model": "Cash Flow Projector",
+          "priority": "FINAL_COMPILATION",
+          "description": "Projects weekly cash flow needs based on the final budget and schedule.",
+          "dependencies": [
+            "Budget Aggregator",
+            "Schedule Optimizer"
+          ],
+          "inputs": null
+        }
+      }
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 6256
+  }
+}
