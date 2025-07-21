@@ -1,0 +1,371 @@
+{
+  "model_name": "insuranceCalculator",
+  "execution_id": "16871b72-065c-4d25-a113-6e5d28d1a15d",
+  "timestamp": "2025-07-21T14:01:42.384524",
+  "success": true,
+  "processing_time": 85.36032716700004,
+  "output_data": {
+    "insuranceAnalysis": {
+      "insuranceAnalysisId": "ins_2001_space_odyssey_v1",
+      "projectId": "proj_2001_space_odyssey",
+      "generationTimestamp": "2024-07-21T10:20:00Z",
+      "currency": "GBP",
+      "processingEvidence": [
+        {
+          "step": 1,
+          "functionName": "CoverageRequirementsCalculationProcessing",
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:18:15Z",
+          "summary": "Determined necessary coverage types and limits based on project scope, identifying extreme risks requiring high limits and specialized policies.",
+          "inputs": [
+            "Scene breakdown with high-risk activities (animals, stunts, pyrotechnics)",
+            "Cast list with essential personnel and high-risk roles",
+            "Equipment and set list (partially inferred due to truncated input)",
+            "Location data (UK studio, Africa practical)",
+            "Labor cost report for Workers' Compensation basis"
+          ],
+          "outputs": {
+            "GeneralLiabilityLimit": "10,000,000",
+            "EquipmentPropertyLimit": "15,000,000 (Estimated)",
+            "CastInsuranceLimit": "19,000,000 (Aggregate)",
+            "ErrorsAndOmissionsLimit": "5,000,000",
+            "WorkersCompensationRequirement": "Statutory (UK)",
+            "AutoLiabilityLimit": "5,000,000",
+            "SpecializedCoverage": [
+              "Animal Mortality & Liability",
+              "Political Risk (Africa)",
+              "Technical Equipment Failure",
+              "Extra Expense (Weather/Delay)"
+            ]
+          }
+        },
+        {
+          "step": 2,
+          "functionName": "RiskFactorAssessmentProcessing",
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:18:45Z",
+          "summary": "Assessed and quantified risk factors across all categories, confirming the production as 'Extreme Risk' due to unprecedented technical innovation, stunts, and animal work.",
+          "inputs": [
+            "Coordinator's risk assessment",
+            "Scene-by-scene breakdown of special requirements",
+            "Production schedule and location details"
+          ],
+          "outputs": {
+            "overallRiskClassification": "EXTREME",
+            "riskFactors": [
+              {
+                "category": "Technical Innovation",
+                "level": "Extreme",
+                "details": "Rotating centrifuge set, zero-gravity rigs, motion control cameras, front projection systems. All are experimental or cutting-edge for the era.",
+                "multiplier": "1.8x"
+              },
+              {
+                "category": "High-Risk Activities",
+                "level": "Extreme",
+                "details": "Work with trained lion, multiple stunt sequences (boulder drop, space accident, explosion), extensive wire-work.",
+                "multiplier": "1.6x"
+              },
+              {
+                "category": "Location & Operational",
+                "level": "High",
+                "details": "Filming in Africa introduces logistical and political risks. Massive, complex sets pose significant safety challenges. Long 145-day schedule increases exposure.",
+                "multiplier": "1.3x"
+              },
+              {
+                "category": "Cast & Key Personnel",
+                "level": "High",
+                "details": "Physically demanding roles (Moonwatcher), extensive prosthetic makeup, aging makeup, stunt work for principals, child actors.",
+                "multiplier": "1.4x"
+              }
+            ]
+          }
+        },
+        {
+          "step": 3,
+          "functionName": "ActuarialTableApplicationProcessing",
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:19:15Z",
+          "summary": "Calculated premiums by applying industry base rates, production scale adjustments, and the assessed risk multipliers. An assumption for Equipment/Property value was required due to truncated dependency output.",
+          "inputs": [
+            "Coverage limits from Step 1",
+            "Risk multipliers from Step 2",
+            "Labor cost data (£17.8M total labor cost)",
+            "Estimated Equipment/Property value (£15M)"
+          ],
+          "outputs": {
+            "premiumCalculations": [
+              {
+                "coverage": "General Liability",
+                "premium": 234000
+              },
+              {
+                "coverage": "Equipment & Property",
+                "premium": 900000
+              },
+              {
+                "coverage": "Cast Insurance",
+                "premium": 475000
+              },
+              {
+                "coverage": "Errors & Omissions",
+                "premium": 60000
+              },
+              {
+                "coverage": "Workers' Compensation",
+                "premium": 574450
+              },
+              {
+                "coverage": "Auto & Miscellaneous",
+                "premium": 75000
+              }
+            ],
+            "notes": "Equipment & Property premium is based on an estimated value of £15,000,000 due to a truncated response from the Equipment Pricing Engine. This value reflects the immense scale of sets (centrifuge, spacecraft), special effects rigs, and hero props."
+          }
+        },
+        {
+          "step": 4,
+          "functionName": "DeductibleFactorProcessing",
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:19:40Z",
+          "summary": "Optimized deductible levels to balance premium cost with risk retention, recommending higher deductibles for high-value assets where the production can absorb initial losses.",
+          "inputs": [
+            "Coverage types and limits",
+            "Overall production budget scale"
+          ],
+          "outputs": {
+            "deductibleRecommendations": [
+              {
+                "coverage": "Equipment & Property",
+                "deductible": 100000
+              },
+              {
+                "coverage": "General Liability",
+                "deductible": 25000
+              },
+              {
+                "coverage": "Cast Insurance",
+                "deductible": "7 day waiting period + 50,000"
+              },
+              {
+                "coverage": "Errors & Omissions",
+                "deductible": 25000
+              },
+              {
+                "coverage": "Auto Liability",
+                "deductible": 5000
+              }
+            ]
+          }
+        },
+        {
+          "step": 5,
+          "functionName": "CompletionBondProcessing",
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:19:55Z",
+          "summary": "Assessed bondability as high-risk but achievable, calculating the premium based on an estimated bondable budget and a high-risk rate. Rebate potential is assessed as moderate.",
+          "inputs": [
+            "Total estimated budget (inferred at £40M)",
+            "Risk assessment summary from Step 2",
+            "Production schedule and key personnel"
+          ],
+          "outputs": {
+            "isBondable": true,
+            "bondabilityConditions": "Requires third-party engineering certification for all major mechanical sets, a dedicated safety supervisor with veto power, and a significant contingency fund (15% minimum).",
+            "bondableBudget": 35000000,
+            "premiumRate": "5.0%",
+            "bondPremium": 1750000,
+            "rebatePotential": "25%",
+            "estimatedRebate": 437500
+          }
+        }
+      ],
+      "riskAssessmentSummary": {
+        "overallRiskRating": "EXTREME",
+        "keyRisks": [
+          {
+            "riskId": "INS-RISK-001",
+            "category": "Technical Failure",
+            "description": "The production's core visuals depend on untested, custom-built technology, including a 30-ton rotating centrifuge set, extensive zero-gravity wire rigs, and advanced motion control systems. Failure of any component could lead to catastrophic schedule delays and cost overruns.",
+            "mitigationRecommendation": "Mandatory third-party engineering review and certification of all mechanical rigs. Budget for on-site engineering support throughout filming. Secure Technical Equipment Failure coverage."
+          },
+          {
+            "riskId": "INS-RISK-002",
+            "category": "Animal Handling",
+            "description": "Use of a trained lion in proximity to cast presents a severe safety risk. Large herds of animals on the African plains create logistical and safety challenges.",
+            "mitigationRecommendation": "Employ a top-tier animal wrangling team and a dedicated on-set safety coordinator for all animal scenes. Strict adherence to animal welfare and safety protocols. Secure specific Animal Liability and Mortality coverage."
+          },
+          {
+            "riskId": "INS-RISK-003",
+            "category": "Cast & Stunts",
+            "description": "Multiple high-risk stunts (explosions, falls, vehicle crashes) and physically demanding roles (ape performance, wire work) create a high probability of cast injury, leading to production delays.",
+            "mitigationRecommendation": "Comprehensive Cast Insurance on all essential elements. Stunt coordinator must approve all action sequences. Adequate rehearsal time and on-set medical support are critical."
+          },
+          {
+            "riskId": "INS-RISK-004",
+            "category": "Completion Risk",
+            "description": "The combination of a long schedule, extreme technical complexity, and high-risk activities makes this project a significant completion risk. The budget and schedule have a high probability of slippage.",
+            "mitigationRecommendation": "A Completion Bond is non-negotiable. The production must maintain a significant contingency (15%+) and provide the bond company with transparent and frequent progress reports."
+          }
+        ]
+      },
+      "coverageRecommendations": {
+        "summary": {
+          "totalPackagePremium": 2318450,
+          "completionBondPremium": 1750000,
+          "grandTotalInsuranceCost": 4068450
+        },
+        "policies": [
+          {
+            "coverageType": "General Liability",
+            "description": "Protects against third-party claims of bodily injury or property damage arising from production activities.",
+            "limit": "10,000,000",
+            "deductible": "25,000",
+            "premium": 234000,
+            "notes": "Premium reflects high risk multipliers for stunts (1.5x), animal work (1.6x), and international locations (1.3x)."
+          },
+          {
+            "coverageType": "Equipment & Property",
+            "description": "All-risk coverage for owned and rented equipment, sets, props, and wardrobe against physical loss or damage.",
+            "limit": "15,000,000",
+            "deductible": "100,000",
+            "premium": 900000,
+            "notes": "High premium based on 6% rate of estimated value, reflecting extreme risk to custom-built, high-value assets like the centrifuge and spacecraft sets."
+          },
+          {
+            "coverageType": "Cast Insurance",
+            "description": "Covers financial loss resulting from the death, injury, or illness of essential cast members or the director.",
+            "limit": "19,000,000",
+            "deductible": "7 day waiting period + 50,000",
+            "premium": 475000,
+            "notes": "Covers 5 essential elements. High premium (2.5% rate) due to high-risk activities (stunts, prosthetics) required of cast."
+          },
+          {
+            "coverageType": "Workers' Compensation",
+            "description": "Statutory coverage for work-related injuries or illnesses of all employees, including cast and crew.",
+            "limit": "Statutory",
+            "deductible": "0",
+            "premium": 574450,
+            "notes": "Based on labor report's total payroll and blended rate of 4.5%. Includes high rates for stunt performers."
+          },
+          {
+            "coverageType": "Errors & Omissions (E&O)",
+            "description": "Protects against legal claims arising from the content of the film, such as copyright infringement or defamation.",
+            "limit": "5,000,000",
+            "deductible": "25,000",
+            "premium": 60000,
+            "notes": "Requires full script, music, and title clearance reports."
+          },
+          {
+            "coverageType": "Commercial Auto Liability",
+            "description": "Covers liability for rented, leased, or owned production vehicles.",
+            "limit": "5,000,000",
+            "deductible": "5,000",
+            "premium": 40000,
+            "notes": "Includes coverage for international use in Africa."
+          },
+          {
+            "coverageType": "Specialized Package",
+            "description": "Bundle of specific policies including Animal Mortality/Liability, Political Risk, and Extra Expense.",
+            "limit": "Varies by policy",
+            "deductible": "Varies",
+            "premium": 35000,
+            "notes": "Essential for mitigating unique risks of this production."
+          }
+        ]
+      },
+      "completionBondAnalysis": {
+        "requirement": "Mandatory",
+        "justification": "Required by financiers for any project of this budget size and unprecedented risk profile to guarantee delivery of the film.",
+        "bondableBudget": 35000000,
+        "premium": 1750000,
+        "termsAndConditions": [
+          "Full access to all financial records and production reports.",
+          "Right to approve key personnel and major budget changes.",
+          "Right to take over the production if it falls significantly behind schedule or over budget.",
+          "Mandatory compliance with all recommended safety and engineering protocols."
+        ],
+        "rebatePotential": {
+          "estimatedPercentage": "25%",
+          "estimatedAmount": 437500,
+          "conditions": "Rebate is contingent on on-time, on-budget delivery with no major insurance claims or bond company intervention. Full rebate is unlikely given the project's complexity."
+        }
+      },
+      "alternativeScenarios": [
+        {
+          "scenario": "Increased Deductibles",
+          "description": "Increase the Equipment & Property deductible from £100,000 to £250,000.",
+          "costBenefitAnalysis": "Could reduce the Equipment premium by approximately £150,000-£200,000. However, this increases the production's self-insured risk. Recommended only if the production's contingency fund is robust and liquid.",
+          "recommendation": "Consider if cash flow allows; the base recommendation is safer."
+        },
+        {
+          "scenario": "Self-Insured Retention (SIR)",
+          "description": "Implement a large SIR of £500,000 across a portfolio of coverages (GL, Equipment).",
+          "costBenefitAnalysis": "Would significantly lower overall premiums but makes the production responsible for managing and paying all claims below the SIR threshold. This requires dedicated internal resources and significant capital reserves.",
+          "recommendation": "Not recommended for this project. The risk of multiple, complex claims is too high to manage effectively via SIR without a dedicated corporate risk management department."
+        }
+      ],
+      "claimsPreventionRecommendations": [
+        {
+          "protocol": "Mandatory Safety Briefings",
+          "description": "Daily safety meetings are required before every shoot day, with specific focus on the day's high-risk activities (stunts, animal work, mechanical set operation)."
+        },
+        {
+          "protocol": "Engineering Certification",
+          "description": "A licensed third-party engineering firm must inspect, test, and certify the centrifuge, all zero-g rigs, and any other major mechanical effects before use with cast or crew."
+        },
+        {
+          "protocol": "Animal Safety Zone",
+          "description": "Establish and enforce a strict 'red zone' around the trained lion, accessible only to essential, authorized personnel. An on-set veterinarian is required during all animal scenes."
+        },
+        {
+          "protocol": "Clearance Procedure",
+          "description": "A dedicated legal clearance coordinator must provide final, signed-off reports for the script, title, and all music cues to the E&O carrier before the policy is bound."
+        },
+        {
+          "protocol": "Emergency Response Plan",
+          "description": "Develop and drill comprehensive emergency response plans for all high-risk scenarios, including medical evacuation from the African location and emergency shutdown of the centrifuge."
+        }
+      ],
+      "complianceVerification": {
+        "checks": [
+          {
+            "jurisdiction": "United Kingdom",
+            "requirement": "Workers' Compensation",
+            "status": "COMPLIANT",
+            "notes": "Premium calculated based on UK statutory requirements and BECTU/SAG-AFTRA agreements."
+          },
+          {
+            "jurisdiction": "United Kingdom",
+            "requirement": "Public Liability",
+            "status": "COMPLIANT",
+            "notes": "General Liability limit of £10M exceeds standard venue and council requirements."
+          },
+          {
+            "jurisdiction": "International (Africa)",
+            "requirement": "Foreign Workers' Compensation",
+            "status": "COMPLIANT",
+            "notes": "Workers' Comp policy includes a foreign voluntary compensation endorsement."
+          },
+          {
+            "jurisdiction": "International (Africa)",
+            "requirement": "Auto & Equipment Carnet",
+            "status": "COMPLIANT",
+            "notes": "Policies are structured to meet ATA Carnet requirements for temporary import/export of equipment."
+          },
+          {
+            "jurisdiction": "Financier/Studio",
+            "requirement": "Completion Bond",
+            "status": "COMPLIANT",
+            "notes": "A full completion bond from a reputable guarantor is included in the budget."
+          }
+        ]
+      }
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 14134
+  }
+}

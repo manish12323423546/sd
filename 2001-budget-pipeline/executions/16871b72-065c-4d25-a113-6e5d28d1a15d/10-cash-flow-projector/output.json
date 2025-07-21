@@ -1,0 +1,393 @@
+{
+  "model_name": "cashFlowProjector",
+  "execution_id": "16871b72-065c-4d25-a113-6e5d28d1a15d",
+  "timestamp": "2025-07-21T14:05:34.021440",
+  "success": true,
+  "processing_time": 70.86473949999993,
+  "output_data": {
+    "cashFlowAnalysis": {
+      "projectId": "proj_2001_space_odyssey",
+      "analysisTimestamp": "2024-07-21T10:11:45Z",
+      "summary": {
+        "totalBudgetBase": 10500000,
+        "contingency": 1575000,
+        "totalFinancingRequired": 12075000,
+        "peakExposure": 12075000,
+        "peakExposureTiming": "Month 7 (Mid-Principal Photography)",
+        "productionTimelineMonths": 28,
+        "currency": "USD",
+        "historicalContext": "1965-1968"
+      },
+      "cashFlowProjections": {
+        "granularity": "Monthly",
+        "notes": "Projections are based on an estimated budget of $10.5M due to a failure in the Budget Aggregator dependency. Costs are spread across a 28-month timeline derived from schedule requirements.",
+        "timeline": [
+          {
+            "month": 1,
+            "phase": "Pre-Production",
+            "period": "1966-01",
+            "openingBalance": 0,
+            "fundingDrawdown": 600000,
+            "expenditures": {
+              "development": 150000,
+              "atlContracts": 200000,
+              "setDesignVfxR&D": 175000,
+              "other": 25000,
+              "total": 550000
+            },
+            "closingBalance": 50000,
+            "cumulativeSpend": 550000
+          },
+          {
+            "month": 2,
+            "phase": "Pre-Production",
+            "period": "1966-02",
+            "openingBalance": 50000,
+            "fundingDrawdown": 550000,
+            "expenditures": {
+              "development": 50000,
+              "atlContracts": 100000,
+              "setDesignVfxR&D": 350000,
+              "other": 25000,
+              "total": 525000
+            },
+            "closingBalance": 75000,
+            "cumulativeSpend": 1075000
+          },
+          {
+            "month": 3,
+            "phase": "Pre-Production",
+            "period": "1966-03",
+            "openingBalance": 75000,
+            "fundingDrawdown": 500000,
+            "expenditures": {
+              "development": 0,
+              "atlContracts": 50000,
+              "setConstruction": 400000,
+              "other": 50000,
+              "total": 500000
+            },
+            "closingBalance": 75000,
+            "cumulativeSpend": 1575000
+          },
+          {
+            "month": 4,
+            "phase": "Principal Photography",
+            "period": "1966-04",
+            "openingBalance": 75000,
+            "fundingDrawdown": 900000,
+            "expenditures": {
+              "atlWeekly": 150000,
+              "btlPayroll": 300000,
+              "equipmentRental": 250000,
+              "locationsSets": 150000,
+              "total": 850000
+            },
+            "closingBalance": 125000,
+            "cumulativeSpend": 2425000
+          },
+          {
+            "month": 7,
+            "phase": "Principal Photography",
+            "period": "1966-07",
+            "openingBalance": 150000,
+            "fundingDrawdown": 950000,
+            "expenditures": {
+              "atlWeekly": 150000,
+              "btlPayroll": 350000,
+              "equipmentRental": 250000,
+              "locationsSets": 150000,
+              "sfxVfxPlate": 50000,
+              "total": 950000
+            },
+            "closingBalance": 150000,
+            "cumulativeSpend": 5275000
+          },
+          {
+            "month": 10,
+            "phase": "Principal Photography",
+            "period": "1966-10",
+            "openingBalance": 100000,
+            "fundingDrawdown": 850000,
+            "expenditures": {
+              "atlWeekly": 100000,
+              "btlPayroll": 300000,
+              "equipmentRental": 200000,
+              "locationsSets": 200000,
+              "total": 800000
+            },
+            "closingBalance": 150000,
+            "cumulativeSpend": 7925000
+          },
+          {
+            "month": 11,
+            "phase": "Post-Production",
+            "period": "1966-11",
+            "openingBalance": 150000,
+            "fundingDrawdown": 200000,
+            "expenditures": {
+              "editorial": 50000,
+              "vfx": 150000,
+              "soundPost": 25000,
+              "wrapCosts": 50000,
+              "total": 275000
+            },
+            "closingBalance": 75000,
+            "cumulativeSpend": 8200000
+          },
+          {
+            "month": 18,
+            "phase": "Post-Production",
+            "period": "1967-06",
+            "openingBalance": 50000,
+            "fundingDrawdown": 200000,
+            "expenditures": {
+              "editorial": 25000,
+              "vfx": 125000,
+              "soundPost": 50000,
+              "music": 25000,
+              "total": 225000
+            },
+            "closingBalance": 25000,
+            "cumulativeSpend": 9850000
+          },
+          {
+            "month": 27,
+            "phase": "Post-Production & Delivery",
+            "period": "1968-03",
+            "openingBalance": 100000,
+            "fundingDrawdown": 200000,
+            "expenditures": {
+              "vfxFinal": 50000,
+              "soundMix": 75000,
+              "musicFinal": 50000,
+              "deliverables": 100000,
+              "total": 275000
+            },
+            "closingBalance": 25000,
+            "cumulativeSpend": 10500000
+          }
+        ]
+      },
+      "scenarioModeling": {
+        "baseCase": {
+          "scenario": "Base",
+          "totalCost": 10500000,
+          "scheduleDays": 145,
+          "fundingRequirement": 10500000,
+          "notes": "Assumes successful management of technical and schedule risks."
+        },
+        "pessimisticCase": {
+          "scenario": "Pessimistic",
+          "totalCost": 12600000,
+          "scheduleDays": 174,
+          "fundingRequirement": 12600000,
+          "notes": "20% cost overrun and 20% schedule delay due to VFX complexity and set construction issues. Requires full contingency plus $525k in additional financing."
+        },
+        "optimisticCase": {
+          "scenario": "Optimistic",
+          "totalCost": 9975000,
+          "scheduleDays": 130,
+          "fundingRequirement": 9975000,
+          "notes": "5% cost savings and 10% schedule improvement due to successful R&D and efficient production."
+        }
+      },
+      "financingOptimization": {
+        "recommendation": "A blended financing structure is recommended, leveraging both studio equity and institutional debt to optimize cost of capital, which was common for major 1960s productions.",
+        "structure": [
+          {
+            "sourceCategory": "Studio/Distributor Financing",
+            "type": "Production Financing (Equity)",
+            "provider": "MGM (Assumed)",
+            "amount": 6300000,
+            "percentage": 60,
+            "notes": "Studio equity to cover development, pre-production, and provide collateral for the bank loan. Recouped first from distribution revenues."
+          },
+          {
+            "sourceCategory": "Bank and Institutional Financing",
+            "type": "Production Loan",
+            "provider": "Major Commercial Bank",
+            "amount": 4200000,
+            "percentage": 40,
+            "interestRate": "Prime + 3% (Est. ~8-9%)",
+            "fees": "Arrangement Fee (1-2%), Commitment Fee on undrawn funds.",
+            "notes": "To be drawn down weekly during principal photography to cover peak burn rate. Secured by distribution guarantees and completion bond."
+          },
+          {
+            "sourceCategory": "Tax Incentive Financing",
+            "type": "Eady Levy Benefit",
+            "amount": 150000,
+            "percentage": 1.4,
+            "notes": "Minor potential benefit from UK's Eady Levy, realized post-release. Not suitable for production financing/bridging due to timing and uncertainty."
+          }
+        ],
+        "costBenefitAnalysis": "This structure minimizes the studio's upfront cash exposure while securing necessary funds for the high-cost production phase. The interest cost on the bank loan is offset by not having to fund the entire production with more expensive equity capital."
+      },
+      "riskAssessment": {
+        "financialRisks": [
+          {
+            "riskId": "FIN-RISK-01",
+            "description": "Budget Overrun Risk: High probability of cost overruns due to groundbreaking VFX, complex mechanical sets, and extended schedule.",
+            "probability": "High",
+            "impact": "High",
+            "mitigation": "Secure a 15% contingency ($1.575M). Implement strict daily cost reporting and variance analysis. Major changes require bond company and studio approval."
+          },
+          {
+            "riskId": "FIN-RISK-02",
+            "description": "Interest Rate Fluctuation: The production loan carries variable interest rate risk over a multi-year period.",
+            "probability": "Medium",
+            "impact": "Medium",
+            "mitigation": "Model cash flow at higher interest rate scenarios. Given the 1960s market, hedging options were limited; the primary mitigation is maintaining a strong liquidity buffer."
+          },
+          {
+            "riskId": "FIN-RISK-03",
+            "description": "Liquidity Shortfall: A temporary spike in costs or a delay in funding drawdown could halt production.",
+            "probability": "Low",
+            "impact": "Critical",
+            "mitigation": "Maintain a minimum cash reserve equivalent to 2 weeks of the current phase's burn rate. Draw down funds a week in advance of need."
+          }
+        ]
+      },
+      "complianceFramework": {
+        "frameworks": [
+          {
+            "name": "Bank Loan Covenant Monitoring",
+            "requirements": [
+              "Maintain minimum liquidity reserves in the production account.",
+              "Submit weekly cost reports and cash flow statements to the lender.",
+              "Provide evidence of continued insurance and completion bond coverage.",
+              "Adhere to approved budget; deviations over 5% require lender consent."
+            ]
+          },
+          {
+            "name": "Completion Bond Compliance",
+            "requirements": [
+              "Daily and weekly production reports comparing progress against schedule.",
+              "Weekly cost reports comparing actual spend against budget.",
+              "Immediate notification of any event that could jeopardize budget or schedule (e.g., cast injury, equipment failure).",
+              "Strict adherence to chain of title and delivery requirements."
+            ]
+          },
+          {
+            "name": "Studio Reporting",
+            "requirements": [
+              "Weekly executive summary of production progress, costs, and risks.",
+              "Monthly detailed financial review and re-forecasting.",
+              "Formal approval process for any creative or financial changes impacting the overall plan."
+            ]
+          }
+        ]
+      },
+      "liquidityManagement": {
+        "recommendations": [
+          {
+            "strategy": "Just-in-Time Funding",
+            "description": "Schedule weekly drawdowns from the production loan to match the projected weekly burn rate during principal photography. This minimizes idle cash and reduces interest expense."
+          },
+          {
+            "strategy": "Maintain Operating Buffer",
+            "description": "Always maintain a minimum cash balance equal to two weeks of forward-looking peak expenditure to cover unforeseen costs or payment delays."
+          },
+          {
+            "strategy": "Currency Management",
+            "description": "For the African location shoot, pre-purchase required local currency in blocks to hedge against minor fluctuations. Given the 1960s currency controls, this must be coordinated carefully through the bank."
+          },
+          {
+            "strategy": "Cash Investment",
+            "description": "Investment of surplus cash is not recommended due to the high velocity of funds and the need for immediate liquidity. Focus should be on minimizing borrowing costs."
+          }
+        ]
+      },
+      "dashboardSpecifications": {
+        "name": "Production Finance Dashboard (Manual Ledger)",
+        "updateFrequency": "Daily/Weekly",
+        "keyMetrics": [
+          {
+            "metric": "Cash on Hand",
+            "source": "Production Bank Account Statement"
+          },
+          {
+            "metric": "Weekly Burn Rate (Actual vs. Budget)",
+            "source": "Weekly Cost Report"
+          },
+          {
+            "metric": "Cumulative Spend (Actual vs. Budget)",
+            "source": "General Ledger"
+          },
+          {
+            "metric": "Contingency Remaining",
+            "source": "Budget vs. Actual Analysis"
+          },
+          {
+            "metric": "Schedule Variance (Days Ahead/Behind)",
+            "source": "Production Report"
+          },
+          {
+            "metric": "Available Credit (Undrawn Loan)",
+            "source": "Bank Statement"
+          },
+          {
+            "metric": "EFC (Estimate to Complete)",
+            "source": "Producer/UPM Re-forecast"
+          }
+        ]
+      }
+    },
+    "processingEvidence": {
+      "status": "SUCCESS_WITH_FALLBACK",
+      "notes": "Core processing completed, but critical dependencies failed, requiring fallback estimation.",
+      "dependencyAnalysis": [
+        {
+          "dependency": "budgetAggregator",
+          "status": "FAILED",
+          "impact": "Critical. No aggregated budget was available. A high-level estimated budget of $10.5M was generated based on project scope, historical context, and coordinator input.",
+          "fallback": "Created a top-down estimated budget allocated across production phases (Prep: 15%, Shoot: 60%, Post: 25%)."
+        },
+        {
+          "dependency": "scheduleOptimizer",
+          "status": "TRUNCATED",
+          "impact": "High. No detailed weekly schedule was available. Cash flow timing is based on phase durations (12w prep, 29w shoot, 80w post) rather than a specific shooting schedule.",
+          "fallback": "Used phase-level durations to calculate average weekly burn rates and spread costs across a 28-month macro-timeline."
+        }
+      ],
+      "functionCallSequence": [
+        {
+          "step": 1,
+          "function": "TimelineCostMappingProcessing",
+          "status": "COMPLETED",
+          "notes": "Mapped estimated $10.5M budget across Prep, Production, and Post-Production phases."
+        },
+        {
+          "step": 2,
+          "function": "WeeklyBurnRateCalculationProcessing",
+          "status": "COMPLETED",
+          "notes": "Calculated average weekly burn rates: Prep (~$131k), Shoot (~$217k), Post (~$33k)."
+        },
+        {
+          "step": 3,
+          "function": "FundingNeedsProjectionProcessing",
+          "status": "COMPLETED",
+          "notes": "Projected funding needs based on burn rates and proposed a 60/40 Studio/Bank financing structure."
+        },
+        {
+          "step": 4,
+          "function": "PeakCashRequirementsProcessing",
+          "status": "COMPLETED",
+          "notes": "Identified peak requirements during Principal Photography. Calculated total funding need of $12.075M including a 15% contingency."
+        },
+        {
+          "step": 5,
+          "function": "MultipleScenarioModelingProcessing",
+          "status": "COMPLETED",
+          "notes": "Modeled Optimistic, Base, and Pessimistic scenarios, showing a potential funding range from $10M to $12.6M."
+        }
+      ]
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 11290
+  }
+}

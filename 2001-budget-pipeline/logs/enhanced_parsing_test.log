@@ -1,0 +1,71 @@
+2025-07-21 19:07:01,490 - [INFO] - __main__:326 - 🧪 Enhanced JSON Parsing Solution Test
+2025-07-21 19:07:01,490 - [INFO] - __main__:327 - ==================================================
+2025-07-21 19:07:01,490 - [INFO] - models.gemini_client:45 - Initialized Gemini gemini-2.5-pro with thinking mode
+2025-07-21 19:07:01,490 - [INFO] - __main__:303 - 🚀 Starting Enhanced JSON Parsing Test Suite
+2025-07-21 19:07:01,490 - [INFO] - __main__:247 - 
+🧪 Testing Truncation Scenarios
+2025-07-21 19:07:01,490 - [INFO] - __main__:276 - 🔍 Testing: Unterminated String
+2025-07-21 19:07:01,490 - [WARNING] - utils.enhanced_json_parser:39 - test_model: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:07:01,491 - [WARNING] - utils.enhanced_json_parser:47 - test_model: Standard parsing failed: Unterminated string starting at: line 1 column 38 (char 37)
+2025-07-21 19:07:01,491 - [INFO] - utils.enhanced_json_parser:61 - test_model: Attempting truncation_recovery repair...
+2025-07-21 19:07:01,491 - [INFO] - utils.enhanced_json_parser:61 - test_model: Attempting smart_completion repair...
+2025-07-21 19:07:01,491 - [INFO] - utils.enhanced_json_parser:61 - test_model: Attempting section_extraction repair...
+2025-07-21 19:07:01,491 - [INFO] - utils.enhanced_json_parser:61 - test_model: Attempting progressive_truncation repair...
+2025-07-21 19:07:01,491 - [INFO] - utils.enhanced_json_parser:61 - test_model: Attempting template_reconstruction repair...
+2025-07-21 19:07:01,491 - [INFO] - utils.enhanced_json_parser:61 - test_model: Attempting emergency_fallback repair...
+2025-07-21 19:07:01,491 - [INFO] - utils.enhanced_json_parser:66 - test_model: ✅ Repaired using emergency_fallback
+2025-07-21 19:07:01,491 - [INFO] - __main__:284 - ✅ Unterminated String: SUCCESS
+2025-07-21 19:07:01,491 - [INFO] - __main__:286 - 🔧 Used repair method: emergency_fallback
+2025-07-21 19:07:01,491 - [INFO] - __main__:276 - 🔍 Testing: Missing Closing Brace
+2025-07-21 19:07:01,491 - [WARNING] - utils.enhanced_json_parser:39 - test_model: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:07:01,491 - [WARNING] - utils.enhanced_json_parser:47 - test_model: Standard parsing failed: Expecting ',' delimiter: line 1 column 49 (char 48)
+2025-07-21 19:07:01,491 - [INFO] - utils.enhanced_json_parser:61 - test_model: Attempting truncation_recovery repair...
+2025-07-21 19:07:01,491 - [INFO] - utils.enhanced_json_parser:61 - test_model: Attempting smart_completion repair...
+2025-07-21 19:07:01,491 - [INFO] - utils.enhanced_json_parser:61 - test_model: Attempting section_extraction repair...
+2025-07-21 19:07:01,491 - [INFO] - utils.enhanced_json_parser:61 - test_model: Attempting progressive_truncation repair...
+2025-07-21 19:07:01,492 - [INFO] - utils.enhanced_json_parser:66 - test_model: ✅ Repaired using progressive_truncation
+2025-07-21 19:07:01,492 - [INFO] - __main__:284 - ✅ Missing Closing Brace: SUCCESS
+2025-07-21 19:07:01,492 - [INFO] - __main__:286 - 🔧 Used repair method: progressive_truncation
+2025-07-21 19:07:01,492 - [INFO] - __main__:276 - 🔍 Testing: Trailing Comma
+2025-07-21 19:07:01,492 - [WARNING] - utils.enhanced_json_parser:39 - test_model: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:07:01,492 - [WARNING] - utils.enhanced_json_parser:47 - test_model: Standard parsing failed: Expecting property name enclosed in double quotes: line 1 column 39 (char 38)
+2025-07-21 19:07:01,492 - [INFO] - utils.enhanced_json_parser:61 - test_model: Attempting truncation_recovery repair...
+2025-07-21 19:07:01,492 - [INFO] - utils.enhanced_json_parser:66 - test_model: ✅ Repaired using truncation_recovery
+2025-07-21 19:07:01,492 - [INFO] - __main__:284 - ✅ Trailing Comma: SUCCESS
+2025-07-21 19:07:01,492 - [INFO] - __main__:286 - 🔧 Used repair method: truncation_recovery
+2025-07-21 19:07:01,492 - [INFO] - __main__:276 - 🔍 Testing: Complete Valid JSON
+2025-07-21 19:07:01,492 - [WARNING] - utils.enhanced_json_parser:39 - test_model: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:07:01,492 - [INFO] - utils.enhanced_json_parser:44 - test_model: ✅ Standard JSON parsing successful
+2025-07-21 19:07:01,492 - [INFO] - __main__:284 - ✅ Complete Valid JSON: SUCCESS
+2025-07-21 19:07:01,492 - [INFO] - __main__:295 - 📊 Truncation Tests: 100.0% success rate
+2025-07-21 19:07:01,492 - [INFO] - __main__:56 - 🧪 Starting Enhanced JSON Parsing Tests
+2025-07-21 19:07:01,494 - [INFO] - __main__:68 - ✅ Loaded coordinator input: 0 scenes
+2025-07-21 19:07:01,494 - [INFO] - __main__:74 - 
+🔍 Testing scheduleOptimizer...
+2025-07-21 19:07:01,494 - [INFO] - utils.prompt_optimizer:104 - Optimized system prompt for scheduleOptimizer (size limit: 12,000)
+2025-07-21 19:07:01,494 - [INFO] - utils.gemini_response_optimizer:209 - Estimated response size: 25000 chars (complexity: very_complex, volume: 0)
+2025-07-21 19:07:01,495 - [INFO] - __main__:122 - 📏 scheduleOptimizer: Estimated response size: 25000, Limit: 12000
+2025-07-21 19:07:01,495 - [ERROR] - __main__:161 - 💥 scheduleOptimizer: Response generation failed: 'GeminiThinkingClient' object has no attribute '_generate_response'
+2025-07-21 19:07:01,495 - [ERROR] - __main__:84 - ❌ scheduleOptimizer: Enhanced parsing FAILED
+2025-07-21 19:07:01,495 - [INFO] - __main__:74 - 
+🔍 Testing laborCostCalculator...
+2025-07-21 19:07:01,495 - [INFO] - utils.prompt_optimizer:104 - Optimized system prompt for laborCostCalculator (size limit: 15,000)
+2025-07-21 19:07:01,495 - [INFO] - utils.gemini_response_optimizer:209 - Estimated response size: 25000 chars (complexity: very_complex, volume: 0)
+2025-07-21 19:07:01,495 - [INFO] - __main__:122 - 📏 laborCostCalculator: Estimated response size: 25000, Limit: 15000
+2025-07-21 19:07:01,495 - [ERROR] - __main__:161 - 💥 laborCostCalculator: Response generation failed: 'GeminiThinkingClient' object has no attribute '_generate_response'
+2025-07-21 19:07:01,495 - [ERROR] - __main__:84 - ❌ laborCostCalculator: Enhanced parsing FAILED
+2025-07-21 19:07:01,495 - [INFO] - __main__:74 - 
+🔍 Testing cashFlowProjector...
+2025-07-21 19:07:01,496 - [INFO] - utils.prompt_optimizer:104 - Optimized system prompt for cashFlowProjector (size limit: 16,000)
+2025-07-21 19:07:01,496 - [INFO] - utils.gemini_response_optimizer:209 - Estimated response size: 25000 chars (complexity: very_complex, volume: 0)
+2025-07-21 19:07:01,496 - [INFO] - __main__:122 - 📏 cashFlowProjector: Estimated response size: 25000, Limit: 16000
+2025-07-21 19:07:01,496 - [ERROR] - __main__:161 - 💥 cashFlowProjector: Response generation failed: 'GeminiThinkingClient' object has no attribute '_generate_response'
+2025-07-21 19:07:01,496 - [ERROR] - __main__:84 - ❌ cashFlowProjector: Enhanced parsing FAILED
+2025-07-21 19:07:01,496 - [INFO] - __main__:94 - 
+📊 TEST SUMMARY:
+2025-07-21 19:07:01,496 - [INFO] - __main__:95 - Success Rate: 0.0% (0/3)
+2025-07-21 19:07:01,496 - [WARNING] - __main__:101 - ⚠️  Some tests failed - success rate: 0.0%
+2025-07-21 19:07:01,496 - [ERROR] - __main__:316 - ❌ Some tests failed - solution needs refinement
+2025-07-21 19:07:01,496 - [ERROR] - __main__:338 - 
+❌ SOLUTION VALIDATION: FAILED
+2025-07-21 19:07:01,496 - [ERROR] - __main__:339 - 🔧 Solution needs refinement before production

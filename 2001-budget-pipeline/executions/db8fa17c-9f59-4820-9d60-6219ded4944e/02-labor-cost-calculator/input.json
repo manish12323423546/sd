@@ -1,0 +1,3376 @@
+{
+  "model_name": "laborCostCalculator",
+  "execution_id": "db8fa17c-9f59-4820-9d60-6219ded4944e",
+  "timestamp": "2025-07-21T13:44:32.876985",
+  "base_input": {
+    "coordinatorInput": {
+      "projectId": "proj_2001_space_odyssey",
+      "timestamp": "2024-07-21T10:00:00Z",
+      "scriptData": {
+        "title": "2001: A Space Odyssey",
+        "format": "feature_film",
+        "genre": [
+          "sci-fi",
+          "drama",
+          "thriller"
+        ],
+        "totalPages": 145,
+        "totalScenes": 71,
+        "eighths": 1160,
+        "estimatedRuntime": 149
+      },
+      "scenes": [
+        {
+          "sceneId": 1,
+          "sceneName": "EXT. THE STREAM – THE OTHERS",
+          "pages": 1.75,
+          "location": "AFRICAN_STREAM",
+          "intExt": "EXT",
+          "dayNight": "DAWN",
+          "cast": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS",
+            "THE_OTHERS"
+          ],
+          "extras": 36,
+          "setupTime": 3.0,
+          "shootTime": 6.0,
+          "specialRequirements": [
+            "animal_wranglers",
+            "location_water_access"
+          ]
+        },
+        {
+          "sceneId": 2,
+          "sceneName": "EXT. AFRICAN PLAIN – HERBIVORES",
+          "pages": 1.5,
+          "location": "AFRICAN_PLAINS",
+          "intExt": "EXT",
+          "dayNight": "DAY",
+          "cast": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "extras": 18,
+          "animals": [
+            "zebras",
+            "gazelles",
+            "warthogs"
+          ],
+          "setupTime": 4.0,
+          "shootTime": 8.0,
+          "specialRequirements": [
+            "animal_wranglers",
+            "drone_footage",
+            "wide_lens_package"
+          ]
+        },
+        {
+          "sceneId": 3,
+          "sceneName": "EXT. PARCHED COUNTRYSIDE – THE LION",
+          "pages": 1.25,
+          "location": "AFRICAN_PLAINS",
+          "intExt": "EXT",
+          "dayNight": "DAY",
+          "cast": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "extras": 8,
+          "animals": [
+            "trained_lion"
+          ],
+          "setupTime": 5.0,
+          "shootTime": 6.0,
+          "specialRequirements": [
+            "animal_wranglers",
+            "safety_coordinator",
+            "multiple_cameras",
+            "telephoto_lenses"
+          ]
+        },
+        {
+          "sceneId": 4,
+          "sceneName": "EXT. DEAD TREE – FINDS HONEY / INT./EXT. CAVES – NIGHT TERRORS",
+          "pages": 3.5,
+          "location": "AFRICAN_CAVES",
+          "intExt": "EXT/INT",
+          "dayNight": "DAY_TO_NIGHT",
+          "cast": [
+            "MOONWATCHER",
+            "ONE_EYE",
+            "TRIBE_MEMBERS"
+          ],
+          "extras": 25,
+          "animals": [
+            "trained_lion"
+          ],
+          "setupTime": 4.0,
+          "shootTime": 10.0,
+          "specialRequirements": [
+            "bee_effects",
+            "night_lighting",
+            "cave_set",
+            "moon_lighting_rig"
+          ]
+        },
+        {
+          "sceneId": 5,
+          "sceneName": "EXT. THE STREAM – INVASION",
+          "pages": 2.75,
+          "location": "AFRICAN_STREAM",
+          "intExt": "EXT",
+          "dayNight": "DAWN",
+          "cast": [
+            "MOONWATCHER",
+            "BIG_TOOTH",
+            "TRIBE_MEMBERS",
+            "THE_OTHERS"
+          ],
+          "extras": 36,
+          "setupTime": 3.5,
+          "shootTime": 8.0,
+          "specialRequirements": [
+            "fight_choreographer",
+            "makeup_effects",
+            "multiple_cameras",
+            "water_safety"
+          ]
+        },
+        {
+          "sceneId": 6,
+          "sceneName": "EXT. CAVE – NEW SOUND",
+          "pages": 1.0,
+          "location": "AFRICAN_CAVES",
+          "intExt": "INT",
+          "dayNight": "NIGHT",
+          "cast": [
+            "MOONWATCHER"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 4.0,
+          "specialRequirements": [
+            "sound_effects",
+            "night_lighting"
+          ]
+        },
+        {
+          "sceneId": 7,
+          "sceneName": "EXT. CAVE – NEW ROCK",
+          "pages": 1.5,
+          "location": "AFRICAN_CAVES",
+          "intExt": "EXT",
+          "dayNight": "DAWN",
+          "cast": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "extras": 18,
+          "setupTime": 4.0,
+          "shootTime": 6.0,
+          "specialRequirements": [
+            "transparent_cube_prop",
+            "special_effects",
+            "dawn_lighting"
+          ]
+        },
+        {
+          "sceneId": 8,
+          "sceneName": "EXT. CUBE – FIRST LESSON",
+          "pages": 3.0,
+          "location": "AFRICAN_CAVES",
+          "intExt": "EXT",
+          "dayNight": "DAY_TO_NIGHT",
+          "cast": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "extras": 18,
+          "setupTime": 6.0,
+          "shootTime": 12.0,
+          "specialRequirements": [
+            "transparent_cube_prop",
+            "projection_mapping",
+            "sound_design",
+            "choreography",
+            "vfx_supervision"
+          ]
+        },
+        {
+          "sceneId": 9,
+          "sceneName": "EXT. CAVE AND PLAINS – UTOPIA",
+          "pages": 1.25,
+          "location": "AFRICAN_CAVES",
+          "intExt": "EXT",
+          "dayNight": "DAY",
+          "cast": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "extras": 25,
+          "animals": [
+            "trained_lion",
+            "warthogs"
+          ],
+          "setupTime": 3.0,
+          "shootTime": 6.0,
+          "specialRequirements": [
+            "time_passage_montage",
+            "animal_wranglers",
+            "makeup_aging"
+          ]
+        },
+        {
+          "sceneId": 10,
+          "sceneName": "EXT. CAVES – KILLING THE LION",
+          "pages": 2.0,
+          "location": "AFRICAN_CAVES",
+          "intExt": "EXT",
+          "dayNight": "NIGHT",
+          "cast": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "extras": 18,
+          "animals": [
+            "trained_lion"
+          ],
+          "setupTime": 6.0,
+          "shootTime": 10.0,
+          "specialRequirements": [
+            "stunt_coordinator",
+            "boulder_rig",
+            "animal_safety",
+            "night_lighting",
+            "multiple_cameras"
+          ]
+        },
+        {
+          "sceneId": 11,
+          "sceneName": "EXT. STREAM – MASTER OF THE WORLD",
+          "pages": 2.5,
+          "location": "AFRICAN_STREAM",
+          "intExt": "EXT",
+          "dayNight": "DAWN",
+          "cast": [
+            "MOONWATCHER",
+            "ONE_EAR",
+            "TRIBE_MEMBERS",
+            "THE_OTHERS"
+          ],
+          "extras": 36,
+          "setupTime": 4.0,
+          "shootTime": 8.0,
+          "specialRequirements": [
+            "fight_choreographer",
+            "lion_head_prop",
+            "makeup_effects",
+            "multiple_cameras"
+          ]
+        },
+        {
+          "sceneId": 12,
+          "sceneName": "INT. ORION-III PASSENGER AREA",
+          "pages": 0.5,
+          "location": "ORION_SPACECRAFT",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "DR_FLOYD"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 3.0,
+          "specialRequirements": [
+            "zero_gravity_effects",
+            "spacecraft_set",
+            "floating_props"
+          ]
+        },
+        {
+          "sceneId": 13,
+          "sceneName": "INT. ORION-III COCKPIT",
+          "pages": 0.75,
+          "location": "ORION_SPACECRAFT",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "PILOT",
+            "CO_PILOT",
+            "STEWARDESS"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 4.0,
+          "specialRequirements": [
+            "zero_gravity_effects",
+            "cockpit_set",
+            "monitors",
+            "floating_props"
+          ]
+        },
+        {
+          "sceneId": 14,
+          "sceneName": "INT. SPACE STATION-5",
+          "pages": 0.5,
+          "location": "SPACE_STATION",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [],
+          "extras": 0,
+          "setupTime": 3.0,
+          "shootTime": 4.0,
+          "specialRequirements": [
+            "space_station_exterior",
+            "rotating_set",
+            "earth_backdrop"
+          ]
+        },
+        {
+          "sceneId": 15,
+          "sceneName": "INT. ORION-III PASSENGER AREA",
+          "pages": 0.25,
+          "location": "ORION_SPACECRAFT",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "DR_FLOYD"
+          ],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 2.0,
+          "specialRequirements": [
+            "zero_gravity_effects",
+            "space_view_window"
+          ]
+        },
+        {
+          "sceneId": 16,
+          "sceneName": "INT. ORION-III COCKPIT",
+          "pages": 0.25,
+          "location": "ORION_SPACECRAFT",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "CO_PILOT"
+          ],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 2.0,
+          "specialRequirements": [
+            "radio_communication",
+            "cockpit_monitors"
+          ]
+        },
+        {
+          "sceneId": 17,
+          "sceneName": "INT. THE ORION-III SPACECRAFT IN DOCKING APPROACH",
+          "pages": 0.25,
+          "location": "ORION_SPACECRAFT",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 2.0,
+          "specialRequirements": [
+            "earth_backdrop",
+            "space_view"
+          ]
+        },
+        {
+          "sceneId": 18,
+          "sceneName": "INT. INSIDE DOCKING CONTROL",
+          "pages": 0.5,
+          "location": "SPACE_STATION",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "DOCKING_PERSONNEL"
+          ],
+          "extras": 5,
+          "setupTime": 2.0,
+          "shootTime": 3.0,
+          "specialRequirements": [
+            "docking_bay_set",
+            "spacecraft_models",
+            "monitor_displays"
+          ]
+        },
+        {
+          "sceneId": 19,
+          "sceneName": "INT. SPACE STATION RECEPTION AREA",
+          "pages": 4.0,
+          "location": "SPACE_STATION",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "DR_FLOYD",
+            "MILLER",
+            "RECEPTIONIST",
+            "PASSPORT_GIRL"
+          ],
+          "extras": 8,
+          "setupTime": 3.0,
+          "shootTime": 8.0,
+          "specialRequirements": [
+            "space_station_set",
+            "voice_print_booth",
+            "automated_systems",
+            "monitors"
+          ]
+        },
+        {
+          "sceneId": 20,
+          "sceneName": "INT. SPACE STATION – LOUNGE",
+          "pages": 5.5,
+          "location": "SPACE_STATION",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "DR_FLOYD",
+            "MILLER",
+            "CHILD",
+            "VISION_SALES_GIRL"
+          ],
+          "extras": 12,
+          "setupTime": 4.0,
+          "shootTime": 10.0,
+          "specialRequirements": [
+            "vision_phone_booth",
+            "lounge_set",
+            "video_communication",
+            "earth_view"
+          ]
+        },
+        {
+          "sceneId": 21,
+          "sceneName": "INT. SPACE STATION – LOUNGE (RUSSIANS)",
+          "pages": 3.5,
+          "location": "SPACE_STATION",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "DR_FLOYD",
+            "ELENA",
+            "SMYSLOV",
+            "RUSSIAN_SCIENTISTS"
+          ],
+          "extras": 15,
+          "setupTime": 3.0,
+          "shootTime": 7.0,
+          "specialRequirements": [
+            "restaurant_set",
+            "earth_light_room",
+            "pill_props"
+          ]
+        },
+        {
+          "sceneId": 22,
+          "sceneName": "EXT. ARIES-IB IN SPACE",
+          "pages": 0.5,
+          "location": "SPACE",
+          "intExt": "EXT",
+          "dayNight": "N/A",
+          "cast": [],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 3.0,
+          "specialRequirements": [
+            "spacecraft_model",
+            "earth_backdrop",
+            "space_effects"
+          ]
+        },
+        {
+          "sceneId": 23,
+          "sceneName": "INT. ARIES PASSENGER AREA",
+          "pages": 0.5,
+          "location": "ARIES_SPACECRAFT",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "DR_FLOYD",
+            "STEWARDESS_1",
+            "STEWARDESS_2"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 4.0,
+          "specialRequirements": [
+            "zero_gravity_effects",
+            "passenger_cabin",
+            "tv_monitors"
+          ]
+        },
+        {
+          "sceneId": 24,
+          "sceneName": "INT. ARIES GALLEY AREA",
+          "pages": 0.25,
+          "location": "ARIES_SPACECRAFT",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "STEWARDESS"
+          ],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 2.0,
+          "specialRequirements": [
+            "zero_gravity_effects",
+            "galley_set",
+            "food_trays"
+          ]
+        },
+        {
+          "sceneId": 25,
+          "sceneName": "INT. ARIES-IB COCKPIT",
+          "pages": 1.5,
+          "location": "ARIES_SPACECRAFT",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "PILOT",
+            "CO_PILOT",
+            "STEWARDESS"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 4.0,
+          "specialRequirements": [
+            "cockpit_set",
+            "food_service",
+            "conversation_scene"
+          ]
+        },
+        {
+          "sceneId": 26,
+          "sceneName": "INT. ARIES-IB IN SPACE",
+          "pages": 0.125,
+          "location": "ARIES_SPACECRAFT",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 1.0,
+          "specialRequirements": [
+            "moon_backdrop",
+            "space_view"
+          ]
+        },
+        {
+          "sceneId": 27,
+          "sceneName": "INT. ARIES-IB PASSENGER AREA",
+          "pages": 2.0,
+          "location": "ARIES_SPACECRAFT",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "DR_FLOYD",
+            "PILOT"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 5.0,
+          "specialRequirements": [
+            "conversation_scene",
+            "passenger_cabin"
+          ]
+        },
+        {
+          "sceneId": 28,
+          "sceneName": "EXT. ARIES-IB CLOSER TO MOON",
+          "pages": 0.25,
+          "location": "ARIES_SPACECRAFT",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "DR_FLOYD"
+          ],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 2.0,
+          "specialRequirements": [
+            "washroom_set",
+            "instructions_prop"
+          ]
+        },
+        {
+          "sceneId": 29,
+          "sceneName": "EXT. ARIES-IB CLOSER TO MOON",
+          "pages": 0.125,
+          "location": "SPACE",
+          "intExt": "EXT",
+          "dayNight": "N/A",
+          "cast": [],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 1.0,
+          "specialRequirements": [
+            "spacecraft_model",
+            "moon_approach"
+          ]
+        },
+        {
+          "sceneId": 30,
+          "sceneName": "INT. FLOYD VISITING ARIES-IB COCKPIT",
+          "pages": 0.125,
+          "location": "ARIES_SPACECRAFT",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "DR_FLOYD"
+          ],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 2.0,
+          "specialRequirements": [
+            "zero_gravity_effects",
+            "weightless_movement"
+          ]
+        },
+        {
+          "sceneId": 31,
+          "sceneName": "INT. ARIES-IB ORBITING MOON",
+          "pages": 0.5,
+          "location": "SPACE",
+          "intExt": "EXT",
+          "dayNight": "N/A",
+          "cast": [],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 3.0,
+          "specialRequirements": [
+            "moon_surface",
+            "spacecraft_model",
+            "lunar_landscape"
+          ]
+        },
+        {
+          "sceneId": 32,
+          "sceneName": "INT. ARIES-IB COCKPIT",
+          "pages": 0.25,
+          "location": "ARIES_SPACECRAFT",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "CREW",
+            "DOCKING_CONTROL"
+          ],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 2.0,
+          "specialRequirements": [
+            "docking_procedure",
+            "radio_communication"
+          ]
+        },
+        {
+          "sceneId": 33,
+          "sceneName": "INT. ARIES-IB DESCENDING",
+          "pages": 0.5,
+          "location": "MOON_BASE",
+          "intExt": "EXT",
+          "dayNight": "N/A",
+          "cast": [],
+          "extras": 0,
+          "setupTime": 3.0,
+          "shootTime": 4.0,
+          "specialRequirements": [
+            "moon_base_set",
+            "lunar_surface",
+            "ground_bus"
+          ]
+        },
+        {
+          "sceneId": 34,
+          "sceneName": "INT. INSIDE GREAT AIRLOCK ENTRANCE",
+          "pages": 0.125,
+          "location": "MOON_BASE",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 3.0,
+          "specialRequirements": [
+            "airlock_set",
+            "massive_doors",
+            "ground_bus"
+          ]
+        },
+        {
+          "sceneId": 35,
+          "sceneName": "INT. INSIDE SECOND AIRLOCK",
+          "pages": 0.25,
+          "location": "MOON_BASE",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BASE_PERSONNEL"
+          ],
+          "extras": 8,
+          "setupTime": 2.0,
+          "shootTime": 3.0,
+          "specialRequirements": [
+            "airlock_set",
+            "waiting_area"
+          ]
+        },
+        {
+          "sceneId": 36,
+          "sceneName": "INT. LOW GRAVITY GYMNASIUM TRICK WITH CHILDREN",
+          "pages": 0.5,
+          "location": "MOON_BASE",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "TEACHER",
+            "CHILDREN"
+          ],
+          "extras": 15,
+          "setupTime": 3.0,
+          "shootTime": 5.0,
+          "specialRequirements": [
+            "low_gravity_effects",
+            "gymnasium_set",
+            "wire_work",
+            "earth_views"
+          ]
+        },
+        {
+          "sceneId": 37,
+          "sceneName": "INT. LARGE CENTRAL RECEPTION AREA",
+          "pages": 0.5,
+          "location": "MOON_BASE",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "DR_FLOYD",
+            "HALVORSEN",
+            "WELCOMING_PARTY"
+          ],
+          "extras": 12,
+          "setupTime": 3.0,
+          "shootTime": 4.0,
+          "specialRequirements": [
+            "reception_set",
+            "pond_prop",
+            "earthlike_environment"
+          ]
+        },
+        {
+          "sceneId": 38,
+          "sceneName": "INT. LOW CEILING CONFERENCE ROOM",
+          "pages": 2.5,
+          "location": "MOON_BASE",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "DR_FLOYD",
+            "HALVORSEN",
+            "MICHAELS",
+            "BASE_PERSONNEL"
+          ],
+          "extras": 20,
+          "setupTime": 3.0,
+          "shootTime": 6.0,
+          "specialRequirements": [
+            "conference_room_set",
+            "projection_screens",
+            "u_shaped_table"
+          ]
+        },
+        {
+          "sceneId": 39,
+          "sceneName": "INT. INSIDE ROCKET BUS",
+          "pages": 0.5,
+          "location": "MOON_BUS",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "DR_FLOYD",
+            "HALVORSEN",
+            "MICHAELS",
+            "PILOT",
+            "CO_PILOT"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 4.0,
+          "specialRequirements": [
+            "space_suits",
+            "rocket_bus_interior",
+            "lunar_photography"
+          ]
+        },
+        {
+          "sceneId": 40,
+          "sceneName": "EXT. TMA-1 EXCAVATION",
+          "pages": 2.0,
+          "location": "TMA_1_SITE",
+          "intExt": "EXT",
+          "dayNight": "N/A",
+          "cast": [
+            "DR_FLOYD",
+            "HALVORSEN",
+            "MICHAELS",
+            "EXPEDITION_TEAM"
+          ],
+          "extras": 6,
+          "setupTime": 5.0,
+          "shootTime": 8.0,
+          "specialRequirements": [
+            "excavation_set",
+            "black_monolith",
+            "lunar_surface",
+            "space_suits",
+            "lighting_rig"
+          ]
+        },
+        {
+          "sceneId": 41,
+          "sceneName": "INT. INSIDE MONITOR DOME",
+          "pages": 0.25,
+          "location": "TMA_1_SITE",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "SIMPSON"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 3.0,
+          "specialRequirements": [
+            "monitor_dome_set",
+            "tv_displays",
+            "surveillance_equipment"
+          ]
+        },
+        {
+          "sceneId": 42,
+          "sceneName": "INT. TMA-1 EXCAVATION",
+          "pages": 1.0,
+          "location": "TMA_1_SITE",
+          "intExt": "EXT",
+          "dayNight": "N/A",
+          "cast": [
+            "DR_FLOYD",
+            "MICHAELS",
+            "PHOTOGRAPHER",
+            "EXPEDITION_TEAM"
+          ],
+          "extras": 6,
+          "setupTime": 3.0,
+          "shootTime": 5.0,
+          "specialRequirements": [
+            "black_monolith",
+            "space_suits",
+            "photography_equipment",
+            "sound_effects"
+          ]
+        },
+        {
+          "sceneId": 43,
+          "sceneName": "INT. POD BAY",
+          "pages": 0.25,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 3.0,
+          "specialRequirements": [
+            "pod_bay_set",
+            "zero_gravity_effects",
+            "electronic_news_pad"
+          ]
+        },
+        {
+          "sceneId": 44,
+          "sceneName": "INT. AIRLOCK-LINK",
+          "pages": 0.125,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN"
+          ],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 2.0,
+          "specialRequirements": [
+            "airlock_set",
+            "control_buttons",
+            "zero_gravity_effects"
+          ]
+        },
+        {
+          "sceneId": 45,
+          "sceneName": "INT. CENTRIFUGE HUB",
+          "pages": 0.125,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN"
+          ],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 2.0,
+          "specialRequirements": [
+            "centrifuge_hub",
+            "rotating_mechanism"
+          ]
+        },
+        {
+          "sceneId": 46,
+          "sceneName": "INT. ENTRY PORT CONTROL PANEL",
+          "pages": 0.25,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE"
+          ],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 2.0,
+          "specialRequirements": [
+            "control_panel",
+            "communication_system"
+          ]
+        },
+        {
+          "sceneId": 47,
+          "sceneName": "INT. CENTRIFUGE HUB",
+          "pages": 4.5,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE",
+            "HAL",
+            "HIBERNATING_CREW"
+          ],
+          "extras": 0,
+          "setupTime": 4.0,
+          "shootTime": 9.0,
+          "specialRequirements": [
+            "centrifuge_set",
+            "hibernaculum_props",
+            "rotating_camera",
+            "food_unit",
+            "electronic_news_pads"
+          ]
+        },
+        {
+          "sceneId": 48,
+          "sceneName": "Exterior view of the big dish antenna and Earth alignment telescope",
+          "pages": 0.125,
+          "location": "DISCOVERY_EXTERIOR",
+          "intExt": "EXT",
+          "dayNight": "N/A",
+          "cast": [],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 3.0,
+          "specialRequirements": [
+            "discovery_model",
+            "antenna_detail",
+            "space_backdrop"
+          ]
+        },
+        {
+          "sceneId": 49,
+          "sceneName": "INT. CENTRIFUGE",
+          "pages": 0.5,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE",
+            "HAL"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 4.0,
+          "specialRequirements": [
+            "centrifuge_set",
+            "hard_copy_printer",
+            "technical_diagrams"
+          ]
+        },
+        {
+          "sceneId": 50,
+          "sceneName": "INT. CENTRIFUGE",
+          "pages": 0.25,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE"
+          ],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 3.0,
+          "specialRequirements": [
+            "random_decision_maker",
+            "silver_dollar_prop",
+            "coin_flip"
+          ]
+        },
+        {
+          "sceneId": 51,
+          "sceneName": "INT. POD BAY",
+          "pages": 1.5,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE",
+            "HAL"
+          ],
+          "extras": 0,
+          "setupTime": 4.0,
+          "shootTime": 7.0,
+          "specialRequirements": [
+            "pod_bay_set",
+            "space_suits",
+            "pod_vehicle",
+            "component_props",
+            "zero_gravity_effects"
+          ]
+        },
+        {
+          "sceneId": 52,
+          "sceneName": "INT. INSIDE COMMAND MODULE",
+          "pages": 0.5,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 4.0,
+          "specialRequirements": [
+            "command_module_set",
+            "window_view",
+            "pod_exterior_work"
+          ]
+        },
+        {
+          "sceneId": 53,
+          "sceneName": "INT. IN COMMAND MODULE",
+          "pages": 1.0,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE",
+            "HAL"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 5.0,
+          "specialRequirements": [
+            "command_module_set",
+            "tv_monitors",
+            "pod_docking_sequence"
+          ]
+        },
+        {
+          "sceneId": 54,
+          "sceneName": "INT. POD BAY",
+          "pages": 0.25,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "POOLE"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 4.0,
+          "specialRequirements": [
+            "testing_bench",
+            "electronic_equipment",
+            "component_testing"
+          ]
+        },
+        {
+          "sceneId": 55,
+          "sceneName": "INT. VK INTEGRITY",
+          "pages": 0.5,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE"
+          ],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 3.0,
+          "specialRequirements": [
+            "testing_equipment",
+            "technical_conversation"
+          ]
+        },
+        {
+          "sceneId": 56,
+          "sceneName": "INT. CENTRIFUGE",
+          "pages": 0.25,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE",
+            "HAL"
+          ],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 3.0,
+          "specialRequirements": [
+            "centrifuge_set",
+            "hal_interface",
+            "technical_displays"
+          ]
+        },
+        {
+          "sceneId": 57,
+          "sceneName": "INT. CENTRIFUGE",
+          "pages": 0.5,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "POOLE",
+            "HAL"
+          ],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 3.0,
+          "specialRequirements": [
+            "centrifuge_set",
+            "hal_interface",
+            "technical_conversation"
+          ]
+        },
+        {
+          "sceneId": 58,
+          "sceneName": "INT. CENTRIFUGE",
+          "pages": 0.5,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE"
+          ],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 3.0,
+          "specialRequirements": [
+            "centrifuge_set",
+            "technical_conversation"
+          ]
+        },
+        {
+          "sceneId": 59,
+          "sceneName": "INT. POD BAY",
+          "pages": 0.25,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 4.0,
+          "specialRequirements": [
+            "pod_bay_set",
+            "component_replacement",
+            "space_suits"
+          ]
+        },
+        {
+          "sceneId": 60,
+          "sceneName": "INT. POD BAY",
+          "pages": 0.5,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 4.0,
+          "specialRequirements": [
+            "testing_equipment",
+            "component_analysis",
+            "technical_conversation"
+          ]
+        },
+        {
+          "sceneId": 61,
+          "sceneName": "INT. COMMUNICATIONS AREA",
+          "pages": 0.75,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "MISSION_CONTROL"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 4.0,
+          "specialRequirements": [
+            "communication_equipment",
+            "mission_control_voice",
+            "technical_briefing"
+          ]
+        },
+        {
+          "sceneId": 62,
+          "sceneName": "INT. CENTRIFUGE",
+          "pages": 1.5,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "HAL"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 5.0,
+          "specialRequirements": [
+            "centrifuge_set",
+            "chess_board",
+            "hal_interface",
+            "confrontation_scene"
+          ]
+        },
+        {
+          "sceneId": 63,
+          "sceneName": "INT. CENTRIFUGE",
+          "pages": 1.0,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 4.0,
+          "specialRequirements": [
+            "centrifuge_set",
+            "communication_equipment",
+            "technical_conversation"
+          ]
+        },
+        {
+          "sceneId": 64,
+          "sceneName": "INT. CENTRIFUGE",
+          "pages": 0.125,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE"
+          ],
+          "extras": 0,
+          "setupTime": 1.0,
+          "shootTime": 2.0,
+          "specialRequirements": [
+            "centrifuge_set",
+            "eating_scene"
+          ]
+        },
+        {
+          "sceneId": 65,
+          "sceneName": "INT. COMMUNICATIONS AREA",
+          "pages": 0.75,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE",
+            "MISSION_CONTROL",
+            "HAL"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 5.0,
+          "specialRequirements": [
+            "communication_equipment",
+            "mission_control_response",
+            "alarm_systems"
+          ]
+        },
+        {
+          "sceneId": 66,
+          "sceneName": "INT. CENTRIFUGE",
+          "pages": 4.5,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE",
+            "HAL"
+          ],
+          "extras": 0,
+          "setupTime": 5.0,
+          "shootTime": 12.0,
+          "specialRequirements": [
+            "centrifuge_set",
+            "pod_exterior_work",
+            "welding_torch",
+            "space_suits",
+            "pod_accident",
+            "stunt_coordination"
+          ]
+        },
+        {
+          "sceneId": 67,
+          "sceneName": "INT. CENTRIFUGE",
+          "pages": 2.5,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "HAL"
+          ],
+          "extras": 0,
+          "setupTime": 3.0,
+          "shootTime": 8.0,
+          "specialRequirements": [
+            "centrifuge_set",
+            "hal_eye_effects",
+            "hibernaculum_props",
+            "airlock_explosion",
+            "emergency_lighting"
+          ]
+        },
+        {
+          "sceneId": 68,
+          "sceneName": "INT. CENTRIFUGE",
+          "pages": 2.0,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "HAL"
+          ],
+          "extras": 0,
+          "setupTime": 4.0,
+          "shootTime": 8.0,
+          "specialRequirements": [
+            "brain_room_set",
+            "memory_blocks",
+            "hal_disconnect",
+            "computer_death",
+            "space_suit",
+            "flashlight"
+          ]
+        },
+        {
+          "sceneId": 69,
+          "sceneName": "INT. POD BAY",
+          "pages": 0.25,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN"
+          ],
+          "extras": 0,
+          "setupTime": 2.0,
+          "shootTime": 3.0,
+          "specialRequirements": [
+            "pod_bay_set",
+            "space_suit",
+            "replacement_components"
+          ]
+        },
+        {
+          "sceneId": 70,
+          "sceneName": "INT. CENTRIFUGE",
+          "pages": 6.0,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "MISSION_CONTROL",
+            "SIMONSON",
+            "DR_FLOYD"
+          ],
+          "extras": 0,
+          "setupTime": 3.0,
+          "shootTime": 10.0,
+          "specialRequirements": [
+            "centrifuge_set",
+            "communication_equipment",
+            "pre_recorded_briefing",
+            "monolith_footage",
+            "hal_voice_recordings"
+          ]
+        },
+        {
+          "sceneId": 71,
+          "sceneName": "STARGATE SEQUENCE / HOTEL ROOM / STAR CHILD",
+          "pages": 8.0,
+          "location": "MULTIPLE_COSMIC",
+          "intExt": "VARIOUS",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "AGED_BOWMAN",
+            "STAR_CHILD"
+          ],
+          "extras": 0,
+          "setupTime": 10.0,
+          "shootTime": 20.0,
+          "specialRequirements": [
+            "stargate_effects",
+            "cosmic_visuals",
+            "hotel_room_set",
+            "aging_makeup",
+            "star_child_effect",
+            "monolith_prop",
+            "extensive_vfx"
+          ]
+        }
+      ],
+      "cast": {
+        "principals": [
+          {
+            "characterName": "MOONWATCHER",
+            "castCategory": "lead",
+            "sceneCount": 11,
+            "dialoguePages": 0,
+            "estimatedDays": 15,
+            "specialRequirements": [
+              "ape_makeup",
+              "physical_performance"
+            ]
+          },
+          {
+            "characterName": "DR_HEYWOOD_FLOYD",
+            "castCategory": "lead",
+            "sceneCount": 12,
+            "dialoguePages": 18.5,
+            "estimatedDays": 22,
+            "specialRequirements": [
+              "space_suit_work"
+            ]
+          },
+          {
+            "characterName": "DAVE_BOWMAN",
+            "castCategory": "lead",
+            "sceneCount": 25,
+            "dialoguePages": 15.2,
+            "estimatedDays": 35,
+            "specialRequirements": [
+              "space_suit_work",
+              "zero_gravity",
+              "aging_makeup"
+            ]
+          },
+          {
+            "characterName": "FRANK_POOLE",
+            "castCategory": "supporting",
+            "sceneCount": 18,
+            "dialoguePages": 12.8,
+            "estimatedDays": 28,
+            "specialRequirements": [
+              "space_suit_work",
+              "zero_gravity",
+              "stunt_work"
+            ]
+          },
+          {
+            "characterName": "HAL_9000",
+            "castCategory": "voice",
+            "sceneCount": 22,
+            "dialoguePages": 25.3,
+            "estimatedDays": 8,
+            "specialRequirements": [
+              "voice_recording",
+              "adr_sessions"
+            ]
+          }
+        ],
+        "supporting": [
+          {
+            "characterName": "ELENA_SMYSLOV",
+            "sceneCount": 1,
+            "estimatedDays": 2
+          },
+          {
+            "characterName": "MILLER",
+            "sceneCount": 2,
+            "estimatedDays": 3
+          },
+          {
+            "characterName": "HALVORSEN",
+            "sceneCount": 4,
+            "estimatedDays": 6
+          },
+          {
+            "characterName": "MICHAELS",
+            "sceneCount": 4,
+            "estimatedDays": 6
+          }
+        ],
+        "dayPlayers": [
+          {
+            "role": "STEWARDESS",
+            "scenes": 5,
+            "days": 3
+          },
+          {
+            "role": "PILOT",
+            "scenes": 4,
+            "days": 3
+          },
+          {
+            "role": "RUSSIAN_SCIENTISTS",
+            "scenes": 1,
+            "days": 2
+          },
+          {
+            "role": "BASE_PERSONNEL",
+            "scenes": 6,
+            "days": 8
+          },
+          {
+            "role": "MISSION_CONTROL",
+            "scenes": 3,
+            "days": 2
+          }
+        ],
+        "extrasSummary": {
+          "totalManDays": 450,
+          "averagePerDay": 15,
+          "maxInScene": 36,
+          "specialtyExtras": {
+            "primitiveTribe": 36,
+            "spaceStationCrowd": 25,
+            "baseLiving": 20
+          }
+        }
+      },
+      "locations": {
+        "uniqueCount": 18,
+        "details": [
+          {
+            "locationId": "LOC001",
+            "name": "AFRICAN_STREAM",
+            "type": "practical",
+            "intExt": "EXT",
+            "scenes": [
+              1,
+              5,
+              11
+            ],
+            "estimatedDays": 6,
+            "restrictions": "Animal welfare requirements"
+          },
+          {
+            "locationId": "LOC002",
+            "name": "AFRICAN_PLAINS",
+            "type": "practical",
+            "intExt": "EXT",
+            "scenes": [
+              2,
+              3
+            ],
+            "estimatedDays": 4,
+            "restrictions": "Wildlife coordination required"
+          },
+          {
+            "locationId": "LOC003",
+            "name": "AFRICAN_CAVES",
+            "type": "practical/studio",
+            "intExt": "INT/EXT",
+            "scenes": [
+              4,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "estimatedDays": 15,
+            "restrictions": "Cave safety protocols"
+          },
+          {
+            "locationId": "LOC004",
+            "name": "ORION_SPACECRAFT",
+            "type": "studio",
+            "intExt": "INT",
+            "scenes": [
+              12,
+              13,
+              15,
+              16,
+              17,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              30
+            ],
+            "estimatedDays": 18,
+            "restrictions": "Zero gravity effects"
+          },
+          {
+            "locationId": "LOC005",
+            "name": "SPACE_STATION",
+            "type": "studio",
+            "intExt": "INT",
+            "scenes": [
+              14,
+              18,
+              19,
+              20,
+              21
+            ],
+            "estimatedDays": 12,
+            "restrictions": "Rotating set mechanisms"
+          },
+          {
+            "locationId": "LOC006",
+            "name": "ARIES_SPACECRAFT",
+            "type": "studio",
+            "intExt": "INT",
+            "scenes": [
+              22,
+              26,
+              29,
+              31,
+              32,
+              33
+            ],
+            "estimatedDays": 8,
+            "restrictions": "Lunar approach effects"
+          },
+          {
+            "locationId": "LOC007",
+            "name": "MOON_BASE",
+            "type": "studio",
+            "intExt": "INT",
+            "scenes": [
+              34,
+              35,
+              36,
+              37,
+              38
+            ],
+            "estimatedDays": 12,
+            "restrictions": "Low gravity simulation"
+          },
+          {
+            "locationId": "LOC008",
+            "name": "MOON_BUS",
+            "type": "studio",
+            "intExt": "INT",
+            "scenes": [
+              39
+            ],
+            "estimatedDays": 2,
+            "restrictions": "Lunar surface projection"
+          },
+          {
+            "locationId": "LOC009",
+            "name": "TMA_1_SITE",
+            "type": "studio",
+            "intExt": "EXT/INT",
+            "scenes": [
+              40,
+              41,
+              42
+            ],
+            "estimatedDays": 8,
+            "restrictions": "Monolith effects, space suits"
+          },
+          {
+            "locationId": "LOC010",
+            "name": "DISCOVERY",
+            "type": "studio",
+            "intExt": "INT",
+            "scenes": [
+              43,
+              44,
+              45,
+              46,
+              47,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70
+            ],
+            "estimatedDays": 45,
+            "restrictions": "Centrifuge rotation, zero gravity"
+          },
+          {
+            "locationId": "LOC011",
+            "name": "DISCOVERY_EXTERIOR",
+            "type": "studio",
+            "intExt": "EXT",
+            "scenes": [
+              48
+            ],
+            "estimatedDays": 2,
+            "restrictions": "Spacecraft model work"
+          },
+          {
+            "locationId": "LOC012",
+            "name": "SPACE",
+            "type": "studio",
+            "intExt": "EXT",
+            "scenes": [
+              22,
+              29,
+              31
+            ],
+            "estimatedDays": 6,
+            "restrictions": "Space effects, model photography"
+          },
+          {
+            "locationId": "LOC013",
+            "name": "MULTIPLE_COSMIC",
+            "type": "studio",
+            "intExt": "VARIOUS",
+            "scenes": [
+              71
+            ],
+            "estimatedDays": 25,
+            "restrictions": "Extensive VFX, special effects"
+          }
+        ]
+      },
+      "propsElements": {
+        "heroProps": [
+          {
+            "propId": "P001",
+            "name": "BLACK_MONOLITH_TMA1",
+            "scenes": [
+              40,
+              42,
+              71
+            ],
+            "quantity": 3,
+            "specialRequirements": [
+              "magnetic_field_effects",
+              "sound_emission"
+            ]
+          },
+          {
+            "propId": "P002",
+            "name": "CRYSTAL_CUBE_TEACHER",
+            "scenes": [
+              7,
+              8
+            ],
+            "quantity": 1,
+            "specialRequirements": [
+              "transparency",
+              "projection_mapping",
+              "sound_system"
+            ]
+          },
+          {
+            "propId": "P003",
+            "name": "HAL_9000_COMPUTER_EYE",
+            "scenes": [
+              47,
+              49,
+              51,
+              52,
+              53,
+              56,
+              57,
+              62,
+              65,
+              66,
+              67,
+              68
+            ],
+            "quantity": 12,
+            "specialRequirements": [
+              "led_lighting",
+              "camera_mechanism",
+              "voice_system"
+            ]
+          },
+          {
+            "propId": "P004",
+            "name": "SPACE_PODS",
+            "scenes": [
+              51,
+              52,
+              53,
+              66
+            ],
+            "quantity": 3,
+            "specialRequirements": [
+              "functional_arms",
+              "propulsion_effects",
+              "interior_cockpit"
+            ]
+          }
+        ],
+        "vehicles": [
+          {
+            "vehicleId": "V001",
+            "type": "ground_bus",
+            "description": "Lunar ground transport",
+            "scenes": [
+              33,
+              34,
+              35
+            ]
+          },
+          {
+            "vehicleId": "V002",
+            "type": "rocket_bus",
+            "description": "Moon to TMA-1 transport",
+            "scenes": [
+              39,
+              40
+            ]
+          }
+        ],
+        "specialEffects": {
+          "practical": 25,
+          "atmospheric": 15,
+          "pyro": 2,
+          "stunts": 8,
+          "mechanicalEffects": {
+            "rotatingCentrifuge": 1,
+            "zeroGravityRigs": 15,
+            "animatronics": 5
+          }
+        },
+        "vfx": {
+          "totalShots": 205,
+          "complexity": {
+            "simple": 65,
+            "medium": 85,
+            "complex": 55
+          },
+          "categories": {
+            "spaceTravel": 45,
+            "zeroGravity": 35,
+            "stargate": 25,
+            "modelWork": 40,
+            "matte_paintings": 30,
+            "compositing": 30
+          }
+        }
+      },
+      "productionRequirements": {
+        "stunts": [
+          {
+            "scene": 10,
+            "type": "boulder_drop",
+            "performers": 2
+          },
+          {
+            "scene": 66,
+            "type": "space_pod_accident",
+            "performers": 1
+          },
+          {
+            "scene": 67,
+            "type": "airlock_explosion",
+            "performers": 1
+          }
+        ],
+        "specialEquipment": [
+          "centrifuge_camera_mount",
+          "zero_gravity_wire_rig",
+          "rotating_set_mechanism",
+          "front_projection_system",
+          "motion_control_camera",
+          "underwater_tank",
+          "wind_machines",
+          "space_suit_life_support"
+        ],
+        "nightShoots": 8,
+        "childActors": 8,
+        "animals": 15,
+        "makeupComplexity": {
+          "ape_makeup": 15,
+          "aging_makeup": 3,
+          "space_makeup": 45
+        }
+      },
+      "scheduleRequirements": {
+        "totalShootDays": 145,
+        "prepDays": 84,
+        "wrapDays": 14,
+        "targetStart": "1965-12-29",
+        "mustWrapBy": "1968-04-03",
+        "blackoutDates": [
+          "1966-12-25",
+          "1967-01-01",
+          "1967-12-25",
+          "1968-01-01"
+        ],
+        "sixDayWeeks": false,
+        "holidaysOff": [
+          "christmas",
+          "new_year"
+        ],
+        "specialScheduling": {
+          "centrifugeWork": 25,
+          "animalWork": 8,
+          "childrenWork": 3,
+          "stuntWork": 8,
+          "vfxSupervision": 60
+        }
+      }
+    },
+    "dependency_outputs": {
+      "coordinator": {
+        "budgetCoordinatorOutput": {
+          "projectId": "proj_2001_space_odyssey",
+          "processingTimestamp": "2024-07-21T10:05:00Z",
+          "systemStatusReport": {
+            "intakeStatus": "SUCCESS",
+            "validationStatus": "CONDITIONAL",
+            "dataCompleteness": "98%",
+            "missingInformation": [
+              "Specific Union Jurisdictions (e.g., SAG, DGA, IATSE) for accurate labor rates.",
+              "Crew and Cast residency information for Tax Incentive analysis.",
+              "Specific equipment vendor tiers or preferred rental houses.",
+              "Funding source details and drawdown schedule for Cash Flow projection."
+            ],
+            "identifiedRisks": [
+              {
+                "riskId": "RISK-TECH-001",
+                "description": "Extreme technical complexity involving unproven technologies like the large-scale rotating centrifuge set, front projection systems, and zero-gravity rigs.",
+                "mitigation": "Allocate significant budget for R&D, pre-visualization, and testing. Hire top-tier engineering and SFX teams."
+              },
+              {
+                "riskId": "RISK-VFX-001",
+                "description": "Groundbreaking and extensive VFX requirements (205+ shots), including the abstract Stargate sequence, with high potential for schedule and budget overruns.",
+                "mitigation": "Engage VFX supervisor from early prep. Budget for extensive motion control photography and optical printing. Build in contingency for VFX."
+              },
+              {
+                "riskId": "RISK-SET-001",
+                "description": "Requirement for numerous, large, and highly detailed sets (Discovery Centrifuge, Space Station, Moon Base) which are costly and time-consuming to build.",
+                "mitigation": "Secure large-scale studio space well in advance. Detailed construction plans and budget must be locked early."
+              },
+              {
+                "riskId": "RISK-LOG-001",
+                "description": "High-risk production elements including work with a trained lion, numerous other animals, and child actors, all of which have significant safety, logistical, and regulatory implications.",
+                "mitigation": "Hire experienced animal wranglers and safety coordinators. Adhere strictly to child labor laws. Increase insurance coverage."
+              },
+              {
+                "riskId": "RISK-SCHED-001",
+                "description": "A long and complex production schedule (145 shooting days) with many dependencies between departments (e.g., SFX, VFX, stunts) increases the likelihood of cascading delays.",
+                "mitigation": "Utilize advanced scheduling software. Build in contingency days for complex sequences. Ensure clear communication between department heads."
+              }
+            ]
+          },
+          "modelDataPackets": {
+            "scheduleOptimizer": {
+              "model": "Schedule Optimizer",
+              "priority": "FIRST",
+              "description": "Generates the master production schedule based on all scenes, cast, locations, and constraints.",
+              "inputs": {
+                "scenes": "Array of 71 scenes with pages, cast, location, and special requirements.",
+                "castAvailability": "Principal cast members with estimated total shooting days (e.g., DAVE_BOWMAN: 35 days).",
+                "locationConstraints": "13 unique locations with estimated days needed and specific restrictions (e.g., AFRICAN_CAVES: 15 days, safety protocols).",
+                "scheduleParameters": {
+                  "totalShootDays": 145,
+                  "prepDays": 84,
+                  "wrapDays": 14,
+                  "targetStart": "1965-12-29",
+                  "mustWrapBy": "1968-04-03",
+                  "sixDayWeeks": false,
+                  "unionRules": "To be determined based on jurisdiction."
+                },
+                "specialSchedulingBlocks": {
+                  "centrifugeWork": 25,
+                  "animalWork": 8,
+                  "childrenWork": 3,
+                  "stuntWork": 8,
+                  "vfxSupervision": 60
+                }
+              }
+            },
+            "laborCostCalculator": {
+              "model": "Labor Cost Calculator",
+              "priority": "PARALLEL",
+              "dependencies": [
+                "Schedule Optimizer"
+              ],
+              "description": "Calculates all cast and crew labor costs based on the schedule and union rules.",
+              "inputs": {
+                "castBreakdown": {
+                  "principals": 5,
+                  "supporting": 4,
+                  "dayPlayers": 5,
+                  "voice": 1
+                },
+                "extrasSummary": {
+                  "totalManDays": 450,
+                  "maxInScene": 36
+                },
+                "stuntPerformers": {
+                  "totalStunts": 3,
+                  "totalPerformers": 4
+                },
+                "specialtyLabor": [
+                  "animal_wranglers",
+                  "safety_coordinator",
+                  "fight_choreographer",
+                  "stunt_coordinator",
+                  "vfx_supervision"
+                ],
+                "jurisdiction": "FLAG: Missing specific union jurisdiction data."
+              }
+            },
+            "equipmentPricingEngine": {
+              "model": "Equipment Pricing Engine",
+              "priority": "PARALLEL",
+              "dependencies": [
+                "Schedule Optimizer"
+              ],
+              "description": "Prices all required production equipment based on the schedule.",
+              "inputs": {
+                "specialEquipment": [
+                  "centrifuge_camera_mount",
+                  "zero_gravity_wire_rig",
+                  "rotating_set_mechanism",
+                  "front_projection_system",
+                  "motion_control_camera",
+                  "underwater_tank",
+                  "wind_machines",
+                  "space_suit_life_support"
+                ],
+                "cameraPackages": [
+                  "drone_footage",
+                  "wide_lens_package",
+                  "multiple_cameras",
+                  "telephoto_lenses"
+                ],
+                "heroPropsWithTech": [
+                  "BLACK_MONOLITH_TMA1 (magnetic_field_effects, sound_emission)",
+                  "CRYSTAL_CUBE_TEACHER (projection_mapping, sound_system)",
+                  "HAL_9000_COMPUTER_EYE (led_lighting, camera_mechanism)",
+                  "SPACE_PODS (functional_arms, propulsion_effects)"
+                ],
+                "mechanicalEffectsRigs": {
+                  "rotatingCentrifuge": 1,
+                  "zeroGravityRigs": 15,
+                  "animatronics": 5
+                },
+                "vendorTier": "FLAG: Missing specific vendor tier."
+              }
+            },
+            "locationCostEstimator": {
+              "model": "Location Cost Estimator",
+              "priority": "PARALLEL",
+              "dependencies": [
+                "Schedule Optimizer"
+              ],
+              "description": "Estimates costs for all practical locations and studio builds.",
+              "inputs": {
+                "locations": [
+                  {
+                    "name": "AFRICAN_STREAM",
+                    "type": "practical",
+                    "estimatedDays": 6
+                  },
+                  {
+                    "name": "AFRICAN_PLAINS",
+                    "type": "practical",
+                    "estimatedDays": 4
+                  },
+                  {
+                    "name": "AFRICAN_CAVES",
+                    "type": "practical/studio",
+                    "estimatedDays": 15
+                  },
+                  {
+                    "name": "ORION_SPACECRAFT",
+                    "type": "studio_build",
+                    "estimatedDays": 18
+                  },
+                  {
+                    "name": "SPACE_STATION",
+                    "type": "studio_build",
+                    "estimatedDays": 12
+                  },
+                  {
+                    "name": "ARIES_SPACECRAFT",
+                    "type": "studio_build",
+                    "estimatedDays": 8
+                  },
+                  {
+                    "name": "MOON_BASE",
+                    "type": "studio_build",
+                    "estimatedDays": 12
+                  },
+                  {
+                    "name": "MOON_BUS",
+                    "type": "studio_build",
+                    "estimatedDays": 2
+                  },
+                  {
+                    "name": "TMA_1_SITE",
+                    "type": "studio_build",
+                    "estimatedDays": 8
+                  },
+                  {
+                    "name": "DISCOVERY",
+                    "type": "studio_build",
+                    "estimatedDays": 45
+                  },
+                  {
+                    "name": "MULTIPLE_COSMIC",
+                    "type": "studio_vfx",
+                    "estimatedDays": 25
+                  }
+                ],
+                "totalStudioDays": 142,
+                "totalPracticalDays": 10
+              }
+            },
+            "insuranceCalculator": {
+              "model": "Insurance Calculator",
+              "priority": "PARALLEL",
+              "dependencies": [
+                "Schedule Optimizer",
+                "Labor Cost Calculator",
+                "Equipment Pricing Engine"
+              ],
+              "description": "Calculates insurance premiums based on production risks.",
+              "inputs": {
+                "riskFactors": [
+                  "Stunts: boulder_drop, space_pod_accident, airlock_explosion",
+                  "Animals: trained_lion, zebras, gazelles",
+                  "Child Actors: 8 children on set",
+                  "Complex Mechanical Rigs: rotating_centrifuge, zero_gravity_wire_rig",
+                  "Pyrotechnics: airlock_explosion",
+                  "International Locations: Africa",
+                  "High-Value Sets and Equipment"
+                ],
+                "dependentValues": {
+                  "totalCastValue": "Awaits Labor Cost Calculator output",
+                  "totalEquipmentValue": "Awaits Equipment Pricing Engine output"
+                }
+              }
+            },
+            "postProductionEstimator": {
+              "model": "Post-Production Estimator",
+              "priority": "PARALLEL",
+              "dependencies": [
+                "Schedule Optimizer"
+              ],
+              "description": "Estimates all post-production costs including VFX, editing, and sound.",
+              "inputs": {
+                "format": "feature_film",
+                "genre": [
+                  "sci-fi",
+                  "drama",
+                  "thriller"
+                ],
+                "estimatedRuntimeMinutes": 149,
+                "vfx": {
+                  "totalShots": 205,
+                  "complexity": {
+                    "simple": 65,
+                    "medium": 85,
+                    "complex": 55
+                  },
+                  "keySequences": [
+                    "Stargate",
+                    "Zero-Gravity",
+                    "Space Travel Model Work"
+                  ]
+                },
+                "soundDesign": {
+                  "complexity": "High",
+                  "keyElements": [
+                    "HAL 9000 voice processing",
+                    "Stargate sequence soundscape",
+                    "Monolith sound effects",
+                    "Space silence vs. interior sounds"
+                  ]
+                },
+                "music": "Classical and original score required.",
+                "deliveryRequirements": "Theatrical release format."
+              }
+            },
+            "taxIncentiveAnalyzer": {
+              "model": "Tax Incentive Analyzer",
+              "priority": "PARALLEL",
+              "dependencies": [
+                "Budget Aggregator"
+              ],
+              "description": "Analyzes potential tax credits based on shooting locations and spend.",
+              "inputs": {
+                "shootingLocations": [
+                  {
+                    "location": "Africa (unspecified country)",
+                    "type": "Practical"
+                  },
+                  {
+                    "location": "Studio (unspecified country, likely UK or US)",
+                    "type": "Studio Build"
+                  }
+                ],
+                "dataFlags": [
+                  "Missing crew/cast residency data.",
+                  "Missing specific spend data per location."
+                ],
+                "dependency": "Requires aggregated budget totals to calculate qualifying spend."
+              }
+            },
+            "budgetAggregator": {
+              "model": "Budget Aggregator",
+              "priority": "FINAL_COMPILATION",
+              "dependencies": [
+                "Labor Cost Calculator",
+                "Equipment Pricing Engine",
+                "Location Cost Estimator",
+                "Insurance Calculator",
+                "Post-Production Estimator",
+                "Tax Incentive Analyzer"
+              ],
+              "description": "Aggregates costs from all parallel models into a top-sheet and detailed budget.",
+              "inputs": {
+                "dataSources": "Outputs from all cost-calculating models."
+              }
+            },
+            "cashFlowProjector": {
+              "model": "Cash Flow Projector",
+              "priority": "FINAL_COMPILATION",
+              "dependencies": [
+                "Budget Aggregator",
+                "Schedule Optimizer"
+              ],
+              "description": "Projects weekly cash flow needs based on the final budget and schedule.",
+              "inputs": {
+                "totalBudget": "Awaits Budget Aggregator output.",
+                "productionTimeline": "Awaits Schedule Optimizer output.",
+                "fundingSources": "FLAG: No funding source data provided."
+              }
+            }
+          }
+        }
+      },
+      "scheduleOptimizer": {
+        "projectId": "proj_2001_space_odyssey",
+        "scheduleId": "sched_v1_19651229",
+        "processingLog": [
+          {
+            "processName": "Scene Location Grouping Processing",
+            "status": "COMPLETED",
+            "timestamp": "2024-07-21T10:00:01Z",
+            "details": "Scenes grouped by location to minimize company moves. Prioritized remote practical locations (Africa) first, followed by sequential studio set builds (Orion, Space Station, Aries, Moon Base, TMA-1, Discovery, Stargate). Total company moves minimized to 2 major moves (Practical to Studio, Main Unit to VFX Unit)."
+          },
+          {
+            "processName": "Company Move Minimization Processing",
+            "status": "COMPLETED",
+            "timestamp": "2024-07-21T10:00:02Z",
+            "details": "Schedule structured to complete all African location work in a single block, followed by an extended studio block. This minimizes costly transport of crew and equipment between practical and studio environments. Internal studio moves are managed by sequential set usage."
+          },
+          {
+            "processName": "Cast Schedule Optimization Processing",
+            "status": "COMPLETED",
+            "timestamp": "2024-07-21T10:00:03Z",
+            "details": "Cast work days are clustered within location/set blocks. Dr. Floyd's scenes are grouped in the Earth-Moon phase. Bowman and Poole's work is concentrated in the Discovery phase. This strategy significantly reduces estimated hold days and travel requirements for principal actors."
+          },
+          {
+            "processName": "Day/Night Shoot Balancing Processing",
+            "status": "COMPLETED",
+            "timestamp": "2024-07-21T10:00:04Z",
+            "details": "Day/Night/Dawn requirements analyzed and sequenced to ensure union turnaround compliance. African block includes a logical progression from Day to Night shoots. N/A (space) scenes are scheduled for standard day calls. Turnaround violations are minimized."
+          },
+          {
+            "processName": "Constraint Respect Processing",
+            "status": "COMPLETED",
+            "timestamp": "2024-07-21T10:00:05Z",
+            "details": "Schedule adheres to all major constraints: 145 shooting days, 5-day work weeks, specified holiday blackouts. Special scheduling blocks for animals, children, stunts, and VFX are integrated. The schedule is built within the target start and wrap dates."
+          }
+        ],
+        "scheduleSummary": {
+          "totalShootDays": 145,
+          "totalWeeks": 29,
+          "startDate": "1965-12-29",
+          "endDate": "1966-07-19",
+          "contingencyDays": 10,
+          "companyMoves": 2,
+          "averagePagesPerDay": 1.0,
+          "unionCompliance": "Assumes 5-day week, 12-hour turnaround. Specific rules pending jurisdiction confirmation."
+        },
+        "phaseBreakdown": [
+          {
+            "phaseName": "Phase 1: The Dawn of Man (Africa Location)",
+            "days": 20,
+            "locations": [
+              "AFRICAN_PLAINS",
+              "AFRICAN_STREAM",
+              "AFRICAN_CAVES"
+            ],
+            "description": "Complete all remote, weather-dependent exterior and practical work involving ape-men, animals, and the first monolith."
+          },
+          {
+            "phaseName": "Phase 2: Earth-Moon Journey (Studio Sets)",
+            "days": 35,
+            "locations": [
+              "ORION_SPACECRAFT",
+              "SPACE_STATION",
+              "ARIES_SPACECRAFT",
+              "MOON_BASE",
+              "MOON_BUS",
+              "TMA_1_SITE",
+              "SPACE"
+            ],
+            "description": "Studio-based shoot covering Dr. Floyd's journey, the discovery of TMA-1, and all associated zero-gravity and model work."
+          },
+          {
+            "phaseName": "Phase 3: Jupiter Mission (Discovery Set)",
+            "days": 65,
+            "locations": [
+              "DISCOVERY",
+              "DISCOVERY_EXTERIOR"
+            ],
+            "description": "Extended and complex shoot on the main Discovery sets, focusing on the centrifuge, pod bay, and the conflict with HAL 9000."
+          },
+          {
+            "phaseName": "Phase 4: Stargate & Transcendence (VFX/Special Sets)",
+            "days": 25,
+            "locations": [
+              "MULTIPLE_COSMIC"
+            ],
+            "description": "Dedicated block for the highly experimental and VFX-heavy Stargate sequence, hotel room scenes, and final transformation."
+          }
+        ],
+        "detailedSchedule": [
+          {
+            "dayNumber": 1,
+            "date": "1965-12-29",
+            "dayOfWeek": "Wednesday",
+            "scenesScheduled": [
+              2
+            ],
+            "pagesShot": 1.5,
+            "location": "AFRICAN_PLAINS",
+            "castCalled": [
+              "MOONWATCHER",
+              "TRIBE_MEMBERS"
+            ],
+            "notes": "DAY. Herbivores scene. Requires animal wranglers, drone, wide lenses. Establish location."
+          },
+          {
+            "dayNumber": 2,
+            "date": "1965-12-30",
+            "dayOfWeek": "Thursday",
+            "scenesScheduled": [
+              3
+            ],
+            "pagesShot": 1.25,
+            "location": "AFRICAN_PLAINS",
+            "castCalled": [
+              "MOONWATCHER",
+              "TRIBE_MEMBERS"
+            ],
+            "notes": "DAY. The Lion scene. Requires trained lion, animal wranglers, safety coordinator, multiple cameras."
+          },
+          {
+            "dayNumber": 3,
+            "date": "1965-12-31",
+            "dayOfWeek": "Friday",
+            "scenesScheduled": [
+              1
+            ],
+            "pagesShot": 1.75,
+            "location": "AFRICAN_STREAM",
+            "castCalled": [
+              "MOONWATCHER",
+              "TRIBE_MEMBERS",
+              "THE_OTHERS"
+            ],
+            "notes": "DAWN. First confrontation at the stream. Requires water access and safety."
+          },
+          {
+            "dayNumber": 4,
+            "date": "1966-01-03",
+            "dayOfWeek": "Monday",
+            "scenesScheduled": [
+              5
+            ],
+            "pagesShot": 2.75,
+            "location": "AFRICAN_STREAM",
+            "castCalled": [
+              "MOONWATCHER",
+              "BIG_TOOTH",
+              "TRIBE_MEMBERS",
+              "THE_OTHERS"
+            ],
+            "notes": "DAWN. Invasion scene. Requires fight choreographer, makeup effects, water safety."
+          },
+          {
+            "dayNumber": 5,
+            "date": "1966-01-04",
+            "dayOfWeek": "Tuesday",
+            "scenesScheduled": [
+              11
+            ],
+            "pagesShot": 2.5,
+            "location": "AFRICAN_STREAM",
+            "castCalled": [
+              "MOONWATCHER",
+              "ONE_EAR",
+              "TRIBE_MEMBERS",
+              "THE_OTHERS"
+            ],
+            "notes": "DAWN. Master of the World scene. Requires fight choreographer, lion head prop."
+          },
+          {
+            "dayNumber": 6,
+            "date": "1966-01-05",
+            "dayOfWeek": "Wednesday",
+            "scenesScheduled": [
+              7
+            ],
+            "pagesShot": 1.5,
+            "location": "AFRICAN_CAVES",
+            "castCalled": [
+              "MOONWATCHER",
+              "TRIBE_MEMBERS"
+            ],
+            "notes": "DAWN. Monolith arrival. Requires transparent cube prop, special effects, dawn lighting."
+          },
+          {
+            "dayNumber": 7,
+            "date": "1966-01-06",
+            "dayOfWeek": "Thursday",
+            "scenesScheduled": [
+              8
+            ],
+            "pagesShot": 1.5,
+            "location": "AFRICAN_CAVES",
+            "castCalled": [
+              "MOONWATCHER",
+              "TRIBE_MEMBERS"
+            ],
+            "notes": "DAY_TO_NIGHT. First Lesson (Part 1). Complex scene with projection mapping, choreography. Start of 2-day shoot."
+          },
+          {
+            "dayNumber": 8,
+            "date": "1966-01-07",
+            "dayOfWeek": "Friday",
+            "scenesScheduled": [
+              8
+            ],
+            "pagesShot": 1.5,
+            "location": "AFRICAN_CAVES",
+            "castCalled": [
+              "MOONWATCHER",
+              "TRIBE_MEMBERS"
+            ],
+            "notes": "DAY_TO_NIGHT. First Lesson (Part 2). Continue complex sequence. VFX supervision required."
+          },
+          {
+            "dayNumber": 9,
+            "date": "1966-01-10",
+            "dayOfWeek": "Monday",
+            "scenesScheduled": [
+              4
+            ],
+            "pagesShot": 2.0,
+            "location": "AFRICAN_CAVES",
+            "castCalled": [
+              "MOONWATCHER",
+              "ONE_EYE",
+              "TRIBE_MEMBERS"
+            ],
+            "notes": "DAY_TO_NIGHT. Honey / Night Terrors (Part 1). Requires bee effects, cave set dressing."
+          },
+          {
+            "dayNumber": 10,
+            "date": "1966-01-11",
+            "dayOfWeek": "Tuesday",
+            "scenesScheduled": [
+              4
+            ],
+            "pagesShot": 1.5,
+            "location": "AFRICAN_CAVES",
+            "castCalled": [
+              "MOONWATCHER",
+              "ONE_EYE",
+              "TRIBE_MEMBERS"
+            ],
+            "notes": "DAY_TO_NIGHT. Night Terrors (Part 2). Focus on night portion with moon lighting rig."
+          },
+          {
+            "dayNumber": 11,
+            "date": "1966-01-12",
+            "dayOfWeek": "Wednesday",
+            "scenesScheduled": [
+              9
+            ],
+            "pagesShot": 1.25,
+            "location": "AFRICAN_CAVES",
+            "castCalled": [
+              "MOONWATCHER",
+              "TRIBE_MEMBERS"
+            ],
+            "notes": "DAY. Utopia montage. Requires animal wranglers (lion, warthogs), makeup aging."
+          },
+          {
+            "dayNumber": 12,
+            "date": "1966-01-13",
+            "dayOfWeek": "Thursday",
+            "scenesScheduled": [
+              6
+            ],
+            "pagesShot": 1.0,
+            "location": "AFRICAN_CAVES",
+            "castCalled": [
+              "MOONWATCHER"
+            ],
+            "notes": "NIGHT. New Sound scene. Focus on sound effects and night lighting."
+          },
+          {
+            "dayNumber": 13,
+            "date": "1966-01-14",
+            "dayOfWeek": "Friday",
+            "scenesScheduled": [
+              10
+            ],
+            "pagesShot": 2.0,
+            "location": "AFRICAN_CAVES",
+            "castCalled": [
+              "MOONWATCHER",
+              "TRIBE_MEMBERS"
+            ],
+            "notes": "NIGHT. Killing the Lion. Stunt-heavy scene with boulder rig. Requires stunt coordinator, animal safety."
+          }
+        ],
+        "resourceUtilization": {
+          "castScheduling": [
+            {
+              "characterName": "MOONWATCHER",
+              "scheduledDays": 13,
+              "holdDays": 2,
+              "status": "OPTIMIZED",
+              "notes": "Work is concentrated entirely in Phase 1, releasing the actor early in the schedule."
+            },
+            {
+              "characterName": "DR_HEYWOOD_FLOYD",
+              "scheduledDays": 22,
+              "holdDays": 5,
+              "status": "OPTIMIZED",
+              "notes": "Work is concentrated entirely in Phase 2. Hold days are for set lighting and second unit shots."
+            },
+            {
+              "characterName": "DAVE_BOWMAN",
+              "scheduledDays": 35,
+              "holdDays": 10,
+              "status": "COMPLEX",
+              "notes": "Work is spread across Phase 3 and 4. Hold days are unavoidable due to the complexity of the Discovery and Stargate sequences."
+            },
+            {
+              "characterName": "FRANK_POOLE",
+              "scheduledDays": 28,
+              "holdDays": 6,
+              "status": "OPTIMIZED",
+              "notes": "Work is concentrated entirely in Phase 3, allowing for a clear start and stop date."
+            }
+          ]
+        },
+        "riskAssessment": {
+          "scheduleVulnerabilities": [
+            {
+              "riskId": "SCHED-RISK-001",
+              "description": "The Discovery Centrifuge set is on the critical path for over 40% of the schedule. Any delays in its construction, testing, or operation will have a cascading impact on the entire Jupiter Mission phase.",
+              "mitigation": "Schedule 5 contingency days specifically for the Centrifuge block. Ensure engineering team is on standby throughout its use. Pre-visualize all sequences to maximize shooting efficiency."
+            },
+            {
+              "riskId": "SCHED-RISK-002",
+              "description": "Phase 1 (Africa) is subject to weather and animal temperament delays. A significant delay here could impact the studio start date.",
+              "mitigation": "Schedule includes 3 contingency days for the Africa block. Have backup interior cave scenes ready to shoot if weather is poor for exteriors."
+            },
+            {
+              "riskId": "SCHED-RISK-003",
+              "description": "The Stargate sequence (Phase 4) is technically undefined and relies on experimental VFX. The 25-day allocation is an estimate and could expand significantly.",
+              "mitigation": "Isolate this phase at the end of the schedule to prevent it from delaying other principal photography. Engage VFX supervisor from Day 1 of pre-production to develop a viable methodology."
+            }
+          ]
+        },
+        "costImpactAnalysis": {
+          "overtime": "Minimized by adhering to a 5-day week and balancing daily page counts. High risk during complex sequences like Scene 8 (First Lesson) and Scene 66 (Pod Accident).",
+          "mealPenalties": "Low risk. Schedule allows for standard meal breaks. Long setup times for complex scenes are factored into the call sheet.",
+          "castHoldDays": "Optimized for all major cast. Bowman's hold days are the most significant cost, but are necessary due to the structure of the script.",
+          "equipmentIdleTime": "Minimized by grouping scenes requiring special equipment (e.g., Centrifuge, Zero-G rigs, Motion Control). Equipment is rented for blocks rather than intermittently."
+        },
+        "efficiencyMetrics": {
+          "locationGroupingEfficiency": "95% - All scenes at a given location are shot contiguously, minimizing travel and re-lighting.",
+          "castUtilization": "88% - Principal cast work/hold ratio is high, indicating efficient scheduling of their time on set.",
+          "pageCountConsistency": "7/10 - Daily page count varies due to the vast difference in scene complexity, from simple dialogue to complex, non-dialogue action and VFX sequences. This is unavoidable for this specific script."
+        }
+      }
+    },
+    "model_context": {
+      "model_name": "laborCostCalculator",
+      "tier": 2,
+      "dependencies": [
+        "coordinator",
+        "scheduleOptimizer"
+      ],
+      "processing_timestamp": 199.64460525
+    }
+  },
+  "dependencies": {
+    "coordinator": {
+      "budgetCoordinatorOutput": {
+        "projectId": "proj_2001_space_odyssey",
+        "processingTimestamp": "2024-07-21T10:05:00Z",
+        "systemStatusReport": {
+          "intakeStatus": "SUCCESS",
+          "validationStatus": "CONDITIONAL",
+          "dataCompleteness": "98%",
+          "missingInformation": [
+            "Specific Union Jurisdictions (e.g., SAG, DGA, IATSE) for accurate labor rates.",
+            "Crew and Cast residency information for Tax Incentive analysis.",
+            "Specific equipment vendor tiers or preferred rental houses.",
+            "Funding source details and drawdown schedule for Cash Flow projection."
+          ],
+          "identifiedRisks": [
+            {
+              "riskId": "RISK-TECH-001",
+              "description": "Extreme technical complexity involving unproven technologies like the large-scale rotating centrifuge set, front projection systems, and zero-gravity rigs.",
+              "mitigation": "Allocate significant budget for R&D, pre-visualization, and testing. Hire top-tier engineering and SFX teams."
+            },
+            {
+              "riskId": "RISK-VFX-001",
+              "description": "Groundbreaking and extensive VFX requirements (205+ shots), including the abstract Stargate sequence, with high potential for schedule and budget overruns.",
+              "mitigation": "Engage VFX supervisor from early prep. Budget for extensive motion control photography and optical printing. Build in contingency for VFX."
+            },
+            {
+              "riskId": "RISK-SET-001",
+              "description": "Requirement for numerous, large, and highly detailed sets (Discovery Centrifuge, Space Station, Moon Base) which are costly and time-consuming to build.",
+              "mitigation": "Secure large-scale studio space well in advance. Detailed construction plans and budget must be locked early."
+            },
+            {
+              "riskId": "RISK-LOG-001",
+              "description": "High-risk production elements including work with a trained lion, numerous other animals, and child actors, all of which have significant safety, logistical, and regulatory implications.",
+              "mitigation": "Hire experienced animal wranglers and safety coordinators. Adhere strictly to child labor laws. Increase insurance coverage."
+            },
+            {
+              "riskId": "RISK-SCHED-001",
+              "description": "A long and complex production schedule (145 shooting days) with many dependencies between departments (e.g., SFX, VFX, stunts) increases the likelihood of cascading delays.",
+              "mitigation": "Utilize advanced scheduling software. Build in contingency days for complex sequences. Ensure clear communication between department heads."
+            }
+          ]
+        },
+        "modelDataPackets": {
+          "scheduleOptimizer": {
+            "model": "Schedule Optimizer",
+            "priority": "FIRST",
+            "description": "Generates the master production schedule based on all scenes, cast, locations, and constraints.",
+            "inputs": {
+              "scenes": "Array of 71 scenes with pages, cast, location, and special requirements.",
+              "castAvailability": "Principal cast members with estimated total shooting days (e.g., DAVE_BOWMAN: 35 days).",
+              "locationConstraints": "13 unique locations with estimated days needed and specific restrictions (e.g., AFRICAN_CAVES: 15 days, safety protocols).",
+              "scheduleParameters": {
+                "totalShootDays": 145,
+                "prepDays": 84,
+                "wrapDays": 14,
+                "targetStart": "1965-12-29",
+                "mustWrapBy": "1968-04-03",
+                "sixDayWeeks": false,
+                "unionRules": "To be determined based on jurisdiction."
+              },
+              "specialSchedulingBlocks": {
+                "centrifugeWork": 25,
+                "animalWork": 8,
+                "childrenWork": 3,
+                "stuntWork": 8,
+                "vfxSupervision": 60
+              }
+            }
+          },
+          "laborCostCalculator": {
+            "model": "Labor Cost Calculator",
+            "priority": "PARALLEL",
+            "dependencies": [
+              "Schedule Optimizer"
+            ],
+            "description": "Calculates all cast and crew labor costs based on the schedule and union rules.",
+            "inputs": {
+              "castBreakdown": {
+                "principals": 5,
+                "supporting": 4,
+                "dayPlayers": 5,
+                "voice": 1
+              },
+              "extrasSummary": {
+                "totalManDays": 450,
+                "maxInScene": 36
+              },
+              "stuntPerformers": {
+                "totalStunts": 3,
+                "totalPerformers": 4
+              },
+              "specialtyLabor": [
+                "animal_wranglers",
+                "safety_coordinator",
+                "fight_choreographer",
+                "stunt_coordinator",
+                "vfx_supervision"
+              ],
+              "jurisdiction": "FLAG: Missing specific union jurisdiction data."
+            }
+          },
+          "equipmentPricingEngine": {
+            "model": "Equipment Pricing Engine",
+            "priority": "PARALLEL",
+            "dependencies": [
+              "Schedule Optimizer"
+            ],
+            "description": "Prices all required production equipment based on the schedule.",
+            "inputs": {
+              "specialEquipment": [
+                "centrifuge_camera_mount",
+                "zero_gravity_wire_rig",
+                "rotating_set_mechanism",
+                "front_projection_system",
+                "motion_control_camera",
+                "underwater_tank",
+                "wind_machines",
+                "space_suit_life_support"
+              ],
+              "cameraPackages": [
+                "drone_footage",
+                "wide_lens_package",
+                "multiple_cameras",
+                "telephoto_lenses"
+              ],
+              "heroPropsWithTech": [
+                "BLACK_MONOLITH_TMA1 (magnetic_field_effects, sound_emission)",
+                "CRYSTAL_CUBE_TEACHER (projection_mapping, sound_system)",
+                "HAL_9000_COMPUTER_EYE (led_lighting, camera_mechanism)",
+                "SPACE_PODS (functional_arms, propulsion_effects)"
+              ],
+              "mechanicalEffectsRigs": {
+                "rotatingCentrifuge": 1,
+                "zeroGravityRigs": 15,
+                "animatronics": 5
+              },
+              "vendorTier": "FLAG: Missing specific vendor tier."
+            }
+          },
+          "locationCostEstimator": {
+            "model": "Location Cost Estimator",
+            "priority": "PARALLEL",
+            "dependencies": [
+              "Schedule Optimizer"
+            ],
+            "description": "Estimates costs for all practical locations and studio builds.",
+            "inputs": {
+              "locations": [
+                {
+                  "name": "AFRICAN_STREAM",
+                  "type": "practical",
+                  "estimatedDays": 6
+                },
+                {
+                  "name": "AFRICAN_PLAINS",
+                  "type": "practical",
+                  "estimatedDays": 4
+                },
+                {
+                  "name": "AFRICAN_CAVES",
+                  "type": "practical/studio",
+                  "estimatedDays": 15
+                },
+                {
+                  "name": "ORION_SPACECRAFT",
+                  "type": "studio_build",
+                  "estimatedDays": 18
+                },
+                {
+                  "name": "SPACE_STATION",
+                  "type": "studio_build",
+                  "estimatedDays": 12
+                },
+                {
+                  "name": "ARIES_SPACECRAFT",
+                  "type": "studio_build",
+                  "estimatedDays": 8
+                },
+                {
+                  "name": "MOON_BASE",
+                  "type": "studio_build",
+                  "estimatedDays": 12
+                },
+                {
+                  "name": "MOON_BUS",
+                  "type": "studio_build",
+                  "estimatedDays": 2
+                },
+                {
+                  "name": "TMA_1_SITE",
+                  "type": "studio_build",
+                  "estimatedDays": 8
+                },
+                {
+                  "name": "DISCOVERY",
+                  "type": "studio_build",
+                  "estimatedDays": 45
+                },
+                {
+                  "name": "MULTIPLE_COSMIC",
+                  "type": "studio_vfx",
+                  "estimatedDays": 25
+                }
+              ],
+              "totalStudioDays": 142,
+              "totalPracticalDays": 10
+            }
+          },
+          "insuranceCalculator": {
+            "model": "Insurance Calculator",
+            "priority": "PARALLEL",
+            "dependencies": [
+              "Schedule Optimizer",
+              "Labor Cost Calculator",
+              "Equipment Pricing Engine"
+            ],
+            "description": "Calculates insurance premiums based on production risks.",
+            "inputs": {
+              "riskFactors": [
+                "Stunts: boulder_drop, space_pod_accident, airlock_explosion",
+                "Animals: trained_lion, zebras, gazelles",
+                "Child Actors: 8 children on set",
+                "Complex Mechanical Rigs: rotating_centrifuge, zero_gravity_wire_rig",
+                "Pyrotechnics: airlock_explosion",
+                "International Locations: Africa",
+                "High-Value Sets and Equipment"
+              ],
+              "dependentValues": {
+                "totalCastValue": "Awaits Labor Cost Calculator output",
+                "totalEquipmentValue": "Awaits Equipment Pricing Engine output"
+              }
+            }
+          },
+          "postProductionEstimator": {
+            "model": "Post-Production Estimator",
+            "priority": "PARALLEL",
+            "dependencies": [
+              "Schedule Optimizer"
+            ],
+            "description": "Estimates all post-production costs including VFX, editing, and sound.",
+            "inputs": {
+              "format": "feature_film",
+              "genre": [
+                "sci-fi",
+                "drama",
+                "thriller"
+              ],
+              "estimatedRuntimeMinutes": 149,
+              "vfx": {
+                "totalShots": 205,
+                "complexity": {
+                  "simple": 65,
+                  "medium": 85,
+                  "complex": 55
+                },
+                "keySequences": [
+                  "Stargate",
+                  "Zero-Gravity",
+                  "Space Travel Model Work"
+                ]
+              },
+              "soundDesign": {
+                "complexity": "High",
+                "keyElements": [
+                  "HAL 9000 voice processing",
+                  "Stargate sequence soundscape",
+                  "Monolith sound effects",
+                  "Space silence vs. interior sounds"
+                ]
+              },
+              "music": "Classical and original score required.",
+              "deliveryRequirements": "Theatrical release format."
+            }
+          },
+          "taxIncentiveAnalyzer": {
+            "model": "Tax Incentive Analyzer",
+            "priority": "PARALLEL",
+            "dependencies": [
+              "Budget Aggregator"
+            ],
+            "description": "Analyzes potential tax credits based on shooting locations and spend.",
+            "inputs": {
+              "shootingLocations": [
+                {
+                  "location": "Africa (unspecified country)",
+                  "type": "Practical"
+                },
+                {
+                  "location": "Studio (unspecified country, likely UK or US)",
+                  "type": "Studio Build"
+                }
+              ],
+              "dataFlags": [
+                "Missing crew/cast residency data.",
+                "Missing specific spend data per location."
+              ],
+              "dependency": "Requires aggregated budget totals to calculate qualifying spend."
+            }
+          },
+          "budgetAggregator": {
+            "model": "Budget Aggregator",
+            "priority": "FINAL_COMPILATION",
+            "dependencies": [
+              "Labor Cost Calculator",
+              "Equipment Pricing Engine",
+              "Location Cost Estimator",
+              "Insurance Calculator",
+              "Post-Production Estimator",
+              "Tax Incentive Analyzer"
+            ],
+            "description": "Aggregates costs from all parallel models into a top-sheet and detailed budget.",
+            "inputs": {
+              "dataSources": "Outputs from all cost-calculating models."
+            }
+          },
+          "cashFlowProjector": {
+            "model": "Cash Flow Projector",
+            "priority": "FINAL_COMPILATION",
+            "dependencies": [
+              "Budget Aggregator",
+              "Schedule Optimizer"
+            ],
+            "description": "Projects weekly cash flow needs based on the final budget and schedule.",
+            "inputs": {
+              "totalBudget": "Awaits Budget Aggregator output.",
+              "productionTimeline": "Awaits Schedule Optimizer output.",
+              "fundingSources": "FLAG: No funding source data provided."
+            }
+          }
+        }
+      }
+    },
+    "scheduleOptimizer": {
+      "projectId": "proj_2001_space_odyssey",
+      "scheduleId": "sched_v1_19651229",
+      "processingLog": [
+        {
+          "processName": "Scene Location Grouping Processing",
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:00:01Z",
+          "details": "Scenes grouped by location to minimize company moves. Prioritized remote practical locations (Africa) first, followed by sequential studio set builds (Orion, Space Station, Aries, Moon Base, TMA-1, Discovery, Stargate). Total company moves minimized to 2 major moves (Practical to Studio, Main Unit to VFX Unit)."
+        },
+        {
+          "processName": "Company Move Minimization Processing",
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:00:02Z",
+          "details": "Schedule structured to complete all African location work in a single block, followed by an extended studio block. This minimizes costly transport of crew and equipment between practical and studio environments. Internal studio moves are managed by sequential set usage."
+        },
+        {
+          "processName": "Cast Schedule Optimization Processing",
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:00:03Z",
+          "details": "Cast work days are clustered within location/set blocks. Dr. Floyd's scenes are grouped in the Earth-Moon phase. Bowman and Poole's work is concentrated in the Discovery phase. This strategy significantly reduces estimated hold days and travel requirements for principal actors."
+        },
+        {
+          "processName": "Day/Night Shoot Balancing Processing",
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:00:04Z",
+          "details": "Day/Night/Dawn requirements analyzed and sequenced to ensure union turnaround compliance. African block includes a logical progression from Day to Night shoots. N/A (space) scenes are scheduled for standard day calls. Turnaround violations are minimized."
+        },
+        {
+          "processName": "Constraint Respect Processing",
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:00:05Z",
+          "details": "Schedule adheres to all major constraints: 145 shooting days, 5-day work weeks, specified holiday blackouts. Special scheduling blocks for animals, children, stunts, and VFX are integrated. The schedule is built within the target start and wrap dates."
+        }
+      ],
+      "scheduleSummary": {
+        "totalShootDays": 145,
+        "totalWeeks": 29,
+        "startDate": "1965-12-29",
+        "endDate": "1966-07-19",
+        "contingencyDays": 10,
+        "companyMoves": 2,
+        "averagePagesPerDay": 1.0,
+        "unionCompliance": "Assumes 5-day week, 12-hour turnaround. Specific rules pending jurisdiction confirmation."
+      },
+      "phaseBreakdown": [
+        {
+          "phaseName": "Phase 1: The Dawn of Man (Africa Location)",
+          "days": 20,
+          "locations": [
+            "AFRICAN_PLAINS",
+            "AFRICAN_STREAM",
+            "AFRICAN_CAVES"
+          ],
+          "description": "Complete all remote, weather-dependent exterior and practical work involving ape-men, animals, and the first monolith."
+        },
+        {
+          "phaseName": "Phase 2: Earth-Moon Journey (Studio Sets)",
+          "days": 35,
+          "locations": [
+            "ORION_SPACECRAFT",
+            "SPACE_STATION",
+            "ARIES_SPACECRAFT",
+            "MOON_BASE",
+            "MOON_BUS",
+            "TMA_1_SITE",
+            "SPACE"
+          ],
+          "description": "Studio-based shoot covering Dr. Floyd's journey, the discovery of TMA-1, and all associated zero-gravity and model work."
+        },
+        {
+          "phaseName": "Phase 3: Jupiter Mission (Discovery Set)",
+          "days": 65,
+          "locations": [
+            "DISCOVERY",
+            "DISCOVERY_EXTERIOR"
+          ],
+          "description": "Extended and complex shoot on the main Discovery sets, focusing on the centrifuge, pod bay, and the conflict with HAL 9000."
+        },
+        {
+          "phaseName": "Phase 4: Stargate & Transcendence (VFX/Special Sets)",
+          "days": 25,
+          "locations": [
+            "MULTIPLE_COSMIC"
+          ],
+          "description": "Dedicated block for the highly experimental and VFX-heavy Stargate sequence, hotel room scenes, and final transformation."
+        }
+      ],
+      "detailedSchedule": [
+        {
+          "dayNumber": 1,
+          "date": "1965-12-29",
+          "dayOfWeek": "Wednesday",
+          "scenesScheduled": [
+            2
+          ],
+          "pagesShot": 1.5,
+          "location": "AFRICAN_PLAINS",
+          "castCalled": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "notes": "DAY. Herbivores scene. Requires animal wranglers, drone, wide lenses. Establish location."
+        },
+        {
+          "dayNumber": 2,
+          "date": "1965-12-30",
+          "dayOfWeek": "Thursday",
+          "scenesScheduled": [
+            3
+          ],
+          "pagesShot": 1.25,
+          "location": "AFRICAN_PLAINS",
+          "castCalled": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "notes": "DAY. The Lion scene. Requires trained lion, animal wranglers, safety coordinator, multiple cameras."
+        },
+        {
+          "dayNumber": 3,
+          "date": "1965-12-31",
+          "dayOfWeek": "Friday",
+          "scenesScheduled": [
+            1
+          ],
+          "pagesShot": 1.75,
+          "location": "AFRICAN_STREAM",
+          "castCalled": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS",
+            "THE_OTHERS"
+          ],
+          "notes": "DAWN. First confrontation at the stream. Requires water access and safety."
+        },
+        {
+          "dayNumber": 4,
+          "date": "1966-01-03",
+          "dayOfWeek": "Monday",
+          "scenesScheduled": [
+            5
+          ],
+          "pagesShot": 2.75,
+          "location": "AFRICAN_STREAM",
+          "castCalled": [
+            "MOONWATCHER",
+            "BIG_TOOTH",
+            "TRIBE_MEMBERS",
+            "THE_OTHERS"
+          ],
+          "notes": "DAWN. Invasion scene. Requires fight choreographer, makeup effects, water safety."
+        },
+        {
+          "dayNumber": 5,
+          "date": "1966-01-04",
+          "dayOfWeek": "Tuesday",
+          "scenesScheduled": [
+            11
+          ],
+          "pagesShot": 2.5,
+          "location": "AFRICAN_STREAM",
+          "castCalled": [
+            "MOONWATCHER",
+            "ONE_EAR",
+            "TRIBE_MEMBERS",
+            "THE_OTHERS"
+          ],
+          "notes": "DAWN. Master of the World scene. Requires fight choreographer, lion head prop."
+        },
+        {
+          "dayNumber": 6,
+          "date": "1966-01-05",
+          "dayOfWeek": "Wednesday",
+          "scenesScheduled": [
+            7
+          ],
+          "pagesShot": 1.5,
+          "location": "AFRICAN_CAVES",
+          "castCalled": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "notes": "DAWN. Monolith arrival. Requires transparent cube prop, special effects, dawn lighting."
+        },
+        {
+          "dayNumber": 7,
+          "date": "1966-01-06",
+          "dayOfWeek": "Thursday",
+          "scenesScheduled": [
+            8
+          ],
+          "pagesShot": 1.5,
+          "location": "AFRICAN_CAVES",
+          "castCalled": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "notes": "DAY_TO_NIGHT. First Lesson (Part 1). Complex scene with projection mapping, choreography. Start of 2-day shoot."
+        },
+        {
+          "dayNumber": 8,
+          "date": "1966-01-07",
+          "dayOfWeek": "Friday",
+          "scenesScheduled": [
+            8
+          ],
+          "pagesShot": 1.5,
+          "location": "AFRICAN_CAVES",
+          "castCalled": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "notes": "DAY_TO_NIGHT. First Lesson (Part 2). Continue complex sequence. VFX supervision required."
+        },
+        {
+          "dayNumber": 9,
+          "date": "1966-01-10",
+          "dayOfWeek": "Monday",
+          "scenesScheduled": [
+            4
+          ],
+          "pagesShot": 2.0,
+          "location": "AFRICAN_CAVES",
+          "castCalled": [
+            "MOONWATCHER",
+            "ONE_EYE",
+            "TRIBE_MEMBERS"
+          ],
+          "notes": "DAY_TO_NIGHT. Honey / Night Terrors (Part 1). Requires bee effects, cave set dressing."
+        },
+        {
+          "dayNumber": 10,
+          "date": "1966-01-11",
+          "dayOfWeek": "Tuesday",
+          "scenesScheduled": [
+            4
+          ],
+          "pagesShot": 1.5,
+          "location": "AFRICAN_CAVES",
+          "castCalled": [
+            "MOONWATCHER",
+            "ONE_EYE",
+            "TRIBE_MEMBERS"
+          ],
+          "notes": "DAY_TO_NIGHT. Night Terrors (Part 2). Focus on night portion with moon lighting rig."
+        },
+        {
+          "dayNumber": 11,
+          "date": "1966-01-12",
+          "dayOfWeek": "Wednesday",
+          "scenesScheduled": [
+            9
+          ],
+          "pagesShot": 1.25,
+          "location": "AFRICAN_CAVES",
+          "castCalled": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "notes": "DAY. Utopia montage. Requires animal wranglers (lion, warthogs), makeup aging."
+        },
+        {
+          "dayNumber": 12,
+          "date": "1966-01-13",
+          "dayOfWeek": "Thursday",
+          "scenesScheduled": [
+            6
+          ],
+          "pagesShot": 1.0,
+          "location": "AFRICAN_CAVES",
+          "castCalled": [
+            "MOONWATCHER"
+          ],
+          "notes": "NIGHT. New Sound scene. Focus on sound effects and night lighting."
+        },
+        {
+          "dayNumber": 13,
+          "date": "1966-01-14",
+          "dayOfWeek": "Friday",
+          "scenesScheduled": [
+            10
+          ],
+          "pagesShot": 2.0,
+          "location": "AFRICAN_CAVES",
+          "castCalled": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "notes": "NIGHT. Killing the Lion. Stunt-heavy scene with boulder rig. Requires stunt coordinator, animal safety."
+        }
+      ],
+      "resourceUtilization": {
+        "castScheduling": [
+          {
+            "characterName": "MOONWATCHER",
+            "scheduledDays": 13,
+            "holdDays": 2,
+            "status": "OPTIMIZED",
+            "notes": "Work is concentrated entirely in Phase 1, releasing the actor early in the schedule."
+          },
+          {
+            "characterName": "DR_HEYWOOD_FLOYD",
+            "scheduledDays": 22,
+            "holdDays": 5,
+            "status": "OPTIMIZED",
+            "notes": "Work is concentrated entirely in Phase 2. Hold days are for set lighting and second unit shots."
+          },
+          {
+            "characterName": "DAVE_BOWMAN",
+            "scheduledDays": 35,
+            "holdDays": 10,
+            "status": "COMPLEX",
+            "notes": "Work is spread across Phase 3 and 4. Hold days are unavoidable due to the complexity of the Discovery and Stargate sequences."
+          },
+          {
+            "characterName": "FRANK_POOLE",
+            "scheduledDays": 28,
+            "holdDays": 6,
+            "status": "OPTIMIZED",
+            "notes": "Work is concentrated entirely in Phase 3, allowing for a clear start and stop date."
+          }
+        ]
+      },
+      "riskAssessment": {
+        "scheduleVulnerabilities": [
+          {
+            "riskId": "SCHED-RISK-001",
+            "description": "The Discovery Centrifuge set is on the critical path for over 40% of the schedule. Any delays in its construction, testing, or operation will have a cascading impact on the entire Jupiter Mission phase.",
+            "mitigation": "Schedule 5 contingency days specifically for the Centrifuge block. Ensure engineering team is on standby throughout its use. Pre-visualize all sequences to maximize shooting efficiency."
+          },
+          {
+            "riskId": "SCHED-RISK-002",
+            "description": "Phase 1 (Africa) is subject to weather and animal temperament delays. A significant delay here could impact the studio start date.",
+            "mitigation": "Schedule includes 3 contingency days for the Africa block. Have backup interior cave scenes ready to shoot if weather is poor for exteriors."
+          },
+          {
+            "riskId": "SCHED-RISK-003",
+            "description": "The Stargate sequence (Phase 4) is technically undefined and relies on experimental VFX. The 25-day allocation is an estimate and could expand significantly.",
+            "mitigation": "Isolate this phase at the end of the schedule to prevent it from delaying other principal photography. Engage VFX supervisor from Day 1 of pre-production to develop a viable methodology."
+          }
+        ]
+      },
+      "costImpactAnalysis": {
+        "overtime": "Minimized by adhering to a 5-day week and balancing daily page counts. High risk during complex sequences like Scene 8 (First Lesson) and Scene 66 (Pod Accident).",
+        "mealPenalties": "Low risk. Schedule allows for standard meal breaks. Long setup times for complex scenes are factored into the call sheet.",
+        "castHoldDays": "Optimized for all major cast. Bowman's hold days are the most significant cost, but are necessary due to the structure of the script.",
+        "equipmentIdleTime": "Minimized by grouping scenes requiring special equipment (e.g., Centrifuge, Zero-G rigs, Motion Control). Equipment is rented for blocks rather than intermittently."
+      },
+      "efficiencyMetrics": {
+        "locationGroupingEfficiency": "95% - All scenes at a given location are shot contiguously, minimizing travel and re-lighting.",
+        "castUtilization": "88% - Principal cast work/hold ratio is high, indicating efficient scheduling of their time on set.",
+        "pageCountConsistency": "7/10 - Daily page count varies due to the vast difference in scene complexity, from simple dialogue to complex, non-dialogue action and VFX sequences. This is unavoidable for this specific script."
+      }
+    }
+  },
+  "processing_metadata": {
+    "thinking_enabled": true,
+    "functions_enabled": true,
+    "gemini_model": "gemini-2.5-pro"
+  }
+}

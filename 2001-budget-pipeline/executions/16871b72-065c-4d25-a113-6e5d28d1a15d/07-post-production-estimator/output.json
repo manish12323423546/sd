@@ -1,0 +1,322 @@
+{
+  "model_name": "postProductionEstimator",
+  "execution_id": "16871b72-065c-4d25-a113-6e5d28d1a15d",
+  "timestamp": "2025-07-21T13:56:30.575216",
+  "success": true,
+  "processing_time": 57.3632705,
+  "output_data": {
+    "postProductionBudget": {
+      "projectId": "proj_2001_space_odyssey",
+      "version": "1.0",
+      "currency": "USD",
+      "context": "1960s",
+      "processingEvidence": {
+        "editorialTimeEstimation": {
+          "function": "estimateEditorialTime",
+          "status": "SUCCESS",
+          "inputs": {
+            "runtimeMinutes": 149,
+            "complexity": "Revolutionary",
+            "vfxShotCount": 205,
+            "format": "70mm"
+          },
+          "outputs": {
+            "assemblyEditWeeks": 8,
+            "roughCutWeeks": 12,
+            "fineCutWeeks": 20,
+            "conformAndFinishWeeks": 6,
+            "totalEditorialWeeks": 46
+          }
+        },
+        "vfxCostCalculation": {
+          "function": "calculateVFXCosts",
+          "status": "SUCCESS",
+          "inputs": {
+            "shotCounts": {
+              "simple": 65,
+              "medium": 85,
+              "complex": 55
+            },
+            "customTechniques": [
+              "Slit-Scan Photography",
+              "Front Projection",
+              "Motion Control",
+              "Optical Compositing",
+              "Model Photography"
+            ]
+          },
+          "outputs": {
+            "shotCostBreakdown": {
+              "simpleShotsCost": 195000,
+              "mediumShotsCost": 850000,
+              "complexShotsCost": 1787500,
+              "totalShotCost": 2832500
+            },
+            "customEquipmentDevelopmentCost": {
+              "slitScanApparatus": 100000,
+              "motionControlSystems": 200000,
+              "specializedOpticalPrinters": 50000,
+              "modelPhotographyRigs": 125000,
+              "totalDevelopmentCost": 475000
+            },
+            "vfxSupervisionAndManagement": 250000,
+            "totalVFXCost": 3557500
+          }
+        },
+        "soundDesignAndMixing": {
+          "function": "priceSoundPost",
+          "status": "SUCCESS",
+          "inputs": {
+            "runtimeMinutes": 149,
+            "specialRequirements": [
+              "HAL_9000_voice_processing",
+              "stargate_sequence_soundscape",
+              "space_silence_effects",
+              "monolith_sound_emission",
+              "6-track_stereo_mix"
+            ],
+            "musicApproach": "Hybrid: Original Score + Licensed Classical"
+          },
+          "outputs": {
+            "dialogueAndADR": {
+              "dialogueEditor": 74000,
+              "adrSessions": 14000,
+              "customVoiceProcessing": 30000,
+              "total": 118000
+            },
+            "soundEffectsAndDesign": {
+              "soundDesigner": 90000,
+              "customSoundCreation": 75000,
+              "foley": 20000,
+              "total": 185000
+            },
+            "musicProduction": {
+              "composerFee": 300000,
+              "orchestraRecording": 250000,
+              "musicLicensing": 150000,
+              "musicEditor": 30000,
+              "musicMixing": 14000,
+              "total": 744000
+            },
+            "finalMixing": {
+              "stageRental": 80000,
+              "mixingCrew": 112000,
+              "total": 192000
+            },
+            "totalSoundCost": 1239000
+          }
+        },
+        "colorCorrection": {
+          "function": "calculateColorAndFinishing",
+          "status": "SUCCESS",
+          "inputs": {
+            "formats": [
+              "35mm",
+              "70mm"
+            ],
+            "qualityStandard": "Pristine",
+            "runtimeMinutes": 149
+          },
+          "outputs": {
+            "colorTimingAndGrading": {
+              "colorTimer": 24000,
+              "gradingSupervision": 30000,
+              "total": 54000
+            },
+            "labServices": {
+              "chemicalTimingAndProcessing": 350000,
+              "answerPrints": 55000,
+              "seventyMMBlowUp": 137500,
+              "total": 542500
+            },
+            "totalColorAndFinishingCost": 596500
+          }
+        },
+        "deliveryCost": {
+          "function": "calculateDeliveryCosts",
+          "status": "SUCCESS",
+          "inputs": {
+            "masterFormats": [
+              "35mm_negative",
+              "70mm_master",
+              "6-track_magnetic"
+            ],
+            "internationalLanguages": 5,
+            "archiveRequirement": "Full preservation"
+          },
+          "outputs": {
+            "mastering": {
+              "thirtyFiveMMConform": 100000,
+              "seventyMMMasterCreation": 200000,
+              "magneticSoundMasters": 50000,
+              "total": 350000
+            },
+            "internationalVersioning": {
+              "subtitling": 50000,
+              "dubbing": 150000,
+              "musicAndEffectsTrack": 137500,
+              "total": 337500
+            },
+            "archivalAndPreservation": {
+              "preservationMasters": 100000,
+              "total": 100000
+            },
+            "totalDeliveryCost": 787500
+          }
+        }
+      },
+      "summary": {
+        "totalPostProductionCost": 7920500,
+        "totalContingency": 1740000,
+        "grandTotal": 9660500,
+        "costBreakdown": {
+          "editorial": 400000,
+          "visualEffects": 3557500,
+          "sound": 1239000,
+          "colorAndFinishing": 596500,
+          "deliveryAndDistribution": 787500,
+          "postProductionOverhead": 1340000
+        }
+      },
+      "timelineAnalysis": {
+        "totalPostProductionWeeks": 53,
+        "criticalPath": "VFX Production -> Fine Cut -> Final Mix -> 70mm Mastering",
+        "phaseDurations": {
+          "assemblyEdit": {
+            "weeks": 8,
+            "description": "Initial assembly of all shot footage."
+          },
+          "roughCutAndVFXIntegration": {
+            "weeks": 12,
+            "description": "Shaping the narrative while integrating early VFX shots."
+          },
+          "fineCutAndSoundDesign": {
+            "weeks": 20,
+            "description": "Picture lock, detailed pacing, sound design, and music editing."
+          },
+          "finishingAndMixing": {
+            "weeks": 6,
+            "description": "Negative conforming, color grading, and final sound mix."
+          },
+          "masteringAndDelivery": {
+            "weeks": 7,
+            "description": "Creation of all master and delivery elements, including schedule contingency."
+          }
+        }
+      },
+      "riskAssessment": {
+        "overallRisk": "VERY_HIGH",
+        "factors": [
+          {
+            "riskId": "RISK-VFX-TECH",
+            "description": "Heavy reliance on unproven, first-of-their-kind visual effects techniques (Slit-Scan, Motion Control).",
+            "impact": "High",
+            "probability": "High",
+            "mitigation": "Budget includes significant R&D costs. A 40% contingency is applied to the VFX budget.",
+            "contingencyApplied": 1423000
+          },
+          {
+            "riskId": "RISK-INTEGRATION",
+            "description": "Complex integration of practical effects, model work, and revolutionary opticals with live-action footage.",
+            "impact": "Medium",
+            "probability": "High",
+            "mitigation": "Extended editorial timeline (46 weeks). A 20% contingency is applied to Editorial and Finishing.",
+            "contingencyApplied": 199300
+          },
+          {
+            "riskId": "RISK-SCHEDULE",
+            "description": "The sheer length and complexity of the post-production process creates a high risk of schedule overruns.",
+            "impact": "Medium",
+            "probability": "Medium",
+            "mitigation": "A 15% (7 week) schedule buffer is built into the timeline and budget.",
+            "contingencyApplied": 117700
+          }
+        ]
+      },
+      "detailedBreakdown": {
+        "editorial": {
+          "total": 400000,
+          "personnel": {
+            "supervisingEditor": 138000,
+            "editor": 92000,
+            "assistantEditors": 82800,
+            "apprenticeEditors": 20700,
+            "total": 333500
+          },
+          "facilitiesAndEquipment": {
+            "editingSuites": 57500,
+            "screeningRooms": 5000,
+            "equipmentAndStock": 4000,
+            "total": 66500
+          }
+        },
+        "visualEffects": {
+          "total": 3557500,
+          "shotProduction": {
+            "simpleComposites": 195000,
+            "mediumComplexityShots": 850000,
+            "complexRevolutionaryShots": 1787500,
+            "total": 2832500
+          },
+          "researchAndDevelopment": {
+            "slitScanApparatusDev": 100000,
+            "motionControlSystemDev": 200000,
+            "opticalPrinterMods": 50000,
+            "modelPhotographyRigDev": 125000,
+            "total": 475000
+          },
+          "managementAndOverhead": {
+            "vfxSupervisorAndTeam": 250000,
+            "total": 250000
+          }
+        },
+        "sound": {
+          "total": 1239000,
+          "dialogueAndADR": 118000,
+          "soundEffectsAndDesign": 185000,
+          "music": 744000,
+          "finalMix": 192000
+        },
+        "colorAndFinishing": {
+          "total": 596500,
+          "colorTiming": 54000,
+          "laboratoryServices": 542500
+        },
+        "deliveryAndDistribution": {
+          "total": 787500,
+          "mastering": 350000,
+          "internationalVersioning": 337500,
+          "archival": 100000
+        },
+        "postProductionOverhead": {
+          "total": 1340000,
+          "postSupervisor": 150000,
+          "facilityManagement": 250000,
+          "storageAndVaults": 90000,
+          "shippingAndHandling": 50000,
+          "generalExpenses": 800000
+        }
+      },
+      "contingency": {
+        "total": 1740000,
+        "breakdown": {
+          "vfxTechnicalContingency": 1423000,
+          "editorialIntegrationContingency": 80000,
+          "finishingIntegrationContingency": 119300,
+          "scheduleContingency": 117700
+        }
+      },
+      "grandTotal": {
+        "subtotal": 7920500,
+        "contingency": 1740000,
+        "totalBudget": 9660500
+      }
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 6641
+  }
+}

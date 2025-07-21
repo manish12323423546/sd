@@ -11,6 +11,8 @@ import google.generativeai as genai
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 from config.settings import settings
 from utils.robust_json_parser import RobustJSONParser
+from utils.enhanced_json_parser import EnhancedJSONParser
+from utils.gemini_response_optimizer import GeminiResponseOptimizer
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -143,13 +145,20 @@ Please process this input according to your system prompt and return a complete 
             raise
     
     def _parse_and_validate_response(self, response_text: str, model_name: str) -> Dict[str, Any]:
-        """Parse and validate JSON response with robust parsing"""
+        """Parse and validate JSON response with enhanced parsing"""
         try:
-            # Use robust JSON parser instead of strict json.loads()
-            parsed_response, was_repaired = RobustJSONParser.parse(response_text, model_name)
+            # ENHANCED: Use new enhanced JSON parser with truncation detection
+            parsed_response, was_repaired, repair_method = EnhancedJSONParser.parse_with_truncation_detection(
+                response_text, model_name
+            )
             
             if was_repaired:
-                logger.warning(f"{model_name}: JSON was repaired during parsing")
+                logger.warning(f"{model_name}: JSON was repaired using {repair_method}")
+            
+            # Validate response size
+            is_safe, size_message = GeminiResponseOptimizer.validate_response_size(response_text, model_name)
+            if not is_safe:
+                logger.warning(f"{model_name}: {size_message}")
             
             # Basic validation
             if not isinstance(parsed_response, dict):
@@ -162,17 +171,9 @@ Please process this input according to your system prompt and return a complete 
             return parsed_response
             
         except Exception as e:
-            logger.error(f"Robust parsing failed for {model_name}: {str(e)}")
-            # Emergency fallback - return minimal valid structure
-            return {
-                "error": "PARSING_FAILED",
-                "model_name": model_name,
-                "success": False,
-                "processing_evidence": {
-                    "status": "FAILED", 
-                    "summary": f"All parsing strategies failed: {str(e)}"
-                }
-            }
+            logger.error(f"Enhanced parsing failed for {model_name}: {str(e)}")
+            # Enhanced emergency fallback
+            return EnhancedJSONParser._create_comprehensive_fallback(response_text, model_name)
     
     def _validate_model_response(self, response: Dict[str, Any], model_name: str):
         """Validate model-specific response structure - FLEXIBLE VERSION"""

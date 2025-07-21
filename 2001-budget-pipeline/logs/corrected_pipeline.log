@@ -840,3 +840,502 @@
 2025-07-21 18:29:12.987 - [INFO] - __main__:108 - 📊 Models processed: 10
 2025-07-21 18:29:12.987 - [INFO] - __main__:109 - 💾 Execution logs: executions/081d6cd0-d3ff-4cec-ac61-3f1269f12f59
 2025-07-21 18:29:12.987 - [INFO] - __main__:113 - ✅ Coordinator processed successfully - data packets created
+2025-07-21 19:11:15.177 - [INFO] - __main__:226 - 🎬 STARTING CORRECTED PIPELINE (Coordinator First)
+2025-07-21 19:11:15.179 - [INFO] - __main__:82 - 🎬 STARTING CORRECTED 2001 BUDGET PIPELINE
+2025-07-21 19:11:15.180 - [INFO] - __main__:83 - 📋 WORKFLOW: Input → Coordinator → Data Distribution → 9 Models
+2025-07-21 19:11:15.181 - [INFO] - __main__:55 - 🔍 Validating input data quality...
+2025-07-21 19:11:15.182 - [INFO] - __main__:62 - 📊 Data Quality: POOR (68 warnings)
+2025-07-21 19:11:15.182 - [INFO] - __main__:65 - ⚠️  Data validation warnings:
+2025-07-21 19:11:15.182 - [INFO] - __main__:67 -    • === CHARACTER SCENE COUNT ANALYSIS ===
+2025-07-21 19:11:15.182 - [INFO] - __main__:67 -    • ✅ AGED_BOWMAN: appears in 1 scenes (scenes: 71)
+2025-07-21 19:11:15.182 - [INFO] - __main__:67 -    • ⚠️  AGED_BOWMAN: Only appears in 1 scene - verify if correct
+2025-07-21 19:11:15.182 - [INFO] - __main__:67 -    • ✅ BASE_PERSONNEL: appears in 2 scenes (scenes: 35, 38)
+2025-07-21 19:11:15.183 - [INFO] - __main__:67 -    • ✅ BIG_TOOTH: appears in 1 scenes (scenes: 5)
+2025-07-21 19:11:15.183 - [INFO] - __main__:69 -    • ... and 63 more warnings
+2025-07-21 19:11:15.183 - [INFO] - __main__:72 - ✅ Loaded and validated 2001 coordinator input: 71 scenes
+2025-07-21 19:11:15.183 - [INFO] - pipeline.memory_state_manager:90 - Memory state manager initialized
+2025-07-21 19:11:15.184 - [INFO] - models.model_processor:48 - Loaded system prompt for laborCostCalculator
+2025-07-21 19:11:15.185 - [INFO] - models.model_processor:67 - Loaded sample input for laborCostCalculator
+2025-07-21 19:11:15.186 - [INFO] - models.model_processor:86 - Loaded sample output for laborCostCalculator
+2025-07-21 19:11:15.186 - [INFO] - models.model_processor:126 - Loaded complete configuration for laborCostCalculator
+2025-07-21 19:11:15.186 - [INFO] - models.model_processor:48 - Loaded system prompt for equipmentPricingEngine
+2025-07-21 19:11:15.187 - [INFO] - models.model_processor:67 - Loaded sample input for equipmentPricingEngine
+2025-07-21 19:11:15.187 - [INFO] - models.model_processor:86 - Loaded sample output for equipmentPricingEngine
+2025-07-21 19:11:15.188 - [INFO] - models.model_processor:126 - Loaded complete configuration for equipmentPricingEngine
+2025-07-21 19:11:15.188 - [INFO] - models.model_processor:48 - Loaded system prompt for locationCostEstimator
+2025-07-21 19:11:15.188 - [INFO] - models.model_processor:67 - Loaded sample input for locationCostEstimator
+2025-07-21 19:11:15.189 - [INFO] - models.model_processor:86 - Loaded sample output for locationCostEstimator
+2025-07-21 19:11:15.189 - [INFO] - models.model_processor:126 - Loaded complete configuration for locationCostEstimator
+2025-07-21 19:11:15.189 - [INFO] - models.model_processor:48 - Loaded system prompt for scheduleOptimizer
+2025-07-21 19:11:15.189 - [INFO] - models.model_processor:67 - Loaded sample input for scheduleOptimizer
+2025-07-21 19:11:15.189 - [INFO] - models.model_processor:86 - Loaded sample output for scheduleOptimizer
+2025-07-21 19:11:15.190 - [INFO] - models.model_processor:126 - Loaded complete configuration for scheduleOptimizer
+2025-07-21 19:11:15.190 - [INFO] - models.model_processor:48 - Loaded system prompt for insuranceCalculator
+2025-07-21 19:11:15.191 - [INFO] - models.model_processor:67 - Loaded sample input for insuranceCalculator
+2025-07-21 19:11:15.191 - [INFO] - models.model_processor:86 - Loaded sample output for insuranceCalculator
+2025-07-21 19:11:15.191 - [INFO] - models.model_processor:126 - Loaded complete configuration for insuranceCalculator
+2025-07-21 19:11:15.192 - [INFO] - models.model_processor:48 - Loaded system prompt for postProductionEstimator
+2025-07-21 19:11:15.192 - [INFO] - models.model_processor:67 - Loaded sample input for postProductionEstimator
+2025-07-21 19:11:15.193 - [INFO] - models.model_processor:86 - Loaded sample output for postProductionEstimator
+2025-07-21 19:11:15.193 - [INFO] - models.model_processor:126 - Loaded complete configuration for postProductionEstimator
+2025-07-21 19:11:15.194 - [INFO] - models.model_processor:48 - Loaded system prompt for taxIncentiveAnalyzer
+2025-07-21 19:11:15.194 - [INFO] - models.model_processor:67 - Loaded sample input for taxIncentiveAnalyzer
+2025-07-21 19:11:15.195 - [INFO] - models.model_processor:86 - Loaded sample output for taxIncentiveAnalyzer
+2025-07-21 19:11:15.195 - [INFO] - models.model_processor:126 - Loaded complete configuration for taxIncentiveAnalyzer
+2025-07-21 19:11:15.196 - [INFO] - models.model_processor:48 - Loaded system prompt for budgetAggregator
+2025-07-21 19:11:15.197 - [INFO] - models.model_processor:67 - Loaded sample input for budgetAggregator
+2025-07-21 19:11:15.198 - [INFO] - models.model_processor:86 - Loaded sample output for budgetAggregator
+2025-07-21 19:11:15.198 - [INFO] - models.model_processor:126 - Loaded complete configuration for budgetAggregator
+2025-07-21 19:11:15.200 - [INFO] - models.model_processor:48 - Loaded system prompt for cashFlowProjector
+2025-07-21 19:11:15.200 - [INFO] - models.model_processor:67 - Loaded sample input for cashFlowProjector
+2025-07-21 19:11:15.202 - [INFO] - models.model_processor:86 - Loaded sample output for cashFlowProjector
+2025-07-21 19:11:15.202 - [INFO] - models.model_processor:126 - Loaded complete configuration for cashFlowProjector
+2025-07-21 19:11:15.202 - [INFO] - models.model_processor:150 - Loaded 9 model configurations
+2025-07-21 19:11:15.202 - [INFO] - models.model_processor:166 - Initialized 9 model processors
+2025-07-21 19:11:15.202 - [INFO] - pipeline.orchestrator:43 - Pipeline orchestrator initialized successfully
+2025-07-21 19:11:15.203 - [INFO] - __main__:92 - 🚀 EXECUTING CORRECTED PIPELINE
+2025-07-21 19:11:15.203 - [INFO] - pipeline.memory_state_manager:123 - Created execution db8fa17c-9f59-4820-9d60-6219ded4944e
+2025-07-21 19:11:15.203 - [INFO] - pipeline.orchestrator:86 - Starting pipeline execution db8fa17c-9f59-4820-9d60-6219ded4944e
+2025-07-21 19:11:15.206 - [INFO] - models.io_logger:48 - Created execution folder structure: executions/db8fa17c-9f59-4820-9d60-6219ded4944e
+2025-07-21 19:11:15.207 - [INFO] - pipeline.memory_state_manager:256 - Updated execution db8fa17c-9f59-4820-9d60-6219ded4944e status to RUNNING
+2025-07-21 19:11:15.207 - [INFO] - pipeline.dependency_manager:90 - Initialized 10 model executions
+2025-07-21 19:11:15.207 - [INFO] - pipeline.orchestrator:102 - Executing Tier 1: ['coordinator']
+2025-07-21 19:11:15.207 - [INFO] - pipeline.memory_state_manager:256 - Updated execution db8fa17c-9f59-4820-9d60-6219ded4944e status to RUNNING
+2025-07-21 19:11:15.208 - [INFO] - pipeline.dependency_manager:181 - Model coordinator status: pending -> running
+2025-07-21 19:11:15.208 - [INFO] - pipeline.orchestrator:221 - Processing model: coordinator
+2025-07-21 19:11:15.208 - [INFO] - models.model_processor:245 - Processing model: coordinator
+2025-07-21 19:11:15.209 - [INFO] - models.model_processor:48 - Loaded system prompt for coordinator
+2025-07-21 19:11:15.209 - [INFO] - models.model_processor:67 - Loaded sample input for coordinator
+2025-07-21 19:11:15.210 - [INFO] - models.model_processor:86 - Loaded sample output for coordinator
+2025-07-21 19:11:15.211 - [INFO] - models.model_processor:126 - Loaded complete configuration for coordinator
+2025-07-21 19:11:15.220 - [INFO] - models.io_logger:86 - Logged input for coordinator: executions/db8fa17c-9f59-4820-9d60-6219ded4944e/01-coordinator/input.json
+2025-07-21 19:11:15.221 - [INFO] - models.gemini_client:74 - Processing coordinator with thinking mode: True
+2025-07-21 19:12:16.945 - [WARNING] - utils.enhanced_json_parser:39 - coordinator: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:12:16.947 - [INFO] - utils.enhanced_json_parser:44 - coordinator: ✅ Standard JSON parsing successful
+2025-07-21 19:12:16.950 - [WARNING] - models.gemini_client:161 - coordinator: Response size (12322) exceeds limit (10000)
+2025-07-21 19:12:16.951 - [INFO] - models.gemini_client:202 - coordinator: Processing evidence found ✅
+2025-07-21 19:12:16.951 - [INFO] - models.gemini_client:215 - coordinator: Substantial budget data found ✅
+2025-07-21 19:12:16.951 - [INFO] - models.gemini_client:220 - ✅ Flexible validation passed for coordinator (response size: 8810 chars)
+2025-07-21 19:12:16.952 - [INFO] - models.gemini_client:117 - Successfully processed coordinator
+2025-07-21 19:12:16.952 - [WARNING] - models.model_processor:346 - No processingLog found in coordinator output - functions may not have executed
+2025-07-21 19:12:16.957 - [INFO] - models.io_logger:138 - Logged output for coordinator: executions/db8fa17c-9f59-4820-9d60-6219ded4944e/01-coordinator/output.json
+2025-07-21 19:12:16.958 - [INFO] - models.model_processor:291 - Successfully processed coordinator in 61.74s
+2025-07-21 19:12:16.958 - [INFO] - pipeline.orchestrator:242 - Model coordinator completed in 61.75 seconds
+2025-07-21 19:12:16.959 - [INFO] - pipeline.dependency_manager:181 - Model coordinator status: running -> completed
+2025-07-21 19:12:16.961 - [INFO] - pipeline.memory_state_manager:174 - Saved output for coordinator in execution db8fa17c-9f59-4820-9d60-6219ded4944e
+2025-07-21 19:12:16.961 - [INFO] - pipeline.orchestrator:143 - Tier 1 completed successfully
+2025-07-21 19:12:16.962 - [INFO] - pipeline.orchestrator:102 - Executing Tier 2: ['scheduleOptimizer', 'postProductionEstimator']
+2025-07-21 19:12:16.962 - [INFO] - pipeline.memory_state_manager:256 - Updated execution db8fa17c-9f59-4820-9d60-6219ded4944e status to RUNNING
+2025-07-21 19:12:16.964 - [INFO] - pipeline.dependency_manager:181 - Model scheduleOptimizer status: pending -> running
+2025-07-21 19:12:16.964 - [INFO] - pipeline.orchestrator:221 - Processing model: scheduleOptimizer
+2025-07-21 19:12:16.964 - [INFO] - models.model_processor:245 - Processing model: scheduleOptimizer
+2025-07-21 19:12:16.971 - [INFO] - models.io_logger:86 - Logged input for scheduleOptimizer: executions/db8fa17c-9f59-4820-9d60-6219ded4944e/05-schedule-optimizer/input.json
+2025-07-21 19:12:16.971 - [INFO] - models.gemini_client:74 - Processing scheduleOptimizer with thinking mode: True
+2025-07-21 19:13:22.146 - [WARNING] - utils.enhanced_json_parser:39 - scheduleOptimizer: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:13:22.148 - [INFO] - utils.enhanced_json_parser:44 - scheduleOptimizer: ✅ Standard JSON parsing successful
+2025-07-21 19:13:22.148 - [WARNING] - models.gemini_client:161 - scheduleOptimizer: Response size (12861) exceeds limit (12000)
+2025-07-21 19:13:22.149 - [INFO] - models.gemini_client:202 - scheduleOptimizer: Processing evidence found ✅
+2025-07-21 19:13:22.150 - [INFO] - models.gemini_client:215 - scheduleOptimizer: Substantial budget data found ✅
+2025-07-21 19:13:22.150 - [INFO] - models.gemini_client:220 - ✅ Flexible validation passed for scheduleOptimizer (response size: 10633 chars)
+2025-07-21 19:13:22.150 - [INFO] - models.gemini_client:117 - Successfully processed scheduleOptimizer
+2025-07-21 19:13:22.151 - [WARNING] - models.model_processor:334 - Missing expected root key 'scheduleModelOutput' in scheduleOptimizer output
+2025-07-21 19:13:22.152 - [ERROR] - models.io_logger:141 - Failed to log output for scheduleOptimizer: 'list' object has no attribute 'items'
+2025-07-21 19:13:22.152 - [INFO] - models.model_processor:291 - Successfully processed scheduleOptimizer in 65.19s
+2025-07-21 19:13:22.152 - [INFO] - pipeline.orchestrator:242 - Model scheduleOptimizer completed in 65.19 seconds
+2025-07-21 19:13:22.152 - [INFO] - pipeline.dependency_manager:181 - Model scheduleOptimizer status: running -> completed
+2025-07-21 19:13:22.153 - [INFO] - pipeline.dependency_manager:181 - Model postProductionEstimator status: pending -> running
+2025-07-21 19:13:22.153 - [INFO] - pipeline.orchestrator:221 - Processing model: postProductionEstimator
+2025-07-21 19:13:22.153 - [INFO] - models.model_processor:245 - Processing model: postProductionEstimator
+2025-07-21 19:13:22.164 - [INFO] - models.io_logger:86 - Logged input for postProductionEstimator: executions/db8fa17c-9f59-4820-9d60-6219ded4944e/07-post-production-estimator/input.json
+2025-07-21 19:13:22.164 - [INFO] - models.gemini_client:74 - Processing postProductionEstimator with thinking mode: True
+2025-07-21 19:14:32.861 - [WARNING] - utils.enhanced_json_parser:39 - postProductionEstimator: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:14:32.863 - [INFO] - utils.enhanced_json_parser:44 - postProductionEstimator: ✅ Standard JSON parsing successful
+2025-07-21 19:14:32.863 - [WARNING] - models.gemini_client:161 - postProductionEstimator: Response size (14005) exceeds limit (10000)
+2025-07-21 19:14:32.864 - [INFO] - models.gemini_client:202 - postProductionEstimator: Processing evidence found ✅
+2025-07-21 19:14:32.864 - [INFO] - models.gemini_client:215 - postProductionEstimator: Substantial budget data found ✅
+2025-07-21 19:14:32.864 - [INFO] - models.gemini_client:220 - ✅ Flexible validation passed for postProductionEstimator (response size: 9639 chars)
+2025-07-21 19:14:32.865 - [INFO] - models.gemini_client:117 - Successfully processed postProductionEstimator
+2025-07-21 19:14:32.865 - [WARNING] - models.model_processor:334 - Missing expected root key 'postProductionModelOutput' in postProductionEstimator output
+2025-07-21 19:14:32.865 - [WARNING] - models.model_processor:346 - No processingLog found in postProductionEstimator output - functions may not have executed
+2025-07-21 19:14:32.869 - [INFO] - models.io_logger:138 - Logged output for postProductionEstimator: executions/db8fa17c-9f59-4820-9d60-6219ded4944e/07-post-production-estimator/output.json
+2025-07-21 19:14:32.869 - [INFO] - models.model_processor:291 - Successfully processed postProductionEstimator in 70.71s
+2025-07-21 19:14:32.869 - [INFO] - pipeline.orchestrator:242 - Model postProductionEstimator completed in 70.72 seconds
+2025-07-21 19:14:32.870 - [INFO] - pipeline.dependency_manager:181 - Model postProductionEstimator status: running -> completed
+2025-07-21 19:14:32.870 - [INFO] - pipeline.memory_state_manager:174 - Saved output for scheduleOptimizer in execution db8fa17c-9f59-4820-9d60-6219ded4944e
+2025-07-21 19:14:32.870 - [INFO] - pipeline.memory_state_manager:174 - Saved output for postProductionEstimator in execution db8fa17c-9f59-4820-9d60-6219ded4944e
+2025-07-21 19:14:32.870 - [INFO] - pipeline.orchestrator:143 - Tier 2 completed successfully
+2025-07-21 19:14:32.871 - [INFO] - pipeline.orchestrator:102 - Executing Tier 3: ['laborCostCalculator', 'equipmentPricingEngine', 'locationCostEstimator']
+2025-07-21 19:14:32.871 - [INFO] - pipeline.memory_state_manager:256 - Updated execution db8fa17c-9f59-4820-9d60-6219ded4944e status to RUNNING
+2025-07-21 19:14:32.871 - [INFO] - pipeline.dependency_manager:181 - Model laborCostCalculator status: pending -> running
+2025-07-21 19:14:32.871 - [INFO] - pipeline.orchestrator:221 - Processing model: laborCostCalculator
+2025-07-21 19:14:32.876 - [INFO] - models.model_processor:245 - Processing model: laborCostCalculator
+2025-07-21 19:14:32.885 - [INFO] - models.io_logger:86 - Logged input for laborCostCalculator: executions/db8fa17c-9f59-4820-9d60-6219ded4944e/02-labor-cost-calculator/input.json
+2025-07-21 19:14:32.886 - [INFO] - models.gemini_client:74 - Processing laborCostCalculator with thinking mode: True
+2025-07-21 19:15:55.181 - [WARNING] - utils.enhanced_json_parser:39 - laborCostCalculator: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:15:55.183 - [INFO] - utils.enhanced_json_parser:44 - laborCostCalculator: ✅ Standard JSON parsing successful
+2025-07-21 19:15:55.183 - [WARNING] - models.gemini_client:161 - laborCostCalculator: Response size (15258) exceeds limit (15000)
+2025-07-21 19:15:55.184 - [INFO] - models.gemini_client:202 - laborCostCalculator: Processing evidence found ✅
+2025-07-21 19:15:55.184 - [INFO] - models.gemini_client:215 - laborCostCalculator: Substantial budget data found ✅
+2025-07-21 19:15:55.184 - [INFO] - models.gemini_client:220 - ✅ Flexible validation passed for laborCostCalculator (response size: 11212 chars)
+2025-07-21 19:15:55.184 - [INFO] - models.gemini_client:117 - Successfully processed laborCostCalculator
+2025-07-21 19:15:55.185 - [WARNING] - models.model_processor:334 - Missing expected root key 'laborCostModelOutput' in laborCostCalculator output
+2025-07-21 19:15:55.185 - [WARNING] - models.model_processor:346 - No processingLog found in laborCostCalculator output - functions may not have executed
+2025-07-21 19:15:55.187 - [INFO] - models.io_logger:138 - Logged output for laborCostCalculator: executions/db8fa17c-9f59-4820-9d60-6219ded4944e/02-labor-cost-calculator/output.json
+2025-07-21 19:15:55.187 - [INFO] - models.model_processor:291 - Successfully processed laborCostCalculator in 82.31s
+2025-07-21 19:15:55.187 - [INFO] - pipeline.orchestrator:242 - Model laborCostCalculator completed in 82.32 seconds
+2025-07-21 19:15:55.187 - [INFO] - pipeline.dependency_manager:181 - Model laborCostCalculator status: running -> completed
+2025-07-21 19:15:55.187 - [INFO] - pipeline.dependency_manager:181 - Model equipmentPricingEngine status: pending -> running
+2025-07-21 19:15:55.187 - [INFO] - pipeline.orchestrator:221 - Processing model: equipmentPricingEngine
+2025-07-21 19:15:55.187 - [INFO] - models.model_processor:245 - Processing model: equipmentPricingEngine
+2025-07-21 19:15:55.193 - [INFO] - models.io_logger:86 - Logged input for equipmentPricingEngine: executions/db8fa17c-9f59-4820-9d60-6219ded4944e/03-equipment-pricing-engine/input.json
+2025-07-21 19:15:55.193 - [INFO] - models.gemini_client:74 - Processing equipmentPricingEngine with thinking mode: True
+2025-07-21 19:17:27.462 - [WARNING] - utils.enhanced_json_parser:39 - equipmentPricingEngine: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:17:27.467 - [WARNING] - utils.enhanced_json_parser:47 - equipmentPricingEngine: Standard parsing failed: Expecting property name enclosed in double quotes: line 497 column 1 (char 17612)
+2025-07-21 19:17:27.469 - [INFO] - utils.enhanced_json_parser:61 - equipmentPricingEngine: Attempting truncation_recovery repair...
+2025-07-21 19:17:27.473 - [INFO] - utils.enhanced_json_parser:61 - equipmentPricingEngine: Attempting smart_completion repair...
+2025-07-21 19:17:27.473 - [INFO] - utils.enhanced_json_parser:61 - equipmentPricingEngine: Attempting section_extraction repair...
+2025-07-21 19:17:27.473 - [INFO] - utils.enhanced_json_parser:61 - equipmentPricingEngine: Attempting progressive_truncation repair...
+2025-07-21 19:17:27.480 - [INFO] - utils.enhanced_json_parser:61 - equipmentPricingEngine: Attempting template_reconstruction repair...
+2025-07-21 19:17:27.480 - [INFO] - utils.enhanced_json_parser:61 - equipmentPricingEngine: Attempting emergency_fallback repair...
+2025-07-21 19:17:27.517 - [INFO] - utils.enhanced_json_parser:66 - equipmentPricingEngine: ✅ Repaired using emergency_fallback
+2025-07-21 19:17:27.518 - [WARNING] - models.gemini_client:156 - equipmentPricingEngine: JSON was repaired using emergency_fallback
+2025-07-21 19:17:27.519 - [WARNING] - models.gemini_client:161 - equipmentPricingEngine: Response size (17612) exceeds limit (10000)
+2025-07-21 19:17:27.519 - [INFO] - models.gemini_client:202 - equipmentPricingEngine: Processing evidence found ✅
+2025-07-21 19:17:27.519 - [INFO] - models.gemini_client:215 - equipmentPricingEngine: Substantial budget data found ✅
+2025-07-21 19:17:27.520 - [INFO] - models.gemini_client:220 - ✅ Flexible validation passed for equipmentPricingEngine (response size: 520 chars)
+2025-07-21 19:17:27.520 - [INFO] - models.gemini_client:117 - Successfully processed equipmentPricingEngine
+2025-07-21 19:17:27.521 - [WARNING] - models.model_processor:334 - Missing expected root key 'equipmentModelOutput' in equipmentPricingEngine output
+2025-07-21 19:17:27.522 - [ERROR] - models.io_logger:141 - Failed to log output for equipmentPricingEngine: 'list' object has no attribute 'items'
+2025-07-21 19:17:27.522 - [INFO] - models.model_processor:291 - Successfully processed equipmentPricingEngine in 92.33s
+2025-07-21 19:17:27.522 - [INFO] - pipeline.orchestrator:242 - Model equipmentPricingEngine completed in 92.34 seconds
+2025-07-21 19:17:27.524 - [INFO] - pipeline.dependency_manager:181 - Model equipmentPricingEngine status: running -> completed
+2025-07-21 19:17:27.524 - [INFO] - pipeline.dependency_manager:181 - Model locationCostEstimator status: pending -> running
+2025-07-21 19:17:27.524 - [INFO] - pipeline.orchestrator:221 - Processing model: locationCostEstimator
+2025-07-21 19:17:27.525 - [INFO] - models.model_processor:245 - Processing model: locationCostEstimator
+2025-07-21 19:17:27.546 - [INFO] - models.io_logger:86 - Logged input for locationCostEstimator: executions/db8fa17c-9f59-4820-9d60-6219ded4944e/04-location-cost-estimator/input.json
+2025-07-21 19:17:27.547 - [INFO] - models.gemini_client:74 - Processing locationCostEstimator with thinking mode: True
+2025-07-21 19:18:56.451 - [WARNING] - utils.enhanced_json_parser:39 - locationCostEstimator: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:18:56.453 - [INFO] - utils.enhanced_json_parser:44 - locationCostEstimator: ✅ Standard JSON parsing successful
+2025-07-21 19:18:56.453 - [WARNING] - models.gemini_client:161 - locationCostEstimator: Response size (11930) exceeds limit (10000)
+2025-07-21 19:18:56.455 - [INFO] - models.gemini_client:202 - locationCostEstimator: Processing evidence found ✅
+2025-07-21 19:18:56.455 - [INFO] - models.gemini_client:215 - locationCostEstimator: Substantial budget data found ✅
+2025-07-21 19:18:56.455 - [INFO] - models.gemini_client:220 - ✅ Flexible validation passed for locationCostEstimator (response size: 10164 chars)
+2025-07-21 19:18:56.456 - [INFO] - models.gemini_client:117 - Successfully processed locationCostEstimator
+2025-07-21 19:18:56.456 - [WARNING] - models.model_processor:334 - Missing expected root key 'locationModelOutput' in locationCostEstimator output
+2025-07-21 19:18:56.456 - [WARNING] - models.model_processor:346 - No processingLog found in locationCostEstimator output - functions may not have executed
+2025-07-21 19:18:56.460 - [INFO] - models.io_logger:138 - Logged output for locationCostEstimator: executions/db8fa17c-9f59-4820-9d60-6219ded4944e/04-location-cost-estimator/output.json
+2025-07-21 19:18:56.461 - [INFO] - models.model_processor:291 - Successfully processed locationCostEstimator in 88.93s
+2025-07-21 19:18:56.461 - [INFO] - pipeline.orchestrator:242 - Model locationCostEstimator completed in 88.94 seconds
+2025-07-21 19:18:56.461 - [INFO] - pipeline.dependency_manager:181 - Model locationCostEstimator status: running -> completed
+2025-07-21 19:18:56.461 - [INFO] - pipeline.memory_state_manager:174 - Saved output for laborCostCalculator in execution db8fa17c-9f59-4820-9d60-6219ded4944e
+2025-07-21 19:18:56.462 - [INFO] - pipeline.memory_state_manager:174 - Saved output for equipmentPricingEngine in execution db8fa17c-9f59-4820-9d60-6219ded4944e
+2025-07-21 19:18:56.462 - [INFO] - pipeline.memory_state_manager:174 - Saved output for locationCostEstimator in execution db8fa17c-9f59-4820-9d60-6219ded4944e
+2025-07-21 19:18:56.462 - [INFO] - pipeline.orchestrator:143 - Tier 3 completed successfully
+2025-07-21 19:18:56.462 - [INFO] - pipeline.orchestrator:102 - Executing Tier 4: ['insuranceCalculator']
+2025-07-21 19:18:56.462 - [INFO] - pipeline.memory_state_manager:256 - Updated execution db8fa17c-9f59-4820-9d60-6219ded4944e status to RUNNING
+2025-07-21 19:18:56.463 - [INFO] - pipeline.dependency_manager:181 - Model insuranceCalculator status: pending -> running
+2025-07-21 19:18:56.463 - [INFO] - pipeline.orchestrator:221 - Processing model: insuranceCalculator
+2025-07-21 19:18:56.463 - [INFO] - models.model_processor:245 - Processing model: insuranceCalculator
+2025-07-21 19:18:56.477 - [INFO] - models.io_logger:86 - Logged input for insuranceCalculator: executions/db8fa17c-9f59-4820-9d60-6219ded4944e/06-insurance-calculator/input.json
+2025-07-21 19:18:56.478 - [INFO] - models.gemini_client:74 - Processing insuranceCalculator with thinking mode: True
+2025-07-21 19:23:10.548 - [INFO] - __main__:226 - 🎬 STARTING CORRECTED PIPELINE (Coordinator First)
+2025-07-21 19:23:10.549 - [INFO] - __main__:82 - 🎬 STARTING CORRECTED 2001 BUDGET PIPELINE
+2025-07-21 19:23:10.549 - [INFO] - __main__:83 - 📋 WORKFLOW: Input → Coordinator → Data Distribution → 9 Models
+2025-07-21 19:23:10.550 - [INFO] - __main__:55 - 🔍 Validating input data quality...
+2025-07-21 19:23:10.551 - [INFO] - __main__:62 - 📊 Data Quality: POOR (68 warnings)
+2025-07-21 19:23:10.551 - [INFO] - __main__:65 - ⚠️  Data validation warnings:
+2025-07-21 19:23:10.551 - [INFO] - __main__:67 -    • === CHARACTER SCENE COUNT ANALYSIS ===
+2025-07-21 19:23:10.551 - [INFO] - __main__:67 -    • ✅ AGED_BOWMAN: appears in 1 scenes (scenes: 71)
+2025-07-21 19:23:10.551 - [INFO] - __main__:67 -    • ⚠️  AGED_BOWMAN: Only appears in 1 scene - verify if correct
+2025-07-21 19:23:10.551 - [INFO] - __main__:67 -    • ✅ BASE_PERSONNEL: appears in 2 scenes (scenes: 35, 38)
+2025-07-21 19:23:10.551 - [INFO] - __main__:67 -    • ✅ BIG_TOOTH: appears in 1 scenes (scenes: 5)
+2025-07-21 19:23:10.551 - [INFO] - __main__:69 -    • ... and 63 more warnings
+2025-07-21 19:23:10.551 - [INFO] - __main__:72 - ✅ Loaded and validated 2001 coordinator input: 71 scenes
+2025-07-21 19:23:10.551 - [INFO] - pipeline.memory_state_manager:90 - Memory state manager initialized
+2025-07-21 19:23:10.553 - [INFO] - models.model_processor:48 - Loaded system prompt for laborCostCalculator
+2025-07-21 19:23:10.553 - [INFO] - models.model_processor:67 - Loaded sample input for laborCostCalculator
+2025-07-21 19:23:10.554 - [INFO] - models.model_processor:86 - Loaded sample output for laborCostCalculator
+2025-07-21 19:23:10.554 - [INFO] - models.model_processor:126 - Loaded complete configuration for laborCostCalculator
+2025-07-21 19:23:10.554 - [INFO] - models.model_processor:48 - Loaded system prompt for equipmentPricingEngine
+2025-07-21 19:23:10.555 - [INFO] - models.model_processor:67 - Loaded sample input for equipmentPricingEngine
+2025-07-21 19:23:10.556 - [INFO] - models.model_processor:86 - Loaded sample output for equipmentPricingEngine
+2025-07-21 19:23:10.556 - [INFO] - models.model_processor:126 - Loaded complete configuration for equipmentPricingEngine
+2025-07-21 19:23:10.557 - [INFO] - models.model_processor:48 - Loaded system prompt for locationCostEstimator
+2025-07-21 19:23:10.557 - [INFO] - models.model_processor:67 - Loaded sample input for locationCostEstimator
+2025-07-21 19:23:10.558 - [INFO] - models.model_processor:86 - Loaded sample output for locationCostEstimator
+2025-07-21 19:23:10.558 - [INFO] - models.model_processor:126 - Loaded complete configuration for locationCostEstimator
+2025-07-21 19:23:10.558 - [INFO] - models.model_processor:48 - Loaded system prompt for scheduleOptimizer
+2025-07-21 19:23:10.558 - [INFO] - models.model_processor:67 - Loaded sample input for scheduleOptimizer
+2025-07-21 19:23:10.559 - [INFO] - models.model_processor:86 - Loaded sample output for scheduleOptimizer
+2025-07-21 19:23:10.559 - [INFO] - models.model_processor:126 - Loaded complete configuration for scheduleOptimizer
+2025-07-21 19:23:10.559 - [INFO] - models.model_processor:48 - Loaded system prompt for insuranceCalculator
+2025-07-21 19:23:10.560 - [INFO] - models.model_processor:67 - Loaded sample input for insuranceCalculator
+2025-07-21 19:23:10.560 - [INFO] - models.model_processor:86 - Loaded sample output for insuranceCalculator
+2025-07-21 19:23:10.561 - [INFO] - models.model_processor:126 - Loaded complete configuration for insuranceCalculator
+2025-07-21 19:23:10.561 - [INFO] - models.model_processor:48 - Loaded system prompt for postProductionEstimator
+2025-07-21 19:23:10.562 - [INFO] - models.model_processor:67 - Loaded sample input for postProductionEstimator
+2025-07-21 19:23:10.562 - [INFO] - models.model_processor:86 - Loaded sample output for postProductionEstimator
+2025-07-21 19:23:10.562 - [INFO] - models.model_processor:126 - Loaded complete configuration for postProductionEstimator
+2025-07-21 19:23:10.562 - [INFO] - models.model_processor:48 - Loaded system prompt for taxIncentiveAnalyzer
+2025-07-21 19:23:10.563 - [INFO] - models.model_processor:67 - Loaded sample input for taxIncentiveAnalyzer
+2025-07-21 19:23:10.563 - [INFO] - models.model_processor:86 - Loaded sample output for taxIncentiveAnalyzer
+2025-07-21 19:23:10.563 - [INFO] - models.model_processor:126 - Loaded complete configuration for taxIncentiveAnalyzer
+2025-07-21 19:23:10.563 - [INFO] - models.model_processor:48 - Loaded system prompt for budgetAggregator
+2025-07-21 19:23:10.564 - [INFO] - models.model_processor:67 - Loaded sample input for budgetAggregator
+2025-07-21 19:23:10.564 - [INFO] - models.model_processor:86 - Loaded sample output for budgetAggregator
+2025-07-21 19:23:10.564 - [INFO] - models.model_processor:126 - Loaded complete configuration for budgetAggregator
+2025-07-21 19:23:10.565 - [INFO] - models.model_processor:48 - Loaded system prompt for cashFlowProjector
+2025-07-21 19:23:10.565 - [INFO] - models.model_processor:67 - Loaded sample input for cashFlowProjector
+2025-07-21 19:23:10.565 - [INFO] - models.model_processor:86 - Loaded sample output for cashFlowProjector
+2025-07-21 19:23:10.566 - [INFO] - models.model_processor:126 - Loaded complete configuration for cashFlowProjector
+2025-07-21 19:23:10.566 - [INFO] - models.model_processor:150 - Loaded 9 model configurations
+2025-07-21 19:23:10.566 - [INFO] - models.model_processor:166 - Initialized 9 model processors
+2025-07-21 19:23:10.566 - [INFO] - pipeline.orchestrator:43 - Pipeline orchestrator initialized successfully
+2025-07-21 19:23:10.566 - [INFO] - __main__:92 - 🚀 EXECUTING CORRECTED PIPELINE
+2025-07-21 19:23:10.566 - [INFO] - pipeline.memory_state_manager:123 - Created execution 16871b72-065c-4d25-a113-6e5d28d1a15d
+2025-07-21 19:23:10.566 - [INFO] - pipeline.orchestrator:86 - Starting pipeline execution 16871b72-065c-4d25-a113-6e5d28d1a15d
+2025-07-21 19:23:10.567 - [INFO] - models.io_logger:48 - Created execution folder structure: executions/16871b72-065c-4d25-a113-6e5d28d1a15d
+2025-07-21 19:23:10.567 - [INFO] - pipeline.memory_state_manager:256 - Updated execution 16871b72-065c-4d25-a113-6e5d28d1a15d status to RUNNING
+2025-07-21 19:23:10.567 - [INFO] - pipeline.dependency_manager:90 - Initialized 10 model executions
+2025-07-21 19:23:10.567 - [INFO] - pipeline.orchestrator:102 - Executing Tier 1: ['coordinator']
+2025-07-21 19:23:10.567 - [INFO] - pipeline.memory_state_manager:256 - Updated execution 16871b72-065c-4d25-a113-6e5d28d1a15d status to RUNNING
+2025-07-21 19:23:10.567 - [INFO] - pipeline.dependency_manager:181 - Model coordinator status: pending -> running
+2025-07-21 19:23:10.567 - [INFO] - pipeline.orchestrator:221 - Processing model: coordinator
+2025-07-21 19:23:10.567 - [INFO] - models.model_processor:245 - Processing model: coordinator
+2025-07-21 19:23:10.568 - [INFO] - models.model_processor:48 - Loaded system prompt for coordinator
+2025-07-21 19:23:10.568 - [INFO] - models.model_processor:67 - Loaded sample input for coordinator
+2025-07-21 19:23:10.569 - [INFO] - models.model_processor:86 - Loaded sample output for coordinator
+2025-07-21 19:23:10.569 - [INFO] - models.model_processor:126 - Loaded complete configuration for coordinator
+2025-07-21 19:23:10.573 - [INFO] - models.io_logger:86 - Logged input for coordinator: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/01-coordinator/input.json
+2025-07-21 19:23:10.573 - [INFO] - models.gemini_client:74 - Processing coordinator with thinking mode: True
+2025-07-21 19:24:09.877 - [WARNING] - utils.enhanced_json_parser:39 - coordinator: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:24:09.882 - [INFO] - utils.enhanced_json_parser:50 - coordinator: ✅ Standard JSON parsing successful
+2025-07-21 19:24:09.882 - [WARNING] - models.gemini_client:161 - coordinator: Response size (10016) exceeds limit (10000)
+2025-07-21 19:24:09.883 - [INFO] - models.gemini_client:202 - coordinator: Processing evidence found ✅
+2025-07-21 19:24:09.883 - [INFO] - models.gemini_client:215 - coordinator: Substantial budget data found ✅
+2025-07-21 19:24:09.883 - [INFO] - models.gemini_client:220 - ✅ Flexible validation passed for coordinator (response size: 7186 chars)
+2025-07-21 19:24:09.883 - [INFO] - models.gemini_client:117 - Successfully processed coordinator
+2025-07-21 19:24:09.885 - [WARNING] - models.model_processor:346 - No processingLog found in coordinator output - functions may not have executed
+2025-07-21 19:24:09.890 - [INFO] - models.io_logger:152 - Logged output for coordinator: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/01-coordinator/output.json
+2025-07-21 19:24:09.890 - [INFO] - models.model_processor:291 - Successfully processed coordinator in 59.32s
+2025-07-21 19:24:09.890 - [INFO] - pipeline.orchestrator:242 - Model coordinator completed in 59.32 seconds
+2025-07-21 19:24:09.890 - [INFO] - pipeline.dependency_manager:181 - Model coordinator status: running -> completed
+2025-07-21 19:24:09.892 - [INFO] - pipeline.memory_state_manager:174 - Saved output for coordinator in execution 16871b72-065c-4d25-a113-6e5d28d1a15d
+2025-07-21 19:24:09.892 - [INFO] - pipeline.orchestrator:143 - Tier 1 completed successfully
+2025-07-21 19:24:09.892 - [INFO] - pipeline.orchestrator:102 - Executing Tier 2: ['scheduleOptimizer', 'postProductionEstimator']
+2025-07-21 19:24:09.892 - [INFO] - pipeline.memory_state_manager:256 - Updated execution 16871b72-065c-4d25-a113-6e5d28d1a15d status to RUNNING
+2025-07-21 19:24:09.893 - [INFO] - pipeline.dependency_manager:181 - Model scheduleOptimizer status: pending -> running
+2025-07-21 19:24:09.902 - [INFO] - pipeline.orchestrator:221 - Processing model: scheduleOptimizer
+2025-07-21 19:24:09.902 - [INFO] - models.model_processor:245 - Processing model: scheduleOptimizer
+2025-07-21 19:24:09.908 - [INFO] - models.io_logger:86 - Logged input for scheduleOptimizer: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/05-schedule-optimizer/input.json
+2025-07-21 19:24:09.909 - [INFO] - models.gemini_client:74 - Processing scheduleOptimizer with thinking mode: True
+2025-07-21 19:25:33.172 - [WARNING] - utils.enhanced_json_parser:39 - scheduleOptimizer: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:25:33.175 - [WARNING] - utils.enhanced_json_parser:53 - scheduleOptimizer: Standard parsing failed: Expecting ',' delimiter: line 634 column 24 (char 18991)
+2025-07-21 19:25:33.176 - [INFO] - utils.enhanced_json_parser:67 - scheduleOptimizer: Attempting truncation_recovery repair...
+2025-07-21 19:25:33.178 - [INFO] - utils.enhanced_json_parser:67 - scheduleOptimizer: Attempting smart_completion repair...
+2025-07-21 19:25:33.178 - [INFO] - utils.enhanced_json_parser:67 - scheduleOptimizer: Attempting section_extraction repair...
+2025-07-21 19:25:33.178 - [INFO] - utils.enhanced_json_parser:67 - scheduleOptimizer: Attempting progressive_truncation repair...
+2025-07-21 19:25:33.190 - [INFO] - utils.enhanced_json_parser:67 - scheduleOptimizer: Attempting template_reconstruction repair...
+2025-07-21 19:25:33.191 - [INFO] - utils.enhanced_json_parser:77 - scheduleOptimizer: ✅ Repaired using template_reconstruction
+2025-07-21 19:25:33.191 - [WARNING] - models.gemini_client:156 - scheduleOptimizer: JSON was repaired using template_reconstruction
+2025-07-21 19:25:33.191 - [WARNING] - models.gemini_client:161 - scheduleOptimizer: Response size (18991) exceeds limit (12000)
+2025-07-21 19:25:33.191 - [INFO] - models.gemini_client:202 - scheduleOptimizer: Processing evidence found ✅
+2025-07-21 19:25:33.191 - [INFO] - models.gemini_client:215 - scheduleOptimizer: Substantial budget data found ✅
+2025-07-21 19:25:33.192 - [INFO] - models.gemini_client:220 - ✅ Flexible validation passed for scheduleOptimizer (response size: 308 chars)
+2025-07-21 19:25:33.192 - [INFO] - models.gemini_client:117 - Successfully processed scheduleOptimizer
+2025-07-21 19:25:33.195 - [WARNING] - models.model_processor:334 - Missing expected root key 'scheduleModelOutput' in scheduleOptimizer output
+2025-07-21 19:25:33.209 - [INFO] - models.io_logger:152 - Logged output for scheduleOptimizer: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/05-schedule-optimizer/output.json
+2025-07-21 19:25:33.209 - [INFO] - models.model_processor:291 - Successfully processed scheduleOptimizer in 83.29s
+2025-07-21 19:25:33.209 - [INFO] - pipeline.orchestrator:242 - Model scheduleOptimizer completed in 83.31 seconds
+2025-07-21 19:25:33.210 - [INFO] - pipeline.dependency_manager:181 - Model scheduleOptimizer status: running -> completed
+2025-07-21 19:25:33.210 - [INFO] - pipeline.dependency_manager:181 - Model postProductionEstimator status: pending -> running
+2025-07-21 19:25:33.210 - [INFO] - pipeline.orchestrator:221 - Processing model: postProductionEstimator
+2025-07-21 19:25:33.210 - [INFO] - models.model_processor:245 - Processing model: postProductionEstimator
+2025-07-21 19:25:33.216 - [INFO] - models.io_logger:86 - Logged input for postProductionEstimator: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/07-post-production-estimator/input.json
+2025-07-21 19:25:33.218 - [INFO] - models.gemini_client:74 - Processing postProductionEstimator with thinking mode: True
+2025-07-21 19:26:30.567 - [WARNING] - utils.enhanced_json_parser:39 - postProductionEstimator: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:26:30.571 - [INFO] - utils.enhanced_json_parser:50 - postProductionEstimator: ✅ Standard JSON parsing successful
+2025-07-21 19:26:30.572 - [INFO] - models.gemini_client:202 - postProductionEstimator: Processing evidence found ✅
+2025-07-21 19:26:30.573 - [INFO] - models.gemini_client:215 - postProductionEstimator: Substantial budget data found ✅
+2025-07-21 19:26:30.573 - [INFO] - models.gemini_client:220 - ✅ Flexible validation passed for postProductionEstimator (response size: 6641 chars)
+2025-07-21 19:26:30.573 - [INFO] - models.gemini_client:117 - Successfully processed postProductionEstimator
+2025-07-21 19:26:30.574 - [WARNING] - models.model_processor:334 - Missing expected root key 'postProductionModelOutput' in postProductionEstimator output
+2025-07-21 19:26:30.574 - [WARNING] - models.model_processor:346 - No processingLog found in postProductionEstimator output - functions may not have executed
+2025-07-21 19:26:30.577 - [INFO] - models.io_logger:152 - Logged output for postProductionEstimator: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/07-post-production-estimator/output.json
+2025-07-21 19:26:30.577 - [INFO] - models.model_processor:291 - Successfully processed postProductionEstimator in 57.36s
+2025-07-21 19:26:30.578 - [INFO] - pipeline.orchestrator:242 - Model postProductionEstimator completed in 57.37 seconds
+2025-07-21 19:26:30.578 - [INFO] - pipeline.dependency_manager:181 - Model postProductionEstimator status: running -> completed
+2025-07-21 19:26:30.578 - [INFO] - pipeline.memory_state_manager:174 - Saved output for scheduleOptimizer in execution 16871b72-065c-4d25-a113-6e5d28d1a15d
+2025-07-21 19:26:30.579 - [INFO] - pipeline.memory_state_manager:174 - Saved output for postProductionEstimator in execution 16871b72-065c-4d25-a113-6e5d28d1a15d
+2025-07-21 19:26:30.579 - [INFO] - pipeline.orchestrator:143 - Tier 2 completed successfully
+2025-07-21 19:26:30.579 - [INFO] - pipeline.orchestrator:102 - Executing Tier 3: ['laborCostCalculator', 'equipmentPricingEngine', 'locationCostEstimator']
+2025-07-21 19:26:30.579 - [INFO] - pipeline.memory_state_manager:256 - Updated execution 16871b72-065c-4d25-a113-6e5d28d1a15d status to RUNNING
+2025-07-21 19:26:30.579 - [INFO] - pipeline.dependency_manager:181 - Model laborCostCalculator status: pending -> running
+2025-07-21 19:26:30.579 - [INFO] - pipeline.orchestrator:221 - Processing model: laborCostCalculator
+2025-07-21 19:26:30.579 - [INFO] - models.model_processor:245 - Processing model: laborCostCalculator
+2025-07-21 19:26:30.587 - [INFO] - models.io_logger:86 - Logged input for laborCostCalculator: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/02-labor-cost-calculator/input.json
+2025-07-21 19:26:30.587 - [INFO] - models.gemini_client:74 - Processing laborCostCalculator with thinking mode: True
+2025-07-21 19:27:44.708 - [WARNING] - utils.enhanced_json_parser:39 - laborCostCalculator: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:27:44.710 - [INFO] - utils.enhanced_json_parser:50 - laborCostCalculator: ✅ Standard JSON parsing successful
+2025-07-21 19:27:44.711 - [WARNING] - models.gemini_client:161 - laborCostCalculator: Response size (15991) exceeds limit (15000)
+2025-07-21 19:27:44.712 - [INFO] - models.gemini_client:202 - laborCostCalculator: Processing evidence found ✅
+2025-07-21 19:27:44.712 - [INFO] - models.gemini_client:215 - laborCostCalculator: Substantial budget data found ✅
+2025-07-21 19:27:44.712 - [INFO] - models.gemini_client:220 - ✅ Flexible validation passed for laborCostCalculator (response size: 10265 chars)
+2025-07-21 19:27:44.713 - [INFO] - models.gemini_client:117 - Successfully processed laborCostCalculator
+2025-07-21 19:27:44.713 - [WARNING] - models.model_processor:334 - Missing expected root key 'laborCostModelOutput' in laborCostCalculator output
+2025-07-21 19:27:44.714 - [WARNING] - models.model_processor:346 - No processingLog found in laborCostCalculator output - functions may not have executed
+2025-07-21 19:27:44.719 - [INFO] - models.io_logger:152 - Logged output for laborCostCalculator: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/02-labor-cost-calculator/output.json
+2025-07-21 19:27:44.719 - [INFO] - models.model_processor:291 - Successfully processed laborCostCalculator in 74.13s
+2025-07-21 19:27:44.719 - [INFO] - pipeline.orchestrator:242 - Model laborCostCalculator completed in 74.14 seconds
+2025-07-21 19:27:44.719 - [INFO] - pipeline.dependency_manager:181 - Model laborCostCalculator status: running -> completed
+2025-07-21 19:27:44.720 - [INFO] - pipeline.dependency_manager:181 - Model equipmentPricingEngine status: pending -> running
+2025-07-21 19:27:44.720 - [INFO] - pipeline.orchestrator:221 - Processing model: equipmentPricingEngine
+2025-07-21 19:27:44.720 - [INFO] - models.model_processor:245 - Processing model: equipmentPricingEngine
+2025-07-21 19:27:44.729 - [INFO] - models.io_logger:86 - Logged input for equipmentPricingEngine: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/03-equipment-pricing-engine/input.json
+2025-07-21 19:27:44.730 - [INFO] - models.gemini_client:74 - Processing equipmentPricingEngine with thinking mode: True
+2025-07-21 19:29:19.370 - [WARNING] - utils.enhanced_json_parser:39 - equipmentPricingEngine: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:29:19.371 - [WARNING] - utils.enhanced_json_parser:53 - equipmentPricingEngine: Standard parsing failed: Expecting ',' delimiter: line 392 column 31 (char 17522)
+2025-07-21 19:29:19.371 - [INFO] - utils.enhanced_json_parser:67 - equipmentPricingEngine: Attempting truncation_recovery repair...
+2025-07-21 19:29:19.371 - [INFO] - utils.enhanced_json_parser:67 - equipmentPricingEngine: Attempting smart_completion repair...
+2025-07-21 19:29:19.371 - [INFO] - utils.enhanced_json_parser:67 - equipmentPricingEngine: Attempting section_extraction repair...
+2025-07-21 19:29:19.371 - [INFO] - utils.enhanced_json_parser:67 - equipmentPricingEngine: Attempting progressive_truncation repair...
+2025-07-21 19:29:19.377 - [INFO] - utils.enhanced_json_parser:67 - equipmentPricingEngine: Attempting template_reconstruction repair...
+2025-07-21 19:29:19.377 - [INFO] - utils.enhanced_json_parser:67 - equipmentPricingEngine: Attempting emergency_fallback repair...
+2025-07-21 19:29:19.378 - [INFO] - utils.enhanced_json_parser:77 - equipmentPricingEngine: ✅ Repaired using emergency_fallback
+2025-07-21 19:29:19.378 - [WARNING] - models.gemini_client:156 - equipmentPricingEngine: JSON was repaired using emergency_fallback
+2025-07-21 19:29:19.378 - [WARNING] - models.gemini_client:161 - equipmentPricingEngine: Response size (17522) exceeds limit (10000)
+2025-07-21 19:29:19.378 - [INFO] - models.gemini_client:202 - equipmentPricingEngine: Processing evidence found ✅
+2025-07-21 19:29:19.378 - [INFO] - models.gemini_client:215 - equipmentPricingEngine: Substantial budget data found ✅
+2025-07-21 19:29:19.379 - [INFO] - models.gemini_client:220 - ✅ Flexible validation passed for equipmentPricingEngine (response size: 513 chars)
+2025-07-21 19:29:19.379 - [INFO] - models.gemini_client:117 - Successfully processed equipmentPricingEngine
+2025-07-21 19:29:19.379 - [WARNING] - models.model_processor:334 - Missing expected root key 'equipmentModelOutput' in equipmentPricingEngine output
+2025-07-21 19:29:19.380 - [INFO] - models.io_logger:152 - Logged output for equipmentPricingEngine: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/03-equipment-pricing-engine/output.json
+2025-07-21 19:29:19.380 - [INFO] - models.model_processor:291 - Successfully processed equipmentPricingEngine in 94.66s
+2025-07-21 19:29:19.380 - [INFO] - pipeline.orchestrator:242 - Model equipmentPricingEngine completed in 94.66 seconds
+2025-07-21 19:29:19.380 - [INFO] - pipeline.dependency_manager:181 - Model equipmentPricingEngine status: running -> completed
+2025-07-21 19:29:19.380 - [INFO] - pipeline.dependency_manager:181 - Model locationCostEstimator status: pending -> running
+2025-07-21 19:29:19.380 - [INFO] - pipeline.orchestrator:221 - Processing model: locationCostEstimator
+2025-07-21 19:29:19.380 - [INFO] - models.model_processor:245 - Processing model: locationCostEstimator
+2025-07-21 19:29:19.388 - [INFO] - models.io_logger:86 - Logged input for locationCostEstimator: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/04-location-cost-estimator/input.json
+2025-07-21 19:29:19.389 - [INFO] - models.gemini_client:74 - Processing locationCostEstimator with thinking mode: True
+2025-07-21 19:30:17.009 - [WARNING] - utils.enhanced_json_parser:39 - locationCostEstimator: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:30:17.012 - [INFO] - utils.enhanced_json_parser:50 - locationCostEstimator: ✅ Standard JSON parsing successful
+2025-07-21 19:30:17.013 - [INFO] - models.gemini_client:202 - locationCostEstimator: Processing evidence found ✅
+2025-07-21 19:30:17.013 - [INFO] - models.gemini_client:215 - locationCostEstimator: Substantial budget data found ✅
+2025-07-21 19:30:17.013 - [INFO] - models.gemini_client:220 - ✅ Flexible validation passed for locationCostEstimator (response size: 7409 chars)
+2025-07-21 19:30:17.014 - [INFO] - models.gemini_client:117 - Successfully processed locationCostEstimator
+2025-07-21 19:30:17.014 - [WARNING] - models.model_processor:334 - Missing expected root key 'locationModelOutput' in locationCostEstimator output
+2025-07-21 19:30:17.014 - [WARNING] - models.model_processor:346 - No processingLog found in locationCostEstimator output - functions may not have executed
+2025-07-21 19:30:17.017 - [INFO] - models.io_logger:152 - Logged output for locationCostEstimator: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/04-location-cost-estimator/output.json
+2025-07-21 19:30:17.017 - [INFO] - models.model_processor:291 - Successfully processed locationCostEstimator in 57.63s
+2025-07-21 19:30:17.017 - [INFO] - pipeline.orchestrator:242 - Model locationCostEstimator completed in 57.64 seconds
+2025-07-21 19:30:17.018 - [INFO] - pipeline.dependency_manager:181 - Model locationCostEstimator status: running -> completed
+2025-07-21 19:30:17.019 - [INFO] - pipeline.memory_state_manager:174 - Saved output for laborCostCalculator in execution 16871b72-065c-4d25-a113-6e5d28d1a15d
+2025-07-21 19:30:17.019 - [INFO] - pipeline.memory_state_manager:174 - Saved output for equipmentPricingEngine in execution 16871b72-065c-4d25-a113-6e5d28d1a15d
+2025-07-21 19:30:17.019 - [INFO] - pipeline.memory_state_manager:174 - Saved output for locationCostEstimator in execution 16871b72-065c-4d25-a113-6e5d28d1a15d
+2025-07-21 19:30:17.019 - [INFO] - pipeline.orchestrator:143 - Tier 3 completed successfully
+2025-07-21 19:30:17.020 - [INFO] - pipeline.orchestrator:102 - Executing Tier 4: ['insuranceCalculator']
+2025-07-21 19:30:17.020 - [INFO] - pipeline.memory_state_manager:256 - Updated execution 16871b72-065c-4d25-a113-6e5d28d1a15d status to RUNNING
+2025-07-21 19:30:17.022 - [INFO] - pipeline.dependency_manager:181 - Model insuranceCalculator status: pending -> running
+2025-07-21 19:30:17.022 - [INFO] - pipeline.orchestrator:221 - Processing model: insuranceCalculator
+2025-07-21 19:30:17.022 - [INFO] - models.model_processor:245 - Processing model: insuranceCalculator
+2025-07-21 19:30:17.035 - [INFO] - models.io_logger:86 - Logged input for insuranceCalculator: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/06-insurance-calculator/input.json
+2025-07-21 19:30:17.035 - [INFO] - models.gemini_client:74 - Processing insuranceCalculator with thinking mode: True
+2025-07-21 19:31:42.379 - [WARNING] - utils.enhanced_json_parser:39 - insuranceCalculator: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:31:42.381 - [INFO] - utils.enhanced_json_parser:50 - insuranceCalculator: ✅ Standard JSON parsing successful
+2025-07-21 19:31:42.381 - [WARNING] - models.gemini_client:161 - insuranceCalculator: Response size (17510) exceeds limit (10000)
+2025-07-21 19:31:42.382 - [INFO] - models.gemini_client:202 - insuranceCalculator: Processing evidence found ✅
+2025-07-21 19:31:42.383 - [INFO] - models.gemini_client:215 - insuranceCalculator: Substantial budget data found ✅
+2025-07-21 19:31:42.383 - [INFO] - models.gemini_client:220 - ✅ Flexible validation passed for insuranceCalculator (response size: 14084 chars)
+2025-07-21 19:31:42.383 - [INFO] - models.gemini_client:117 - Successfully processed insuranceCalculator
+2025-07-21 19:31:42.383 - [WARNING] - models.model_processor:334 - Missing expected root key 'insuranceModelOutput' in insuranceCalculator output
+2025-07-21 19:31:42.383 - [WARNING] - models.model_processor:346 - No processingLog found in insuranceCalculator output - functions may not have executed
+2025-07-21 19:31:42.387 - [INFO] - models.io_logger:152 - Logged output for insuranceCalculator: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/06-insurance-calculator/output.json
+2025-07-21 19:31:42.387 - [INFO] - models.model_processor:291 - Successfully processed insuranceCalculator in 85.36s
+2025-07-21 19:31:42.387 - [INFO] - pipeline.orchestrator:242 - Model insuranceCalculator completed in 85.36 seconds
+2025-07-21 19:31:42.387 - [INFO] - pipeline.dependency_manager:181 - Model insuranceCalculator status: running -> completed
+2025-07-21 19:31:42.389 - [INFO] - pipeline.memory_state_manager:174 - Saved output for insuranceCalculator in execution 16871b72-065c-4d25-a113-6e5d28d1a15d
+2025-07-21 19:31:42.389 - [INFO] - pipeline.orchestrator:143 - Tier 4 completed successfully
+2025-07-21 19:31:42.389 - [INFO] - pipeline.orchestrator:102 - Executing Tier 5: ['budgetAggregator']
+2025-07-21 19:31:42.389 - [INFO] - pipeline.memory_state_manager:256 - Updated execution 16871b72-065c-4d25-a113-6e5d28d1a15d status to RUNNING
+2025-07-21 19:31:42.390 - [INFO] - pipeline.dependency_manager:181 - Model budgetAggregator status: pending -> running
+2025-07-21 19:31:42.390 - [INFO] - pipeline.orchestrator:221 - Processing model: budgetAggregator
+2025-07-21 19:31:42.390 - [INFO] - models.model_processor:245 - Processing model: budgetAggregator
+2025-07-21 19:31:42.404 - [INFO] - models.io_logger:86 - Logged input for budgetAggregator: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/09-budget-aggregator/input.json
+2025-07-21 19:31:42.404 - [INFO] - models.gemini_client:74 - Processing budgetAggregator with thinking mode: True
+2025-07-21 19:33:16.675 - [WARNING] - utils.enhanced_json_parser:39 - budgetAggregator: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:33:16.678 - [WARNING] - utils.enhanced_json_parser:53 - budgetAggregator: Standard parsing failed: Unterminated string starting at: line 175 column 20 (char 8060)
+2025-07-21 19:33:16.678 - [INFO] - utils.enhanced_json_parser:67 - budgetAggregator: Attempting truncation_recovery repair...
+2025-07-21 19:33:16.682 - [INFO] - utils.enhanced_json_parser:67 - budgetAggregator: Attempting smart_completion repair...
+2025-07-21 19:33:16.683 - [INFO] - utils.enhanced_json_parser:67 - budgetAggregator: Attempting section_extraction repair...
+2025-07-21 19:33:16.683 - [INFO] - utils.enhanced_json_parser:67 - budgetAggregator: Attempting progressive_truncation repair...
+2025-07-21 19:33:16.683 - [INFO] - utils.enhanced_json_parser:77 - budgetAggregator: ✅ Repaired using progressive_truncation
+2025-07-21 19:33:16.684 - [WARNING] - models.gemini_client:156 - budgetAggregator: JSON was repaired using progressive_truncation
+2025-07-21 19:33:16.684 - [ERROR] - models.gemini_client:174 - Enhanced parsing failed for budgetAggregator: Response too short or empty for budgetAggregator
+2025-07-21 19:33:16.684 - [INFO] - models.gemini_client:117 - Successfully processed budgetAggregator
+2025-07-21 19:33:16.685 - [WARNING] - models.model_processor:334 - Missing expected root key 'budgetAggregatorOutput' in budgetAggregator output
+2025-07-21 19:33:16.685 - [WARNING] - models.model_processor:346 - No processingLog found in budgetAggregator output - functions may not have executed
+2025-07-21 19:33:16.686 - [INFO] - models.io_logger:152 - Logged output for budgetAggregator: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/09-budget-aggregator/output.json
+2025-07-21 19:33:16.687 - [INFO] - models.model_processor:291 - Successfully processed budgetAggregator in 94.29s
+2025-07-21 19:33:16.687 - [INFO] - pipeline.orchestrator:242 - Model budgetAggregator completed in 94.30 seconds
+2025-07-21 19:33:16.687 - [INFO] - pipeline.dependency_manager:181 - Model budgetAggregator status: running -> completed
+2025-07-21 19:33:16.687 - [INFO] - pipeline.memory_state_manager:174 - Saved output for budgetAggregator in execution 16871b72-065c-4d25-a113-6e5d28d1a15d
+2025-07-21 19:33:16.688 - [INFO] - pipeline.orchestrator:143 - Tier 5 completed successfully
+2025-07-21 19:33:16.688 - [INFO] - pipeline.orchestrator:102 - Executing Tier 6: ['taxIncentiveAnalyzer']
+2025-07-21 19:33:16.688 - [INFO] - pipeline.memory_state_manager:256 - Updated execution 16871b72-065c-4d25-a113-6e5d28d1a15d status to RUNNING
+2025-07-21 19:33:16.689 - [INFO] - pipeline.dependency_manager:181 - Model taxIncentiveAnalyzer status: pending -> running
+2025-07-21 19:33:16.689 - [INFO] - pipeline.orchestrator:221 - Processing model: taxIncentiveAnalyzer
+2025-07-21 19:33:16.689 - [INFO] - models.model_processor:245 - Processing model: taxIncentiveAnalyzer
+2025-07-21 19:33:16.695 - [INFO] - models.io_logger:86 - Logged input for taxIncentiveAnalyzer: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/08-tax-incentive-analyzer/input.json
+2025-07-21 19:33:16.695 - [INFO] - models.gemini_client:74 - Processing taxIncentiveAnalyzer with thinking mode: True
+2025-07-21 19:34:23.132 - [WARNING] - utils.enhanced_json_parser:39 - taxIncentiveAnalyzer: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:34:23.134 - [INFO] - utils.enhanced_json_parser:50 - taxIncentiveAnalyzer: ✅ Standard JSON parsing successful
+2025-07-21 19:34:23.134 - [WARNING] - models.gemini_client:161 - taxIncentiveAnalyzer: Response size (13789) exceeds limit (10000)
+2025-07-21 19:34:23.135 - [INFO] - models.gemini_client:202 - taxIncentiveAnalyzer: Processing evidence found ✅
+2025-07-21 19:34:23.135 - [INFO] - models.gemini_client:215 - taxIncentiveAnalyzer: Substantial budget data found ✅
+2025-07-21 19:34:23.136 - [INFO] - models.gemini_client:220 - ✅ Flexible validation passed for taxIncentiveAnalyzer (response size: 12063 chars)
+2025-07-21 19:34:23.136 - [INFO] - models.gemini_client:117 - Successfully processed taxIncentiveAnalyzer
+2025-07-21 19:34:23.136 - [WARNING] - models.model_processor:334 - Missing expected root key 'taxIncentiveModelOutput' in taxIncentiveAnalyzer output
+2025-07-21 19:34:23.137 - [WARNING] - models.model_processor:346 - No processingLog found in taxIncentiveAnalyzer output - functions may not have executed
+2025-07-21 19:34:23.140 - [INFO] - models.io_logger:152 - Logged output for taxIncentiveAnalyzer: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/08-tax-incentive-analyzer/output.json
+2025-07-21 19:34:23.140 - [INFO] - models.model_processor:291 - Successfully processed taxIncentiveAnalyzer in 66.45s
+2025-07-21 19:34:23.140 - [INFO] - pipeline.orchestrator:242 - Model taxIncentiveAnalyzer completed in 66.45 seconds
+2025-07-21 19:34:23.141 - [INFO] - pipeline.dependency_manager:181 - Model taxIncentiveAnalyzer status: running -> completed
+2025-07-21 19:34:23.141 - [INFO] - pipeline.memory_state_manager:174 - Saved output for taxIncentiveAnalyzer in execution 16871b72-065c-4d25-a113-6e5d28d1a15d
+2025-07-21 19:34:23.141 - [INFO] - pipeline.orchestrator:143 - Tier 6 completed successfully
+2025-07-21 19:34:23.141 - [INFO] - pipeline.orchestrator:102 - Executing Tier 7: ['cashFlowProjector']
+2025-07-21 19:34:23.141 - [INFO] - pipeline.memory_state_manager:256 - Updated execution 16871b72-065c-4d25-a113-6e5d28d1a15d status to RUNNING
+2025-07-21 19:34:23.142 - [INFO] - pipeline.dependency_manager:181 - Model cashFlowProjector status: pending -> running
+2025-07-21 19:34:23.142 - [INFO] - pipeline.orchestrator:221 - Processing model: cashFlowProjector
+2025-07-21 19:34:23.142 - [INFO] - models.model_processor:245 - Processing model: cashFlowProjector
+2025-07-21 19:34:23.147 - [INFO] - models.io_logger:86 - Logged input for cashFlowProjector: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/10-cash-flow-projector/input.json
+2025-07-21 19:34:23.147 - [INFO] - models.gemini_client:74 - Processing cashFlowProjector with thinking mode: True
+2025-07-21 19:35:33.969 - [WARNING] - utils.enhanced_json_parser:39 - cashFlowProjector: Truncation detected - abrupt_ending_"[^"]*$
+2025-07-21 19:35:33.991 - [INFO] - utils.enhanced_json_parser:50 - cashFlowProjector: ✅ Standard JSON parsing successful
+2025-07-21 19:35:33.997 - [INFO] - models.gemini_client:202 - cashFlowProjector: Processing evidence found ✅
+2025-07-21 19:35:33.998 - [INFO] - models.gemini_client:215 - cashFlowProjector: Substantial budget data found ✅
+2025-07-21 19:35:33.998 - [INFO] - models.gemini_client:220 - ✅ Flexible validation passed for cashFlowProjector (response size: 11290 chars)
+2025-07-21 19:35:33.998 - [INFO] - models.gemini_client:117 - Successfully processed cashFlowProjector
+2025-07-21 19:35:34.004 - [WARNING] - models.model_processor:334 - Missing expected root key 'cashFlowModelOutput' in cashFlowProjector output
+2025-07-21 19:35:34.005 - [WARNING] - models.model_processor:346 - No processingLog found in cashFlowProjector output - functions may not have executed
+2025-07-21 19:35:34.036 - [INFO] - models.io_logger:152 - Logged output for cashFlowProjector: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/10-cash-flow-projector/output.json
+2025-07-21 19:35:34.036 - [INFO] - models.model_processor:291 - Successfully processed cashFlowProjector in 70.86s
+2025-07-21 19:35:34.038 - [INFO] - pipeline.orchestrator:242 - Model cashFlowProjector completed in 70.90 seconds
+2025-07-21 19:35:34.043 - [INFO] - pipeline.dependency_manager:181 - Model cashFlowProjector status: running -> completed
+2025-07-21 19:35:34.053 - [INFO] - pipeline.memory_state_manager:174 - Saved output for cashFlowProjector in execution 16871b72-065c-4d25-a113-6e5d28d1a15d
+2025-07-21 19:35:34.053 - [INFO] - pipeline.orchestrator:143 - Tier 7 completed successfully
+2025-07-21 19:35:34.054 - [WARNING] - pipeline.orchestrator:151 - 🔄 Budget Aggregator failed, applying fallback aggregation...
+2025-07-21 19:35:34.059 - [INFO] - utils.fallback_aggregator:32 - 🔄 FALLBACK AGGREGATION: Starting emergency budget compilation
+2025-07-21 19:35:34.064 - [INFO] - utils.fallback_aggregator:49 - ✅ FALLBACK AGGREGATION: Completed successfully
+2025-07-21 19:35:34.064 - [ERROR] - utils.fallback_aggregator:55 - ❌ FALLBACK AGGREGATION: Failed - 'budgetSummary'
+2025-07-21 19:35:34.064 - [ERROR] - utils.fallback_aggregator:409 - 🚨 EMERGENCY BUDGET: All aggregation methods failed
+2025-07-21 19:35:34.064 - [INFO] - pipeline.orchestrator:167 - ✅ Fallback budget aggregation completed successfully
+2025-07-21 19:35:34.067 - [INFO] - pipeline.memory_state_manager:256 - Updated execution 16871b72-065c-4d25-a113-6e5d28d1a15d status to COMPLETED
+2025-07-21 19:35:34.082 - [INFO] - models.io_logger:208 - Logged execution summary: executions/16871b72-065c-4d25-a113-6e5d28d1a15d/execution_summary.json
+2025-07-21 19:35:34.082 - [INFO] - pipeline.orchestrator:188 - Pipeline execution 16871b72-065c-4d25-a113-6e5d28d1a15d completed in 743.50 seconds
+2025-07-21 19:35:34.082 - [INFO] - pipeline.orchestrator:189 - Execution logs stored in: executions/16871b72-065c-4d25-a113-6e5d28d1a15d
+2025-07-21 19:35:34.082 - [INFO] - __main__:106 - 🎉 CORRECTED PIPELINE COMPLETED!
+2025-07-21 19:35:34.082 - [INFO] - __main__:107 - ⏱️ Total time: 743.5s
+2025-07-21 19:35:34.082 - [INFO] - __main__:108 - 📊 Models processed: 10
+2025-07-21 19:35:34.082 - [INFO] - __main__:109 - 💾 Execution logs: executions/16871b72-065c-4d25-a113-6e5d28d1a15d
+2025-07-21 19:35:34.082 - [INFO] - __main__:113 - ✅ Coordinator processed successfully - data packets created

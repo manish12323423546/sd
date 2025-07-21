@@ -1,0 +1,260 @@
+{
+  "model_name": "locationCostEstimator",
+  "execution_id": "db8fa17c-9f59-4820-9d60-6219ded4944e",
+  "timestamp": "2025-07-21T13:48:56.457311",
+  "success": true,
+  "processing_time": 88.93044320900003,
+  "output_data": {
+    "projectId": "proj_2001_space_odyssey",
+    "locationCostAnalysisId": "loc_est_680403_v1",
+    "processingTimestamp": "2024-07-21T10:12:00Z",
+    "processingEvidence": [
+      {
+        "functionName": "Location Fee Estimation Processing",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:11:55Z",
+        "summary": "Estimated fees for all practical and studio locations. Calculated practical location fees for 20 shoot days in Africa, including government liaison charges. Calculated studio costs based on a 40-week block booking of 4 large stages at MGM-British Studios to accommodate extensive prep, a 125-day shoot schedule, and wrap. Included costs for ancillary spaces like workshops and offices."
+      },
+      {
+        "functionName": "Permit Cost Calculation Processing",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:11:56Z",
+        "summary": "Calculated international and domestic permit costs. For Africa, this includes a national filming permit, animal importation/welfare permits, and customs carnet fees. For the UK, this includes pyrotechnic permits and fees for unprecedented engineering and safety certifications for the large-scale mechanical sets."
+      },
+      {
+        "functionName": "Security Requirements Processing",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:11:57Z",
+        "summary": "Assessed and costed security for both location types. A dedicated security team, secure compound, and crowd control measures were budgeted for the high-risk remote African location. For the studio, costs include 24/7 on-set security, and enhanced access control protocols to protect high-value sets and maintain project confidentiality."
+      },
+      {
+        "functionName": "Restoration Cost Processing",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:11:58Z",
+        "summary": "Factored in restoration costs. For Africa, this includes a substantial environmental bond, a dedicated cleanup crew, and oversight from an environmental officer to ensure a 'leave no trace' policy. For the studio, a significant budget was allocated for the strike, removal, and disposal of massive, complex sets."
+      },
+      {
+        "functionName": "Parking and Facilities Processing",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:11:59Z",
+        "summary": "Calculated costs for essential support facilities. For the remote African shoot, this covers the establishment of a full base camp, including vehicle staging, field kitchens, large-scale power generation with fuel, and water/waste management. For the studio, costs are primarily for the high consumption of electrical power for massive set lighting, plus a contingency for overflow parking."
+      }
+    ],
+    "locationCostSummary": {
+      "totalLocationFees": 1657500,
+      "totalPermitCosts": 97000,
+      "totalSecurityCosts": 203000,
+      "totalRestorationCosts": 191250,
+      "totalFacilitiesAndInfrastructure": 423000,
+      "totalConstructionAndSupport": 2310000,
+      "subtotal": 4881750,
+      "contingencyAmount": 976350,
+      "totalEstimatedCost": 5858100,
+      "currency": "USD",
+      "notes": "Costs are estimated in 1965-1968 US dollars, reflecting the production era. A significant contingency is included due to the pioneering and unprecedented nature of the production's technical requirements."
+    },
+    "confidenceInterval": {
+      "low": 4881750,
+      "high": 5858100,
+      "confidenceLevel": "85%",
+      "description": "The range reflects the high degree of uncertainty and risk associated with the project's groundbreaking special effects, set construction, and remote international filming in the 1960s."
+    },
+    "detailedBreakdown": [
+      {
+        "locationCategory": "Practical Locations",
+        "locationName": "Africa (Namibia/Kenya proxy)",
+        "schedulePhase": "Phase 1: The Dawn of Man",
+        "durationDays": 20,
+        "costs": {
+          "locationFees": {
+            "description": "Fees for access to national parks/reserves for plains, stream, and cave exterior scenes.",
+            "dailyRate": 2500,
+            "days": 15,
+            "total": 37500
+          },
+          "governmentLiaison": {
+            "description": "Mandatory government fixers, park ranger oversight, and local authority coordination.",
+            "dailyRate": 1000,
+            "days": 20,
+            "total": 20000
+          },
+          "permits": {
+            "description": "National filming permit, animal welfare/importation permits, and customs carnet.",
+            "total": 80000
+          },
+          "security": {
+            "description": "On-site security team (10 guards), secure equipment compound, and crowd management.",
+            "total": 73000
+          },
+          "restorationAndCleanup": {
+            "description": "Environmental bond, 'leave no trace' cleanup crew, and environmental officer.",
+            "bondAmount": 100000,
+            "nonRefundableCosts": 41250,
+            "total": 41250
+          },
+          "transportationLogistics": {
+            "description": "International air/sea freight for equipment, plus local rental of 4x4 vehicles.",
+            "total": 195000
+          },
+          "localSupport": {
+            "description": "Local fixer/liaison services and specialized animal wrangler package for lion and other animals.",
+            "total": 115000
+          },
+          "subtotal": 561750
+        }
+      },
+      {
+        "locationCategory": "Studio Facilities",
+        "locationName": "MGM-British Studios, UK (proxy)",
+        "schedulePhase": "Phases 2, 3, 4",
+        "durationDays": 125,
+        "costs": {
+          "studioRental": {
+            "description": "Block booking of 4 large sound stages for 40 weeks to cover prep, shoot, and wrap. Includes office space, workshops, and storage.",
+            "weeklyRate": 40000,
+            "weeks": 40,
+            "total": 1600000
+          },
+          "permitsAndCertification": {
+            "description": "Permits for on-set pyrotechnics and engineering safety certification for complex mechanical rigs.",
+            "total": 17000
+          },
+          "security": {
+            "description": "24/7 on-set security team and enhanced access control for confidential sets.",
+            "total": 130000
+          },
+          "utilities": {
+            "description": "Metered electrical power consumption for massive set lighting and mechanical rigs.",
+            "dailyRate": 2000,
+            "days": 125,
+            "total": 250000
+          },
+          "parkingAndFacilities": {
+            "description": "Contingency for overflow crew parking.",
+            "total": 10000
+          },
+          "restorationAndStrike": {
+            "description": "Labor and disposal costs for striking and removing all large-scale sets post-filming.",
+            "total": 150000
+          },
+          "subtotal": 2157000
+        }
+      }
+    ],
+    "specializedCosting": {
+      "customSetConstruction": {
+        "description": "Design, engineering, material, and labor costs for constructing groundbreaking and large-scale sets. This was a primary driver of the film's budget.",
+        "items": [
+          {
+            "setName": "Discovery One Centrifuge",
+            "details": "38-foot diameter, 100-ton rotating set with integrated lighting, props, and camera rigging. A major engineering feat.",
+            "cost": 750000
+          },
+          {
+            "setName": "Space Station 5",
+            "details": "Large-scale, multi-level set with curved architecture and provisions for a smaller rotating section for docking sequence.",
+            "cost": 400000
+          },
+          {
+            "setName": "Moon Base & TMA-1 Excavation",
+            "details": "Multiple interconnected sets including conference rooms, airlocks, and a large-scale lunar surface excavation site with complex lighting.",
+            "cost": 350000
+          },
+          {
+            "setName": "Various Spacecraft Interiors",
+            "details": "Cockpit and passenger sets for Orion III and Aries-IB spacecraft, designed for zero-gravity effects.",
+            "cost": 250000
+          },
+          {
+            "setName": "Stargate & Hotel Room",
+            "details": "Specialized sets for abstract visual effects sequences and the final Louis XVI-style hotel room.",
+            "cost": 150000
+          },
+          {
+            "setName": "African Cave Interiors",
+            "details": "Studio-built cave set to match practical exteriors, allowing for controlled lighting and effects.",
+            "cost": 100000
+          }
+        ],
+        "total": 2000000
+      },
+      "infrastructureDevelopment": {
+        "description": "Costs to establish temporary infrastructure required for filming.",
+        "items": [
+          {
+            "location": "Africa",
+            "details": "Establishment of a full base camp: grading for vehicle access, catering tents, field kitchen.",
+            "cost": 30000
+          },
+          {
+            "location": "Africa",
+            "details": "Water and waste management systems, including transport of potable water and disposal of waste.",
+            "cost": 30000
+          }
+        ],
+        "total": 60000
+      }
+    },
+    "riskAssessment": [
+      {
+        "riskId": "LOC-RISK-001",
+        "category": "Logistical",
+        "description": "High risk of delays and cost overruns at the remote African location due to weather, animal availability, and complex logistics for personnel and equipment.",
+        "mitigation": "Budget includes a local fixer, contingency days, and an environmental bond. Pre-scouting and establishing strong local contacts is critical."
+      },
+      {
+        "riskId": "LOC-RISK-002",
+        "category": "Construction",
+        "description": "The unprecedented scale and technical complexity of the studio sets (especially the centrifuge) present a massive risk of engineering challenges, budget overruns, and schedule delays.",
+        "mitigation": "A substantial construction budget and a high overall contingency (20%) are allocated. Engaging top-tier engineers and extensive R&D/testing periods are assumed."
+      },
+      {
+        "riskId": "LOC-RISK-003",
+        "category": "Regulatory",
+        "description": "Pioneering construction and special effects may face unforeseen regulatory hurdles for safety certification, as standards for such work were not yet established.",
+        "mitigation": "Budget allocated for specialized engineering review and certification. Close collaboration with studio safety officers and authorities is required."
+      },
+      {
+        "riskId": "LOC-RISK-004",
+        "category": "Resource",
+        "description": "Extreme demand for specialized studio space and power. Availability of multiple large stages for an extended period could be a constraint.",
+        "mitigation": "Cost estimate is based on a long-term block booking made well in advance. Power costs are budgeted at a premium rate to reflect high consumption."
+      }
+    ],
+    "alternativeLocationOptions": [
+      {
+        "option": "Substitute Spain for Africa",
+        "description": "Utilize established filming locations in Spanish deserts (e.g., Almería) to replicate African plains. This would significantly reduce logistical complexity, transportation costs, and political risks.",
+        "pros": [
+          "Lower logistical risk",
+          "Established infrastructure",
+          "Reduced travel time and cost"
+        ],
+        "cons": [
+          "Loss of visual authenticity",
+          "Different quality of light",
+          "May not have the required wildlife"
+        ]
+      },
+      {
+        "option": "US-Based Studio Production",
+        "description": "Base the entire studio portion of the film in a major Hollywood studio complex instead of the UK.",
+        "pros": [
+          "Access to a large pool of specialized SFX/VFX talent and vendors",
+          "Proximity to director and key US-based production staff"
+        ],
+        "cons": [
+          "Potentially higher union labor costs in the 1960s",
+          "Less favorable currency exchange rates at the time",
+          "May have required relocating key UK-based department heads (e.g., production design)"
+        ]
+      }
+    ]
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 10169
+  }
+}

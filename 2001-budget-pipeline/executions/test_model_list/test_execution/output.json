@@ -1,0 +1,33 @@
+{
+  "model_name": "test_execution",
+  "execution_id": "test_model_list",
+  "timestamp": "2025-07-21T13:51:10.677224",
+  "success": 60.0,
+  "processing_time": true,
+  "output_data": {
+    "model_data": {
+      "key": "value"
+    },
+    "processingLog": [
+      {
+        "status": "SUCCESS",
+        "step": "step1"
+      },
+      {
+        "status": "FAILED",
+        "step": "step2"
+      }
+    ]
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 130
+  },
+  "thinking_evidence": {
+    "has_processing_log": true,
+    "functions_executed": 1,
+    "processing_log_type": "list"
+  }
+}

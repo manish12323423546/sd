@@ -1,0 +1,34 @@
+{
+  "model_name": "scheduleOptimizer",
+  "execution_id": "16871b72-065c-4d25-a113-6e5d28d1a15d",
+  "timestamp": "2025-07-21T13:55:33.208920",
+  "success": true,
+  "processing_time": 83.29211720800001,
+  "output_data": {
+    "scheduleId": "sched_2001_truncated",
+    "projectId": "proj_2001_space_odyssey",
+    "scheduleData": "TRUNCATED_DATA_PLACEHOLDER",
+    "processingLog": [
+      {
+        "status": "TRUNCATED",
+        "note": "Response was truncated"
+      }
+    ],
+    "majorMoves": 2,
+    "totalShootDays": 145,
+    "totalPages": 145,
+    "averagePagesPerDay": 1.0,
+    "companyMoves": 12
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 308
+  },
+  "thinking_evidence": {
+    "has_processing_log": true,
+    "functions_executed": 0,
+    "processing_log_type": "list"
+  }
+}

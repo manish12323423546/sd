@@ -1,0 +1,40 @@
+{
+  "model_name": "equipmentPricingEngine",
+  "execution_id": "16871b72-065c-4d25-a113-6e5d28d1a15d",
+  "timestamp": "2025-07-21T13:59:19.379798",
+  "success": true,
+  "processing_time": 94.65797537500004,
+  "output_data": {
+    "model_name": "equipmentPricingEngine",
+    "status": "TRUNCATED_RESPONSE",
+    "extracted_data": {
+      "equipmentPricingId": "equip_price_6a2b8c4d_1967",
+      "projectId": "proj_2001_space_odyssey"
+    },
+    "processingLog": [
+      {
+        "status": "FAILED",
+        "reason": "Response truncated during generation",
+        "timestamp": "2025-07-21T19:29:19.fZ",
+        "recovery_method": "emergency_structure"
+      }
+    ],
+    "original_response_length": 17522,
+    "truncation_analysis": {
+      "estimated_complete_size": 35044,
+      "truncation_type": "gemini_output_limit",
+      "recoverable": false
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 513
+  },
+  "thinking_evidence": {
+    "has_processing_log": true,
+    "functions_executed": 0,
+    "processing_log_type": "list"
+  }
+}

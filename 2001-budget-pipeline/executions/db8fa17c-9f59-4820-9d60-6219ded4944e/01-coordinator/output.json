@@ -1,0 +1,345 @@
+{
+  "model_name": "coordinator",
+  "execution_id": "db8fa17c-9f59-4820-9d60-6219ded4944e",
+  "timestamp": "2025-07-21T13:42:16.953679",
+  "success": true,
+  "processing_time": 61.744227708,
+  "output_data": {
+    "budgetCoordinatorOutput": {
+      "projectId": "proj_2001_space_odyssey",
+      "processingTimestamp": "2024-07-21T10:05:00Z",
+      "systemStatusReport": {
+        "intakeStatus": "SUCCESS",
+        "validationStatus": "CONDITIONAL",
+        "dataCompleteness": "98%",
+        "missingInformation": [
+          "Specific Union Jurisdictions (e.g., SAG, DGA, IATSE) for accurate labor rates.",
+          "Crew and Cast residency information for Tax Incentive analysis.",
+          "Specific equipment vendor tiers or preferred rental houses.",
+          "Funding source details and drawdown schedule for Cash Flow projection."
+        ],
+        "identifiedRisks": [
+          {
+            "riskId": "RISK-TECH-001",
+            "description": "Extreme technical complexity involving unproven technologies like the large-scale rotating centrifuge set, front projection systems, and zero-gravity rigs.",
+            "mitigation": "Allocate significant budget for R&D, pre-visualization, and testing. Hire top-tier engineering and SFX teams."
+          },
+          {
+            "riskId": "RISK-VFX-001",
+            "description": "Groundbreaking and extensive VFX requirements (205+ shots), including the abstract Stargate sequence, with high potential for schedule and budget overruns.",
+            "mitigation": "Engage VFX supervisor from early prep. Budget for extensive motion control photography and optical printing. Build in contingency for VFX."
+          },
+          {
+            "riskId": "RISK-SET-001",
+            "description": "Requirement for numerous, large, and highly detailed sets (Discovery Centrifuge, Space Station, Moon Base) which are costly and time-consuming to build.",
+            "mitigation": "Secure large-scale studio space well in advance. Detailed construction plans and budget must be locked early."
+          },
+          {
+            "riskId": "RISK-LOG-001",
+            "description": "High-risk production elements including work with a trained lion, numerous other animals, and child actors, all of which have significant safety, logistical, and regulatory implications.",
+            "mitigation": "Hire experienced animal wranglers and safety coordinators. Adhere strictly to child labor laws. Increase insurance coverage."
+          },
+          {
+            "riskId": "RISK-SCHED-001",
+            "description": "A long and complex production schedule (145 shooting days) with many dependencies between departments (e.g., SFX, VFX, stunts) increases the likelihood of cascading delays.",
+            "mitigation": "Utilize advanced scheduling software. Build in contingency days for complex sequences. Ensure clear communication between department heads."
+          }
+        ]
+      },
+      "modelDataPackets": {
+        "scheduleOptimizer": {
+          "model": "Schedule Optimizer",
+          "priority": "FIRST",
+          "description": "Generates the master production schedule based on all scenes, cast, locations, and constraints.",
+          "inputs": {
+            "scenes": "Array of 71 scenes with pages, cast, location, and special requirements.",
+            "castAvailability": "Principal cast members with estimated total shooting days (e.g., DAVE_BOWMAN: 35 days).",
+            "locationConstraints": "13 unique locations with estimated days needed and specific restrictions (e.g., AFRICAN_CAVES: 15 days, safety protocols).",
+            "scheduleParameters": {
+              "totalShootDays": 145,
+              "prepDays": 84,
+              "wrapDays": 14,
+              "targetStart": "1965-12-29",
+              "mustWrapBy": "1968-04-03",
+              "sixDayWeeks": false,
+              "unionRules": "To be determined based on jurisdiction."
+            },
+            "specialSchedulingBlocks": {
+              "centrifugeWork": 25,
+              "animalWork": 8,
+              "childrenWork": 3,
+              "stuntWork": 8,
+              "vfxSupervision": 60
+            }
+          }
+        },
+        "laborCostCalculator": {
+          "model": "Labor Cost Calculator",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Schedule Optimizer"
+          ],
+          "description": "Calculates all cast and crew labor costs based on the schedule and union rules.",
+          "inputs": {
+            "castBreakdown": {
+              "principals": 5,
+              "supporting": 4,
+              "dayPlayers": 5,
+              "voice": 1
+            },
+            "extrasSummary": {
+              "totalManDays": 450,
+              "maxInScene": 36
+            },
+            "stuntPerformers": {
+              "totalStunts": 3,
+              "totalPerformers": 4
+            },
+            "specialtyLabor": [
+              "animal_wranglers",
+              "safety_coordinator",
+              "fight_choreographer",
+              "stunt_coordinator",
+              "vfx_supervision"
+            ],
+            "jurisdiction": "FLAG: Missing specific union jurisdiction data."
+          }
+        },
+        "equipmentPricingEngine": {
+          "model": "Equipment Pricing Engine",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Schedule Optimizer"
+          ],
+          "description": "Prices all required production equipment based on the schedule.",
+          "inputs": {
+            "specialEquipment": [
+              "centrifuge_camera_mount",
+              "zero_gravity_wire_rig",
+              "rotating_set_mechanism",
+              "front_projection_system",
+              "motion_control_camera",
+              "underwater_tank",
+              "wind_machines",
+              "space_suit_life_support"
+            ],
+            "cameraPackages": [
+              "drone_footage",
+              "wide_lens_package",
+              "multiple_cameras",
+              "telephoto_lenses"
+            ],
+            "heroPropsWithTech": [
+              "BLACK_MONOLITH_TMA1 (magnetic_field_effects, sound_emission)",
+              "CRYSTAL_CUBE_TEACHER (projection_mapping, sound_system)",
+              "HAL_9000_COMPUTER_EYE (led_lighting, camera_mechanism)",
+              "SPACE_PODS (functional_arms, propulsion_effects)"
+            ],
+            "mechanicalEffectsRigs": {
+              "rotatingCentrifuge": 1,
+              "zeroGravityRigs": 15,
+              "animatronics": 5
+            },
+            "vendorTier": "FLAG: Missing specific vendor tier."
+          }
+        },
+        "locationCostEstimator": {
+          "model": "Location Cost Estimator",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Schedule Optimizer"
+          ],
+          "description": "Estimates costs for all practical locations and studio builds.",
+          "inputs": {
+            "locations": [
+              {
+                "name": "AFRICAN_STREAM",
+                "type": "practical",
+                "estimatedDays": 6
+              },
+              {
+                "name": "AFRICAN_PLAINS",
+                "type": "practical",
+                "estimatedDays": 4
+              },
+              {
+                "name": "AFRICAN_CAVES",
+                "type": "practical/studio",
+                "estimatedDays": 15
+              },
+              {
+                "name": "ORION_SPACECRAFT",
+                "type": "studio_build",
+                "estimatedDays": 18
+              },
+              {
+                "name": "SPACE_STATION",
+                "type": "studio_build",
+                "estimatedDays": 12
+              },
+              {
+                "name": "ARIES_SPACECRAFT",
+                "type": "studio_build",
+                "estimatedDays": 8
+              },
+              {
+                "name": "MOON_BASE",
+                "type": "studio_build",
+                "estimatedDays": 12
+              },
+              {
+                "name": "MOON_BUS",
+                "type": "studio_build",
+                "estimatedDays": 2
+              },
+              {
+                "name": "TMA_1_SITE",
+                "type": "studio_build",
+                "estimatedDays": 8
+              },
+              {
+                "name": "DISCOVERY",
+                "type": "studio_build",
+                "estimatedDays": 45
+              },
+              {
+                "name": "MULTIPLE_COSMIC",
+                "type": "studio_vfx",
+                "estimatedDays": 25
+              }
+            ],
+            "totalStudioDays": 142,
+            "totalPracticalDays": 10
+          }
+        },
+        "insuranceCalculator": {
+          "model": "Insurance Calculator",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Schedule Optimizer",
+            "Labor Cost Calculator",
+            "Equipment Pricing Engine"
+          ],
+          "description": "Calculates insurance premiums based on production risks.",
+          "inputs": {
+            "riskFactors": [
+              "Stunts: boulder_drop, space_pod_accident, airlock_explosion",
+              "Animals: trained_lion, zebras, gazelles",
+              "Child Actors: 8 children on set",
+              "Complex Mechanical Rigs: rotating_centrifuge, zero_gravity_wire_rig",
+              "Pyrotechnics: airlock_explosion",
+              "International Locations: Africa",
+              "High-Value Sets and Equipment"
+            ],
+            "dependentValues": {
+              "totalCastValue": "Awaits Labor Cost Calculator output",
+              "totalEquipmentValue": "Awaits Equipment Pricing Engine output"
+            }
+          }
+        },
+        "postProductionEstimator": {
+          "model": "Post-Production Estimator",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Schedule Optimizer"
+          ],
+          "description": "Estimates all post-production costs including VFX, editing, and sound.",
+          "inputs": {
+            "format": "feature_film",
+            "genre": [
+              "sci-fi",
+              "drama",
+              "thriller"
+            ],
+            "estimatedRuntimeMinutes": 149,
+            "vfx": {
+              "totalShots": 205,
+              "complexity": {
+                "simple": 65,
+                "medium": 85,
+                "complex": 55
+              },
+              "keySequences": [
+                "Stargate",
+                "Zero-Gravity",
+                "Space Travel Model Work"
+              ]
+            },
+            "soundDesign": {
+              "complexity": "High",
+              "keyElements": [
+                "HAL 9000 voice processing",
+                "Stargate sequence soundscape",
+                "Monolith sound effects",
+                "Space silence vs. interior sounds"
+              ]
+            },
+            "music": "Classical and original score required.",
+            "deliveryRequirements": "Theatrical release format."
+          }
+        },
+        "taxIncentiveAnalyzer": {
+          "model": "Tax Incentive Analyzer",
+          "priority": "PARALLEL",
+          "dependencies": [
+            "Budget Aggregator"
+          ],
+          "description": "Analyzes potential tax credits based on shooting locations and spend.",
+          "inputs": {
+            "shootingLocations": [
+              {
+                "location": "Africa (unspecified country)",
+                "type": "Practical"
+              },
+              {
+                "location": "Studio (unspecified country, likely UK or US)",
+                "type": "Studio Build"
+              }
+            ],
+            "dataFlags": [
+              "Missing crew/cast residency data.",
+              "Missing specific spend data per location."
+            ],
+            "dependency": "Requires aggregated budget totals to calculate qualifying spend."
+          }
+        },
+        "budgetAggregator": {
+          "model": "Budget Aggregator",
+          "priority": "FINAL_COMPILATION",
+          "dependencies": [
+            "Labor Cost Calculator",
+            "Equipment Pricing Engine",
+            "Location Cost Estimator",
+            "Insurance Calculator",
+            "Post-Production Estimator",
+            "Tax Incentive Analyzer"
+          ],
+          "description": "Aggregates costs from all parallel models into a top-sheet and detailed budget.",
+          "inputs": {
+            "dataSources": "Outputs from all cost-calculating models."
+          }
+        },
+        "cashFlowProjector": {
+          "model": "Cash Flow Projector",
+          "priority": "FINAL_COMPILATION",
+          "dependencies": [
+            "Budget Aggregator",
+            "Schedule Optimizer"
+          ],
+          "description": "Projects weekly cash flow needs based on the final budget and schedule.",
+          "inputs": {
+            "totalBudget": "Awaits Budget Aggregator output.",
+            "productionTimeline": "Awaits Schedule Optimizer output.",
+            "fundingSources": "FLAG: No funding source data provided."
+          }
+        }
+      }
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 8810
+  }
+}

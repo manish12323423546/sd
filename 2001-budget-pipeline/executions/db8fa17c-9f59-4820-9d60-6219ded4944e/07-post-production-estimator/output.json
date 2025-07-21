@@ -1,0 +1,461 @@
+{
+  "model_name": "postProductionEstimator",
+  "execution_id": "db8fa17c-9f59-4820-9d60-6219ded4944e",
+  "timestamp": "2025-07-21T13:44:32.866291",
+  "success": true,
+  "processing_time": 70.711507208,
+  "output_data": {
+    "postProductionBudget": {
+      "projectId": "proj_2001_space_odyssey",
+      "title": "2001: A Space Odyssey",
+      "version": "1.0",
+      "currency": "USD",
+      "context": "1960s Pricing",
+      "summary": {
+        "totalPostProductionCost": 10013075,
+        "editorial": 605450,
+        "visualEffects": 5167500,
+        "soundPostProduction": 1351500,
+        "colorAndFinishing": 770000,
+        "deliveryAndArchiving": 700000,
+        "subTotal": 8594450,
+        "contingency": {
+          "percentage": 16.5,
+          "amount": 1418625
+        }
+      },
+      "detailedBreakdown": {
+        "editorial": {
+          "total": 605450,
+          "personnel": {
+            "total": 414000,
+            "supervisingEditor": {
+              "weeks": 46,
+              "ratePerWeek": 3000,
+              "cost": 138000
+            },
+            "editors": {
+              "count": 2,
+              "weeks": 46,
+              "ratePerWeek": 2000,
+              "cost": 184000
+            },
+            "assistantEditors": {
+              "count": 4,
+              "weeks": 46,
+              "ratePerWeek": 900,
+              "cost": 165600
+            },
+            "apprenticeEditors": {
+              "count": 2,
+              "weeks": 46,
+              "ratePerWeek": 450,
+              "cost": 41400
+            },
+            "editorialCoordinator": {
+              "weeks": 46,
+              "ratePerWeek": 1200,
+              "cost": 55200
+            }
+          },
+          "facilitiesAndEquipment": {
+            "total": 191450,
+            "editingSuites": {
+              "count": 3,
+              "months": 10.62,
+              "ratePerMonth": 4000,
+              "cost": 127483
+            },
+            "screeningRooms": {
+              "days": 90,
+              "ratePerDay": 350,
+              "cost": 31500
+            },
+            "filmAndMagneticStock": {
+              "cost": 25000
+            },
+            "storageAndVaults": {
+              "cost": 7467
+            }
+          }
+        },
+        "visualEffects": {
+          "total": 5167500,
+          "shotProduction": {
+            "total": 2970000,
+            "simpleShots": {
+              "count": 65,
+              "avgCostPerShot": 3000,
+              "cost": 195000
+            },
+            "mediumShots": {
+              "count": 85,
+              "avgCostPerShot": 10000,
+              "cost": 850000
+            },
+            "complexShots": {
+              "count": 55,
+              "avgCostPerShot": 35000,
+              "cost": 1925000
+            }
+          },
+          "customEquipmentDevelopment": {
+            "total": 475000,
+            "slitScanApparatus": 100000,
+            "motionControlSystems": 200000,
+            "specializedOpticalPrinters": 50000,
+            "modelPhotographyRigs": 125000
+          },
+          "researchAndDevelopment": {
+            "total": 1722500,
+            "description": "R&D, testing, and refinement of revolutionary techniques (e.g., Stargate, front projection). Estimated as 50% of shot and equipment cost due to unprecedented nature of the work.",
+            "cost": 1722500
+          }
+        },
+        "soundPostProduction": {
+          "total": 1351500,
+          "dialogueAndADR": {
+            "total": 120000,
+            "dialogueEditor": {
+              "weeks": 20,
+              "ratePerWeek": 2000,
+              "cost": 40000
+            },
+            "adrSessions": {
+              "days": 20,
+              "ratePerDay": 1500,
+              "cost": 30000
+            },
+            "halVoiceProcessing": {
+              "description": "Custom sound processing for HAL 9000 voice.",
+              "cost": 50000
+            }
+          },
+          "soundEffectsAndDesign": {
+            "total": 170000,
+            "soundDesigner": {
+              "weeks": 30,
+              "ratePerWeek": 2500,
+              "cost": 75000
+            },
+            "customSoundCreation": {
+              "description": "Unique soundscapes for Stargate, Monolith, space environments.",
+              "cost": 75000
+            },
+            "foley": {
+              "days": 20,
+              "ratePerDay": 1000,
+              "cost": 20000
+            }
+          },
+          "music": {
+            "total": 987500,
+            "composerFee": 400000,
+            "orchestraRecording": 300000,
+            "classicalMusicLicensing": {
+              "description": "Licensing for pieces by Strauss, Ligeti, etc.",
+              "cost": 250000
+            },
+            "musicEditor": {
+              "weeks": 15,
+              "ratePerWeek": 1500,
+              "cost": 22500
+            },
+            "musicMixing": {
+              "weeks": 4,
+              "ratePerWeek": 3500,
+              "cost": 14000
+            }
+          },
+          "finalMixing": {
+            "total": 200000,
+            "mixingStageRental": {
+              "description": "6-Track Stereo capable stage",
+              "weeks": 8,
+              "ratePerWeek": 10000,
+              "cost": 80000
+            },
+            "mixingTeamLabor": {
+              "weeks": 8,
+              "ratePerWeek": 15000,
+              "cost": 120000
+            }
+          }
+        },
+        "colorAndFinishing": {
+          "total": 770000,
+          "colorTimingAndGrading": {
+            "total": 70000,
+            "colorTimer": {
+              "weeks": 10,
+              "ratePerWeek": 3000,
+              "cost": 30000
+            },
+            "gradingSupervisor": {
+              "weeks": 10,
+              "ratePerWeek": 4000,
+              "cost": 40000
+            }
+          },
+          "laboratoryServices": {
+            "total": 530000,
+            "processingAndTiming": 350000,
+            "answerPrints": 30000,
+            "70mmBlowUp": 150000
+          },
+          "releasePrints": {
+            "total": 170000,
+            "description": "Initial run of 170 prints for premiere and key cities.",
+            "count": 170,
+            "costPerPrint": 1000,
+            "cost": 170000
+          }
+        },
+        "deliveryAndArchiving": {
+          "total": 700000,
+          "masterElements": {
+            "total": 450000,
+            "35mmNegativeConforming": 100000,
+            "70mmMasterElements": 200000,
+            "magneticSoundMasters": 50000,
+            "archivalPreservationMasters": 100000
+          },
+          "internationalVersioning": {
+            "total": 250000,
+            "subtitling": {
+              "languages": 5,
+              "costPerLanguage": 10000,
+              "cost": 50000
+            },
+            "dubbing": {
+              "languages": 3,
+              "costPerLanguage": 50000,
+              "cost": 150000
+            },
+            "mAndETrackCreation": 150000
+          }
+        }
+      },
+      "timelineAnalysis": {
+        "totalPostProductionDurationMonths": 34,
+        "editorialTimeline": {
+          "totalWeeks": 46,
+          "phases": [
+            {
+              "phase": "Assembly Edit",
+              "durationWeeks": 8
+            },
+            {
+              "phase": "Rough Cut",
+              "durationWeeks": 12
+            },
+            {
+              "phase": "Fine Cut",
+              "durationWeeks": 20
+            },
+            {
+              "phase": "Conform and Finish",
+              "durationWeeks": 6
+            }
+          ]
+        },
+        "vfxTimeline": {
+          "totalMonths": 34,
+          "criticalPath": true,
+          "description": "VFX production runs in parallel with pre-production, production, and post-production, representing the longest single activity chain.",
+          "phases": [
+            {
+              "phase": "Custom Equipment Development",
+              "durationMonths": 6
+            },
+            {
+              "phase": "Technique Testing & R&D",
+              "durationMonths": 4
+            },
+            {
+              "phase": "VFX Shot Production",
+              "durationMonths": 18
+            },
+            {
+              "phase": "VFX Finishing & Integration",
+              "durationMonths": 6
+            }
+          ]
+        }
+      },
+      "riskAssessmentAndContingency": {
+        "overallRiskLevel": "Very High",
+        "contingencyCalculation": {
+          "vfxContingency": {
+            "baseAmount": 5167500,
+            "percentage": 20,
+            "contingencyAmount": 1033500
+          },
+          "generalPostContingency": {
+            "baseAmount": 3426950,
+            "percentage": 10,
+            "contingencyAmount": 342695
+          },
+          "musicLicensingContingency": {
+            "baseAmount": 250000,
+            "percentage": 15,
+            "contingencyAmount": 42430
+          },
+          "totalContingency": 1418625
+        },
+        "keyRisks": [
+          {
+            "riskId": "POST-RISK-VFX-01",
+            "area": "Visual Effects",
+            "description": "Failure or significant delay in developing new technologies like Slit-Scan and motion control, impacting the Stargate sequence and other key visuals.",
+            "mitigation": "Budget includes substantial R&D allocation. Parallel development paths for critical tech should be considered."
+          },
+          {
+            "riskId": "POST-RISK-SCHED-01",
+            "area": "Schedule",
+            "description": "The sheer volume and complexity of optical compositing could create a bottleneck, delaying final conform and delivery.",
+            "mitigation": "Engage multiple optical houses. Prioritize shots based on complexity and sequence dependencies."
+          },
+          {
+            "riskId": "POST-RISK-SND-01",
+            "area": "Sound",
+            "description": "Creating a completely novel soundscape for space and abstract sequences may require more time and resources than allocated.",
+            "mitigation": "Early engagement of a visionary Sound Designer. Budget for extensive custom sound effect recording and synthesis."
+          },
+          {
+            "riskId": "POST-RISK-FIN-01",
+            "area": "Finishing",
+            "description": "Achieving a flawless 70mm blow-up from 35mm and Super Panavision 70 source elements presents significant technical challenges.",
+            "mitigation": "Allocate budget for multiple test prints and extensive lab supervision. Secure the best lab facilities available."
+          }
+        ]
+      },
+      "qualityControlAndFormats": {
+        "primaryExhibitionFormat": "70mm Super Panavision",
+        "secondaryExhibitionFormat": "35mm Anamorphic",
+        "soundFormat": "6-Track Magnetic Stereo",
+        "masteringStandards": "Mastering to achieve the highest possible fidelity for both 70mm and 35mm prints, with extensive quality control at each stage (answer print, check prints).",
+        "archivalStrategy": "Creation of 35mm black and white separation masters for long-term preservation of color information, in addition to archival storage of the original negative and sound masters."
+      },
+      "internationalDeliveryPlan": {
+        "totalCost": 250000,
+        "mAndETracks": {
+          "description": "A comprehensive Music & Effects track will be created for international dubbing.",
+          "cost": 150000
+        },
+        "dubbing": {
+          "description": "Full dubbing planned for key international markets (e.g., French, German, Italian).",
+          "cost": 150000
+        },
+        "subtitling": {
+          "description": "Subtitling for a wide range of territories.",
+          "cost": 50000
+        }
+      },
+      "processingEvidence": [
+        {
+          "function": "estimate_editorial_costs",
+          "description": "Calculated editorial personnel, facility, and materials costs based on a 149-minute runtime and high complexity.",
+          "inputs": {
+            "runtimeMinutes": 149,
+            "complexity": "High",
+            "historicalContext": "1960s"
+          },
+          "outputs": {
+            "timelineWeeks": 46,
+            "personnelCost": 414000,
+            "facilityAndEquipmentCost": 191450,
+            "totalEditorialCost": 605450
+          }
+        },
+        {
+          "function": "calculate_vfx_costs",
+          "description": "Calculated VFX costs based on shot complexity, custom equipment development, and extensive R&D for revolutionary 1960s techniques.",
+          "inputs": {
+            "shotCounts": {
+              "simple": 65,
+              "medium": 85,
+              "complex": 55
+            },
+            "requiredTechniques": [
+              "Slit-Scan",
+              "Front Projection",
+              "Motion Control",
+              "Optical Compositing"
+            ]
+          },
+          "outputs": {
+            "shotProductionCost": 2970000,
+            "customEquipmentCost": 475000,
+            "researchAndDevelopmentCost": 1722500,
+            "totalVfxCost": 5167500
+          }
+        },
+        {
+          "function": "estimate_sound_costs",
+          "description": "Priced all sound post-production including dialogue, ADR, custom sound design, Foley, music composition, licensing, and final mixing.",
+          "inputs": {
+            "complexity": "High",
+            "keyElements": [
+              "HAL voice",
+              "Stargate soundscape",
+              "Monolith effects"
+            ],
+            "musicRequirements": "Original Score + Licensed Classical"
+          },
+          "outputs": {
+            "dialogueAndAdrCost": 120000,
+            "sfxAndDesignCost": 170000,
+            "musicCost": 987500,
+            "finalMixCost": 200000,
+            "totalSoundCost": 1351500
+          }
+        },
+        {
+          "function": "calculate_color_and_finishing_costs",
+          "description": "Calculated costs for color timing, lab services, 70mm blow-up, and initial release printing.",
+          "inputs": {
+            "deliveryFormats": [
+              "35mm",
+              "70mm"
+            ],
+            "qualityStandard": "Premiere"
+          },
+          "outputs": {
+            "colorPersonnelCost": 70000,
+            "labServicesCost": 530000,
+            "releasePrintsCost": 170000,
+            "totalFinishingCost": 770000
+          }
+        },
+        {
+          "function": "calculate_delivery_and_archive_costs",
+          "description": "Calculated costs for creating master elements, archival preservation, and international versioning.",
+          "inputs": {
+            "formats": [
+              "35mm",
+              "70mm",
+              "6-Track Stereo"
+            ],
+            "internationalRequirements": [
+              "Subtitling",
+              "Dubbing",
+              "M&E Track"
+            ]
+          },
+          "outputs": {
+            "masteringCost": 450000,
+            "internationalVersioningCost": 250000,
+            "totalDeliveryCost": 700000
+          }
+        }
+      ]
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 9639
+  }
+}

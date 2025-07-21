@@ -1,0 +1,234 @@
+{
+  "model_name": "locationCostEstimator",
+  "execution_id": "16871b72-065c-4d25-a113-6e5d28d1a15d",
+  "timestamp": "2025-07-21T14:00:17.015714",
+  "success": true,
+  "processing_time": 57.633074875000034,
+  "output_data": {
+    "locationCostEstimate": {
+      "projectId": "proj_2001_space_odyssey",
+      "version": "1.0",
+      "timestamp": "2024-07-21T10:05:45Z",
+      "currency": "GBP",
+      "currencyYear": 1967,
+      "summary": {
+        "totalLocationCosts": 1255550,
+        "totalFeesAndRentals": 685000,
+        "totalPermitsAndCompliance": 85500,
+        "totalSupportServices": 325800,
+        "totalRestorationAndStrike": 109250,
+        "contingency": {
+          "percentage": 20,
+          "amount": 251110
+        },
+        "grandTotalWithContingency": 1506660,
+        "confidenceInterval": {
+          "level": "85%",
+          "lowerBound": 1190000,
+          "upperBound": 1650000
+        },
+        "notes": "Costs are estimated in 1967 Great British Pounds (GBP) and reflect the unprecedented scale, technical complexity, and international nature of the production. Significant contingency is allocated due to pioneering construction, reliance on unproven technology, and remote location work."
+      },
+      "processingEvidence": [
+        {
+          "functionName": "estimateLocationFees",
+          "status": "SUCCESS",
+          "timestamp": "2024-07-21T10:05:46Z",
+          "summary": "Calculated fees for 3 practical and 10 studio location groups, factoring in extensive prep/hold days for complex set builds.",
+          "results": {
+            "practicalLocationFees": 75000,
+            "studioRentalFees": 520000,
+            "prepAndHoldFees": 85000,
+            "governmentLiaisonFees": 5000,
+            "total": 685000
+          }
+        },
+        {
+          "functionName": "calculatePermitCosts",
+          "status": "SUCCESS",
+          "timestamp": "2024-07-21T10:05:47Z",
+          "summary": "Calculated permits for UK and African jurisdictions, including specialized animal welfare and environmental clearances.",
+          "results": {
+            "africaFilmingPermits": 45000,
+            "ukSafetyClearances": 12500,
+            "animalWelfarePermits": 25000,
+            "internationalCarnetAndCustoms": 3000,
+            "total": 85500
+          }
+        },
+        {
+          "functionName": "processSecurityRequirements",
+          "status": "SUCCESS",
+          "timestamp": "2024-07-21T10:05:48Z",
+          "summary": "Assessed security needs for remote African locations and high-confidentiality UK studio sets.",
+          "results": {
+            "africaPersonnelAndPerimeter": 22500,
+            "ukStudioAccessControlAndPersonnel": 48000,
+            "secureStorageForAssets": 7500,
+            "total": 78000
+          }
+        },
+        {
+          "functionName": "calculateRestorationCosts",
+          "status": "SUCCESS",
+          "timestamp": "2024-07-21T10:05:49Z",
+          "summary": "Estimated costs for site restoration in Africa and massive set strikes in the UK studio.",
+          "results": {
+            "damageDepositsAndBonds": 40000,
+            "practicalLocationCleanup": 11750,
+            "studioSetStrikeAndDisposal": 57500,
+            "total": 109250
+          }
+        },
+        {
+          "functionName": "estimateParkingAndFacilities",
+          "status": "SUCCESS",
+          "timestamp": "2024-07-21T10:05:50Z",
+          "summary": "Calculated costs for base camp infrastructure in Africa and extensive power/parking needs for the UK studio.",
+          "results": {
+            "crewAndEquipmentParking": 28000,
+            "baseCampAndStagingAreas": 62300,
+            "powerGenerationAndDistribution": 150000,
+            "wasteManagementAndHoneyWagons": 7500,
+            "total": 247800
+          }
+        }
+      ],
+      "detailedBreakdown": [
+        {
+          "locationId": "GRP_AFRICA",
+          "locationGroup": "African Practical Locations (Stream, Plains, Caves)",
+          "type": "practical",
+          "estimatedShootDays": 25,
+          "totalCost": 211550,
+          "fees": {
+            "description": "Fees paid to local authorities, landowners, and fixers for access to all three locations.",
+            "liaisonAndFixerServices": 25000,
+            "locationAccessFees": 50000,
+            "total": 75000
+          },
+          "permits": {
+            "description": "Governmental permits for filming, environmental impact, and animal usage.",
+            "nationalParkFilmingPermit": 20000,
+            "animalWelfareAndImportPermits": 25000,
+            "regionalGovernmentAuthorization": 15000,
+            "total": 60000
+          },
+          "security": {
+            "description": "Security for crew, equipment, and animal safety perimeter.",
+            "personnel_days": 450,
+            "cost": 22500,
+            "total": 22500
+          },
+          "restoration": {
+            "description": "Bond and cleanup costs for restoring natural environments.",
+            "environmentalBond": 25000,
+            "dailyCleanupCrew": 6250,
+            "finalSiteRestoration": 5500,
+            "total": 36750
+          },
+          "facilities": {
+            "description": "Establishment of a full base camp with power and support services.",
+            "baseCampRentalPackage": 12500,
+            "generatorAndFuel": 2500,
+            "honeyWagons": 1800,
+            "total": 16800
+          }
+        },
+        {
+          "locationId": "GRP_STUDIO",
+          "locationGroup": "UK Studio Facilities (All Space Sets)",
+          "type": "studio",
+          "estimatedShootDays": 120,
+          "totalCost": 1044000,
+          "fees": {
+            "description": "Rental of multiple large soundstages and workshops at a major UK studio (e.g., MGM-British Studios) for over a year to accommodate construction, prep, and shooting.",
+            "longTermStageRental": 450000,
+            "workshopAndOfficeSpace": 70000,
+            "prepAndHoldDayCharges": 85000,
+            "total": 605000
+          },
+          "permits": {
+            "description": "Safety and regulatory compliance for unprecedented set construction.",
+            "engineeringAndSafetyCertification": 10000,
+            "pyrotechnicsPermits": 2500,
+            "customsAndCarnetFees": 3000,
+            "total": 15500
+          },
+          "security": {
+            "description": "High-level security to protect groundbreaking designs and technology.",
+            "accessControlSystem": 5000,
+            "24_7_SecurityPersonnel": 43000,
+            "secureAssetStorage": 7500,
+            "total": 55500
+          },
+          "restoration": {
+            "description": "Costs for striking the enormous sets and clearing the stages.",
+            "studioDamageDeposit": 15000,
+            "setStrikeAndDisposalLabor": 40000,
+            "wasteRemovalAndRecycling": 17500,
+            "total": 72500
+          },
+          "facilities": {
+            "description": "Massive infrastructure support, primarily for power.",
+            "supplementalParkingLots": 28000,
+            "cateringAndSupportTents": 49800,
+            "powerGenerationAndCabling": 147500,
+            "wasteManagement": 5700,
+            "total": 231000
+          }
+        }
+      ],
+      "riskAssessment": {
+        "locationSpecificRisks": [
+          {
+            "riskId": "RISK-LOC-AFR-01",
+            "location": "Africa",
+            "description": "Weather delays and animal availability/cooperation could significantly impact the schedule.",
+            "mitigation": "Schedule includes weather contingency days. Multiple animal handlers on standby."
+          },
+          {
+            "riskId": "RISK-LOC-UK-01",
+            "location": "UK Studio",
+            "description": "Failure of complex mechanical sets (centrifuge) could cause catastrophic delays and safety issues.",
+            "mitigation": "Extensive pre-production engineering, prototyping, and testing period budgeted. On-site engineering team during operation."
+          }
+        ],
+        "logisticalRiskFactors": [
+          {
+            "riskId": "RISK-LOG-01",
+            "description": "1960s-era international logistics and communication infrastructure are less reliable, increasing coordination complexity.",
+            "mitigation": "Budget includes costs for a dedicated international logistics coordinator and local fixers. Use of telex and scheduled calls for communication."
+          },
+          {
+            "riskId": "RISK-LOG-02",
+            "description": "Sourcing specialized construction materials and engineering expertise for novel sets.",
+            "mitigation": "Budget includes funds for research, development, and establishing new vendor relationships with aerospace and engineering firms."
+          }
+        ]
+      },
+      "alternativeOptions": [
+        {
+          "optionId": "ALT-AFR-01",
+          "location": "African Scenes",
+          "description": "Construct African exteriors on a studio backlot combined with second-unit plate photography from Africa.",
+          "costImpact": "Reduces international logistics and security costs by ~£50,000 but increases set construction costs by ~£70,000. May compromise visual authenticity.",
+          "feasibility": "Moderate. Would require significant water features and landscaping."
+        },
+        {
+          "optionId": "ALT-SET-01",
+          "location": "Centrifuge Set",
+          "description": "Utilize camera-rotation and stationary sets instead of a fully rotating, 38-foot diameter centrifuge.",
+          "costImpact": "Reduces set construction and engineering costs by an estimated £150,000. Increases complexity in VFX and may not achieve the desired practical effect of gravity.",
+          "feasibility": "High. A common technique, but would deviate from the director's vision for practical effects."
+        }
+      ]
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 7424
+  }
+}

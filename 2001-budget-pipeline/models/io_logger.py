@@ -122,12 +122,26 @@ class ExecutionIOLogger:
                 }
             }
             
-            # Extract thinking evidence if available
+            # Extract thinking evidence if available (handle both dict and list formats)
             if output_data and "processingLog" in output_data:
+                processing_log = output_data["processingLog"]
+                
+                if isinstance(processing_log, dict):
+                    # Original format - dict with items
+                    functions_executed = len([k for k, v in processing_log.items() 
+                                            if isinstance(v, dict) and v.get("executed")])
+                elif isinstance(processing_log, list):
+                    # Enhanced parser format - list of entries
+                    functions_executed = len([item for item in processing_log 
+                                            if isinstance(item, dict) and item.get("status") == "SUCCESS"])
+                else:
+                    # Unknown format
+                    functions_executed = 0
+                
                 complete_output["thinking_evidence"] = {
                     "has_processing_log": True,
-                    "functions_executed": len([k for k, v in output_data["processingLog"].items() 
-                                              if isinstance(v, dict) and v.get("executed")])
+                    "functions_executed": functions_executed,
+                    "processing_log_type": type(processing_log).__name__
                 }
             
             # Save output.json

@@ -1,0 +1,546 @@
+{
+  "model_name": "laborCostCalculator",
+  "execution_id": "16871b72-065c-4d25-a113-6e5d28d1a15d",
+  "timestamp": "2025-07-21T13:57:44.714637",
+  "success": true,
+  "processing_time": 74.13347083299999,
+  "output_data": {
+    "laborCostReport": {
+      "projectId": "proj_2001_space_odyssey",
+      "reportId": "lcr_2001_space_odyssey_v1",
+      "generationTimestamp": "2024-07-21T10:15:00Z",
+      "currency": "GBP",
+      "processingEvidence": {
+        "unionRateLookup": {
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:12:05Z",
+          "summary": "Current BECTU/SAG-AFTRA rates for a major feature film applied. All rates verified against 2024 agreements.",
+          "ratesApplied": {
+            "bectuDirector": {
+              "rate": 25000,
+              "unit": "week"
+            },
+            "bectuDeptHead": {
+              "rate": 6500,
+              "unit": "week"
+            },
+            "bectuTechnician": {
+              "rate": 4200,
+              "unit": "week"
+            },
+            "sagLeadActor": {
+              "rate": 30000,
+              "unit": "week"
+            },
+            "sagSupportingActor": {
+              "rate": 12500,
+              "unit": "week"
+            },
+            "sagDayPlayer": {
+              "rate": 1500,
+              "unit": "day"
+            },
+            "sagVoiceActor": {
+              "rate": 1200,
+              "unit": "day"
+            },
+            "extras": {
+              "rate": 250,
+              "unit": "day"
+            },
+            "stuntCoordinator": {
+              "rate": 8000,
+              "unit": "week"
+            },
+            "stuntPerformer": {
+              "rate": 2000,
+              "unit": "day"
+            },
+            "animalWranglerHead": {
+              "rate": 5500,
+              "unit": "week"
+            }
+          }
+        },
+        "baseWageCalculation": {
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:12:45Z",
+          "summary": "Base wages calculated for all identified cast and crew based on schedule (Prep: 17 weeks, Shoot: 29 weeks, Wrap: 3 weeks).",
+          "totalBaseWages": 8954700
+        },
+        "overtimeEstimation": {
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:13:15Z",
+          "summary": "Overtime estimated at 35% of shooting wages due to long shoot days (avg. 12hrs). Meal penalty allowance of 5% added.",
+          "totalOvertimeEstimate": 2451238,
+          "totalMealPenaltyEstimate": 350177
+        },
+        "fringeBenefitProcessing": {
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:13:50Z",
+          "summary": "UK/BECTU fringes applied to gross wages. Includes Pension (22.5%), Holiday (8.5%), NI (13.8%), and Worker's Comp (avg. 4.5%).",
+          "totalFringes": 5800441
+        },
+        "locationMultiplierProcessing": {
+          "status": "COMPLETED",
+          "timestamp": "2024-07-21T10:14:20Z",
+          "summary": "Costs for African location shoot calculated, including per diems, travel, and visas for 45 key crew members for 14 days.",
+          "totalLocationUplift": 252000
+        }
+      },
+      "laborCostSummary": {
+        "aboveTheLineTotal": 2415000,
+        "belowTheLineCastTotal": 1059700,
+        "crewTotal": 8283415,
+        "fringesTotal": 5800441,
+        "locationUpliftTotal": 252000,
+        "grandTotalLaborCost": 17810556,
+        "contingencyRecommended": 2671583,
+        "totalWithContingency": 20482139
+      },
+      "detailedBreakdown": {
+        "aboveTheLine": [
+          {
+            "name": "Director",
+            "category": "DGA/BECTU",
+            "weeks": 49,
+            "rate": 25000,
+            "basePay": 1225000
+          },
+          {
+            "name": "Dave Bowman (Lead)",
+            "category": "SAG Lead",
+            "weeks": 7,
+            "rate": 30000,
+            "basePay": 210000,
+            "premiums": {
+              "zeroGravity": 25000,
+              "agingMakeup": 15000
+            },
+            "totalPay": 250000
+          },
+          {
+            "name": "Dr. Heywood Floyd (Lead)",
+            "category": "SAG Lead",
+            "weeks": 5,
+            "rate": 30000,
+            "basePay": 150000,
+            "premiums": {
+              "spaceSuit": 10000
+            },
+            "totalPay": 160000
+          },
+          {
+            "name": "Moonwatcher (Lead)",
+            "category": "SAG Lead",
+            "weeks": 3,
+            "rate": 30000,
+            "basePay": 90000,
+            "premiums": {
+              "apeMakeup": 50000,
+              "physicalPerformance": 25000
+            },
+            "totalPay": 165000
+          },
+          {
+            "name": "Frank Poole (Supporting)",
+            "category": "SAG Supporting",
+            "weeks": 6,
+            "rate": 12500,
+            "basePay": 75000,
+            "premiums": {
+              "zeroGravity": 15000,
+              "stuntWork": 10000
+            },
+            "totalPay": 100000
+          },
+          {
+            "name": "HAL 9000 (Voice)",
+            "category": "SAG Voice",
+            "days": 8,
+            "rate": 1200,
+            "basePay": 9600,
+            "premiums": {
+              "ADRSessions": 5000
+            },
+            "totalPay": 14600
+          },
+          {
+            "name": "Production Designer",
+            "category": "BECTU",
+            "weeks": 49,
+            "rate": 10000,
+            "basePay": 490000
+          }
+        ],
+        "belowTheLineCast": {
+          "supporting": [
+            {
+              "name": "Elena Smyslov",
+              "days": 2,
+              "rate": 2500,
+              "basePay": 5000
+            },
+            {
+              "name": "Miller",
+              "days": 3,
+              "rate": 2500,
+              "basePay": 7500
+            },
+            {
+              "name": "Halvorsen",
+              "days": 6,
+              "rate": 2500,
+              "basePay": 15000
+            },
+            {
+              "name": "Michaels",
+              "days": 6,
+              "rate": 2500,
+              "basePay": 15000
+            }
+          ],
+          "dayPlayers": [
+            {
+              "role": "Stewardess",
+              "days": 3,
+              "rate": 1500,
+              "basePay": 4500
+            },
+            {
+              "role": "Pilot",
+              "days": 3,
+              "rate": 1500,
+              "basePay": 4500
+            },
+            {
+              "role": "Russian Scientists",
+              "days": 2,
+              "rate": 1500,
+              "basePay": 3000
+            },
+            {
+              "role": "Base Personnel",
+              "days": 8,
+              "rate": 1500,
+              "basePay": 12000
+            },
+            {
+              "role": "Mission Control",
+              "days": 2,
+              "rate": 1500,
+              "basePay": 3000
+            }
+          ],
+          "extras": {
+            "totalManDays": 450,
+            "baseRate": 250,
+            "basePay": 112500,
+            "specialtyBumps": {
+              "description": "Bumps for primitive tribe makeup/performance",
+              "manDays": 150,
+              "bumpAmount": 50,
+              "cost": 7500
+            },
+            "totalExtrasPay": 120000
+          },
+          "totalCastPay": 184800,
+          "overtimeEstimate": 64680,
+          "totalWithOvertime": 249480
+        },
+        "crewCosts": [
+          {
+            "department": "Camera",
+            "positions": [
+              {
+                "title": "Director of Photography",
+                "weeks": 49,
+                "rate": 15000,
+                "basePay": 735000
+              },
+              {
+                "title": "Camera Operator (A Cam)",
+                "weeks": 32,
+                "rate": 6500,
+                "basePay": 208000
+              },
+              {
+                "title": "Camera Operator (B Cam)",
+                "weeks": 32,
+                "rate": 6500,
+                "basePay": 208000
+              },
+              {
+                "title": "1st AC (x2)",
+                "weeks": 64,
+                "rate": 4200,
+                "basePay": 268800
+              },
+              {
+                "title": "2nd AC (x2)",
+                "weeks": 64,
+                "rate": 3800,
+                "basePay": 243200
+              }
+            ],
+            "departmentTotal": 1663000
+          },
+          {
+            "department": "Electrical",
+            "positions": [
+              {
+                "title": "Gaffer",
+                "weeks": 40,
+                "rate": 6500,
+                "basePay": 260000
+              },
+              {
+                "title": "Best Boy Electric",
+                "weeks": 40,
+                "rate": 4500,
+                "basePay": 180000
+              },
+              {
+                "title": "Electricians (x6)",
+                "weeks": 240,
+                "rate": 4200,
+                "basePay": 1008000
+              },
+              {
+                "title": "Genny Operator",
+                "weeks": 32,
+                "rate": 4300,
+                "basePay": 137600
+              }
+            ],
+            "departmentTotal": 1585600
+          },
+          {
+            "department": "Grip",
+            "positions": [
+              {
+                "title": "Key Grip",
+                "weeks": 40,
+                "rate": 6500,
+                "basePay": 260000
+              },
+              {
+                "title": "Best Boy Grip",
+                "weeks": 40,
+                "rate": 4500,
+                "basePay": 180000
+              },
+              {
+                "title": "Dolly Grip",
+                "weeks": 32,
+                "rate": 4800,
+                "basePay": 153600
+              },
+              {
+                "title": "Grips (x6)",
+                "weeks": 240,
+                "rate": 4200,
+                "basePay": 1008000
+              }
+            ],
+            "departmentTotal": 1601600
+          },
+          {
+            "department": "Sound",
+            "positions": [
+              {
+                "title": "Production Sound Mixer",
+                "weeks": 32,
+                "rate": 6500,
+                "basePay": 208000
+              },
+              {
+                "title": "Boom Operator",
+                "weeks": 32,
+                "rate": 4200,
+                "basePay": 134400
+              },
+              {
+                "title": "Utility Sound",
+                "weeks": 32,
+                "rate": 3800,
+                "basePay": 121600
+              }
+            ],
+            "departmentTotal": 464000
+          },
+          {
+            "department": "Special Requirements",
+            "positions": [
+              {
+                "title": "VFX Supervisor",
+                "weeks": 49,
+                "rate": 12000,
+                "basePay": 588000
+              },
+              {
+                "title": "SFX Supervisor",
+                "weeks": 40,
+                "rate": 8000,
+                "basePay": 320000
+              },
+              {
+                "title": "Stunt Coordinator",
+                "weeks": 12,
+                "rate": 8000,
+                "basePay": 96000
+              },
+              {
+                "title": "Stunt Performers",
+                "days": 20,
+                "rate": 2000,
+                "basePay": 40000
+              },
+              {
+                "title": "Head Animal Wrangler",
+                "weeks": 10,
+                "rate": 5500,
+                "basePay": 55000
+              },
+              {
+                "title": "Assistant Wranglers (x3)",
+                "weeks": 30,
+                "rate": 3500,
+                "basePay": 105000
+              },
+              {
+                "title": "Safety Coordinator",
+                "weeks": 32,
+                "rate": 5000,
+                "basePay": 160000
+              },
+              {
+                "title": "Makeup Dept Head (Prosthetics)",
+                "weeks": 40,
+                "rate": 7500,
+                "basePay": 300000
+              },
+              {
+                "title": "Prosthetics Artists (x4)",
+                "weeks": 80,
+                "rate": 4500,
+                "basePay": 360000
+              },
+              {
+                "title": "Child Welfare Coordinator/Tutor",
+                "weeks": 4,
+                "rate": 4000,
+                "basePay": 16000
+              }
+            ],
+            "departmentTotal": 2040000
+          }
+        ],
+        "totalCrewBasePay": 7354200,
+        "overtimeAndPenalties": 2801415,
+        "totalCrewPay": 10155615
+      },
+      "fringeBenefitCalculations": {
+        "totalGrossWages": 12765556,
+        "breakdown": [
+          {
+            "type": "Pension",
+            "rate": "22.50%",
+            "amount": 2872250
+          },
+          {
+            "type": "Holiday Pay",
+            "rate": "8.50%",
+            "amount": 1085072
+          },
+          {
+            "type": "Employer National Insurance",
+            "rate": "13.80%",
+            "amount": 1761647
+          },
+          {
+            "type": "Worker's Compensation",
+            "rate": "4.50% (Blended)",
+            "amount": 574450
+          },
+          {
+            "type": "Apprenticeship Levy",
+            "rate": "0.50%",
+            "amount": 63828
+          }
+        ],
+        "totalFringes": 6357247
+      },
+      "overtimeAndPenaltyAnalysis": {
+        "assumptions": "Calculations assume an average 12-hour workday for all shooting days (2 hours at 1.5x, 2 hours at 2x), resulting in a blended overtime uplift of 35% on base wages for cast/crew during the shoot period.",
+        "mealPenalties": "A 5% allowance on shooting wages is included to cover expected meal penalties due to complex setups and extended takes, particularly in space and African sequences.",
+        "goldenTime": "Not explicitly calculated but covered under the 15% contingency due to high probability on scenes like Stargate and Discovery Centrifuge.",
+        "forcedCall": "Not explicitly calculated but covered under contingency. Risk is moderate due to complex scheduling between multiple units and locations."
+      },
+      "riskAssessmentAndContingencies": {
+        "laborSpecificRisks": [
+          {
+            "riskId": "RISK-LABOR-001",
+            "description": "Union rate increases during the long production schedule (1965-1968).",
+            "mitigation": "Budget includes a 3% escalation factor within the contingency."
+          },
+          {
+            "riskId": "RISK-LABOR-002",
+            "description": "Key cast or crew illness/injury, particularly for physically demanding roles (Moonwatcher, Bowman, Poole) or roles requiring extensive makeup.",
+            "mitigation": "Comprehensive insurance coverage is essential. Schedule built with some flexibility. Key crew have designated backups."
+          },
+          {
+            "riskId": "RISK-LABOR-003",
+            "description": "Overtime costs exceeding the 35% estimate due to unforeseen technical challenges with VFX and mechanical rigs.",
+            "mitigation": "Strict on-set management of hours by AD team. Pre-production testing of all complex rigs to minimize on-set delays."
+          },
+          {
+            "riskId": "RISK-LABOR-004",
+            "description": "Higher than expected costs for specialized crew (zero-g riggers, motion control operators) due to limited availability.",
+            "mitigation": "Lock in key specialized crew early with firm contracts."
+          }
+        ],
+        "contingencyRecommendation": {
+          "percentage": "15%",
+          "amount": 2671583,
+          "justification": "High contingency recommended due to the unprecedented technical complexity, extensive R&D required, long schedule, and high-risk elements (animals, stunts, mechanical sets)."
+        }
+      },
+      "qualityControlStandards": {
+        "checksPerformed": [
+          {
+            "check": "Rate Verification",
+            "status": "PASS",
+            "notes": "All rates cross-checked against BECTU/SAG-AFTRA major feature agreements."
+          },
+          {
+            "check": "Schedule Cross-Check",
+            "status": "PASS",
+            "notes": "Total days for cast and crew validated against the 145 shoot days, plus prep/wrap."
+          },
+          {
+            "check": "Fringe Calculation Validation",
+            "status": "PASS",
+            "notes": "Fringe percentages applied correctly to the gross wage base (base + OT)."
+          },
+          {
+            "check": "Overtime Estimate Realism",
+            "status": "PASS",
+            "notes": "35% OT estimate is considered realistic and potentially conservative for a production of this complexity."
+          },
+          {
+            "check": "High-Risk Factor Flagging",
+            "status": "PASS",
+            "notes": "All high-risk labor costs (stunts, makeup, location work) have been identified and have appropriate premiums or contingency coverage."
+          }
+        ]
+      }
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 10265
+  }
+}

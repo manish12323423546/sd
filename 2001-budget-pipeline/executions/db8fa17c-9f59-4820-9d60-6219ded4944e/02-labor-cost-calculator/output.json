@@ -1,0 +1,513 @@
+{
+  "model_name": "laborCostCalculator",
+  "execution_id": "db8fa17c-9f59-4820-9d60-6219ded4944e",
+  "timestamp": "2025-07-21T13:45:55.185654",
+  "success": true,
+  "processing_time": 82.30791374999998,
+  "output_data": {
+    "projectId": "proj_2001_space_odyssey",
+    "calculationTimestamp": "2024-07-21T10:15:00Z",
+    "processingEvidence": [
+      {
+        "processName": "Union Rate Lookup Processing",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:10:01Z",
+        "details": "Simulated lookup of union rates. Assumed a UK/US co-production. Using BECTU/PACT 2024 Major Feature Agreement rates for UK-based crew and SAG-AFTRA Theatrical Agreement rates for US-based principal cast. Rates validated for all key positions based on project scale and complexity.",
+        "assumptions": [
+          "Jurisdiction: UK for Below-the-Line Crew (BECTU), US for Above-the-Line Cast (SAG-AFTRA).",
+          "Rates are representative of a high-budget, major studio production.",
+          "All rates are current and include no projected increases during production."
+        ]
+      },
+      {
+        "processName": "Base Wage Calculation Processing",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:10:45Z",
+        "details": "Calculated base wages for all identified cast and crew. Applied weekly rates for long-term engagements and daily rates for short-term players. Prep (12 weeks) and wrap (2 weeks) periods factored into crew contracts. Cast contracts based on scheduled shoot days plus hold days.",
+        "assumptions": [
+          "Production Schedule: 145 shoot days over 29 weeks.",
+          "Core Crew Contract: 12 weeks prep + 29 weeks shoot + 2 weeks wrap = 43 weeks total.",
+          "Cast weekly rates are based on a 5-day week."
+        ]
+      },
+      {
+        "processName": "Overtime Estimation Processing",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:11:30Z",
+        "details": "Estimated overtime based on schedule analysis. Scenes with long shoot times (10+ hours), DAY_TO_NIGHT transitions, and complex technical setups (Centrifuge, Stargate) were identified as high-OT risks. A blended overtime factor of 28% has been applied to BTL crew base wages. A lump sum for meal and turnaround penalties has been included.",
+        "assumptions": [
+          "Standard work day is 10 hours for crew.",
+          "Overtime calculated at 1.5x for hours 11-12, and 2.0x beyond 12 hours.",
+          "The 28% factor is an aggregate estimate across the entire production schedule."
+        ]
+      },
+      {
+        "processName": "Fringe Benefit Processing",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:12:15Z",
+        "details": "Calculated all statutory and union-mandated fringe benefits. Applied UK rates to all crew gross wages and US rates to all cast gross wages.",
+        "ratesApplied": {
+          "ukCrewFringes": {
+            "description": "Applied to total gross wages (base + OT + allowances)",
+            "pension": "22.5%",
+            "holidayPay": "8.5%",
+            "employerNationalInsurance": "13.8%",
+            "total": "44.8%"
+          },
+          "usCastFringes": {
+            "description": "Applied to total gross wages",
+            "pensionAndHealth": "20.5%",
+            "fica": "7.65%",
+            "futa": "0.6%",
+            "sui": "3.5%",
+            "workersComp": "2.0%",
+            "total": "34.25%"
+          }
+        }
+      },
+      {
+        "processName": "Location Multiplier Processing",
+        "status": "COMPLETED",
+        "timestamp": "2024-07-21T10:13:00Z",
+        "details": "Applied location-based costs for the 'Phase 1: The Dawn of Man' shoot in Africa. Calculated travel, per diems, and a hazard/uplift premium for the 20-day shoot block.",
+        "calculations": {
+          "personnelCount": 60,
+          "durationDays": 28,
+          "travelCost": 90000,
+          "perDiemCost": 126000,
+          "locationPremium": 75000
+        }
+      }
+    ],
+    "laborCostSummary": {
+      "currency": "USD",
+      "exchangeRateGBPtoUSD": 1.25,
+      "aboveTheLineCast": 1496500,
+      "belowTheLineCast": 489375,
+      "crew": 7895625,
+      "totalGrossWages": 9881500,
+      "totalFringes": 4234034,
+      "totalLaborCost": 14115534,
+      "contingency": {
+        "percentage": 15,
+        "amount": 2117330
+      },
+      "grandTotalWithContingency": 16232864
+    },
+    "aboveTheLineCastDetail": [
+      {
+        "characterName": "DAVE_BOWMAN",
+        "category": "Lead",
+        "estimatedWeeks": 7,
+        "weeklyRateUSD": 75000,
+        "baseFee": 525000,
+        "specialPremiums": {
+          "zeroGravityStunt": 50000,
+          "agingMakeup": 15000
+        },
+        "grossWage": 590000,
+        "fringes": 202075,
+        "totalCost": 792075
+      },
+      {
+        "characterName": "DR_HEYWOOD_FLOYD",
+        "category": "Lead",
+        "estimatedWeeks": 5,
+        "weeklyRateUSD": 75000,
+        "baseFee": 375000,
+        "specialPremiums": {},
+        "grossWage": 375000,
+        "fringes": 128438,
+        "totalCost": 503438
+      },
+      {
+        "characterName": "FRANK_POOLE",
+        "category": "Lead (Supporting)",
+        "estimatedWeeks": 6,
+        "weeklyRateUSD": 30000,
+        "baseFee": 180000,
+        "specialPremiums": {
+          "zeroGravityStunt": 25000
+        },
+        "grossWage": 205000,
+        "fringes": 70213,
+        "totalCost": 275213
+      },
+      {
+        "characterName": "MOONWATCHER",
+        "category": "Lead (Special Performance)",
+        "estimatedWeeks": 3,
+        "weeklyRateUSD": 0,
+        "baseFee": 150000,
+        "specialPremiums": {
+          "prostheticPerformanceUplift": 50000
+        },
+        "grossWage": 200000,
+        "fringes": 68500,
+        "totalCost": 268500
+      },
+      {
+        "characterName": "HAL_9000",
+        "category": "Voice",
+        "estimatedDays": 8,
+        "dailyRateUSD": 5000,
+        "baseFee": 40000,
+        "specialPremiums": {},
+        "grossWage": 40000,
+        "fringes": 13700,
+        "totalCost": 53700
+      }
+    ],
+    "belowTheLineCastDetail": {
+      "supporting": [
+        {
+          "characterName": "ELENA_SMYSLOV",
+          "days": 2,
+          "dailyRateUSD": 1200,
+          "grossWage": 2400
+        },
+        {
+          "characterName": "MILLER",
+          "days": 3,
+          "dailyRateUSD": 1200,
+          "grossWage": 3600
+        },
+        {
+          "characterName": "HALVORSEN",
+          "days": 6,
+          "dailyRateUSD": 1200,
+          "grossWage": 7200
+        },
+        {
+          "characterName": "MICHAELS",
+          "days": 6,
+          "dailyRateUSD": 1200,
+          "grossWage": 7200
+        }
+      ],
+      "dayPlayers": [
+        {
+          "role": "STEWARDESS",
+          "days": 3,
+          "dailyRateUSD": 1050,
+          "grossWage": 3150
+        },
+        {
+          "role": "PILOT",
+          "days": 3,
+          "dailyRateUSD": 1050,
+          "grossWage": 3150
+        },
+        {
+          "role": "RUSSIAN_SCIENTISTS",
+          "days": 2,
+          "dailyRateUSD": 1050,
+          "grossWage": 2100
+        },
+        {
+          "role": "BASE_PERSONNEL",
+          "days": 8,
+          "dailyRateUSD": 1050,
+          "grossWage": 8400
+        },
+        {
+          "role": "MISSION_CONTROL",
+          "days": 2,
+          "dailyRateUSD": 1050,
+          "grossWage": 2100
+        }
+      ],
+      "extras": {
+        "totalManDays": 450,
+        "dailyRateGBP": 150,
+        "grossWageGBP": 67500,
+        "grossWageUSD": 84375
+      },
+      "summary": {
+        "totalGrossWageUSD": 123675,
+        "totalFringesUSD": 42342,
+        "totalCostUSD": 166017,
+        "totalCostWithExtrasUSD": 250392
+      }
+    },
+    "crewCostDetail": {
+      "totalBaseWageGBP": 3850000,
+      "totalOvertimeGBP": 1078000,
+      "totalAllowancesGBP": 394500,
+      "totalGrossWageGBP": 5322500,
+      "totalGrossWageUSD": 6653125,
+      "totalFringesUSD": 2980600,
+      "totalCostUSD": 9633725,
+      "departments": [
+        {
+          "department": "Direction",
+          "positions": [
+            {
+              "title": "Director",
+              "notes": "Fee not included in labor; typically a separate ATL deal with profit participation.",
+              "cost": 0
+            },
+            {
+              "title": "1st Assistant Director",
+              "weeks": 43,
+              "weeklyRateGBP": 4500,
+              "baseWage": 193500
+            },
+            {
+              "title": "2nd Assistant Director",
+              "weeks": 43,
+              "weeklyRateGBP": 3000,
+              "baseWage": 129000
+            }
+          ]
+        },
+        {
+          "department": "Camera",
+          "positions": [
+            {
+              "title": "Director of Photography",
+              "weeks": 43,
+              "weeklyRateGBP": 12000,
+              "baseWage": 516000
+            },
+            {
+              "title": "Camera Operator (A Cam)",
+              "weeks": 43,
+              "weeklyRateGBP": 4000,
+              "baseWage": 172000
+            },
+            {
+              "title": "Focus Puller (A Cam)",
+              "weeks": 43,
+              "weeklyRateGBP": 3200,
+              "baseWage": 137600
+            },
+            {
+              "title": "Clapper Loader (A Cam)",
+              "weeks": 43,
+              "weeklyRateGBP": 2500,
+              "baseWage": 107500
+            },
+            {
+              "title": "Motion Control Supervisor",
+              "weeks": 20,
+              "weeklyRateGBP": 5000,
+              "baseWage": 100000
+            }
+          ]
+        },
+        {
+          "department": "Grip & Electric",
+          "positions": [
+            {
+              "title": "Gaffer",
+              "weeks": 43,
+              "weeklyRateGBP": 3800,
+              "baseWage": 163400
+            },
+            {
+              "title": "Key Grip",
+              "weeks": 43,
+              "weeklyRateGBP": 3800,
+              "baseWage": 163400
+            },
+            {
+              "title": "Best Boy Electric",
+              "weeks": 43,
+              "weeklyRateGBP": 3000,
+              "baseWage": 129000
+            },
+            {
+              "title": "Best Boy Grip",
+              "weeks": 43,
+              "weeklyRateGBP": 3000,
+              "baseWage": 129000
+            },
+            {
+              "title": "Rigging Supervisor",
+              "weeks": 25,
+              "weeklyRateGBP": 4200,
+              "baseWage": 105000
+            }
+          ]
+        },
+        {
+          "department": "Art & Production Design",
+          "positions": [
+            {
+              "title": "Production Designer",
+              "weeks": 43,
+              "weeklyRateGBP": 10000,
+              "baseWage": 430000
+            },
+            {
+              "title": "Supervising Art Director",
+              "weeks": 43,
+              "weeklyRateGBP": 6000,
+              "baseWage": 258000
+            },
+            {
+              "title": "Set Decorator",
+              "weeks": 43,
+              "weeklyRateGBP": 4500,
+              "baseWage": 193500
+            }
+          ]
+        },
+        {
+          "department": "Sound",
+          "positions": [
+            {
+              "title": "Production Sound Mixer",
+              "weeks": 43,
+              "weeklyRateGBP": 4000,
+              "baseWage": 172000,
+              "allowance": 34400
+            },
+            {
+              "title": "Boom Operator",
+              "weeks": 43,
+              "weeklyRateGBP": 2800,
+              "baseWage": 120400
+            }
+          ]
+        },
+        {
+          "department": "Makeup & Hair",
+          "positions": [
+            {
+              "title": "Chief Makeup Artist",
+              "weeks": 43,
+              "weeklyRateGBP": 4500,
+              "baseWage": 193500
+            },
+            {
+              "title": "Prosthetics Supervisor (Ape Makeup)",
+              "weeks": 10,
+              "weeklyRateGBP": 6000,
+              "baseWage": 60000
+            }
+          ]
+        },
+        {
+          "department": "Special & Visual Effects",
+          "positions": [
+            {
+              "title": "SFX Supervisor",
+              "weeks": 43,
+              "weeklyRateGBP": 8000,
+              "baseWage": 344000
+            },
+            {
+              "title": "VFX Supervisor",
+              "weeks": 43,
+              "weeklyRateGBP": 8000,
+              "baseWage": 344000
+            }
+          ]
+        },
+        {
+          "department": "Production",
+          "positions": [
+            {
+              "title": "Line Producer",
+              "weeks": 43,
+              "weeklyRateGBP": 6500,
+              "baseWage": 279500
+            },
+            {
+              "title": "Production Manager",
+              "weeks": 43,
+              "weeklyRateGBP": 4500,
+              "baseWage": 193500
+            }
+          ]
+        }
+      ]
+    },
+    "specialRequirementCostDetail": {
+      "currency": "USD",
+      "stunts": {
+        "stuntCoordinator": {
+          "weeks": 15,
+          "weeklyRate": 5000,
+          "grossWage": 75000
+        },
+        "stuntPerformers": {
+          "totalManDays": 40,
+          "dailyRate": 1500,
+          "grossWage": 60000
+        },
+        "totalGrossWage": 135000,
+        "fringes": 46238,
+        "totalCost": 181238
+      },
+      "animalHandling": {
+        "headAnimalWrangler": {
+          "weeks": 6,
+          "weeklyRate": 4000,
+          "grossWage": 24000
+        },
+        "assistantWranglers": {
+          "totalManDays": 30,
+          "dailyRate": 800,
+          "grossWage": 24000
+        },
+        "totalGrossWage": 48000,
+        "fringes": 16440,
+        "totalCost": 64440
+      },
+      "childWelfare": {
+        "tutorsAndWranglers": {
+          "weeks": 4,
+          "weeklyRate": 3500,
+          "grossWage": 14000
+        },
+        "totalGrossWage": 14000,
+        "fringes": 4795,
+        "totalCost": 18795
+      },
+      "locationBased": {
+        "travelAndPerDiem": {
+          "description": "Travel, lodging, and per diems for Africa shoot.",
+          "totalCost": 291000
+        }
+      }
+    },
+    "riskAssessment": {
+      "laborCostRisks": [
+        {
+          "riskId": "LABOR-RISK-001",
+          "description": "Overtime Escalation: The high number of complex scenes with long setup and shoot times (e.g., Centrifuge, Stargate, Ape sequences) creates a significant risk of overtime costs exceeding the 28% estimate.",
+          "mitigation": "Strict enforcement of daily schedules by AD team. Pre-lighting and rigging on separate days where possible. The 15% contingency is designed to cover this risk.",
+          "confidence": "Medium"
+        },
+        {
+          "riskId": "LABOR-RISK-002",
+          "description": "Union Rate Increases: The production spans multiple years, making it vulnerable to scheduled union rate increases not factored into the initial budget.",
+          "mitigation": "Budget for a 3-5% annual escalation in labor rates. Lock in key personnel with multi-year contracts where possible.",
+          "confidence": "High"
+        },
+        {
+          "riskId": "LABOR-RISK-003",
+          "description": "Specialty Labor Shortage: The demand for highly specialized crew (motion control, prosthetics, large-scale riggers) could lead to higher-than-budgeted rates due to limited availability.",
+          "mitigation": "Identify and contract key specialty personnel early in pre-production.",
+          "confidence": "Medium"
+        },
+        {
+          "riskId": "LABOR-RISK-004",
+          "description": "Cast/Crew Burnout: The long and demanding schedule increases the risk of illness or injury, leading to costly production delays and potential replacement costs.",
+          "mitigation": "Enforce mandatory rest periods and turnaround times. Ensure adequate on-set medical and safety support. Maintain a robust insurance policy.",
+          "confidence": "High"
+        }
+      ],
+      "contingencyRecommendation": "A 15% contingency on total labor costs is recommended due to the unprecedented technical complexity, long schedule, and high-risk sequences involving stunts and special effects. This provides a buffer of approximately $2.1M to cover potential overages in overtime, penalties, and other unforeseen labor expenses."
+    }
+  },
+  "error": null,
+  "metadata": {
+    "gemini_model": "gemini-2.5-pro",
+    "thinking_enabled": true,
+    "output_size_chars": 11212
+  }
+}
