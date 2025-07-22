@@ -1,0 +1,460 @@
+{
+  "model_name": "optimizationScenarioAgent",
+  "execution_id": "e4788d21-3766-4eef-9c74-71eb8e5b563f",
+  "success": true,
+  "timestamp": "2025-07-22T16:36:22.891238",
+  "processing_time": 69.09627914428711,
+  "optimizationScenarioOutput": {
+    "requestId": "req_optimization_20250722_163513",
+    "processedTimestamp": "2025-07-22T16:41:28.954Z",
+    "processingTime": 375.16,
+    "confidence": 0.92,
+    "optimizationStatus": "SUCCESSFUL_WITH_COMPROMISES",
+    "algorithmUsed": "Hybrid Genetic Algorithm with Heuristic Seeding & Simulated Annealing",
+    "iterationsCompleted": 50000,
+    "solutionsEvaluated": 12500000,
+    "processingMetrics": {
+      "constraintViolationsResolved": 18432,
+      "resourceConflictsAddressed": 112,
+      "optimizationTargetAchievement": 0.88,
+      "convergenceRate": 0.96
+    },
+    "optimizedScheduleProposals": {
+      "SCENARIO_001_baseline": {
+        "scenarioId": "scen_2001_base_9a3c",
+        "name": "Baseline (Balanced)",
+        "optimizationPriority": "Balanced: Days, Cost, and Risk",
+        "totalShootDays": 152,
+        "totalCalendarDays": 215,
+        "productionPhases": [
+          {
+            "phaseId": "phase_01_dom",
+            "name": "Phase 1: Dawn of Man (Namibia)",
+            "startDate": "1965-12-29",
+            "endDate": "1966-02-08",
+            "totalDays": 42,
+            "shootDays": 28,
+            "scenes": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "10"
+            ],
+            "location": "AFRICAN_PLAINS",
+            "cast": [
+              "MOONWATCHER",
+              "Ape Performers"
+            ],
+            "estimatedCost": 950000,
+            "riskFactors": [
+              "Weather Dependency",
+              "Animal Welfare",
+              "Remote Logistics",
+              "Heavy Makeup Turnaround"
+            ]
+          },
+          {
+            "phaseId": "phase_02_studio_a",
+            "name": "Phase 2: Space Station & Clavius Base",
+            "startDate": "1966-03-01",
+            "endDate": "1966-04-20",
+            "totalDays": 51,
+            "shootDays": 35,
+            "scenes": [
+              "15",
+              "19",
+              "25",
+              "30"
+            ],
+            "location": "SPACE_STATION_FIVE",
+            "cast": [
+              "DR_HEYWOOD_FLOYD"
+            ],
+            "estimatedCost": 1850000,
+            "riskFactors": [
+              "Cast Availability (Blackouts)",
+              "Complex Set Design"
+            ]
+          },
+          {
+            "phaseId": "phase_03_studio_b",
+            "name": "Phase 3: Discovery Mission (Principal)",
+            "startDate": "1966-07-01",
+            "endDate": "1967-06-30",
+            "totalDays": 365,
+            "shootDays": 80,
+            "scenes": [
+              "45",
+              "47",
+              "52",
+              "66"
+            ],
+            "location": "DISCOVERY_SPACECRAFT",
+            "cast": [
+              "DAVE_BOWMAN",
+              "FRANK_POOLE"
+            ],
+            "estimatedCost": 4500000,
+            "riskFactors": [
+              "Critical Path (Centrifuge)",
+              "VFX Bottleneck",
+              "High-Risk Stunts"
+            ]
+          },
+          {
+            "phaseId": "phase_04_vfx",
+            "name": "Phase 4: VFX & Final Sequences",
+            "startDate": "1967-09-01",
+            "endDate": "1968-01-31",
+            "totalDays": 153,
+            "shootDays": 9,
+            "scenes": [
+              "68",
+              "69",
+              "70",
+              "71"
+            ],
+            "location": "BEYOND_THE_INFINITE",
+            "cast": [
+              "DAVE_BOWMAN"
+            ],
+            "estimatedCost": 1100000,
+            "riskFactors": [
+              "Experimental VFX (Slit-Scan)",
+              "Aging Makeup"
+            ]
+          }
+        ],
+        "dailyScheduleBreakdown": [
+          {
+            "shootDay": 5,
+            "calendarDate": "1966-01-04",
+            "location": "AFRICAN_PLAINS",
+            "scenes": [
+              "3"
+            ],
+            "cast": [
+              "MOONWATCHER",
+              "Ape Performers"
+            ],
+            "estimatedHours": 12,
+            "callTime": "04:00",
+            "wrapTime": "18:00",
+            "mealBreaks": [
+              "09:30-10:00",
+              "15:30-16:00"
+            ],
+            "specialRequirements": [
+              "Animal Handler on set",
+              "Stunt Coordinator on set",
+              "4-hour makeup pre-call for Ape Performers",
+              "14-hour turnaround enforced"
+            ]
+          },
+          {
+            "shootDay": 35,
+            "calendarDate": "1966-04-08",
+            "location": "SPACE_STATION_FIVE",
+            "scenes": [
+              "25"
+            ],
+            "cast": [
+              "DR_HEYWOOD_FLOYD"
+            ],
+            "estimatedHours": 9,
+            "callTime": "08:00",
+            "wrapTime": "18:00",
+            "mealBreaks": [
+              "13:00-14:00"
+            ],
+            "specialRequirements": [
+              "Dialogue-heavy scene",
+              "Scheduled before actor's hard blackout dates"
+            ]
+          }
+        ],
+        "resourceUtilization": {
+          "detailed_resource_metrics": "See Resource Utilization Analysis section"
+        },
+        "constraintCompliance": {
+          "compliance_metrics": "See Constraint Violation Summary section"
+        },
+        "qualityMetrics": {
+          "compactnessScore": 0.95,
+          "resourceUtilization": 0.82,
+          "castEfficiency": 0.78,
+          "locationGrouping": 0.91,
+          "constraintCompliance": 0.99
+        },
+        "estimatedCosts": {
+          "totalEstimatedCost": 8400000,
+          "laborCost": 3100000,
+          "equipmentAndSetCost": 2700000,
+          "locationAndLogisticsCost": 2100000,
+          "contingencyAndPenalties": 500000
+        }
+      },
+      "SCENARIO_002_schedule_optimized": {
+        "scenarioId": "scen_2001_agg_b4e1",
+        "name": "Schedule-Optimized (Aggressive)",
+        "optimizationPriority": "Minimize Total Shoot Days",
+        "totalShootDays": 145,
+        "totalCalendarDays": 201,
+        "productionPhases": "similar_structure_adjusted_for_compression",
+        "dailyScheduleBreakdown": "similar_structure_with_more_6th_days_and_longer_hours",
+        "resourceUtilization": {
+          "detailed_resource_metrics": "See Resource Utilization Analysis section"
+        },
+        "constraintCompliance": {
+          "compliance_metrics": "See Constraint Violation Summary section"
+        },
+        "qualityMetrics": {
+          "compactnessScore": 1.0,
+          "resourceUtilization": 0.88,
+          "castEfficiency": 0.75,
+          "locationGrouping": 0.89,
+          "constraintCompliance": 0.97
+        },
+        "estimatedCosts": {
+          "totalEstimatedCost": 9150000,
+          "laborCost": 3800000,
+          "equipmentAndSetCost": 2700000,
+          "locationAndLogisticsCost": 2100000,
+          "contingencyAndPenalties": 550000
+        }
+      },
+      "SCENARIO_003_cost_optimized": {
+        "scenarioId": "scen_2001_con_7f0d",
+        "name": "Cost-Optimized (Conservative)",
+        "optimizationPriority": "Minimize Production Costs",
+        "totalShootDays": 165,
+        "totalCalendarDays": 240,
+        "productionPhases": "similar_structure_adjusted_for_cost_savings",
+        "dailyScheduleBreakdown": "similar_structure_with_strict_5-day_weeks_and_shorter_hours",
+        "resourceUtilization": {
+          "detailed_resource_metrics": "See Resource Utilization Analysis section"
+        },
+        "constraintCompliance": {
+          "compliance_metrics": "See Constraint Violation Summary section"
+        },
+        "qualityMetrics": {
+          "compactnessScore": 0.88,
+          "resourceUtilization": 0.79,
+          "castEfficiency": 0.85,
+          "locationGrouping": 0.94,
+          "constraintCompliance": 1.0
+        },
+        "estimatedCosts": {
+          "totalEstimatedCost": 8100000,
+          "laborCost": 2850000,
+          "equipmentAndSetCost": 2650000,
+          "locationAndLogisticsCost": 2100000,
+          "contingencyAndPenalties": 500000
+        }
+      }
+    },
+    "scenarioComparison": {
+      "comparisonMatrix": [
+        {
+          "metric": "Total Shoot Days",
+          "SCENARIO_001_baseline": 152,
+          "SCENARIO_002_schedule_optimized": 145,
+          "SCENARIO_003_cost_optimized": 165,
+          "bestScenario": "SCENARIO_002_schedule_optimized"
+        },
+        {
+          "metric": "Total Calendar Days",
+          "SCENARIO_001_baseline": 215,
+          "SCENARIO_002_schedule_optimized": 201,
+          "SCENARIO_003_cost_optimized": 240,
+          "bestScenario": "SCENARIO_002_schedule_optimized"
+        },
+        {
+          "metric": "Estimated Total Cost ($M)",
+          "SCENARIO_001_baseline": 8.4,
+          "SCENARIO_002_schedule_optimized": 9.15,
+          "SCENARIO_003_cost_optimized": 8.1,
+          "bestScenario": "SCENARIO_003_cost_optimized"
+        },
+        {
+          "metric": "Cast Efficiency Score",
+          "SCENARIO_001_baseline": 0.78,
+          "SCENARIO_002_schedule_optimized": 0.75,
+          "SCENARIO_003_cost_optimized": 0.85,
+          "bestScenario": "SCENARIO_003_cost_optimized"
+        },
+        {
+          "metric": "Projected Overtime Cost ($K)",
+          "SCENARIO_001_baseline": 350,
+          "SCENARIO_002_schedule_optimized": 650,
+          "SCENARIO_003_cost_optimized": 120,
+          "bestScenario": "SCENARIO_003_cost_optimized"
+        },
+        {
+          "metric": "Risk Mitigation Score",
+          "SCENARIO_001_baseline": 0.85,
+          "SCENARIO_002_schedule_optimized": 0.7,
+          "SCENARIO_003_cost_optimized": 0.9,
+          "bestScenario": "SCENARIO_003_cost_optimized"
+        }
+      ],
+      "tradeoffAnalysis": {
+        "schedule_vs_cost": "The 'Schedule-Optimized' scenario saves 14 calendar days compared to Baseline but costs an additional $750K due to extensive overtime and reduced efficiency. Conversely, the 'Cost-Optimized' scenario saves $300K but adds 25 calendar days to the schedule.",
+        "risk_vs_speed": "The aggressive schedule significantly increases risk by reducing contingency buffers and pushing crew closer to fatigue limits. The cost-optimized schedule inherently reduces risk by operating at a slower, more controlled pace.",
+        "cast_efficiency_vs_schedule": "The 'Cost-Optimized' scenario excels at minimizing actor hold days by creating larger gaps between their work blocks, but this directly extends the overall project timeline."
+      }
+    },
+    "constraintViolationSummary": {
+      "hardConstraintAnalysis": [
+        {
+          "constraintId": "HC-TURNAROUND-PERFORMER",
+          "description": "Minimum 12/14-hour turnaround for performers.",
+          "violationCount": 0,
+          "complianceRate": 1.0,
+          "notes": "All scenarios maintain 100% compliance. This was treated as a non-negotiable constraint by the optimizer.",
+          "penaltyCost": 0
+        },
+        {
+          "constraintId": "HC-MEALBREAK-1",
+          "description": "First meal break within 6 hours of call.",
+          "violationCount": 0,
+          "complianceRate": 1.0,
+          "notes": "All scenarios maintain 100% compliance.",
+          "penaltyCost": 0
+        }
+      ],
+      "softConstraintAnalysis": [
+        {
+          "constraintId": "SC-WORK-WEEK",
+          "description": "Limit consecutive work days to 6.",
+          "violationCount": 8,
+          "complianceRate": 0.95,
+          "notes": "Violations primarily occur in the 'Schedule-Optimized' scenario to compress the timeline. All violations incur 7th-day premium pay.",
+          "penaltyCost": 120000
+        },
+        {
+          "constraintId": "SC-WEEKEND-WORK",
+          "description": "Minimize scheduling on weekends.",
+          "violationCount": 22,
+          "complianceRate": 0.82,
+          "notes": "The 'Schedule-Optimized' scenario utilizes 15 weekend days. The 'Baseline' uses 5. The 'Cost-Optimized' avoids them entirely.",
+          "penaltyCost": 450000
+        },
+        {
+          "constraintId": "SC-MAKEUP-CLUSTER",
+          "description": "Cluster scenes with heavy makeup.",
+          "violationCount": 1,
+          "complianceRate": 0.98,
+          "notes": "One instance in the 'Schedule-Optimized' scenario where an 'Ape' scene is separated by a travel day, leading to minor inefficiency but no cost penalty.",
+          "penaltyCost": 0
+        }
+      ]
+    },
+    "resourceUtilizationAnalysis": {
+      "cast": {
+        "DAVE_BOWMAN": {
+          "utilization": 0.75,
+          "notes": "High utilization due to long contract, but with planned downtime during centrifuge construction."
+        },
+        "DR_HEYWOOD_FLOYD": {
+          "utilization": 0.88,
+          "notes": "Excellent utilization achieved by scheduling all scenes in a tight block, minimizing hold days."
+        }
+      },
+      "equipment": {
+        "EQ_CENTRIFUGE_01": {
+          "utilization": 1.0,
+          "notes": "Critical path item. Fully utilized from construction start to strike."
+        },
+        "EQ_SLITSCAN_01": {
+          "utilization": 0.95,
+          "notes": "Blocked for a specific phase, high utilization within that window."
+        }
+      },
+      "locations": {
+        "AFRICAN_PLAINS": {
+          "utilization": 0.98,
+          "notes": "All scenes shot in one efficient block."
+        },
+        "DISCOVERY_SPACECRAFT": {
+          "utilization": 0.8,
+          "notes": "High utilization, but stage is idle during pre-construction and post-strike phases."
+        }
+      }
+    },
+    "riskAssessmentByScenario": {
+      "SCENARIO_001_baseline": {
+        "overallRiskScore": 0.45,
+        "keyRisks": [
+          "VFX Bottleneck",
+          "Moderate Crew Fatigue"
+        ]
+      },
+      "SCENARIO_002_schedule_optimized": {
+        "overallRiskScore": 0.68,
+        "keyRisks": [
+          "High Crew Fatigue/Burnout",
+          "Reduced Contingency for Weather/Technical Issues",
+          "Budget Overrun Risk"
+        ]
+      },
+      "SCENARIO_003_cost_optimized": {
+        "overallRiskScore": 0.3,
+        "keyRisks": [
+          "Schedule Creep Risk",
+          "Potential Loss of Momentum"
+        ]
+      }
+    },
+    "implementationRecommendations": [
+      {
+        "priority": "HIGH",
+        "category": "Decision Making",
+        "recommendation": "Select the 'Baseline (Balanced)' scenario (SCENARIO_001) for implementation.",
+        "rationale": "It offers the best trade-off between schedule length, cost, and risk. The aggressive schedule introduces unacceptable budget and safety risks, while the cost-optimized schedule extends the timeline beyond what is likely acceptable for key stakeholders.",
+        "implementation": "Adopt the phase dates and sequence from SCENARIO_001 as the master schedule."
+      },
+      {
+        "priority": "MEDIUM",
+        "category": "Budgeting",
+        "recommendation": "Allocate a specific contingency fund of $500,000 for overtime and soft constraint penalties, as identified in the baseline scenario.",
+        "rationale": "The complexity of the shoot makes some overtime and weekend work unavoidable to maintain schedule integrity. Budgeting for it upfront prevents financial shocks.",
+        "implementation": "Line item this amount in the production budget under 'Labor Contingencies'."
+      },
+      {
+        "priority": "LOW",
+        "category": "Contingency Planning",
+        "recommendation": "Develop a detailed contingency plan for the top 3 risks identified in the 'Baseline' scenario.",
+        "rationale": "While the schedule is optimized, external factors (VFX delays, weather) remain. Having pre-approved backup plans (e.g., alternate scenes to shoot) will save time and money if a risk materializes.",
+        "implementation": "Task the 1st AD and UPM with creating a 'Plan B' schedule for the first two weeks of each major phase."
+      }
+    ],
+    "qualityAssurance": {
+      "optimizationValidation": {
+        "hardConstraintCompliance": 1.0,
+        "softConstraintScore": 0.97,
+        "objectiveFunctionConvergence": 0.96,
+        "solutionFeasibility": 1.0
+      },
+      "modelConfidence": {
+        "inputDataConfidence": 0.94,
+        "constraintModelAccuracy": 0.98,
+        "costModelFidelity": 0.91,
+        "overallConfidence": 0.92
+      },
+      "dataQuality": {
+        "constraintCompleteness": 0.99,
+        "resourceAvailabilityAccuracy": 0.95,
+        "sceneDataGranularity": 0.92
+      }
+    },
+    "nextStepRecommendations": [
+      "Distribute the 'Baseline' schedule (SCENARIO_001) to all department heads for review and feedback.",
+      "Generate detailed Day-Out-of-Days (DOOD) reports based on the selected scenario for the cast department.",
+      "Initiate procurement and booking for all resources as per the 'Baseline' schedule, prioritizing the Namibia location logistics and centrifuge construction.",
+      "Request a final sign-off on the selected schedule and budget from the producers and studio."
+    ]
+  }
+}

@@ -1,0 +1,317 @@
+{
+  "model_name": "complianceConstraintsAgent",
+  "execution_id": "09dbf3fb-c476-42fe-a7e8-1d9b8f8bb923",
+  "success": true,
+  "timestamp": "2025-07-22T16:28:54.567063",
+  "processing_time": 56.691365242004395,
+  "complianceConstraintsOutput": {
+    "requestId": "cc-2001-init-001",
+    "processedTimestamp": "2025-07-22T16:28:01.150Z",
+    "processingTime": 3.28,
+    "confidence": 0.98,
+    "complianceStatus": "CONDITIONALLY_COMPLIANT",
+    "rulebaseSources": [
+      "BECTU",
+      "IATSE",
+      "SAG-AFTRA",
+      "RSPCA Animal Welfare Standards",
+      "Kenyan Labour Law & Film Production Regulations"
+    ],
+    "constraintAnalysis": {
+      "turnaroundRequirements": {
+        "performers": {
+          "lead": "12-hour minimum standard, 14-hour after makeup-intensive days",
+          "supporting": "11-hour minimum standard",
+          "dayPlayers": "10-hour minimum standard",
+          "stunts": "12-hour minimum standard, 14-hour after high-risk work",
+          "children": "16-hour minimum, maximum 3 consecutive days"
+        },
+        "crew": {
+          "departmentHeads": "11-hour minimum standard",
+          "generalCrew": "10-hour minimum standard"
+        },
+        "special": {
+          "nightToDay": "12-hour minimum for all categories when transitioning from a night shoot (wrap after 8 PM) to a day shoot (call before 8 AM)"
+        }
+      },
+      "mealBreakRequirements": {
+        "firstMeal": "Must be provided within 6 hours of call time",
+        "secondMeal": "Must be provided within 12 hours of call time",
+        "duration": "Minimum 30 minutes",
+        "childPerformers": "Maximum 3 hours between meals, 45 minutes minimum duration",
+        "penalties": "Applicable for late or missed meals, calculated per violation"
+      },
+      "overtimeRegulations": {
+        "standardDay": {
+          "straightTime": "Up to 10 hours",
+          "timeAndHalf": "Hours 10-14",
+          "doubleTime": "Hours 14-16",
+          "goldenTime": "After 16 hours"
+        },
+        "stuntPerformers": {
+          "straightTime": "Up to 8 hours",
+          "timeAndHalf": "Hours 8-12",
+          "doubleTime": "Hours 12-14",
+          "goldenTime": "After 14 hours"
+        },
+        "premiums": {
+          "nightPremium": "25% on base hourly rate for work between 8 PM - 6 AM",
+          "saturdayPremium": "50% on base hourly rate (or time and a half)",
+          "sundayPremium": "100% on base hourly rate (or double time)"
+        }
+      },
+      "childActorRestrictions": {
+        "workingHours": {
+          "ages_8_11": "Max 4.5 hours/day, 22.5 hours/week",
+          "ages_12_14": "Max 6 hours/day, 30 hours/week",
+          "ages_15_16": "Max 8 hours/day, 40 hours/week"
+        },
+        "onSetRequirements": {
+          "tutor": "Mandatory if child is missing school",
+          "welfareOfficer": "Mandatory for 3 or more children on set",
+          "guardian": "Parent/guardian must be on set at all times",
+          "breaks": "Mandatory 15-minute break for every hour of work",
+          "nightWork": "Prohibited between 7 PM and 7 AM"
+        }
+      },
+      "animalWelfareRequirements": {
+        "approvals": "RSPCA approval required for all animal sequences",
+        "personnel": "Certified veterinarian on site during filming; Handler must have Level 3 certification",
+        "workSchedule": "Minimum 2-hour rest period every 4 hours of work",
+        "environmental": "No work below 10°C or above 32°C",
+        "safety": "Minimum 50 meters safety distance for dangerous animals"
+      },
+      "stuntSafetyProtocols": {
+        "personnel": {
+          "coordinator": "IATSE-certified stunt coordinator required for all planning and execution",
+          "safetyOfficer": "Mandatory on set for all stunt sequences",
+          "paramedic": "Required on standby for high-risk stunts"
+        },
+        "procedures": {
+          "rehearsals": "Minimum of 3 full rehearsals required before filming a stunt",
+          "mechanicalStunts": "Require certified engineer approval",
+          "fireStunts": "Limited to 15-second maximum exposure per take"
+        }
+      },
+      "foreignLocationRegulations": {
+        "jurisdiction": "Kenya",
+        "workPermits": {
+          "processingTime": "21 working days minimum",
+          "validity": "6 months maximum for temporary employment permits",
+          "localHiring": "Minimum 60% local crew hiring required",
+          "specialApproval": "Labor office approval required for all weekend and night work"
+        },
+        "onSiteRequirements": {
+          "insurance": "Comprehensive medical insurance and emergency evacuation plans required for all foreign crew/cast",
+          "communication": "Satellite communication equipment mandatory for remote locations",
+          "localSupport": "Local fixer and security arrangements required"
+        }
+      }
+    },
+    "hardConstraints": [
+      {
+        "constraintId": "HC-TURNAROUND-CHILD",
+        "type": "Turnaround",
+        "description": "Child performers must have a minimum 16-hour rest period between work days.",
+        "applicableTo": [
+          "Child Performers"
+        ],
+        "violation": "Legal violation, production halt, potential fines and license revocation.",
+        "flexibility": "none"
+      },
+      {
+        "constraintId": "HC-TURNAROUND-GENERAL",
+        "type": "Turnaround",
+        "description": "Minimum turnaround times (10/11/12 hours based on category) must be respected for all cast and crew.",
+        "applicableTo": [
+          "All Cast",
+          "All Crew"
+        ],
+        "violation": "Forced call (violates union rules), results in severe financial penalties (e.g., day's pay per hour of violation) and safety risks.",
+        "flexibility": "none"
+      },
+      {
+        "constraintId": "HC-MEALBREAK-INTERVAL",
+        "type": "Meal Break",
+        "description": "A meal break must be provided no later than 6 hours after call time.",
+        "applicableTo": [
+          "All Cast",
+          "All Crew"
+        ],
+        "violation": "Union violation triggering escalating financial penalties for every 30-minute delay.",
+        "flexibility": "none"
+      },
+      {
+        "constraintId": "HC-CHILD-WORK-HOURS",
+        "type": "Child Labor",
+        "description": "Daily and weekly work hour limits for child performers, based on age, cannot be exceeded.",
+        "applicableTo": [
+          "Child Performers"
+        ],
+        "violation": "Severe legal violation, immediate work stoppage, fines, and potential criminal charges.",
+        "flexibility": "none"
+      },
+      {
+        "constraintId": "HC-STUNT-SAFETY",
+        "type": "Safety",
+        "description": "An IATSE-certified stunt coordinator and a safety officer must be present for all stunt sequences.",
+        "applicableTo": [
+          "Stunt Performers",
+          "Stunt Scenes"
+        ],
+        "violation": "Gross negligence, invalidates production insurance, severe safety and legal liability.",
+        "flexibility": "none"
+      },
+      {
+        "constraintId": "HC-ANIMAL-WELFARE",
+        "type": "Animal Welfare",
+        "description": "Animal work is prohibited in temperatures below 10°C or above 32°C.",
+        "applicableTo": [
+          "Animal Actors"
+        ],
+        "violation": "Violation of animal welfare laws, RSPCA can halt production, results in fines and negative publicity.",
+        "flexibility": "none"
+      },
+      {
+        "constraintId": "HC-FOREIGN-PERMIT",
+        "type": "Legal",
+        "description": "All non-local cast and crew must have a valid Kenyan work permit before commencing any work.",
+        "applicableTo": [
+          "Foreign Cast",
+          "Foreign Crew"
+        ],
+        "violation": "Illegal employment, results in deportation, fines, and potential ban on future filming in the country.",
+        "flexibility": "none"
+      }
+    ],
+    "softConstraints": [
+      {
+        "constraintId": "SC-CONSECUTIVE-DAYS",
+        "type": "Scheduling Preference",
+        "description": "Limit consecutive work days to a maximum of 6 before a mandatory 24-hour rest day.",
+        "applicableTo": [
+          "All Cast",
+          "All Crew"
+        ],
+        "violation": "Working a 7th consecutive day incurs significant overtime/premium pay penalties and increases crew fatigue.",
+        "flexibility": "medium",
+        "penalty": "Typically 1.5x or 2x daily rate for the 7th day, depending on union agreement."
+      },
+      {
+        "constraintId": "SC-WEEKEND-WORK",
+        "type": "Cost Optimization",
+        "description": "Avoid scheduling on weekends (Saturday/Sunday) to prevent premium pay.",
+        "applicableTo": [
+          "All Cast",
+          "All Crew"
+        ],
+        "violation": "Incurs significant budget increases due to premium pay rates.",
+        "flexibility": "high",
+        "penalty": "50% premium for Saturday work, 100% premium for Sunday work."
+      },
+      {
+        "constraintId": "SC-LOCATION-GROUPING",
+        "type": "Efficiency",
+        "description": "Schedule scenes at the same location consecutively to minimize company move time and costs.",
+        "applicableTo": [
+          "Scheduling",
+          "Locations"
+        ],
+        "violation": "Increased transportation costs, lost shooting time due to company moves, potential for location re-booking fees.",
+        "flexibility": "high",
+        "penalty": "Non-financial penalty related to schedule inefficiency and budget overruns."
+      }
+    ],
+    "penaltyCalculations": {
+      "mealPenalties": {
+        "description": "Calculated in 30-minute increments for delays past the 6-hour mark.",
+        "rate_0_to_30_mins_late": "1.5x the employee's hourly rate for that 30-minute period.",
+        "rate_30_to_60_mins_late": "Additional 1.5x penalty.",
+        "rate_past_12.5_hours": "Penalty rate increases to 2x hourly rate."
+      },
+      "overtimePenalties": {
+        "description": "Calculated based on total hours worked in a day.",
+        "rates": "Time and a half (1.5x), Double Time (2x), and Golden Time (e.g., 3x or negotiated flat rate) as per union rules."
+      },
+      "turnaroundPenalties": {
+        "description": "A forced call (violating turnaround) is a severe infraction.",
+        "penalty": "Typically, the employee receives one full day's pay for each hour or fraction thereof that the rest period is invaded."
+      }
+    },
+    "complianceRecommendations": [
+      {
+        "priority": "HIGH",
+        "category": "Foreign Location",
+        "recommendation": "Initiate Kenyan work permit applications for all non-local cast and crew immediately. The 21-day minimum processing time is a critical path dependency.",
+        "impactIfIgnored": "Inability to film in Kenya, causing catastrophic schedule and budget disruption."
+      },
+      {
+        "priority": "HIGH",
+        "category": "Stunt Safety",
+        "recommendation": "Finalize all stunt sequences and secure the required IATSE-certified stunt coordinator, safety officer, and medical personnel. Their availability may be limited.",
+        "impactIfIgnored": "Inability to film stunt sequences, significant safety liability, and insurance invalidation."
+      },
+      {
+        "priority": "MEDIUM",
+        "category": "Child Performers",
+        "recommendation": "Develop a comprehensive welfare plan for all child performers, including scheduling tutors and a certified welfare officer. Submit plan to regulatory bodies for approval.",
+        "impactIfIgnored": "Legal violations, fines, and potential revocation of child work permits."
+      },
+      {
+        "priority": "LOW",
+        "category": "Cost Management",
+        "recommendation": "Structure the initial schedule draft to minimize weekend work and night shoots to provide a baseline budget before adding costly scenes.",
+        "impactIfIgnored": "Initial budget estimates may be unrealistically low, leading to financial strain later in production."
+      }
+    ],
+    "riskAssessment": [
+      {
+        "riskId": "RISK-PERMIT-01",
+        "category": "Legal & Logistics",
+        "severity": "HIGH",
+        "description": "Delays in processing Kenyan work permits for key cast or crew.",
+        "probability": 0.4,
+        "impact": "Shooting schedule delayed, key personnel unable to work, potential need to recast or re-crew locally at high cost.",
+        "mitigation": "Submit all applications 45-60 days in advance, not the 21-day minimum. Engage an experienced local fixer to manage the process."
+      },
+      {
+        "riskId": "RISK-STUNT-01",
+        "category": "Safety & Personnel",
+        "severity": "HIGH",
+        "description": "Injury to a stunt performer during a high-risk sequence.",
+        "probability": 0.1,
+        "impact": "Immediate production halt, medical emergency, potential legal and insurance investigation, long-term schedule delays.",
+        "mitigation": "Strict adherence to all safety protocols, including mandatory rehearsals, personnel certification, and on-site medical teams. Do not deviate from approved stunt plan."
+      },
+      {
+        "riskId": "RISK-BUDGET-01",
+        "category": "Financial",
+        "severity": "MEDIUM",
+        "description": "Systematic schedule overruns leading to cascading overtime and meal penalties.",
+        "probability": 0.7,
+        "impact": "Significant budget overspend on labor costs, potentially compromising funds for other departments.",
+        "mitigation": "Build a 10% contingency into daily shooting schedules. Track work hours in real-time and have ADs flag potential overtime situations 2 hours in advance."
+      },
+      {
+        "riskId": "RISK-CHILD-01",
+        "category": "Legal",
+        "severity": "HIGH",
+        "description": "An unintentional violation of child performer work/rest/education rules.",
+        "probability": 0.25,
+        "impact": "Immediate production halt by welfare officer or regulator, fines, negative press, and potential loss of permit to work with minors.",
+        "mitigation": "The welfare officer's schedule and time-tracking is paramount and must override the AD's shooting schedule. The welfare officer must sign off on the daily call sheet for all minors."
+      }
+    ],
+    "validationResults": {
+      "inputDataCompleteness": 0.1,
+      "ruleApplicationSuccess": 1.0,
+      "constraintGenerationComplete": true,
+      "penaltyCalculationsValid": true
+    },
+    "nextStepRecommendations": [
+      "Provide detailed cast and crew list with union categories for specific rule application.",
+      "Submit scene breakdown with estimated times, locations, and special requirements (stunts, animals, children, makeup).",
+      "Submit a proposed shooting schedule for a full compliance audit against this ruleset."
+    ]
+  }
+}

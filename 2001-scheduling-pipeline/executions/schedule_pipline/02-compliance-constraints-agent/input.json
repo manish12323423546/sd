@@ -1,0 +1,61 @@
+{
+  "complianceConstraintsInput": {
+    "requestId": "proj_2001_space_odyssey_schedule",
+    "timestamp": "2025-07-22T16:34:13.064038",
+    "sourceAgent": "coordinatorAgent",
+    "unionJurisdiction": "",
+    "primaryLocation": "",
+    "scheduleConstraints": {},
+    "castComplianceDetails": [],
+    "sceneComplianceFlags": [],
+    "specialConsiderations": [],
+    "projectModel": {
+      "totalScenes": 71,
+      "totalPages": 145,
+      "totalEstimatedDays": 145,
+      "complexityScore": 9.8,
+      "riskFactors": [
+        "Revolutionary and experimental VFX requirements (slit-scan, front projection)",
+        "Complex and large-scale set construction (rotating centrifuge, space station)",
+        "Weather-dependent exterior shoots with animals",
+        "Seasonal restrictions for location shooting (Africa dry season)",
+        "Extensive and high-risk stunt work (animal interaction, zero-g)",
+        "Extremely long makeup application times (ape, aging)",
+        "Multiple cast availability conflicts and specific restrictions",
+        "Dependency on custom-built, specialized equipment",
+        "High budget and extended production timeline"
+      ]
+    },
+    "coordinationProtocol": {
+      "executionSequence": [
+        {
+          "phase": "Phase 1: Constraint & Resource Gathering",
+          "agents": [
+            "Compliance & Constraints Agent",
+            "Resource Logistics Agent"
+          ],
+          "description": "Dispatch initial data packets to agents for parallel processing of compliance rules and resource availability."
+        },
+        {
+          "phase": "Phase 2: Schedule Optimization",
+          "agents": [
+            "Optimization & Scenario Agent"
+          ],
+          "description": "Consolidate responses from Phase 1 and dispatch the complete, constrained model to the Optimization Agent."
+        }
+      ],
+      "dataFlowValidation": {
+        "complianceResponse": "Must provide a machine-readable set of hard and soft constraints (e.g., turnaround times, meal penalties).",
+        "logisticsResponse": "Must provide a comprehensive availability matrix for all critical resources (cast, locations, special equipment).",
+        "interAgentConsistency": "Ensure cast members flagged for stunts by Compliance Agent are cross-referenced with stunt performer availability from Logistics Agent."
+      },
+      "qualityChecks": [
+        "Verify 100% union turnaround and meal break compliance in final schedule.",
+        "Confirm all weather-dependent scenes are scheduled within seasonal windows.",
+        "Analyze Day-Out-of-Days report for cast efficiency and holding day minimization.",
+        "Validate location groupings to ensure minimal company moves.",
+        "Ensure contingency days are allocated appropriately."
+      ]
+    }
+  }
+}

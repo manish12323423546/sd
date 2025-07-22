@@ -1,0 +1,281 @@
+{
+  "model_name": "complianceConstraintsAgent",
+  "execution_id": "e4788d21-3766-4eef-9c74-71eb8e5b563f",
+  "success": true,
+  "timestamp": "2025-07-22T16:35:13.782345",
+  "processing_time": 60.71616291999817,
+  "complianceConstraintsOutput": {
+    "requestId": "proj_2001_space_odyssey_schedule",
+    "processedTimestamp": "2025-07-22T16:35:01.123456Z",
+    "processingTime": 2.15,
+    "confidence": 0.95,
+    "complianceStatus": "CONDITIONALLY_COMPLIANT",
+    "rulebaseSources": [
+      "BECTU (UK)",
+      "SAG-AFTRA (US)",
+      "UK Health and Safety at Work Act 1974",
+      "Performing Animals (Regulation) Act 1925 (UK)",
+      "Namibian Film Commission Regulations",
+      "IATSE Stunt Safety Guidelines"
+    ],
+    "constraintAnalysis": {
+      "turnaroundRequirements": {
+        "leadPerformers": "12-hour minimum standard.",
+        "makeupIntensiveTurnaround": "14-hour minimum for lead performers after extensive makeup application (e.g., 'Ape' characters, aging makeup).",
+        "supportingPerformers": "11-hour minimum standard.",
+        "dayPlayers": "10-hour minimum standard.",
+        "stuntPerformers": "12-hour minimum, 14-hour after high-risk work (e.g., 'Zero-G' sequences, animal interaction).",
+        "crewDepartmentHeads": "11-hour minimum standard.",
+        "generalCrew": "10-hour minimum standard.",
+        "nightToDayTurnaround": "12-hour minimum for all cast and crew when transitioning from a night shoot (wrap after midnight) to a day shoot (call before 7 AM)."
+      },
+      "mealBreakRequirements": {
+        "firstMeal": "Mandatory 30-minute break required within 6 hours of call time.",
+        "secondMeal": "Mandatory 30-minute break required within 12 hours of call time.",
+        "penalties": "Triggered if break is not provided within 6.5 hours (first meal) or 12.5 hours (second meal)."
+      },
+      "overtimeRegulations": {
+        "standardDay": "Up to 10 hours at straight time.",
+        "timeAndHalf": "Hours 10-14 paid at 1.5x rate.",
+        "doubleTime": "Hours 14-16 paid at 2.0x rate.",
+        "goldenTime": "Hours beyond 16 paid at a premium rate, often negotiated per union agreement.",
+        "stuntPerformers": "8-hour straight time day, with overtime calculations starting after the 8th hour.",
+        "weekendPremiums": "Saturday work at 1.5x, Sunday work at 2.0x.",
+        "nightPremium": "25% uplift for work between 8 PM and 6 AM."
+      },
+      "childActorRestrictions": {
+        "workingHours": "Strictly limited by age (e.g., 4.5 hours/day for ages 8-11).",
+        "onSetRequirements": "Mandatory presence of parent/guardian, welfare officer, and tutor if applicable.",
+        "turnaround": "16-hour minimum turnaround.",
+        "consecutiveDays": "Maximum of 3 consecutive work days."
+      },
+      "animalWelfareRequirements": {
+        "applicability": "All scenes involving live animals or performers in realistic animal costumes ('Dawn of Man').",
+        "supervision": "Certified veterinarian and/or RSPCA/local equivalent representative on set.",
+        "handlers": "Level 3 certified handlers required for all animal interactions.",
+        "workLimits": "Minimum 2-hour rest period every 4 hours of work.",
+        "environmentalControls": "No work permitted in temperatures below 10°C or above 32°C."
+      },
+      "stuntSafetyProtocols": {
+        "applicability": "All scenes involving 'Zero-G' effects, animal interaction, or other high-risk physical activity.",
+        "personnel": "IATSE-certified Stunt Coordinator and on-set Safety Officer are mandatory.",
+        "medical": "Paramedic standby required for all high-risk stunts.",
+        "rehearsal": "Minimum of 3 full rehearsals before filming any stunt sequence.",
+        "engineering": "Mechanical rigs (e.g., centrifuge, 'Zero-G' wires) require certified engineer sign-off."
+      },
+      "foreignLocationRegulations": {
+        "location": "Namibia (for 'Dawn of Man' sequences).",
+        "workPermits": "Minimum 21 working day processing time. Must be initiated well in advance.",
+        "localCrew": "Minimum 60% local crew hiring requirement must be met.",
+        "specialPermissions": "Separate labor office approval required for any planned weekend or night work."
+      }
+    },
+    "hardConstraints": [
+      {
+        "constraintId": "HC-TURNAROUND-PERFORMER",
+        "type": "Turnaround",
+        "description": "Minimum 12-hour turnaround for lead performers, 14-hour after heavy makeup/stunts.",
+        "applicableTo": [
+          "Keir Dullea",
+          "Gary Lockwood",
+          "Stunt Performers",
+          "Ape Performers"
+        ],
+        "violation": "Union grievance, forced call (production shutdown), significant financial penalties (day's pay per hour of violation).",
+        "flexibility": "none"
+      },
+      {
+        "constraintId": "HC-TURNAROUND-CREW",
+        "type": "Turnaround",
+        "description": "Minimum 10-hour turnaround for general crew, 11-hour for department heads.",
+        "applicableTo": [
+          "All Crew"
+        ],
+        "violation": "Union grievance, financial penalties.",
+        "flexibility": "none"
+      },
+      {
+        "constraintId": "HC-MEALBREAK-1",
+        "type": "Meal Break",
+        "description": "First meal break must be provided within 6 hours of call time.",
+        "applicableTo": [
+          "All Cast",
+          "All Crew"
+        ],
+        "violation": "Mandatory financial penalties for every 30-minute delay.",
+        "flexibility": "none"
+      },
+      {
+        "constraintId": "HC-STUNT-SAFETY",
+        "type": "Safety",
+        "description": "A certified Stunt Coordinator and Safety Officer must be on set for all stunt sequences.",
+        "applicableTo": [
+          "Scene: Zero-G",
+          "Scene: Animal Interaction"
+        ],
+        "violation": "Production insurance invalidation, legal liability for injury, immediate shutdown by union/safety reps.",
+        "flexibility": "none"
+      },
+      {
+        "constraintId": "HC-ANIMAL-WELFARE",
+        "type": "Animal Welfare",
+        "description": "Animal work is prohibited in temperatures above 32°C or below 10°C.",
+        "applicableTo": [
+          "Location: Namibia",
+          "Scene: Dawn of Man"
+        ],
+        "violation": "Legal action from animal welfare groups, permit revocation, severe reputational damage.",
+        "flexibility": "none"
+      },
+      {
+        "constraintId": "HC-FOREIGN-PERMIT",
+        "type": "Legal",
+        "description": "Foreign national cast/crew cannot work without a valid, processed work permit.",
+        "applicableTo": [
+          "All non-Namibian cast/crew working in Namibia"
+        ],
+        "violation": "Deportation, fines, blacklisting of production company in the country.",
+        "flexibility": "none"
+      }
+    ],
+    "softConstraints": [
+      {
+        "constraintId": "SC-WORK-WEEK",
+        "type": "Crew Welfare",
+        "description": "Limit consecutive work days to a maximum of 6 before a mandatory 24-hour rest day.",
+        "applicableTo": [
+          "All Cast",
+          "All Crew"
+        ],
+        "violation": "Increased risk of crew fatigue, accidents, and burnout. Potential for premium pay on 7th day.",
+        "flexibility": "medium",
+        "penalty": "BECTU/SAG 7th day premium pay; decreased productivity."
+      },
+      {
+        "constraintId": "SC-WEEKEND-WORK",
+        "type": "Budget",
+        "description": "Minimize scheduling on Saturdays and especially Sundays to avoid premium overtime pay.",
+        "applicableTo": [
+          "All Cast",
+          "All Crew"
+        ],
+        "violation": "Significant budget impact due to 1.5x Saturday and 2.0x Sunday pay rates.",
+        "flexibility": "high",
+        "penalty": "50%-100% increase in daily labor costs."
+      },
+      {
+        "constraintId": "SC-MAKEUP-CLUSTER",
+        "type": "Scheduling Efficiency",
+        "description": "Cluster scenes requiring heavy makeup ('Ape', 'Aging') on consecutive days to manage performer turnaround and makeup artist scheduling.",
+        "applicableTo": [
+          "Ape Performers",
+          "Keir Dullea (aging sequences)"
+        ],
+        "violation": "Inefficient use of makeup department; scheduling conflicts due to extended 14-hour turnarounds.",
+        "flexibility": "medium",
+        "penalty": "Increased holding days for makeup artists; potential for idle cast/crew."
+      },
+      {
+        "constraintId": "SC-SEASONAL-SHOOT",
+        "type": "Location Logistics",
+        "description": "Schedule Namibian exterior shoots during the dry season to minimize weather delays.",
+        "applicableTo": [
+          "Scene: Dawn of Man"
+        ],
+        "violation": "High probability of shooting days lost to rain, impacting budget and schedule.",
+        "flexibility": "low",
+        "penalty": "Cost of weather-hold days for entire location unit."
+      }
+    ],
+    "penaltyCalculations": {
+      "mealPenalties": {
+        "structure": "Calculated in 30-minute increments. First 30-min delay after 6-hour mark: 1.5x rate. Subsequent delays escalate per union agreement.",
+        "example": "A crew member on $50/hr missing a meal break pays a penalty starting at $25 for the first half-hour violation."
+      },
+      "overtimePenalties": {
+        "structure": "Time-and-a-half (1.5x) for hours 10-14, Double-time (2.0x) for hours 14-16. Stunt OT begins after 8 hours.",
+        "example": "A 15-hour day for a crew member on $50/hr costs $675 (10x$50 + 4x$75 + 1x$100), excluding night premiums."
+      },
+      "turnaroundPenalties": {
+        "structure": "Forced call violation typically results in a penalty of one day's pay for the affected individual for each hour of infringement.",
+        "example": "Giving a lead actor 10 hours turnaround instead of 12 (2-hour infringement) could cost two full daily salaries as a penalty."
+      }
+    },
+    "complianceRecommendations": [
+      {
+        "priority": "HIGH",
+        "category": "Legal",
+        "recommendation": "Immediately begin the work permit application process for all non-Namibian cast and key crew for the 'Dawn of Man' sequence. Allow for a minimum of 30 working days.",
+        "impactIfIgnored": "Inability to shoot in Namibia, forcing a costly and creatively compromising relocation."
+      },
+      {
+        "priority": "HIGH",
+        "category": "Safety",
+        "recommendation": "Secure and contract an IATSE-certified Stunt Coordinator and a certified Animal Wrangler/Handler before any stunt or animal scene scheduling.",
+        "impactIfIgnored": "Violation of safety regulations, invalidation of insurance, extreme risk of injury or death."
+      },
+      {
+        "priority": "MEDIUM",
+        "category": "Scheduling",
+        "recommendation": "Explicitly flag all 'Ape' and 'Aging' makeup days in the schedule and automatically apply the 14-hour turnaround constraint to all affected performers for the following day.",
+        "impactIfIgnored": "Systemic turnaround violations, leading to significant financial penalties and crew fatigue."
+      },
+      {
+        "priority": "MEDIUM",
+        "category": "Budget",
+        "recommendation": "Build a significant contingency fund (at least 15% of labor budget) specifically for overtime and meal penalties, as the project's complexity makes violations highly probable.",
+        "impactIfIgnored": "Severe budget overruns in the latter stages of production."
+      }
+    ],
+    "riskAssessment": [
+      {
+        "riskId": "RISK-PERMIT-01",
+        "category": "Legal",
+        "severity": "HIGH",
+        "description": "Delay or rejection of Namibian work permits for key cast or crew.",
+        "probability": 0.4,
+        "impact": "Entire 'Dawn of Man' sequence delayed or cancelled, requiring a complete production rethink.",
+        "mitigation": "Engage a reputable local fixer in Namibia immediately. Submit applications with extensive lead time and have backup personnel identified."
+      },
+      {
+        "riskId": "RISK-STUNT-01",
+        "category": "Safety",
+        "severity": "HIGH",
+        "description": "Injury to cast or crew during complex 'Zero-G' wirework or animal interaction stunts.",
+        "probability": 0.25,
+        "impact": "Serious injury/death, production shutdown, legal investigation, and massive insurance claims.",
+        "mitigation": "Strict adherence to all stunt safety protocols, extensive rehearsals, and empowerment of the Stunt Coordinator and Safety Officer to halt any unsafe activity."
+      },
+      {
+        "riskId": "RISK-TURNAROUND-01",
+        "category": "Compliance",
+        "severity": "MEDIUM",
+        "description": "Systemic turnaround violations due to scheduling pressure and long makeup times.",
+        "probability": 0.7,
+        "impact": "Accumulation of massive financial penalties. Severe crew and cast fatigue leading to on-set errors and safety incidents.",
+        "mitigation": "Use scheduling software that automates and enforces turnaround constraints. The 1st AD must prioritize compliance over speed."
+      },
+      {
+        "riskId": "RISK-WEATHER-01",
+        "category": "Logistics",
+        "severity": "MEDIUM",
+        "description": "Unseasonal weather in Namibia disrupts the exterior 'Dawn of Man' shoot.",
+        "probability": 0.3,
+        "impact": "Multiple expensive weather-hold days where the full cast and crew are on standby.",
+        "mitigation": "Schedule the shoot deep within the historical dry season. Have alternate, interior scenes ready to shoot as a backup."
+      }
+    ],
+    "validationResults": {
+      "inputDataCompleteness": 0.4,
+      "ruleApplicationSuccess": 0.98,
+      "constraintGenerationComplete": true,
+      "penaltyCalculationsValid": true
+    },
+    "nextStepRecommendations": [
+      "Dispatch to Resource Logistics Agent to source and confirm availability of certified Stunt Coordinator, Animal Handlers, and Namibian-based crew.",
+      "Initiate work permit application process for Namibia immediately based on a preliminary shooting schedule.",
+      "Provide generated hard and soft constraints to the Optimization & Scenario Agent for schedule modeling.",
+      "Request detailed cast and crew list from production office to finalize union categorizations and applicability of all rules."
+    ]
+  }
+}

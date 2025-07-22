@@ -1,0 +1,241 @@
+{
+  "model_name": "coordinatorAgent",
+  "execution_id": "09dbf3fb-c476-42fe-a7e8-1d9b8f8bb923",
+  "success": true,
+  "timestamp": "2025-07-22T16:27:57.866512",
+  "processing_time": 39.914615869522095,
+  "coordinatorOutput": {
+    "projectId": "proj_2001_space_odyssey_schedule",
+    "processedTimestamp": "2024-07-22T10:05:15Z",
+    "processingTime": 4.78,
+    "confidence": 0.98,
+    "systemStatus": {
+      "dataIntakeStatus": "SUCCESS",
+      "modelCreationStatus": "COMPLETE",
+      "validationStatus": "PASS",
+      "agentDistributionStatus": "READY"
+    },
+    "comprehensiveProjectModel": {
+      "totalScenes": 71,
+      "totalPages": 145,
+      "totalEstimatedDays": 145,
+      "complexityScore": 10.0,
+      "riskFactors": [
+        "Revolutionary VFX & experimental technology (slit-scan, front projection)",
+        "Extensive animal work with seasonal dependency (dry season)",
+        "Complex stunt sequences with animal and mechanical elements",
+        "Extremely long makeup application times (6+ hours for aging)",
+        "Massive, complex set construction (rotating centrifuge, space station)",
+        "Weather dependency for all 'Dawn of Man' exterior sequences",
+        "Long production timeline increasing risk of unforeseen issues",
+        "Cast availability constraints and specific work restrictions"
+      ]
+    },
+    "agentDataPackets": {
+      "complianceConstraintsAgent": {
+        "agentName": "Compliance & Constraints Agent",
+        "priority": "FIRST_PARALLEL",
+        "description": "Request for analysis of all regulatory, union (BECTU), and safety constraints based on project data.",
+        "requestData": {
+          "unionJurisdiction": "BECTU",
+          "primaryLocation": "London, UK",
+          "scheduleConstraints": {
+            "turnaroundMinimum": 12,
+            "mealBreakMaximum": 6,
+            "maxConsecutiveDays": 6,
+            "preferredWeeklyPattern": "5_day_weeks"
+          },
+          "castComplianceDetails": [
+            {
+              "characterName": "DR_HEYWOOD_FLOYD",
+              "restrictions": "Cannot work consecutive night shoots"
+            },
+            {
+              "characterName": "DAVE_BOWMAN",
+              "restrictions": "Aging makeup requires 6-hour prep time, impacting daily work hours"
+            }
+          ],
+          "sceneComplianceFlags": [
+            {
+              "sceneId": 3,
+              "flags": [
+                "animal_work",
+                "stunt_work"
+              ]
+            },
+            {
+              "sceneId": 10,
+              "flags": [
+                "animal_work",
+                "stunt_work",
+                "night_work"
+              ]
+            },
+            {
+              "sceneId": 66,
+              "flags": [
+                "stunt_work",
+                "mechanical_effects"
+              ]
+            }
+          ],
+          "specialConsiderations": [
+            "Animal work must adhere to UK welfare regulations and seasonal restrictions.",
+            "Stunt sequences require certified safety coordinator and protocols."
+          ]
+        }
+      },
+      "resourceLogisticsAgent": {
+        "agentName": "Resource Logistics Agent",
+        "priority": "FIRST_PARALLEL",
+        "description": "Request for analysis of cast, crew, location, and equipment availability and logistics.",
+        "requestData": {
+          "castAvailability": [
+            {
+              "characterName": "MOONWATCHER",
+              "availableStart": "1965-12-29",
+              "availableEnd": "1966-02-15",
+              "blackoutDates": []
+            },
+            {
+              "characterName": "DR_HEYWOOD_FLOYD",
+              "availableStart": "1966-03-01",
+              "availableEnd": "1966-05-15",
+              "blackoutDates": [
+                "1966-04-10",
+                "1966-04-11"
+              ]
+            },
+            {
+              "characterName": "DAVE_BOWMAN",
+              "availableStart": "1966-06-01",
+              "availableEnd": "1968-02-01",
+              "blackoutDates": [
+                "1966-12-20",
+                "1966-12-27",
+                "1967-12-20",
+                "1967-12-27"
+              ]
+            },
+            {
+              "characterName": "FRANK_POOLE",
+              "availableStart": "1966-06-01",
+              "availableEnd": "1967-08-01",
+              "blackoutDates": []
+            }
+          ],
+          "locationLogistics": [
+            {
+              "locationId": "LOC001",
+              "name": "AFRICAN_STREAM",
+              "season": "dry_season_only",
+              "access": "remote_4wd_required"
+            },
+            {
+              "locationId": "LOC002",
+              "name": "AFRICAN_PLAINS",
+              "season": "dry_season_only",
+              "access": "remote_4wd_required"
+            },
+            {
+              "locationId": "LOC003",
+              "name": "DISCOVERY_SPACECRAFT",
+              "access": "studio_construction_required"
+            },
+            {
+              "locationId": "LOC004",
+              "name": "SPACE_STATION_FIVE",
+              "access": "studio_construction_required"
+            }
+          ],
+          "departmentResourceNeeds": {
+            "camera": {
+              "specialEquipment": [
+                "centrifuge_mount",
+                "front_projection",
+                "motion_control",
+                "slit_scan"
+              ]
+            },
+            "makeup": {
+              "specialTypes": [
+                "ape_transformation",
+                "aging_makeup"
+              ],
+              "testDays": 12
+            },
+            "stunts": {
+              "coordinator": "required",
+              "performers": 8
+            },
+            "vfx": {
+              "supervisionDays": 145,
+              "vendorRequirement": "cutting_edge_experimental"
+            }
+          }
+        }
+      },
+      "optimizationScenarioAgent": {
+        "agentName": "Optimization & Scenario Agent",
+        "priority": "SECOND_PARALLEL",
+        "dependencies": [
+          "complianceConstraintsAgent",
+          "resourceLogisticsAgent"
+        ],
+        "description": "Standby request. Awaiting constraint and resource data before proceeding with schedule optimization.",
+        "requestData": {
+          "optimizationGoals": {
+            "minimizeCompanyMoves": true,
+            "groupSimilarScenes": true,
+            "prioritizeCastEfficiency": true,
+            "weatherContingencyDays": 5
+          },
+          "projectModel": {
+            "totalScenes": 71,
+            "totalPages": 145,
+            "sceneData": "Reference full structuredScriptBreakdown from initial input."
+          },
+          "dependencyPlaceholders": {
+            "constraintSet": "Awaiting data from Compliance & Constraints Agent",
+            "resourceAvailability": "Awaiting data from Resource Logistics Agent"
+          }
+        }
+      }
+    },
+    "coordinationProtocol": {
+      "executionSequence": [
+        {
+          "phase": "Phase 1: Constraint & Resource Analysis",
+          "agents": [
+            "Compliance & Constraints Agent",
+            "Resource Logistics Agent"
+          ],
+          "description": "Dispatch data packets to agents for parallel processing of hard/soft constraints and resource availability."
+        },
+        {
+          "phase": "Phase 2: Schedule Optimization",
+          "agents": [
+            "Optimization & Scenario Agent"
+          ],
+          "description": "Upon receipt of Phase 1 outputs, consolidate data and dispatch to the Optimization agent to generate schedule proposals."
+        }
+      ],
+      "dataFlowValidation": {
+        "validation_requirements": "Cross-reference the final constraint set from the Compliance agent against the resource availability matrix from the Logistics agent to identify any immediate, unresolvable conflicts before optimization."
+      },
+      "qualityChecks": [
+        "Verify 100% union compliance for turnaround and meal breaks in all proposed schedules.",
+        "Check that all weather-dependent scenes are scheduled within the specified seasonal window (dry season).",
+        "Ensure schedules account for long makeup prep times by blocking appropriate character days.",
+        "Validate that location groupings minimize company moves as per optimization goals.",
+        "Confirm that all high-risk scenes (stunts, animals) have appropriate resource allocation."
+      ]
+    },
+    "nextActions": [
+      "Dispatch data packets to Compliance & Constraints Agent and Resource Logistics Agent.",
+      "Set system to 'PENDING' and await responses from Phase 1 agents.",
+      "Prepare consolidation logic for incoming constraint and resource data.",
+      "Queue final data packet for Optimization & Scenario Agent upon successful Phase 1 completion."
+    ]
+  }
+}

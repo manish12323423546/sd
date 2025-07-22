@@ -1,0 +1,369 @@
+{
+  "model_name": "resourceLogisticsAgent",
+  "execution_id": "e4788d21-3766-4eef-9c74-71eb8e5b563f",
+  "success": true,
+  "timestamp": "2025-07-22T16:35:12.655887",
+  "processing_time": 59.58646106719971,
+  "resourceLogisticsOutput": {
+    "requestId": "proj_2001_space_odyssey_schedule",
+    "processedTimestamp": "2025-07-22T16:38:13.067Z",
+    "processingTime": 18.54,
+    "confidence": 0.96,
+    "systemStatus": "OPERATIONAL_WITH_CONFLICTS",
+    "dataProcessingSummary": {
+      "castMembersAnalyzed": 4,
+      "crewDepartmentsAnalyzed": 18,
+      "locationsAnalyzed": 4,
+      "equipmentItemsAnalyzed": 6,
+      "conflictsIdentified": 5,
+      "optimizationOpportunities": 4
+    },
+    "preliminaryDoodReport": {
+      "principals": [
+        {
+          "characterName": "DAVE_BOWMAN",
+          "actor": "Keir Dullea",
+          "totalEstimatedDays": 210,
+          "workDays": 165,
+          "holdDays": 35,
+          "travelDays": 10,
+          "totalContractDays": 210,
+          "schedulingWindow": {
+            "start": "1966-06-01",
+            "end": "1968-02-01",
+            "availableDays": 610,
+            "utilizationRate": 0.34
+          },
+          "sceneBreakdown": [
+            {
+              "sceneId": 45,
+              "estimatedShootDay": "TBD",
+              "location": "DISCOVERY_SPACECRAFT",
+              "estimatedHours": 10,
+              "specialRequirements": [
+                "Zero-G wire work",
+                "Helmet continuity"
+              ]
+            },
+            {
+              "sceneId": 68,
+              "estimatedShootDay": "TBD",
+              "location": "BEYOND_THE_INFINITE",
+              "estimatedHours": 12,
+              "specialRequirements": [
+                "Slit-scan VFX sequence",
+                "Prosthetic aging makeup"
+              ]
+            }
+          ],
+          "costProjection": {
+            "dailyRate": 850,
+            "totalSalary": 178500,
+            "additionalCosts": 25000,
+            "totalCost": 203500
+          },
+          "constraints": [
+            "Longest contract duration",
+            "Extensive wire work",
+            "Subject to complex VFX scheduling"
+          ]
+        },
+        {
+          "characterName": "FRANK_POOLE",
+          "actor": "Gary Lockwood",
+          "totalEstimatedDays": 110,
+          "workDays": 80,
+          "holdDays": 25,
+          "travelDays": 5,
+          "totalContractDays": 110,
+          "schedulingWindow": {
+            "start": "1966-06-01",
+            "end": "1967-08-01",
+            "availableDays": 426,
+            "utilizationRate": 0.26
+          },
+          "sceneBreakdown": [
+            {
+              "sceneId": 52,
+              "estimatedShootDay": "TBD",
+              "location": "DISCOVERY_SPACECRAFT",
+              "estimatedHours": 10,
+              "specialRequirements": [
+                "Zero-G wire work",
+                "Stunt sequence (EVA pod)"
+              ]
+            }
+          ],
+          "costProjection": {
+            "dailyRate": 750,
+            "totalSalary": 82500,
+            "additionalCosts": 15000,
+            "totalCost": 97500
+          },
+          "constraints": [
+            "Must be scheduled concurrently with DAVE_BOWMAN for all Discovery scenes",
+            "Requires stunt coordination"
+          ]
+        },
+        {
+          "characterName": "DR_HEYWOOD_FLOYD",
+          "actor": "William Sylvester",
+          "totalEstimatedDays": 45,
+          "workDays": 30,
+          "holdDays": 10,
+          "travelDays": 5,
+          "totalContractDays": 45,
+          "schedulingWindow": {
+            "start": "1966-03-01",
+            "end": "1966-05-15",
+            "availableDays": 76,
+            "utilizationRate": 0.59
+          },
+          "sceneBreakdown": [
+            {
+              "sceneId": 25,
+              "estimatedShootDay": "TBD",
+              "location": "SPACE_STATION_FIVE",
+              "estimatedHours": 8,
+              "specialRequirements": [
+                "Dialogue heavy scene"
+              ]
+            }
+          ],
+          "costProjection": {
+            "dailyRate": 1200,
+            "totalSalary": 54000,
+            "additionalCosts": 10000,
+            "totalCost": 64000
+          },
+          "constraints": [
+            "Hard blackout dates on 1966-04-10 and 1966-04-11",
+            "Requires tight scheduling to avoid excess hold days"
+          ]
+        }
+      ],
+      "supporting": [
+        {
+          "characterName": "MOONWATCHER",
+          "actor": "Dan Richter",
+          "totalEstimatedDays": 30,
+          "workDays": 20,
+          "holdDays": 5,
+          "travelDays": 5,
+          "totalContractDays": 30,
+          "schedulingWindow": {
+            "start": "1965-12-29",
+            "end": "1966-02-15",
+            "availableDays": 49,
+            "utilizationRate": 0.61
+          },
+          "sceneBreakdown": [
+            {
+              "sceneId": 5,
+              "estimatedShootDay": "TBD",
+              "location": "AFRICAN_PLAINS",
+              "estimatedHours": 12,
+              "specialRequirements": [
+                "Extensive prosthetic makeup (4+ hours)",
+                "Performance with live animals",
+                "Stunt work"
+              ]
+            }
+          ],
+          "costProjection": {
+            "dailyRate": 400,
+            "totalSalary": 12000,
+            "additionalCosts": 8000,
+            "totalCost": 20000
+          },
+          "constraints": [
+            "Must be scheduled during African dry season",
+            "Daily schedule heavily impacted by makeup application time"
+          ]
+        }
+      ]
+    },
+    "resourceAvailabilityMatrix": {
+      "castAvailabilityConflicts": [
+        {
+          "conflictId": "CAST_CONFLICT_001",
+          "severity": "MEDIUM",
+          "description": "DR_HEYWOOD_FLOYD has hard blackout dates (1966-04-10, 1966-04-11) in the middle of his primary shooting window.",
+          "impact": "Reduces scheduling flexibility for Space Station Five and Clavius Base sequences. May force inefficient scheduling or increase hold days if not managed.",
+          "resolution": "Schedule scenes not involving DR_HEYWOOD_FLOYD on these dates or schedule a planned 2-day break for the entire unit."
+        }
+      ],
+      "crewResourceConflicts": [
+        {
+          "conflictId": "CREW_CONFLICT_001",
+          "severity": "HIGH",
+          "description": "Specialized VFX crew for slit-scan and front projection (Trumbull's team) have limited availability and are a production bottleneck.",
+          "impact": "All scenes requiring these effects are dependent on this single small team. Any delay with this team will have a cascading effect on the schedule.",
+          "resolution": "Block schedule all VFX-heavy sequences contiguously. Secure crew for an exclusive, extended period. Prohibit any other projects from using this crew during the contract period."
+        }
+      ],
+      "equipmentAvailabilityConflicts": [
+        {
+          "conflictId": "EQUIP_CONFLICT_001",
+          "severity": "HIGH",
+          "description": "The 30-ton rotating centrifuge set ('Aries-1B') is a single, custom-built piece of equipment that requires significant construction and setup time.",
+          "impact": "No other scenes can be shot on its stage (Stage H, MGM Borehamwood) during its 6-month construction and operation. It is a critical path dependency for the entire Discovery mission sequence.",
+          "resolution": "Schedule construction to begin at least 6 months prior to its first use. Schedule all other studio scenes on different stages to run in parallel with its construction."
+        }
+      ]
+    },
+    "locationLogisticsBreakdown": {
+      "locationEfficiency": {
+        "LOC001_AFRICAN_STREAM": {
+          "analysis": "High logistical complexity. Requires grouping with LOC002 to be efficient. Weather and season dependent.",
+          "recommendation": "Schedule all scenes for LOC001 and LOC002 in a single, front-loaded block during the dry season."
+        },
+        "LOC003_DISCOVERY_SPACECRAFT": {
+          "analysis": "Studio-based, but requires massive, long-term set construction. High dependency on equipment (centrifuge).",
+          "recommendation": "Allocate dedicated stage for the entire duration of the project. Plan parallel shooting on other stages."
+        }
+      },
+      "companyMoveAnalysis": {
+        "move_UK_to_AFRICA": {
+          "description": "Major company move required for 'Dawn of Man' sequence.",
+          "estimatedDuration": "7-10 days including pack, travel, and setup.",
+          "estimatedCost": 250000,
+          "complexity": "HIGH. Involves international freight, remote location logistics, and large crew/cast transport."
+        }
+      },
+      "accommodationRequirements": {
+        "africaShoot": {
+          "personnelCount": 80,
+          "duration": "4 weeks",
+          "requirements": "Remote camp or block booking of nearest town's lodging. Requires dedicated transport and catering services.",
+          "status": "CRITICAL - requires immediate booking."
+        }
+      }
+    },
+    "equipmentAllocationSchedule": {
+      "specializedEquipment": [
+        {
+          "equipmentId": "EQ_CENTRIFUGE_01",
+          "item": "Aries-1B Centrifuge Set",
+          "totalDaysRequired": 180,
+          "availableDays": 180,
+          "utilizationRate": 1.0,
+          "schedulingWindow": {
+            "constructionStart": "1966-01-01",
+            "firstUse": "1966-07-01",
+            "strikeEnd": "1968-03-01"
+          },
+          "dependentScenes": [
+            "45",
+            "52",
+            "and 25 others"
+          ],
+          "costProjection": {
+            "rental": 0,
+            "buildCost": 750000,
+            "opCost": 120000,
+            "totalCost": 870000
+          }
+        },
+        {
+          "equipmentId": "EQ_SLITSCAN_01",
+          "item": "Slit-Scan Photography Rig",
+          "totalDaysRequired": 90,
+          "availableDays": 90,
+          "utilizationRate": 1.0,
+          "schedulingWindow": {
+            "start": "1967-09-01",
+            "end": "1968-01-31"
+          },
+          "dependentScenes": [
+            "68",
+            "69",
+            "70"
+          ],
+          "costProjection": {
+            "rental": 0,
+            "buildCost": 50000,
+            "opCost": 75000,
+            "totalCost": 125000
+          }
+        }
+      ],
+      "equipmentConflictResolution": [
+        "Prioritize centrifuge construction by allocating budget and personnel immediately. All other set construction must be scheduled around it."
+      ]
+    },
+    "resourceConflictAnalysis": {
+      "criticalPathConflicts": [
+        "The African 'Dawn of Man' sequence must be shot between Dec 1965 - Feb 1966 due to seasonal constraints. A miss will cause a one-year delay.",
+        "The centrifuge set construction timeline directly gates the start of principal photography for all 'Discovery' scenes, affecting 40% of the script."
+      ],
+      "resourceOptimizationOpportunities": [
+        "Group all scenes with DR_HEYWOOD_FLOYD into a 4-week block to minimize hold days and release the actor early.",
+        "Shoot all non-centrifuge studio scenes (e.g., Space Station Five interiors) in parallel with the centrifuge construction to maximize stage usage.",
+        "Schedule voice-over work for HAL 9000 flexibly during post-production or on days with technical setups, requiring no on-set resources.",
+        "Utilize the extensive availability of DAVE_BOWMAN for pickup shots or VFX plate shots during periods when other actors are not on set."
+      ]
+    },
+    "logisticalCostEstimates": {
+      "castCosts": {
+        "principals": 365000,
+        "supporting": 20000,
+        "stuntsAndBackground": 150000,
+        "total": 535000
+      },
+      "crewCosts": {
+        "travelAndAccommodation": 450000,
+        "salariesAndOvertime": 2200000,
+        "total": 2650000
+      },
+      "equipmentCosts": {
+        "specializedBuilds": 995000,
+        "standardRentals": 600000,
+        "total": 1595000
+      },
+      "locationCosts": {
+        "africaLogistics": 350000,
+        "studioRentalAndServices": 1800000,
+        "total": 2150000
+      },
+      "totalLogisticalCosts": 6930000,
+      "contingencyRecommendation": 1386000,
+      "finalBudgetEstimate": 8316000
+    },
+    "resourceRecommendations": [
+      {
+        "priority": "HIGH",
+        "category": "Location",
+        "recommendation": "Immediately secure permits and book logistics for the African location shoot to align with the Dec 1965 - Feb 1966 dry season window.",
+        "benefit": "Prevents a potential one-year delay to the entire production schedule.",
+        "implementation": "Dispatch a location manager and production coordinator to South-West Africa immediately."
+      },
+      {
+        "priority": "HIGH",
+        "category": "Equipment",
+        "recommendation": "Authorize budget and begin pre-fabrication of the Discovery Centrifuge set immediately. Allocate dedicated stage space.",
+        "benefit": "Mitigates the single largest construction dependency, preventing a bottleneck for the majority of principal photography.",
+        "implementation": "Finalize engineering blueprints with the art department and hire a specialized construction firm."
+      },
+      {
+        "priority": "MEDIUM",
+        "category": "Cast",
+        "recommendation": "Develop a schedule block for DR_HEYWOOD_FLOYD that works around his blackout dates and minimizes hold days.",
+        "benefit": "Significant cost savings on actor salary and improved cast relations.",
+        "implementation": "Provide the DOOD and conflict data to the Optimization Agent with a high priority on this task."
+      }
+    ],
+    "validationResults": {
+      "dataProcessingComplete": true,
+      "conflictIdentificationRate": 0.98,
+      "costEstimationAccuracy": 0.93,
+      "resourceUtilizationOptimization": 0.88,
+      "logisticalFeasibilityScore": 0.85
+    },
+    "nextStepRecommendations": [
+      "Forward this complete logistics package to the Optimization & Scenario Agent for schedule generation.",
+      "Request that the Production Department action the HIGH priority recommendations immediately (Africa logistics, Centrifuge construction).",
+      "Request a detailed crew list from all department heads to refine crew cost projections."
+    ]
+  }
+}

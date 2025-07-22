@@ -1,0 +1,335 @@
+{
+  "model_name": "resourceLogisticsAgent",
+  "execution_id": "09dbf3fb-c476-42fe-a7e8-1d9b8f8bb923",
+  "success": true,
+  "timestamp": "2025-07-22T16:28:52.370027",
+  "processing_time": 54.49481797218323,
+  "resourceLogisticsOutput": {
+    "requestId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "processedTimestamp": "2025-07-22T16:30:15.123Z",
+    "processingTime": 185.4,
+    "confidence": 0.96,
+    "systemStatus": "OPERATIONAL_WITH_CONFLICTS",
+    "dataProcessingSummary": {
+      "castMembersAnalyzed": 4,
+      "crewDepartmentsAnalyzed": 8,
+      "locationsAnalyzed": 3,
+      "equipmentItemsAnalyzed": 5,
+      "conflictsIdentified": 3,
+      "optimizationOpportunities": 2
+    },
+    "preliminaryDoodReport": {
+      "principals": [
+        {
+          "characterName": "Dr. Dave Bowman",
+          "actor": "Keir Dullea",
+          "totalEstimatedDays": 75,
+          "workDays": 58,
+          "holdDays": 12,
+          "travelDays": 5,
+          "totalContractDays": 75,
+          "schedulingWindow": {
+            "start": "2025-09-01",
+            "end": "2025-12-19",
+            "availableDays": 80,
+            "utilizationRate": 0.9375
+          },
+          "sceneBreakdown": [
+            {
+              "sceneId": 150,
+              "estimatedShootDay": "2025-10-15",
+              "location": "Studio Stage 5 - Discovery One Cockpit",
+              "estimatedHours": 8,
+              "specialRequirements": [
+                "Zero-G wire work",
+                "Extended helmet time"
+              ]
+            },
+            {
+              "sceneId": 175,
+              "estimatedShootDay": "2025-11-05",
+              "location": "Studio Stage 6 - EVA Pod Bay",
+              "estimatedHours": 10,
+              "specialRequirements": [
+                "Stunt coordination required",
+                "HAL interface dialogue"
+              ]
+            }
+          ],
+          "costProjection": {
+            "dailyRate": 2500,
+            "totalSalary": 175000,
+            "additionalCosts": 15000,
+            "totalCost": 190000
+          },
+          "constraints": [
+            "Max 4 consecutive days on wire rig",
+            "Personal blackout: 2025-11-04 to 2025-11-06"
+          ]
+        },
+        {
+          "characterName": "Dr. Frank Poole",
+          "actor": "Gary Lockwood",
+          "totalEstimatedDays": 68,
+          "workDays": 52,
+          "holdDays": 11,
+          "travelDays": 5,
+          "totalContractDays": 68,
+          "schedulingWindow": {
+            "start": "2025-09-01",
+            "end": "2025-12-12",
+            "availableDays": 74,
+            "utilizationRate": 0.9189
+          },
+          "sceneBreakdown": [
+            {
+              "sceneId": 148,
+              "estimatedShootDay": "2025-10-10",
+              "location": "Studio Stage 7 - Centrifuge Set",
+              "estimatedHours": 9,
+              "specialRequirements": [
+                "Physical fitness assessment required",
+                "Running on centrifuge"
+              ]
+            }
+          ],
+          "costProjection": {
+            "dailyRate": 2200,
+            "totalSalary": 138600,
+            "additionalCosts": 12000,
+            "totalCost": 150600
+          },
+          "constraints": [
+            "Requires 1-hour warm-up for centrifuge scenes"
+          ]
+        }
+      ],
+      "supporting": [
+        {
+          "characterName": "Dr. Heywood R. Floyd",
+          "actor": "William Sylvester",
+          "totalEstimatedDays": 20,
+          "workDays": 14,
+          "holdDays": 4,
+          "travelDays": 2,
+          "totalContractDays": 20,
+          "schedulingWindow": {
+            "start": "2025-09-08",
+            "end": "2025-10-03",
+            "availableDays": 20,
+            "utilizationRate": 1.0
+          },
+          "sceneBreakdown": [
+            {
+              "sceneId": 45,
+              "estimatedShootDay": "2025-09-15",
+              "location": "Clavius Base - Conference Room",
+              "estimatedHours": 6,
+              "specialRequirements": [
+                "Extended dialogue scene"
+              ]
+            }
+          ],
+          "costProjection": {
+            "dailyRate": 1800,
+            "totalSalary": 32400,
+            "additionalCosts": 5000,
+            "totalCost": 37400
+          },
+          "constraints": [
+            "Must be wrapped by October 5th for another commitment"
+          ]
+        }
+      ]
+    },
+    "resourceAvailabilityMatrix": {
+      "castAvailabilityConflicts": [
+        {
+          "conflictId": "CAST-001",
+          "severity": "HIGH",
+          "description": "Keir Dullea (Dave Bowman) has a personal blackout from 2025-11-04 to 2025-11-06, which conflicts with the scheduled shoot for critical Scene 175 (HAL disconnect sequence) on 2025-11-05.",
+          "impact": "Delays a critical path sequence, potentially pushing back all subsequent Discovery One scenes. Incurs costs for idle crew and set.",
+          "resolution": "Propose moving Scene 175 shoot to 2025-11-07. Alternatively, attempt to buy out the blackout dates at a premium cost."
+        }
+      ],
+      "crewResourceConflicts": [
+        {
+          "conflictId": "CREW-001",
+          "severity": "MEDIUM",
+          "description": "The lead Zero-G rigging specialist is only available for 3 weeks in October, but wire-work scenes are currently scheduled across a 5-week block.",
+          "impact": "Requires either rescheduling all wire-work scenes into a compressed timeframe or hiring a second, potentially less experienced, specialist.",
+          "resolution": "Scheduling Agent to re-sequence all scenes requiring Zero-G rigging into the specialist's 3-week availability window in October."
+        }
+      ],
+      "equipmentAvailabilityConflicts": [
+        {
+          "conflictId": "EQUIP-001",
+          "severity": "HIGH",
+          "description": "The single Mitchell Super Panavision 70 camera is required for both the main unit on the Centrifuge set (Stage 7) and the miniature effects unit on the same day (2025-10-10).",
+          "impact": "One unit will be forced to stand down, causing a full day's delay and incurring significant cost for idle crew and facilities. This is a critical path blocker.",
+          "resolution": "Immediately source and rent a second Mitchell 70mm camera package for the duration of the schedule overlap. Absorb the additional rental and insurance cost."
+        }
+      ]
+    },
+    "locationLogisticsBreakdown": {
+      "locationEfficiency": {
+        "locationId": "LOC-01",
+        "name": "MGM-British Studios, Borehamwood",
+        "analysis": "Optimal for large-scale set construction like the 38-foot diameter Centrifuge. Proximity to London provides access to a deep crew base. However, travel from central London can exceed 90 minutes in peak traffic, impacting call times.",
+        "pros": [
+          "Vast stage space",
+          "Experienced local crew",
+          "On-site construction workshops"
+        ],
+        "cons": [
+          "High facility rental costs",
+          "Commute times from London",
+          "Limited on-site accommodation"
+        ]
+      },
+      "companyMoveAnalysis": {
+        "moveId": "CM-001",
+        "from": "MGM-British Studios",
+        "to": "Namib Desert (for 'Dawn of Man')",
+        "estimatedTime": "72 hours (including equipment packing, air freight, ground transport, and setup)",
+        "estimatedCost": 250000,
+        "complexity": "HIGH",
+        "notes": "Requires charter flights for key equipment and personnel, extensive ground support, and a remote base camp. High risk of weather delays."
+      },
+      "accommodationRequirements": {
+        "location": "Borehamwood Area",
+        "personnelCount": 150,
+        "requiredRooms": 120,
+        "duration": "16 weeks",
+        "estimatedCost": 1344000,
+        "notes": "Block booking of several hotels required. Limited availability of long-term serviced apartments."
+      }
+    },
+    "equipmentAllocationSchedule": {
+      "specializedEquipment": [
+        {
+          "equipmentId": "SPEC-001",
+          "item": "Custom Centrifuge Set",
+          "totalDaysRequired": 45,
+          "availableDays": 45,
+          "utilizationRate": 1.0,
+          "schedulingWindow": {
+            "start": "2025-10-01",
+            "end": "2025-11-28",
+            "notes": "Requires 6-week pre-build. Immovable once constructed. Dedicated to Stage 7."
+          },
+          "dependentScenes": [
+            "148",
+            "149",
+            "151",
+            "152",
+            "155"
+          ],
+          "costProjection": {
+            "rental": 0,
+            "buildCost": 750000,
+            "strikeCost": 80000,
+            "totalCost": 830000
+          }
+        },
+        {
+          "equipmentId": "SPEC-002",
+          "item": "Mitchell Super Panavision 70 Camera",
+          "totalDaysRequired": 90,
+          "availableDays": 90,
+          "utilizationRate": 0.98,
+          "schedulingWindow": {
+            "start": "2025-09-01",
+            "end": "2025-12-19",
+            "notes": "High demand, single unit available per rental agreement."
+          },
+          "dependentScenes": [
+            "ALL"
+          ],
+          "costProjection": {
+            "rental": 180000,
+            "transport": 5000,
+            "insurance": 25000,
+            "totalCost": 210000
+          }
+        }
+      ],
+      "equipmentConflictResolution": [
+        "Resolved EQUIP-001 by approving budget for a second Mitchell 70mm camera rental for a 4-week period, at an additional cost of $65,000."
+      ]
+    },
+    "resourceConflictAnalysis": {
+      "criticalPathConflicts": [
+        "EQUIP-001: Dual requirement for the Mitchell 70mm camera on 2025-10-10. Resolution is pending budget approval for a second camera.",
+        "CAST-001: Keir Dullea's unavailability for Scene 175. Resolution requires immediate negotiation with actor's agent."
+      ],
+      "resourceOptimizationOpportunities": [
+        "Group all of William Sylvester's (Dr. Floyd) scenes into a 14-day block at the start of the schedule to release the actor early, saving an estimated $7,200 in hold day fees.",
+        "Schedule all EVA Pod interior scenes (175, 176, 178) back-to-back to reduce setup/strike time for the complex mockup, saving an estimated 2 shoot days."
+      ]
+    },
+    "logisticalCostEstimates": {
+      "castCosts": {
+        "principals": 340600,
+        "supporting": 37400,
+        "stunts": 85000,
+        "total": 463000
+      },
+      "crewCosts": {
+        "aboveTheLine": 1200000,
+        "belowTheLine": 4500000,
+        "total": 5700000
+      },
+      "equipmentCosts": {
+        "specialized": 1040000,
+        "standardPackages": 600000,
+        "total": 1640000
+      },
+      "locationCosts": {
+        "studioRental": 2200000,
+        "practicalLocations": 450000,
+        "logisticsAndTravel": 1594000,
+        "total": 4244000
+      },
+      "totalLogisticalCosts": 12047000,
+      "contingencyRecommendation": 1807050,
+      "finalBudgetEstimate": 13854050
+    },
+    "resourceRecommendations": [
+      {
+        "priority": "HIGH",
+        "category": "Equipment",
+        "recommendation": "Approve the budget for a second Mitchell Super Panavision 70 camera package for the 4-week period of overlapping demand.",
+        "benefit": "Prevents a critical path schedule delay and avoids wasting approximately $150,000 on an idle day for the main unit.",
+        "implementation": "Line Producer to sign off on the additional rental expenditure immediately. Production Coordinator to execute rental agreement."
+      },
+      {
+        "priority": "HIGH",
+        "category": "Cast",
+        "recommendation": "Engage with Keir Dullea's agent to resolve the scheduling conflict for Scene 175.",
+        "benefit": "Keeps a pivotal story sequence on schedule and prevents cascading delays.",
+        "implementation": "Casting Director and 1st AD to present alternative shoot dates (Nov 3 or Nov 7) or a buyout offer."
+      },
+      {
+        "priority": "MEDIUM",
+        "category": "Scheduling",
+        "recommendation": "Adopt the proposed schedule optimization to group all scenes with William Sylvester and all EVA pod interiors.",
+        "benefit": "Reduces costs by minimizing hold days and improves efficiency by saving two shoot days.",
+        "implementation": "Scheduling Agent to publish a revised schedule reflecting these changes."
+      }
+    ],
+    "validationResults": {
+      "dataProcessingComplete": true,
+      "conflictIdentificationRate": 1.0,
+      "costEstimationAccuracy": 0.94,
+      "resourceUtilizationOptimization": 0.88,
+      "logisticalFeasibilityScore": 0.85
+    },
+    "nextStepRecommendations": [
+      "Line Producer: Approve budget for second camera rental.",
+      "Scheduling Agent: Revise and distribute schedule based on approved optimizations and conflict resolutions.",
+      "Casting Director: Initiate negotiations regarding Keir Dullea's blackout dates.",
+      "Travel Coordinator: Finalize block booking of hotels in Borehamwood."
+    ]
+  }
+}

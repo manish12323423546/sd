@@ -1,0 +1,552 @@
+{
+  "coordinatorInput": {
+    "projectId": "proj_2001_space_odyssey_schedule",
+    "timestamp": "2024-07-22T10:00:00Z",
+    "projectMetadata": {
+      "title": "2001: A Space Odyssey",
+      "format": "feature_film",
+      "genre": [
+        "sci-fi",
+        "drama",
+        "thriller"
+      ],
+      "totalPages": 145,
+      "totalScenes": 71,
+      "estimatedRuntime": 149,
+      "targetStart": "1965-12-29",
+      "mustWrapBy": "1968-04-03",
+      "budgetTier": "major_motion_picture",
+      "unionJurisdiction": "BECTU",
+      "primaryLocation": "London, UK"
+    },
+    "structuredScriptBreakdown": {
+      "scenes": [
+        {
+          "sceneId": 1,
+          "sceneName": "EXT. THE STREAM – THE OTHERS",
+          "pages": 1.75,
+          "location": "AFRICAN_STREAM",
+          "intExt": "EXT",
+          "dayNight": "DAWN",
+          "cast": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS",
+            "THE_OTHERS"
+          ],
+          "extras": 36,
+          "setupTime": 3.0,
+          "shootTime": 6.0,
+          "specialRequirements": [
+            "animal_wranglers",
+            "location_water_access"
+          ],
+          "complexity": "medium",
+          "vfxShots": 0,
+          "stuntWork": false,
+          "weatherDependent": true
+        },
+        {
+          "sceneId": 2,
+          "sceneName": "EXT. AFRICAN PLAIN – HERBIVORES",
+          "pages": 1.5,
+          "location": "AFRICAN_PLAINS",
+          "intExt": "EXT",
+          "dayNight": "DAY",
+          "cast": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "extras": 18,
+          "animals": [
+            "zebras",
+            "gazelles",
+            "warthogs"
+          ],
+          "setupTime": 4.0,
+          "shootTime": 8.0,
+          "specialRequirements": [
+            "animal_wranglers",
+            "drone_footage",
+            "wide_lens_package"
+          ],
+          "complexity": "high",
+          "vfxShots": 2,
+          "stuntWork": false,
+          "weatherDependent": true
+        },
+        {
+          "sceneId": 3,
+          "sceneName": "EXT. PARCHED COUNTRYSIDE – THE LION",
+          "pages": 1.25,
+          "location": "AFRICAN_PLAINS",
+          "intExt": "EXT",
+          "dayNight": "DAY",
+          "cast": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "extras": 8,
+          "animals": [
+            "trained_lion"
+          ],
+          "setupTime": 5.0,
+          "shootTime": 6.0,
+          "specialRequirements": [
+            "animal_wranglers",
+            "safety_coordinator",
+            "multiple_cameras",
+            "telephoto_lenses"
+          ],
+          "complexity": "high",
+          "vfxShots": 0,
+          "stuntWork": true,
+          "weatherDependent": true
+        },
+        {
+          "sceneId": 10,
+          "sceneName": "EXT. CAVES – KILLING THE LION",
+          "pages": 2.0,
+          "location": "AFRICAN_CAVES",
+          "intExt": "EXT",
+          "dayNight": "NIGHT",
+          "cast": [
+            "MOONWATCHER",
+            "TRIBE_MEMBERS"
+          ],
+          "extras": 18,
+          "animals": [
+            "trained_lion"
+          ],
+          "setupTime": 6.0,
+          "shootTime": 10.0,
+          "specialRequirements": [
+            "stunt_coordinator",
+            "boulder_rig",
+            "animal_safety",
+            "night_lighting",
+            "multiple_cameras"
+          ],
+          "complexity": "very_high",
+          "vfxShots": 3,
+          "stuntWork": true,
+          "weatherDependent": false
+        },
+        {
+          "sceneId": 19,
+          "sceneName": "INT. SPACE STATION RECEPTION AREA",
+          "pages": 4.0,
+          "location": "SPACE_STATION",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "DR_FLOYD",
+            "MILLER",
+            "RECEPTIONIST",
+            "PASSPORT_GIRL"
+          ],
+          "extras": 8,
+          "setupTime": 3.0,
+          "shootTime": 8.0,
+          "specialRequirements": [
+            "space_station_set",
+            "voice_print_booth",
+            "automated_systems",
+            "monitors"
+          ],
+          "complexity": "medium",
+          "vfxShots": 5,
+          "stuntWork": false,
+          "weatherDependent": false
+        },
+        {
+          "sceneId": 47,
+          "sceneName": "INT. CENTRIFUGE HUB",
+          "pages": 4.5,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE",
+            "HAL",
+            "HIBERNATING_CREW"
+          ],
+          "extras": 0,
+          "setupTime": 4.0,
+          "shootTime": 9.0,
+          "specialRequirements": [
+            "centrifuge_set",
+            "hibernaculum_props",
+            "rotating_camera",
+            "food_unit",
+            "electronic_news_pads"
+          ],
+          "complexity": "very_high",
+          "vfxShots": 12,
+          "stuntWork": false,
+          "weatherDependent": false
+        },
+        {
+          "sceneId": 66,
+          "sceneName": "INT. CENTRIFUGE - POD ACCIDENT",
+          "pages": 4.5,
+          "location": "DISCOVERY",
+          "intExt": "INT",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "POOLE",
+            "HAL"
+          ],
+          "extras": 0,
+          "setupTime": 5.0,
+          "shootTime": 12.0,
+          "specialRequirements": [
+            "centrifuge_set",
+            "pod_exterior_work",
+            "welding_torch",
+            "space_suits",
+            "pod_accident",
+            "stunt_coordination"
+          ],
+          "complexity": "extreme",
+          "vfxShots": 15,
+          "stuntWork": true,
+          "weatherDependent": false
+        },
+        {
+          "sceneId": 71,
+          "sceneName": "STARGATE SEQUENCE / HOTEL ROOM / STAR CHILD",
+          "pages": 8.0,
+          "location": "MULTIPLE_COSMIC",
+          "intExt": "VARIOUS",
+          "dayNight": "N/A",
+          "cast": [
+            "BOWMAN",
+            "AGED_BOWMAN",
+            "STAR_CHILD"
+          ],
+          "extras": 0,
+          "setupTime": 10.0,
+          "shootTime": 20.0,
+          "specialRequirements": [
+            "stargate_effects",
+            "cosmic_visuals",
+            "hotel_room_set",
+            "aging_makeup",
+            "star_child_effect",
+            "monolith_prop",
+            "extensive_vfx"
+          ],
+          "complexity": "revolutionary",
+          "vfxShots": 45,
+          "stuntWork": false,
+          "weatherDependent": false
+        }
+      ]
+    },
+    "characterAnalysisReport": {
+      "principals": [
+        {
+          "characterName": "MOONWATCHER",
+          "actor": "Unknown Actor",
+          "sceneCount": 11,
+          "estimatedDays": 15,
+          "availability": {
+            "availableStart": "1965-12-29",
+            "availableEnd": "1966-02-15",
+            "blackoutDates": [],
+            "restrictions": "Must complete ape makeup sequences first"
+          },
+          "specialRequirements": [
+            "ape_makeup",
+            "physical_performance"
+          ],
+          "unionCategory": "lead_performer",
+          "dailyRate": 5000,
+          "overtimeRules": "standard_sag"
+        },
+        {
+          "characterName": "DR_HEYWOOD_FLOYD",
+          "actor": "William Sylvester",
+          "sceneCount": 12,
+          "estimatedDays": 22,
+          "availability": {
+            "availableStart": "1966-03-01",
+            "availableEnd": "1966-05-15",
+            "blackoutDates": [
+              "1966-04-10",
+              "1966-04-11"
+            ],
+            "restrictions": "Cannot work consecutive night shoots"
+          },
+          "specialRequirements": [
+            "space_suit_work"
+          ],
+          "unionCategory": "lead_performer",
+          "dailyRate": 8000,
+          "overtimeRules": "standard_sag"
+        },
+        {
+          "characterName": "DAVE_BOWMAN",
+          "actor": "Keir Dullea",
+          "sceneCount": 25,
+          "estimatedDays": 35,
+          "availability": {
+            "availableStart": "1966-06-01",
+            "availableEnd": "1968-02-01",
+            "blackoutDates": [
+              "1966-12-20",
+              "1966-12-27",
+              "1967-12-20",
+              "1967-12-27"
+            ],
+            "restrictions": "Aging makeup requires 6-hour prep time"
+          },
+          "specialRequirements": [
+            "space_suit_work",
+            "zero_gravity",
+            "aging_makeup"
+          ],
+          "unionCategory": "lead_performer",
+          "dailyRate": 12000,
+          "overtimeRules": "standard_sag"
+        },
+        {
+          "characterName": "FRANK_POOLE",
+          "actor": "Gary Lockwood",
+          "sceneCount": 18,
+          "estimatedDays": 28,
+          "availability": {
+            "availableStart": "1966-06-01",
+            "availableEnd": "1967-08-01",
+            "blackoutDates": [],
+            "restrictions": "Requires stunt double coordination for pod accident"
+          },
+          "specialRequirements": [
+            "space_suit_work",
+            "zero_gravity",
+            "stunt_work"
+          ],
+          "unionCategory": "lead_performer",
+          "dailyRate": 10000,
+          "overtimeRules": "standard_sag"
+        }
+      ],
+      "supporting": [
+        {
+          "characterName": "HAL_9000",
+          "actor": "Douglas Rain (voice)",
+          "sceneCount": 22,
+          "estimatedDays": 8,
+          "availability": {
+            "availableStart": "1966-01-01",
+            "availableEnd": "1968-04-01",
+            "blackoutDates": [],
+            "restrictions": "Voice recording sessions can be scheduled flexibly"
+          },
+          "specialRequirements": [
+            "voice_recording",
+            "adr_sessions"
+          ],
+          "unionCategory": "voice_performer",
+          "dailyRate": 3000,
+          "overtimeRules": "aftra_voice"
+        }
+      ]
+    },
+    "departmentAnalysisReport": {
+      "camera": {
+        "packageLevel": "high_end",
+        "specialEquipment": [
+          "centrifuge_mount",
+          "front_projection",
+          "motion_control",
+          "slit_scan"
+        ],
+        "crewSize": 12,
+        "estimatedDays": 145,
+        "overnightEquipment": 85
+      },
+      "lighting": {
+        "packageLevel": "studio_major",
+        "specialRigs": [
+          "dawn_simulation",
+          "space_lighting",
+          "practical_effects"
+        ],
+        "crewSize": 18,
+        "generatorRequirement": "750amp",
+        "nightShootDays": 8
+      },
+      "sound": {
+        "recordingType": "sync_sound_limited",
+        "postRequirements": [
+          "extensive_adr",
+          "sound_design",
+          "orchestral_score"
+        ],
+        "crewSize": 4,
+        "specialEquipment": [
+          "space_suit_communication"
+        ]
+      },
+      "makeup": {
+        "complexity": "extremely_high",
+        "specialTypes": [
+          "ape_transformation",
+          "aging_makeup",
+          "space_environment"
+        ],
+        "dailyApplicationTime": 360,
+        "crewSize": 8,
+        "testDays": 12
+      },
+      "stunts": {
+        "coordinator": "required",
+        "performers": 8,
+        "sequences": [
+          "lion_attack",
+          "boulder_drop",
+          "pod_accident",
+          "airlock_explosion"
+        ],
+        "safetyRequirements": [
+          "animal_handlers",
+          "wire_work",
+          "mechanical_effects"
+        ]
+      },
+      "vfx": {
+        "totalShots": 205,
+        "complexity": "revolutionary",
+        "supervisionDays": 145,
+        "categories": [
+          "space_travel",
+          "zero_gravity",
+          "stargate",
+          "model_work"
+        ],
+        "vendorRequirement": "cutting_edge_experimental"
+      }
+    },
+    "locationOneLinerSummary": [
+      {
+        "locationId": "LOC001",
+        "name": "AFRICAN_STREAM",
+        "description": "Tribal confrontations at dawn water source",
+        "scenes": [
+          1,
+          5,
+          11
+        ],
+        "totalPages": 7.0,
+        "estimatedDays": 6,
+        "season": "dry_season_only",
+        "access": "remote_4wd_required"
+      },
+      {
+        "locationId": "LOC002",
+        "name": "AFRICAN_PLAINS",
+        "description": "Wildlife savanna with predator encounters",
+        "scenes": [
+          2,
+          3
+        ],
+        "totalPages": 2.75,
+        "estimatedDays": 4,
+        "season": "dry_season_only",
+        "access": "remote_4wd_required"
+      },
+      {
+        "locationId": "LOC003",
+        "name": "DISCOVERY_SPACECRAFT",
+        "description": "Rotating centrifuge and command modules",
+        "scenes": [
+          43,
+          44,
+          45,
+          46,
+          47,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70
+        ],
+        "totalPages": 45.25,
+        "estimatedDays": 45,
+        "season": "year_round",
+        "access": "studio_construction_required"
+      },
+      {
+        "locationId": "LOC004",
+        "name": "SPACE_STATION_FIVE",
+        "description": "Rotating space station interiors",
+        "scenes": [
+          14,
+          16,
+          18,
+          19,
+          20,
+          21
+        ],
+        "totalPages": 14.0,
+        "estimatedDays": 12,
+        "season": "year_round",
+        "access": "studio_construction_required"
+      }
+    ],
+    "userProjectParameters": {
+      "scheduleConstraints": {
+        "maxShootDays": 145,
+        "preferredWeeklyPattern": "5_day_weeks",
+        "mandatoryOffDays": [
+          "sundays",
+          "christmas",
+          "new_year"
+        ],
+        "maxConsecutiveDays": 6,
+        "turnaroundMinimum": 12,
+        "mealBreakMaximum": 6
+      },
+      "budgetConstraints": {
+        "totalBudget": 10500000,
+        "dailyBudgetCap": 75000,
+        "overtimeBudgetLimit": 15,
+        "locationBudgetLimit": 2500000
+      },
+      "qualityRequirements": {
+        "minimizeCompanyMoves": true,
+        "groupSimilarScenes": true,
+        "prioritizeCastEfficiency": true,
+        "allowSixthDays": false,
+        "weatherContingencyDays": 5
+      },
+      "specialConsiderations": [
+        "Animal work must be completed in dry season (Dec-Mar)",
+        "Centrifuge work requires exclusive access for extended periods",
+        "VFX supervision required for 85% of shoot days",
+        "Aging makeup requires full day character arc completion",
+        "Zero gravity effects require specialized crew and equipment"
+      ]
+    }
+  }
+}

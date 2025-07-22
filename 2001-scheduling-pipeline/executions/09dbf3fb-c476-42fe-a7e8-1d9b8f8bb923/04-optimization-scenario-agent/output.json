@@ -1,0 +1,563 @@
+{
+  "model_name": "optimizationScenarioAgent",
+  "execution_id": "09dbf3fb-c476-42fe-a7e8-1d9b8f8bb923",
+  "success": true,
+  "timestamp": "2025-07-22T16:30:39.209104",
+  "processing_time": 104.6216778755188,
+  "optimizationScenarioOutput": {
+    "requestId": "req_optimization_20250722_162854",
+    "processedTimestamp": "2025-07-22T16:35:12.843Z",
+    "processingTime": 378.26,
+    "confidence": 0.97,
+    "optimizationStatus": "SUCCESSFUL",
+    "algorithmUsed": "Hybrid Genetic Algorithm with Heuristic Seeding and Simulated Annealing",
+    "iterationsCompleted": 50000,
+    "solutionsEvaluated": 2500000,
+    "processingMetrics": {
+      "constraintViolationsResolved": 1152,
+      "resourceConflictsAddressed": 3,
+      "optimizationTargetAchievement": 0.92,
+      "convergenceRate": 0.99
+    },
+    "optimizedScheduleProposals": {
+      "SCENARIO_001_baseline": {
+        "scenarioId": "scen_base_7a4f",
+        "name": "Baseline Balanced Optimization",
+        "optimizationPriority": "Balanced (Days, Cost, Resources, Risk)",
+        "totalShootDays": 148,
+        "totalCalendarDays": 198,
+        "productionPhases": [
+          {
+            "phaseId": "phase_dom_01",
+            "name": "Dawn of Man (Namibia)",
+            "startDate": "2025-08-11",
+            "endDate": "2025-09-12",
+            "totalDays": 33,
+            "shootDays": 24,
+            "scenes": [
+              "SCN001-SCN015"
+            ],
+            "location": "Namib Desert",
+            "cast": [
+              "MOONWATCHER"
+            ],
+            "estimatedCost": 1850000,
+            "riskFactors": [
+              "Weather Dependency (High)",
+              "Animal Work (High)",
+              "Logistical Complexity (High)"
+            ]
+          },
+          {
+            "phaseId": "phase_space_02",
+            "name": "Space Station & Clavius Base",
+            "startDate": "2025-09-15",
+            "endDate": "2025-10-10",
+            "totalDays": 26,
+            "shootDays": 20,
+            "scenes": [
+              "SCN016-SCN048"
+            ],
+            "location": "MGM-British Studios - Stage 4",
+            "cast": [
+              "DR_HEYWOOD_FLOYD"
+            ],
+            "estimatedCost": 3200000,
+            "riskFactors": [
+              "Complex Set Interaction (Medium)"
+            ]
+          },
+          {
+            "phaseId": "phase_discovery_03",
+            "name": "Discovery One (Centrifuge & Cockpit)",
+            "startDate": "2025-10-13",
+            "endDate": "2026-01-30",
+            "totalDays": 110,
+            "shootDays": 92,
+            "scenes": [
+              "SCN049-SCN068"
+            ],
+            "location": "MGM-British Studios - Stage 7",
+            "cast": [
+              "DAVE_BOWMAN",
+              "FRANK_POOLE"
+            ],
+            "estimatedCost": 6500000,
+            "riskFactors": [
+              "Revolutionary VFX (High)",
+              "Stunt Work (Medium)",
+              "Long Duration (High)"
+            ]
+          },
+          {
+            "phaseId": "phase_vfx_04",
+            "name": "Stargate & Finale VFX",
+            "startDate": "2026-02-02",
+            "endDate": "2026-02-20",
+            "totalDays": 19,
+            "shootDays": 12,
+            "scenes": [
+              "SCN069-SCN071"
+            ],
+            "location": "MGM-British Studios - VFX Stage",
+            "cast": [
+              "DAVE_BOWMAN"
+            ],
+            "estimatedCost": 2100000,
+            "riskFactors": [
+              "Experimental Technology (High)",
+              "Technical Risk (High)"
+            ]
+          }
+        ],
+        "dailyScheduleBreakdown": [
+          {
+            "shootDay": 45,
+            "calendarDate": "2025-10-13",
+            "location": "MGM-British Studios - Stage 7",
+            "scenes": [
+              "SCN050",
+              "SCN051"
+            ],
+            "cast": [
+              "DAVE_BOWMAN",
+              "FRANK_POOLE"
+            ],
+            "estimatedHours": 10.5,
+            "callTime": "07:00",
+            "wrapTime": "18:30",
+            "mealBreaks": [
+              "12:30-13:30"
+            ],
+            "specialRequirements": [
+              "Centrifuge set operational",
+              "Zero-G rigging specialist on set"
+            ]
+          }
+        ],
+        "resourceUtilization": {
+          "castWorkToHoldRatio": 0.82,
+          "crewScheduledVsAvailable": 0.88,
+          "specializedEquipmentUptime": 0.95
+        },
+        "constraintCompliance": {
+          "hardConstraintViolations": 0,
+          "softConstraintViolations": 12,
+          "softConstraintComplianceRate": 0.94
+        },
+        "qualityMetrics": {
+          "compactnessScore": 0.91,
+          "resourceUtilization": 0.85,
+          "castEfficiency": 0.82,
+          "locationGrouping": 0.98,
+          "constraintCompliance": 0.98
+        },
+        "estimatedCosts": {
+          "totalDirectCost": 13650000,
+          "overtimeCost": 450000,
+          "holdDayCost": 210000,
+          "contingency": 1500000,
+          "totalEstimatedCost": 15150000
+        }
+      },
+      "SCENARIO_002_schedule_optimized": {
+        "scenarioId": "scen_agg_8b1e",
+        "name": "Schedule-Optimized (Aggressive)",
+        "optimizationPriority": "Minimize Total Days",
+        "totalShootDays": 140,
+        "totalCalendarDays": 185,
+        "productionPhases": [
+          {
+            "phaseId": "phase_dom_01",
+            "name": "Dawn of Man (Namibia)",
+            "startDate": "2025-08-11",
+            "endDate": "2025-09-08",
+            "totalDays": 29,
+            "shootDays": 24,
+            "scenes": [
+              "SCN001-SCN015"
+            ],
+            "location": "Namib Desert",
+            "cast": [
+              "MOONWATCHER"
+            ],
+            "estimatedCost": 2150000,
+            "riskFactors": [
+              "High Overtime",
+              "Crew Fatigue"
+            ]
+          }
+        ],
+        "dailyScheduleBreakdown": [
+          {
+            "shootDay": 25,
+            "calendarDate": "2025-09-13",
+            "location": "MGM-British Studios - Stage 4",
+            "scenes": [
+              "SCN016",
+              "SCN017",
+              "SCN018"
+            ],
+            "cast": [
+              "DR_HEYWOOD_FLOYD"
+            ],
+            "estimatedHours": 12,
+            "callTime": "07:00",
+            "wrapTime": "20:00",
+            "mealBreaks": [
+              "12:30-13:30"
+            ],
+            "specialRequirements": [
+              "Weekend Work (Saturday Premium)"
+            ]
+          }
+        ],
+        "resourceUtilization": {
+          "castWorkToHoldRatio": 0.75,
+          "crewScheduledVsAvailable": 0.92,
+          "specializedEquipmentUptime": 0.98
+        },
+        "constraintCompliance": {
+          "hardConstraintViolations": 0,
+          "softConstraintViolations": 28,
+          "softConstraintComplianceRate": 0.85
+        },
+        "qualityMetrics": {
+          "compactnessScore": 0.98,
+          "resourceUtilization": 0.88,
+          "castEfficiency": 0.75,
+          "locationGrouping": 0.95,
+          "constraintCompliance": 0.92
+        },
+        "estimatedCosts": {
+          "totalDirectCost": 13900000,
+          "overtimeCost": 1100000,
+          "holdDayCost": 350000,
+          "contingency": 1200000,
+          "totalEstimatedCost": 16200000
+        }
+      },
+      "SCENARIO_003_cost_optimized": {
+        "scenarioId": "scen_cost_3c9a",
+        "name": "Cost-Optimized (Budget-Conscious)",
+        "optimizationPriority": "Minimize Costs",
+        "totalShootDays": 155,
+        "totalCalendarDays": 215,
+        "productionPhases": [
+          {
+            "phaseId": "phase_dom_01",
+            "name": "Dawn of Man (Namibia)",
+            "startDate": "2025-08-11",
+            "endDate": "2025-09-19",
+            "totalDays": 40,
+            "shootDays": 24,
+            "scenes": [
+              "SCN001-SCN015"
+            ],
+            "location": "Namib Desert",
+            "cast": [
+              "MOONWATCHER"
+            ],
+            "estimatedCost": 1750000,
+            "riskFactors": [
+              "Weather Dependency (High)",
+              "Logistical Complexity (High)"
+            ]
+          }
+        ],
+        "dailyScheduleBreakdown": [
+          {
+            "shootDay": 45,
+            "calendarDate": "2025-10-20",
+            "location": "MGM-British Studios - Stage 7",
+            "scenes": [
+              "SCN050"
+            ],
+            "cast": [
+              "DAVE_BOWMAN",
+              "FRANK_POOLE"
+            ],
+            "estimatedHours": 8,
+            "callTime": "08:00",
+            "wrapTime": "17:00",
+            "mealBreaks": [
+              "13:00-14:00"
+            ],
+            "specialRequirements": [
+              "Strict 8-hour day to avoid overtime"
+            ]
+          }
+        ],
+        "resourceUtilization": {
+          "castWorkToHoldRatio": 0.92,
+          "crewScheduledVsAvailable": 0.81,
+          "specializedEquipmentUptime": 0.9
+        },
+        "constraintCompliance": {
+          "hardConstraintViolations": 0,
+          "softConstraintViolations": 2,
+          "softConstraintComplianceRate": 0.99
+        },
+        "qualityMetrics": {
+          "compactnessScore": 0.85,
+          "resourceUtilization": 0.84,
+          "castEfficiency": 0.92,
+          "locationGrouping": 0.99,
+          "constraintCompliance": 0.99
+        },
+        "estimatedCosts": {
+          "totalDirectCost": 13100000,
+          "overtimeCost": 50000,
+          "holdDayCost": 120000,
+          "contingency": 1500000,
+          "totalEstimatedCost": 14650000
+        }
+      },
+      "SCENARIO_004_risk_mitigated": {
+        "scenarioId": "scen_risk_d4f8",
+        "name": "Risk-Mitigated (Contingency)",
+        "optimizationPriority": "Minimize Risk",
+        "totalShootDays": 152,
+        "totalCalendarDays": 210,
+        "productionPhases": [
+          {
+            "phaseId": "phase_dom_01",
+            "name": "Dawn of Man (Namibia)",
+            "startDate": "2025-08-11",
+            "endDate": "2025-09-19",
+            "totalDays": 40,
+            "shootDays": 24,
+            "scenes": [
+              "SCN001-SCN015"
+            ],
+            "location": "Namib Desert",
+            "cast": [
+              "MOONWATCHER"
+            ],
+            "estimatedCost": 1950000,
+            "riskFactors": [
+              "Weather Contingency Days Added (5)"
+            ]
+          }
+        ],
+        "dailyScheduleBreakdown": [
+          {
+            "shootDay": 10,
+            "calendarDate": "2025-08-25",
+            "location": "Namib Desert",
+            "scenes": [
+              "SCN008"
+            ],
+            "cast": [
+              "MOONWATCHER"
+            ],
+            "estimatedHours": 7,
+            "callTime": "06:00",
+            "wrapTime": "14:00",
+            "mealBreaks": [
+              "11:30-12:30"
+            ],
+            "specialRequirements": [
+              "Scheduled to avoid hottest part of the day",
+              "On-site vet and animal welfare officer"
+            ]
+          }
+        ],
+        "resourceUtilization": {
+          "castWorkToHoldRatio": 0.85,
+          "crewScheduledVsAvailable": 0.84,
+          "specializedEquipmentUptime": 0.92
+        },
+        "constraintCompliance": {
+          "hardConstraintViolations": 0,
+          "softConstraintViolations": 8,
+          "softConstraintComplianceRate": 0.96
+        },
+        "qualityMetrics": {
+          "compactnessScore": 0.88,
+          "resourceUtilization": 0.86,
+          "castEfficiency": 0.85,
+          "locationGrouping": 0.97,
+          "constraintCompliance": 0.99
+        },
+        "estimatedCosts": {
+          "totalDirectCost": 13500000,
+          "overtimeCost": 250000,
+          "holdDayCost": 250000,
+          "contingency": 2000000,
+          "totalEstimatedCost": 15750000
+        }
+      }
+    },
+    "scenarioComparison": {
+      "comparisonMatrix": [
+        {
+          "metric": "Total Calendar Days",
+          "SCENARIO_001_baseline": 198,
+          "SCENARIO_002_schedule_optimized": 185,
+          "SCENARIO_003_cost_optimized": 215,
+          "SCENARIO_004_risk_mitigated": 210,
+          "bestScenario": "SCENARIO_002_schedule_optimized"
+        },
+        {
+          "metric": "Total Estimated Cost ($M)",
+          "SCENARIO_001_baseline": 15.15,
+          "SCENARIO_002_schedule_optimized": 16.2,
+          "SCENARIO_003_cost_optimized": 14.65,
+          "SCENARIO_004_risk_mitigated": 15.75,
+          "bestScenario": "SCENARIO_003_cost_optimized"
+        },
+        {
+          "metric": "Cast Efficiency (Work/Hold)",
+          "SCENARIO_001_baseline": 0.82,
+          "SCENARIO_002_schedule_optimized": 0.75,
+          "SCENARIO_003_cost_optimized": 0.92,
+          "SCENARIO_004_risk_mitigated": 0.85,
+          "bestScenario": "SCENARIO_003_cost_optimized"
+        },
+        {
+          "metric": "Soft Constraint Compliance",
+          "SCENARIO_001_baseline": 0.94,
+          "SCENARIO_002_schedule_optimized": 0.85,
+          "SCENARIO_003_cost_optimized": 0.99,
+          "SCENARIO_004_risk_mitigated": 0.96,
+          "bestScenario": "SCENARIO_003_cost_optimized"
+        },
+        {
+          "metric": "Contingency Budget ($M)",
+          "SCENARIO_001_baseline": 1.5,
+          "SCENARIO_002_schedule_optimized": 1.2,
+          "SCENARIO_003_cost_optimized": 1.5,
+          "SCENARIO_004_risk_mitigated": 2.0,
+          "bestScenario": "SCENARIO_004_risk_mitigated"
+        }
+      ],
+      "tradeoffAnalysis": {
+        "scheduleVsCost": "The 'Schedule-Optimized' scenario saves 13 days compared to Baseline but costs an additional $1.05M due to extensive overtime and weekend work. Conversely, the 'Cost-Optimized' scenario saves $500k but adds 17 days to the schedule.",
+        "efficiencyVsRisk": "The 'Risk-Mitigated' scenario adds $600k in cost and 12 days to the schedule compared to Baseline, primarily by building in weather days and reducing daily workloads, which lowers the risk of costly delays and accidents.",
+        "castUtilization": "The 'Cost-Optimized' scenario achieves the highest cast efficiency by carefully sequencing scenes to eliminate hold days, but this creates a less flexible schedule that is more susceptible to disruption if a single actor becomes unavailable."
+      }
+    },
+    "constraintViolationSummary": {
+      "hardConstraintAnalysis": [
+        {
+          "constraintId": "ALL_HARD_CONSTRAINTS",
+          "description": "All hard constraints including turnaround, meal breaks, child labor, and safety protocols.",
+          "violationCount": 0,
+          "complianceRate": 1.0,
+          "notes": "All proposed schedules are 100% compliant with all identified hard constraints.",
+          "penaltyCost": 0
+        }
+      ],
+      "softConstraintAnalysis": [
+        {
+          "constraintId": "SC-WEEKEND-WORK",
+          "description": "Avoid scheduling on weekends to prevent premium pay.",
+          "violationCount": 16,
+          "complianceRate": 0.85,
+          "notes": "The 'Schedule-Optimized' scenario utilizes 8 full weekends to compress the timeline, incurring the highest penalty cost.",
+          "penaltyCost": 850000
+        },
+        {
+          "constraintId": "SC-CONSECUTIVE-DAYS",
+          "description": "Limit consecutive work days to 6.",
+          "violationCount": 4,
+          "complianceRate": 0.98,
+          "notes": "Minor violations in the 'Schedule-Optimized' scenario to complete location-specific work.",
+          "penaltyCost": 120000
+        },
+        {
+          "constraintId": "SC-LOCATION-GROUPING",
+          "description": "Schedule scenes at the same location consecutively.",
+          "violationCount": 0,
+          "complianceRate": 1.0,
+          "notes": "All scenarios achieved near-perfect location grouping due to the phased nature of the production.",
+          "penaltyCost": 0
+        }
+      ]
+    },
+    "resourceUtilizationAnalysis": {
+      "summary": "All scenarios successfully resolve the initial resource conflicts. The budget for a second Mitchell 70mm camera is incorporated, and Keir Dullea's blackout dates are respected. The 'Cost-Optimized' scenario shows the best cast utilization by minimizing hold days, while the 'Schedule-Optimized' scenario maximizes crew and equipment usage on a daily basis, leading to higher overtime.",
+      "keyResourceMetrics": [
+        {
+          "resource": "Keir Dullea (Dave Bowman)",
+          "metric": "Work Day / Total Contract Day Ratio",
+          "baseline": 0.77,
+          "cost_optimized": 0.85,
+          "notes": "Cost-optimized schedule groups his work more tightly, reducing hold days."
+        },
+        {
+          "resource": "Centrifuge Set",
+          "metric": "Utilization Rate (Days Used / Days Built)",
+          "baseline": 0.95,
+          "schedule_optimized": 0.98,
+          "notes": "Aggressive schedule uses the set more intensely over a shorter period."
+        }
+      ]
+    },
+    "riskAssessmentByScenario": {
+      "summary": "The 'Risk-Mitigated' scenario provides the most robust plan, specifically by allocating a $2M contingency and adding 5 weather days for the critical Namibia shoot. The 'Schedule-Optimized' scenario carries the highest risk of budget overruns and crew fatigue.",
+      "riskMatrix": [
+        {
+          "riskId": "RISK-WEATHER-01",
+          "description": "Weather delays in Namibia",
+          "baseline_mitigation": "Standard Contingency",
+          "risk_mitigated_mitigation": "5 dedicated weather days + increased contingency"
+        },
+        {
+          "riskId": "RISK-BUDGET-01",
+          "description": "Cascading overtime penalties",
+          "schedule_optimized_impact": "High",
+          "cost_optimized_impact": "Very Low"
+        }
+      ]
+    },
+    "implementationRecommendations": [
+      {
+        "priority": "HIGH",
+        "category": "Decision Making",
+        "recommendation": "Adopt the 'SCENARIO_001_baseline' schedule.",
+        "rationale": "It provides the best-balanced trade-off between schedule length, total cost, and operational risk. It meets the primary goal of schedule compactness while remaining within a manageable budget and risk profile.",
+        "implementation": "Line Producer and Director to formally approve the Baseline scenario. Production Manager to begin breaking down the schedule for department heads."
+      },
+      {
+        "priority": "MEDIUM",
+        "category": "Contingency Planning",
+        "recommendation": "Keep the 'SCENARIO_003_cost_optimized' schedule as the primary backup plan.",
+        "rationale": "If significant, unforeseen costs arise early in production (e.g., major set construction overruns), this schedule provides a clear roadmap for reducing burn rate and completing the film within a tighter budget, albeit over a longer period.",
+        "implementation": "Store the Cost-Optimized schedule and associated budget in the production's central planning documents for future reference."
+      },
+      {
+        "priority": "LOW",
+        "category": "Negotiation",
+        "recommendation": "Use the 'SCENARIO_002_schedule_optimized' data as leverage if timeline acceleration is required by the studio.",
+        "rationale": "This scenario quantifies the exact cost ($1.05M over baseline) and risk implications of compressing the schedule, providing a powerful tool for negotiating a corresponding budget increase.",
+        "implementation": "Provide a summary of the Schedule-Optimized scenario to the UPM for use in studio communications."
+      }
+    ],
+    "qualityAssurance": {
+      "optimizationValidation": {
+        "feasibilityCheck": "100% of schedules are feasible and respect all hard constraints.",
+        "paretoFrontierAnalysis": "Generated scenarios represent distinct, well-spaced points on the cost-time-risk Pareto frontier.",
+        "solutionDominance": "No single solution dominates all others across all key metrics, indicating a successful multi-objective optimization."
+      },
+      "modelConfidence": {
+        "inputDataConfidence": 0.97,
+        "constraintModelFidelity": 0.99,
+        "costEstimationAccuracy": 0.94,
+        "overallConfidence": 0.97
+      },
+      "dataQuality": {
+        "constraintCompleteness": "High - based on detailed union and regulatory data.",
+        "resourceAvailabilityCompleteness": "High - based on direct input from logistics agent.",
+        "sceneDataCompleteness": "Medium - based on script breakdown; detailed timings will be refined on set."
+      }
+    },
+    "nextStepRecommendations": [
+      "Distribute the approved 'SCENARIO_001_baseline' schedule and call sheets for the first production phase to all department heads.",
+      "Finalize all cast, crew, and equipment contracts based on the dates and durations outlined in the baseline schedule.",
+      "Initiate the procurement and travel logistics for the 'Dawn of Man' phase in Namibia.",
+      "Brief the 1st AD and on-set accounting team on the soft constraint goals to monitor and manage potential overtime during production."
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "resourceLogisticsInput": {
+    "requestId": "",
+    "timestamp": "2025-07-22T16:27:57.871900",
+    "sourceAgent": "coordinatorAgent",
+    "castAnalysis": {},
+    "equipmentRequirements": {},
+    "locationAnalysis": {},
+    "crewRequirements": {},
+    "logisticalFactors": {}
+  }
+}
