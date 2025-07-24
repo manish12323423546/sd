@@ -10,9 +10,7 @@ import {
   TrendingUp,
   CheckCircle,
   Calendar,
-  Upload,
   Search,
-  Users,
   Brain
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -120,32 +118,11 @@ const quickActions = [
 
 const thinkAiActions = [
   {
-    name: "Upload Script",
-    description: "Process script with AI analysis",
-    icon: Upload,
-    href: "/dashboard/writer/upload-script",
-    color: "text-purple-500"
-  },
-  {
     name: "Script Analysis",
-    description: "Detailed scene breakdown",
+    description: "AI-powered detailed scene breakdown and analysis",
     icon: Search,
     href: "/dashboard/writer/script-analysis",
     color: "text-blue-500"
-  },
-  {
-    name: "One-Liner Generation",
-    description: "Create scene summaries",
-    icon: Brain,
-    href: "/dashboard/writer/one-liner",
-    color: "text-green-500"
-  },
-  {
-    name: "Character Insights",
-    description: "View character analysis",
-    icon: Users,
-    href: "/dashboard/writer/character-breakdown",
-    color: "text-orange-500"
   }
 ]
 

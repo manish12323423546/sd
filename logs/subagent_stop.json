@@ -1,0 +1,9 @@
+[
+  {
+    "session_id": "de927270-fbf0-48e2-870c-41a168168057",
+    "transcript_path": "/Users/varunisrani/.claude/projects/-Users-varunisrani-Downloads-filmustage-ui-kit-main/de927270-fbf0-48e2-870c-41a168168057.jsonl",
+    "cwd": "/Users/varunisrani/Downloads/filmustage-ui-kit-main/think.ai",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false
+  }
+]

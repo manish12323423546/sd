@@ -1,3 +1,0 @@
-{
-  "error": "Scene breakdown cards generation failed: division by zero"
-}

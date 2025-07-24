@@ -4,25 +4,22 @@ import { motion } from "framer-motion"
 import { 
   Crown, 
   Users, 
-  Settings, 
   BarChart3,
-  Shield,
   Database,
   Activity,
   AlertCircle,
-  Plus,
   Calendar,
   FileText,
   TrendingUp,
-  Upload,
-  Film,
-  Layers
+  FolderOpen,
+  Plus
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { Roles } from "@/types/globals"
+import { CJSApiStatus } from "@/components/ui/CJSApiStatus"
 
 interface AdminDashboardProps {
   userData: {
@@ -44,10 +41,17 @@ const adminStats = [
     changeType: "positive" as const
   },
   { 
-    label: "Active Projects", 
+    label: "Film Projects", 
     value: "24", 
-    icon: FileText,
+    icon: FolderOpen,
     change: "+3",
+    changeType: "positive" as const
+  },
+  { 
+    label: "Scripts Analyzed", 
+    value: "156", 
+    icon: FileText,
+    change: "+12",
     changeType: "positive" as const
   },
   { 
@@ -56,64 +60,64 @@ const adminStats = [
     icon: Activity,
     change: "stable",
     changeType: "neutral" as const
-  },
-  { 
-    label: "Storage Used", 
-    value: "64%", 
-    icon: Database,
-    change: "+5%",
-    changeType: "warning" as const
   }
 ]
 
 const recentActivity = [
   {
-    action: "New user registration",
+    action: "New film project created",
     user: "Sarah Chen",
     time: "2 minutes ago",
-    type: "user"
-  },
-  {
-    action: "Project created",
-    user: "Mike Rodriguez",
-    time: "15 minutes ago",
     type: "project"
   },
   {
-    action: "System backup completed",
-    user: "System",
-    time: "1 hour ago",
-    type: "system"
+    action: "Script analysis completed",
+    user: "Mike Rodriguez",
+    time: "15 minutes ago",
+    type: "analysis"
   },
   {
-    action: "Script published",
+    action: "Budget generated successfully",
     user: "Emily Davis",
+    time: "1 hour ago",
+    type: "budget"
+  },
+  {
+    action: "Production schedule updated",
+    user: "James Wilson",
     time: "2 hours ago",
-    type: "content"
+    type: "schedule"
   }
 ]
 
 const quickActions = [
   {
-    name: "Think AI - Upload Script",
-    description: "Upload and analyze scripts",
-    icon: Upload,
-    href: "/dashboard/admin/upload-script",
-    color: "text-purple-500"
-  },
-  {
-    name: "Think AI - Script Analysis",
-    description: "Detailed script breakdown",
-    icon: FileText,
-    href: "/dashboard/admin/script-analysis",
+    name: "Create New Project",
+    description: "Start a new film production project",
+    icon: Plus,
+    href: "/dashboard/admin/projects/create",
     color: "text-blue-500"
   },
   {
-    name: "Think AI - Project Overview",
-    description: "Complete project summary",
-    icon: Film,
-    href: "/dashboard/admin/project-overview",
+    name: "Manage Projects",
+    description: "View and organize all projects",
+    icon: FolderOpen,
+    href: "/dashboard/admin/projects",
     color: "text-green-500"
+  },
+  {
+    name: "Script Analysis",
+    description: "Detailed AI-powered script breakdown",
+    icon: FileText,
+    href: "/dashboard/admin/script-analysis",
+    color: "text-purple-500"
+  },
+  {
+    name: "Production Schedule",
+    description: "Generate and manage shooting schedules",
+    icon: Calendar,
+    href: "/dashboard/admin/schedule",
+    color: "text-orange-500"
   }
 ]
 
@@ -169,10 +173,16 @@ export function AdminDashboard({ userData }: AdminDashboardProps) {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <AlertCircle className="h-5 w-5" />
-              System Alerts
+              System Status
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="space-y-4">
+            {/* CJS API Status */}
+            <div className="p-3 rounded-lg border bg-muted/50">
+              <CJSApiStatus showDetails={false} />
+            </div>
+            
+            {/* System Alerts */}
             {systemAlerts.map((alert, index) => (
               <div key={index} className="flex items-center justify-between p-3 rounded-lg border">
                 <span className="text-sm">{alert.message}</span>

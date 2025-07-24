@@ -4,7 +4,6 @@ import { Roles } from "@/types/globals"
 import { AdminDashboard } from "./dashboards/admin-dashboard"
 import { WriterDashboard } from "./dashboards/writer-dashboard"
 import { ProducerDashboard } from "./dashboards/producer-dashboard"
-import { StoryboardArtistDashboard } from "./dashboards/storyboard-artist-dashboard"
 import { DirectorDashboard } from "./dashboards/director-dashboard"
 import { TeamMemberDashboard } from "./dashboards/team-member-dashboard"
 import { redirect } from "next/navigation"
@@ -49,8 +48,6 @@ export function RoleBasedDashboard({ userData }: RoleBasedDashboardProps) {
       return <WriterDashboard userData={dashboardUserData} />
     case "producer":
       return <ProducerDashboard userData={dashboardUserData} />
-    case "storyboard_artist":
-      return <StoryboardArtistDashboard userData={dashboardUserData} />
     case "director":
       return <DirectorDashboard userData={dashboardUserData} />
     case "team_member":

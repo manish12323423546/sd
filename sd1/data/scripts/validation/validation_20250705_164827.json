@@ -1,5 +1,0 @@
-{
-  "is_valid": false,
-  "error": "Error during validation: name 'result' is not defined",
-  "formatted_text": "Error: Validation process failed - name 'result' is not defined"
-}

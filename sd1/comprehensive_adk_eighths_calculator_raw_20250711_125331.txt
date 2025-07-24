@@ -1,3 +1,0 @@
-{
-  "error": "Eighths calculation failed: ADK page-by-page analysis failed: local variable 'word_count' referenced before assignment"
-}

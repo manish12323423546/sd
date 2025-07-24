@@ -13,20 +13,11 @@ import {
 import { Roles } from "@/types/globals"
 import { 
   Film, 
-  Edit3, 
-  Palette, 
   BarChart3, 
-  Settings, 
-  Users, 
-  FolderOpen,
-  Crown,
-  PlusCircle,
   FileText,
-  Layers,
-  Upload,
   Calendar,
   DollarSign,
-  Layout
+  FolderOpen
 } from "lucide-react"
 
 // Define navigation items based on roles
@@ -42,32 +33,33 @@ const getNavigationItems = (role: Roles, permissions: string[]) => {
   })
 
 
+  // Project Management - admin only
+  if (role === 'admin') {
+    items.push({
+      title: "Projects",
+      url: "/dashboard/admin/projects",
+      icon: FolderOpen,
+      items: [
+        {
+          title: "All Projects",
+          url: "/dashboard/admin/projects",
+          icon: FolderOpen
+        }
+      ]
+    })
+  }
+
   // Think AI Features - admin only
   if (role === 'admin') {
     items.push({
       title: "Think AI",
-      url: "/dashboard/admin/upload-script",
+      url: "/dashboard/admin/script-analysis",
       icon: Film,
       items: [
-        {
-          title: "Upload Script",
-          url: "/dashboard/admin/upload-script",
-          icon: Upload
-        },
         {
           title: "Script Analysis",
           url: "/dashboard/admin/script-analysis",
           icon: FileText
-        },
-        {
-          title: "One-Liner",
-          url: "/dashboard/admin/one-liner",
-          icon: Edit3
-        },
-        {
-          title: "Character Breakdown",
-          url: "/dashboard/admin/character-breakdown",
-          icon: Users
         },
         {
           title: "Schedule",
@@ -78,16 +70,6 @@ const getNavigationItems = (role: Roles, permissions: string[]) => {
           title: "Budget",
           url: "/dashboard/admin/budget",
           icon: DollarSign
-        },
-        {
-          title: "Storyboard",
-          url: "/dashboard/admin/storyboard",
-          icon: Layers
-        },
-        {
-          title: "Project Overview",
-          url: "/dashboard/admin/project-overview",
-          icon: Layout
         }
       ]
     })

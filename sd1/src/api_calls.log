@@ -1,1 +1,0 @@
-{"timestamp": "2025-07-06T17:25:55.539262", "provider": "gemini", "model": "gemini-2.5-flash", "prompt_length": 2388, "response_length": 5092, "duration_seconds": 12.001, "status": "success", "metadata": {"temperature": 0.7, "max_tokens": 4000, "top_p": 0.95, "top_k": 20}}
