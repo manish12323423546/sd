@@ -166,5 +166,12 @@
     "cwd": "/Users/varunisrani/Downloads/filmustage-ui-kit-main/think.ai",
     "hook_event_name": "Notification",
     "message": "Claude is waiting for your input"
+  },
+  {
+    "session_id": "6160cead-1ae3-489d-992e-5bcce0f89386",
+    "transcript_path": "/Users/varunisrani/.claude/projects/-Users-varunisrani-Downloads-filmustage-ui-kit-main/6160cead-1ae3-489d-992e-5bcce0f89386.jsonl",
+    "cwd": "/Users/varunisrani/Downloads/filmustage-ui-kit-main/think.ai",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input"
   }
 ]

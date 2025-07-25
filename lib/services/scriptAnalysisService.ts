@@ -662,9 +662,9 @@ class GeminiScriptAnalysisService {
       const structuredScript = this.preprocessScriptContent(scriptContent);
       console.log('✅ PREPROCESSING: Script structure analyzed');
       console.log('📊 STRUCTURED DATA INSIGHTS:', {
-        scenes: structuredScript.metadata?.estimatedScenes || 0,
-        characters: structuredScript.metadata?.identifiedCharacters?.length || 0,
-        dialogueLines: structuredScript.metadata?.dialogueLines || 0
+        scenes: (structuredScript.metadata as any)?.estimatedScenes || 0,
+        characters: (structuredScript.metadata as any)?.identifiedCharacters?.length || 0,
+        dialogueLines: (structuredScript.metadata as any)?.dialogueLines || 0
       });
       
       const prompt = `

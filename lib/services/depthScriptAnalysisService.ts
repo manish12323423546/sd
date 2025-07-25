@@ -850,7 +850,7 @@ Your breakdown analysis provides the foundation for all subsequent budget and sc
             },
             characters: {
               speaking: scene.characters?.map(char => ({
-                name: typeof char === 'string' ? char : char.name || char,
+                name: typeof char === 'string' ? char : (char as any).name || char,
                 dialogueLines: 5,
                 specialRequirements: []
               })) || [],

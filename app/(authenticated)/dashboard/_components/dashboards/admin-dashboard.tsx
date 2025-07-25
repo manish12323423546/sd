@@ -218,7 +218,7 @@ export function AdminDashboard({ userData }: AdminDashboardProps) {
                     <p className={`text-xs ${
                       stat.changeType === 'positive' 
                         ? 'text-green-600' 
-                        : stat.changeType === 'warning'
+                        : (stat.changeType as any) === 'warning'
                         ? 'text-yellow-600'
                         : 'text-muted-foreground'
                     }`}>

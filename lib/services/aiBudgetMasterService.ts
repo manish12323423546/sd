@@ -474,7 +474,7 @@ class GeminiBudgetMasterService {
 
         // Store raw agent output
         if (!rawAgentOutputs.tier0) rawAgentOutputs.tier0 = {};
-        rawAgentOutputs.tier0.budgetCoordinator = coordinatorResult.rawResponse || coordinatorResult.result;
+        rawAgentOutputs.tier0.budgetCoordinator = (coordinatorResult as any).rawResponse || coordinatorResult.result;
         onRawAgentUpdate?.('tier0', 'budgetCoordinator', rawAgentOutputs.tier0.budgetCoordinator);
 
         tierResults.tier0Results = {
@@ -516,7 +516,7 @@ class GeminiBudgetMasterService {
       ).then(result => {
         // Store raw agent output
         if (!rawAgentOutputs.tier1) rawAgentOutputs.tier1 = {};
-        rawAgentOutputs.tier1.basicBudgetGenerator = result.rawResponse || result.result;
+        rawAgentOutputs.tier1.basicBudgetGenerator = (result as any).rawResponse || result.result;
         onRawAgentUpdate?.('tier1', 'basicBudgetGenerator', rawAgentOutputs.tier1.basicBudgetGenerator);
         return result;
       }).catch(error => ({

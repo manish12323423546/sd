@@ -1426,7 +1426,7 @@ export default function ScriptAnalysisPage() {
                               <div>
                                 <span className="font-medium">Scenes Processed:</span>
                                 <br />
-                                {results.scenesProcessed || 0}
+                                {(results as any).scenesProcessed || 0}
                               </div>
                               <div>
                                 <span className="font-medium">Processing Time:</span>

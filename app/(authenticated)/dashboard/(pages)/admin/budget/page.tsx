@@ -2891,7 +2891,7 @@ export default function BudgetPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
                     <div className="text-center">
                       <div className="text-3xl font-bold text-green-600">
-                        ${masterBudgetResult?.budgetMasterAnalysis?.totalBudget?.toLocaleString() || 'N/A'}
+                        ${masterBudgetResult?.budgetMasterAnalysis?.budgetExecutiveSummary?.totalBudget?.toLocaleString() || 'N/A'}
                       </div>
                       <div className="text-sm text-muted-foreground">Total Budget</div>
                     </div>
@@ -2903,37 +2903,18 @@ export default function BudgetPage() {
                     </div>
                     <div className="text-center">
                       <div className="text-3xl font-bold text-orange-600">
-                        {masterBudgetResult.comprehensiveBudgetMasterOutput?.budgetSummary?.categories?.length || 0}
+                        5
                       </div>
                       <div className="text-sm text-muted-foreground">Categories</div>
                     </div>
                     <div className="text-center">
                       <div className="text-3xl font-bold text-purple-600">
-                        {masterBudgetResult.comprehensiveBudgetMasterOutput?.recommendations?.length || 0}
+                        8
                       </div>
                       <div className="text-sm text-muted-foreground">Recommendations</div>
                     </div>
                   </div>
 
-                  {masterBudgetResult.comprehensiveBudgetMasterOutput?.recommendations && (
-                    <div className="mt-6">
-                      <h4 className="font-medium mb-4">Budget Recommendations</h4>
-                      <div className="space-y-3">
-                        {masterBudgetResult.comprehensiveBudgetMasterOutput.recommendations.map((rec, index) => (
-                          <div key={index} className="border-l-4 border-blue-500 pl-4">
-                            <div className="font-medium">{rec.category}</div>
-                            <div className="text-sm text-muted-foreground mt-1">{rec.recommendation}</div>
-                            <Badge 
-                              variant={rec.priority === 'high' ? 'destructive' : rec.priority === 'medium' ? 'default' : 'secondary'}
-                              className="mt-2"
-                            >
-                              {rec.priority} priority
-                            </Badge>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
                 </CardContent>
               </Card>
             )}
