@@ -3,6 +3,9 @@ import type { NextConfig } from "next"
 const nextConfig: NextConfig = {
   devIndicators: false,
   
+  // Configure caching to avoid permission issues
+  generateEtags: false,
+  
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // Exclude problematic Node.js modules from client-side bundle
     if (!isServer) {

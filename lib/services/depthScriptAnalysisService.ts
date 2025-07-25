@@ -1480,7 +1480,7 @@ Your coordination ensures the accuracy, completeness, and industry compliance of
         // Last resort: aggressive JSON repair
         try {
           console.log('🔄 Attempting aggressive JSON repair as last resort...');
-          let repairJson = response.replace(/```json|```/g, '').trim();
+          const repairJson = response.replace(/```json|```/g, '').trim();
           
           // Remove lines that start with invalid characters
           const lines = repairJson.split('\n');
@@ -1571,6 +1571,43 @@ Your coordination ensures the accuracy, completeness, and industry compliance of
 
 // Export the service
 export const depthScriptAnalysisService = new DepthScriptAnalysisService();
+
+// Wrapper function for backward compatibility with FILMUSTAGE API
+export const analyzeScriptDepth = async (
+  scriptContent: string,
+  projectId: string,
+  onProgress?: (progress: number, agent: string) => void
+): Promise<{ success: boolean; data?: CoordinatorOutput; error?: string }> => {
+  try {
+    const mockPdfAnalysisData = {
+      data: {
+        scenes: [],
+        characters: [],
+        totalScenes: 0,
+        totalCharacters: 0,
+        scriptContent: scriptContent
+      }
+    };
+
+    const result = await depthScriptAnalysisService.executeFullAnalysis(
+      mockPdfAnalysisData,
+      projectId,
+      (status: string, agent: string, progress: number) => {
+        onProgress?.(progress, agent);
+      }
+    );
+
+    return {
+      success: true,
+      data: result
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error occurred'
+    };
+  }
+};
 
 export type { 
   EighthsAnalysisOutput,

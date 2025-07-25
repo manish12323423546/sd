@@ -545,32 +545,47 @@ export default function ScriptAnalysisPage() {
     setDepthAnalysisError('');
     setDepthAnalysisProgress(0);
     setCurrentDepthAgent('');
+    setRawAgentOutputs({}); // Clear previous raw outputs
 
     try {
       console.log('🧠 Starting depth analysis with 4-agent pipeline');
       
-      const result = await depthScriptAnalysisService.analyze(
-        selectedProject.scriptContent,
+      // Create mock PDF analysis data from script content for depth analysis
+      const mockPdfAnalysisData = {
+        data: {
+          scenes: [],
+          characters: [],
+          totalScenes: 0,
+          totalCharacters: 0,
+          scriptContent: selectedProject.scriptContent
+        }
+      };
+
+      const result = await depthScriptAnalysisService.executeFullAnalysis(
+        mockPdfAnalysisData,
         selectedProject.id,
-        (progress, agent) => {
+        (status: string, agent: string, progress: number) => {
           setDepthAnalysisProgress(progress);
           setCurrentDepthAgent(agent);
+        },
+        (agent: string, rawOutput: any, parsedOutput: any) => {
+          setRawAgentOutputs(prev => ({
+            ...prev,
+            [agent]: { raw: rawOutput, parsed: parsedOutput }
+          }));
         }
       );
 
-      if (result.success && result.data) {
-        setDepthAnalysisResults(result.data);
-        setShowDepthResults(true);
+      // The executeFullAnalysis method returns the CoordinatorOutput directly
+      setDepthAnalysisResults(result);
+      setShowDepthResults(true);
 
-        // Store results
-        localStorage.setItem(`depth_analysis_${selectedProject.id}`, JSON.stringify(result.data));
+      // Store results
+      localStorage.setItem(`depth_analysis_${selectedProject.id}`, JSON.stringify(result));
 
-        toast.success("Depth Analysis Complete!", {
-          description: "4-agent pipeline analysis completed successfully",
-        });
-      } else {
-        throw new Error(result.error || 'Depth analysis failed');
-      }
+      toast.success("Depth Analysis Complete!", {
+        description: "4-agent pipeline analysis completed successfully",
+      });
     } catch (error) {
       console.error('Depth analysis error:', error);
       const errorMessage = error instanceof Error ? error.message : 'Depth analysis failed';
@@ -643,6 +658,36 @@ export default function ScriptAnalysisPage() {
     toast.success("Analysis exported successfully!");
   };
 
+  const exportDepthAnalysis = () => {
+    if (!depthAnalysisResults) return;
+
+    const exportData = {
+      project: selectedProject?.name,
+      timestamp: new Date().toISOString(),
+      analysisType: "depth-analysis",
+      depthAnalysis: depthAnalysisResults,
+      workflowSummary: {
+        totalProcessingTime: depthAnalysisResults.workflowExecutionSummary?.totalProcessingTimeMs,
+        agentsCoordinated: depthAnalysisResults.workflowExecutionSummary?.agentsCoordinated,
+        overallSuccessRate: depthAnalysisResults.workflowExecutionSummary?.overallSuccessRate,
+        confidenceScore: depthAnalysisResults.qualityControlReport?.overallConfidenceScore
+      },
+      rawAgentOutputs: rawAgentOutputs // Include raw outputs for debugging
+    };
+
+    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `depth-analysis-${selectedProject?.name || 'project'}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    toast.success("Depth analysis exported successfully!");
+  };
+
   // Script editing handlers
   const handleScriptChange = (value: string) => {
     setEditedScript(value);
@@ -681,7 +726,13 @@ export default function ScriptAnalysisPage() {
             {pdfAnalysisResults && (
               <Button variant="outline" onClick={exportScriptAnalysis}>
                 <Download className="w-4 h-4 mr-2" />
-                Export Analysis
+                Export PDF Analysis
+              </Button>
+            )}
+            {depthAnalysisResults && (
+              <Button variant="outline" onClick={exportDepthAnalysis}>
+                <Download className="w-4 h-4 mr-2" />
+                Export Depth Analysis
               </Button>
             )}
             <Button asChild>
@@ -1196,53 +1247,323 @@ export default function ScriptAnalysisPage() {
             </Card>
 
             {depthAnalysisResults && showDepthResults && (
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-600" />
-                    Depth Analysis Results
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-blue-600">
-                          {depthAnalysisResults.totalScenes || 0}
+              <div className="space-y-6">
+                {/* Executive Summary Card */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <CheckCircle className="w-5 h-5 text-green-600" />
+                      Depth Analysis Results - Executive Summary
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-6">
+                      {/* High-level Stats */}
+                      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-blue-600">
+                            {depthAnalysisResults.integratedProductionBreakdown?.projectOverview?.totalScenes || 0}
+                          </div>
+                          <div className="text-sm text-muted-foreground">Scenes Analyzed</div>
                         </div>
-                        <div className="text-sm text-muted-foreground">Scenes Analyzed</div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-green-600">
+                            {depthAnalysisResults.integratedProductionBreakdown?.productionElementsSummary?.totalUniqueCharacters || 0}
+                          </div>
+                          <div className="text-sm text-muted-foreground">Characters</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-orange-600">
+                            {depthAnalysisResults.integratedProductionBreakdown?.productionElementsSummary?.totalUniqueLocations || 0}
+                          </div>
+                          <div className="text-sm text-muted-foreground">Locations</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-purple-600">
+                            {Math.ceil(depthAnalysisResults.integratedProductionBreakdown?.projectOverview?.estimatedShootingDays || 0)}
+                          </div>
+                          <div className="text-sm text-muted-foreground">Shoot Days</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-indigo-600">
+                            {depthAnalysisResults.workflowExecutionSummary?.agentsCoordinated || 4}
+                          </div>
+                          <div className="text-sm text-muted-foreground">AI Agents</div>
+                        </div>
                       </div>
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-green-600">
-                          {depthAnalysisResults.totalCharacters || 0}
+
+                      {/* Project Overview */}
+                      {depthAnalysisResults.integratedProductionBreakdown?.projectOverview && (
+                        <div className="bg-blue-50 p-4 rounded-lg">
+                          <h4 className="font-medium mb-3 text-blue-800">Project Overview</h4>
+                          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                            <div>
+                              <span className="font-medium">Screen Time:</span>
+                              <br />
+                              {depthAnalysisResults.integratedProductionBreakdown.projectOverview.totalEstimatedScreenTime}
+                            </div>
+                            <div>
+                              <span className="font-medium">Budget Estimate:</span>
+                              <br />
+                              ${depthAnalysisResults.integratedProductionBreakdown.projectOverview.totalEstimatedBudget?.toLocaleString()}
+                            </div>
+                            <div>
+                              <span className="font-medium">Crew Size:</span>
+                              <br />
+                              {depthAnalysisResults.integratedProductionBreakdown.projectOverview.crewSizeRecommendation} people
+                            </div>
+                          </div>
                         </div>
-                        <div className="text-sm text-muted-foreground">Characters</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-orange-600">
-                          {depthAnalysisResults.totalLocations || 0}
+                      )}
+
+                      {/* Timing Analysis Summary */}
+                      {depthAnalysisResults.integratedProductionBreakdown?.timingAnalysisSummary && (
+                        <div className="bg-green-50 p-4 rounded-lg">
+                          <h4 className="font-medium mb-3 text-green-800">Timing Analysis Summary</h4>
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                            <div>
+                              <span className="font-medium">Average Scene:</span>
+                              <br />
+                              {depthAnalysisResults.integratedProductionBreakdown.timingAnalysisSummary.averageSceneLength}
+                            </div>
+                            <div>
+                              <span className="font-medium">Shortest Scene:</span>
+                              <br />
+                              #{depthAnalysisResults.integratedProductionBreakdown.timingAnalysisSummary.shortestScene?.sceneNumber} - {depthAnalysisResults.integratedProductionBreakdown.timingAnalysisSummary.shortestScene?.screenTime}
+                            </div>
+                            <div>
+                              <span className="font-medium">Longest Scene:</span>
+                              <br />
+                              #{depthAnalysisResults.integratedProductionBreakdown.timingAnalysisSummary.longestScene?.sceneNumber} - {depthAnalysisResults.integratedProductionBreakdown.timingAnalysisSummary.longestScene?.screenTime}
+                            </div>
+                            <div>
+                              <span className="font-medium">Complexity Distribution:</span>
+                              <br />
+                              S:{depthAnalysisResults.integratedProductionBreakdown.timingAnalysisSummary.complexityDistribution?.simpleScenes} / 
+                              M:{depthAnalysisResults.integratedProductionBreakdown.timingAnalysisSummary.complexityDistribution?.standardScenes} / 
+                              C:{depthAnalysisResults.integratedProductionBreakdown.timingAnalysisSummary.complexityDistribution?.complexScenes}
+                            </div>
+                          </div>
                         </div>
-                        <div className="text-sm text-muted-foreground">Locations</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-purple-600">
-                          4
+                      )}
+
+                      {/* Department Budget Summary */}
+                      {depthAnalysisResults.integratedProductionBreakdown?.departmentBudgetSummary && (
+                        <div className="bg-orange-50 p-4 rounded-lg">
+                          <h4 className="font-medium mb-3 text-orange-800">Department Budget Breakdown</h4>
+                          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 text-sm">
+                            {Object.entries(depthAnalysisResults.integratedProductionBreakdown.departmentBudgetSummary)
+                              .filter(([key]) => key !== 'grandTotal' && key !== 'budgetByPhase')
+                              .map(([dept, amount]) => (
+                                <div key={dept} className="text-center">
+                                  <div className="font-medium text-orange-900 capitalize">
+                                    {dept.replace(/([A-Z])/g, ' $1').trim()}
+                                  </div>
+                                  <div className="text-lg font-bold text-orange-700">
+                                    ${(amount as number)?.toLocaleString() || '0'}
+                                  </div>
+                                </div>
+                              ))
+                            }
+                          </div>
+                          <div className="mt-4 pt-4 border-t border-orange-200 text-center">
+                            <div className="text-lg font-bold text-orange-900">
+                              Total Budget: ${depthAnalysisResults.integratedProductionBreakdown.departmentBudgetSummary.grandTotal?.toLocaleString()}
+                            </div>
+                          </div>
                         </div>
-                        <div className="text-sm text-muted-foreground">AI Agents</div>
+                      )}
+
+                      {/* Workflow Execution Summary */}
+                      <div className="bg-purple-50 p-4 rounded-lg">
+                        <h4 className="font-medium mb-3 text-purple-800">Workflow Execution Summary</h4>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                          <div>
+                            <span className="font-medium">Processing Time:</span>
+                            <br />
+                            {Math.round(depthAnalysisResults.workflowExecutionSummary.totalProcessingTimeMs / 1000)}s
+                          </div>
+                          <div>
+                            <span className="font-medium">Success Rate:</span>
+                            <br />
+                            {depthAnalysisResults.workflowExecutionSummary.overallSuccessRate}
+                          </div>
+                          <div>
+                            <span className="font-medium">Validation Checks:</span>
+                            <br />
+                            {depthAnalysisResults.workflowExecutionSummary.validationChecksPassed} passed
+                          </div>
+                          <div>
+                            <span className="font-medium">Confidence Score:</span>
+                            <br />
+                            {depthAnalysisResults.qualityControlReport?.overallConfidenceScore || 'N/A'}
+                          </div>
+                        </div>
                       </div>
                     </div>
+                  </CardContent>
+                </Card>
 
-                    {depthAnalysisResults.summary && (
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <h4 className="font-medium mb-2">Analysis Summary</h4>
-                        <p className="text-sm text-muted-foreground">
-                          {depthAnalysisResults.summary}
-                        </p>
+                {/* Agent Coordination Results */}
+                {depthAnalysisResults.agentCoordinationResults && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Agent Coordination Results</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        {Object.entries(depthAnalysisResults.agentCoordinationResults).map(([agentName, results]) => (
+                          <div key={agentName} className="border rounded-lg p-4">
+                            <div className="flex items-center justify-between mb-3">
+                              <h5 className="font-medium capitalize">
+                                {agentName.replace(/([A-Z])/g, ' $1').trim()} Agent
+                              </h5>
+                              <Badge variant={results.executionStatus === 'SUCCESS' ? 'default' : 'destructive'}>
+                                {results.executionStatus}
+                              </Badge>
+                            </div>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                              <div>
+                                <span className="font-medium">Scenes Processed:</span>
+                                <br />
+                                {results.scenesProcessed || 0}
+                              </div>
+                              <div>
+                                <span className="font-medium">Processing Time:</span>
+                                <br />
+                                {Math.round(results.processingTimeMs / 1000)}s
+                              </div>
+                              <div>
+                                <span className="font-medium">Validation:</span>
+                                <br />
+                                <Badge variant={results.validationStatus === 'PASS' ? 'default' : 'destructive'}>
+                                  {results.validationStatus}
+                                </Badge>
+                              </div>
+                              <div>
+                                <span className="font-medium">Key Findings:</span>
+                                <br />
+                                {results.keyFindings?.length || 0} insights
+                              </div>
+                            </div>
+                            {results.keyFindings && results.keyFindings.length > 0 && (
+                              <div className="mt-3">
+                                <h6 className="font-medium text-sm mb-2">Key Findings:</h6>
+                                <div className="space-y-1">
+                                  {results.keyFindings.slice(0, 3).map((finding, idx) => (
+                                    <div key={idx} className="flex items-center gap-2 text-sm">
+                                      <Badge variant={finding.impact === 'high' ? 'destructive' : finding.impact === 'medium' ? 'secondary' : 'outline'}>
+                                        {finding.impact}
+                                      </Badge>
+                                      <span>{finding.finding}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        ))}
                       </div>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Risk Assessment and Recommendations */}
+                {depthAnalysisResults.riskAssessmentAndRecommendations && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Risk Assessment & Recommendations</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-6">
+                        {/* Identified Risks */}
+                        {depthAnalysisResults.riskAssessmentAndRecommendations.identifiedRisks && 
+                         depthAnalysisResults.riskAssessmentAndRecommendations.identifiedRisks.length > 0 && (
+                          <div>
+                            <h5 className="font-medium mb-3 text-red-700">Identified Risks</h5>
+                            <div className="space-y-3">
+                              {depthAnalysisResults.riskAssessmentAndRecommendations.identifiedRisks.slice(0, 5).map((risk, idx) => (
+                                <div key={idx} className="border-l-4 border-red-400 pl-4 py-2 bg-red-50">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <Badge variant="destructive">{risk.category}</Badge>
+                                    <Badge variant={risk.probability === 'high' ? 'destructive' : risk.probability === 'medium' ? 'secondary' : 'outline'}>
+                                      {risk.probability} probability
+                                    </Badge>
+                                    <Badge variant={risk.impact === 'high' ? 'destructive' : risk.impact === 'medium' ? 'secondary' : 'outline'}>
+                                      {risk.impact} impact
+                                    </Badge>
+                                  </div>
+                                  <p className="text-sm font-medium text-red-800">{risk.description}</p>
+                                  <p className="text-sm text-red-600 mt-1">Mitigation: {risk.mitigation}</p>
+                                  <p className="text-sm text-red-600">Contingency Cost: ${risk.contingencyCost?.toLocaleString()}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Optimization Opportunities */}
+                        {depthAnalysisResults.riskAssessmentAndRecommendations.optimizationOpportunities && 
+                         depthAnalysisResults.riskAssessmentAndRecommendations.optimizationOpportunities.length > 0 && (
+                          <div>
+                            <h5 className="font-medium mb-3 text-green-700">Optimization Opportunities</h5>
+                            <div className="space-y-3">
+                              {depthAnalysisResults.riskAssessmentAndRecommendations.optimizationOpportunities.slice(0, 5).map((opp, idx) => (
+                                <div key={idx} className="border-l-4 border-green-400 pl-4 py-2 bg-green-50">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <Badge variant="default">{opp.category}</Badge>
+                                    <span className="text-sm text-green-600">
+                                      Potential Savings: ${opp.potentialSavings?.toLocaleString()}
+                                    </span>
+                                  </div>
+                                  <p className="text-sm font-medium text-green-800">{opp.description}</p>
+                                  <p className="text-sm text-green-600 mt-1">Action: {opp.recommendedAction}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Raw Agent Outputs (if available) */}
+                {Object.keys(rawAgentOutputs).length > 0 && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Raw Agent Outputs (Debug View)</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        {Object.entries(rawAgentOutputs).map(([agentName, outputs]) => (
+                          <div key={agentName}>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => setExpandedRawSections(prev => ({
+                                ...prev,
+                                [agentName]: !prev[agentName]
+                              }))}
+                              className="mb-2"
+                            >
+                              {expandedRawSections[agentName] ? <ChevronDown className="w-4 h-4 mr-2" /> : <ChevronRight className="w-4 h-4 mr-2" />}
+                              {agentName} Agent Raw Output
+                            </Button>
+                            {expandedRawSections[agentName] && (
+                              <div className="bg-gray-50 p-4 rounded-lg">
+                                <pre className="text-xs overflow-auto max-h-96">
+                                  {JSON.stringify(outputs, null, 2)}
+                                </pre>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
             )}
           </div>
         )}

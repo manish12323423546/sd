@@ -133,7 +133,7 @@ export class ClientPdfAnalyzer {
       else if (trimmedLine.includes(':') && trimmedLine.split(':')[0].length < 50) {
         const charMatch = trimmedLine.match(/^([A-Z][A-Z\s'().]+[A-Z]):\s*(.*)/);
         if (charMatch) {
-          let character = charMatch[1].trim().replace(/\s*\(.*?\)/, '').replace(/\s+/, ' ').trim();
+          const character = charMatch[1].trim().replace(/\s*\(.*?\)/, '').replace(/\s+/, ' ').trim();
           const dialogue = charMatch[2].trim();
           if (character && character.length > 1) {
             this.characters.add(character);
@@ -152,7 +152,7 @@ export class ClientPdfAnalyzer {
       } 
       // Character names
       else if (/^[A-Z'\s]+$/.test(trimmedLine) && trimmedLine.length > 2 && trimmedLine.length < 30) {
-        let character = trimmedLine.trim().replace(/\s*\(.*?\)/, '');
+        const character = trimmedLine.trim().replace(/\s*\(.*?\)/, '');
         if (character && !['THE', 'AND', 'OR', 'TO', 'IN', 'ON', 'AT'].includes(character)) {
           this.characters.add(character);
           if (!currentSceneCharacters.includes(character)) {

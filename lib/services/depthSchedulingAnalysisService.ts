@@ -156,7 +156,7 @@ export class DepthSchedulingAnalysisService {
       { tierNumber: 3, tierName: 'Optimization', agents: ['Scenario Optimization'], progress: 0, status: 'pending' }
     ];
 
-    let rawAgentOutputs = {
+    const rawAgentOutputs = {
       coordinatorRaw: '',
       complianceRaw: '',
       resourceRaw: '',
@@ -1426,4 +1426,32 @@ Create complete daily schedules with specific times, cast, and logistics for eac
   }
 }
 
-export default DepthSchedulingAnalysisService;
+// Create singleton instance for static-like usage
+const depthSchedulingService = new DepthSchedulingAnalysisService();
+
+// Export types for use in other files
+export type { TierProgress, SchedulingScenario, DepthSchedulingResult };
+
+// Export both the class and a static-like API
+export default class DepthSchedulingAnalysisServiceExport {
+  static async analyze(
+    scriptContent: string,
+    projectId: string,
+    onProgress?: (tier: string, progress: number) => void
+  ): Promise<DepthSchedulingResult> {
+    const project: SchedulingProject = {
+      id: projectId,
+      name: `Project ${projectId}`,
+      scriptContent,
+      created: new Date().toISOString()
+    };
+
+    return await depthSchedulingService.executeFullSchedulingAnalysis(
+      project,
+      onProgress ? (message: string, agent: string, progress: number, tier?: number) => {
+        // Map the callback to match expected signature
+        onProgress(`Tier ${tier}: ${agent}`, progress);
+      } : undefined
+    );
+  }
+}
