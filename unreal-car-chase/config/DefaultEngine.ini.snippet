@@ -1,0 +1,60 @@
+; ---------------------------------------------------------------------------
+; Jungle Night Chase - project rendering settings (UE 5.5+)
+; Merge these sections into <Project>/Config/DefaultEngine.ini, then restart.
+; Every setting can also be found in Project Settings > Engine > Rendering.
+; ---------------------------------------------------------------------------
+
+[/Script/WindowsTargetPlatform.WindowsTargetSettings]
+; DX12 + SM6 are required for Nanite, Lumen hardware ray tracing and Virtual Shadow Maps
+DefaultGraphicsRHI=DefaultGraphicsRHI_DX12
+-D3D12TargetedShaderFormats=PCD3D_SM5
++D3D12TargetedShaderFormats=PCD3D_SM6
+
+[/Script/Engine.RendererSettings]
+; --- Global illumination & reflections: Lumen ---
+r.DynamicGlobalIlluminationMethod=1
+r.ReflectionMethod=1
+r.Lumen.TraceMeshSDFs=1
+r.GenerateMeshDistanceFields=True
+; Hardware ray tracing gives accurate reflections on car paint, glass and wet asphalt
+r.RayTracing=True
+r.RayTracing.RayTracingProxies.ProjectEnabled=True
+r.Lumen.HardwareRayTracing=True
+; 1 = hit lighting for reflections (mirror-quality car reflections)
+r.Lumen.HardwareRayTracing.LightingMode=1
+r.Lumen.TranslucencyReflections.FrontLayer.EnableForProject=True
+r.SkinCache.CompileShaders=True
+
+; --- Shadows ---
+r.Shadow.Virtual.Enable=1
+
+; --- Geometry ---
+r.Nanite.ProjectEnabled=True
+r.AllowStaticLighting=False
+r.VirtualTextures=True
+r.VT.EnableAutoImport=True
+
+; --- Anti-aliasing: Temporal Super Resolution ---
+r.AntiAliasingMethod=4
+
+; --- Post defaults (manual exposure is set in the PostProcessVolume) ---
+r.DefaultFeature.AutoExposure=False
+r.DefaultFeature.AutoExposure.ExtendDefaultLuminanceRange=True
+r.DefaultFeature.MotionBlur=True
+r.DefaultFeature.Bloom=True
+
+; --- Misc ---
+; custom depth + stencil, for selective glow / outline passes
+r.CustomDepth=3
+; per-pixel velocities for foliage wind (correct motion blur on swaying leaves)
+r.Velocity.EnableVertexDeformation=1
+r.SupportSkyAtmosphereAffectsHeightFog=True
+
+[/Script/Engine.Engine]
+; keep the editor responsive while working on heavy scenes
+bSmoothFrameRate=False
+
+[SystemSettings]
+; editor viewport quality while working (renders use the MRQ cvars instead)
+r.Lumen.ScreenProbeGather.DownsampleFactor=16
+r.Streaming.PoolSize=6000
