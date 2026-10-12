@@ -11,9 +11,13 @@ export function ContactCta() {
           <img className="cta-wave" src={ICON.wave} alt="" width={700} height={440} loading="lazy" />
           <div className="cta-left">
             <div>
-              <Split id="cta-title" className="h2" text="Ready to Get Started" />
+              <span className="eyebrow">Let&apos;s connect</span>
+              <Split id="cta-title" className="h2" text="Let's Build Your Next Team" />
               <p className="t-r" data-reveal="fade">
-                Verixa is your trusted platform for discovering job opportunities that match your skills, experience, and career aspirations.
+                Share the roles, locations and hiring priorities. Start a conversation with Hirepulse.
+              </p>
+              <p className="cta-mail" data-reveal="fade">
+                Or email <a href="mailto:info@hirepulsesolutions.com">info@hirepulsesolutions.com</a>
               </p>
             </div>
           </div>

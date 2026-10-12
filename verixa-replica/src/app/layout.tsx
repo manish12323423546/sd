@@ -17,20 +17,28 @@ const interDisplay = localFont({
   fallback: ["system-ui", "-apple-system", "Segoe UI", "Arial", "sans-serif"],
 });
 
+const TITLE = "Hirepulse Solutions – Recruitment & Staffing Across IT and Non-IT";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: { default: "Verixa – Connecting Top Talent with Leading Opportunities", template: "%s – Verixa" },
+  title: { default: TITLE, template: "%s – Hirepulse Solutions" },
   description: SITE.description,
-  // Reference replica of a third-party template: keep it out of search indexes.
-  robots: { index: false, follow: false },
-  openGraph: { type: "website", siteName: "Verixa", title: "Verixa – Connecting Top Talent with Leading Opportunities", description: SITE.description },
+  // Stays out of search results until the site moves to its own domain (set NEXT_PUBLIC_ALLOW_INDEXING=true).
+  robots: process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true" ? { index: true, follow: true } : { index: false, follow: false },
+  openGraph: {
+    type: "website",
+    siteName: "Hirepulse Solutions",
+    title: TITLE,
+    description: SITE.description,
+    images: [{ url: "/brand/og-image.jpg", width: 1200, height: 630, alt: "Hirepulse Solutions – Apki Job Hmari Zimmedari" }],
+  },
   icons: { icon: "/favicon.svg" },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#ffffff",
+  themeColor: "#142c30",
 };
 
 // Hide below-the-fold reveal targets before first paint; Effects reveals them on scroll.

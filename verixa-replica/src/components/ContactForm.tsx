@@ -25,7 +25,10 @@ export function ContactForm({ id = "contact" }: { id?: string }) {
       if (!res.ok) throw new Error(body.error || "Your message could not be sent. Please try again later.");
       form.reset();
       // Mock endpoint (demo replica): be clear that nothing was actually delivered.
-      setState({ kind: "sent", message: "Thanks for your message! This is a demo site, so it wasn't sent anywhere." });
+      setState({
+        kind: "sent",
+        message: "Thanks! This form isn't connected to an inbox yet, so please also email info@hirepulsesolutions.com.",
+      });
     } catch (err) {
       setState({ kind: "error", message: err instanceof Error ? err.message : "Your message could not be sent." });
     }
@@ -44,11 +47,11 @@ export function ContactForm({ id = "contact" }: { id?: string }) {
         </label>
         <label className="field">
           <span>Subject</span>
-          <input type="text" name="subject" required maxLength={200} placeholder="Write your subject" />
+          <input type="text" name="subject" required maxLength={200} placeholder="Roles, locations or hiring need" />
         </label>
         <label className="field">
           <span>Your message</span>
-          <textarea name="message" required maxLength={4000} placeholder="What comes to your mind?" />
+          <textarea name="message" required maxLength={4000} placeholder="Tell us about the roles you want to fill" />
         </label>
         <label className="hp" aria-hidden="true">
           Website

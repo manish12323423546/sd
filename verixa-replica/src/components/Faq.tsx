@@ -2,9 +2,10 @@
 
 import { useId, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import type { FaqTab } from "@/lib/content";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
+
+export type FaqTab = { tab: string; items: { q: string; a: string[] }[] };
 
 export function Faq({ tabs }: { tabs: FaqTab[] }) {
   const uid = useId();

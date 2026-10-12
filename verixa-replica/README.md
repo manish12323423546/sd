@@ -1,52 +1,45 @@
-# Verixa replica
+# Hirepulse Solutions website
 
-A Next.js (App Router, TypeScript) + Framer Motion rebuild of the Framer template site
-`verixa.framer.media`, made from a capture ZIP (stage 2 of the website replica pipeline).
-Reference/demo work: the copy, photos and brand belong to the template's authors, and the site is
-served with `noindex, nofollow`.
+Next.js (App Router, TypeScript) + Framer Motion site for **Hirepulse Solutions Pvt. Ltd.**, built on
+the layout and motion of a rebuilt Framer template ("Verixa") and filled with the content of the
+Hirepulse company profile (10-page PDF).
 
 ## Run
 
 ```bash
 npm ci
 npm run dev        # http://localhost:3000
-npm run build      # static pages for every route + /api/contact
+npm run build
 npm run typecheck
 ```
 
-## What is in it
+## Pages
 
-- 13 page templates, 37 routes (all sitemap URLs of the original): home, about, service, case studies
-  (+6), blog (+10), jobs (+10), contact, style guide, changelog, licenses, and the 404 page.
-  Unknown routes and unknown CMS slugs return 404.
-- Content comes from the capture (`src/data/content.json`); images were converted from the capture's
-  assets to WebP at 640 and 1440 px (`npm run images -- <capture>/assets`), with intrinsic sizes in
-  `src/data/images.json` so nothing shifts while loading.
-- Inter Display (400/500/600, SIL OFL) is self-hosted from `src/fonts`.
+| Route | Content (from the company profile) |
+|---|---|
+| `/` | Hero (People. Potential. Progress.), two hiring models, six services, IT / non-IT scope, why Hirepulse, people, process, FAQ |
+| `/about-us` | Who we are, why Hirepulse, 10+ / 50+ / 15+ counters, purpose, leadership and delivery team |
+| `/service` | Six services (with anchors), Hire-Train-Deploy vs lateral models, delivery brief, process, FAQ |
+| `/hiring-scope` | IT and non-IT roles, representative sectors, sourcing channels, regional strongholds |
+| `/contact` | Email, website, registered office (Ahmedabad), branch offices |
 
-## Motion (taken from the original's code, not guessed)
+All copy lives in `src/lib/hirepulse.ts`. Facts are as supplied in the profile, which notes they were
+not independently verified; leadership names follow the profile ("Jinendra Mihsra").
 
-- H1/H2 reveal word by word: 800 ms, +40 ms per word, `cubic-bezier(.22,1,.36,1)`.
-- Other blocks fade up 24 px over 900 ms; items entering together stagger 80 ms.
-- The header hides on scroll down after 150 px, returns on scroll up, and gets a hairline border.
-- Cards lift 4 px with a soft shadow and zoom their image to 1.05 on hover.
-- Buttons roll their label and swap the arrow on hover.
-- Wheel scrolling is smoothed on mouse/trackpad devices.
-- About counters count up when scrolled into view. FAQ tabs/accordion, blog and job filters work.
-- Everything respects `prefers-reduced-motion`.
+## Brand
 
-## Approximations
+Colours sampled from the logo and profile: slate `#142c30`, teal `#1f9399` / `#10666b`,
+orange `#ef8a3b`, peach `#fff2e5`. The logo (`public/brand/`) was cut out of the profile's logo
+image; replace it with the original vector file when available.
 
-- The two "Process" illustrations on the home page were Lottie animations in the original; they are
-  rebuilt in HTML/CSS with Framer Motion and look close but are not frame-exact.
-- Tablet (810-1199 px) layouts follow the original's type scale but were not captured, so spacing
-  there is inferred.
-- The footer credit reads "Built with Next.js" instead of "Built in Framer".
+## Things to know
 
-## Contact form
-
-Mock by design: `/api/contact` validates the input (required fields, phone format, lengths), drops
-obvious spam (hidden honeypot field, submissions under 2.5 s, 5 per IP per 10 minutes) and then
-answers success without storing or forwarding anything. The thank-you message tells the visitor it
-is a demo. To make it real later, replace the mock step in `src/app/api/contact/route.ts` with a call
-to an email service or database.
+- **Photos**: apart from the two leadership photos, the images are stock photos that came with the
+  Framer template (credited there to Freepik). Check the licence or replace them with Hirepulse's own.
+- **Contact form**: mock. `/api/contact` validates input and drops spam, but stores nothing; the
+  thank-you message asks people to email info@hirepulsesolutions.com. Wire it to an inbox or CRM
+  before relying on it.
+- **Search engines**: pages are `noindex` until `NEXT_PUBLIC_ALLOW_INDEXING=true` is set (do this once
+  the site is on its own domain, and set `NEXT_PUBLIC_SITE_URL` to that domain).
+- Motion follows the original template: word-by-word heading reveals, fade-up blocks, hiding header,
+  card hovers, smooth wheel scrolling; all respect `prefers-reduced-motion`.

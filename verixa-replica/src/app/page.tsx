@@ -1,52 +1,14 @@
+import Link from "next/link";
 import { Button } from "@/components/Button";
-import { BlogCard, JobCard, ProgressCard, ReviewCard } from "@/components/Cards";
+import { PathwayCard, PurposeCard, ServiceCard, SourcingCard } from "@/components/Cards";
 import { ContactCta } from "@/components/ContactCta";
 import { Faq } from "@/components/Faq";
 import { ProfileChecklist, UploadDoc } from "@/components/Illustrations";
 import { Img } from "@/components/Img";
 import { Split } from "@/components/Split";
-import { faq, jobs, posts } from "@/lib/content";
+import { COMPANY, DELIVERY_TEAM, FAQ, HIRING_SCOPE, LEADERS, MODELS, PROCESS, SERVICES } from "@/lib/hirepulse";
 
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
-
-const TESTIMONIALS = [
-  {
-    name: "Sarah Thompson",
-    img: "bg1jl6yqwbh5ce2frk09ju4xtq",
-    quote: "“Verixa offers great tools for tracking applicants and organising interviews. It has made our recruitment process smoother and more organised.”",
-  },
-  {
-    name: "Steve Kal",
-    img: "clsnj94mlbrteojurfvyuzmyw",
-    quote: "“Verixa's job alerts kept me updated with relevant positions daily. I finally landed a role that perfectly matches my skills and aspirations.”",
-  },
-  {
-    name: "Lee Atkins",
-    img: "6dqdwza68xs597q1yszbrzrqum",
-    quote: "“Verixa helped our team reach qualified candidates faster. Posting roles and shortlisting applicants now takes a fraction of the time.”",
-  },
-];
-
-function Requirements({ dark = false }: { dark?: boolean }) {
-  return (
-    <div className={`reqs ${dark ? "on-dark" : ""}`} data-reveal="fade">
-      <div>
-        <h3>Job Finding</h3>
-        <ul className="t-r">
-          <li>To increase impression</li>
-          <li>Get skilled jobs</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Matched Skills</h3>
-        <ul className="t-r">
-          <li>Experienced job hunter</li>
-          <li>Intern opportunities</li>
-        </ul>
-      </div>
-    </div>
-  );
-}
 
 export default function HomePage() {
   return (
@@ -54,36 +16,36 @@ export default function HomePage() {
       <section className="home-hero">
         <div className="container home-hero__intro">
           <span className="pill load-fade" style={d(0)}>
-            Global Job Finder Plus Portal
+            Recruitment &amp; Staffing · India
           </span>
-          <Split as="h1" className="h1" text="Connecting top talent with leading opportunities" mode="load" delay={80} />
+          <Split as="h1" className="h1" text={COMPANY.motto} mode="load" delay={80} />
           <p className="t-r load-fade" style={d(240)}>
-            Find jobs that match your skills and career goals. Our platform helps professionals connect with leading companies.
+            {COMPANY.name} — {COMPANY.summary.charAt(0).toLowerCase() + COMPANY.summary.slice(1)}
           </p>
           <div className="btn-row load-fade" style={d(320)}>
-            <Button href="/service">View Services</Button>
-            <Button href="/jobs" variant="secondary">
-              Find A Job
+            <Button href="/service">Our Services</Button>
+            <Button href="/contact" variant="secondary">
+              Hire Talent
             </Button>
           </div>
         </div>
         <div className="container">
           <div className="showcase">
             <div className="media r20 showcase__a load-fade" style={d(400)}>
-              <Img name="szajswyk9grhqe5slaj60iedn9k" sizes="(min-width: 1200px) 486px, (min-width: 810px) 40vw, calc(100vw - 60px)" alt="Smiling professional working on a laptop" priority />
+              <Img name="szajswyk9grhqe5slaj60iedn9k" sizes="(min-width: 1200px) 486px, (min-width: 810px) 40vw, calc(100vw - 60px)" alt="Professional smiling while working on a laptop" priority />
             </div>
             <div className="showcase__job load-fade" style={d(480)}>
-              <ProgressCard />
+              <PathwayCard />
             </div>
             <div className="media r20 showcase__b load-fade" style={d(560)}>
               <Img name="2ya4xilpdsgydoi9lo6qcwbirq" sizes="(min-width: 1200px) 361px, (min-width: 810px) 30vw, calc(100vw - 60px)" alt="Two colleagues collaborating at a desk" />
             </div>
             <div className="showcase__career load-fade" style={d(640)}>
               <div className="copy">
-                <h2 className="h3">Boost Your Career Success</h2>
-                <p className="t-s">Our mission is to empower businesses every day with top talent</p>
+                <h2 className="h3">Talent for every business direction.</h2>
+                <p className="t-s">IT and non-IT recruitment — from campus and fresher hiring to experienced placements.</p>
               </div>
-              <ReviewCard />
+              <PurposeCard />
             </div>
           </div>
         </div>
@@ -92,9 +54,10 @@ export default function HomePage() {
       <section className="section">
         <div className="container">
           <div className="sec-head sec-head--center">
-            <Split className="h2" text="A Smooth Process With Outstanding Results" />
+            <span className="eyebrow">Two hiring models</span>
+            <Split className="h2" text="Match the Model to the Requirement" />
             <p className="t-r" data-reveal="fade">
-              Highlighting the smooth and efficient process from job search to landing a role.
+              Choose the pathway that fits the candidate&apos;s readiness and the role&apos;s expectations.
             </p>
           </div>
           <div className="process-cards">
@@ -103,8 +66,8 @@ export default function HomePage() {
                 <ProfileChecklist />
               </div>
               <div>
-                <h3 className="h5">Professional Profile Creation</h3>
-                <p className="t-r">Create a professional profile that highlights your skills and experience.</p>
+                <h3 className="h5">{MODELS[0].title}</h3>
+                <p className="t-r">{MODELS[0].for}: source promising candidates, prepare them against an agreed role and deploy them into suitable roles.</p>
               </div>
             </article>
             <article className="process-card" data-reveal="group">
@@ -112,8 +75,8 @@ export default function HomePage() {
                 <UploadDoc />
               </div>
               <div>
-                <h3 className="h5">Smart Application System</h3>
-                <p className="t-r">Apply to multiple jobs quickly using our streamlined application system.</p>
+                <h3 className="h5">{MODELS[1].title}</h3>
+                <p className="t-r">{MODELS[1].for}: identify experienced professionals, match their experience and skills, and place them with the client.</p>
               </div>
             </article>
           </div>
@@ -123,9 +86,12 @@ export default function HomePage() {
       <section className="section bg-stone">
         <div className="container">
           <div className="sec-head sec-head--split">
-            <Split className="h2" text="The Most Popular Jobs Are Listed Below" />
+            <div>
+              <span className="eyebrow">What we do</span>
+              <Split className="h2" text="Recruitment, With Support at Every Step" />
+            </div>
             <p className="t-r" data-reveal="fade">
-              Explore some of the most in-demand positions currently available on our platform.
+              A connected set of services for new teams, growing operations and experienced hiring needs.
             </p>
           </div>
           <div className="popular">
@@ -135,8 +101,8 @@ export default function HomePage() {
               </div>
             </div>
             <div className="job-list">
-              {jobs.slice(0, 4).map((job) => (
-                <JobCard key={job.slug} job={job} />
+              {SERVICES.map((s, i) => (
+                <ServiceCard key={s.id} service={s} index={i} />
               ))}
             </div>
           </div>
@@ -147,19 +113,37 @@ export default function HomePage() {
         <div className="container split-feature">
           <div className="split-feature__copy">
             <div>
-              <Split className="h2" text="Verixa Increases Your Job Success Rate" />
+              <span className="eyebrow">Cross-industry hiring</span>
+              <Split className="h2" text="One Partner. A Broad Talent Lens." />
               <p className="t-r" data-reveal="fade">
-                You will learn some job success factors and the job success strategies you need to succeed.
+                Recruitment and staffing conversations across technology, business functions and operational roles.
               </p>
             </div>
-            <Requirements />
+            <div className="reqs" data-reveal="fade">
+              <div>
+                <h3>{HIRING_SCOPE.it.label} · {HIRING_SCOPE.it.title}</h3>
+                <ul className="t-r">
+                  {HIRING_SCOPE.it.roles.map((r) => (
+                    <li key={r}>{r}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3>{HIRING_SCOPE.nonIt.label} · {HIRING_SCOPE.nonIt.title}</h3>
+                <ul className="t-r">
+                  {HIRING_SCOPE.nonIt.roles.map((r) => (
+                    <li key={r}>{r}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
           <div className="feature-media feature-media--right">
             <div className="media" data-reveal="fade">
               <Img name="p4dge4uf5agixyologqssztznxg" sizes="(min-width: 1200px) 554px, calc(100vw - 24px)" alt="Professional in a meeting with colleagues" />
             </div>
             <div className="progress-card-wrap" data-reveal="fade">
-              <ProgressCard />
+              <SourcingCard />
             </div>
           </div>
         </div>
@@ -172,17 +156,45 @@ export default function HomePage() {
               <Img name="u0ihudojlu4yhhocdyilhzitkx0" sizes="(min-width: 1200px) 546px, calc(100vw - 24px)" alt="Recruiter shaking hands with a candidate" />
             </div>
             <div className="review-card-wrap" data-reveal="fade">
-              <ReviewCard />
+              <div className="review-card">
+                <div className="review-card__head">
+                  <strong>10+ years</strong>
+                  <span className="t-s">Expertise</span>
+                </div>
+                <p className="t-s">Hiring and training experience spanning fresher recruitment, lateral hiring and candidate preparation.</p>
+                <Link href="/about-us" className="btn btn--primary btn--block btn--sm">
+                  <span className="roll">
+                    <span>About Hirepulse</span>
+                    <span aria-hidden="true">About Hirepulse</span>
+                  </span>
+                </Link>
+              </div>
             </div>
           </div>
           <div className="split-feature__copy">
             <div>
-              <Split className="h2" text="Get a Job at One of the Best Companies!" />
+              <span className="eyebrow">Why Hirepulse</span>
+              <Split className="h2" text="Built Around People. Organised for Delivery." />
               <p className="t-r" data-reveal="fade">
-                Find great places to work. Get access to millions of company reviews. Company name or job title. Find Companies. Do you want to search for salaries?
+                Recruitment experience, talent access and candidate support brought together in one working relationship.
               </p>
             </div>
-            <Requirements dark />
+            <div className="reqs on-dark" data-reveal="fade">
+              <div>
+                <h3>Talent access</h3>
+                <ul className="t-r">
+                  <li>50+ active college tie-ups</li>
+                  <li>State-wise sourcing support</li>
+                </ul>
+              </div>
+              <div>
+                <h3>Candidate support</h3>
+                <ul className="t-r">
+                  <li>Interview preparation</li>
+                  <li>Academic &amp; retention support</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -190,23 +202,36 @@ export default function HomePage() {
       <section className="section">
         <div className="container">
           <div className="sec-head sec-head--left">
-            <Split className="h2" text="Insight From Our Users" />
+            <span className="eyebrow">Our people</span>
+            <Split className="h2" text="People Behind the Process" />
             <p className="t-r" data-reveal="fade">
-              Highlighting authentic testimonials from users who found success with Verixa.
+              Desk and remote recruiters, trainers and a dedicated academic and retention support team.
             </p>
           </div>
           <div className="testimonials">
-            {TESTIMONIALS.map((t) => (
-              <figure className="testimonial" key={t.name} data-reveal="group">
+            {LEADERS.map((l) => (
+              <figure className="testimonial leader-card" key={l.name} data-reveal="group">
                 <div className="media">
-                  <Img name={t.img} sizes="(min-width: 1200px) 424px, (min-width: 810px) 50vw, calc(100vw - 24px)" alt={`Portrait of ${t.name}`} />
+                  <img src={l.photo} alt={`${l.name}, ${l.role}`} width={l.w} height={l.h} loading="lazy" decoding="async" />
                 </div>
                 <div>
-                  <figcaption className="h6">{t.name}</figcaption>
-                  <blockquote className="t-l">{t.quote}</blockquote>
+                  <figcaption className="h6">{l.name}</figcaption>
+                  <p className="role-line t-l">{l.role}</p>
                 </div>
               </figure>
             ))}
+            <div className="team-card" data-reveal="group">
+              <p className="h6">Delivery team</p>
+              <ul>
+                {DELIVERY_TEAM.map((t) => (
+                  <li key={t.label}>
+                    <b>{t.value}</b>
+                    <span>{t.label}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="t-s">Academic &amp; Retention Support Team for candidate coordination, documentation, employee engagement and workforce retention.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -214,28 +239,36 @@ export default function HomePage() {
       <section className="section bg-stone">
         <div className="container">
           <div className="sec-head sec-head--center">
-            <Split className="h2" text="Frequently Asked Questions" />
+            <span className="eyebrow">How we work</span>
+            <Split className="h2" text="A Clear Path From Brief to Joining" />
             <p className="t-r" data-reveal="fade">
-              We’re ready to respond to your doubts
+              A practical recruitment workflow, coordinated around the client&apos;s needs and the candidate&apos;s journey.
             </p>
           </div>
-          <Faq tabs={faq} />
+          <ol className="steps">
+            {PROCESS.map(([title, text], i) => (
+              <li className="step" key={title} data-reveal="group">
+                <span className="step__num">{String(i + 1).padStart(2, "0")}</span>
+                <h3>{title}</h3>
+                <p className="t-s">{text}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="steps-foot" data-reveal="fade">
+            Role clarity / Candidate communication / Consistent follow-through
+          </p>
         </div>
       </section>
 
       <section className="section">
         <div className="container">
           <div className="sec-head sec-head--center">
-            <Split className="h2" text="Get Professional Insights & Tips From Our Blogs" />
+            <Split className="h2" text="Frequently Asked Questions" />
             <p className="t-r" data-reveal="fade">
-              Suggesting that the blog offers guidance for every stage of the job search.
+              Answers for employers, candidates and anyone asking about our coverage.
             </p>
           </div>
-          <div className="blog-grid">
-            {posts.slice(0, 3).map((p) => (
-              <BlogCard key={p.slug} post={p} />
-            ))}
-          </div>
+          <Faq tabs={FAQ} />
         </div>
       </section>
 

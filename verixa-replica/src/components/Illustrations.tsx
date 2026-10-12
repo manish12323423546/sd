@@ -4,19 +4,19 @@ import { motion, useReducedMotion } from "framer-motion";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/** Rebuild of the "Complete Profile" Lottie: checklist rows tick in one after another, then loop. */
+/** Hire, Train, Deploy checklist: rows tick in one after another, then loop. */
 export function ProfileChecklist() {
   const reduce = useReducedMotion();
   const rows = [
-    { title: "Curriculam Vitae", tint: "#fde7d4", stroke: "#f08a3c" },
-    { title: "Personal Data", tint: "#dfeaf7", stroke: "#3b82d6" },
-    { title: "Academic Information", tint: "#f8e2f6", stroke: "#d23ccf" },
+    { title: "Hire", note: "Colleges & talent channels", tint: "#fde7d4", stroke: "#ef8a3b" },
+    { title: "Train", note: "Agreed role & training brief", tint: "#dbefef", stroke: "#1f9399" },
+    { title: "Deploy", note: "Placement & joining", tint: "#e3e9ea", stroke: "#142c30" },
   ];
   return (
     <div className="illu" aria-hidden="true">
       <div className="illu-card">
         <div className="illu-head">
-          <span className="illu-title">Complete Profile</span>
+          <span className="illu-title">Hire. Train. Deploy.</span>
           <span className="illu-steps">
             1<span>/3</span>
             <i />
@@ -35,7 +35,7 @@ export function ProfileChecklist() {
               </span>
               <span className="illu-text">
                 <b>{r.title}</b>
-                <small>pdf.36</small>
+                <small>{r.note}</small>
               </span>
               <motion.span
                 className="illu-check"
@@ -55,7 +55,7 @@ export function ProfileChecklist() {
   );
 }
 
-/** Rebuild of the "Upload Your Document" Lottie: a cursor drags a file into the drop zone, loop. */
+/** "Share your hiring brief": a cursor drags a file into the drop zone, loop. */
 export function UploadDoc() {
   const reduce = useReducedMotion();
   const loop = { duration: 3.6, repeat: Infinity, ease: "easeInOut" as const, times: [0, 0.35, 0.55, 0.75, 1] };
@@ -63,7 +63,7 @@ export function UploadDoc() {
     <div className="illu" aria-hidden="true">
       <div className="illu-card">
         <div className="illu-head">
-          <span className="illu-title">Upload Your Document</span>
+          <span className="illu-title">Share your hiring brief</span>
           <span className="illu-close">×</span>
         </div>
         <div className="illu-drop">
@@ -75,7 +75,7 @@ export function UploadDoc() {
             <svg width="30" height="26" viewBox="0 0 30 26" fill="none">
               <rect x="7" y="1" width="18" height="14" rx="1.5" fill="#fff" stroke="#9db8a8" />
               <path d="M10 5h12M10 8h12M10 11h8" stroke="#8fb39d" />
-              <path d="M1 8a2 2 0 0 1 2-2h7l2 3h15a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2z" fill="#f6c343" />
+              <path d="M1 8a2 2 0 0 1 2-2h7l2 3h15a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2z" fill="#ef8a3b" />
             </svg>
           </motion.span>
           <motion.span
@@ -91,12 +91,12 @@ export function UploadDoc() {
             <path d="M12 16V4M7 9l5-5 5 5M4 16v4h16v-4" />
           </svg>
           <span className="illu-drop-text">
-            Drag &amp; Drop your file or <b>browse</b>
+            Drop your job description or <b>browse</b>
           </span>
         </div>
         <div className="illu-foot">
-          <span>Supported formats: PNG, JPG, PDF, MP4</span>
-          <span className="illu-btn">Upload</span>
+          <span>Roles, locations and hiring volume</span>
+          <span className="illu-btn">Send brief</span>
         </div>
       </div>
     </div>

@@ -1,46 +1,18 @@
+import { COMPANY } from "./hirepulse";
+
 export const SITE = {
-  name: "Verixa",
+  name: COMPANY.name,
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://verixa-replica.vercel.app",
   description:
-    "Verixa is a modern job board and recruitment template for hiring platforms, HR agencies and career websites. Find verified jobs, explore case studies and get career advice.",
+    "Hirepulse Solutions Pvt. Ltd. is a recruitment and staffing partner connecting fresh talent and experienced professionals with opportunities across IT and non-IT sectors in India.",
 };
 
 export const MAIN_NAV = [
   { href: "/", label: "Home" },
   { href: "/about-us", label: "About" },
-  { href: "/case-studies", label: "Case Studies" },
-];
-
-export const PAGES_MENU = [
-  {
-    title: "Main Pages",
-    links: [
-      { href: "/", label: "Home" },
-      { href: "/about-us", label: "About Us" },
-      { href: "/service", label: "Services" },
-      { href: "/case-studies", label: "Case Studies" },
-      { href: "/jobs", label: "Jobs" },
-    ],
-  },
-  {
-    title: "Inner Pages",
-    links: [
-      { href: "/blog", label: "Blogs" },
-      { href: "/case-studies/reduced-cost-per-hire-by-35-with-recruits-hiring-tools", label: "Case Studies CMS" },
-      { href: "/blog/switching-careers-successfully-a-step-by-step-guide", label: "Blogs CMS" },
-      { href: "/jobs/frontend-developer-react", label: "Jobs CMS" },
-      { href: "/contact", label: "Contact Us" },
-    ],
-  },
-  {
-    title: "Utilities",
-    links: [
-      { href: "/404", label: "404 Not Found" },
-      { href: "/utility/style-guide", label: "Style Guide" },
-      { href: "/utility/changelog", label: "Changelogs" },
-      { href: "/utility/licenses", label: "Licenses" },
-    ],
-  },
+  { href: "/service", label: "Services" },
+  { href: "/hiring-scope", label: "Hiring Scope" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export const FOOTER = [
@@ -48,34 +20,36 @@ export const FOOTER = [
     title: "Company",
     links: [
       { href: "/about-us", label: "About Us" },
-      { href: "/jobs", label: "Jobs" },
+      { href: "/service", label: "Services" },
+      { href: "/hiring-scope", label: "Hiring Scope" },
       { href: "/contact", label: "Contact" },
-      { href: "/blog", label: "Blog" },
     ],
   },
   {
-    title: "Support",
+    title: "Services",
     links: [
-      { href: "/utility/licenses", label: "License" },
-      { href: "/utility/style-guide", label: "Style Guide" },
-      { href: "/utility/changelog", label: "Changelog" },
-      { href: "/404", label: "404 Page" },
+      { href: "/service#lateral-recruitment", label: "Lateral recruitment" },
+      { href: "/service#campus-fresher-hiring", label: "Campus & fresher hiring" },
+      { href: "/service#hire-train-deploy", label: "Hire, Train, Deploy" },
+      { href: "/service#bulk-location-hiring", label: "Bulk & location hiring" },
     ],
   },
   {
-    title: "Social",
+    title: "Contact",
     links: [
-      { href: "https://www.facebook.com/", label: "Facebook" },
-      { href: "https://www.linkedin.com/", label: "LinkedIn" },
-      { href: "https://www.instagram.com/", label: "Instagram" },
-      { href: "https://x.com/", label: "Twitter" },
+      { href: `mailto:${COMPANY.email}`, label: COMPANY.email },
+      { href: COMPANY.websiteUrl, label: COMPANY.website },
+      { href: "/contact", label: "Ahmedabad, Gujarat" },
     ],
   },
 ];
 
 export const svg = (name: string) => `/svg/${name}.svg`;
 export const ICON = {
-  logo: svg("alubmguetehazqxmx2rtmz0e"),
+  logo: "/brand/hirepulse-logo-280.webp",
+  logo2x: "/brand/hirepulse-logo-560.webp",
+  logoFull: "/brand/hirepulse-logo-full-320.webp",
+  logoFull2x: "/brand/hirepulse-logo-full-640.webp",
   arrowWhite: svg("blxaxb60cg3s5kho0x1jqdwln28"),
   arrowInk: svg("utpvu16e41e7mhbu13cpkv6pagm"),
   chevron: svg("leigkdsk9e8drw8vty0tbzsnxr4"),
