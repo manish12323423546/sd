@@ -26,7 +26,7 @@ export function JobCard({ job, reveal = "group" }: { job: Job; reveal?: "group" 
 
 export function BlogCard({
   post,
-  sizes = "(min-width: 1200px) 427px, (min-width: 810px) 50vw, 100vw",
+  sizes = "(min-width: 1200px) 427px, (min-width: 810px) 50vw, calc(100vw - 24px)",
   reveal = true,
 }: {
   post: Post;
@@ -52,7 +52,7 @@ export function CaseCard({ item }: { item: CaseStudy }) {
   return (
     <Link href={`/case-studies/${item.slug}`} className="case-card hover-card" data-reveal="group">
       <div className="media zoom">
-        <Img name={item.card} sizes="(min-width: 810px) 50vw, 100vw" alt={item.title} />
+        <Img name={item.card} sizes="(min-width: 1440px) 648px, (min-width: 810px) 50vw, calc(100vw - 24px)" alt={item.title} />
       </div>
       <h2>{item.title}</h2>
       <FauxLink>View Details</FauxLink>

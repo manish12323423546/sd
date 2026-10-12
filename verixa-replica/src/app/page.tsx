@@ -70,13 +70,13 @@ export default function HomePage() {
         <div className="container">
           <div className="showcase">
             <div className="media r20 showcase__a load-fade" style={d(400)}>
-              <Img name="szajswyk9grhqe5slaj60iedn9k" sizes="(min-width: 1200px) 486px, (min-width: 810px) 40vw, 100vw" alt="Smiling professional working on a laptop" priority />
+              <Img name="szajswyk9grhqe5slaj60iedn9k" sizes="(min-width: 1200px) 486px, (min-width: 810px) 40vw, calc(100vw - 60px)" alt="Smiling professional working on a laptop" priority />
             </div>
             <div className="showcase__job load-fade" style={d(480)}>
               <ProgressCard />
             </div>
             <div className="media r20 showcase__b load-fade" style={d(560)}>
-              <Img name="2ya4xilpdsgydoi9lo6qcwbirq" sizes="(min-width: 1200px) 361px, (min-width: 810px) 30vw, 100vw" alt="Two colleagues collaborating at a desk" />
+              <Img name="2ya4xilpdsgydoi9lo6qcwbirq" sizes="(min-width: 1200px) 361px, (min-width: 810px) 30vw, calc(100vw - 60px)" alt="Two colleagues collaborating at a desk" />
             </div>
             <div className="showcase__career load-fade" style={d(640)}>
               <div className="copy">
@@ -131,7 +131,7 @@ export default function HomePage() {
           <div className="popular">
             <div className="popular__banner" data-reveal="fade">
               <div className="media r16">
-                <Img name="vpizsra2kr9rgv4juix8awxxy0" sizes="(min-width: 1200px) 468px, 100vw" alt="Professional holding a tablet in an office" />
+                <Img name="vpizsra2kr9rgv4juix8awxxy0" sizes="(min-width: 1200px) 468px, calc(100vw - 92px)" alt="Professional holding a tablet in an office" />
               </div>
             </div>
             <div className="job-list">
@@ -156,7 +156,7 @@ export default function HomePage() {
           </div>
           <div className="feature-media feature-media--right">
             <div className="media" data-reveal="fade">
-              <Img name="p4dge4uf5agixyologqssztznxg" sizes="(min-width: 1200px) 554px, 100vw" alt="Professional in a meeting with colleagues" />
+              <Img name="p4dge4uf5agixyologqssztznxg" sizes="(min-width: 1200px) 554px, calc(100vw - 24px)" alt="Professional in a meeting with colleagues" />
             </div>
             <div className="progress-card-wrap" data-reveal="fade">
               <ProgressCard />
@@ -169,7 +169,7 @@ export default function HomePage() {
         <div className="container split-feature split-feature--reverse">
           <div className="feature-media feature-media--left">
             <div className="media" data-reveal="fade">
-              <Img name="u0ihudojlu4yhhocdyilhzitkx0" sizes="(min-width: 1200px) 546px, 100vw" alt="Recruiter shaking hands with a candidate" />
+              <Img name="u0ihudojlu4yhhocdyilhzitkx0" sizes="(min-width: 1200px) 546px, calc(100vw - 24px)" alt="Recruiter shaking hands with a candidate" />
             </div>
             <div className="review-card-wrap" data-reveal="fade">
               <ReviewCard />
@@ -199,7 +199,7 @@ export default function HomePage() {
             {TESTIMONIALS.map((t) => (
               <figure className="testimonial" key={t.name} data-reveal="group">
                 <div className="media">
-                  <Img name={t.img} sizes="(min-width: 1200px) 424px, (min-width: 810px) 50vw, 100vw" alt={`Portrait of ${t.name}`} />
+                  <Img name={t.img} sizes="(min-width: 1200px) 424px, (min-width: 810px) 50vw, calc(100vw - 24px)" alt={`Portrait of ${t.name}`} />
                 </div>
                 <div>
                   <figcaption className="h6">{t.name}</figcaption>

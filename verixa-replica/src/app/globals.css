@@ -1401,7 +1401,8 @@ select {
   border-radius: 32px;
   overflow: hidden;
   position: relative;
-  background: url("/svg/ytb3mofdiovrya9tt08owh5tuoi.svg") center top / cover no-repeat, var(--paper);
+  /* Pre-rendered from the original's blurred-circle SVG (ytb3...svg): same look, no live blur filter. */
+  background: url("/img/hero-glow-706.webp") center top / cover no-repeat, var(--paper);
   padding: 150px 0 45px;
 }
 

@@ -11,7 +11,7 @@ const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const outImg = path.join(root, "public/img");
 const outSvg = path.join(root, "public/svg");
 const outFont = path.join(root, "src/fonts");
-const WIDTHS = [640, 1440];
+const WIDTHS = [640, 960, 1440];
 const manifest = {};
 
 for (const file of fs.readdirSync(src).sort()) {
