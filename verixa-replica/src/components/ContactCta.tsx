@@ -2,9 +2,6 @@ import { ICON } from "@/lib/site";
 import { ContactForm } from "./ContactForm";
 import { Split } from "./Split";
 
-// The form only claims to send when a real destination is configured (see docs/contact-form.md).
-const contactEnabled = Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_PUBLISHABLE_KEY);
-
 /** "Ready to Get Started" block shown above the footer on most pages. */
 export function ContactCta() {
   return (
@@ -20,7 +17,7 @@ export function ContactCta() {
               </p>
             </div>
           </div>
-          <ContactForm enabled={contactEnabled} />
+          <ContactForm />
         </div>
       </div>
     </section>

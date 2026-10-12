@@ -45,5 +45,8 @@ npm run typecheck
 
 ## Contact form
 
-Not connected by default: it says so and sends nothing. See `docs/contact-form.md` to store messages
-in Supabase through an insert-only function.
+Mock by design: `/api/contact` validates the input (required fields, phone format, lengths), drops
+obvious spam (hidden honeypot field, submissions under 2.5 s, 5 per IP per 10 minutes) and then
+answers success without storing or forwarding anything. The thank-you message tells the visitor it
+is a demo. To make it real later, replace the mock step in `src/app/api/contact/route.ts` with a call
+to an email service or database.

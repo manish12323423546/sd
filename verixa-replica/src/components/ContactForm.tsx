@@ -5,20 +5,14 @@ import { SubmitLabel } from "./Button";
 
 type State = { kind: "idle" | "sending" | "sent" | "error"; message?: string };
 
-const NOT_CONNECTED = "This form isn't connected yet, so messages won't be sent.";
-
-export function ContactForm({ id = "contact", enabled }: { id?: string; enabled: boolean }) {
-  const [state, setState] = useState<State>(enabled ? { kind: "idle" } : { kind: "idle", message: NOT_CONNECTED });
+export function ContactForm({ id = "contact" }: { id?: string }) {
+  const [state, setState] = useState<State>({ kind: "idle" });
   const startedAt = useRef(Date.now());
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     if (!form.reportValidity()) return;
-    if (!enabled) {
-      setState({ kind: "error", message: NOT_CONNECTED });
-      return;
-    }
     const data = Object.fromEntries(new FormData(form).entries());
     setState({ kind: "sending" });
     try {
@@ -30,7 +24,8 @@ export function ContactForm({ id = "contact", enabled }: { id?: string; enabled:
       const body = (await res.json().catch(() => ({}))) as { error?: string };
       if (!res.ok) throw new Error(body.error || "Your message could not be sent. Please try again later.");
       form.reset();
-      setState({ kind: "sent", message: "Thanks, your message has been sent. We will get back to you soon." });
+      // Mock endpoint (demo replica): be clear that nothing was actually delivered.
+      setState({ kind: "sent", message: "Thanks for your message! This is a demo site, so it wasn't sent anywhere." });
     } catch (err) {
       setState({ kind: "error", message: err instanceof Error ? err.message : "Your message could not be sent." });
     }

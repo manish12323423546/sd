@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 
-// Contact form endpoint. Validates input, drops obvious spam (honeypot + minimum fill time),
-// and stores the message through an insert-only Supabase function. It never reports success
-// unless the insert succeeded.
+// Mock contact endpoint for the demo replica: validates the input and filters obvious spam like a
+// real endpoint would, then answers success without storing or forwarding anything.
 
 const LIMITS = { name: 120, phone: 40, subject: 200, message: 4000 } as const;
 const recent = new Map<string, number[]>();
@@ -25,9 +24,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  // Bots fill the hidden field or submit instantly; answer quietly without storing anything.
+  // Bots fill the hidden field or submit instantly; answer quietly.
   if (clean(body.website, 200) || Number(body.elapsed) < 2500) {
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, mock: true });
   }
 
   const name = clean(body.name, LIMITS.name);
@@ -46,23 +45,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Too many messages. Please try again in a few minutes." }, { status: 429 });
   }
 
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_PUBLISHABLE_KEY;
-  if (!url || !key) {
-    return NextResponse.json({ error: "The contact form is not available right now. Please try again later." }, { status: 503 });
-  }
-
-  try {
-    const res = await fetch(`${url}/rest/v1/rpc/verixa_submit_contact`, {
-      method: "POST",
-      headers: { apikey: key, Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ p_name: name, p_phone: phone || null, p_subject: subject, p_message: message }),
-      signal: AbortSignal.timeout(5000),
-    });
-    if (!res.ok) throw new Error(`insert failed: ${res.status}`);
-    return NextResponse.json({ ok: true });
-  } catch (err) {
-    console.error("contact form", err);
-    return NextResponse.json({ error: "Your message could not be sent. Please try again later." }, { status: 502 });
-  }
+  // Simulate a short round trip; nothing is stored or sent.
+  await new Promise((r) => setTimeout(r, 600));
+  return NextResponse.json({ ok: true, mock: true });
 }
