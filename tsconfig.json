@@ -33,7 +33,7 @@
     "**/*.ts",
     "**/*.tsx"
   ],
-  "exclude": [
+  "exclude": ["grocer-replica", 
     "node_modules"
   ]
 }

@@ -10,6 +10,8 @@ const compat = new FlatCompat({
 })
 
 const eslintConfig = [
+  // The Grocer replica in grocer-replica/ has its own lint and TypeScript setup.
+  { ignores: ["grocer-replica/**"] },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {

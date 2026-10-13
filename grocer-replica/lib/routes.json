@@ -1,0 +1,704 @@
+[
+ {
+  "slug": "404",
+  "route": "/404",
+  "baseRoute": "/404",
+  "page": 1,
+  "comp": "Page404",
+  "title": "Not Found | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "about-us",
+  "route": "/about-us",
+  "baseRoute": "/about-us",
+  "page": 1,
+  "comp": "PageAboutUs",
+  "title": "About Us | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "blog--build-healthy-daily-habits",
+  "route": "/blog/build-healthy-daily-habits",
+  "baseRoute": "/blog/build-healthy-daily-habits",
+  "page": 1,
+  "comp": "PageBlogBuildHealthyDailyHabits",
+  "title": "Build Healthy Daily Habits | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "blog--buy-in-bulk-plan-ahead",
+  "route": "/blog/buy-in-bulk-plan-ahead",
+  "baseRoute": "/blog/buy-in-bulk-plan-ahead",
+  "page": 1,
+  "comp": "PageBlogBuyInBulkPlanAhead",
+  "title": "Buy in Bulk & Plan Ahead | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "blog--compare-brands-and-unit-prices",
+  "route": "/blog/compare-brands-and-unit-prices",
+  "baseRoute": "/blog/compare-brands-and-unit-prices",
+  "page": 1,
+  "comp": "PageBlogCompareBrandsAndUnitPrices",
+  "title": "Compare brands and unit prices | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "blog--give-new-life-to-the-old",
+  "route": "/blog/give-new-life-to-the-old",
+  "baseRoute": "/blog/give-new-life-to-the-old",
+  "page": 1,
+  "comp": "PageBlogGiveNewLifeToTheOld",
+  "title": "Give New Life to the Old | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "blog--local-grown-season-perfect",
+  "route": "/blog/local-grown-season-perfect",
+  "baseRoute": "/blog/local-grown-season-perfect",
+  "page": 1,
+  "comp": "PageBlogLocalGrownSeasonPerfect",
+  "title": "Local Grown, Season Perfect | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "blog--make-a-focused-shopping-list",
+  "route": "/blog/make-a-focused-shopping-list",
+  "baseRoute": "/blog/make-a-focused-shopping-list",
+  "page": 1,
+  "comp": "PageBlogMakeAFocusedShoppingList",
+  "title": "Make a focused shopping list | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "blog--plan-before-you-shop",
+  "route": "/blog/plan-before-you-shop",
+  "baseRoute": "/blog/plan-before-you-shop",
+  "page": 1,
+  "comp": "PageBlogPlanBeforeYouShop",
+  "title": "Plan before you shop | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "blog--simple-ways-start-organic",
+  "route": "/blog/simple-ways-start-organic",
+  "baseRoute": "/blog/simple-ways-start-organic",
+  "page": 1,
+  "comp": "PageBlogSimpleWaysStartOrganic",
+  "title": "Simple Ways Start Organic | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "blog--start-with-small-swaps",
+  "route": "/blog/start-with-small-swaps",
+  "baseRoute": "/blog/start-with-small-swaps",
+  "page": 1,
+  "comp": "PageBlogStartWithSmallSwaps",
+  "title": "Start with Small Swaps | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "blog-02e64ee6_page-2",
+  "route": "/blog?page=2",
+  "baseRoute": "/blog",
+  "page": 2,
+  "comp": "PageBlog02e64ee6Page2",
+  "title": "Blog | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "blog",
+  "route": "/blog",
+  "baseRoute": "/blog",
+  "page": 1,
+  "comp": "PageBlog",
+  "title": "Blog | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "category--beauty-product-6de0778f_page-2",
+  "route": "/category/beauty-product?page=2",
+  "baseRoute": "/category/beauty-product",
+  "page": 2,
+  "comp": "PageCategoryBeautyProduct6de0778fPage2",
+  "title": "Beauty Product | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "category--beauty-product",
+  "route": "/category/beauty-product",
+  "baseRoute": "/category/beauty-product",
+  "page": 1,
+  "comp": "PageCategoryBeautyProduct",
+  "title": "Beauty Product | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "category--beverage-6de0778f_page-2",
+  "route": "/category/beverage?page=2",
+  "baseRoute": "/category/beverage",
+  "page": 2,
+  "comp": "PageCategoryBeverage6de0778fPage2",
+  "title": "Beverage | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "category--beverage",
+  "route": "/category/beverage",
+  "baseRoute": "/category/beverage",
+  "page": 1,
+  "comp": "PageCategoryBeverage",
+  "title": "Beverage | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "category--cooking-items-6de0778f_page-2",
+  "route": "/category/cooking-items?page=2",
+  "baseRoute": "/category/cooking-items",
+  "page": 2,
+  "comp": "PageCategoryCookingItems6de0778fPage2",
+  "title": "Cooking Items | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "category--cooking-items",
+  "route": "/category/cooking-items",
+  "baseRoute": "/category/cooking-items",
+  "page": 1,
+  "comp": "PageCategoryCookingItems",
+  "title": "Cooking Items | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "category--fruits-6de0778f_page-2",
+  "route": "/category/fruits?page=2",
+  "baseRoute": "/category/fruits",
+  "page": 2,
+  "comp": "PageCategoryFruits6de0778fPage2",
+  "title": "Fruits | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "category--fruits",
+  "route": "/category/fruits",
+  "baseRoute": "/category/fruits",
+  "page": 1,
+  "comp": "PageCategoryFruits",
+  "title": "Fruits | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "category--meat-6de0778f_page-2",
+  "route": "/category/meat?page=2",
+  "baseRoute": "/category/meat",
+  "page": 2,
+  "comp": "PageCategoryMeat6de0778fPage2",
+  "title": "Meat | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "category--meat",
+  "route": "/category/meat",
+  "baseRoute": "/category/meat",
+  "page": 1,
+  "comp": "PageCategoryMeat",
+  "title": "Meat | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "category--vegetables-6de0778f_page-2",
+  "route": "/category/vegetables?page=2",
+  "baseRoute": "/category/vegetables",
+  "page": 2,
+  "comp": "PageCategoryVegetables6de0778fPage2",
+  "title": "Vegetables | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "category--vegetables",
+  "route": "/category/vegetables",
+  "baseRoute": "/category/vegetables",
+  "page": 1,
+  "comp": "PageCategoryVegetables",
+  "title": "Vegetables | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "checkout",
+  "route": "/checkout",
+  "baseRoute": "/checkout",
+  "page": 1,
+  "comp": "PageCheckout",
+  "title": "Checkout | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "contact-us",
+  "route": "/contact-us",
+  "baseRoute": "/contact-us",
+  "page": 1,
+  "comp": "PageContactUs",
+  "title": "Contact Us | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "faq",
+  "route": "/faq",
+  "baseRoute": "/faq",
+  "page": 1,
+  "comp": "PageFaq",
+  "title": "FAQ | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "home-02",
+  "route": "/home-02",
+  "baseRoute": "/home-02",
+  "page": 1,
+  "comp": "PageHome02",
+  "title": "Home 02 | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "home",
+  "route": "/",
+  "baseRoute": "/",
+  "page": 1,
+  "comp": "PageHome",
+  "title": "Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "privacy-policy",
+  "route": "/privacy-policy",
+  "baseRoute": "/privacy-policy",
+  "page": 1,
+  "comp": "PagePrivacyPolicy",
+  "title": "Privacy Policy | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--beef",
+  "route": "/product/beef",
+  "baseRoute": "/product/beef",
+  "page": 1,
+  "comp": "PageProductBeef",
+  "title": "Beef | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--body-lotion",
+  "route": "/product/body-lotion",
+  "baseRoute": "/product/body-lotion",
+  "page": 1,
+  "comp": "PageProductBodyLotion",
+  "title": "Body Lotion | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--bottled-water",
+  "route": "/product/bottled-water",
+  "baseRoute": "/product/bottled-water",
+  "page": 1,
+  "comp": "PageProductBottledWater",
+  "title": "Bottled Water | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--cabbage",
+  "route": "/product/cabbage",
+  "baseRoute": "/product/cabbage",
+  "page": 1,
+  "comp": "PageProductCabbage",
+  "title": "Cabbage | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--camel-meat",
+  "route": "/product/camel-meat",
+  "baseRoute": "/product/camel-meat",
+  "page": 1,
+  "comp": "PageProductCamelMeat",
+  "title": "Camel Meat | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--carrot",
+  "route": "/product/carrot",
+  "baseRoute": "/product/carrot",
+  "page": 1,
+  "comp": "PageProductCarrot",
+  "title": "Carrot | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--chicken",
+  "route": "/product/chicken",
+  "baseRoute": "/product/chicken",
+  "page": 1,
+  "comp": "PageProductChicken",
+  "title": "Chicken | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--cola-drink",
+  "route": "/product/cola-drink",
+  "baseRoute": "/product/cola-drink",
+  "page": 1,
+  "comp": "PageProductColaDrink",
+  "title": "Cola Drink | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--conditioner",
+  "route": "/product/conditioner",
+  "baseRoute": "/product/conditioner",
+  "page": 1,
+  "comp": "PageProductConditioner",
+  "title": "Conditioner | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--duckling",
+  "route": "/product/duckling",
+  "baseRoute": "/product/duckling",
+  "page": 1,
+  "comp": "PageProductDuckling",
+  "title": "Duckling | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--energy-drink",
+  "route": "/product/energy-drink",
+  "baseRoute": "/product/energy-drink",
+  "page": 1,
+  "comp": "PageProductEnergyDrink",
+  "title": "Energy Drink | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--face-cream",
+  "route": "/product/face-cream",
+  "baseRoute": "/product/face-cream",
+  "page": 1,
+  "comp": "PageProductFaceCream",
+  "title": "Face Cream | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--fresh-green-apple",
+  "route": "/product/fresh-green-apple",
+  "baseRoute": "/product/fresh-green-apple",
+  "page": 1,
+  "comp": "PageProductFreshGreenApple",
+  "title": "Fresh Green Apple | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--hand-wash",
+  "route": "/product/hand-wash",
+  "baseRoute": "/product/hand-wash",
+  "page": 1,
+  "comp": "PageProductHandWash",
+  "title": "Hand Wash | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--instant-coffee-powder",
+  "route": "/product/instant-coffee-powder",
+  "baseRoute": "/product/instant-coffee-powder",
+  "page": 1,
+  "comp": "PageProductInstantCoffeePowder",
+  "title": "Instant Coffee Powder | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--kiwi",
+  "route": "/product/kiwi",
+  "baseRoute": "/product/kiwi",
+  "page": 1,
+  "comp": "PageProductKiwi",
+  "title": "Kiwi | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--lemon-soda",
+  "route": "/product/lemon-soda",
+  "baseRoute": "/product/lemon-soda",
+  "page": 1,
+  "comp": "PageProductLemonSoda",
+  "title": "Lemon Soda | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--lip-balm",
+  "route": "/product/lip-balm",
+  "baseRoute": "/product/lip-balm",
+  "page": 1,
+  "comp": "PageProductLipBalm",
+  "title": "Lip Balm | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--mango-juice",
+  "route": "/product/mango-juice",
+  "baseRoute": "/product/mango-juice",
+  "page": 1,
+  "comp": "PageProductMangoJuice",
+  "title": "Mango Juice | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--mustard-oil",
+  "route": "/product/mustard-oil",
+  "baseRoute": "/product/mustard-oil",
+  "page": 1,
+  "comp": "PageProductMustardOil",
+  "title": "Mustard Oil | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--mutton",
+  "route": "/product/mutton",
+  "baseRoute": "/product/mutton",
+  "page": 1,
+  "comp": "PageProductMutton",
+  "title": "Mutton | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--natural-butter",
+  "route": "/product/natural-butter",
+  "baseRoute": "/product/natural-butter",
+  "page": 1,
+  "comp": "PageProductNaturalButter",
+  "title": "Natural Butter | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--onion",
+  "route": "/product/onion",
+  "baseRoute": "/product/onion",
+  "page": 1,
+  "comp": "PageProductOnion",
+  "title": "Onion | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--orange",
+  "route": "/product/orange",
+  "baseRoute": "/product/orange",
+  "page": 1,
+  "comp": "PageProductOrange",
+  "title": "Orange | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--potato",
+  "route": "/product/potato",
+  "baseRoute": "/product/potato",
+  "page": 1,
+  "comp": "PageProductPotato",
+  "title": "Potato | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--premium-soybean-oil",
+  "route": "/product/premium-soybean-oil",
+  "baseRoute": "/product/premium-soybean-oil",
+  "page": 1,
+  "comp": "PageProductPremiumSoybeanOil",
+  "title": "Premium Soybean Oil | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--pure-salt",
+  "route": "/product/pure-salt",
+  "baseRoute": "/product/pure-salt",
+  "page": 1,
+  "comp": "PageProductPureSalt",
+  "title": "Pure Salt | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--purple-grapes",
+  "route": "/product/purple-grapes",
+  "baseRoute": "/product/purple-grapes",
+  "page": 1,
+  "comp": "PageProductPurpleGrapes",
+  "title": "Purple Grapes | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--shampoo",
+  "route": "/product/shampoo",
+  "baseRoute": "/product/shampoo",
+  "page": 1,
+  "comp": "PageProductShampoo",
+  "title": "Shampoo | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--spinach",
+  "route": "/product/spinach",
+  "baseRoute": "/product/spinach",
+  "page": 1,
+  "comp": "PageProductSpinach",
+  "title": "Spinach | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--strawberry",
+  "route": "/product/strawberry",
+  "baseRoute": "/product/strawberry",
+  "page": 1,
+  "comp": "PageProductStrawberry",
+  "title": "Strawberry | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--sundrops-mango",
+  "route": "/product/sundrops-mango",
+  "baseRoute": "/product/sundrops-mango",
+  "page": 1,
+  "comp": "PageProductSundropsMango",
+  "title": "Sundrops Mango | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--tomato",
+  "route": "/product/tomato",
+  "baseRoute": "/product/tomato",
+  "page": 1,
+  "comp": "PageProductTomato",
+  "title": "Tomato | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--turke",
+  "route": "/product/turke",
+  "baseRoute": "/product/turke",
+  "page": 1,
+  "comp": "PageProductTurke",
+  "title": "Turkey | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--turmeric-powder",
+  "route": "/product/turmeric-powder",
+  "baseRoute": "/product/turmeric-powder",
+  "page": 1,
+  "comp": "PageProductTurmericPowder",
+  "title": "Turmeric Powder | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "product--wheat-flour",
+  "route": "/product/wheat-flour",
+  "baseRoute": "/product/wheat-flour",
+  "page": 1,
+  "comp": "PageProductWheatFlour",
+  "title": "Wheat Flour | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "return-refund-policy",
+  "route": "/return-refund-policy",
+  "baseRoute": "/return-refund-policy",
+  "page": 1,
+  "comp": "PageReturnRefundPolicy",
+  "title": "Return & Refund Policy | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "shop-b979b66a_page-2",
+  "route": "/shop?page=2",
+  "baseRoute": "/shop",
+  "page": 2,
+  "comp": "PageShopB979b66aPage2",
+  "title": "Shop | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "shop-b979b66a_page-3",
+  "route": "/shop?page=3",
+  "baseRoute": "/shop",
+  "page": 3,
+  "comp": "PageShopB979b66aPage3",
+  "title": "Shop | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "shop",
+  "route": "/shop",
+  "baseRoute": "/shop",
+  "page": 1,
+  "comp": "PageShop",
+  "title": "Shop | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "terms-conditions",
+  "route": "/terms-conditions",
+  "baseRoute": "/terms-conditions",
+  "page": 1,
+  "comp": "PageTermsConditions",
+  "title": "Terms & Conditions | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "user--create-account",
+  "route": "/user/create-account",
+  "baseRoute": "/user/create-account",
+  "page": 1,
+  "comp": "PageUserCreateAccount",
+  "title": "Create Account | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "user--forgot-password",
+  "route": "/user/forgot-password",
+  "baseRoute": "/user/forgot-password",
+  "page": 1,
+  "comp": "PageUserForgotPassword",
+  "title": "Forgot Password | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "user--login",
+  "route": "/user/login",
+  "baseRoute": "/user/login",
+  "page": 1,
+  "comp": "PageUserLogin",
+  "title": "Login | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "utility--change-log",
+  "route": "/utility/change-log",
+  "baseRoute": "/utility/change-log",
+  "page": 1,
+  "comp": "PageUtilityChangeLog",
+  "title": "Change-Log | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "utility--license",
+  "route": "/utility/license",
+  "baseRoute": "/utility/license",
+  "page": 1,
+  "comp": "PageUtilityLicense",
+  "title": "License | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ },
+ {
+  "slug": "utility--style-guide",
+  "route": "/utility/style-guide",
+  "baseRoute": "/utility/style-guide",
+  "page": 1,
+  "comp": "PageUtilityStyleGuide",
+  "title": "Style Guide | Grocer - Webflow Ecommerce HTML Website Template",
+  "forms": 0
+ }
+]
