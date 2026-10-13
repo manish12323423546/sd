@@ -3,6 +3,7 @@
  * the (mock) forms, the ecommerce cart modal and current-page link marking.
  * Everything binds to existing DOM nodes and is safe to call again for newly added subtrees.
  */
+import { getLang, translate } from "@/lib/i18n";
 import { animate } from "framer-motion";
 
 const bound = new WeakSet<Element>();
@@ -159,7 +160,7 @@ function addNote(parent: Element, text: string, cls = "demo-form-note") {
   const n = document.createElement("p");
   n.className = cls;
   n.setAttribute("role", "note");
-  n.textContent = text;
+  n.textContent = translate(text, getLang());
   parent.appendChild(n);
 }
 function bindForm(form: HTMLFormElement) {
@@ -173,7 +174,7 @@ function bindForm(form: HTMLFormElement) {
     if (isCart) { toast(DEMO_CART_NOTE); return; }
     toast(DEMO_FORM_NOTE);
     const note = form.querySelector<HTMLElement>(":scope > .demo-form-note");
-    if (note) { note.textContent = "Demo: nothing was sent. " + DEMO_FORM_NOTE; note.classList.add("is-submitted"); }
+    if (note) { note.textContent = translate("Demo: nothing was sent. " + DEMO_FORM_NOTE, getLang()); note.classList.add("is-submitted"); }
     form.reset();
   });
 }

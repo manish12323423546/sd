@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Lenis from "lenis";
 import { bindTree, startEngine } from "@/lib/ix-engine";
 import { bindWidgets, markCurrentLinks } from "@/lib/widgets";
+import { applyLang, bindLangToggles, getLang, translate } from "@/lib/i18n";
 
 /** Bind widgets and interactions inside a subtree. Safe to call repeatedly. */
 export function scanAll(root: ParentNode = document.body) {
@@ -13,6 +14,9 @@ export function scanAll(root: ParentNode = document.body) {
   document.documentElement.classList.add("w-mod-ix");
   bindWidgets(root);
   bindTree(root);
+  // Pages are generated in Gujarati; swap known strings (including notes the widgets just added) to the remembered language.
+  applyLang(root === document.body ? document : root, getLang());
+  bindLangToggles(root);
 }
 
 /** Client-side behaviour for the static markup: interactions, widgets, smooth scroll, demo toasts. */
@@ -29,6 +33,9 @@ export default function SiteRuntime() {
       for (const r of records) r.addedNodes.forEach((n) => { if (n.nodeType === 1) pending!.add(n as Element); });
     });
     mo.observe(document.body, { childList: true, subtree: true });
+    // React re-renders <title> (Gujarati) after hydration and on navigation; keep it in the chosen language.
+    const headMo = new MutationObserver(() => { const t = translate(document.title, getLang()); if (t !== document.title) document.title = t; });
+    headMo.observe(document.head, { childList: true, subtree: true, characterData: true });
 
     const onToast = (e: Event) => {
       const id = Date.now() + Math.random();
@@ -47,7 +54,7 @@ export default function SiteRuntime() {
       const loop = (time: number) => { lenis!.raf(time); raf = requestAnimationFrame(loop); };
       raf = requestAnimationFrame(loop);
     }
-    return () => { mo.disconnect(); window.removeEventListener("demo-toast", onToast); if (lenis) { cancelAnimationFrame(raf); lenis.destroy(); } };
+    return () => { mo.disconnect(); headMo.disconnect(); window.removeEventListener("demo-toast", onToast); if (lenis) { cancelAnimationFrame(raf); lenis.destroy(); } };
   }, []);
 
   useEffect(() => {

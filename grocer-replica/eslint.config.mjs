@@ -11,7 +11,8 @@ const eslintConfig = defineConfig([
       "@next/next/no-img-element": "off",
     },
   },
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "tools/**"]),
+  // rebrand/*.js are Node build scripts run by tools/convert.js, not app code.
+  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "tools/**", "rebrand/*.js"]),
 ]);
 
 export default eslintConfig;

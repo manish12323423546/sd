@@ -297,6 +297,11 @@ function apply($, slug, opts = {}) {
   // ---- CTA images ----
   $('img.cta-image').each((i, img) => { setImg($(img), `/brand/cta-${(i % 2) + 1}.jpg`, i % 2 === 0 ? 'Family packs on the shelf' : 'Kitchenware at Hare Krishna Mall'); $(img).removeAttr('srcset'); });
 
+  // ---- language toggle (Gujarati default / English) next to the cart in both header blocks ----
+  $('.header-section .w-commerce-commercecartwrapper').each((i, el) => {
+    $(el).before('<a href="#" class="hk-lang-toggle" data-lang-toggle data-no-i18n aria-label="Switch language / ભાષા બદલો" role="button"><span class="hk-lang-opt" data-lang="gu">ગુજરાતી</span><span class="hk-lang-opt" data-lang="en">EN</span></a>');
+  });
+
   // ---- currency in cart ----
   $('body *').each((i, el) => { if ($(el).children().length === 0 && /^\$\s?0\.00\s?USD$/.test($(el).text().trim())) $(el).text('₹ 0.00'); });
 

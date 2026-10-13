@@ -5,7 +5,7 @@
   "baseRoute": "/404",
   "page": 1,
   "comp": "Page404",
-  "title": "Page Not Found | Hare Krishna Supermarket",
+  "title": "પેજ મળ્યું નહીં | હરે કૃષ્ણ સુપરમાર્કેટ",
   "forms": 0
  },
  {
@@ -14,7 +14,7 @@
   "baseRoute": "/about-us",
   "page": 1,
   "comp": "PageAboutUs",
-  "title": "About Hare Krishna Mall | Family-Run Supermarket in Virpur & Lalsar",
+  "title": "હરે કૃષ્ણ મોલ વિશે | વીરપુર અને લાલસરનું પારિવારિક સુપરમાર્કેટ",
   "forms": 0
  },
  {
@@ -23,7 +23,7 @@
   "baseRoute": "/blog/monsoon-home-essentials",
   "page": 1,
   "comp": "PageBlogMonsoonHomeEssentials",
-  "title": "Monsoon essentials: keep the home dry, clean and stocked | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "ચોમાસાની જરૂરિયાતો: ઘર સૂકું, સ્વચ્છ અને ભરેલું રાખો | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -32,7 +32,7 @@
   "baseRoute": "/blog/buy-in-bulk-plan-ahead",
   "page": 1,
   "comp": "PageBlogBuyInBulkPlanAhead",
-  "title": "Buy in bulk, plan ahead: family packs that save money | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "જથ્થામાં ખરીદો, આગળનું આયોજન કરો: બચત કરાવતા ફેમિલી પેક | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -41,7 +41,7 @@
   "baseRoute": "/blog/compare-brands-and-unit-prices",
   "page": 1,
   "comp": "PageBlogCompareBrandsAndUnitPrices",
-  "title": "Compare brands and unit prices before you buy | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "ખરીદતાં પહેલાં બ્રાન્ડ અને યુનિટ ભાવ સરખાવો | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -50,7 +50,7 @@
   "baseRoute": "/blog/wedding-season-shopping",
   "page": 1,
   "comp": "PageBlogWeddingSeasonShopping",
-  "title": "Wedding season shopping: kitchenware, gifting and the big list | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "લગ્નસરાની ખરીદી: રસોડાનાં વાસણો, ભેટ અને મોટી યાદી | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -59,7 +59,7 @@
   "baseRoute": "/blog/navratri-ready-checklist",
   "page": 1,
   "comp": "PageBlogNavratriReadyChecklist",
-  "title": "Navratri ready: seven things every family stocks up on | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "નવરાત્રિ માટે તૈયાર: દરેક પરિવાર જે સાત વસ્તુઓ ભરી રાખે છે | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -68,7 +68,7 @@
   "baseRoute": "/blog/mrp-vs-our-price",
   "page": 1,
   "comp": "PageBlogMrpVsOurPrice",
-  "title": "MRP vs our price: how to read a shelf label | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "MRP અને અમારો ભાવ: છાજલીનું લેબલ કેવી રીતે વાંચવું | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -77,7 +77,7 @@
   "baseRoute": "/blog/monthly-grocery-list",
   "page": 1,
   "comp": "PageBlogMonthlyGroceryList",
-  "title": "Your monthly grocery list, sorted in 10 minutes | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "તમારી મહિનાની કરિયાણાની યાદી, 10 મિનિટમાં તૈયાર | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -86,7 +86,7 @@
   "baseRoute": "/blog/diwali-shopping-checklist",
   "page": 1,
   "comp": "PageBlogDiwaliShoppingChecklist",
-  "title": "Diwali shopping checklist: pooja, sweets, gifts and cleaning | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "દિવાળી ખરીદીની ચેકલિસ્ટ: પૂજા, મીઠાઈ, ભેટ અને સફાઈ | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -95,7 +95,7 @@
   "baseRoute": "/blog/back-to-school-under-one-roof",
   "page": 1,
   "comp": "PageBlogBackToSchoolUnderOneRoof",
-  "title": "Back to school: supplies, lunch boxes and bags in one trip | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "શાળા શરૂ: સ્ટેશનરી, ટિફિન અને બેગ એક જ ફેરામાં | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -104,7 +104,7 @@
   "baseRoute": "/blog",
   "page": 2,
   "comp": "PageBlog02e64ee6Page2",
-  "title": "Shopping Tips & Festival Checklists | Hare Krishna Mall",
+  "title": "ખરીદીની ટિપ્સ અને તહેવારની ચેકલિસ્ટ | હરે કૃષ્ણ મોલ",
   "forms": 0
  },
  {
@@ -113,7 +113,7 @@
   "baseRoute": "/blog",
   "page": 1,
   "comp": "PageBlog",
-  "title": "Shopping Tips & Festival Checklists | Hare Krishna Mall",
+  "title": "ખરીદીની ટિપ્સ અને તહેવારની ચેકલિસ્ટ | હરે કૃષ્ણ મોલ",
   "forms": 0
  },
  {
@@ -122,7 +122,7 @@
   "baseRoute": "/category/pooja-stationery",
   "page": 2,
   "comp": "PageCategoryPoojaStationery6de0778fPage2",
-  "title": "Pooja & Stationery | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "પૂજા અને સ્ટેશનરી | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -131,7 +131,7 @@
   "baseRoute": "/category/pooja-stationery",
   "page": 1,
   "comp": "PageCategoryPoojaStationery",
-  "title": "Pooja & Stationery | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "પૂજા અને સ્ટેશનરી | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -140,7 +140,7 @@
   "baseRoute": "/category/kitchen-plastics",
   "page": 2,
   "comp": "PageCategoryKitchenPlastics6de0778fPage2",
-  "title": "Kitchen & Plastics | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "રસોડું અને પ્લાસ્ટિક | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -149,7 +149,7 @@
   "baseRoute": "/category/kitchen-plastics",
   "page": 1,
   "comp": "PageCategoryKitchenPlastics",
-  "title": "Kitchen & Plastics | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "રસોડું અને પ્લાસ્ટિક | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -158,7 +158,7 @@
   "baseRoute": "/category/home-cleaning",
   "page": 2,
   "comp": "PageCategoryHomeCleaning6de0778fPage2",
-  "title": "Home & Cleaning | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "ઘર અને સફાઈ | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -167,7 +167,7 @@
   "baseRoute": "/category/home-cleaning",
   "page": 1,
   "comp": "PageCategoryHomeCleaning",
-  "title": "Home & Cleaning | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "ઘર અને સફાઈ | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -176,7 +176,7 @@
   "baseRoute": "/category/snacks-beverages",
   "page": 2,
   "comp": "PageCategorySnacksBeverages6de0778fPage2",
-  "title": "Snacks & Beverages | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "નાસ્તો અને પીણાં | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -185,7 +185,7 @@
   "baseRoute": "/category/snacks-beverages",
   "page": 1,
   "comp": "PageCategorySnacksBeverages",
-  "title": "Snacks & Beverages | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "નાસ્તો અને પીણાં | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -194,7 +194,7 @@
   "baseRoute": "/category/personal-care",
   "page": 2,
   "comp": "PageCategoryPersonalCare6de0778fPage2",
-  "title": "Personal Care | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "પર્સનલ કેર | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -203,7 +203,7 @@
   "baseRoute": "/category/personal-care",
   "page": 1,
   "comp": "PageCategoryPersonalCare",
-  "title": "Personal Care | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "પર્સનલ કેર | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -212,7 +212,7 @@
   "baseRoute": "/category/groceries-staples",
   "page": 2,
   "comp": "PageCategoryGroceriesStaples6de0778fPage2",
-  "title": "Groceries & Staples | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "કરિયાણું અને અનાજ | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -221,7 +221,7 @@
   "baseRoute": "/category/groceries-staples",
   "page": 1,
   "comp": "PageCategoryGroceriesStaples",
-  "title": "Groceries & Staples | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "કરિયાણું અને અનાજ | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -230,7 +230,7 @@
   "baseRoute": "/checkout",
   "page": 1,
   "comp": "PageCheckout",
-  "title": "Checkout (Demo) | Hare Krishna Supermarket",
+  "title": "ચેકઆઉટ (ડેમો) | હરે કૃષ્ણ સુપરમાર્કેટ",
   "forms": 0
  },
  {
@@ -239,7 +239,7 @@
   "baseRoute": "/contact-us",
   "page": 1,
   "comp": "PageContactUs",
-  "title": "Contact & Store Locations | Hare Krishna Supermarket",
+  "title": "સંપર્ક અને સ્ટોરનાં સરનામાં | હરે કૃષ્ણ સુપરમાર્કેટ",
   "forms": 0
  },
  {
@@ -248,7 +248,7 @@
   "baseRoute": "/faq",
   "page": 1,
   "comp": "PageFaq",
-  "title": "FAQ | Hare Krishna Supermarket",
+  "title": "વારંવાર પુછાતા પ્રશ્નો | હરે કૃષ્ણ સુપરમાર્કેટ",
   "forms": 0
  },
  {
@@ -257,7 +257,7 @@
   "baseRoute": "/home-02",
   "page": 1,
   "comp": "PageHome02",
-  "title": "Offers & Festive Picks | Hare Krishna Supermarket",
+  "title": "ઓફર અને તહેવારની પસંદગી | હરે કૃષ્ણ સુપરમાર્કેટ",
   "forms": 0
  },
  {
@@ -266,7 +266,7 @@
   "baseRoute": "/",
   "page": 1,
   "comp": "PageHome",
-  "title": "Hare Krishna Supermarket | Everything Under One Roof in Virpur & Lalsar",
+  "title": "હરે કૃષ્ણ સુપરમાર્કેટ | વીરપુર અને લાલસરમાં બધું એક જ છત નીચે",
   "forms": 0
  },
  {
@@ -275,7 +275,7 @@
   "baseRoute": "/privacy-policy",
   "page": 1,
   "comp": "PagePrivacyPolicy",
-  "title": "Privacy Policy | Hare Krishna Supermarket",
+  "title": "ગોપનીયતા નીતિ | હરે કૃષ્ણ સુપરમાર્કેટ",
   "forms": 0
  },
  {
@@ -284,7 +284,7 @@
   "baseRoute": "/product/shampoo-650ml",
   "page": 1,
   "comp": "PageProductShampoo650ml",
-  "title": "Shampoo (650 ml bottle) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "શેમ્પૂ (650 મિલીની બોટલ) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -293,7 +293,7 @@
   "baseRoute": "/product/ball-pens-box-20",
   "page": 1,
   "comp": "PageProductBallPensBox20",
-  "title": "Ball Pens (Box of 20) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "બોલ પેન (20 નું બોક્સ) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -302,7 +302,7 @@
   "baseRoute": "/product/bucket-20l-with-mug",
   "page": 1,
   "comp": "PageProductBucket20lWithMug",
-  "title": "Bucket with Mug (20 L) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "બાલદી અને ડોલ (20 લિટર) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -311,7 +311,7 @@
   "baseRoute": "/product/sunflower-oil-1l",
   "page": 1,
   "comp": "PageProductSunflowerOil1l",
-  "title": "Sunflower Oil (1 L bottle) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "સનફ્લાવર તેલ (1 લિટરની બોટલ) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -320,7 +320,7 @@
   "baseRoute": "/product/talcum-powder-400g",
   "page": 1,
   "comp": "PageProductTalcumPowder400g",
-  "title": "Talcum Powder (400 g tin) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "ટેલ્કમ પાવડર (400 ગ્રામનો ડબ્બો) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -329,7 +329,7 @@
   "baseRoute": "/product/toor-dal-1kg",
   "page": 1,
   "comp": "PageProductToorDal1kg",
-  "title": "Toor Dal (1 kg pouch) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "તુવેર દાળ (1 કિલોનું પાઉચ) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -338,7 +338,7 @@
   "baseRoute": "/product/toothpaste-300g",
   "page": 1,
   "comp": "PageProductToothpaste300g",
-  "title": "Toothpaste (300 g value pack) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "ટૂથપેસ્ટ (300 ગ્રામનું વેલ્યુ પેક) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -347,7 +347,7 @@
   "baseRoute": "/product/pressure-cooker-5l",
   "page": 1,
   "comp": "PageProductPressureCooker5l",
-  "title": "Pressure Cooker (5 L aluminium) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "પ્રેશર કૂકર (5 લિટર એલ્યુમિનિયમ) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -356,7 +356,7 @@
   "baseRoute": "/product/camphor-100g",
   "page": 1,
   "comp": "PageProductCamphor100g",
-  "title": "Camphor (100 g box) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "કપૂર (100 ગ્રામનું બોક્સ) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -365,7 +365,7 @@
   "baseRoute": "/product/coconut-hair-oil-500ml",
   "page": 1,
   "comp": "PageProductCoconutHairOil500ml",
-  "title": "Coconut Hair Oil (500 ml bottle) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "કોપરેલ તેલ (500 મિલીની બોટલ) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -374,7 +374,7 @@
   "baseRoute": "/product/non-stick-tawa-28cm",
   "page": 1,
   "comp": "PageProductNonStickTawa28cm",
-  "title": "Non-stick Tawa (28 cm) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "નોન-સ્ટિક તવો (28 સેમી) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -383,7 +383,7 @@
   "baseRoute": "/product/agarbatti-12-pack",
   "page": 1,
   "comp": "PageProductAgarbatti12Pack",
-  "title": "Agarbatti (12 packs) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "અગરબત્તી (12 પેક) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -392,7 +392,7 @@
   "baseRoute": "/product/namkeen-mix-400g",
   "page": 1,
   "comp": "PageProductNamkeenMix400g",
-  "title": "Namkeen Mix (400 g pack) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "નમકીન મિક્સ (400 ગ્રામનું પેક) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -401,7 +401,7 @@
   "baseRoute": "/product/school-bag-30l",
   "page": 1,
   "comp": "PageProductSchoolBag30l",
-  "title": "School Bag (30 L) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "સ્કૂલ બેગ (30 લિટર) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -410,7 +410,7 @@
   "baseRoute": "/product/lunch-box-3-tier",
   "page": 1,
   "comp": "PageProductLunchBox3Tier",
-  "title": "Lunch Box (3-tier steel) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "ટિફિન (3 ખાનાનું સ્ટીલ) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -419,7 +419,7 @@
   "baseRoute": "/product/cold-drink-2l",
   "page": 1,
   "comp": "PageProductColdDrink2l",
-  "title": "Cold Drink (2 L bottle) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "ઠંડું પીણું (2 લિટરની બોટલ) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -428,7 +428,7 @@
   "baseRoute": "/product/steel-water-bottle-1l",
   "page": 1,
   "comp": "PageProductSteelWaterBottle1l",
-  "title": "Steel Water Bottle (1 L) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "સ્ટીલની પાણીની બોટલ (1 લિટર) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -437,7 +437,7 @@
   "baseRoute": "/product/notebooks-6-pack",
   "page": 1,
   "comp": "PageProductNotebooks6Pack",
-  "title": "Notebooks (6 x 172 pages) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "નોટબુક (6 x 172 પાનાં) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -446,7 +446,7 @@
   "baseRoute": "/product/storage-containers-set-of-6",
   "page": 1,
   "comp": "PageProductStorageContainersSetOf6",
-  "title": "Storage Containers (Set of 6) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "સ્ટોરેજ ડબ્બા (6 નો સેટ) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -455,7 +455,7 @@
   "baseRoute": "/product/mosquito-repellent-refill",
   "page": 1,
   "comp": "PageProductMosquitoRepellentRefill",
-  "title": "Mosquito Repellent Refill (2 refills) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "મચ્છર રિપેલન્ટ રિફિલ (2 રિફિલ) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -464,7 +464,7 @@
   "baseRoute": "/product/bath-soap-4-pack",
   "page": 1,
   "comp": "PageProductBathSoap4Pack",
-  "title": "Bath Soap (4 x 125 g) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "નહાવાનો સાબુ (4 x 125 ગ્રામ) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -473,7 +473,7 @@
   "baseRoute": "/product/dishwash-bar-5-pack",
   "page": 1,
   "comp": "PageProductDishwashBar5Pack",
-  "title": "Dishwash Bar (5 x 200 g) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "વાસણ ધોવાનો સાબુ (5 x 200 ગ્રામ) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -482,7 +482,7 @@
   "baseRoute": "/product/tea-powder-500g",
   "page": 1,
   "comp": "PageProductTeaPowder500g",
-  "title": "Tea Powder (500 g pack) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "ચા પાવડર (500 ગ્રામનું પેક) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -491,7 +491,7 @@
   "baseRoute": "/product/glucose-biscuits-family-pack",
   "page": 1,
   "comp": "PageProductGlucoseBiscuitsFamilyPack",
-  "title": "Glucose Biscuits (800 g family pack) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "ગ્લુકોઝ બિસ્કિટ (800 ગ્રામનું ફેમિલી પેક) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -500,7 +500,7 @@
   "baseRoute": "/product/chakki-atta-10kg",
   "page": 1,
   "comp": "PageProductChakkiAtta10kg",
-  "title": "Chakki Fresh Atta (10 kg bag) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "ચક્કી ફ્રેશ લોટ (10 કિલોની થેલી) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -509,7 +509,7 @@
   "baseRoute": "/product/detergent-powder-4kg",
   "page": 1,
   "comp": "PageProductDetergentPowder4kg",
-  "title": "Detergent Powder (4 kg pack) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "ડિટર્જન્ટ પાવડર (4 કિલોનું પેક) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -518,7 +518,7 @@
   "baseRoute": "/product/toilet-cleaner-1l",
   "page": 1,
   "comp": "PageProductToiletCleaner1l",
-  "title": "Toilet Cleaner (1 L bottle) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "ટોઇલેટ ક્લીનર (1 લિટરની બોટલ) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -527,7 +527,7 @@
   "baseRoute": "/product/instant-noodles-12-pack",
   "page": 1,
   "comp": "PageProductInstantNoodles12Pack",
-  "title": "Instant Noodles (12-pack) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "ઇન્સ્ટન્ટ નૂડલ્સ (12 નું પેક) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -536,7 +536,7 @@
   "baseRoute": "/product/brass-diya-set-12",
   "page": 1,
   "comp": "PageProductBrassDiyaSet12",
-  "title": "Brass Diya Set (12 pieces) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "પિત્તળના દીવાનો સેટ (12 નંગ) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -545,7 +545,7 @@
   "baseRoute": "/product/sugar-5kg",
   "page": 1,
   "comp": "PageProductSugar5kg",
-  "title": "Sugar (5 kg pack) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "ખાંડ (5 કિલોનું પેક) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -554,7 +554,7 @@
   "baseRoute": "/product/mango-drink-1l",
   "page": 1,
   "comp": "PageProductMangoDrink1l",
-  "title": "Mango Drink (1 L pack) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "કેરીનું પીણું (1 લિટરનું પેક) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -563,7 +563,7 @@
   "baseRoute": "/product/potato-chips-party-pack",
   "page": 1,
   "comp": "PageProductPotatoChipsPartyPack",
-  "title": "Potato Chips (150 g party pack) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "બટાકાની ચિપ્સ (150 ગ્રામનું પાર્ટી પેક) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -572,7 +572,7 @@
   "baseRoute": "/product/basmati-rice-5kg",
   "page": 1,
   "comp": "PageProductBasmatiRice5kg",
-  "title": "Basmati Rice (5 kg bag) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "બાસમતી ચોખા (5 કિલોની થેલી) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -581,7 +581,7 @@
   "baseRoute": "/product/face-cream-100g",
   "page": 1,
   "comp": "PageProductFaceCream100g",
-  "title": "Face Cream (100 g jar) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "ફેસ ક્રીમ (100 ગ્રામની બરણી) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -590,7 +590,7 @@
   "baseRoute": "/product/garbage-bags-90",
   "page": 1,
   "comp": "PageProductGarbageBags90",
-  "title": "Garbage Bags (90 bags) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "કચરાની થેલીઓ (90 થેલીઓ) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -599,7 +599,7 @@
   "baseRoute": "/product/floor-cleaner-2l",
   "page": 1,
   "comp": "PageProductFloorCleaner2l",
-  "title": "Floor Cleaner (2 L bottle) | Hare Krishna Supermarket, Virpur & Lalsar",
+  "title": "ફ્લોર ક્લીનર (2 લિટરની બોટલ) | હરે કૃષ્ણ સુપરમાર્કેટ, વીરપુર અને લાલસર",
   "forms": 0
  },
  {
@@ -608,7 +608,7 @@
   "baseRoute": "/return-refund-policy",
   "page": 1,
   "comp": "PageReturnRefundPolicy",
-  "title": "Exchange & Refund Policy | Hare Krishna Supermarket",
+  "title": "બદલી અને રિફંડ નીતિ | હરે કૃષ્ણ સુપરમાર્કેટ",
   "forms": 0
  },
  {
@@ -617,7 +617,7 @@
   "baseRoute": "/shop",
   "page": 2,
   "comp": "PageShopB979b66aPage2",
-  "title": "Shop All Products | Hare Krishna Supermarket",
+  "title": "બધી પ્રોડક્ટ જુઓ | હરે કૃષ્ણ સુપરમાર્કેટ",
   "forms": 0
  },
  {
@@ -626,7 +626,7 @@
   "baseRoute": "/shop",
   "page": 3,
   "comp": "PageShopB979b66aPage3",
-  "title": "Shop All Products | Hare Krishna Supermarket",
+  "title": "બધી પ્રોડક્ટ જુઓ | હરે કૃષ્ણ સુપરમાર્કેટ",
   "forms": 0
  },
  {
@@ -635,7 +635,7 @@
   "baseRoute": "/shop",
   "page": 1,
   "comp": "PageShop",
-  "title": "Shop All Products | Hare Krishna Supermarket",
+  "title": "બધી પ્રોડક્ટ જુઓ | હરે કૃષ્ણ સુપરમાર્કેટ",
   "forms": 0
  },
  {
@@ -644,7 +644,7 @@
   "baseRoute": "/terms-conditions",
   "page": 1,
   "comp": "PageTermsConditions",
-  "title": "Terms & Conditions | Hare Krishna Supermarket",
+  "title": "નિયમો અને શરતો | હરે કૃષ્ણ સુપરમાર્કેટ",
   "forms": 0
  },
  {
@@ -653,7 +653,7 @@
   "baseRoute": "/user/create-account",
   "page": 1,
   "comp": "PageUserCreateAccount",
-  "title": "Create Account | Hare Krishna Supermarket",
+  "title": "ખાતું બનાવો | હરે કૃષ્ણ સુપરમાર્કેટ",
   "forms": 0
  },
  {
@@ -662,7 +662,7 @@
   "baseRoute": "/user/forgot-password",
   "page": 1,
   "comp": "PageUserForgotPassword",
-  "title": "Forgot Password | Hare Krishna Supermarket",
+  "title": "પાસવર્ડ ભૂલી ગયા | હરે કૃષ્ણ સુપરમાર્કેટ",
   "forms": 0
  },
  {
@@ -671,7 +671,7 @@
   "baseRoute": "/user/login",
   "page": 1,
   "comp": "PageUserLogin",
-  "title": "Login | Hare Krishna Supermarket",
+  "title": "લૉગિન | હરે કૃષ્ણ સુપરમાર્કેટ",
   "forms": 0
  },
  {
@@ -680,7 +680,7 @@
   "baseRoute": "/utility/change-log",
   "page": 1,
   "comp": "PageUtilityChangeLog",
-  "title": "Change Log | Hare Krishna Supermarket",
+  "title": "ફેરફારોની યાદી | હરે કૃષ્ણ સુપરમાર્કેટ",
   "forms": 0
  },
  {
@@ -689,7 +689,7 @@
   "baseRoute": "/utility/license",
   "page": 1,
   "comp": "PageUtilityLicense",
-  "title": "Licence | Hare Krishna Supermarket",
+  "title": "લાઇસન્સ | હરે કૃષ્ણ સુપરમાર્કેટ",
   "forms": 0
  },
  {
@@ -698,7 +698,7 @@
   "baseRoute": "/utility/style-guide",
   "page": 1,
   "comp": "PageUtilityStyleGuide",
-  "title": "Brand Style Guide | Hare Krishna Supermarket",
+  "title": "બ્રાન્ડ સ્ટાઇલ ગાઇડ | હરે કૃષ્ણ સુપરમાર્કેટ",
   "forms": 0
  }
 ]

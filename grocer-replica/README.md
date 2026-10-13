@@ -13,7 +13,19 @@ built on a replica of the Webflow "Grocer" template layout and rebranded as a re
 - `rebrand/images.py` generates placeholder brand imagery into `public/brand/` (packshots, category tiles,
   post covers, about/contact art, avatars, OG image, keyed logos). `rebrand/prompts.py` writes one
   AI-image prompt per image so real images can replace the placeholders under the same file names.
-- `app/brand.css` holds the dark header/menu theme the logo needs.
+- `app/brand.css` holds the dark header/menu theme the logo needs, the Gujarati typography and the language toggle.
+- The brand imagery in `public/brand/` was generated from the prompts and dropped in under the same file names.
+
+## Gujarati and English
+
+The site is Gujarati by default with an English toggle in the header. `rebrand/gu.json` maps every
+English string on the site to Gujarati; `lib/i18n-core.js` holds the shared translation rules (exact
+matches plus composed strings such as page titles, dates, read times and discounts). At build time
+`rebrand/i18n.js` translates every generated page, so the served HTML, titles and descriptions are
+Gujarati (`<html lang="gu">`, Noto Sans Gujarati). On the client `lib/i18n.ts` swaps the known strings in
+either direction, remembers the choice in `localStorage` (`hk-lang`) and applies it before paint on the
+next visit. Strings that are not in the dictionary (brand handles, country names in the demo checkout)
+stay as they are.
 
 Prices, products, reviews and posts are mock content for the demo. Phone numbers and addresses are not
 shown because they have not been confirmed; the footer and contact page use the Google Maps and Instagram links.
