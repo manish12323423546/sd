@@ -4,7 +4,7 @@ import { Button } from "./Button";
 import { CtaWave } from "./Waves";
 import { Reveal } from "./Reveal";
 
-const strip = ["/img/strip-1.webp", "/img/strip-2.webp", "/img/strip-3.webp", "/img/strip-4.webp", "/img/strip-5.webp"];
+const strip = ["/img/cta-1.webp", "/img/cta-2.webp", "/img/cta-3.webp", "/img/cta-4.webp", "/img/cta-5.webp"];
 
 export function Cta() {
   return (

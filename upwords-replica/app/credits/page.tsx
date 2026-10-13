@@ -7,8 +7,8 @@ export default function CreditsPage() {
   return (
     <section className="page-head" style={{ paddingBottom: 80 }}>
       <div className="container narrow prose">
-        <h1 className="display" style={{ color: "#1d1d1d" }}>Photo credits</h1>
-        <p>Every photo on this demo is a public-domain (CC0) image from StockSnap, found through Openverse. Credit is not required, but is given here.</p>
+        <h1 className="display" style={{ color: "var(--ink)" }}>Photo credits</h1>
+        <p>The photo of Jay Modi and the Clarivyn logo are supplied by Clarivyn Advisory. All other photos are public-domain (CC0) images from StockSnap, found through Openverse; credit is not required, but is given here.</p>
         <ul>
           {credits.map((c) => (
             <li key={c.file}>

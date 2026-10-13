@@ -1,15 +1,17 @@
-# upwords-replica
+# upwords-replica: Clarivyn Advisory site
 
-A Next.js 16 + Framer Motion rebuild of the layout of the Upword Framer template (upwords.framer.website), made as a demo.
+A Next.js 16 + Framer Motion site for **Clarivyn Advisory** (Jay Modi, Ahmedabad), built on a rebuild of the Upword Framer template layout (upwords.framer.website).
 
-- **Original content.** All copy, names, quotes, prices and figures are sample text written for this build (`lib/content.ts`, `lib/posts.ts`). The brand is a made-up one, "Climbwell", with its own logo mark.
-- **Photos.** Public-domain (CC0) images from StockSnap via Openverse. Credits are listed in `lib/photo-credits.json` and on `/credits`.
-- **Fonts.** Instrument Serif and Inter (SIL Open Font Licence), loaded with `next/font`.
-- **Contact form.** A labelled demo. It sends and stores nothing.
-- **Search engines.** Blocked by default (robots meta, `X-Robots-Tag` header and `robots.txt`). Set `ALLOW_INDEXING=true` once the site is on its own domain, and `SITE_URL` to that domain.
+- **Content.** Facts come from clarivynadvisory.com (captured 13 Oct 2026), condensed into one data module, `lib/content.ts`. Nothing is invented.
+- **Images.** The photo of Jay Modi and the logo were supplied by Clarivyn. The other photos are public-domain (CC0) images from StockSnap via Openverse, credited in `lib/photo-credits.json` and on `/credits`.
+- **Colours.** Taken from the Clarivyn logo: navy `#0d2440` and gold `#c9933a`, on a cream background.
+- **Contact form.** Not connected yet. It sends and stores nothing, says so on screen and points people to WhatsApp.
+- **Search engines.** Blocked by default. Set `ALLOW_INDEXING=true` and `SITE_URL` once the site is on its own domain.
+
+Routes: `/`, `/about`, `/pharma`, `/clinic`, `/startups`, `/quick-services`, `/registry`, `/partner`, `/packages`, `/contact`, `/credits`.
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
+npm run dev
 npm run build && npm run types
 ```

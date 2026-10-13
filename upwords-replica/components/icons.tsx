@@ -25,18 +25,21 @@ export const PlusMinus = ({ open }: { open: boolean }) => (
   </svg>
 );
 
-/** Small mountain-and-flag mark used inside the hero headline. */
+/** Small rising-bars mark used inside the hero headline (echoes the Clarivyn logo). */
 export const Summit = ({ size = 30 }: P) => (
   <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden="true">
-    <path d="M3 26 12.5 11l5 7.5L21 13l8 13H3Z" fill="#245333" />
-    <path d="M21 13V4.5l6 2.5-6 2.5" stroke="#245333" strokeWidth="2" strokeLinejoin="round" />
+    <rect x="5" y="18" width="4" height="8" rx="1.2" fill="#0d2440" opacity="0.55" />
+    <rect x="11" y="14" width="4" height="12" rx="1.2" fill="#0d2440" opacity="0.75" />
+    <rect x="17" y="10" width="4" height="16" rx="1.2" fill="#0d2440" />
+    <rect x="23" y="5" width="4" height="21" rx="1.2" fill="#0d2440" />
+    <path d="M6 16 25 4" stroke="#0d2440" strokeWidth="1.4" strokeDasharray="2 2" />
   </svg>
 );
 
 /** Four-point sparkle used between ribbon items. */
 export const Sparkle = ({ size = 26 }: P) => (
   <svg width={size} height={size} viewBox="0 0 26 26" fill="none" aria-hidden="true">
-    <path d="M13 0c1 6.5 6.5 12 13 13-6.5 1-12 6.5-13 13-1-6.5-6.5-12-13-13C6.5 12 12 6.5 13 0Z" fill="#bbfd6a" />
+    <path d="M13 0c1 6.5 6.5 12 13 13-6.5 1-12 6.5-13 13-1-6.5-6.5-12-13-13C6.5 12 12 6.5 13 0Z" fill="#c9933a" />
   </svg>
 );
 
@@ -74,6 +77,13 @@ const valuePaths: Record<string, React.ReactNode> = {
   map: <path d="M4 7l6-2 8 3 6-2v16l-6 2-8-3-6 2V7Zm6-2v16m8-13v16" stroke="#1d1d1d" strokeWidth="1.6" strokeLinejoin="round" />,
   people: <path d="M10 13a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-6 9c0-3.3 2.7-6 6-6s6 2.7 6 6m1-15.5a3 3 0 0 1 0 6M20 16c2.3.6 4 2.8 4 5.5" stroke="#1d1d1d" strokeWidth="1.6" strokeLinecap="round" />,
   target: <path d="M14 24a10 10 0 1 1 0-20 10 10 0 0 1 0 20Zm0-5a5 5 0 1 1 0-10 5 5 0 0 1 0 10Zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" stroke="#1d1d1d" strokeWidth="1.6" />,
+  pill: <path d="M9.5 18.5 18.5 9.5a4.2 4.2 0 0 0-6-6L3.5 12.5a4.2 4.2 0 0 0 6 6ZM8 8l6 6" stroke="#1d1d1d" strokeWidth="1.6" strokeLinecap="round" transform="translate(3 3)" />,
+  cap: <path d="M2 11 14 5l12 6-12 6-12-6Zm5 2.5V19c0 1.5 3 3 7 3s7-1.5 7-3v-5.5M26 11v6" stroke="#1d1d1d" strokeWidth="1.6" strokeLinejoin="round" />,
+  school: <path d="M4 24h20M6 24V12m16 12V12M3 12 14 5l11 7H3Zm8 12v-6h6v6" stroke="#1d1d1d" strokeWidth="1.6" strokeLinejoin="round" />,
+  book: <path d="M4 6c3-1 7-1 10 1v16c-3-2-7-2-10-1V6Zm20 0c-3-1-7-1-10 1v16c3-2 7-2 10-1V6Z" stroke="#1d1d1d" strokeWidth="1.6" strokeLinejoin="round" />,
+  layers: <path d="m14 4 10 5-10 5-10-5 10-5Zm-10 10 10 5 10-5M4 19l10 5 10-5" stroke="#1d1d1d" strokeWidth="1.6" strokeLinejoin="round" />,
+  play: <path d="M14 25a11 11 0 1 1 0-22 11 11 0 0 1 0 22Zm-2.5-15v8l6.5-4-6.5-4Z" stroke="#1d1d1d" strokeWidth="1.6" strokeLinejoin="round" />,
+  check: <path d="m6 14 5 5 11-11" stroke="#1d1d1d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />,
 };
 
 export const ValueIcon = ({ name }: { name: string }) => (
@@ -84,6 +94,18 @@ export const ValueIcon = ({ name }: { name: string }) => (
 
 export const SocialIcon = ({ name }: { name: string }) => {
   switch (name) {
+    case "whatsapp":
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z" fill="currentColor" />
+        </svg>
+      );
+    case "youtube":
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8A26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8ZM10 15V9l5.2 3L10 15Z" fill="currentColor" />
+        </svg>
+      );
     case "facebook":
       return (
         <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">

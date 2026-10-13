@@ -30,7 +30,7 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <Button href="/contact" variant="lime" size="sm" className="header__cta">Get in Touch</Button>
+        <Button href="/contact" variant="lime" size="sm" className="header__cta">Book a Consultation</Button>
         <button className="menu-btn" aria-label="Open menu" aria-expanded={open} onClick={() => setOpen(true)}>
           <MenuIcon open={false} />
         </button>
@@ -54,7 +54,7 @@ export function Header() {
               </button>
             </div>
             <nav className="mobile-nav__links" aria-label="Mobile">
-              {[...nav, { label: "Contact", href: "/contact" }].map((n) => (
+              {[{ label: "Home", href: "/" }, ...nav, { label: "Startup Registry", href: "/registry" }, { label: "Partner With Us", href: "/partner" }, { label: "Contact", href: "/contact" }].map((n) => (
                 <Link key={n.href} href={n.href} aria-current={isActive(path, n.href) ? "page" : undefined}>
                   {n.label}
                 </Link>

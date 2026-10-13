@@ -13,13 +13,12 @@ const allowIndexing = process.env.ALLOW_INDEXING === "true";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL || "https://upwords-replica.vercel.app"),
-  title: { default: `${brand.name} | Career Coaching (demo)`, template: `%s | ${brand.name}` },
-  description: "Demo coaching site: a Next.js rebuild of a Framer layout with original sample copy and public-domain photos.",
+  title: { default: `${brand.name} | Business Consulting for Clinics, Pharma & Founders in Gujarat`, template: `%s | ${brand.name}` },
+  description: "Clarivyn Advisory, led by Jay Modi, is an Ahmedabad-based business consulting firm helping pharma firms, doctor clinics and early-stage founders across Gujarat grow with clarity.",
   robots: allowIndexing ? { index: true, follow: true } : { index: false, follow: false },
-  icons: { icon: "/icon.svg" },
 };
 
-export const viewport: Viewport = { themeColor: "#f3f4ee", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#f9f6f1", width: "device-width", initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
