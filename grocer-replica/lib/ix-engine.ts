@@ -285,7 +285,9 @@ export function bindElement(el: Element) {
     switch (ev.type) {
       case "SCROLL_INTO_VIEW": {
         hasScrollReveal = true;
-        applyInitial(el, list);
+        // Above-the-fold media wrappers (data-ix-eager) render visible on first paint; the reveal
+        // still runs but from the visible state, so there is nothing to hide first.
+        if (!el.hasAttribute("data-ix-eager")) applyInitial(el, list);
         const off = (ev.config as ScrollConfig)?.scrollOffsetValue ?? 0;
         observe(el, off, () => { void runList(el, list, { instant, skipInitial: true }); });
         break;
@@ -378,6 +380,7 @@ export function bindElement(el: Element) {
     el.setAttribute("role", "button");
     el.setAttribute("tabindex", "0");
     el.setAttribute("aria-expanded", "false");
+    if (!el.getAttribute("aria-label") && !(el.textContent || "").trim()) el.setAttribute("aria-label", "Toggle menu");
     const k = (e: Event) => { const ke = e as KeyboardEvent; if (ke.key === "Enter" || ke.key === " ") { e.preventDefault(); h(); } };
     el.addEventListener("click", h); el.addEventListener("keydown", k);
     cl.push(() => { el.removeEventListener("click", h); el.removeEventListener("keydown", k); });

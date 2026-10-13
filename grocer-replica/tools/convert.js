@@ -47,6 +47,7 @@ function localAsset(url) {
 
 // ---------- attribute / style mapping ----------
 const ATTR = {
+  fetchpriority: 'fetchPriority',
   class: 'className', for: 'htmlFor', tabindex: 'tabIndex', maxlength: 'maxLength', minlength: 'minLength',
   autocomplete: 'autoComplete', readonly: 'readOnly', srcset: 'srcSet', crossorigin: 'crossOrigin',
   playsinline: 'playsInline', autoplay: 'autoPlay', allowfullscreen: 'allowFullScreen', frameborder: 'frameBorder',
@@ -204,6 +205,28 @@ for (const file of files) {
     if (!footerJsx) { footerSig = s; footerJsx = serialize($, footer[0], { stripCurrent: true, collectIds: usedIds }); }
     else if (s !== footerSig) report.push(`footer differs on ${slug} (${Math.abs(s.length - footerSig.length)} chars)`);
     footer.replaceWith('<footer-slot></footer-slot>');
+  }
+  // Above-the-fold media: the first content section after the header is the hero. Its images load
+  // eagerly and the reveal wrappers around them render visible on first paint (the engine still
+  // binds them, but skips the hidden initial state) so the LCP image does not wait for JavaScript.
+  const hero = $('section').filter((i, el) => !$(el).hasClass('header-section') && !$(el).hasClass('footer-section')).first();
+  if (hero.length) {
+    let prioritised = false;
+    hero.find('img').each((i, img) => {
+      const $img = $(img);
+      $img.attr('loading', 'eager');
+      const src = $img.attr('src') || '';
+      if (!prioritised && !/\.svg(\?|$)/i.test(src) && !/icon|chevron|arrow/i.test($img.attr('class') || '')) { $img.attr('fetchpriority', 'high'); prioritised = true; }
+      let node = $img;
+      while (node.length && node[0] !== hero[0]) {
+        const st = node.attr('style') || '';
+        if (node.attr('data-w-id') && /opacity:\s*0|scale3d\((1\.\d+|0\.\d+)|translate3d\([^)]*[1-9]\d*px/.test(st)) {
+          node.attr('style', st.replace(/(-webkit-|-moz-|-ms-)?transform:[^;]*;?/g, '').replace(/opacity:\s*0;?/g, '').trim());
+          node.attr('data-ix-eager', 'true');
+        }
+        node = node.parent();
+      }
+    });
   }
   const ctx = { collectIds: usedIds, baseRoute };
   let body = $('body').children().toArray().map((n) => serialize($, n, ctx)).join('');

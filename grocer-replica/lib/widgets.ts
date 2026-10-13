@@ -67,6 +67,8 @@ function bindTabs(tabs: HTMLElement) {
   const links = Array.from(tabs.querySelectorAll<HTMLElement>(".w-tab-link"));
   const panes = Array.from(tabs.querySelectorAll<HTMLElement>(".w-tab-pane"));
   const durIn = Number(tabs.getAttribute("data-duration-in") || 300) / 1000;
+  tabs.querySelector(".w-tab-menu")?.setAttribute("role", "tablist");
+  panes.forEach((p) => { p.setAttribute("role", "tabpanel"); p.setAttribute("aria-label", p.getAttribute("data-w-tab") || "Tab"); });
   links.forEach((link) => {
     link.setAttribute("role", "tab");
     link.setAttribute("tabindex", "0");
@@ -116,14 +118,16 @@ function bindSlider(slider: HTMLElement) {
       nav.appendChild(d); dots.push(d);
     });
   }
-  slides.forEach((s, i) => { s.setAttribute("aria-hidden", String(i !== 0)); s.setAttribute("role", "group"); s.setAttribute("aria-label", `${i + 1} of ${slides.length}`); });
+  const setActive = (i: number) => slides.forEach((s, k) => { const cur = k === i; s.setAttribute("aria-hidden", String(!cur)); if (cur) s.removeAttribute("inert"); else s.setAttribute("inert", ""); });
+  slides.forEach((s, i) => { s.setAttribute("role", "group"); s.setAttribute("aria-label", `${i + 1} of ${slides.length}`); });
+  setActive(0);
   const goTo = (i: number, instant = false) => {
     if (i < 0) i = infinite ? slides.length - 1 : 0;
     if (i >= slides.length) i = infinite ? 0 : slides.length - 1;
     index = i;
     const x = `-${index * 100}%`;
-    slides.forEach((s, k) => {
-      s.setAttribute("aria-hidden", String(k !== index));
+    setActive(index);
+    slides.forEach((s) => {
       if (instant) s.style.transform = `translateX(${x})`;
       else animate(s, { x }, { duration, ease: [0.25, 0.1, 0.25, 1] });
     });
@@ -136,6 +140,8 @@ function bindSlider(slider: HTMLElement) {
   };
   left?.addEventListener("click", () => goTo(index - 1));
   right?.addEventListener("click", () => goTo(index + 1));
+  left?.setAttribute("aria-label", "Previous slide");
+  right?.setAttribute("aria-label", "Next slide");
   [left, right].forEach((a) => { if (a) { a.setAttribute("role", "button"); a.setAttribute("tabindex", "0"); a.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); a.click(); } }); } });
   slider.addEventListener("pointerenter", () => { hovered = true; });
   slider.addEventListener("pointerleave", () => { hovered = false; });
