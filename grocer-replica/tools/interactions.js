@@ -106,7 +106,7 @@ const results = {};
   await page.screenshot({ path: path.join(outDir, '6-form.png') });
 
   // 7. product page: add to cart
-  await page.goto(base + '/product/tomato', { waitUntil: 'networkidle2' });
+  await page.goto(base + '/product/basmati-rice-5kg', { waitUntil: 'networkidle2' });
   await sleep(1200);
   await page.click('.w-commerce-commerceaddtocartbutton');
   await sleep(600);

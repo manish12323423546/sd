@@ -10,6 +10,16 @@ const cheerio = require('cheerio');
 
 const [refDir, capDir, appDir] = process.argv.slice(2);
 const htmlDir = path.join(refDir, 'html');
+// Optional rebrand transform (rebrand/apply.js in the app): rewrites copy, images, links and slugs.
+let rebrand = null;
+try { rebrand = require(path.join(appDir, 'rebrand', 'apply.js')); console.error('rebrand: on'); } catch (e) { if (process.env.REBRAND) throw e; }
+const oldBlogTitles = {};
+if (rebrand) {
+  for (const f of fs.readdirSync(htmlDir).filter((x) => x.startsWith('blog--'))) {
+    const m = fs.readFileSync(path.join(htmlDir, f), 'utf8').match(/<h2[^>]*class="hero-title[^"]*"[^>]*>([^<]+)<\/h2>/);
+    if (m) oldBlogTitles[m[1].trim()] = f.replace(/^blog--/, '').replace(/\.html$/, '');
+  }
+}
 const SITE = 'https://grocer-tnc.webflow.io';
 
 // ---------- assets ----------
@@ -177,12 +187,14 @@ const toComp = (slug) => 'Page' + slug.replace(/(^|[-_])([a-z0-9])/g, (_, __, c)
 
 const report = [];
 for (const file of files) {
-  const slug = file.replace(/\.html$/, '');
+  const srcSlug = file.replace(/\.html$/, '');
+  const slug = rebrand ? rebrand.newSlug(srcSlug) : srcSlug;
   const paged = slug.match(/^(.*)-([0-9a-f]{8})_page-(\d+)$/);
   const baseRoute = slug === 'home' ? '/' : '/' + (paged ? paged[1] : slug).replace(/--/g, '/');
   const route = paged ? `${baseRoute}?page=${paged[3]}` : baseRoute;
   const html = fs.readFileSync(path.join(htmlDir, file), 'utf8');
   const $ = cheerio.load(html);
+  if (rebrand) rebrand.apply($, srcSlug, { route: baseRoute, oldBlogTitles });
   const title = $('title').text();
   const desc = $('meta[name="description"]').attr('content') || '';
   const og = localAsset($('meta[property="og:image"]').attr('content') || '');
@@ -311,6 +323,7 @@ css = css.replace(/url\((['"]?)(https?:\/\/[^'")]+)\1\)/g, (m, q, u) => `url(${q
 css = css.replace(/Staatliches, sans-serif/g, 'var(--font-staatliches), sans-serif').replace(/Inter, sans-serif/g, 'var(--font-inter), sans-serif');
 // Drop the Webflow badge rules.
 css = css.replace(/\.w-webflow-badge[^{]*\{[^}]*\}\s*/g, '');
+if (rebrand) css = rebrand.css(css);
 fs.writeFileSync(path.join(appDir, 'app', 'webflow.css'), css);
 
 // ---------- IX2 data (only what the runtime needs) ----------

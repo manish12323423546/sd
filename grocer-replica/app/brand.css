@@ -1,0 +1,110 @@
+/* Hare Krishna Supermarket theme on top of the ported template styles. The logo needs a dark
+   background, so the header and the mobile menu are deep forest green with cream text. */
+:root {
+  --hk-lime: #a6dc17;
+  --hk-saffron: #ffb100;
+  --hk-ice: #d7f6fe;
+  --hk-cream: #f5fae1;
+  --hk-forest: #012013;
+  --hk-moss: #1e4114;
+}
+
+.header-section {
+  background-color: var(--hk-forest);
+  border-bottom-color: var(--hk-moss);
+}
+
+.header-section .header-menu-link,
+.header-section .header-dropdown-text,
+.header-section .header-dropdown-icon,
+.header-section .header-cart-button,
+.header-section .header-menu-user,
+.header-section .header-cart-button svg,
+.header-section .header-menu-user svg {
+  color: var(--hk-cream);
+}
+
+.header-section .header-menu-link.megamenu,
+.header-section .header-dropdown-wrap .header-menu-link {
+  color: #1e1e1e;
+}
+
+.header-section .header-menu-link.megamenu:hover {
+  color: var(--hk-moss);
+}
+
+.header-section .header-menu-link,
+.header-section .header-dropdown-name {
+  background-image: url("/brand/dot.svg");
+}
+
+.header-section .header-cart-quantity {
+  background-color: var(--hk-saffron);
+  color: var(--hk-forest);
+}
+
+.header-section .brand-logo {
+  width: auto;
+  height: 72px;
+}
+
+.header-section .display-show-for-tablet .brand-logo {
+  height: 54px;
+}
+
+.header-section .header-brand-block {
+  display: flex;
+  align-items: center;
+}
+
+.header-menu-wrap {
+  background-color: var(--hk-forest);
+}
+
+.header-menu-wrap .header-menu-link,
+.header-menu-wrap .header-dropdown-text,
+.header-menu-wrap .header-dropdown-icon {
+  color: var(--hk-cream);
+}
+
+.header-menu-wrap .header-dropdown-wrap .header-menu-link {
+  color: #1e1e1e;
+}
+
+.header-menu-divider {
+  background-color: var(--hk-moss);
+}
+
+.header-menu-button .top,
+.header-menu-button .middle,
+.header-menu-button .bottom {
+  background-color: var(--hk-cream);
+}
+
+.footer-section .brand-logo {
+  width: auto;
+  height: 64px;
+}
+
+.home-hero-title-bg {
+  background-color: var(--hk-saffron);
+}
+
+.home-hero-slider {
+  background-color: var(--hk-lime);
+}
+
+.w-slider-dot.w-active {
+  background-color: var(--hk-lime);
+}
+
+.demo-toast {
+  background: var(--hk-forest);
+  border: 1px solid var(--hk-moss);
+}
+
+@media (max-width: 479px) {
+  .header-section .display-show-for-tablet .brand-logo {
+    height: 44px;
+  }
+}

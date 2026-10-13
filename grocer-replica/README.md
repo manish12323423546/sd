@@ -1,8 +1,22 @@
-# Grocer replica
+# Hare Krishna Supermarket website
 
-A Next.js (App Router, TypeScript) rebuild of the Webflow template demo at
-https://grocer-tnc.webflow.io/. Reference / demo work only: the copy, photos and
-video belong to the template author and are not cleared for publication as client work.
+A Next.js (App Router, TypeScript) website for Hare Krishna Mall (Virpur and Lalsar, Gujarat),
+built on a replica of the Webflow "Grocer" template layout and rebranded as a retail supermarket.
+
+## Rebrand
+
+- `rebrand/content.json` is the single content module: brand facts and links (from business.md),
+  six retail categories, 36 mock products with mock prices, nine posts, reviews, FAQ, page copy and SEO text.
+- `rebrand/apply.js` is run by `tools/convert.js` on every captured page: it swaps products, categories,
+  posts, images, links (Google Maps for both branches, Instagram), copy and metadata, and recolours the
+  stylesheet with the logo palette.
+- `rebrand/images.py` generates placeholder brand imagery into `public/brand/` (packshots, category tiles,
+  post covers, about/contact art, avatars, OG image, keyed logos). `rebrand/prompts.py` writes one
+  AI-image prompt per image so real images can replace the placeholders under the same file names.
+- `app/brand.css` holds the dark header/menu theme the logo needs.
+
+Prices, products, reviews and posts are mock content for the demo. Phone numbers and addresses are not
+shown because they have not been confirmed; the footer and contact page use the Google Maps and Instagram links.
 
 ## What is in here
 
