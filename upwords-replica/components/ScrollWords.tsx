@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 
 function Word({ word, progress, range }: { word: string; progress: MotionValue<number>; range: [number, number] }) {
-  const color = useTransform(progress, range, ["rgba(29,29,29,0.28)", "rgba(29,29,29,1)"]);
+  const color = useTransform(progress, range, ["#7d7e7a", "#1d1d1d"]);
   return <motion.span style={{ color }}>{word} </motion.span>;
 }
 

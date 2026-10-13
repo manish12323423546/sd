@@ -21,7 +21,7 @@ export function Footer() {
             </div>
           </div>
           <div className="footer__col">
-            <h4>PAGES</h4>
+            <p className="footer__label">PAGES</p>
             <ul>
               {footerLinks.map((l) => (
                 <li key={l.href}><Link href={l.href}>{l.label}</Link></li>

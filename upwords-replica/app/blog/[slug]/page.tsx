@@ -28,13 +28,13 @@ export default async function PostPage({ params }: Params) {
     <>
       <section className="container">
         <div className="post-head">
-          <Reveal>
+          <Reveal instant>
             <span className="crumb">{post.category}</span>
             <h1 className="serif">{post.title}</h1>
             <p>{post.intro}</p>
           </Reveal>
-          <Reveal delay={0.1}>
-            <div className="post-head__img"><Image src={post.image} alt="" fill priority sizes="(max-width: 809px) 92vw, 560px" /></div>
+          <Reveal instant delay={0.1}>
+            <div className="post-head__img"><Image src={post.image} alt="" fill priority fetchPriority="high" sizes="(max-width: 809px) 92vw, 560px" /></div>
           </Reveal>
         </div>
       </section>

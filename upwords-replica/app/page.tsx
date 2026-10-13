@@ -17,9 +17,9 @@ export default function HomePage() {
     <>
       <section className="hero clip-x">
         <div className="container">
-          <Reveal><span className="badge">{home.badge}</span></Reveal>
+          <Reveal instant><span className="badge">{home.badge}</span></Reveal>
           <div className="hero__grid">
-            <Reveal delay={0.05}>
+            <Reveal instant delay={0.05}>
               <h1 className="serif hero__title">
                 {home.heroLine1}
                 <br />
@@ -28,14 +28,14 @@ export default function HomePage() {
                 {home.heroLine2b}
               </h1>
             </Reveal>
-            <Reveal delay={0.15} className="hero__side">
+            <Reveal instant delay={0.15} className="hero__side">
               <p>{home.heroBody}</p>
               <Button href="/contact">Book an Intro Call</Button>
             </Reveal>
           </div>
-          <Reveal delay={0.2} className="hero__media">
+          <Reveal instant delay={0.2} className="hero__media">
             <div className="hero__img">
-              <Image src="/img/coach-desk.webp" alt={`${brand.coach}, the coach, writing at her desk`} fill priority sizes="(max-width: 809px) 92vw, 1152px" style={{ objectPosition: "50% 35%" }} />
+              <Image src="/img/coach-desk.webp" alt={`${brand.coach}, the coach, writing at her desk`} fill priority fetchPriority="high" sizes="(max-width: 809px) 92vw, 1152px" style={{ objectPosition: "50% 35%" }} />
             </div>
             <HeroWave className="hero__wave" />
           </Reveal>

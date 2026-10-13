@@ -28,12 +28,12 @@ export default async function ServicePage({ params }: Params) {
     <>
       <section className="page-head">
         <div className="container narrow">
-          <Reveal>
+          <Reveal instant>
             <Link href="/service" className="crumb">Services</Link>
             <h1 className="h-xl" style={{ fontSize: "clamp(40px, 6vw, 72px)", marginTop: 16 }}>{s.title}</h1>
           </Reveal>
-          <Reveal delay={0.1}>
-            <div className="detail-img"><Image src={s.image} alt="" fill priority sizes="(max-width: 809px) 92vw, 760px" /></div>
+          <Reveal instant delay={0.1}>
+            <div className="detail-img"><Image src={s.image} alt="" fill priority fetchPriority="high" sizes="(max-width: 809px) 92vw, 760px" /></div>
           </Reveal>
           <Reveal className="prose">
             <p><strong>The idea:</strong> {s.idea}</p>

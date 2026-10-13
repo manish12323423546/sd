@@ -13,8 +13,8 @@ export default function ContactPage() {
     <>
       <section className="page-head">
         <div className="container">
-          <Reveal><h1 className="display center">{contactPage.heading[0]}<br />{contactPage.heading[1]}</h1></Reveal>
-          <Reveal delay={0.1}><ContactForm /></Reveal>
+          <Reveal instant><h1 className="display center">{contactPage.heading[0]}<br />{contactPage.heading[1]}</h1></Reveal>
+          <Reveal instant delay={0.1}><ContactForm /></Reveal>
         </div>
       </section>
       <section className="section">

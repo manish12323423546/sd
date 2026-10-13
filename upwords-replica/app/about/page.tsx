@@ -19,7 +19,7 @@ export default function AboutPage() {
       <section className="container clip-x" style={{ position: "relative" }}>
         <HeroWave className="hero__wave" />
         <div className="about-hero">
-          <Reveal>
+          <Reveal instant>
             <h1 className="h-xl">{about.heading[0]}<br />{about.heading[1]}</h1>
             <p className="body" style={{ maxWidth: 470, margin: "24px 0 32px" }}>{about.body}</p>
             <Button href="/contact">Book an Intro Call</Button>
@@ -35,9 +35,9 @@ export default function AboutPage() {
               ))}
             </div>
           </Reveal>
-          <Reveal delay={0.15}>
+          <Reveal instant delay={0.15}>
             <div className="about-hero__img">
-              <Image src="/img/coach-writing.webp" alt={`${brand.coach} at her desk`} fill priority sizes="(max-width: 809px) 92vw, 440px" style={{ objectPosition: "72% 50%" }} />
+              <Image src="/img/coach-writing.webp" alt={`${brand.coach} at her desk`} fill priority fetchPriority="high" sizes="(max-width: 809px) 92vw, 440px" style={{ objectPosition: "72% 50%" }} />
             </div>
           </Reveal>
         </div>

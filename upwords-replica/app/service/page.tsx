@@ -14,13 +14,13 @@ export default function ServicesPage() {
     <>
       <section className="page-head">
         <div className="container">
-          <Reveal>
+          <Reveal instant>
             <h1 className="h-xl">{servicesPage.heading[0]}<br />{servicesPage.heading[1]}</h1>
             <p>{servicesPage.body}</p>
             <Button href="/contact">Book an Intro Call</Button>
           </Reveal>
-          <Reveal delay={0.1}>
-            <div className="wide-img"><Image src="/img/services-hero.webp" alt="Two people talking at a window table" fill priority sizes="(max-width: 809px) 92vw, 1160px" /></div>
+          <Reveal instant delay={0.1}>
+            <div className="wide-img"><Image src="/img/services-hero.webp" alt="Two people talking at a window table" fill priority fetchPriority="high" sizes="(max-width: 809px) 92vw, 1160px" /></div>
           </Reveal>
         </div>
       </section>
