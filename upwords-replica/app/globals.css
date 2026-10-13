@@ -195,7 +195,7 @@ h1, h2, h3, h4 { font-weight: 400; }
 .card__more { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; }
 .filters { display: flex; gap: 12px; flex-wrap: wrap; }
 .filters button { height: 40px; padding: 0 18px; border-radius: 50px; border: 1px solid var(--line); background: transparent; cursor: pointer; transition: background-color .2s; }
-.filters button[aria-pressed="true"] { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.filters button[aria-pressed="true"], .filters button[aria-selected="true"] { background: var(--navy); color: var(--white); border-color: var(--navy); }
 .more-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
 
 /* FAQ */

@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
   experimental: { inlineCss: true },
   images: {
     formats: ["image/avif", "image/webp"],
+    qualities: [70, 75],
     deviceSizes: [390, 640, 828, 1080, 1440, 1920],
   },
   async headers() {

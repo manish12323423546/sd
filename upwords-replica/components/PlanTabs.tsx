@@ -16,7 +16,7 @@ export function PlanTabs({ heading, note, only }: { heading: string[]; note?: st
         {groups.length > 1 && (
           <div className="filters tabs" role="tablist" aria-label="Practice area">
             {groups.map((x) => (
-              <button key={x.key} role="tab" aria-selected={x.key === key} aria-pressed={x.key === key} onClick={() => setKey(x.key)}>{x.label}</button>
+              <button key={x.key} role="tab" aria-selected={x.key === key} onClick={() => setKey(x.key)}>{x.label}</button>
             ))}
           </div>
         )}

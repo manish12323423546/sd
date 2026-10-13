@@ -40,7 +40,7 @@ export default function HomePage() {
           </div>
           <Reveal instant delay={0.2} className="hero__media">
             <div className="hero__img">
-              <Image src="/img/jay-modi.webp" alt="Jay Modi, founder of Clarivyn Advisory, at IIM Kozhikode" fill priority fetchPriority="high" sizes="(max-width: 809px) 92vw, 1152px" style={{ objectPosition: "75% 35%" }} />
+              <Image src="/img/jay-modi.webp" alt="Jay Modi, founder of Clarivyn Advisory, at IIM Kozhikode" fill priority fetchPriority="high" quality={70} sizes="(max-width: 809px) 92vw, 1152px" style={{ objectPosition: "75% 35%" }} />
             </div>
             <HeroWave className="hero__wave" />
           </Reveal>
