@@ -63,6 +63,9 @@ function setImg($img, spec, alt) {
   if (alt !== undefined) $img.attr('alt', alt);
   if (widths && widths.length > 1) {
     $img.attr('srcset', widths.map((w, i) => `${i === 0 ? src : `${base}-p-${w}.${ext}`} ${w}w`).join(', '));
+    // Card images render at about 80vw on phones, 42vw on tablets and 400px on desktop (measured),
+    // so the browser can pick the 500/800 variants instead of the full-size file.
+    $img.attr('sizes', '(max-width: 767px) 80vw, (max-width: 991px) 42vw, 400px');
   } else {
     $img.removeAttr('srcset');
   }

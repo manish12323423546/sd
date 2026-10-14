@@ -10,7 +10,7 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"], variable: "--font-inter", display: "swap" });
 const staatliches = Staatliches({ subsets: ["latin"], weight: "400", variable: "--font-staatliches", display: "swap" });
-const gujarati = Noto_Sans_Gujarati({ subsets: ["gujarati", "latin"], weight: ["400", "500", "600", "700", "800"], variable: "--font-gujarati", display: "swap" });
+const gujarati = Noto_Sans_Gujarati({ subsets: ["gujarati"], weight: ["400", "700"], variable: "--font-gujarati", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
