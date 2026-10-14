@@ -301,8 +301,12 @@ function apply($, slug, opts = {}) {
   $('img.cta-image').each((i, img) => { setImg($(img), `/brand/cta-${(i % 2) + 1}.jpg`, i % 2 === 0 ? 'Family packs on the shelf' : 'Kitchenware at Hare Krishna Mall'); $(img).removeAttr('srcset'); });
 
   // ---- language toggle (Gujarati default / English) next to the cart in both header blocks ----
-  $('.header-section .w-commerce-commercecartwrapper').each((i, el) => {
+  $('.header-section .display-show-for-desktop .w-commerce-commercecartwrapper').each((i, el) => {
     $(el).before('<a href="#" class="hk-lang-toggle" data-lang-toggle data-no-i18n aria-label="Switch language / ભાષા બદલો" role="button"><span class="hk-lang-opt" data-lang="gu">ગુજરાતી</span><span class="hk-lang-opt" data-lang="en">EN</span></a>');
+  });
+  // On phones and tablets the pill would crowd the logo, so it sits at the top of the hamburger menu instead.
+  $('.header-section .header-menu-wrap .header-menu-wrapper').each((i, el) => {
+    $(el).prepend('<div class="hk-lang-row" data-no-i18n><span class="hk-lang-row-label">ભાષા / Language</span><a href="#" class="hk-lang-toggle" data-lang-toggle data-no-i18n aria-label="Switch language / ભાષા બદલો" role="button"><span class="hk-lang-opt" data-lang="gu">ગુજરાતી</span><span class="hk-lang-opt" data-lang="en">EN</span></a></div>');
   });
 
   // ---- currency in cart ----

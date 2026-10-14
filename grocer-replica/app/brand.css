@@ -49,7 +49,7 @@
 }
 
 .header-section .display-show-for-tablet .brand-logo {
-  height: 54px;
+  height: 64px;
 }
 
 .header-section .header-brand-block {
@@ -105,7 +105,7 @@
 
 @media (max-width: 479px) {
   .header-section .display-show-for-tablet .brand-logo {
-    height: 44px;
+    height: 58px;
   }
 }
 
@@ -204,4 +204,31 @@ html[lang="gu"] h2 {
 .header-section .header-menu-link,
 .header-section .header-dropdown-name {
   white-space: nowrap;
+}
+
+/* Language row at the top of the phone/tablet menu */
+.hk-lang-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 0 18px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--hk-moss);
+}
+
+.hk-lang-row-label {
+  color: var(--hk-cream);
+  font-family: var(--font-gujarati), var(--font-inter), sans-serif;
+  font-size: 15px;
+  opacity: 0.85;
+}
+
+.hk-lang-row .hk-lang-toggle {
+  margin-right: 0;
+  font-size: 15px;
+}
+
+.hk-lang-row .hk-lang-toggle .hk-lang-opt {
+  padding: 8px 14px;
 }
