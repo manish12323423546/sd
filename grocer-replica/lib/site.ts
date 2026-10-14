@@ -9,7 +9,7 @@ export const BRAND = {
   maps: { virpur: "https://share.google/QZFsR2hXAd1Kq7KJ9", lalsar: "https://share.google/FSxPSffdaZ2DnIuF4" },
 };
 export const SITE_NAME = BRAND.name;
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://grocer-replica.vercel.app";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://harekrishna-mall.vercel.app";
 /** Indexing is on. Set NEXT_PUBLIC_ALLOW_INDEXING=false to block search engines (for example on a staging deployment). */
 export const ALLOW_INDEXING = process.env.NEXT_PUBLIC_ALLOW_INDEXING !== "false";
 
