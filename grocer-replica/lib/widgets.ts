@@ -11,7 +11,7 @@ export const DEMO_FORM_NOTE = "Demo form: this replica is not connected to a bac
 export const DEMO_CART_NOTE = "Demo store: the cart and checkout are not connected, so nothing is added or charged.";
 
 export function toast(message: string) {
-  window.dispatchEvent(new CustomEvent("demo-toast", { detail: message }));
+  window.dispatchEvent(new CustomEvent("demo-toast", { detail: translate(message, getLang()) }));
 }
 
 function waitFor(el: Element, name: string): Promise<void> {
