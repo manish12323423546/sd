@@ -55,6 +55,13 @@ function newHref(h) {
   return h;
 }
 
+function imgSizes(cls) {
+  if (/details-image/.test(cls)) return '(max-width: 991px) 96vw, 960px';
+  if (/product-thubm/.test(cls)) return '(max-width: 991px) 90vw, 600px';
+  if (/story-image/.test(cls)) return '(max-width: 767px) 92vw, (max-width: 991px) 50vw, 570px';
+  return '(max-width: 767px) 92vw, (max-width: 991px) 47vw, 430px';
+}
+
 function setImg($img, spec, alt) {
   const [src, widths] = Array.isArray(spec) ? spec : [spec, null];
   const base = src.replace(/\.(webp|jpg|png)$/, '');
@@ -63,9 +70,10 @@ function setImg($img, spec, alt) {
   if (alt !== undefined) $img.attr('alt', alt);
   if (widths && widths.length > 1) {
     $img.attr('srcset', widths.map((w, i) => `${i === 0 ? src : `${base}-p-${w}.${ext}`} ${w}w`).join(', '));
-    // Card images render at about 80vw on phones, 42vw on tablets and 400px on desktop (measured),
-    // so the browser can pick the 500/800 variants instead of the full-size file.
-    $img.attr('sizes', '(max-width: 767px) 80vw, (max-width: 991px) 42vw, 400px');
+    // Rendered widths measured per image type at 412/768/1440 px, so the browser picks the right
+    // variant. hk-fill makes the image fill its box (sizes alone would also set its display width).
+    $img.attr('sizes', imgSizes($img.attr('class') || ''));
+    $img.addClass('hk-fill');
   } else {
     $img.removeAttr('srcset');
   }

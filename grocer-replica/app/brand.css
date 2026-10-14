@@ -232,3 +232,8 @@ html[lang="gu"] h2 {
 .hk-lang-row .hk-lang-toggle .hk-lang-opt {
   padding: 8px 14px;
 }
+
+/* Responsive brand images fill their card or column. Zero specificity, so any width the template sets wins. */
+:where(img.hk-fill) {
+  width: 100%;
+}
