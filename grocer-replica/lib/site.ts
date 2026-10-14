@@ -10,8 +10,8 @@ export const BRAND = {
 };
 export const SITE_NAME = BRAND.name;
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://grocer-replica.vercel.app";
-/** Search engines stay blocked until the site is on its own domain. Set NEXT_PUBLIC_ALLOW_INDEXING=true to allow indexing. */
-export const ALLOW_INDEXING = process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true";
+/** Indexing is on. Set NEXT_PUBLIC_ALLOW_INDEXING=false to block search engines (for example on a staging deployment). */
+export const ALLOW_INDEXING = process.env.NEXT_PUBLIC_ALLOW_INDEXING !== "false";
 
 export type PageMeta = { title: string; description: string; ogImage: string; bodyClass: string };
 

@@ -54,9 +54,10 @@ and submitting shows the same message. Add to cart, buy now, the cart modal and 
 
 ## Search engines
 
-The site is `noindex, nofollow` until it is on its own domain. Set
-`NEXT_PUBLIC_ALLOW_INDEXING=true` (and `NEXT_PUBLIC_SITE_URL`) in the environment to allow
-indexing.
+Indexing is on: every page carries `index, follow`, a canonical URL and Open Graph data, and
+`/robots.txt` and `/sitemap.xml` are generated from the route list (`app/robots.ts`, `app/sitemap.ts`).
+Set `NEXT_PUBLIC_ALLOW_INDEXING=false` to block search engines on a staging deployment, and
+`NEXT_PUBLIC_SITE_URL` to the final domain so canonical URLs and the sitemap point at it.
 
 ## Commands
 
