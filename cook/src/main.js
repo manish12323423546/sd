@@ -9,7 +9,7 @@ import { SUN_DIR, SUN_COLOR, installFog } from './shared.js';
 import { makeSky } from './sky.js';
 import { makeWater } from './water.js';
 import { makeStone, makeGround, makeFrond, makeCloth, makePlaster } from './textures.js';
-import { buildCity, groundHeight } from './city.js';
+import { buildCity, groundHeight, AVENUES, RINGS, PRECINCT, TEMPLE_ROT } from './city.js';
 import { buildBoats, buildVegetation, buildFlags, flagMaterial, buildBirds, buildPeople } from './props.js';
 import { SHOTS } from './shots.js';
 
@@ -55,7 +55,7 @@ sun.shadow.mapSize.set(4096, 4096);
 sun.shadow.bias = -0.0004;
 sun.shadow.normalBias = 0.6;
 scene.add(sun, sun.target);
-const hemi = new THREE.HemisphereLight(0x8090b0, 0x6a4026, 0.35);
+const hemi = new THREE.HemisphereLight(0x6f8cc8, 0x6a4026, 0.5);
 scene.add(hemi);
 
 function fitShadow(center, radius) {
@@ -116,6 +116,43 @@ function weather(m, scale) {
 }
 weather(mats.stone, 1); weather(mats.stone2, 1.3); weather(mats.plaster, 0.8);
 
+// streets & courtyards: dressed flagstones with dust in the joints (analytic street mask)
+{
+  const av = AVENUES.map((a) => a.toFixed(5)).join(',');
+  mats.terrain.onBeforeCompile = (sh) => {
+    sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nvarying vec3 vWP;')
+      .replace('#include <worldpos_vertex>', '#include <worldpos_vertex>\nvWP = (modelMatrix * vec4(transformed, 1.0)).xyz;');
+    sh.fragmentShader = sh.fragmentShader.replace('#include <common>', `#include <common>
+      varying vec3 vWP;
+      float ph(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+      float streetMask(vec2 p){
+        float r = length(p), th = atan(p.y, p.x), m = 0.0;
+        float A[8] = float[8](${av});
+        if (r > ${(PRECINCT * 0.9).toFixed(1)}) for (int i = 0; i < 8; i++){ float d = th - A[i]; d = atan(sin(d), cos(d)); if (cos(d) > 0.0) m = max(m, 1.0 - smoothstep(5.5, 7.5, abs(sin(d)) * r)); }
+        ${RINGS.map((rr) => `m = max(m, 1.0 - smoothstep(4.0, 6.0, abs(r - ${rr.toFixed(1)})));`).join(' ')}
+        vec2 q = vec2(p.x * ${Math.cos(TEMPLE_ROT).toFixed(5)} - p.y * ${Math.sin(TEMPLE_ROT).toFixed(5)}, p.x * ${Math.sin(TEMPLE_ROT).toFixed(5)} + p.y * ${Math.cos(TEMPLE_ROT).toFixed(5)});
+        m = max(m, 1.0 - smoothstep(${(PRECINCT - 2).toFixed(1)}, ${PRECINCT.toFixed(1)}, max(abs(q.x), abs(q.y))));
+        return m;
+      }`)
+      .replace('#include <map_fragment>', `#include <map_fragment>
+      {
+        float sm = streetMask(vWP.xz);
+        if (sm > 0.01) {
+          vec2 g = vWP.xz / vec2(1.3, 0.9);
+          float row = floor(g.y);
+          g.x += ph(vec2(row, 3.0)) * 1.0;
+          vec2 cell = floor(g), f = fract(g);
+          float edge = min(min(f.x, 1.0 - f.x) * 1.3, min(f.y, 1.0 - f.y) * 0.9);
+          float joint = smoothstep(0.02, 0.07, edge);
+          float tint = ph(cell);
+          vec3 slab = vec3(0.62, 0.47, 0.32) * (0.82 + 0.3 * tint) * (0.9 + 0.1 * sampledDiffuseColor.r / 0.5);
+          slab = mix(vec3(0.33, 0.24, 0.16), slab, joint);
+          diffuseColor.rgb = mix(diffuseColor.rgb, slab, sm * 0.9);
+        }
+      }`);
+  };
+}
+
 // ---------- world ----------
 const city = buildCity(mats);
 city.group.getObjectByName('terrain').material = mats.terrain;
@@ -173,7 +210,7 @@ const grade = new ShaderPass({
       // gentle S-curve for depth in the shadows
       c = mix(c, c * c * (3.0 - 2.0 * c), 0.35);
       // shadows lean warm umber, highlights lean gold; keep mids natural
-      c *= mix(vec3(0.94, 0.92, 0.98), vec3(1.0), smoothstep(0.0, 0.35, l));
+      c *= mix(vec3(0.90, 0.94, 1.04), vec3(1.0), smoothstep(0.0, 0.4, l));
       c = mix(c, c * vec3(1.04, 0.99, 0.9), smoothstep(0.55, 1.0, l));
       // saturation
       float l2 = dot(c, vec3(0.2126, 0.7152, 0.0722));

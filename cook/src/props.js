@@ -195,11 +195,12 @@ function frondGeo(rnd) {
 }
 
 function palm(bark, fronds, x, y, z, rnd) {
-  const h = 9 + rnd() * 9;
-  const lean = rnd() * 0.25;
+  const date = rnd() < 0.3;
+  const h = date ? 4 + rnd() * 4 : 9 + rnd() * 10;
+  const lean = date ? rnd() * 0.06 : rnd() * 0.28;
   const la = rnd() * Math.PI * 2;
   const segs = 10;
-  const trunk = new THREE.CylinderGeometry(0.22, 0.34, h, 7, segs);
+  const trunk = new THREE.CylinderGeometry(date ? 0.36 : 0.2, date ? 0.42 : 0.36, h, 7, segs);
   const p = trunk.attributes.position;
   for (let i = 0; i < p.count; i++) {
     const yy = p.getY(i) + h / 2;
@@ -213,14 +214,16 @@ function palm(bark, fronds, x, y, z, rnd) {
   const tone = 0.8 + rnd() * 0.3;
   bark.add(trunk, M(x, y - 0.3, z), [0.5 * tone, 0.4 * tone, 0.3 * tone]);
   const topX = x + Math.cos(la) * lean * h * 0.5, topZ = z + Math.sin(la) * lean * h * 0.5, topY = y - 0.3 + h;
-  const n = 11 + Math.floor(rnd() * 6);
+  const n = date ? 20 + Math.floor(rnd() * 8) : 13 + Math.floor(rnd() * 7);
   for (let i = 0; i < n; i++) {
     const a = (i / n) * Math.PI * 2 + rnd() * 0.4;
     const tilt = -0.2 + rnd() * 0.9; // upright to drooping
     const g = frondGeo(rnd);
     const c = 0.75 + rnd() * 0.45;
     const dead = rnd() < 0.1;
-    fronds.add(g, M(topX, topY, topZ, a, 1, 1, 1, Math.PI / 2 - 0.9 - tilt * 0.6), dead ? [1.3, 1.0, 0.55] : [c, c, c * 0.9]);
+    const fs = date ? 0.7 : 1.15 + rnd() * 0.3;
+    const up = date ? -0.3 + rnd() * 1.2 : tilt;
+    fronds.add(g, M(topX, topY, topZ, a, fs, fs, fs, Math.PI / 2 - 0.9 - up * 0.6), dead ? [1.3, 1.0, 0.55] : date ? [c * 0.9, c * 1.0, c * 0.95] : [c, c, c * 0.9]);
   }
   // coconut cluster
   bark.add(new THREE.IcosahedronGeometry(0.6, 0), M(topX, topY - 0.4, topZ), [0.35, 0.3, 0.12]);

@@ -149,6 +149,20 @@ function mainTemple(B, T, flags) {
     box(stone, chain(T, M(4, y, 0)), w, h, d, shade(c, 0.94));
     // moulding lip
     box(stone, chain(T, M(4, y + h - 0.3, 0)), w + 0.6, 0.3, d + 0.6, shade(c, 1.05));
+    // carved frieze: a running band of small niches/figures and a lotus cornice
+    for (const [ln, along, ax] of [[w, d / 2, 'z'], [w, -d / 2, 'z'], [d, w / 2, 'x'], [d, -w / 2, 'x']]) {
+      const n = Math.floor(ln / 1.4);
+      for (let i = 0; i < n; i++) {
+        const t = -ln / 2 + (i + 0.5) * (ln / n);
+        const fx = ax === 'z' ? 4 + t : 4 + along + Math.sign(along) * 0.12;
+        const fz = ax === 'z' ? along + Math.sign(along) * 0.12 : t;
+        const sx = ax === 'z' ? 0.8 : 0.3, sz = ax === 'z' ? 0.3 : 0.8;
+        stone.add(BOX, chain(T, M(fx, y + h * 0.42, fz, 0, sx, h * 0.38, sz)), shade(c, i % 2 ? 1.08 : 0.92), 'world');
+      }
+      const L = ax === 'z' ? [w + 0.4, 0.22, 0.5] : [0.5, 0.22, d + 0.4];
+      stone.add(BOX, chain(T, M(ax === 'z' ? 4 : 4 + along, y + h * 0.2, ax === 'z' ? along : 0, 0, ...L)), shade(c, 1.1), 'world');
+      stone.add(BOX, chain(T, M(ax === 'z' ? 4 : 4 + along, y + h * 0.66, ax === 'z' ? along : 0, 0, ...L)), shade(c, 1.1), 'world');
+    }
     y += h;
   }
   // front staircase toward the ghats (local -x)
@@ -350,9 +364,15 @@ function houses(B, flags) {
       const floors = Math.max(1, Math.round(1 + rnd() * 1.6 + near * 2.2));
       const fh = 3.2 + rnd() * 0.5;
       const H = floors * fh;
-      const sc = STONES[Math.floor(rnd() * (rnd() < 0.75 ? 4 : 5))];
-      const col = shade(sc, 0.9 + rnd() * 0.18);
-      const bat = rnd() < 0.7 ? plaster : stone;
+      const usePlaster = rnd() < 0.7;
+      const bat = usePlaster ? plaster : stone;
+      let col;
+      if (usePlaster) {
+        // lime washes: ochre, whitewash, rose, weathered grey, rare indigo
+        const wr = rnd();
+        const wash = wr < 0.34 ? [0.98, 0.74, 0.5] : wr < 0.62 ? [1.08, 1.02, 0.94] : wr < 0.78 ? [1.04, 0.74, 0.62] : wr < 0.93 ? [0.84, 0.78, 0.7] : [0.62, 0.7, 0.9];
+        col = shade(wash, 0.88 + rnd() * 0.16);
+      } else col = shade(STONES[Math.floor(rnd() * (rnd() < 0.75 ? 4 : 5))], 0.9 + rnd() * 0.18);
       const X = M(x, gy - 0.5, z, ang);
       // plinth & body
       box(bat, X, w + 0.8, 1.1, d + 0.8, shade(col, 0.9));

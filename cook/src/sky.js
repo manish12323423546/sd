@@ -35,7 +35,8 @@ export function makeSky() {
         float detail = fbm2(q * 3.2 - 7.0, 5);
         float streak = fbm2(vec2(q.x * 0.25, q.y * 3.0) + 11.0, 4);
         float dens = base * 1.0 + detail * 0.22 + streak * 0.25;
-        dens = smoothstep(0.1, 0.7, dens);
+        dens = smoothstep(0.05, 0.85, dens);
+        dens = dens * dens * (3.0 - 2.0 * dens) * 0.95;
         // fewer clouds right above the sun, a band at mid-height
         float band = smoothstep(0.015, 0.09, d.y) * (1.0 - smoothstep(0.35, 0.75, d.y));
         dens *= band;

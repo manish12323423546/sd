@@ -213,10 +213,10 @@ export function makePlaster(seed = 61) {
       const loss = smooth(0.74, 0.8, tfbm(u * 3, v * 3, 3, 5, seed + 13)) * 0.8;
       const course = (y % 37) < 2 ? 0.75 : 1.0;
       h[y * n + x] = fine * 0.5 + mot * 0.3 - loss * 0.4 * (course < 1 ? 1.4 : 1);
-      let r = 0.70, g = 0.47, b = 0.26;
+      let r = 0.74, g = 0.66, b = 0.55;
       const k = (0.82 + 0.3 * mot + 0.08 * fine) * (0.86 + 0.2 * streak);
       r *= k; g *= k; b *= k;
-      if (loss > 0) { const s = 0.78 * (loss < 1 ? 1 : course); r = r * (1 - loss) + 0.55 * s * loss; g = g * (1 - loss) + 0.36 * s * loss; b = b * (1 - loss) + 0.22 * s * loss; }
+      if (loss > 0) { const s = 0.78 * (loss < 1 ? 1 : course); r = r * (1 - loss) + 0.62 * s * loss; g = g * (1 - loss) + 0.42 * s * loss; b = b * (1 - loss) + 0.25 * s * loss; }
       const i = (y * n + x) * 4;
       img.data[i] = lin2srgb(r); img.data[i + 1] = lin2srgb(g); img.data[i + 2] = lin2srgb(b); img.data[i + 3] = 255;
     }

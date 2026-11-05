@@ -38,3 +38,11 @@ Shot list (src/shots.js): 01 hero bay · 02 aerial · 03 harbour · 04 temple lo
 - Anti-sun sky changed from grey-lavender to a rose Belt of Venus.
 - Clouds domain-warped into heaped masses instead of pure streaks.
 - Ghats shot re-blocked as an elevated three-quarter view down the flight of steps.
+
+## Round 5: materials and colour monotony (critic r4 weakest: materials 38; scores r4: comp 62 · scale 55 · mat 38 · colour 50 · sky 58 · water 60 · detail 45 · variety 40 · slop 80)
+- Plaster texture made neutral, with hue driven per house by lime washes: ochre 34%, whitewash 28%, rose 16%, weathered grey 15%, indigo 7%.
+- Analytic flagstone paving shader on avenues, ring roads and the temple courtyard (staggered slabs, per-slab tint, dusty joints).
+- Cooler sky-blue hemisphere fill and a teal-violet shadow lift in the grade, against the warm key.
+- Zenith darkened so upward shots (04, 10) read as dusk, not midday blue.
+- Palms: 30% short, dense date palms; coconut palms taller, with fuller fronds.
+- In progress for r6: softer cloud edges; carved niche friezes and lotus cornices on the temple platform.
