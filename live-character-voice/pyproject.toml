@@ -68,7 +68,7 @@ plugins = ["pydantic.mypy"]
 module = [
   "soundfile.*", "scipy.*", "jiwer.*", "librosa.*", "silero_vad.*", "faster_whisper.*",
   "speechbrain.*", "kokoro.*", "webvtt.*", "srt.*", "psutil.*", "matplotlib.*",
-  "torch.*", "uvicorn.*",
+  "torch.*", "uvicorn.*", "demucs.*",
 ]
 ignore_missing_imports = true
 

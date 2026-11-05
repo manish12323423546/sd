@@ -135,11 +135,17 @@ def load_user_bed(n: int, sr: int) -> F32 | None:
     return as_f32(bed / (rms(bed) + 1e-9) * db_to_gain(BED_RMS_DB))
 
 
+_CACHE: dict[tuple[str, str, str], F32] = {}
+_TTS: list[Any] = []
+
+
 def synth_lines(lines: list[dict[str, Any]]) -> list[F32]:
     from engine.providers.free.tts_kokoro import KokoroTTS
 
-    tts = KokoroTTS(lang_codes=tuple(sorted({v[0] for v in SOURCE_VOICES.values()})))
-    cache: dict[tuple[str, str, str], F32] = {}
+    if not _TTS:
+        _TTS.append(KokoroTTS(lang_codes=tuple(sorted({v[0] for v in SOURCE_VOICES.values()}))))
+    tts = _TTS[0]
+    cache = _CACHE
     out: list[F32] = []
     t0 = time.monotonic()
     for i, ln in enumerate(lines):
@@ -248,9 +254,17 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
     if clash:
         raise SystemExit(f"source voices must not be output voices: {clash}")
 
-    lines = expand_lines(script, args.minutes * 60 if args.minutes else None, args.seed)
-    print(f"{len(lines)} lines → synthesizing source commentary with Kokoro")
-    audios = synth_lines(lines)
+    target = args.minutes * 60 if args.minutes else None
+    est_target = target
+    while True:
+        lines = expand_lines(script, est_target, args.seed)
+        print(f"{len(lines)} lines → synthesizing source commentary with Kokoro")
+        audios = synth_lines(lines)
+        actual = sum(a.size / SR for a in audios) + sum(ln["gap_after_ms"] for ln in lines) / 1000
+        if target is None or est_target is None or actual >= target:
+            break
+        est_target *= target / actual * 1.03  # the words/s estimate was off; measure and extend
+        print(f"  measured {actual:.0f} s < target {target:.0f} s → extending")
 
     # place on the timeline
     t = script.get("lead_in_ms", 1500) / 1000

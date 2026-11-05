@@ -34,6 +34,8 @@ class SegmentConfig(_Strict):
     pad_ms: int = 120
     burst_db: float = 10.0
     split_sim: float = 0.45
+    level_split_db: float = 6.0  # level-change split at micro-pauses (M2)
+    speaker_split: bool = True  # soft speaker-change split (docs/04 §2), needs speaker model
 
 
 class AsrConfig(_Strict):

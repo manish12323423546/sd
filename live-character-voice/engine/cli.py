@@ -186,6 +186,164 @@ def cmd_bench(args: argparse.Namespace) -> int:
     return _run_script("bench_models.py", ["--clip", args.clip, "--runs", str(args.runs)])
 
 
+def _parse_voices(spec: str | None) -> dict[str, str]:
+    out: dict[str, str] = {}
+    for part in (spec or "").split(","):
+        if "=" in part:
+            k, v = part.split("=", 1)
+            out[k.strip()] = v.strip()
+    return out
+
+
+def _find_truth(clip: Path, explicit: str | None) -> Path | None:
+    if explicit:
+        return Path(explicit)
+    guess = clip.with_suffix(".truth.json")
+    return guess if guess.exists() else None
+
+
+def cmd_poc(args: argparse.Namespace) -> int:
+    import asyncio
+    import time
+    from datetime import datetime
+
+    from engine.config import load_engine_config
+    from engine.ingest.decode import probe
+    from engine.metrics.compute import compute_all
+    from engine.metrics.export import write_lines_csv
+    from engine.orchestrator import Models, Session
+    from engine.speakers.enroll import load_enroll
+
+    cfg = load_engine_config(Path(args.config) if args.config else None)
+    cfg.speed = args.speed
+    if args.source:
+        cfg.source = args.source
+    if args.speakers:
+        cfg.speaker.max_speakers = args.speakers
+    if args.asr_model:
+        cfg.asr.model = args.asr_model
+    if args.no_split:
+        cfg.segment.speaker_split = False
+    clip = Path(args.clip)
+    info = probe(clip)
+    run_id = f"{datetime.now():%Y%m%d-%H%M%S}_{clip.stem}" + (
+        f"_{args.label}" if args.label else ""
+    )
+    out = Path(args.out) / run_id
+    out.mkdir(parents=True, exist_ok=True)
+    stages = {"segment": set(), "understand": {"asr", "speaker"}}.get(
+        args.stop_after, {"asr", "speaker", "tts"}
+    )
+    print(
+        f"run {run_id}: clip {clip} ({info['duration']:.1f} s) speed {cfg.speed} "
+        f"stop-after {args.stop_after}"
+    )
+    models = Models.load(cfg, stages, torch_threads=args.torch_threads)
+    truth_path = _find_truth(clip, args.truth)
+    truth = json.loads(truth_path.read_text()) if truth_path else None
+    enroll = load_enroll(args.enroll) if args.enroll else None
+    session = Session(
+        cfg, clip, models, out, stop_after=args.stop_after, enroll=enroll,
+        voice_map=_parse_voices(args.voices), captions_path=args.captions,
+    )  # fmt: skip
+
+    async def _run() -> None:
+        sub = session.store.subscribe("session.metrics")
+
+        async def progress() -> None:
+            async for ev in sub:
+                d = ev.data
+                print(f"  t={session.clock.now():6.1f}s lines={d['lines']} "
+                      f"p50={d['p50_delay']}s p95={d['p95_delay']}s last={d['last_delay']}s",
+                      flush=True)  # fmt: skip
+
+        task = asyncio.create_task(progress())
+        await session.run()
+        sub.close()
+        await task
+
+    t0 = time.monotonic()
+    crashed = None
+    try:
+        asyncio.run(_run())
+    except Exception as e:
+        crashed = f"{type(e).__name__}: {e}"
+    wall = time.monotonic() - t0
+    rec = session.store.record
+    session.store.checkpoint(out / "record.json")
+    metrics = compute_all(rec, truth, float(info["duration"]))
+    metrics["run"] = {
+        "run_id": run_id,
+        "clip": str(clip),
+        "truth": str(truth_path) if truth_path else None,
+        "enroll": args.enroll,
+        "clip_duration_s": round(float(info["duration"]), 3),
+        "wall_s": round(wall, 2),
+        "live_wall_s": round((session.finished_wall or 0) - (session.started_wall or 0), 2),
+        "speed": cfg.speed,
+        "stop_after": args.stop_after,
+        "crashes": 0 if crashed is None else 1,
+        "crash": crashed,
+        "models": models.info,
+        "model_load_s": models.load_s,
+        "cpu_count": os.cpu_count(),
+        "config_hash": cfg.snapshot_hash(),
+        "max_speakers": cfg.speaker.max_speakers,
+        "voice_map": session.voice_map,
+    }
+    (out / "metrics.json").write_text(json.dumps(metrics, indent=2, default=str))
+    write_lines_csv(rec, out / "lines.csv")
+    if args.stop_after == "all" and not args.no_render and crashed is None:
+        from engine.render.mixer import render_all
+
+        render_all(rec, clip, out, cfg, separate=args.separate)
+    from engine.metrics.report import write_report
+
+    write_report(out, metrics, rec)
+    print(f"done in {wall:.1f} s → {out}")
+    print(json.dumps(_summary(metrics), indent=2))
+    if crashed:
+        print(f"CRASH: {crashed}")
+        return 2
+    return 0
+
+
+def _summary(m: dict[str, object]) -> dict[str, object]:
+    keys = ("delay", "wer", "speaker", "emotion", "segmentation", "coverage", "schedule")
+    out: dict[str, object] = {"wall_s": m["run"]["wall_s"]}  # type: ignore[index]
+    for k in keys:
+        if k in m:
+            v = m[k]
+            if k == "delay" and isinstance(v, dict):
+                v = {"ready": v["delay_ready"], "drift": v["drift_slope_s_per_s"]}
+            if k == "emotion" and isinstance(v, dict):
+                v = {kk: vv for kk, vv in v.items() if kk != "confusion"}
+            out[k] = v
+    return out
+
+
+def cmd_report(args: argparse.Namespace) -> int:
+    from engine.metrics.compute import compute_all
+    from engine.metrics.export import write_lines_csv
+    from engine.metrics.report import write_report
+    from engine.record.store import RecordStore
+
+    run = Path(args.run)
+    rec = RecordStore.load(run / "record.json")
+    old = json.loads((run / "metrics.json").read_text()) if (run / "metrics.json").exists() else {}
+    run_info = old.get("run", {})
+    truth_path = _find_truth(Path(rec.clip_path), args.truth or run_info.get("truth"))
+    truth = json.loads(truth_path.read_text()) if truth_path else None
+    duration = float(run_info.get("clip_duration_s") or (truth or {}).get("duration") or 0.0)
+    metrics = compute_all(rec, truth, duration)
+    metrics["run"] = run_info
+    (run / "metrics.json").write_text(json.dumps(metrics, indent=2, default=str))
+    write_lines_csv(rec, run / "lines.csv")
+    write_report(run, metrics, rec)
+    print(f"report → {run / 'report.md'}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="engine.cli", description="Live Sports Character Voice engine")
     sub = p.add_subparsers(dest="command", required=True)
@@ -199,6 +357,29 @@ def build_parser() -> argparse.ArgumentParser:
     b.add_argument("--clip", default="data/clips/synthetic_match.mp4")
     b.add_argument("--runs", type=int, default=10)
     b.set_defaults(func=cmd_bench)
+    pc = sub.add_parser("poc", help="run the POC on a clip at live speed")
+    pc.add_argument("--clip", required=True)
+    pc.add_argument("--truth", default=None, help="default: <clip>.truth.json if present")
+    pc.add_argument("--enroll", default=None)
+    pc.add_argument("--speakers", type=int, default=None)
+    pc.add_argument("--voices", default=None, help="S1=bm_george,S2=am_adam")
+    pc.add_argument("--source", choices=["asr", "captions"], default=None)
+    pc.add_argument("--captions", default=None)
+    pc.add_argument("--speed", type=float, default=1.0)
+    pc.add_argument("--separate", action="store_true", help="also render a Demucs clean demo")
+    pc.add_argument("--out", default="outputs")
+    pc.add_argument("--label", default="")
+    pc.add_argument("--config", default=None)
+    pc.add_argument("--asr-model", default=None)
+    pc.add_argument("--torch-threads", type=int, default=None)
+    pc.add_argument("--no-split", action="store_true", help="disable speaker-change split")
+    pc.add_argument("--no-render", action="store_true")
+    pc.add_argument("--stop-after", choices=["segment", "understand", "tts", "all"], default="all")
+    pc.set_defaults(func=cmd_poc)
+    rp = sub.add_parser("report", help="recompute metrics + report from record.json")
+    rp.add_argument("--run", required=True)
+    rp.add_argument("--truth", default=None)
+    rp.set_defaults(func=cmd_report)
     return p
 
 
