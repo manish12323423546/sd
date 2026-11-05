@@ -15,19 +15,28 @@ SYS_PKGS := ffmpeg espeak-ng libsndfile1 sox
 setup: setup-system setup-python setup-web
 
 setup-system:
-	@missing=""; for p in $(SYS_PKGS); do dpkg -s $$p >/dev/null 2>&1 || missing="$$missing $$p"; done; \
-	if [ -n "$$missing" ]; then \
-	  echo "Installing:$$missing"; \
-	  SUDO=$$( [ "$$(id -u)" = 0 ] || echo sudo ); \
-	  $$SUDO apt-get update -y && $$SUDO apt-get install -y $$missing; \
-	else echo "System packages OK"; fi
+	@if [ "$$(uname)" = "Darwin" ]; then \
+	  command -v brew >/dev/null || { echo "Install Homebrew first: https://brew.sh"; exit 1; }; \
+	  brew install ffmpeg espeak-ng uv node; \
+	else \
+	  missing=""; for p in $(SYS_PKGS); do dpkg -s $$p >/dev/null 2>&1 || missing="$$missing $$p"; done; \
+	  if [ -n "$$missing" ]; then \
+	    echo "Installing:$$missing"; \
+	    SUDO=$$( [ "$$(id -u)" = 0 ] || echo sudo ); \
+	    $$SUDO apt-get update -y && $$SUDO apt-get install -y $$missing; \
+	  else echo "System packages OK"; fi; \
+	fi
 
 $(PY):
 	uv venv --python $(PY_VERSION) $(VENV)
 
 # CPU torch first (so nothing pulls the CUDA build), then the project with all extras.
 setup-python: $(PY)
-	uv pip install --python $(PY) --index-url $(TORCH_INDEX) torch torchaudio
+	@if [ "$$(uname)" = "Darwin" ]; then \
+	  uv pip install --python $(PY) torch torchaudio; \
+	else \
+	  uv pip install --python $(PY) --index-url $(TORCH_INDEX) torch torchaudio; \
+	fi
 	uv pip install --python $(PY) --extra-index-url $(TORCH_INDEX) --index-strategy unsafe-best-match \
 	  -e ".[models,api,dev]"
 
