@@ -90,7 +90,7 @@ button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px s
   <header>
     <div class="kicker"><span class="dot" aria-hidden="true"></span> Try it · works in your browser · sound on</div>
     <h1>Live Character Voice</h1>
-    <p class="lede">Press start. Each commentator is re-spoken in the character voice you choose, with the emotion of the moment, while the crowd keeps going. Change a voice while the match plays and the next line uses it.</p>
+    <p class="lede">Press start. Voices now come from Fish S2.1 with emotion, and the new voice starts a median 1.8 s after each line ends. Each commentator is re-spoken in the character voice you choose, with the emotion of the moment, while the crowd keeps going. Change a voice while the match plays and the next line uses it.</p>
   </header>
 
   <section class="stage" aria-label="Player">
@@ -115,8 +115,13 @@ button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px s
         <div id="speakers"><p class="note">Loading…</p></div>
         <div class="toast" id="toast" role="status"></div>
         <div class="mode">
+          <div class="kicker">Voice engine</div>
+          <label><input type="radio" name="engine" id="eng-fish" value="fish" checked> Fish S2.1: expressive, with emotion tags (streamed, voice starts about 1.8 s after the line)</label>
+          <label><input type="radio" name="engine" id="eng-kokoro" value="kokoro"> Kokoro: fully local, plainer (voice about 4 s after the line)</label>
+        </div>
+        <div class="mode">
           <div class="kicker">Timing</div>
-          <label><input type="radio" name="mode" id="mode-live" value="live" checked> As measured live: each voice starts when the engine had it ready (about 4 s after the line).</label>
+          <label><input type="radio" name="mode" id="mode-live" value="live" checked> As measured live: each voice starts when the engine had it ready.</label>
           <label><input type="radio" name="mode" id="mode-sync" value="sync"> Lip-synced preview: each voice starts on its original moment.</label>
         </div>
       </div>
@@ -127,9 +132,9 @@ button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px s
   <section aria-labelledby="h-results">
     <h2 id="h-results">Measured results</h2>
     <div class="board">
-      <div class="panel stat"><span class="k">median delay · target ≤ 4.0 s</span><span class="v">4.14 s</span><span class="pill miss">0.14 s over</span></div>
-      <div class="panel stat"><span class="k">p95 delay · target ≤ 7.0 s</span><span class="v">5.42 s</span><span class="pill ok">met</span></div>
-      <div class="panel stat"><span class="k">word error rate · ≤ 12 %</span><span class="v">10.9 %</span><span class="pill ok">met</span></div>
+      <div class="panel stat"><span class="k">voice starts after line · target ≤ 4.0 s</span><span class="v">1.80 s</span><span class="pill ok">was 4.14 s</span></div>
+      <div class="panel stat"><span class="k">voice playing (incl. queue) · median</span><span class="v">2.83 s</span><span class="pill ok">was 5.26 s</span></div>
+      <div class="panel stat"><span class="k">word error rate · ≤ 12 %</span><span class="v">6.9 %</span><span class="pill ok">was 10.9 %</span></div>
       <div class="panel stat"><span class="k">speaker accuracy · ≥ 90 %</span><span class="v">92.9 %</span><span class="pill ok">met</span></div>
       <div class="panel stat"><span class="k">20-min run · p95 ≤ 6.0 s</span><span class="v">5.11 s</span><span class="pill ok">0 crashes</span></div>
       <div class="panel stat"><span class="k">voice switches on next line</span><span class="v">56 / 56</span><span class="pill ok">met</span></div>
@@ -179,10 +184,11 @@ make serve</span>
   const video = $("video");
   const DUCK = 0.25, ATTACK = 0.08, HOLD = 0.15;
   let data = null, ctx = null, origGain = null, voiceGain = null, buffers = {};
-  let choice = {}, mode = "live", scheduled = new Map(), activeUntil = 0, ticking = null, lastRow = "";
+  let choice = {}, mode = "live", engine = "fish", scheduled = new Map(), activeUntil = 0, ticking = null, lastRow = "";
 
   const fmt = (t) => { const s = Math.max(0, Math.floor(t || 0)); return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); };
-  const startAt = (l) => (mode === "live" ? l.play_at : l.t_start);
+  const startAt = (l) => (mode === "live" ? (engine === "fish" ? l.play_at_fish : l.play_at) : l.t_start);
+  const key = (voice) => (engine === "fish" ? "f_" : "v_") + voice;
 
   fetch("lines.json").then((r) => r.json()).then((d) => {
     data = d;
@@ -241,10 +247,12 @@ make serve</span>
     voiceGain.connect(ctx.destination);
     origGain.gain.value = +$("orig").value;
     voiceGain.gain.value = +$("voice").value;
-    await Promise.all(data.voices.map(async (v) => {
-      const res = await fetch(`v_${v.id}.mp3`);
-      buffers[v.id] = await ctx.decodeAudioData(await res.arrayBuffer());
+    const load = (prefix) => Promise.all(data.voices.map(async (v) => {
+      const res = await fetch(`${prefix}${v.id}.mp3`);
+      buffers[prefix + v.id] = await ctx.decodeAudioData(await res.arrayBuffer());
     }));
+    await load(engine === "fish" ? "f_" : "v_");
+    load(engine === "fish" ? "v_" : "f_").catch(() => {});
   }
 
   function duck(start, end) {
@@ -274,7 +282,9 @@ make serve</span>
       for (const l of data.lines) {
         const at = startAt(l);
         if (scheduled.has(l.id) || at < t - 0.3 || at > t + 0.6) continue;
-        const voice = choice[l.speaker], seg = l.seg[voice], buf = buffers[voice];
+        const voice = choice[l.speaker];
+        const seg = engine === "fish" ? (l.seg_fish || {})[voice] : l.seg[voice];
+        const buf = buffers[key(voice)];
         if (!seg || !buf) continue;
         const when = ctx.currentTime + Math.max(0, at - t);
         const node = ctx.createBufferSource();
@@ -319,6 +329,10 @@ make serve</span>
   video.addEventListener("ended", () => { stopAll(); $("playpause").textContent = "▶ Play"; });
   $("orig").addEventListener("input", (e) => { if (origGain) origGain.gain.setTargetAtTime(+e.target.value, ctx.currentTime, 0.02); });
   $("voice").addEventListener("input", (e) => { if (voiceGain) voiceGain.gain.setTargetAtTime(+e.target.value, ctx.currentTime, 0.02); });
+  document.querySelectorAll('input[name="engine"]').forEach((r) => r.addEventListener("change", (e) => {
+    engine = e.target.value;
+    stopAll();
+  }));
   document.querySelectorAll('input[name="mode"]').forEach((r) => r.addEventListener("change", (e) => {
     mode = e.target.value;
     $("badge").textContent = mode === "live" ? "● LIVE VOICES" : "● LIP-SYNCED";
