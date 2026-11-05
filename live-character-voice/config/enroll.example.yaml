@@ -1,0 +1,9 @@
+# Optional speaker enrollment (docs/04 §4). 5–15 s reference spans per commentator,
+# in media seconds of the clip. Centroids are initialised from these; names come from here.
+speakers:
+  - name: Commentator A
+    t_start: 0.0
+    t_end: 8.0
+  - name: Commentator B
+    t_start: 10.0
+    t_end: 18.0

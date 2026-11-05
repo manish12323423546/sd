@@ -1,0 +1,35 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Node
+web/node_modules/
+web/dist/
+web/test-results/
+web/playwright-report/
+
+# Models (downloaded into ~/.cache, never committed)
+models/
+*.pth
+*.pt
+*.onnx
+*.bin
+*.safetensors
+
+# Run outputs: commit only report/metrics/csv/png + small demos (docs/09 §9.6)
+outputs/**/tts/
+outputs/**/run.log
+*.wav
+!media/previews/*.wav
+
+# Synthetic clips are regenerated (make synth); large media are not committed
+data/clips/*
+!data/clips/.gitkeep
+data/sfx/*
+!data/sfx/.gitkeep
+web/*.tsbuildinfo

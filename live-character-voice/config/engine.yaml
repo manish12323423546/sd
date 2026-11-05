@@ -1,0 +1,52 @@
+# Engine configuration. Values are starting points (docs/06 §6.2); tune with measurements
+# and record every change in docs/BUILD_LOG.md.
+mode: poc                # poc | pilot
+source: asr              # asr | captions
+speed: 1.0               # 1.0 = honest live speed (the only speed allowed for reported numbers)
+audio:
+  analysis_sr: 16000
+  chunk_ms: 500
+vad:
+  threshold: 0.5
+segment:
+  end_silence_ms: 350
+  max_line_s: 6.0
+  min_line_ms: 250
+  pad_ms: 120
+  burst_db: 10
+  split_sim: 0.45
+asr:
+  provider: faster_whisper
+  model: small.en
+  compute_type: int8
+  cpu_threads: 4
+  beam_size: 1
+  fallback_model: base.en
+speaker:
+  provider: ecapa
+  max_speakers: 2         # 3 for pilot
+  assign_sim: 0.55
+  ema_alpha: 0.1
+  enroll_file: null
+emotion:
+  provider: prosody
+  weights: {loudness: 0.45, pitch: 0.30, rate: 0.15, text: 0.10}
+  thresholds: {calm: -0.5, excited: 0.8, peak: 1.8}
+tts:
+  provider: kokoro
+  workers: 2
+  lang_code: a
+  voice_map: {S1: bm_george, S2: am_adam, S3: af_bella}
+style:
+  pitch_shift: false      # docs/08 §8.3: off by default (CPU cost)
+schedule:
+  mode: fast
+  gap_ms: 80
+  lag_soft_s: 3.5
+  lag_hard_s: 6.0
+  max_speedup: 1.15
+render:
+  out_sr: 48000
+  duck_gain: 0.25
+  duck_ramp_ms: 80
+  voice_gain_db: 0.0

@@ -1,0 +1,36 @@
+# Live Sports Character Voice — lint + unit tests only (no model downloads).
+# TO ACTIVATE: move this file to <repo root>/.github/workflows/ (Claude Code cannot push workflow files).
+name: live-character-voice CI
+
+on:
+  push:
+    paths: ["live-character-voice/**", ".github/workflows/live-character-voice-ci.yml"]
+  pull_request:
+    paths: ["live-character-voice/**", ".github/workflows/live-character-voice-ci.yml"]
+
+defaults:
+  run:
+    working-directory: live-character-voice
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: System packages
+        run: sudo apt-get update -y && sudo apt-get install -y ffmpeg espeak-ng libsndfile1
+      - uses: astral-sh/setup-uv@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: live-character-voice/web/package-lock.json
+      - name: Install (light, no torch/models)
+        run: make setup-ci PY_VERSION=3.12 && make setup-web
+      - name: Lint
+        run: make lint
+      - name: Unit tests
+        run: make test

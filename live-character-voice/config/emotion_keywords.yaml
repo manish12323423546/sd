@@ -1,0 +1,15 @@
+# Text cues for the prosody emotion provider (docs/04 §5). Weight is added to text_cue_score.
+keywords:
+  goal: 1.0
+  score: 0.6
+  scores: 0.6
+  unbelievable: 0.8
+  "what a": 0.6
+  save: 0.5
+  wow: 0.6
+  "yes": 0.5
+  "no way": 0.7
+  incredible: 0.7
+  brilliant: 0.4
+exclamation_weight: 0.5
+max_score: 2.0

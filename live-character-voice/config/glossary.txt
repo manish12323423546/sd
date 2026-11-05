@@ -1,0 +1,10 @@
+# Invented team and player names used by the synthetic clip (one per line).
+# Passed to ASR as part of the initial prompt and protected from text normalisation.
+Riverside Rovers
+Northgate United
+Okafor
+Lindqvist
+Moreau
+Tanaka
+Delgado
+Brennan

@@ -1,0 +1,80 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "live-character-voice"
+version = "0.1.0"
+description = "Live Sports Character Voice: re-speak sports commentary in original character voices, live."
+requires-python = ">=3.11,<3.13"   # kokoro/misaki require < 3.13
+license = { text = "Proprietary (project code); third-party licences in THIRD_PARTY_LICENSES.md" }
+# Core: light dependencies needed by unit tests, CI and the CLI (no model libraries).
+dependencies = [
+  "numpy>=1.26,<3",
+  "pydantic>=2.6,<3",
+  "PyYAML>=6.0",
+  "soundfile>=0.12",
+  "scipy>=1.11",
+  "jiwer>=3.0",
+  "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+# Model + audio libraries (need CPU torch installed first from download.pytorch.org/whl/cpu).
+models = [
+  "librosa>=0.10",
+  "silero-vad>=5.1",
+  "faster-whisper>=1.1",
+  "speechbrain>=1.0",
+  "kokoro>=0.9.4",
+  "webvtt-py>=0.5",
+  "srt>=3.5",
+  "psutil>=5.9",
+]
+# Pilot web API.
+api = [
+  "fastapi>=0.110",
+  "uvicorn[standard]>=0.29",
+  "python-multipart>=0.0.9",
+  "websockets>=12",
+]
+dev = [
+  "pytest>=8",
+  "pytest-asyncio>=0.23",
+  "ruff>=0.5",
+  "mypy>=1.10",
+  "types-PyYAML",
+]
+
+[tool.setuptools.packages.find]
+include = ["engine*", "app*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["web", "outputs", "data"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003"]  # allow unicode dashes/arrows in docs strings
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["engine", "app"]
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = [
+  "soundfile.*", "scipy.*", "jiwer.*", "librosa.*", "silero_vad.*", "faster_whisper.*",
+  "speechbrain.*", "kokoro.*", "webvtt.*", "srt.*", "psutil.*", "matplotlib.*",
+  "torch.*", "uvicorn.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+markers = ["slow: uses real models / downloads (run with `make test-slow`)"]
+addopts = "-m 'not slow'"

@@ -1,0 +1,41 @@
+# Approved voice catalog (docs/08 §8.2). Only built-in Kokoro-82M voices (Apache-2.0).
+# Display names are our own invented characters; never real people or known characters.
+# M1 confirms each voice_id exists in the downloaded model before it is used.
+preview_text: "And that's a brilliant start to the second half!"
+voices:
+  - voice_id: bm_george
+    name: The Veteran
+    description: Warm, measured British broadcaster
+    lang_code: b
+    base_speed: 1.0
+    enabled_in_pilot: true
+  - voice_id: am_adam
+    name: Hype Host
+    description: Energetic American host
+    lang_code: a
+    base_speed: 1.0
+    enabled_in_pilot: true
+  - voice_id: af_bella
+    name: Spark
+    description: Bright, quick, playful
+    lang_code: a
+    base_speed: 1.0
+    enabled_in_pilot: true
+  - voice_id: am_michael
+    name: Coach
+    description: Steady, confident analyst
+    lang_code: a
+    base_speed: 1.0
+    enabled_in_pilot: true
+  - voice_id: bf_emma
+    name: The Pro
+    description: Clear, polished British presenter
+    lang_code: b
+    base_speed: 1.0
+    enabled_in_pilot: false
+  - voice_id: bm_lewis
+    name: Night Shift
+    description: Deep, calm late-night voice
+    lang_code: b
+    base_speed: 1.0
+    enabled_in_pilot: false
