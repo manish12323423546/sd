@@ -45,7 +45,7 @@ def mem_stats(csv_path: Path) -> dict[str, float]:
         "end_mb": round(float(m[-1]), 1),
         "growth_after_warmup_mb": round(growth, 1),
         "late_slope_mb_per_min": round(late_slope * 60, 2),
-        "troughs_mb": [int(round(float(x))) for x in tr[:, 1]] if len(tr) else [],
+        "troughs_mb": [round(float(x)) for x in tr[:, 1]] if len(tr) else [],
         "samples": int(m.size),
     }
 
