@@ -227,47 +227,60 @@ def enroll_spans(truth: list[dict[str, Any]], need_s: float = 8.0) -> dict[str, 
     }
 
 
+FONT_CANDIDATES = [
+    "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf",  # Debian/Ubuntu
+    "/System/Library/Fonts/Supplemental/Courier New Bold.ttf",  # macOS
+    "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+    "/Library/Fonts/Arial Bold.ttf",
+    "C:/Windows/Fonts/consolab.ttf",
+]
+
+
+def _ffmpeg_has(kind: str, name: str) -> bool:
+    """True if this ffmpeg build has the filter/encoder (Homebrew builds may lack drawtext/ass)."""
+    out = subprocess.run(["ffmpeg", "-hide_banner", f"-{kind}"], capture_output=True, text=True)
+    return any(line.split()[1:2] == [name] for line in out.stdout.splitlines() if line.strip())
+
+
+def _video_codec() -> list[str]:
+    if _ffmpeg_has("encoders", "libx264"):
+        return ["-c:v", "libx264", "-preset", "veryfast", "-crf", "30"]
+    if _ffmpeg_has("encoders", "h264_videotoolbox"):  # macOS hardware encoder
+        return ["-c:v", "h264_videotoolbox", "-b:v", "2500k"]
+    return ["-c:v", "mpeg4", "-q:v", "5"]
+
+
 def render_video(audio_wav: Path, ass: Path, duration: float, out: Path) -> None:
-    font = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf"
-    clock = (
-        f"drawtext=fontfile={font}:text='%{{pts\\:hms}}':x=40:y=40:fontsize=44:"
-        "fontcolor=white:box=1:boxcolor=black@0.6:boxborderw=12"
-    )
-    vf = f"{clock},subtitles={ass.as_posix()}"
-    cmd = [
-        "ffmpeg",
-        "-y",
-        "-hide_banner",
-        "-loglevel",
-        "error",
-        "-f",
-        "lavfi",
-        "-i",
-        f"testsrc2=size=1280x720:rate=25:duration={duration:.3f}",
-        "-i",
-        str(audio_wav),
-        "-vf",
-        vf,
-        "-c:v",
-        "libx264",
-        "-preset",
-        "veryfast",
-        "-crf",
-        "30",
-        "-pix_fmt",
-        "yuv420p",
-        "-c:a",
-        "aac",
-        "-b:a",
-        "160k",
-        "-ar",
-        str(OUT_SR),
-        "-shortest",
-        "-movflags",
-        "+faststart",
-        str(out),
-    ]
-    subprocess.run(cmd, check=True)
+    """Test pattern + burned-in clock and speaker letter when this ffmpeg supports it; plain test
+    pattern otherwise (the overlay only helps a human judge sync, the engine never sees it)."""
+    filters = []
+    font = next((f for f in FONT_CANDIDATES if Path(f).exists()), None)
+    if _ffmpeg_has("filters", "drawtext") and font:
+        filters.append(
+            f"drawtext=fontfile='{font}':text='%{{pts\\:hms}}':x=40:y=40:fontsize=44:"
+            "fontcolor=white:box=1:boxcolor=black@0.6:boxborderw=12"
+        )
+    if _ffmpeg_has("filters", "subtitles"):
+        filters.append(f"subtitles=filename='{ass.as_posix()}'")
+    base = [
+        "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
+        "-f", "lavfi", "-i", f"testsrc2=size=1280x720:rate=25:duration={duration:.3f}",
+        "-i", str(audio_wav),
+    ]  # fmt: skip
+    tail = [
+        *_video_codec(), "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k",
+        "-ar", str(OUT_SR), "-shortest", "-movflags", "+faststart", str(out),
+    ]  # fmt: skip
+    if filters:
+        res = subprocess.run([*base, "-vf", ",".join(filters), *tail])
+        if res.returncode == 0:
+            return
+        print("  video overlay not supported by this ffmpeg build — rendering without it")
+    else:
+        print(
+            "  this ffmpeg has no drawtext/subtitles — rendering the test pattern without overlay"
+        )
+    subprocess.run([*base, *tail], check=True)
 
 
 def build(args: argparse.Namespace) -> dict[str, Any]:
