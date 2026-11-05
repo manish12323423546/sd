@@ -12,6 +12,13 @@ class VoiceOut(BaseModel):
     lang: str
     preview_url: str
     custom: bool = False
+    tier: str = "builtin"  # builtin | instant | pro
+    score: int | None = None  # pro voices: quality-test similarity, 0–100
+
+
+class SayRequest(BaseModel):
+    text: str = Field(min_length=1, max_length=300)
+    emotion: str = "neutral"
 
 
 class ClipOut(BaseModel):

@@ -124,16 +124,25 @@ class FishTTS:
 
         base = self._base_speed.get(voice_id, 1.0)
         speed = float(np.clip(style.speed / base, 0.85, 1.25))
-        ref_audio, ref_text = self._reference(voice_id)
-        body = {
+        from engine.voices_custom import fish_model_id, is_custom, references
+
+        if is_custom(voice_id):
+            refs = references(voice_id, str(style.emotion))  # mood-matched (pro voices)
+        else:
+            refs = [self._reference(voice_id)]
+        body: dict[str, Any] = {
             "text": EMOTION_TAGS.get(style.emotion, "") + text,
             "format": "pcm",
             "sample_rate": SAMPLE_RATE,
             "latency": self.latency,
             "normalize": True,
             "prosody": {"speed": round(speed, 3), "volume": 0},
-            "references": [{"audio": ref_audio, "text": ref_text}],
+            "references": [{"audio": a, "text": t} for a, t in refs],
         }
+        model_id = fish_model_id(voice_id) if is_custom(voice_id) else None
+        if model_id:  # a trained Fish voice (paid accounts) replaces the references
+            body["reference_id"] = model_id
+            body.pop("references")
         headers = {
             "Authorization": f"Bearer {self.key}",
             "model": self.model,

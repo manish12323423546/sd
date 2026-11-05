@@ -66,7 +66,12 @@ def catalog_entries() -> list[VoiceEntry]:
         VoiceEntry(
             voice_id=m["voice_id"],
             name=m["name"],
-            description=f"Your cloned voice ({m['seconds']:.0f} s sample)",
+            description=(
+                f"Pro clone · {len([r for rs in m['refs'].values() for r in rs])} "
+                f"references across calm, neutral and excited"
+                if m.get("tier") == "pro"
+                else f"Instant clone · {m['seconds']:.0f} s sample"
+            ),
             lang_code="a",
             base_speed=1.0,
             enabled_in_pilot=True,
@@ -79,6 +84,36 @@ def reference(voice_id: str) -> tuple[bytes, str]:
     d = _dir(voice_id)
     meta = json.loads((d / "meta.json").read_text())
     return (d / "ref.mp3").read_bytes(), str(meta["transcript"])
+
+
+def references(voice_id: str, emotion: str = "neutral") -> list[tuple[bytes, str]]:
+    """Reference clips for one line. Pro voices return the references recorded in the matching
+    mood (peak → excited; missing moods → neutral); instant voices return their single clip."""
+    d = _dir(voice_id)
+    meta = json.loads((d / "meta.json").read_text())
+    refs = meta.get("refs")
+    if not refs:
+        return [((d / "ref.mp3").read_bytes(), str(meta["transcript"]))]
+    # Measured (BUILD_LOG V2.3): the steady "neutral" references keep the voice most like the
+    # speaker in EVERY mood (excited line 0.69 vs 0.33 with excited references, which made the
+    # identity drift); the mood itself comes from Fish's emotion tags. Mood references are used
+    # only if a voice opts in with "mood_refs": true.
+    mood = {"peak": "excited"}.get(emotion, emotion) if meta.get("mood_refs") else "neutral"
+    chosen = refs.get(mood) or refs.get("neutral") or next(v for v in refs.values() if v)
+    return [((d / r["file"]).read_bytes(), str(r["text"])) for r in chosen]
+
+
+def fish_model_id(voice_id: str) -> str | None:
+    try:
+        meta = json.loads((_dir(voice_id) / "meta.json").read_text())
+    except KeyError:
+        return None
+    fm = meta.get("fish_model") or {}
+    return str(fm["model_id"]) if fm.get("trained") and fm.get("model_id") else None
+
+
+def get_meta(voice_id: str) -> dict[str, Any]:
+    return dict(json.loads((_dir(voice_id) / "meta.json").read_text()))
 
 
 def best_window(audio: np.ndarray, sr: int, length_s: float = MAX_S) -> float:

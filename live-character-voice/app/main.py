@@ -18,7 +18,15 @@ from fastapi.responses import FileResponse, HTMLResponse, PlainTextResponse, Str
 from fastapi.staticfiles import StaticFiles
 
 from app import ws as ws_handler
-from app.schemas import ClipOut, CreateSession, SessionCreated, SessionStatus, SpeakerOut, VoiceOut
+from app.schemas import (
+    ClipOut,
+    CreateSession,
+    SayRequest,
+    SessionCreated,
+    SessionStatus,
+    SpeakerOut,
+    VoiceOut,
+)
 from app.sessions import (
     CLIP_EXT,
     CLIPS_DIR,
@@ -29,9 +37,16 @@ from app.sessions import (
     SessionManager,
     list_clips,
 )
+from engine import voices_pro
 from engine.env import load_env
 from engine.metrics.export import lines_csv
-from engine.voices_custom import VoiceUploadError, add_custom_voice, remove_custom_voice
+from engine.voices_custom import (
+    CUSTOM_DIR,
+    VoiceUploadError,
+    add_custom_voice,
+    get_meta,
+    remove_custom_voice,
+)
 
 MAX_UPLOAD = 2 * 1024**3
 manager = SessionManager()
@@ -82,19 +97,132 @@ def _rss_mb() -> float | None:
         return None
 
 
+def _tier_score(voice_id: str) -> tuple[str, int | None]:
+    if not voice_id.startswith("cu_"):
+        return "builtin", None
+    try:
+        meta = get_meta(voice_id)
+    except KeyError:
+        return "instant", None
+    return str(meta.get("tier", "instant")), (meta.get("quality") or {}).get("score")
+
+
 @app.get("/api/voices", response_model=list[VoiceOut])
 def voices() -> list[VoiceOut]:
-    return [
-        VoiceOut(
-            voice_id=v.voice_id,
-            name=v.name,
-            description=v.description,
-            lang=v.lang_code,
-            preview_url=f"/media/previews/{manager.preview_name(v.voice_id)}",
-            custom=v.voice_id.startswith("cu_"),
+    out = []
+    for v in manager.catalog.pilot_voices():
+        tier, score = _tier_score(v.voice_id)
+        out.append(
+            VoiceOut(
+                voice_id=v.voice_id,
+                name=v.name,
+                description=v.description,
+                lang=v.lang_code,
+                preview_url=f"/media/previews/{manager.preview_name(v.voice_id)}",
+                custom=v.voice_id.startswith("cu_"),
+                tier=tier,
+                score=score,
+            )
         )
-        for v in manager.catalog.pilot_voices()
-    ]
+    return out
+
+
+@app.post("/api/voices/pro")
+async def add_pro_voice(
+    name: str = Form(...),
+    consent: bool = Form(False),
+    file: UploadFile = File(...),
+) -> dict[str, object]:
+    """Professional cloning from a 1–10 min recording; runs in the background (poll the job)."""
+    suffix = Path(file.filename or "voice.wav").suffix.lower() or ".wav"
+    if suffix not in {".wav", ".mp3", ".m4a", ".aac", ".ogg", ".flac", ".webm", ".mp4", ".mov"}:
+        raise HTTPException(400, "upload an audio file (wav, mp3, m4a, ogg, flac) or a video")
+    tmp = Path(tempfile.mkstemp(suffix=suffix, prefix="pro_voice_")[1])
+    size = 0
+    with tmp.open("wb") as fh:
+        while chunk := await file.read(1024 * 1024):
+            size += len(chunk)
+            if size > 500 * 1024**2:
+                tmp.unlink(missing_ok=True)
+                raise HTTPException(413, "recording larger than 500 MB")
+            fh.write(chunk)
+    try:
+        job = voices_pro.start_job(name, tmp, consent, manager.models)
+    except VoiceUploadError as e:
+        tmp.unlink(missing_ok=True)
+        raise HTTPException(400, str(e)) from e
+    return job.public()
+
+
+@app.get("/api/voices/jobs/{job_id}")
+def voice_job(job_id: str) -> dict[str, object]:
+    job = voices_pro.JOBS.get(job_id)
+    if job is None:
+        raise HTTPException(404, "unknown job")
+    if job.stage == "done" and job.result and manager.cloning:
+        vid = job.result["voice_id"]
+        if not (PREVIEWS_DIR / manager.preview_name(vid)).exists():
+            manager.make_preview(vid, 1.0)
+    return job.public()
+
+
+@app.get("/api/voices/custom/{voice_id}")
+def voice_detail(voice_id: str) -> dict[str, object]:
+    try:
+        meta = get_meta(voice_id)
+    except KeyError as e:
+        raise HTTPException(404, "unknown custom voice") from e
+    slug = voice_id[3:]
+    base = f"/media/voices/{slug}"
+    for rs in (meta.get("refs") or {}).values():
+        for r in rs:
+            r["url"] = f"{base}/{r['file']}"
+    q = meta.get("quality") or {}
+    for mood, m in (q.get("moods") or {}).items():
+        m["url"] = f"{base}/test_{mood}.wav"
+    meta["ref_url"] = f"{base}/ref.mp3"
+    meta.setdefault("tier", "instant")
+    return meta
+
+
+@app.get("/media/voices/{slug}/{name}")
+def voice_file(slug: str, name: str) -> FileResponse:
+    path = (CUSTOM_DIR / Path(slug).name / Path(name).name).resolve()
+    if not path.is_relative_to(CUSTOM_DIR.resolve()) or not path.exists():
+        raise HTTPException(404)
+    if path.suffix not in {".mp3", ".wav"}:
+        raise HTTPException(404)
+    return FileResponse(path, media_type="audio/mpeg" if path.suffix == ".mp3" else "audio/wav")
+
+
+@app.post("/api/voices/{voice_id}/say")
+async def say(voice_id: str, body: SayRequest) -> StreamingResponse:
+    """Voice playground: speak any line with any voice in a chosen mood."""
+    import io
+
+    import soundfile as sf
+
+    from engine.providers.base import DeliveryStyle
+    from engine.record.models import Emotion
+
+    m = manager.models
+    if m is None or m.tts is None:
+        raise HTTPException(503, "models are not loaded")
+    if voice_id not in {v.voice_id for v in manager.catalog.voices}:
+        raise HTTPException(404, "unknown voice")
+    try:
+        emotion = Emotion(body.emotion)
+    except ValueError as e:
+        raise HTTPException(400, "emotion must be calm, neutral, excited or peak") from e
+    style = DeliveryStyle(emotion=emotion, gain_db={"peak": 2.0, "excited": 1.0}.get(emotion, 0.0))
+    res = await asyncio.get_running_loop().run_in_executor(
+        None,
+        lambda: m.tts.synthesize(body.text, voice_id, style),  # type: ignore[union-attr]
+    )
+    buf = io.BytesIO()
+    sf.write(buf, res.audio, res.sr, format="WAV")
+    buf.seek(0)
+    return StreamingResponse(buf, media_type="audio/wav", headers={"Cache-Control": "no-store"})
 
 
 @app.post("/api/voices/custom", response_model=VoiceOut)
