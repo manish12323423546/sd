@@ -79,6 +79,7 @@ const mats = {
   stone2: new THREE.MeshStandardMaterial({ map: s2.map, normalMap: s2.normalMap, normalScale: new THREE.Vector2(1, 1), vertexColors: true, roughness: 0.88, metalness: 0 }),
   plaster: new THREE.MeshStandardMaterial({ map: pl.map, normalMap: pl.normalMap, normalScale: new THREE.Vector2(0.7, 0.7), vertexColors: true, roughness: 0.9, metalness: 0 }),
   gold: new THREE.MeshStandardMaterial({ color: new THREE.Color(1.0, 0.7, 0.32), metalness: 1.0, roughness: 0.3, vertexColors: false }),
+  lamp: new THREE.MeshStandardMaterial({ color: 0x000000, emissive: new THREE.Color(1.0, 0.46, 0.16), emissiveIntensity: 0.75, vertexColors: true, roughness: 1 }),
   dark: new THREE.MeshStandardMaterial({ color: new THREE.Color(0.035, 0.022, 0.016), roughness: 0.95 }),
   cloth: new THREE.MeshStandardMaterial({ map: clothTex, vertexColors: true, roughness: 0.9, side: THREE.DoubleSide }),
   wood: new THREE.MeshStandardMaterial({ color: new THREE.Color(0.22, 0.13, 0.07), roughness: 0.85, vertexColors: true }),

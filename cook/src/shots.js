@@ -1,7 +1,7 @@
 // The ten reference shots. Positions in metres; the temple sits at the origin,
 // ghats face west-north-west into the setting sun, harbour is to the south-east.
 export const SHOTS = [
-  { name: '01_hero_bay', pos: [-430, 48, -640], target: [-20, 22, -20], fov: 36, shadow: { c: [-60, 0, -120], r: 560 } },
+  { name: '01_hero_bay', pos: [-380, 30, -560], target: [-10, 30, -10], fov: 28, shadow: { c: [-60, 0, -120], r: 560 } },
   { name: '02_aerial', pos: [-760, 560, 520], target: [10, 0, -30], fov: 42, shadow: { c: [0, 0, 0], r: 520 } },
   { name: '03_harbour', pos: [330, 3.2, 540], target: [190, 14, 330], fov: 44, shadow: { c: [230, 0, 380], r: 220 } },
   { name: '04_temple_low', pos: [-66, 12.5, 30], target: [10, 44, -4], fov: 56, shadow: { c: [0, 0, 0], r: 110 } },

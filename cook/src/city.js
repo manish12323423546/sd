@@ -59,8 +59,8 @@ const STONES = [
 
 export function buildCity(mats) {
   Batch.ground = groundHeight;
-  const stone = new Batch(), stone2 = new Batch(), plaster = new Batch(), gold = new Batch(), dark = new Batch(), cloth = new Batch(), wood = new Batch();
-  const B = { stone, stone2, plaster, gold, dark, cloth, wood };
+  const lamp = new Batch(), stone = new Batch(), stone2 = new Batch(), plaster = new Batch(), gold = new Batch(), dark = new Batch(), cloth = new Batch(), wood = new Batch();
+  const B = { stone, stone2, plaster, gold, dark, cloth, wood, lamp };
   const flags = [];
   const torches = [];
 
@@ -91,6 +91,7 @@ export function buildCity(mats) {
   add(plaster, mats.plaster);
   add(gold, mats.gold);
   add(dark, mats.dark, { cast: false });
+  add(lamp, mats.lamp, { cast: false });
   add(cloth, mats.cloth);
   add(wood, mats.wood);
   return { group, flags };
@@ -249,7 +250,7 @@ function mainTemple(B, T, flags) {
   for (const [px, pz] of [[-5, -5], [-5, 5], [5, -5], [5, 5], [-5, 0]]) if (pz !== 0) pillar(stone, chain(P, M(px, 1.4, pz)), 6.5, 0.38, c);
   box(stone, chain(P, M(0, 7.9, 0)), 13.5, 0.6, 13.5, shade(c, 1.08));
   samvarana(stone, gold, chain(P, M(0, 8.5, 0)), 10, 10, 6, c);
-  box(dark, chain(P, M(4, 1.4, 0)), 0.3, 5.5, 4, [1, 1, 1]);
+  box(B.lamp, chain(P, M(4, 1.4, 0)), 0.3, 5.5, 4, [0.5, 0.45, 0.5]);
 }
 
 // A square box with ratha projections (offsets in plan) for temple walls.
@@ -296,6 +297,7 @@ function precinct(B, flags) {
   for (const s of [-1, 1]) box(stone, chain(G, M(s * 7, -1, 0)), 5, 15, 7, shade(c, 0.95));
   box(stone, chain(G, M(0, 10, 0)), 19, 2.4, 8, c);
   box(dark, chain(G, M(0, -0.5, 0)), 9, 10.5, 3, [1, 1, 1]);
+  box(B.lamp, chain(G, M(0, -0.5, -1.2)), 3.2, 7.5, 0.4, [0.22, 0.18, 0.22]);
   samvarana(stone, gold, chain(G, M(0, 12.4, 0)), 12, 7, 6, c);
 
   // subsidiary shrines (each one different)
@@ -392,6 +394,7 @@ function houses(B, flags) {
             const F = chain(X, M(0, 0, 0, face === 1 ? 0 : Math.PI));
             const paint = rnd();
             if (paint < 0.22) B.wood.add(BOX, chain(F, M(wx, wy + wh / 2, d / 2 + 0.03, 0, ww, wh, 0.06)), [[2.2, 0.9, 0.35], [0.5, 1.3, 1.6], [2.6, 1.6, 0.5], [2.0, 0.6, 0.4]][Math.floor(rnd() * 4)]);
+            else if (rnd() < 0.3 + near * 0.2) { const k = 0.4 + rnd() * 0.8; box(B.lamp, chain(F, M(wx, wy, d / 2 + 0.02)), ww, wh, 0.06, [k, k * (0.85 + rnd() * 0.15), k]); }
             else box(dark, chain(F, M(wx, wy, d / 2 + 0.02)), ww, wh, 0.06, [1, 1, 1]);
             // frame & arched hood
             box(bat, chain(F, M(wx - ww / 2 - 0.12, wy, d / 2 + 0.08)), 0.24, wh, 0.18, shade(col, 1.05));
@@ -665,8 +668,11 @@ function torana(B) {
     box(stone, chain(T, M(0, y + 1.05, 0)), len - 0.4, 0.15, 1.05, shade(c, 1.08));
     // volute ends
     for (const s of [-1, 1]) {
-      const vol = new THREE.TorusGeometry(0.62, 0.3, 6, 14, Math.PI * 1.6);
-      stone.add(vol, chain(T, M(s * (len / 2 + 0.25), y + 0.5, 0, 0, s, 1, 1.6, 0, s > 0 ? 0.6 : -0.6 + Math.PI)), c, 'world');
+      const drum = new THREE.CylinderGeometry(0.62, 0.62, 1.0, 18);
+      drum.rotateX(Math.PI / 2);
+      stone.add(drum, chain(T, M(s * (len / 2 + 0.1), y + 0.52, 0)), shade(c, 0.97), 'world');
+      const spiral = new THREE.TorusGeometry(0.36, 0.09, 5, 16);
+      for (const f of [-1, 1]) stone.add(spiral, chain(T, M(s * (len / 2 + 0.1), y + 0.52, f * 0.52)), shade(c, 1.1), 'world');
     }
     // short posts carrying the architrave above, with small figures between
     if (k < 2) {

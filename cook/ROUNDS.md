@@ -57,3 +57,10 @@ Shot list (src/shots.js): 01 hero bay · 02 aerial · 03 harbour · 04 temple lo
 ## Round 7: sky (critic r5: clouds read as paint daubs, sky 42)
 - Cloud domain warp cut from 0.9 to 0.4; detail noise erodes the edges into wisps; softer density ramp.
 - 85% of houses now lime-plastered (was 70%), so brick-looking ashlar is mostly kept for temples and fortifications.
+
+## Rounds 8-9: materials and composition (critic r7: materials 32 · comp 58 · scale 48 · colour 52 · sky 60 · water 55 · detail 40 · variety 36 · slop 74)
+- Previews and critic input moved from 640×360 to 1280×720: the surface detail the critics kept missing was below preview resolution.
+- Black window voids now about 30–50% lamplit (warm emissive, varied per window; denser toward the centre). Sanctum and gate doorways glow faintly.
+- Torana volutes were reading as "C-hooks". They're replaced with face-on drum ends carrying spiral relief, as at Sanchi.
+- Hero reframed (fov 36 to 28, closer): the main shikhara is about twice its former size in frame.
+- r8 blew the windows out to white; r9 drops the emissive from 2.4 to 0.75.
