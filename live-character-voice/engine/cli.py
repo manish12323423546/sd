@@ -224,6 +224,8 @@ def cmd_poc(args: argparse.Namespace) -> int:
         cfg.asr.model = args.asr_model
     if args.no_split:
         cfg.segment.speaker_split = False
+    if args.no_lane:
+        cfg.runtime.compute_lane = False
     clip = Path(args.clip)
     info = probe(clip)
     run_id = f"{datetime.now():%Y%m%d-%H%M%S}_{clip.stem}" + (
@@ -243,9 +245,15 @@ def cmd_poc(args: argparse.Namespace) -> int:
     truth = json.loads(truth_path.read_text()) if truth_path else None
     enroll = load_enroll(args.enroll) if args.enroll else None
     session = Session(
-        cfg, clip, models, out, stop_after=args.stop_after, enroll=enroll,
-        voice_map=_parse_voices(args.voices), captions_path=args.captions,
-    )  # fmt: skip
+        cfg,
+        clip,
+        models,
+        out,
+        stop_after=args.stop_after,
+        enroll=enroll,
+        voice_map=_parse_voices(args.voices),
+        captions_path=args.captions,
+    )
 
     async def _run() -> None:
         sub = session.store.subscribe("session.metrics")
@@ -253,9 +261,11 @@ def cmd_poc(args: argparse.Namespace) -> int:
         async def progress() -> None:
             async for ev in sub:
                 d = ev.data
-                print(f"  t={session.clock.now():6.1f}s lines={d['lines']} "
-                      f"p50={d['p50_delay']}s p95={d['p95_delay']}s last={d['last_delay']}s",
-                      flush=True)  # fmt: skip
+                print(
+                    f"  t={session.clock.now():6.1f}s lines={d['lines']} "
+                    f"p50={d['p50_delay']}s p95={d['p95_delay']}s last={d['last_delay']}s",
+                    flush=True,
+                )
 
         task = asyncio.create_task(progress())
         await session.run()
@@ -291,12 +301,13 @@ def cmd_poc(args: argparse.Namespace) -> int:
         "max_speakers": cfg.speaker.max_speakers,
         "voice_map": session.voice_map,
     }
-    (out / "metrics.json").write_text(json.dumps(metrics, indent=2, default=str))
-    write_lines_csv(rec, out / "lines.csv")
     if args.stop_after == "all" and not args.no_render and crashed is None:
         from engine.render.mixer import render_all
 
-        render_all(rec, clip, out, cfg, separate=args.separate)
+        print("rendering demo_live.mp4, demo_synced.mp4, voices_only.wav …")
+        metrics["render"] = render_all(rec, clip, out, cfg, separate=args.separate)
+    (out / "metrics.json").write_text(json.dumps(metrics, indent=2, default=str))
+    write_lines_csv(rec, out / "lines.csv")
     from engine.metrics.report import write_report
 
     write_report(out, metrics, rec)
@@ -337,6 +348,8 @@ def cmd_report(args: argparse.Namespace) -> int:
     duration = float(run_info.get("clip_duration_s") or (truth or {}).get("duration") or 0.0)
     metrics = compute_all(rec, truth, duration)
     metrics["run"] = run_info
+    if "render" in old:
+        metrics["render"] = old["render"]
     (run / "metrics.json").write_text(json.dumps(metrics, indent=2, default=str))
     write_lines_csv(rec, run / "lines.csv")
     write_report(run, metrics, rec)
@@ -374,6 +387,7 @@ def build_parser() -> argparse.ArgumentParser:
     pc.add_argument("--torch-threads", type=int, default=None)
     pc.add_argument("--no-split", action="store_true", help="disable speaker-change split")
     pc.add_argument("--no-render", action="store_true")
+    pc.add_argument("--no-lane", action="store_true", help="ASR/TTS on separate pools")
     pc.add_argument("--stop-after", choices=["segment", "understand", "tts", "all"], default="all")
     pc.set_defaults(func=cmd_poc)
     rp = sub.add_parser("report", help="recompute metrics + report from record.json")

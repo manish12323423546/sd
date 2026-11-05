@@ -25,9 +25,15 @@ ROOT = Path(__file__).resolve().parents[2]
 
 @pytest.mark.parametrize(
     ("n", "words"),
-    [(0, "zero"), (7, "seven"), (21, "twenty-one"), (90, "ninety"), (105, "one hundred and five"),
-     (2026, "two thousand and twenty-six")],
-)  # fmt: skip
+    [
+        (0, "zero"),
+        (7, "seven"),
+        (21, "twenty-one"),
+        (90, "ninety"),
+        (105, "one hundred and five"),
+        (2026, "two thousand and twenty-six"),
+    ],
+)
 def test_number_to_words(n: int, words: str) -> None:
     assert number_to_words(n) == words
 

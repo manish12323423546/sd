@@ -15,7 +15,7 @@ from engine.record.models import Emotion, Line, SessionRecord, line_id_for
 def test_engine_config_loads_with_spec_defaults() -> None:
     cfg = load_engine_config()
     assert cfg.speed == 1.0
-    assert cfg.audio.chunk_ms == 500
+    assert cfg.audio.chunk_ms == 250  # tuned in M7 (spec start value 500)
     assert cfg.segment.end_silence_ms == 350
     assert cfg.asr.model == "small.en"
     assert cfg.tts.voice_map["S1"] == "bm_george"

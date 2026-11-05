@@ -3,7 +3,7 @@
 Every dependency, model and tool used by this project, its licence and link. Versions are the ones
 installed on the build VM at the date shown. Re-checked when each item is installed (CLAUDE.md).
 
-Last updated: 2026-11-05 (M1).
+Last updated: 2026-11-05 (M10).
 
 ## System tools (apt)
 | Tool | Version | Licence | Link | Notes |
@@ -40,6 +40,8 @@ Last updated: 2026-11-05 (M1).
 | webvtt-py | 0.7.0 | MIT | https://github.com/glut23/webvtt-py |
 | srt | 3.5.3 | MIT | https://github.com/cdown/srt |
 | psutil | 7.2.2 | BSD-3-Clause | https://github.com/giampaolo/psutil |
+| markdown (report → HTML) | 3.10 | BSD-3-Clause | https://python-markdown.github.io |
+| httpx (WS client, tests) | 0.28 | BSD-3-Clause | https://www.python-httpx.org |
 | fastapi | 0.162.0 | MIT | https://fastapi.tiangolo.com |
 | uvicorn | 0.54.0 | BSD-3-Clause | https://www.uvicorn.org |
 | python-multipart | 0.0.33 | Apache-2.0 | https://github.com/Kludex/python-multipart |
@@ -61,6 +63,13 @@ Last updated: 2026-11-05 (M1).
 | eslint-plugin-react-hooks | 5.2.0 | MIT |
 | globals | 15.15.0 | MIT |
 | @types/react, @types/react-dom | 18.3.x | MIT |
+| react-router-dom | 6.30.6 | MIT |
+| zustand | 5.0.16 | MIT |
+| tailwindcss | 3.4.19 | MIT |
+| postcss / autoprefixer | 8.5.32 / 10.6.2 | MIT |
+| jsdom (test env) | 25.0.1 | MIT |
+| playwright (pre-installed on the VM, e2e only) | — | Apache-2.0 |
+| Sora font (Google Fonts, loaded by the browser) | — | SIL OFL 1.1 |
 
 ## Models (downloaded in M1, never committed)
 Sizes measured in M1: small.en 486 MB, base.en 148 MB, ECAPA 89 MB, Kokoro-82M + 54 voices 356 MB.
@@ -71,3 +80,4 @@ Sizes measured in M1: small.en 486 MB, base.en 148 MB, ECAPA 89 MB, Kokoro-82M +
 | SpeechBrain ECAPA `spkrec-ecapa-voxceleb` | Apache-2.0 | https://huggingface.co/speechbrain/spkrec-ecapa-voxceleb |
 | Kokoro-82M + built-in voices | Apache-2.0 | https://huggingface.co/hexgrad/Kokoro-82M |
 | Silero VAD (bundled in pip) | MIT | https://github.com/snakers4/silero-vad |
+| Kokoro-82M ONNX export (`onnx-community/Kokoro-82M-v1.0-ONNX`, optional `kokoro_onnx` provider, benchmarked in M7, not the default) | Apache-2.0 | https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX |

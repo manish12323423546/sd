@@ -31,6 +31,13 @@ WINDOW_S = 60.0
 MIN_HISTORY = 3
 
 
+def loudest_window_db(audio: F32, sr: int, win_s: float = 1.0, hop_s: float = 0.25) -> float:
+    w, h = int(win_s * sr), int(hop_s * sr)
+    if audio.size <= w:
+        return rms_db(audio)
+    return max(rms_db(audio[i : i + w]) for i in range(0, audio.size - w + 1, h))
+
+
 def label_for(arousal: float, cfg: EmotionConfig) -> Emotion:
     th = cfg.thresholds
     if arousal < th.calm:
@@ -80,9 +87,16 @@ class ProsodyEmotion:
 
     # ---- audio part (thread pool, parallel to ASR) ----
     def audio_features(self, audio: F32, sr: int) -> dict[str, float]:
+        """Loudness = the loudest 1 s window (0.25 s hop): the speech level of the most intense
+        moment, not diluted by pauses or calmer words in the same line. Pitch = 75th percentile
+        of voiced YIN frames. Both chosen in M4 from measurements (see BUILD_LOG)."""
         import librosa
 
-        feats = {"loudness_db": rms_db(audio), "duration_s": audio.size / sr}
+        feats = {
+            "loudness_db": loudest_window_db(audio, sr),
+            "loudness_mean_db": rms_db(audio),
+            "duration_s": audio.size / sr,
+        }
         if audio.size >= int(0.25 * sr):
             f0 = librosa.yin(audio, fmin=70, fmax=400, sr=sr, frame_length=1024)
             # keep frames from the louder part of the signal (YIN returns a value everywhere)
@@ -93,6 +107,7 @@ class ProsodyEmotion:
             voiced = f0[:n][(frame_db[:n] > -25) & (f0[:n] > 70) & (f0[:n] < 400)]
             if voiced.size >= 5:
                 feats["pitch_hz_median"] = float(np.median(voiced))
+                feats["pitch_hz_p75"] = float(np.percentile(voiced, 75))
                 feats["pitch_range"] = float(np.percentile(voiced, 90) - np.percentile(voiced, 10))
         return feats
 
@@ -110,7 +125,7 @@ class ProsodyEmotion:
             rate = len(ctx.words) / span
         else:
             rate = len(ctx.text.split()) / duration
-        pitch_hz = f.get("pitch_hz_median")
+        pitch_hz = f.get("pitch_hz_p75") or f.get("pitch_hz_median")
         pitch_st = 12.0 * float(np.log2(pitch_hz / 100.0)) if pitch_hz else None
 
         z_loud = self._z(loud, [v for _, v in self.h.loud], "loudness")

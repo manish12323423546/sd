@@ -156,8 +156,15 @@ def test_segmenter_rolling_buffer_stays_bounded() -> None:
 
 # ---------------------------------------------------------------- record store
 def _record() -> SessionRecord:
-    return SessionRecord(session_id="t", clip_path="c", mode="poc", speed=1.0, source="asr",
-                         started_at_iso="x", config_snapshot={})  # fmt: skip
+    return SessionRecord(
+        session_id="t",
+        clip_path="c",
+        mode="poc",
+        speed=1.0,
+        source="asr",
+        started_at_iso="x",
+        config_snapshot={},
+    )
 
 
 def test_record_store_events_in_order_and_queries(tmp_path: Path) -> None:
@@ -230,9 +237,14 @@ def test_enrollment_fixes_speakers_and_names() -> None:
     assert cl.names == {"S1": "Ann", "S2": "Bob"}
     assert cl.assign(_vec(23, b, 0.05), 2.0, None).speaker_id == "S2"
     assert not cl.assign(_vec(9), 3.0, None).is_new
-    ef = EnrollFile.model_validate({"speakers": [
-        {"name": "A", "t_start": 0, "t_end": 4, "spans": [[6, 9]]}, {"name": "B", "spans": [[4, 6]]}
-    ]})  # fmt: skip
+    ef = EnrollFile.model_validate(
+        {
+            "speakers": [
+                {"name": "A", "t_start": 0, "t_end": 4, "spans": [[6, 9]]},
+                {"name": "B", "spans": [[4, 6]]},
+            ]
+        }
+    )
     assert ef.speakers[0].spans == [(0, 4), (6, 9)] and ef.ready_at == 9
 
 
@@ -255,9 +267,14 @@ def _ctx(
     loud: float, pitch: float, words: int, t: float, spk: str = "S1", text: str = ""
 ) -> EmotionContext:
     ws = [Word(word="w", start=i * 0.4, end=i * 0.4 + 0.3, prob=1.0) for i in range(words)]
-    return EmotionContext(features={"loudness_db": loud, "pitch_hz_median": pitch},
-                          text=text or "w " * words, words=ws, speaker_id=spk,
-                          t_start=t - 2, t_end=t)  # fmt: skip
+    return EmotionContext(
+        features={"loudness_db": loud, "pitch_hz_median": pitch},
+        text=text or "w " * words,
+        words=ws,
+        speaker_id=spk,
+        t_start=t - 2,
+        t_end=t,
+    )
 
 
 def test_emotion_relative_loudness_pitch_and_smoothing() -> None:
@@ -280,24 +297,29 @@ def test_emotion_relative_loudness_pitch_and_smoothing() -> None:
 # ---------------------------------------------------------------- scheduler
 def test_plan_playback_gap_overlap_and_catch_up() -> None:
     cfg = ScheduleConfig()
-    p = plan_playback(tts_ready=12.0, t_start=8.0, t_end=10.0, speaker_id="S1", duration=2,
-                      prev=None, cfg=cfg)  # fmt: skip
+    p = plan_playback(
+        tts_ready=12.0, t_start=8.0, t_end=10.0, speaker_id="S1", duration=2, prev=None, cfg=cfg
+    )
     assert p.play_at == 12.0 and p.action == "none" and p.lag == pytest.approx(2.0)
     prev = PrevPlayback("S1", play_end=13.0, t_end=9.0)
-    p = plan_playback(tts_ready=12.0, t_start=9.5, t_end=11.0, speaker_id="S1", duration=1,
-                      prev=prev, cfg=cfg)  # fmt: skip
+    p = plan_playback(
+        tts_ready=12.0, t_start=9.5, t_end=11.0, speaker_id="S1", duration=1, prev=prev, cfg=cfg
+    )
     assert p.play_at == pytest.approx(13.08)  # same speaker: after previous + 80 ms gap
     # different speaker whose original overlapped by 0.25 s may overlap by 0.25 s
     prev = PrevPlayback("S1", play_end=13.0, t_end=9.75)
-    p = plan_playback(tts_ready=12.0, t_start=9.5, t_end=11.0, speaker_id="S2", duration=1,
-                      prev=prev, cfg=cfg)  # fmt: skip
+    p = plan_playback(
+        tts_ready=12.0, t_start=9.5, t_end=11.0, speaker_id="S2", duration=1, prev=prev, cfg=cfg
+    )
     assert p.play_at == pytest.approx(12.75)
     # soft lag → speed-up within [1, max_speedup]
-    p = plan_playback(tts_ready=15.0, t_start=9.0, t_end=10.0, speaker_id="S1", duration=1,
-                      prev=None, cfg=cfg)  # fmt: skip
+    p = plan_playback(
+        tts_ready=15.0, t_start=9.0, t_end=10.0, speaker_id="S1", duration=1, prev=None, cfg=cfg
+    )
     assert p.action == "speedup" and 1.0 < p.speedup <= cfg.max_speedup
-    p = plan_playback(tts_ready=20.0, t_start=9.0, t_end=10.0, speaker_id="S1", duration=1,
-                      prev=None, cfg=cfg)  # fmt: skip
+    p = plan_playback(
+        tts_ready=20.0, t_start=9.0, t_end=10.0, speaker_id="S1", duration=1, prev=None, cfg=cfg
+    )
     assert p.speedup == cfg.max_speedup
 
 
@@ -341,3 +363,14 @@ def test_segmenter_burst_ends_on_energy_drop_even_if_vad_stays_on() -> None:
     lines = _run(seg, pattern)
     assert lines[4].close_reason == "burst"
     assert lines[4].t_end - lines[4].t_start == pytest.approx(0.6, abs=2 * FD)
+
+
+def test_loudest_window_ignores_pauses() -> None:
+    from engine.providers.free.emotion_prosody import loudest_window_db
+
+    sr = 16000
+    tone = (0.1 * np.sin(2 * np.pi * 200 * np.arange(sr) / sr)).astype(np.float32)
+    silence = np.zeros(3 * sr, np.float32)
+    x = np.concatenate([silence, tone, silence])
+    # whole-line RMS is ~12 dB lower than the speech level; the loudest second is not
+    assert loudest_window_db(x, sr) == pytest.approx(-23.0, abs=0.2)

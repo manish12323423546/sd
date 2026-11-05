@@ -5,7 +5,7 @@ source: asr              # asr | captions
 speed: 1.0               # 1.0 = honest live speed (the only speed allowed for reported numbers)
 audio:
   analysis_sr: 16000
-  chunk_ms: 500
+  chunk_ms: 250          # M7: 500 → 250 ms cuts ~0.12 s of end-of-line detection wait (same VAD work)
 vad:
   threshold: 0.5
 segment:
@@ -52,3 +52,6 @@ render:
   duck_gain: 0.25
   duck_ramp_ms: 80
   voice_gain_db: 0.0
+runtime:
+  torch_threads: 4       # Kokoro + ECAPA (torch.set_num_threads)
+  compute_lane: false    # M7: measured worse (ASR queues behind TTS; median 8.6 s vs 4.3 s)

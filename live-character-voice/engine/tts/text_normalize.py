@@ -12,15 +12,37 @@ import re
 from collections.abc import Iterable
 
 _ONES = [
-    "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
-    "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
+    "zero",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "ten",
+    "eleven",
+    "twelve",
+    "thirteen",
+    "fourteen",
+    "fifteen",
+    "sixteen",
+    "seventeen",
+    "eighteen",
     "nineteen",
-]  # fmt: skip
+]
 _TENS = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
 _ORD_IRREGULAR = {
-    "one": "first", "two": "second", "three": "third", "five": "fifth", "eight": "eighth",
-    "nine": "ninth", "twelve": "twelfth",
-}  # fmt: skip
+    "one": "first",
+    "two": "second",
+    "three": "third",
+    "five": "fifth",
+    "eight": "eighth",
+    "nine": "ninth",
+    "twelve": "twelfth",
+}
 FILLERS = {"uh", "um", "erm", "er", "uhm", "hmm", "mm"}
 
 

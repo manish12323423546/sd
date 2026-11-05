@@ -27,9 +27,22 @@ def require_ffmpeg() -> None:
 def decode_audio(path: str | Path, sr: int = 16000) -> F32:
     require_ffmpeg()
     cmd = [
-        "ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "error",
-        "-i", str(path), "-vn", "-ac", "1", "-ar", str(sr), "-f", "f32le", "-",
-    ]  # fmt: skip
+        "ffmpeg",
+        "-nostdin",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-i",
+        str(path),
+        "-vn",
+        "-ac",
+        "1",
+        "-ar",
+        str(sr),
+        "-f",
+        "f32le",
+        "-",
+    ]
     out = subprocess.run(cmd, capture_output=True, check=False)
     if out.returncode != 0:
         raise RuntimeError(f"ffmpeg failed on {path}: {out.stderr.decode(errors='replace')[-500:]}")
@@ -40,9 +53,15 @@ def probe(path: str | Path) -> dict[str, float | bool]:
     """Duration and which stream types exist."""
     require_ffmpeg()
     cmd = [
-        "ffprobe", "-v", "error", "-show_entries", "format=duration:stream=codec_type",
-        "-of", "json", str(path),
-    ]  # fmt: skip
+        "ffprobe",
+        "-v",
+        "error",
+        "-show_entries",
+        "format=duration:stream=codec_type",
+        "-of",
+        "json",
+        str(path),
+    ]
     out = subprocess.run(cmd, capture_output=True, text=True, check=True)
     data = json.loads(out.stdout)
     types = {s.get("codec_type") for s in data.get("streams", [])}

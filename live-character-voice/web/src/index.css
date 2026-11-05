@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  background: #0b0f14;
+  color: #e6edf5;
+  font-family: Sora, system-ui, sans-serif;
+  font-size: 14px;
+}
+
+:focus-visible {
+  outline: 2px solid #4fa3ff;
+  outline-offset: 2px;
+}
+
+input[type="range"] {
+  accent-color: #4fa3ff;
+}

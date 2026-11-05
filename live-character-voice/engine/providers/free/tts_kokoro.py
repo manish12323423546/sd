@@ -10,7 +10,7 @@ from typing import Any
 
 import numpy as np
 
-from engine.audio import F32, as_f32, db_to_gain, soft_limit
+from engine.audio import F32, as_f32, db_to_gain, fade, soft_limit, trim_silence
 from engine.providers.base import DeliveryStyle, TTSResult, VoiceInfo
 
 REPO_ID = "hexgrad/Kokoro-82M"
@@ -83,6 +83,12 @@ class KokoroTTS:
 
             audio = as_f32(
                 librosa.effects.pitch_shift(audio, sr=SAMPLE_RATE, n_steps=style.pitch_semitones)
+            )
+        # Kokoro adds ~0.2–0.3 s of silence at each end; trim it (keep 30 ms) so the voice starts
+        # sooner and its length is comparable with the original line (M5, see BUILD_LOG).
+        if audio.size:
+            audio = fade(
+                trim_silence(audio, SAMPLE_RATE, threshold_db=-50.0, pad_s=0.03), SAMPLE_RATE
             )
         audio = soft_limit(audio * db_to_gain(style.gain_db), ceiling_db=-1.0)
         return TTSResult(audio=audio, sr=SAMPLE_RATE, duration_s=audio.size / SAMPLE_RATE)

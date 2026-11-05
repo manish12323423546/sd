@@ -21,7 +21,7 @@ from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from functools import partial
 from pathlib import Path
-from typing import Any
+from typing import Any, TypeVar
 
 import numpy as np
 
@@ -29,6 +29,7 @@ from engine.audio import F32
 from engine.config import EngineConfig, load_voice_catalog
 from engine.ingest.decode import decode_audio
 from engine.ingest.feeder import SessionClock, feed
+from engine.priority_executor import PriorityExecutor
 from engine.providers.base import (
     ASRProvider,
     ASRResult,
@@ -54,6 +55,7 @@ from engine.speakers.online_cluster import OnlineClusterer
 from engine.tts.style import style_for
 from engine.tts.worker import TtsCache, stretch_file, synthesize_line
 
+T = TypeVar("T")
 STOP_AFTER = ("segment", "understand", "tts", "all")
 CHECKPOINT_EVERY_S = 30.0
 DRIFT_EVERY_S = 60.0
@@ -96,10 +98,12 @@ class Models:
         from engine.providers import registry
 
         m = cls()
-        if torch_threads:
+        threads = torch_threads or cfg.runtime.torch_threads
+        if threads and stages & {"speaker", "tts"}:
             import torch
 
-            torch.set_num_threads(torch_threads)
+            torch.set_num_threads(threads)
+            m.info["torch_threads"] = str(threads)
 
         def timed(name: str, fn: Callable[[], Any]) -> Any:
             t = time.monotonic()
@@ -120,7 +124,10 @@ class Models:
                     beam_size=cfg.asr.beam_size,
                 ),
             )
-            m.info["asr"] = f"{cfg.asr.provider}:{cfg.asr.model} ({cfg.asr.compute_type})"
+            m.info["asr"] = (
+                f"{cfg.asr.provider}:{cfg.asr.model} ({cfg.asr.compute_type}, "
+                f"{cfg.asr.cpu_threads} threads)"
+            )
         if "speaker" in stages:
             m.speaker = timed("speaker", lambda: registry.create("speaker", cfg.speaker.provider))
             m.info["speaker"] = cfg.speaker.provider
@@ -170,6 +177,7 @@ class Session:
         captions_path: str | Path | None = None,
         echo_log: bool = False,
         emotion: EmotionProvider | None = None,
+        vad_factory: Callable[[], Any] | None = None,
     ) -> None:
         if stop_after not in STOP_AFTER:
             raise ValueError(f"stop_after must be one of {STOP_AFTER}")
@@ -208,6 +216,7 @@ class Session:
 
             emotion = ProsodyEmotion(cfg.emotion)
         self.emotion = emotion
+        self.vad_factory = vad_factory or _make_vad
         self.captions_asr: ASRProvider | None = None
         if cfg.source == "captions":
             from engine.providers.free.asr_captions import CaptionsASR
@@ -220,6 +229,8 @@ class Session:
         self.asr_pool = ThreadPoolExecutor(1, thread_name_prefix="asr")
         self.spk_pool = ThreadPoolExecutor(1, thread_name_prefix="spk")
         self.tts_pool = ThreadPoolExecutor(cfg.tts.workers, thread_name_prefix="tts")
+        # compute lane (M7): ASR + TTS one at a time with all cores, oldest line first
+        self.lane = PriorityExecutor("lane") if cfg.runtime.compute_lane else None
         self.misc_pool = ThreadPoolExecutor(1, thread_name_prefix="misc")
         self.tts_cache = TtsCache()
         self._work: dict[str, _LineWork] = {}
@@ -235,11 +246,14 @@ class Session:
         self._feed_done = False
         self._split_busy = False
         self._last_split_check = 0.0
+        self._split_line: float | None = None
+        self._split_windows: list[tuple[float, Any]] = []
         self._n_lines = 0
         self.duration = 0.0
         self.started_wall: float | None = None
         self.finished_wall: float | None = None
         self.voice_switches: list[dict[str, Any]] = []
+        self.audio_override: F32 | None = None  # tests: skip FFmpeg decode
 
     # ------------------------------------------------------------------ public
     def stop(self) -> None:
@@ -279,14 +293,19 @@ class Session:
     async def run(self) -> SessionRecord:
         loop = asyncio.get_running_loop()
         t_decode = time.monotonic()
-        audio = await loop.run_in_executor(self.misc_pool, decode_audio, self.clip_path, self.sr)
+        if self.audio_override is not None:
+            audio = self.audio_override
+        else:
+            audio = await loop.run_in_executor(
+                self.misc_pool, decode_audio, self.clip_path, self.sr
+            )
         self.duration = audio.size / self.sr
         self.log.log(
             "decode", seconds=round(time.monotonic() - t_decode, 3), duration=self.duration
         )
         if self.enroll is not None and self.models.speaker is not None:
             await self._do_enroll(audio)
-        vad = await loop.run_in_executor(self.misc_pool, _make_vad)
+        vad = await loop.run_in_executor(self.misc_pool, self.vad_factory)
 
         workers = []
         if self.stop_after in ("tts", "all"):
@@ -341,6 +360,8 @@ class Session:
         self.store.bus.publish("session.ended")
         for pool in (self.asr_pool, self.spk_pool, self.tts_pool, self.misc_pool):
             pool.shutdown(wait=False)
+        if self.lane is not None:
+            self.lane.shutdown()
         self.log.close()
         return self.store.record
 
@@ -385,9 +406,13 @@ class Session:
         self._order.append(lid)
         self._status[lid] = "pending"
         self.log.log(
-            "line.created", line_id=lid, t_start=line.t_start, t_end=line.t_end,
-            reason=cand.close_reason, wait_ms=round((now - cand.t_end) * 1000, 1),
-        )  # fmt: skip
+            "line.created",
+            line_id=lid,
+            t_start=line.t_start,
+            t_end=line.t_end,
+            reason=cand.close_reason,
+            wait_ms=round((now - cand.t_end) * 1000, 1),
+        )
         if self.stop_after == "segment":
             self._finish(lid, "skip")
             return
@@ -414,34 +439,54 @@ class Session:
         task.add_done_callback(self._tasks.discard)
 
     async def _speaker_split_check(self, line_start: float, now: float) -> None:
+        """Soft speaker-change split (docs/04 §2). Incremental: each check embeds ONLY the newest
+        1.5 s window (~0.12 s CPU) and compares it with the mean of this line's earlier,
+        non-overlapping windows. (M7: embedding the whole line-so-far every second cost 30–60 %
+        of the CPU during long lines and slowed ASR/TTS — measured, see BUILD_LOG.)"""
         try:
             assert self.models.speaker is not None
             loop = asyncio.get_running_loop()
-            split_at = now - SPLIT_WINDOW_S
-            before = self.segmenter.recent_audio(line_start, split_at)
-            recent = self.segmenter.recent_audio(split_at, now)
-            if before.size < int(0.8 * self.sr) or recent.size < int(1.0 * self.sr):
+            if self._split_line != line_start:
+                self._split_line = line_start
+                self._split_windows = []
+            win_start = now - SPLIT_WINDOW_S
+            recent = self.segmenter.recent_audio(win_start, now)
+            if recent.size < int(1.0 * self.sr):
                 return
-            emb = self.models.speaker.embed
-            e_before = await loop.run_in_executor(self.spk_pool, emb, before, self.sr)
-            e_recent = await loop.run_in_executor(self.spk_pool, emb, recent, self.sr)
-            sim = float(np.dot(e_before, e_recent))
+            emb = await loop.run_in_executor(
+                self.spk_pool, self.models.speaker.embed, recent, self.sr
+            )
+            earlier = [e for t_end, e in self._split_windows if t_end <= win_start + 0.25]
+            self._split_windows.append((now, emb))
+            if not earlier:
+                return
+            mean = np.mean(np.stack(earlier), axis=0)
+            mean = mean / (np.linalg.norm(mean) + 1e-9)
+            sim = float(np.dot(mean, emb))
             if sim >= self.cfg.segment.split_sim:
                 return
             if self.cluster.centroids:
-                b1, _ = self.cluster.best_match(e_before)
-                b2, s2 = self.cluster.best_match(e_recent)
+                b1, _ = self.cluster.best_match(mean.astype(np.float32))
+                b2, s2 = self.cluster.best_match(emb)
                 if b1 == b2 or s2 < self.cfg.speaker.assign_sim:
                     return
             span = self.segmenter.open_line()
             if span is None or abs(span[0] - line_start) > 1e-6:
                 return  # the line already closed on its own
-            cand = self.segmenter.force_split(split_at, now - 0.2)
+            cand = self.segmenter.force_split(win_start, now - 0.2)
             if cand is not None:
                 self.log.log("speaker_split", at=cand.t_end, sim=round(sim, 3))
+                self._split_line = None
                 self._on_line(cand)
         finally:
             self._split_busy = False
+
+    async def _heavy(self, lid: str, fn: Callable[[], T], pool: ThreadPoolExecutor) -> T:
+        """Run a heavy model call: on the priority compute lane (oldest line first) when enabled,
+        else on the stage's own pool."""
+        if self.lane is not None:
+            return await asyncio.wrap_future(self.lane.submit(int(lid[1:]), fn))
+        return await asyncio.get_running_loop().run_in_executor(pool, fn)
 
     # ------------------------------------------------------------------ understanding
     def _asr_prompt(self, line: Line) -> str:
@@ -475,8 +520,14 @@ class Session:
                 return
             now = self.clock.now()
             self.store.update_line(lid, event="line.complete", **_t(complete=round(now, 3)))
-            self.log.log("line.complete", line_id=lid, text=line.text, speaker=line.speaker_id,
-                         emotion=line.emotion, wait_s=round(now - line.t_end, 3))  # fmt: skip
+            self.log.log(
+                "line.complete",
+                line_id=lid,
+                text=line.text,
+                speaker=line.speaker_id,
+                emotion=line.emotion,
+                wait_s=round(now - line.t_end, 3),
+            )
             if self.stop_after == "understand":
                 self._finish(lid, "skip")
                 return
@@ -488,7 +539,7 @@ class Session:
             self._work.pop(lid, None)
 
     async def _run_asr(self, lid: str, line: Line, cand: LineCandidate, core: F32) -> None:
-        loop = asyncio.get_running_loop()
+        asyncio.get_running_loop()
         t = time.monotonic()
         if self.captions_asr is not None:
             fn = partial(
@@ -499,7 +550,7 @@ class Session:
             assert self.models.asr is not None
             fn = partial(self.models.asr.transcribe, cand.audio, self.sr, self._asr_prompt(line))
             offset = line.t_start - cand.pad_before_s
-        res: ASRResult = await loop.run_in_executor(self.asr_pool, fn)
+        res: ASRResult = await self._heavy(lid, fn, self.asr_pool)
         ms = (time.monotonic() - t) * 1000
         text = res.text.strip()
         noise = res.no_speech_prob > NOISE_NO_SPEECH and (len(text) < 2 or res.avg_logprob < -1.0)
@@ -511,19 +562,32 @@ class Session:
         ]
         self._work[lid].asr = res
         self.store.update_line(
-            lid, event="line.asr_done", text=text, words=words,
+            lid,
+            event="line.asr_done",
+            text=text,
+            words=words,
             asr_conf=round(float(np.exp(res.avg_logprob)), 3),
             **_t(asr_done=round(self.clock.now(), 3)),
-        )  # fmt: skip
-        self.log.log("stage", line_id=lid, stage="asr", duration_ms=round(ms, 1),
-                     no_speech=round(res.no_speech_prob, 3), noise=noise)  # fmt: skip
+        )
+        self.log.log(
+            "stage",
+            line_id=lid,
+            stage="asr",
+            duration_ms=round(ms, 1),
+            no_speech=round(res.no_speech_prob, 3),
+            noise=noise,
+        )
 
     async def _run_speaker(self, lid: str, line: Line, core: F32) -> None:
         loop = asyncio.get_running_loop()
         if self.models.speaker is None:
-            self.store.update_line(lid, event="line.speaker_done", speaker_id="S1",
-                                   speaker_conf="low",
-                                   **_t(speaker_done=round(self.clock.now(), 3)))  # fmt: skip
+            self.store.update_line(
+                lid,
+                event="line.speaker_done",
+                speaker_id="S1",
+                speaker_conf="low",
+                **_t(speaker_done=round(self.clock.now(), 3)),
+            )
             return
         t = time.monotonic()
         emb = await loop.run_in_executor(self.spk_pool, self.models.speaker.embed, core, self.sr)
@@ -546,13 +610,22 @@ class Session:
             if sp is not None:
                 sp.centroid_n = self.cluster.counts.get(res.speaker_id, sp.centroid_n)
         self.store.update_line(
-            lid, event="line.speaker_done", speaker_id=res.speaker_id,
-            speaker_sim=round(res.similarity, 3), speaker_conf=res.confidence,
+            lid,
+            event="line.speaker_done",
+            speaker_id=res.speaker_id,
+            speaker_sim=round(res.similarity, 3),
+            speaker_conf=res.confidence,
             **_t(speaker_done=round(self.clock.now(), 3)),
-        )  # fmt: skip
+        )
         sims = {k: round(v, 3) for k, v in res.sims.items()}
-        self.log.log("stage", line_id=lid, stage="speaker", duration_ms=round(ms, 1),
-                     speaker=res.speaker_id, sims=sims)  # fmt: skip
+        self.log.log(
+            "stage",
+            line_id=lid,
+            stage="speaker",
+            duration_ms=round(ms, 1),
+            speaker=res.speaker_id,
+            sims=sims,
+        )
 
     async def _run_prosody(self, lid: str, core: F32) -> None:
         loop = asyncio.get_running_loop()
@@ -561,8 +634,12 @@ class Session:
             self.misc_pool, self.emotion.audio_features, core, self.sr
         )
         self._work[lid].features = feats
-        self.log.log("stage", line_id=lid, stage="prosody",
-                     duration_ms=round((time.monotonic() - t) * 1000, 1))  # fmt: skip
+        self.log.log(
+            "stage",
+            line_id=lid,
+            stage="prosody",
+            duration_ms=round((time.monotonic() - t) * 1000, 1),
+        )
 
     def _label_emotion(self, lid: str) -> None:
         line = self.store.get(lid)
@@ -579,14 +656,17 @@ class Session:
         res = self.emotion.analyze(ctx)
         feats = {k: round(float(v), 3) for k, v in res.features.items()}
         self.store.update_line(
-            lid, event="line.emotion_done", emotion=res.label, arousal=round(res.arousal, 3),
+            lid,
+            event="line.emotion_done",
+            emotion=res.label,
+            arousal=round(res.arousal, 3),
             features={**line.features, **feats},
             **_t(emotion_done=round(self.clock.now(), 3)),
-        )  # fmt: skip
+        )
 
     # ------------------------------------------------------------------ TTS
     async def _tts_worker(self, idx: int) -> None:
-        loop = asyncio.get_running_loop()
+        asyncio.get_running_loop()
         assert self.models.tts is not None
         tts = self.models.tts
         while True:
@@ -624,20 +704,41 @@ class Session:
                 start = self.clock.now()
                 self.store.update_line(lid, voice_id=voice, **_t(tts_start=round(start, 3)))
                 t = time.monotonic()
-                out = await loop.run_in_executor(
+                out = await self._heavy(
+                    lid,
+                    partial(
+                        synthesize_line,
+                        tts,
+                        self.tts_cache,
+                        self.tts_dir,
+                        lid,
+                        text,
+                        voice,
+                        style,
+                        self.glossary,
+                    ),
                     self.tts_pool,
-                    partial(synthesize_line, tts, self.tts_cache, self.tts_dir, lid, text, voice,
-                            style, self.glossary),
-                )  # fmt: skip
+                )
                 ms = (time.monotonic() - t) * 1000
                 ready = self.clock.now()
                 self.store.update_line(
-                    lid, event="tts.ready", tts_path=str(out.path),
-                    tts_duration=round(out.duration, 3), **_t(tts_ready=round(ready, 3)),
-                )  # fmt: skip
-                self.log.log("stage", line_id=lid, stage="tts", duration_ms=round(ms, 1),
-                             voice=voice, speed=style.speed, chars=len(out.text),
-                             audio_s=round(out.duration, 3), worker=idx)  # fmt: skip
+                    lid,
+                    event="tts.ready",
+                    tts_path=str(out.path),
+                    tts_duration=round(out.duration, 3),
+                    **_t(tts_ready=round(ready, 3)),
+                )
+                self.log.log(
+                    "stage",
+                    line_id=lid,
+                    stage="tts",
+                    duration_ms=round(ms, 1),
+                    voice=voice,
+                    speed=style.speed,
+                    chars=len(out.text),
+                    audio_s=round(out.duration, 3),
+                    worker=idx,
+                )
                 if merged:
                     self.store.update_line(lid, schedule_action="merged")
                 self._finish(lid, "ready")
@@ -690,7 +791,11 @@ class Session:
                 lid = self._order[head]
                 head += 1
                 if self._status[lid] == "ready":
-                    await self._schedule_line(lid, loop)
+                    try:
+                        await self._schedule_line(lid, loop)
+                    except Exception as e:
+                        self.store.update_line(lid, error=f"schedule: {type(e).__name__}: {e}")
+                        self.store.warn(f"line {lid} schedule failed: {e}")
             done = self._feed_done and not self._tasks and head >= len(self._order)
             if done and not self._tts_queue and self._tts_busy == 0:
                 return
@@ -728,12 +833,20 @@ class Session:
                 action = "speedup"
         play_at = plan.play_at
         self.store.update_line(
-            lid, event="line.scheduled", schedule_action=action,
+            lid,
+            event="line.scheduled",
+            schedule_action=action,
             **_t(play_at=round(play_at, 3)),
-        )  # fmt: skip
+        )
         self._prev_play = PrevPlayback(line.speaker_id, play_at + duration, line.t_end)
-        self.log.log("schedule", line_id=lid, action=action, play_at=round(play_at, 3),
-                     lag=round(plan.lag, 3), speedup=plan.speedup)  # fmt: skip
+        self.log.log(
+            "schedule",
+            line_id=lid,
+            action=action,
+            play_at=round(play_at, 3),
+            lag=round(plan.lag, 3),
+            speedup=plan.speedup,
+        )
 
     def _drift_check(self) -> None:
         lines = [ln for ln in self.store.record.lines if ln.delay_ready is not None]

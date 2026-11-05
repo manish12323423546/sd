@@ -9,11 +9,32 @@ from pathlib import Path
 from engine.record.models import SessionRecord
 
 COLUMNS = [
-    "line_id", "t_start", "t_end", "close_reason", "speaker_id", "speaker_sim", "speaker_conf",
-    "emotion", "arousal", "text", "voice_id", "tts_duration", "schedule_action", "error",
-    "created", "asr_done", "speaker_done", "emotion_done", "complete", "tts_start", "tts_ready",
-    "play_at", "played", "delay_ready", "delay_play",
-]  # fmt: skip
+    "line_id",
+    "t_start",
+    "t_end",
+    "close_reason",
+    "speaker_id",
+    "speaker_sim",
+    "speaker_conf",
+    "emotion",
+    "arousal",
+    "text",
+    "voice_id",
+    "tts_duration",
+    "schedule_action",
+    "error",
+    "created",
+    "asr_done",
+    "speaker_done",
+    "emotion_done",
+    "complete",
+    "tts_start",
+    "tts_ready",
+    "play_at",
+    "played",
+    "delay_ready",
+    "delay_play",
+]
 
 
 def lines_csv(rec: SessionRecord) -> str:

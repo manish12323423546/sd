@@ -33,3 +33,11 @@ data/clips/*
 data/sfx/*
 !data/sfx/.gitkeep
 web/*.tsbuildinfo
+
+# Demo media: only the headline POC run is committed (docs/09 §9.6, each file < 25 MB)
+outputs/**/*.mp4
+outputs/**/_mix_*.wav
+!outputs/20261105-062141_synthetic_match_final2/demo_live.mp4
+!outputs/20261105-062141_synthetic_match_final2/demo_synced.mp4
+!outputs/20261105-062141_synthetic_match_final2/voices_only.wav
+web/e2e/*.png

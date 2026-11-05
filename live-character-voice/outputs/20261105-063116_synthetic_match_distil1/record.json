@@ -1,0 +1,9212 @@
+{
+ "session_id": "20261105-063116_synthetic_match_distil1",
+ "clip_path": "data/clips/synthetic_match.mp4",
+ "mode": "poc",
+ "speed": 1.0,
+ "source": "asr",
+ "started_at_iso": "2026-11-05T06:31:26+00:00",
+ "config_snapshot": {
+  "mode": "poc",
+  "source": "asr",
+  "speed": 1.0,
+  "audio": {
+   "analysis_sr": 16000,
+   "chunk_ms": 250
+  },
+  "vad": {
+   "threshold": 0.5
+  },
+  "segment": {
+   "end_silence_ms": 350,
+   "max_line_s": 6.0,
+   "min_line_ms": 250,
+   "pad_ms": 120,
+   "burst_db": 10.0,
+   "split_sim": 0.45,
+   "level_split_db": 6.0,
+   "speaker_split": true
+  },
+  "asr": {
+   "provider": "faster_whisper",
+   "model": "distil-small.en",
+   "compute_type": "int8",
+   "cpu_threads": 4,
+   "beam_size": 1,
+   "fallback_model": "base.en"
+  },
+  "speaker": {
+   "provider": "ecapa",
+   "max_speakers": 2,
+   "assign_sim": 0.55,
+   "ema_alpha": 0.1,
+   "enroll_file": null
+  },
+  "emotion": {
+   "provider": "prosody",
+   "weights": {
+    "loudness": 0.45,
+    "pitch": 0.3,
+    "rate": 0.15,
+    "text": 0.1
+   },
+   "thresholds": {
+    "calm": -0.5,
+    "excited": 0.8,
+    "peak": 1.8
+   }
+  },
+  "tts": {
+   "provider": "kokoro",
+   "workers": 2,
+   "lang_code": "a",
+   "voice_map": {
+    "S1": "bm_george",
+    "S2": "am_adam",
+    "S3": "af_bella"
+   }
+  },
+  "style": {
+   "pitch_shift": false
+  },
+  "schedule": {
+   "mode": "fast",
+   "gap_ms": 80,
+   "lag_soft_s": 3.5,
+   "lag_hard_s": 6.0,
+   "max_speedup": 1.15
+  },
+  "render": {
+   "out_sr": 48000,
+   "duck_gain": 0.25,
+   "duck_ramp_ms": 80,
+   "voice_gain_db": 0.0
+  },
+  "runtime": {
+   "torch_threads": 4,
+   "compute_lane": false
+  }
+ },
+ "speakers": {
+  "S1": {
+   "speaker_id": "S1",
+   "display_name": "Commentator 1",
+   "color": "#4FA3FF",
+   "centroid_n": 21,
+   "voice_id": "bm_george"
+  },
+  "S2": {
+   "speaker_id": "S2",
+   "display_name": "Commentator 2",
+   "color": "#F5A524",
+   "centroid_n": 8,
+   "voice_id": "am_adam"
+  }
+ },
+ "lines": [
+  {
+   "line_id": "L000001",
+   "t_start": 1.504,
+   "t_end": 4.96,
+   "close_reason": "pause",
+   "text": "Good evening and welcome to Riverside Park for this evening's match.",
+   "words": [
+    [
+     "Good",
+     1.384,
+     1.624,
+     0.982
+    ],
+    [
+     "evening",
+     1.624,
+     1.984,
+     0.962
+    ],
+    [
+     "and",
+     1.984,
+     2.264,
+     0.936
+    ],
+    [
+     "welcome",
+     2.264,
+     2.724,
+     0.991
+    ],
+    [
+     "to",
+     2.724,
+     2.884,
+     0.997
+    ],
+    [
+     "Riverside",
+     2.884,
+     3.324,
+     0.986
+    ],
+    [
+     "Park",
+     3.324,
+     3.704,
+     0.989
+    ],
+    [
+     "for",
+     3.704,
+     3.964,
+     0.985
+    ],
+    [
+     "this",
+     3.964,
+     4.044,
+     0.997
+    ],
+    [
+     "evening's",
+     4.044,
+     4.444,
+     0.99
+    ],
+    [
+     "match.",
+     4.444,
+     4.704,
+     0.996
+    ]
+   ],
+   "asr_conf": 0.898,
+   "speaker_id": "S1",
+   "speaker_sim": 1.0,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.0,
+   "features": {
+    "loudness_db": -18.434,
+    "loudness_mean_db": -20.006,
+    "duration_s": 3.456,
+    "pitch_hz_median": 137.845,
+    "pitch_hz_p75": 178.909,
+    "pitch_range": 213.073,
+    "rate_wps": 3.313,
+    "text_cue": 0.0,
+    "z_loudness": 0.0,
+    "z_pitch": 0.0,
+    "z_rate": 0.0,
+    "arousal_raw": 0.0
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000001_bm_george_cc5d55b5_x1.07.wav",
+   "tts_duration": 3.284,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 5.504,
+    "asr_done": 6.75,
+    "speaker_done": 6.285,
+    "emotion_done": 6.751,
+    "complete": 6.751,
+    "tts_start": 6.753,
+    "tts_ready": 9.23,
+    "play_at": 9.23,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000002",
+   "t_start": 5.6,
+   "t_end": 9.088,
+   "close_reason": "pause",
+   "text": "It's a lovely night for football, and both sides need it, and both sides need it.",
+   "words": [
+    [
+     "It's",
+     5.48,
+     5.86,
+     0.956
+    ],
+    [
+     "a",
+     5.86,
+     5.9,
+     0.993
+    ],
+    [
+     "lovely",
+     5.9,
+     6.2,
+     0.994
+    ],
+    [
+     "night",
+     6.2,
+     6.56,
+     0.667
+    ],
+    [
+     "for",
+     6.56,
+     6.7,
+     0.737
+    ],
+    [
+     "football,",
+     6.7,
+     7.18,
+     0.984
+    ],
+    [
+     "and",
+     7.42,
+     7.68,
+     0.986
+    ],
+    [
+     "both",
+     7.68,
+     7.88,
+     0.995
+    ],
+    [
+     "sides",
+     7.88,
+     8.3,
+     0.993
+    ],
+    [
+     "need",
+     8.3,
+     8.58,
+     0.812
+    ],
+    [
+     "it,",
+     8.58,
+     8.78,
+     0.892
+    ],
+    [
+     "and",
+     8.88,
+     8.96,
+     0.0
+    ],
+    [
+     "both",
+     8.96,
+     8.98,
+     0.013
+    ],
+    [
+     "sides",
+     8.98,
+     8.98,
+     0.913
+    ],
+    [
+     "need",
+     8.98,
+     8.98,
+     0.878
+    ],
+    [
+     "it.",
+     8.98,
+     8.98,
+     0.973
+    ]
+   ],
+   "asr_conf": 0.78,
+   "speaker_id": "S2",
+   "speaker_sim": 1.0,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.0,
+   "features": {
+    "loudness_db": -19.643,
+    "loudness_mean_db": -22.192,
+    "duration_s": 3.488,
+    "pitch_hz_median": 199.866,
+    "pitch_hz_p75": 229.086,
+    "pitch_range": 172.598,
+    "rate_wps": 4.571,
+    "text_cue": 0.0,
+    "z_loudness": 0.0,
+    "z_pitch": 0.0,
+    "z_rate": 0.0,
+    "arousal_raw": 0.0
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000002_am_adam_31b8eaa1_x1.10.wav",
+   "tts_duration": 3.807,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 9.503,
+    "asr_done": 11.126,
+    "speaker_done": 9.829,
+    "emotion_done": 11.126,
+    "complete": 11.126,
+    "tts_start": 11.126,
+    "tts_ready": 14.224,
+    "play_at": 14.224,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000003",
+   "t_start": 9.824,
+   "t_end": 13.312,
+   "close_reason": "pause",
+   "text": "Riverside Rovers get us underway, playing from left. to write.",
+   "words": [
+    [
+     "Riverside",
+     9.704,
+     10.344,
+     0.854
+    ],
+    [
+     "Rovers",
+     10.344,
+     10.844,
+     0.912
+    ],
+    [
+     "get",
+     10.844,
+     11.024,
+     0.963
+    ],
+    [
+     "us",
+     11.024,
+     11.224,
+     0.998
+    ],
+    [
+     "underway,",
+     11.224,
+     11.704,
+     0.941
+    ],
+    [
+     "playing",
+     12.284,
+     12.284,
+     0.986
+    ],
+    [
+     "from",
+     12.284,
+     12.544,
+     0.996
+    ],
+    [
+     "left.",
+     12.544,
+     12.784,
+     0.996
+    ],
+    [
+     "to",
+     12.784,
+     12.964,
+     0.904
+    ],
+    [
+     "write.",
+     12.964,
+     13.144,
+     0.941
+    ]
+   ],
+   "asr_conf": 0.745,
+   "speaker_id": "S1",
+   "speaker_sim": 0.791,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.0,
+   "features": {
+    "loudness_db": -17.905,
+    "loudness_mean_db": -20.312,
+    "duration_s": 3.488,
+    "pitch_hz_median": 137.497,
+    "pitch_hz_p75": 151.55,
+    "pitch_range": 152.727,
+    "rate_wps": 2.907,
+    "text_cue": 0.0,
+    "z_loudness": 0.0,
+    "z_pitch": 0.0,
+    "z_rate": 0.0,
+    "arousal_raw": 0.0
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000003_bm_george_b8761889_x1.08.wav",
+   "tts_duration": 3.135,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 13.755,
+    "asr_done": 15.498,
+    "speaker_done": 14.095,
+    "emotion_done": 15.499,
+    "complete": 15.499,
+    "tts_start": 15.499,
+    "tts_ready": 18.01,
+    "play_at": 18.111,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000004",
+   "t_start": 13.824,
+   "t_end": 16.096,
+   "close_reason": "pause",
+   "text": "Akkifir finds Lindeft on the halfway line.",
+   "words": [
+    [
+     "Akkifir",
+     13.704,
+     14.224,
+     0.135
+    ],
+    [
+     "finds",
+     14.224,
+     14.524,
+     0.987
+    ],
+    [
+     "Lindeft",
+     14.524,
+     14.944,
+     0.17
+    ],
+    [
+     "on",
+     14.944,
+     15.144,
+     0.991
+    ],
+    [
+     "the",
+     15.144,
+     15.264,
+     0.991
+    ],
+    [
+     "halfway",
+     15.264,
+     15.564,
+     0.965
+    ],
+    [
+     "line.",
+     15.564,
+     15.924,
+     0.993
+    ]
+   ],
+   "asr_conf": 0.482,
+   "speaker_id": "S1",
+   "speaker_sim": 0.7,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.16,
+   "features": {
+    "loudness_db": -19.482,
+    "loudness_mean_db": -20.806,
+    "duration_s": 2.272,
+    "pitch_hz_median": 138.254,
+    "pitch_hz_p75": 175.653,
+    "pitch_range": 134.219,
+    "rate_wps": 3.153,
+    "text_cue": 0.0,
+    "z_loudness": -0.419,
+    "z_pitch": 0.0,
+    "z_rate": -0.266,
+    "arousal_raw": -0.228
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000004_bm_george_29def5f8_x1.10.wav",
+   "tts_duration": 2.337,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 16.505,
+    "asr_done": 18.675,
+    "speaker_done": 16.712,
+    "emotion_done": 18.675,
+    "complete": 18.675,
+    "tts_start": 18.675,
+    "tts_ready": 20.567,
+    "play_at": 21.326,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000005",
+   "t_start": 16.864,
+   "t_end": 21.472,
+   "close_reason": "pause",
+   "text": "Lindeveste has been in fine form this season, always looking, I'm going to pass forward.",
+   "words": [
+    [
+     "Lindeveste",
+     16.744,
+     17.564,
+     0.354
+    ],
+    [
+     "has",
+     17.564,
+     17.664,
+     0.956
+    ],
+    [
+     "been",
+     17.664,
+     17.864,
+     0.992
+    ],
+    [
+     "in",
+     17.864,
+     18.024,
+     0.994
+    ],
+    [
+     "fine",
+     18.024,
+     18.304,
+     0.972
+    ],
+    [
+     "form",
+     18.304,
+     18.664,
+     0.988
+    ],
+    [
+     "this",
+     18.664,
+     18.784,
+     0.987
+    ],
+    [
+     "season,",
+     18.784,
+     19.244,
+     0.993
+    ],
+    [
+     "always",
+     19.644,
+     19.904,
+     0.974
+    ],
+    [
+     "looking,",
+     19.904,
+     20.264,
+     0.995
+    ],
+    [
+     "I'm",
+     20.264,
+     20.484,
+     0.539
+    ],
+    [
+     "going",
+     20.484,
+     20.484,
+     0.777
+    ],
+    [
+     "to",
+     20.484,
+     20.484,
+     0.996
+    ],
+    [
+     "pass",
+     20.484,
+     20.804,
+     0.976
+    ],
+    [
+     "forward.",
+     20.804,
+     21.144,
+     0.972
+    ]
+   ],
+   "asr_conf": 0.706,
+   "speaker_id": "S2",
+   "speaker_sim": 0.57,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.042,
+   "features": {
+    "loudness_db": -19.581,
+    "loudness_mean_db": -23.021,
+    "duration_s": 4.608,
+    "pitch_hz_median": 197.28,
+    "pitch_hz_p75": 226.563,
+    "pitch_range": 196.735,
+    "rate_wps": 3.409,
+    "text_cue": 0.0,
+    "z_loudness": -0.249,
+    "z_pitch": 0.0,
+    "z_rate": 0.352,
+    "arousal_raw": -0.059
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000005_am_adam_8308971e_x1.15.wav",
+   "tts_duration": 4.226,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 22.004,
+    "asr_done": 23.867,
+    "speaker_done": 22.55,
+    "emotion_done": 23.867,
+    "complete": 23.867,
+    "tts_start": 23.868,
+    "tts_ready": 27.587,
+    "play_at": 27.587,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000006",
+   "t_start": 22.048,
+   "t_end": 24.672,
+   "close_reason": "pause",
+   "text": "Northgate United sit deep, and wait. for the press.",
+   "words": [
+    [
+     "Northgate",
+     21.928,
+     22.488,
+     0.98
+    ],
+    [
+     "United",
+     22.488,
+     22.808,
+     0.971
+    ],
+    [
+     "sit",
+     22.808,
+     23.108,
+     0.92
+    ],
+    [
+     "deep,",
+     23.108,
+     23.448,
+     0.986
+    ],
+    [
+     "and",
+     23.488,
+     23.708,
+     0.994
+    ],
+    [
+     "wait.",
+     23.708,
+     23.888,
+     0.998
+    ],
+    [
+     "for",
+     23.888,
+     24.068,
+     0.904
+    ],
+    [
+     "the",
+     24.068,
+     24.288,
+     0.979
+    ],
+    [
+     "press.",
+     24.288,
+     24.468,
+     0.991
+    ]
+   ],
+   "asr_conf": 0.712,
+   "speaker_id": "S1",
+   "speaker_sim": 0.721,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.081,
+   "features": {
+    "loudness_db": -18.636,
+    "loudness_mean_db": -20.651,
+    "duration_s": 2.624,
+    "pitch_hz_median": 138.183,
+    "pitch_hz_p75": 170.061,
+    "pitch_range": 180.225,
+    "rate_wps": 3.543,
+    "text_cue": 0.0,
+    "z_loudness": 0.338,
+    "z_pitch": -0.467,
+    "z_rate": 0.46,
+    "arousal_raw": 0.081
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000006_bm_george_37ae6ae9_x1.15.wav",
+   "tts_duration": 2.6,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 25.254,
+    "asr_done": 27.702,
+    "speaker_done": 25.491,
+    "emotion_done": 27.703,
+    "complete": 27.703,
+    "tts_start": 27.703,
+    "tts_ready": 29.792,
+    "play_at": 31.893,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000007",
+   "t_start": 25.216,
+   "t_end": 29.216,
+   "close_reason": "pause",
+   "text": "Moreau steps in and wins it back clean. That's the kind of, tackle the manager you love.",
+   "words": [
+    [
+     "Moreau",
+     25.096,
+     25.556,
+     0.457
+    ],
+    [
+     "steps",
+     25.556,
+     25.716,
+     0.958
+    ],
+    [
+     "in",
+     25.716,
+     26.056,
+     0.991
+    ],
+    [
+     "and",
+     26.056,
+     26.056,
+     0.985
+    ],
+    [
+     "wins",
+     26.056,
+     26.236,
+     0.53
+    ],
+    [
+     "it",
+     26.236,
+     26.356,
+     0.989
+    ],
+    [
+     "back",
+     26.356,
+     26.576,
+     0.996
+    ],
+    [
+     "clean.",
+     26.576,
+     26.816,
+     0.86
+    ],
+    [
+     "That's",
+     26.856,
+     27.196,
+     0.974
+    ],
+    [
+     "the",
+     27.196,
+     27.256,
+     0.993
+    ],
+    [
+     "kind",
+     27.256,
+     27.456,
+     0.981
+    ],
+    [
+     "of,",
+     27.456,
+     27.636,
+     0.997
+    ],
+    [
+     "tackle",
+     27.636,
+     28.016,
+     0.131
+    ],
+    [
+     "the",
+     28.016,
+     28.156,
+     0.977
+    ],
+    [
+     "manager",
+     28.156,
+     28.536,
+     0.705
+    ],
+    [
+     "you",
+     28.536,
+     28.756,
+     0.678
+    ],
+    [
+     "love.",
+     28.756,
+     28.996,
+     0.977
+    ]
+   ],
+   "asr_conf": 0.657,
+   "speaker_id": "S1",
+   "speaker_sim": 0.516,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.117,
+   "features": {
+    "loudness_db": -19.295,
+    "loudness_mean_db": -21.525,
+    "duration_s": 4.0,
+    "pitch_hz_median": 180.796,
+    "pitch_hz_p75": 210.839,
+    "pitch_range": 158.152,
+    "rate_wps": 4.359,
+    "text_cue": 0.0,
+    "z_loudness": -0.094,
+    "z_pitch": 2.867,
+    "z_rate": 1.996,
+    "arousal_raw": 1.117
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000007_bm_george_22a57694_x1.11.wav",
+   "tts_duration": 3.996,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 29.754,
+    "asr_done": 31.583,
+    "speaker_done": 30.198,
+    "emotion_done": 31.584,
+    "complete": 31.584,
+    "tts_start": 31.584,
+    "tts_ready": 34.476,
+    "play_at": 34.573,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000008",
+   "t_start": 30.048,
+   "t_end": 32.448,
+   "close_reason": "pause",
+   "text": "to knock it, on the right wing past one past two.",
+   "words": [
+    [
+     "to",
+     29.928,
+     30.128,
+     0.856
+    ],
+    [
+     "knock",
+     30.128,
+     30.348,
+     0.984
+    ],
+    [
+     "it,",
+     30.348,
+     30.468,
+     0.995
+    ],
+    [
+     "on",
+     30.468,
+     30.568,
+     0.309
+    ],
+    [
+     "the",
+     30.568,
+     30.668,
+     0.981
+    ],
+    [
+     "right",
+     30.668,
+     30.868,
+     0.992
+    ],
+    [
+     "wing",
+     30.868,
+     31.108,
+     0.994
+    ],
+    [
+     "past",
+     31.108,
+     31.468,
+     0.938
+    ],
+    [
+     "one",
+     31.468,
+     31.728,
+     0.949
+    ],
+    [
+     "past",
+     31.728,
+     31.988,
+     0.516
+    ],
+    [
+     "two.",
+     31.988,
+     32.288,
+     0.987
+    ]
+   ],
+   "asr_conf": 0.657,
+   "speaker_id": "S1",
+   "speaker_sim": 0.734,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.631,
+   "features": {
+    "loudness_db": -18.081,
+    "loudness_mean_db": -20.085,
+    "duration_s": 2.4,
+    "pitch_hz_median": 134.987,
+    "pitch_hz_p75": 168.84,
+    "pitch_range": 129.249,
+    "rate_wps": 4.661,
+    "text_cue": 0.0,
+    "z_loudness": 0.486,
+    "z_pitch": -0.571,
+    "z_rate": 2.504,
+    "arousal_raw": 0.423
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000008_bm_george_c7d2da26_x1.15.wav",
+   "tts_duration": 2.278,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 33.004,
+    "asr_done": 35.087,
+    "speaker_done": 33.213,
+    "emotion_done": 35.088,
+    "complete": 35.088,
+    "tts_start": 35.088,
+    "tts_ready": 37.029,
+    "play_at": 38.649,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000009",
+   "t_start": 32.896,
+   "t_end": 34.336,
+   "close_reason": "level_change",
+   "text": "He cuts it back for Delgado.",
+   "words": [
+    [
+     "He",
+     32.776,
+     32.956,
+     0.959
+    ],
+    [
+     "cuts",
+     32.956,
+     33.176,
+     0.994
+    ],
+    [
+     "it",
+     33.176,
+     33.296,
+     0.989
+    ],
+    [
+     "back",
+     33.296,
+     33.536,
+     0.991
+    ],
+    [
+     "for",
+     33.536,
+     33.736,
+     0.987
+    ],
+    [
+     "Delgado.",
+     33.736,
+     34.076,
+     0.978
+    ]
+   ],
+   "asr_conf": 0.826,
+   "speaker_id": "S1",
+   "speaker_sim": 0.405,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": 0.772,
+   "features": {
+    "loudness_db": -16.26,
+    "loudness_mean_db": -17.096,
+    "duration_s": 1.44,
+    "pitch_hz_median": 151.673,
+    "pitch_hz_p75": 173.91,
+    "pitch_range": 129.553,
+    "rate_wps": 4.615,
+    "text_cue": 0.0,
+    "z_loudness": 1.082,
+    "z_pitch": 0.09,
+    "z_rate": 1.722,
+    "arousal_raw": 0.772
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000009_bm_george_77d263c1_x1.15.wav",
+   "tts_duration": 1.487,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 35.007,
+    "asr_done": 36.296,
+    "speaker_done": 35.116,
+    "emotion_done": 36.297,
+    "complete": 36.297,
+    "tts_start": 36.297,
+    "tts_ready": 37.908,
+    "play_at": 41.008,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000010",
+   "t_start": 34.656,
+   "t_end": 35.136,
+   "close_reason": "burst",
+   "text": "Oh, what a chance.",
+   "words": [
+    [
+     "Oh,",
+     34.536,
+     34.756,
+     0.936
+    ],
+    [
+     "what",
+     34.956,
+     34.956,
+     0.983
+    ],
+    [
+     "a",
+     34.956,
+     34.956,
+     0.987
+    ],
+    [
+     "chance.",
+     34.956,
+     35.116,
+     0.993
+    ]
+   ],
+   "asr_conf": 0.82,
+   "speaker_id": "S1",
+   "speaker_sim": 0.03,
+   "speaker_conf": "low",
+   "emotion": "peak",
+   "arousal": 3.0,
+   "features": {
+    "loudness_db": -10.551,
+    "loudness_mean_db": -10.551,
+    "duration_s": 0.48,
+    "pitch_hz_median": 200.26,
+    "pitch_hz_p75": 227.059,
+    "pitch_range": 80.443,
+    "rate_wps": 6.897,
+    "text_cue": 0.6,
+    "z_loudness": 3.234,
+    "z_pitch": 3.847,
+    "z_rate": 3.554,
+    "arousal_raw": 3.0
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000010_bm_george_334c9dd1_x1.15.wav",
+   "tts_duration": 0.852,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 35.506,
+    "asr_done": 37.58,
+    "speaker_done": 35.597,
+    "emotion_done": 37.581,
+    "complete": 37.581,
+    "tts_start": 37.581,
+    "tts_ready": 38.608,
+    "play_at": 42.575,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000011",
+   "t_start": 35.136,
+   "t_end": 35.552,
+   "close_reason": "level_change",
+   "text": "Dance.",
+   "words": [
+    [
+     "Dance.",
+     35.016,
+     35.196,
+     0.173
+    ]
+   ],
+   "asr_conf": 0.611,
+   "speaker_id": "S1",
+   "speaker_sim": -0.036,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.273,
+   "features": {
+    "loudness_db": -23.148,
+    "loudness_mean_db": -23.148,
+    "duration_s": 0.416,
+    "pitch_hz_median": 113.7,
+    "pitch_hz_p75": 257.297,
+    "pitch_range": 292.256,
+    "rate_wps": 5.0,
+    "text_cue": 0.0,
+    "z_loudness": -1.845,
+    "z_pitch": 4.0,
+    "z_rate": 1.087,
+    "arousal_raw": 0.533
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000011_bm_george_f778d207_x1.15.wav",
+   "tts_duration": 0.53,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 36.008,
+    "asr_done": 38.79,
+    "speaker_done": 36.061,
+    "emotion_done": 38.79,
+    "complete": 38.79,
+    "tts_start": 38.791,
+    "tts_ready": 39.598,
+    "play_at": 43.507,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000012",
+   "t_start": 35.648,
+   "t_end": 37.984,
+   "close_reason": "pause",
+   "text": "It has to slow it, the gold is right open.",
+   "words": [
+    [
+     "It",
+     35.528,
+     35.788,
+     0.256
+    ],
+    [
+     "has",
+     35.788,
+     35.928,
+     0.97
+    ],
+    [
+     "to",
+     35.928,
+     35.988,
+     0.988
+    ],
+    [
+     "slow",
+     35.988,
+     36.288,
+     0.612
+    ],
+    [
+     "it,",
+     36.288,
+     36.488,
+     0.612
+    ],
+    [
+     "the",
+     36.608,
+     36.728,
+     0.83
+    ],
+    [
+     "gold",
+     36.728,
+     36.968,
+     0.551
+    ],
+    [
+     "is",
+     36.968,
+     37.108,
+     0.986
+    ],
+    [
+     "right",
+     37.108,
+     37.368,
+     0.885
+    ],
+    [
+     "open.",
+     37.368,
+     37.808,
+     0.991
+    ]
+   ],
+   "asr_conf": 0.686,
+   "speaker_id": "S2",
+   "speaker_sim": 0.372,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 0.919,
+   "features": {
+    "loudness_db": -13.55,
+    "loudness_mean_db": -14.775,
+    "duration_s": 2.336,
+    "pitch_hz_median": 205.35,
+    "pitch_hz_p75": 232.182,
+    "pitch_range": 182.307,
+    "rate_wps": 4.386,
+    "text_cue": 0.0,
+    "z_loudness": 2.034,
+    "z_pitch": 0.0,
+    "z_rate": 0.022,
+    "arousal_raw": 0.919
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000012_am_adam_2f0f8922_x1.15.wav",
+   "tts_duration": 1.904,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 38.512,
+    "asr_done": 39.916,
+    "speaker_done": 38.658,
+    "emotion_done": 39.917,
+    "complete": 39.917,
+    "tts_start": 39.917,
+    "tts_ready": 41.768,
+    "play_at": 44.117,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000013",
+   "t_start": 38.784,
+   "t_end": 41.12,
+   "close_reason": "pause",
+   "text": "A goal kicked then, and the lid off for Riverside.",
+   "words": [
+    [
+     "A",
+     38.664,
+     38.844,
+     0.819
+    ],
+    [
+     "goal",
+     38.844,
+     39.124,
+     0.466
+    ],
+    [
+     "kicked",
+     39.124,
+     39.404,
+     0.095
+    ],
+    [
+     "then,",
+     39.404,
+     39.684,
+     0.736
+    ],
+    [
+     "and",
+     39.684,
+     39.924,
+     0.894
+    ],
+    [
+     "the",
+     39.924,
+     39.964,
+     0.254
+    ],
+    [
+     "lid",
+     39.964,
+     40.084,
+     0.787
+    ],
+    [
+     "off",
+     40.084,
+     40.324,
+     0.985
+    ],
+    [
+     "for",
+     40.324,
+     40.424,
+     0.966
+    ],
+    [
+     "Riverside.",
+     40.424,
+     40.864,
+     0.941
+    ]
+   ],
+   "asr_conf": 0.658,
+   "speaker_id": "S1",
+   "speaker_sim": 0.566,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.249,
+   "features": {
+    "loudness_db": -21.166,
+    "loudness_mean_db": -22.648,
+    "duration_s": 2.336,
+    "pitch_hz_median": 131.324,
+    "pitch_hz_p75": 182.264,
+    "pitch_range": 208.563,
+    "rate_wps": 4.545,
+    "text_cue": 1.0,
+    "z_loudness": -1.052,
+    "z_pitch": 0.533,
+    "z_rate": 0.16,
+    "arousal_raw": -0.19
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000013_bm_george_bea28f8e_x1.09.wav",
+   "tts_duration": 2.296,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 41.504,
+    "asr_done": 42.436,
+    "speaker_done": 41.71,
+    "emotion_done": 42.436,
+    "complete": 42.436,
+    "tts_start": 42.436,
+    "tts_ready": 44.314,
+    "play_at": 46.102,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000014",
+   "t_start": 41.856,
+   "t_end": 44.576,
+   "close_reason": "pause",
+   "text": "Delgado, will be thinking about that.",
+   "words": [
+    [
+     "Delgado,",
+     41.736,
+     42.376,
+     0.908
+    ],
+    [
+     "will",
+     42.596,
+     42.596,
+     0.415
+    ],
+    [
+     "be",
+     42.596,
+     42.696,
+     0.997
+    ],
+    [
+     "thinking",
+     42.696,
+     43.076,
+     0.997
+    ],
+    [
+     "about",
+     43.076,
+     43.416,
+     0.974
+    ],
+    [
+     "that.",
+     43.416,
+     43.596,
+     0.975
+    ]
+   ],
+   "asr_conf": 0.672,
+   "speaker_id": "S2",
+   "speaker_sim": 0.507,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": -0.084,
+   "features": {
+    "loudness_db": -20.17,
+    "loudness_mean_db": -22.528,
+    "duration_s": 2.72,
+    "pitch_hz_median": 193.567,
+    "pitch_hz_p75": 226.603,
+    "pitch_range": 174.743,
+    "rate_wps": 3.226,
+    "text_cue": 0.0,
+    "z_loudness": -0.614,
+    "z_pitch": -0.157,
+    "z_rate": -1.274,
+    "arousal_raw": -0.514
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000014_am_adam_ac8b24bb_x1.07.wav",
+   "tts_duration": 1.767,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 45.005,
+    "asr_done": 45.907,
+    "speaker_done": 45.24,
+    "emotion_done": 45.908,
+    "complete": 45.908,
+    "tts_start": 45.908,
+    "tts_ready": 47.488,
+    "play_at": 48.477,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000015",
+   "t_start": 45.12,
+   "t_end": 48.576,
+   "close_reason": "pause",
+   "text": "Brennan, with the long ball forward, headed away by the long ball forward, headed away. you",
+   "words": [
+    [
+     "Brennan,",
+     45.0,
+     45.42,
+     0.931
+    ],
+    [
+     "with",
+     45.46,
+     45.62,
+     0.996
+    ],
+    [
+     "the",
+     45.62,
+     45.74,
+     0.937
+    ],
+    [
+     "long",
+     45.74,
+     46.04,
+     0.991
+    ],
+    [
+     "ball",
+     46.04,
+     46.4,
+     0.976
+    ],
+    [
+     "forward,",
+     46.4,
+     46.86,
+     0.995
+    ],
+    [
+     "headed",
+     47.34,
+     47.34,
+     0.994
+    ],
+    [
+     "away",
+     47.34,
+     47.64,
+     0.995
+    ],
+    [
+     "by",
+     47.64,
+     47.84,
+     0.995
+    ],
+    [
+     "the",
+     47.84,
+     47.98,
+     0.997
+    ],
+    [
+     "long",
+     47.98,
+     48.18,
+     0.0
+    ],
+    [
+     "ball",
+     48.18,
+     48.32,
+     0.0
+    ],
+    [
+     "forward,",
+     48.32,
+     48.56,
+     0.017
+    ],
+    [
+     "headed",
+     48.56,
+     48.56,
+     0.993
+    ],
+    [
+     "away.",
+     48.56,
+     48.56,
+     0.996
+    ],
+    [
+     "you",
+     48.56,
+     48.66,
+     0.094
+    ]
+   ],
+   "asr_conf": 0.569,
+   "speaker_id": "S1",
+   "speaker_sim": 0.722,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.035,
+   "features": {
+    "loudness_db": -18.487,
+    "loudness_mean_db": -20.166,
+    "duration_s": 3.456,
+    "pitch_hz_median": 143.791,
+    "pitch_hz_p75": 167.581,
+    "pitch_range": 134.335,
+    "rate_wps": 4.372,
+    "text_cue": 0.0,
+    "z_loudness": 0.192,
+    "z_pitch": -0.811,
+    "z_rate": -0.001,
+    "arousal_raw": -0.157
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000015_bm_george_74cfbfd0_x1.10.wav",
+   "tts_duration": 4.338,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 49.004,
+    "asr_done": 50.663,
+    "speaker_done": 49.355,
+    "emotion_done": 50.663,
+    "complete": 50.663,
+    "tts_start": 50.663,
+    "tts_ready": 53.779,
+    "play_at": 53.779,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000016",
+   "t_start": 49.152,
+   "t_end": 54.208,
+   "close_reason": "pause",
+   "text": "It drops to Akhaffer on the edge of the area, and he shoots. And he shoots. at the keeper, you should have done better.",
+   "words": [
+    [
+     "It",
+     49.032,
+     49.232,
+     0.959
+    ],
+    [
+     "drops",
+     49.232,
+     49.532,
+     0.991
+    ],
+    [
+     "to",
+     49.532,
+     49.732,
+     0.992
+    ],
+    [
+     "Akhaffer",
+     49.732,
+     50.112,
+     0.538
+    ],
+    [
+     "on",
+     50.112,
+     50.332,
+     0.989
+    ],
+    [
+     "the",
+     50.332,
+     50.392,
+     0.996
+    ],
+    [
+     "edge",
+     50.392,
+     50.572,
+     0.99
+    ],
+    [
+     "of",
+     50.572,
+     50.672,
+     0.998
+    ],
+    [
+     "the",
+     50.672,
+     50.792,
+     0.997
+    ],
+    [
+     "area,",
+     50.792,
+     51.172,
+     0.998
+    ],
+    [
+     "and",
+     51.452,
+     51.452,
+     0.995
+    ],
+    [
+     "he",
+     51.452,
+     51.612,
+     0.995
+    ],
+    [
+     "shoots.",
+     51.612,
+     51.852,
+     0.997
+    ],
+    [
+     "And",
+     52.152,
+     52.272,
+     0.0
+    ],
+    [
+     "he",
+     52.272,
+     52.352,
+     0.117
+    ],
+    [
+     "shoots.",
+     52.352,
+     52.352,
+     0.988
+    ],
+    [
+     "at",
+     52.352,
+     52.472,
+     0.575
+    ],
+    [
+     "the",
+     52.472,
+     52.552,
+     0.954
+    ],
+    [
+     "keeper,",
+     52.552,
+     52.912,
+     0.846
+    ],
+    [
+     "you",
+     53.152,
+     53.192,
+     0.786
+    ],
+    [
+     "should",
+     53.192,
+     53.312,
+     0.995
+    ],
+    [
+     "have",
+     53.312,
+     53.412,
+     0.973
+    ],
+    [
+     "done",
+     53.412,
+     53.552,
+     0.998
+    ],
+    [
+     "better.",
+     53.552,
+     53.872,
+     0.999
+    ]
+   ],
+   "asr_conf": 0.767,
+   "speaker_id": "S1",
+   "speaker_sim": 0.66,
+   "speaker_conf": "high",
+   "emotion": "excited",
+   "arousal": 1.632,
+   "features": {
+    "loudness_db": -16.468,
+    "loudness_mean_db": -18.667,
+    "duration_s": 5.056,
+    "pitch_hz_median": 172.575,
+    "pitch_hz_p75": 228.962,
+    "pitch_range": 169.052,
+    "rate_wps": 4.959,
+    "text_cue": 0.0,
+    "z_loudness": 0.867,
+    "z_pitch": 3.824,
+    "z_rate": 0.63,
+    "arousal_raw": 1.632
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000016_bm_george_ca4f9b7d_x1.15.wav",
+   "tts_duration": 4.748,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 54.754,
+    "asr_done": 56.549,
+    "speaker_done": 55.24,
+    "emotion_done": 56.549,
+    "complete": 56.549,
+    "tts_start": 56.549,
+    "tts_ready": 60.242,
+    "play_at": 60.242,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000017",
+   "t_start": 54.848,
+   "t_end": 57.504,
+   "close_reason": "pause",
+   "text": "Northgate, keep the ball now. Passing it around the ball, passing it around the back. you",
+   "words": [
+    [
+     "Northgate,",
+     55.048,
+     55.328,
+     0.943
+    ],
+    [
+     "keep",
+     55.528,
+     55.528,
+     0.943
+    ],
+    [
+     "the",
+     55.528,
+     55.668,
+     0.996
+    ],
+    [
+     "ball",
+     55.668,
+     55.888,
+     0.713
+    ],
+    [
+     "now.",
+     55.888,
+     56.188,
+     0.971
+    ],
+    [
+     "Passing",
+     56.528,
+     56.808,
+     0.696
+    ],
+    [
+     "it",
+     56.808,
+     56.868,
+     0.72
+    ],
+    [
+     "around",
+     56.868,
+     57.108,
+     0.909
+    ],
+    [
+     "the",
+     57.108,
+     57.228,
+     0.978
+    ],
+    [
+     "ball,",
+     57.228,
+     57.348,
+     0.0
+    ],
+    [
+     "passing",
+     57.348,
+     57.348,
+     0.001
+    ],
+    [
+     "it",
+     57.348,
+     57.348,
+     0.815
+    ],
+    [
+     "around",
+     57.348,
+     57.348,
+     0.94
+    ],
+    [
+     "the",
+     57.348,
+     57.348,
+     0.984
+    ],
+    [
+     "back.",
+     57.348,
+     57.448,
+     0.98
+    ],
+    [
+     "you",
+     57.448,
+     57.508,
+     0.08
+    ]
+   ],
+   "asr_conf": 0.539,
+   "speaker_id": "S1",
+   "speaker_sim": 0.591,
+   "speaker_conf": "high",
+   "emotion": "excited",
+   "arousal": 1.001,
+   "features": {
+    "loudness_db": -20.049,
+    "loudness_mean_db": -22.169,
+    "duration_s": 2.656,
+    "pitch_hz_median": 143.691,
+    "pitch_hz_p75": 209.293,
+    "pitch_range": 225.347,
+    "rate_wps": 6.504,
+    "text_cue": 0.0,
+    "z_loudness": -0.595,
+    "z_pitch": 2.134,
+    "z_rate": 2.387,
+    "arousal_raw": 0.73
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000017_bm_george_f5d84cd7_x1.15.wav",
+   "tts_duration": 4.374,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 58.003,
+    "asr_done": 60.346,
+    "speaker_done": 58.27,
+    "emotion_done": 60.347,
+    "complete": 60.347,
+    "tts_start": 60.347,
+    "tts_ready": 63.978,
+    "play_at": 65.07,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000018",
+   "t_start": 58.368,
+   "t_end": 60.64,
+   "close_reason": "pause",
+   "text": "20 minutes gone, and it is still nil. new.",
+   "words": [
+    [
+     "20",
+     58.248,
+     58.628,
+     0.907
+    ],
+    [
+     "minutes",
+     58.628,
+     58.868,
+     0.946
+    ],
+    [
+     "gone,",
+     58.868,
+     59.248,
+     0.987
+    ],
+    [
+     "and",
+     59.448,
+     59.448,
+     0.989
+    ],
+    [
+     "it",
+     59.448,
+     59.548,
+     0.992
+    ],
+    [
+     "is",
+     59.548,
+     59.728,
+     0.99
+    ],
+    [
+     "still",
+     59.728,
+     59.928,
+     0.998
+    ],
+    [
+     "nil.",
+     59.928,
+     60.128,
+     0.596
+    ],
+    [
+     "new.",
+     60.128,
+     60.388,
+     0.201
+    ]
+   ],
+   "asr_conf": 0.645,
+   "speaker_id": "S2",
+   "speaker_sim": 0.445,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": -0.162,
+   "features": {
+    "loudness_db": -19.506,
+    "loudness_mean_db": -20.657,
+    "duration_s": 2.272,
+    "pitch_hz_median": 206.065,
+    "pitch_hz_p75": 227.373,
+    "pitch_range": 169.735,
+    "rate_wps": 4.206,
+    "text_cue": 0.0,
+    "z_loudness": -0.348,
+    "z_pitch": -0.03,
+    "z_rate": -0.198,
+    "arousal_raw": -0.195
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000018_am_adam_278b7f94_x1.15.wav",
+   "tts_duration": 2.278,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 61.004,
+    "asr_done": 63.389,
+    "speaker_done": 61.209,
+    "emotion_done": 63.389,
+    "complete": 63.389,
+    "tts_start": 63.389,
+    "tts_ready": 65.606,
+    "play_at": 69.524,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000019",
+   "t_start": 61.152,
+   "t_end": 63.104,
+   "close_reason": "pause",
+   "text": "Moreau, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now, now,",
+   "words": [
+    [
+     "Moreau,",
+     61.732,
+     61.932,
+     0.454
+    ],
+    [
+     "now,",
+     61.932,
+     62.132,
+     0.001
+    ],
+    [
+     "now,",
+     62.232,
+     62.232,
+     0.0
+    ],
+    [
+     "now,",
+     62.332,
+     62.332,
+     0.0
+    ],
+    [
+     "now,",
+     62.432,
+     62.432,
+     0.0
+    ],
+    [
+     "now,",
+     62.492,
+     62.492,
+     0.0
+    ],
+    [
+     "now,",
+     62.552,
+     62.552,
+     0.0
+    ],
+    [
+     "now,",
+     62.652,
+     62.672,
+     0.0
+    ],
+    [
+     "now,",
+     62.672,
+     62.712,
+     0.0
+    ],
+    [
+     "now,",
+     62.712,
+     62.772,
+     0.0
+    ],
+    [
+     "now,",
+     62.892,
+     62.892,
+     0.0
+    ],
+    [
+     "now,",
+     62.912,
+     62.912,
+     0.0
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.0
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.02
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.039
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.035
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.038
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.033
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.046
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.049
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.036
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.047
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.046
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.046
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.056
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.1
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.075
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.113
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.162
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.212
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.281
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.337
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.351
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.454
+    ],
+    [
+     "now,",
+     63.092,
+     63.092,
+     0.457
+    ],
+    [
+     "now,",
+     63.092,
+     63.132,
+     0.449
+    ],
+    [
+     "now,",
+     63.132,
+     63.172,
+     0.57
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.514
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.439
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.512
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.563
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.536
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.488
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.488
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.5
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.524
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.47
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.431
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.401
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.408
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.419
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.512
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.39
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.373
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.414
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.388
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.465
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.546
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.606
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.537
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.47
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.542
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.558
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.573
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.536
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.548
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.53
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.601
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.546
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.536
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.582
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.559
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.569
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.615
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.653
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.574
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.629
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.631
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.615
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.689
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.665
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.641
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.647
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.631
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.685
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.635
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.622
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.646
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.63
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.616
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.687
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.651
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.684
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.595
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.619
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.682
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.691
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.614
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.661
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.636
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.62
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.644
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.647
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.635
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.659
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.624
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.666
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.681
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.665
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.611
+    ],
+    [
+     "now,",
+     63.172,
+     63.172,
+     0.637
+    ]
+   ],
+   "asr_conf": 0.677,
+   "speaker_id": "S1",
+   "speaker_sim": 0.768,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.477,
+   "features": {
+    "loudness_db": -19.123,
+    "loudness_mean_db": -20.506,
+    "duration_s": 1.952,
+    "pitch_hz_median": 129.421,
+    "pitch_hz_p75": 161.376,
+    "pitch_range": 125.404,
+    "rate_wps": 77.083,
+    "text_cue": 0.0,
+    "z_loudness": -0.063,
+    "z_pitch": -1.064,
+    "z_rate": 4.0,
+    "arousal_raw": 0.253
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000019_bm_george_faaf1ebd_x1.15.wav",
+   "tts_duration": 16.452,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 63.504,
+    "asr_done": 66.844,
+    "speaker_done": 63.705,
+    "emotion_done": 66.845,
+    "complete": 66.845,
+    "tts_start": 66.845,
+    "tts_ready": 83.412,
+    "play_at": 83.412,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000020",
+   "t_start": 63.616,
+   "t_end": 65.984,
+   "close_reason": "level_change",
+   "text": "Donaka threw on gold. He goes round the keeper.",
+   "words": [
+    [
+     "Donaka",
+     63.496,
+     63.916,
+     0.523
+    ],
+    [
+     "threw",
+     63.916,
+     64.096,
+     0.101
+    ],
+    [
+     "on",
+     64.096,
+     64.276,
+     0.994
+    ],
+    [
+     "gold.",
+     64.276,
+     64.616,
+     0.338
+    ],
+    [
+     "He",
+     64.976,
+     64.996,
+     0.993
+    ],
+    [
+     "goes",
+     64.996,
+     65.156,
+     0.997
+    ],
+    [
+     "round",
+     65.156,
+     65.376,
+     0.619
+    ],
+    [
+     "the",
+     65.376,
+     65.496,
+     0.623
+    ],
+    [
+     "keeper.",
+     65.496,
+     65.776,
+     0.912
+    ]
+   ],
+   "asr_conf": 0.683,
+   "speaker_id": "S1",
+   "speaker_sim": 0.488,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": 0.601,
+   "features": {
+    "loudness_db": -16.706,
+    "loudness_mean_db": -17.415,
+    "duration_s": 2.368,
+    "pitch_hz_median": 172.784,
+    "pitch_hz_p75": 194.689,
+    "pitch_range": 153.707,
+    "rate_wps": 3.947,
+    "text_cue": 0.0,
+    "z_loudness": 1.001,
+    "z_pitch": 0.842,
+    "z_rate": -0.681,
+    "arousal_raw": 0.601
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000020_bm_george_f4c47bca_x1.15.wav",
+   "tts_duration": 2.365,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 66.508,
+    "asr_done": 68.071,
+    "speaker_done": 66.666,
+    "emotion_done": 68.071,
+    "complete": 68.071,
+    "tts_start": 68.071,
+    "tts_ready": 70.125,
+    "play_at": 99.944,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000021",
+   "t_start": 66.112,
+   "t_end": 68.832,
+   "close_reason": "pause",
+   "text": "Go, Go, Go, and not. And not the scores for North Gate, for North Gate, North Gate, Northgate, North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North North",
+   "words": [
+    [
+     "Go,",
+     65.992,
+     66.272,
+     0.966
+    ],
+    [
+     "Go,",
+     66.512,
+     66.752,
+     0.314
+    ],
+    [
+     "Go,",
+     66.772,
+     66.992,
+     0.002
+    ],
+    [
+     "and",
+     66.992,
+     67.052,
+     0.579
+    ],
+    [
+     "not.",
+     67.052,
+     67.172,
+     0.276
+    ],
+    [
+     "And",
+     67.252,
+     67.252,
+     0.006
+    ],
+    [
+     "not",
+     67.252,
+     67.252,
+     0.182
+    ],
+    [
+     "the",
+     67.252,
+     67.292,
+     0.876
+    ],
+    [
+     "scores",
+     67.292,
+     67.572,
+     0.773
+    ],
+    [
+     "for",
+     67.572,
+     67.752,
+     0.978
+    ],
+    [
+     "North",
+     67.752,
+     67.952,
+     0.965
+    ],
+    [
+     "Gate,",
+     67.952,
+     68.112,
+     0.574
+    ],
+    [
+     "for",
+     68.312,
+     68.312,
+     0.0
+    ],
+    [
+     "North",
+     68.312,
+     68.332,
+     0.0
+    ],
+    [
+     "Gate,",
+     68.332,
+     68.332,
+     0.886
+    ],
+    [
+     "North",
+     68.332,
+     68.332,
+     0.0
+    ],
+    [
+     "Gate,",
+     68.332,
+     68.332,
+     0.002
+    ],
+    [
+     "Northgate,",
+     68.432,
+     68.712,
+     0.0
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.001
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.0
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.001
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.002
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.004
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.004
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.004
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.007
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.008
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.01
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.012
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.013
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.013
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.012
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.021
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.025
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.023
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.035
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.042
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.078
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.094
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.203
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.328
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.348
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.504
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.517
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.524
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.599
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.642
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.684
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.601
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.583
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.529
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.613
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.73
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.762
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.699
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.766
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.761
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.784
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.79
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.829
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.821
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.833
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.845
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.866
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.869
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.846
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.876
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.864
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.887
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.841
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.869
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.88
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.889
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.887
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.89
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.877
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.911
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.899
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.919
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.899
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.908
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.915
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.909
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.904
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.894
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.908
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.861
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.9
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.907
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.922
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.916
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.915
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.9
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.906
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.909
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.916
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.899
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.931
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.923
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.906
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.892
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.894
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.927
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.925
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.868
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.913
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.88
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.868
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.906
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.901
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.899
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.878
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.885
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.891
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.877
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.856
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.842
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.884
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.872
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.868
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.892
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.87
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.855
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.857
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.845
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.865
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.86
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.832
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.834
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.837
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.856
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.846
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.819
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.822
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.853
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.834
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.805
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.803
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.828
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.855
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.821
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.837
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.825
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.831
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.826
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.836
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.796
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.824
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.802
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.825
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.836
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.798
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.819
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.819
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.811
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.808
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.819
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.831
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.777
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.795
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.787
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.791
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.797
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.786
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.749
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.768
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.811
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.784
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.811
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.806
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.81
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.798
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.795
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.824
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.787
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.796
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.789
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.791
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.77
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.791
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.79
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.769
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.781
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.832
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.776
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.761
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.767
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.771
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.777
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.774
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.786
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.767
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.772
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.764
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.764
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.763
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.745
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.763
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.771
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.754
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.752
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.73
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.795
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.705
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.738
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.794
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.754
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.782
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.763
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.742
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.739
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.722
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.767
+    ],
+    [
+     "North",
+     68.932,
+     68.932,
+     0.732
+    ]
+   ],
+   "asr_conf": 0.66,
+   "speaker_id": "S1",
+   "speaker_sim": 0.148,
+   "speaker_conf": "low",
+   "emotion": "peak",
+   "arousal": 2.613,
+   "features": {
+    "loudness_db": -10.042,
+    "loudness_mean_db": -12.091,
+    "duration_s": 2.72,
+    "pitch_hz_median": 147.572,
+    "pitch_hz_p75": 204.395,
+    "pitch_range": 152.123,
+    "rate_wps": 72.789,
+    "text_cue": 0.6,
+    "z_loudness": 3.632,
+    "z_pitch": 1.063,
+    "z_rate": 4.0,
+    "arousal_raw": 2.613
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000021_bm_george_5b01b927_x1.15.wav",
+   "tts_duration": 38.765,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 69.255,
+    "asr_done": 72.941,
+    "speaker_done": 69.521,
+    "emotion_done": 72.942,
+    "complete": 72.942,
+    "tts_start": 72.942,
+    "tts_ready": 110.063,
+    "play_at": 110.063,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000022",
+   "t_start": 69.76,
+   "t_end": 69.888,
+   "close_reason": "burst",
+   "text": "and",
+   "words": [
+    [
+     "and",
+     69.64,
+     69.9,
+     0.568
+    ]
+   ],
+   "asr_conf": 0.499,
+   "speaker_id": "S1",
+   "speaker_sim": 0.058,
+   "speaker_conf": "low",
+   "emotion": "peak",
+   "arousal": 1.982,
+   "features": {
+    "loudness_db": -4.265,
+    "loudness_mean_db": -4.265,
+    "duration_s": 0.128,
+    "rate_wps": 3.846,
+    "text_cue": 0.0,
+    "z_loudness": 4.0,
+    "z_pitch": 0.0,
+    "z_rate": -0.593,
+    "arousal_raw": 1.711
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000022_bm_george_b9485f14_x1.15.wav",
+   "tts_duration": 0.409,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 70.255,
+    "asr_done": 75.668,
+    "speaker_done": 70.291,
+    "emotion_done": 75.668,
+    "complete": 75.668,
+    "tts_start": 83.413,
+    "tts_ready": 84.192,
+    "play_at": 148.908,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000023",
+   "t_start": 69.888,
+   "t_end": 75.52,
+   "close_reason": "pause",
+   "text": "Unbelievable, what a finish from Tanaka, what a finish, You made that look so easy.",
+   "words": [
+    [
+     "Unbelievable,",
+     69.768,
+     70.428,
+     0.902
+    ],
+    [
+     "what",
+     70.628,
+     70.648,
+     0.979
+    ],
+    [
+     "a",
+     70.648,
+     70.748,
+     0.985
+    ],
+    [
+     "finish",
+     70.748,
+     71.028,
+     0.894
+    ],
+    [
+     "from",
+     71.028,
+     71.228,
+     0.987
+    ],
+    [
+     "Tanaka,",
+     71.228,
+     71.708,
+     0.699
+    ],
+    [
+     "what",
+     72.128,
+     72.548,
+     0.001
+    ],
+    [
+     "a",
+     72.548,
+     72.708,
+     0.964
+    ],
+    [
+     "finish,",
+     72.708,
+     73.048,
+     0.0
+    ],
+    [
+     "You",
+     73.668,
+     74.108,
+     0.56
+    ],
+    [
+     "made",
+     74.108,
+     74.308,
+     0.494
+    ],
+    [
+     "that",
+     74.308,
+     74.508,
+     0.978
+    ],
+    [
+     "look",
+     74.508,
+     74.748,
+     0.991
+    ],
+    [
+     "so",
+     74.748,
+     74.948,
+     0.993
+    ],
+    [
+     "easy.",
+     74.948,
+     75.168,
+     0.994
+    ]
+   ],
+   "asr_conf": 0.694,
+   "speaker_id": "S2",
+   "speaker_sim": 0.306,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.479,
+   "features": {
+    "loudness_db": -13.215,
+    "loudness_mean_db": -14.956,
+    "duration_s": 5.632,
+    "pitch_hz_median": 224.139,
+    "pitch_hz_p75": 260.407,
+    "pitch_range": 204.254,
+    "rate_wps": 2.778,
+    "text_cue": 2.0,
+    "z_loudness": 2.168,
+    "z_pitch": 1.957,
+    "z_rate": -1.894,
+    "arousal_raw": 1.479
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000023_am_adam_97837c72_x1.15.wav",
+   "tts_duration": 3.696,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 76.004,
+    "asr_done": 79.079,
+    "speaker_done": 76.763,
+    "emotion_done": 79.081,
+    "complete": 79.081,
+    "tts_start": 84.192,
+    "tts_ready": 87.264,
+    "play_at": 149.397,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000024",
+   "t_start": 76.224,
+   "t_end": 78.592,
+   "close_reason": "pause",
+   "text": "So Northgate United lead by one goal to no.",
+   "words": [
+    [
+     "So",
+     76.104,
+     76.304,
+     0.884
+    ],
+    [
+     "Northgate",
+     76.304,
+     76.704,
+     0.984
+    ],
+    [
+     "United",
+     76.704,
+     77.004,
+     0.916
+    ],
+    [
+     "lead",
+     77.004,
+     77.384,
+     0.672
+    ],
+    [
+     "by",
+     77.384,
+     77.664,
+     0.958
+    ],
+    [
+     "one",
+     77.664,
+     77.904,
+     0.969
+    ],
+    [
+     "goal",
+     77.904,
+     78.144,
+     0.993
+    ],
+    [
+     "to",
+     78.144,
+     78.284,
+     0.994
+    ],
+    [
+     "no.",
+     78.284,
+     78.484,
+     0.901
+    ]
+   ],
+   "asr_conf": 0.843,
+   "speaker_id": "S1",
+   "speaker_sim": 0.749,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.323,
+   "features": {
+    "loudness_db": -18.848,
+    "loudness_mean_db": -19.937,
+    "duration_s": 2.368,
+    "pitch_hz_median": 136.658,
+    "pitch_hz_p75": 155.724,
+    "pitch_range": 117.126,
+    "rate_wps": 3.782,
+    "text_cue": 1.0,
+    "z_loudness": -0.137,
+    "z_pitch": -1.064,
+    "z_rate": -0.712,
+    "arousal_raw": -0.388
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000024_bm_george_f643f09c_x1.15.wav",
+   "tts_duration": 2.348,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 79.003,
+    "asr_done": 80.539,
+    "speaker_done": 79.228,
+    "emotion_done": 80.539,
+    "complete": 80.539,
+    "tts_start": 87.264,
+    "tts_ready": 89.334,
+    "play_at": 153.173,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000025",
+   "t_start": 79.264,
+   "t_end": 82.784,
+   "close_reason": "pause",
+   "text": "Riverside, how to respond now, they can respond now, they can't respond now, you",
+   "words": [
+    [
+     "Riverside,",
+     79.144,
+     79.764,
+     0.967
+    ],
+    [
+     "how",
+     79.764,
+     80.064,
+     0.243
+    ],
+    [
+     "to",
+     80.064,
+     80.144,
+     0.998
+    ],
+    [
+     "respond",
+     80.144,
+     80.524,
+     0.994
+    ],
+    [
+     "now,",
+     80.524,
+     80.964,
+     0.986
+    ],
+    [
+     "they",
+     81.344,
+     81.384,
+     0.984
+    ],
+    [
+     "can",
+     81.384,
+     81.504,
+     0.987
+    ],
+    [
+     "respond",
+     81.504,
+     81.504,
+     0.0
+    ],
+    [
+     "now,",
+     81.504,
+     81.504,
+     0.98
+    ],
+    [
+     "they",
+     81.504,
+     81.504,
+     0.987
+    ],
+    [
+     "can't",
+     81.504,
+     81.664,
+     0.993
+    ],
+    [
+     "respond",
+     81.664,
+     81.824,
+     0.0
+    ],
+    [
+     "now,",
+     81.824,
+     82.764,
+     0.011
+    ],
+    [
+     "you",
+     82.764,
+     82.784,
+     0.119
+    ]
+   ],
+   "asr_conf": 0.548,
+   "speaker_id": "S2",
+   "speaker_sim": 0.597,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.168,
+   "features": {
+    "loudness_db": -20.494,
+    "loudness_mean_db": -23.42,
+    "duration_s": 3.52,
+    "pitch_hz_median": 202.571,
+    "pitch_hz_p75": 230.579,
+    "pitch_range": 192.305,
+    "rate_wps": 3.846,
+    "text_cue": 0.0,
+    "z_loudness": -0.76,
+    "z_pitch": 0.148,
+    "z_rate": -0.636,
+    "arousal_raw": -0.393
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000025_am_adam_d9c77d8f_x1.15.wav",
+   "tts_duration": 3.635,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 83.254,
+    "asr_done": 86.195,
+    "speaker_done": 83.731,
+    "emotion_done": 86.195,
+    "complete": 86.195,
+    "tts_start": 89.334,
+    "tts_ready": 92.392,
+    "play_at": 155.6,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000026",
+   "t_start": 83.36,
+   "t_end": 87.136,
+   "close_reason": "pause",
+   "text": "Lindeckes, tries to lift his team, pointing at his team, shop.",
+   "words": [
+    [
+     "Lindeckes,",
+     83.24,
+     83.94,
+     0.234
+    ],
+    [
+     "tries",
+     83.94,
+     84.24,
+     0.998
+    ],
+    [
+     "to",
+     84.24,
+     84.4,
+     0.999
+    ],
+    [
+     "lift",
+     84.4,
+     84.6,
+     0.995
+    ],
+    [
+     "his",
+     84.6,
+     84.78,
+     0.997
+    ],
+    [
+     "team,",
+     84.78,
+     85.2,
+     0.995
+    ],
+    [
+     "pointing",
+     85.46,
+     85.78,
+     0.994
+    ],
+    [
+     "at",
+     85.78,
+     85.98,
+     0.0
+    ],
+    [
+     "his",
+     85.98,
+     86.2,
+     0.0
+    ],
+    [
+     "team,",
+     86.2,
+     86.72,
+     0.001
+    ],
+    [
+     "shop.",
+     86.72,
+     86.92,
+     0.163
+    ]
+   ],
+   "asr_conf": 0.57,
+   "speaker_id": "S1",
+   "speaker_sim": 0.849,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.071,
+   "features": {
+    "loudness_db": -18.636,
+    "loudness_mean_db": -20.358,
+    "duration_s": 3.776,
+    "pitch_hz_median": 144.131,
+    "pitch_hz_p75": 182.973,
+    "pitch_range": 285.481,
+    "rate_wps": 2.989,
+    "text_cue": 0.0,
+    "z_loudness": -0.05,
+    "z_pitch": 0.147,
+    "z_rate": -1.745,
+    "arousal_raw": -0.24
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000026_bm_george_bf4fcbac_x1.15.wav",
+   "tts_duration": 2.826,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 87.504,
+    "asr_done": 90.39,
+    "speaker_done": 87.978,
+    "emotion_done": 90.39,
+    "complete": 90.39,
+    "tts_start": 92.392,
+    "tts_ready": 94.735,
+    "play_at": 159.315,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000027",
+   "t_start": 87.584,
+   "t_end": 91.2,
+   "close_reason": "pause",
+   "text": "A. A free kick on the right side for River. This is a great. A free. A free. A free. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. A. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This. This",
+   "words": [
+    [
+     "A.",
+     87.464,
+     87.644,
+     0.593
+    ],
+    [
+     "A",
+     87.644,
+     87.824,
+     0.005
+    ],
+    [
+     "free",
+     87.824,
+     87.884,
+     0.979
+    ],
+    [
+     "kick",
+     87.884,
+     88.124,
+     0.973
+    ],
+    [
+     "on",
+     88.124,
+     88.244,
+     0.99
+    ],
+    [
+     "the",
+     88.244,
+     88.324,
+     0.994
+    ],
+    [
+     "right",
+     88.324,
+     88.504,
+     0.989
+    ],
+    [
+     "side",
+     88.504,
+     88.864,
+     0.989
+    ],
+    [
+     "for",
+     88.864,
+     89.024,
+     0.981
+    ],
+    [
+     "River.",
+     89.024,
+     89.244,
+     0.002
+    ],
+    [
+     "This",
+     89.364,
+     89.544,
+     0.985
+    ],
+    [
+     "is",
+     89.544,
+     89.704,
+     0.997
+    ],
+    [
+     "a",
+     89.704,
+     89.824,
+     0.996
+    ],
+    [
+     "great.",
+     89.824,
+     89.984,
+     0.0
+    ],
+    [
+     "A",
+     90.304,
+     90.624,
+     0.003
+    ],
+    [
+     "free.",
+     90.624,
+     90.684,
+     0.0
+    ],
+    [
+     "A",
+     90.824,
+     90.824,
+     0.697
+    ],
+    [
+     "free.",
+     90.824,
+     90.824,
+     0.0
+    ],
+    [
+     "A",
+     90.824,
+     90.844,
+     0.629
+    ],
+    [
+     "free.",
+     90.844,
+     90.844,
+     0.001
+    ],
+    [
+     "A.",
+     90.844,
+     90.844,
+     0.67
+    ],
+    [
+     "A.",
+     90.844,
+     90.844,
+     0.462
+    ],
+    [
+     "A.",
+     90.844,
+     90.844,
+     0.463
+    ],
+    [
+     "A.",
+     90.844,
+     90.844,
+     0.586
+    ],
+    [
+     "A.",
+     90.844,
+     90.844,
+     0.575
+    ],
+    [
+     "A.",
+     90.844,
+     90.844,
+     0.571
+    ],
+    [
+     "A.",
+     90.844,
+     90.844,
+     0.653
+    ],
+    [
+     "A.",
+     90.844,
+     90.844,
+     0.603
+    ],
+    [
+     "A.",
+     90.844,
+     90.844,
+     0.642
+    ],
+    [
+     "A.",
+     90.844,
+     90.904,
+     0.642
+    ],
+    [
+     "A.",
+     90.904,
+     90.904,
+     0.644
+    ],
+    [
+     "A.",
+     90.964,
+     91.284,
+     0.657
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.701
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.72
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.723
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.751
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.777
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.769
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.798
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.823
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.838
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.805
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.805
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.742
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.75
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.73
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.7
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.72
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.702
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.715
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.693
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.679
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.646
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.677
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.652
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.688
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.704
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.675
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.629
+    ],
+    [
+     "A.",
+     91.284,
+     91.284,
+     0.627
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.069
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.079
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.08
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.1
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.111
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.106
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.109
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.105
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.128
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.118
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.129
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.131
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.135
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.134
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.125
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.121
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.154
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.136
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.145
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.158
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.145
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.142
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.137
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.155
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.146
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.156
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.158
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.141
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.172
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.152
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.172
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.163
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.173
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.176
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.159
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.202
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.208
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.182
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.216
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.199
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.178
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.2
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.193
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.196
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.189
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.223
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.214
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.239
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.204
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.176
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.241
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.204
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.201
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.19
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.202
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.2
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.187
+    ],
+    [
+     "This.",
+     91.284,
+     91.284,
+     0.21
+    ],
+    [
+     "This",
+     91.284,
+     91.284,
+     0.216
+    ]
+   ],
+   "asr_conf": 0.573,
+   "speaker_id": "S1",
+   "speaker_sim": 0.724,
+   "speaker_conf": "high",
+   "emotion": "excited",
+   "arousal": 1.012,
+   "features": {
+    "loudness_db": -18.757,
+    "loudness_mean_db": -20.136,
+    "duration_s": 3.616,
+    "pitch_hz_median": 180.253,
+    "pitch_hz_p75": 222.751,
+    "pitch_range": 143.957,
+    "rate_wps": 31.152,
+    "text_cue": 0.0,
+    "z_loudness": -0.091,
+    "z_pitch": 1.509,
+    "z_rate": 4.0,
+    "arousal_raw": 1.012
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000027_bm_george_215a4e03_x1.15.wav",
+   "tts_duration": 60.383,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 91.755,
+    "asr_done": 95.807,
+    "speaker_done": 92.161,
+    "emotion_done": 95.809,
+    "complete": 95.809,
+    "tts_start": 95.809,
+    "tts_ready": 142.464,
+    "play_at": 162.221,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000028",
+   "t_start": 91.776,
+   "t_end": 94.688,
+   "close_reason": "level_change",
+   "text": "Brennan whips it in. I'm getting rises in the far post.",
+   "words": [
+    [
+     "Brennan",
+     91.656,
+     92.056,
+     0.849
+    ],
+    [
+     "whips",
+     92.056,
+     92.356,
+     0.915
+    ],
+    [
+     "it",
+     92.356,
+     92.456,
+     0.993
+    ],
+    [
+     "in.",
+     92.456,
+     93.056,
+     0.997
+    ],
+    [
+     "I'm",
+     93.076,
+     93.356,
+     0.435
+    ],
+    [
+     "getting",
+     93.356,
+     93.436,
+     0.053
+    ],
+    [
+     "rises",
+     93.436,
+     93.796,
+     0.123
+    ],
+    [
+     "in",
+     93.796,
+     93.996,
+     0.828
+    ],
+    [
+     "the",
+     93.996,
+     94.076,
+     0.994
+    ],
+    [
+     "far",
+     94.076,
+     94.216,
+     0.959
+    ],
+    [
+     "post.",
+     94.216,
+     94.536,
+     0.991
+    ]
+   ],
+   "asr_conf": 0.593,
+   "speaker_id": "S1",
+   "speaker_sim": 0.653,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.567,
+   "features": {
+    "loudness_db": -15.376,
+    "loudness_mean_db": -18.277,
+    "duration_s": 2.912,
+    "pitch_hz_median": 146.881,
+    "pitch_hz_p75": 175.841,
+    "pitch_range": 142.231,
+    "rate_wps": 3.819,
+    "text_cue": 0.0,
+    "z_loudness": 1.183,
+    "z_pitch": -0.211,
+    "z_rate": -0.619,
+    "arousal_raw": 0.376
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000028_bm_george_82854a2a_x1.15.wav",
+   "tts_duration": 5.061,
+   "schedule_action": "merged",
+   "error": null,
+   "times": {
+    "created": 95.254,
+    "asr_done": 97.246,
+    "speaker_done": 95.448,
+    "emotion_done": 97.247,
+    "complete": 97.247,
+    "tts_start": 110.063,
+    "tts_ready": 114.097,
+    "play_at": 222.684,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000029",
+   "t_start": 94.976,
+   "t_end": 95.168,
+   "close_reason": "burst",
+   "text": "Dave.",
+   "words": [
+    [
+     "Dave.",
+     94.856,
+     95.156,
+     0.709
+    ]
+   ],
+   "asr_conf": 0.694,
+   "speaker_id": "S1",
+   "speaker_sim": 0.05,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.401,
+   "features": {
+    "loudness_db": -8.929,
+    "loudness_mean_db": -8.929,
+    "duration_s": 0.192,
+    "rate_wps": 3.333,
+    "text_cue": 0.0,
+    "z_loudness": 3.479,
+    "z_pitch": 0.0,
+    "z_rate": -1.095,
+    "arousal_raw": 1.401
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "merged",
+   "error": null,
+   "times": {
+    "created": 95.51,
+    "asr_done": 98.638,
+    "speaker_done": 95.543,
+    "emotion_done": 98.639,
+    "complete": 98.639,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000030",
+   "t_start": 95.168,
+   "t_end": 96.768,
+   "close_reason": "pause",
+   "text": "save, what is said by the keeper?",
+   "words": [
+    [
+     "save,",
+     95.048,
+     95.448,
+     0.153
+    ],
+    [
+     "what",
+     95.448,
+     95.628,
+     0.385
+    ],
+    [
+     "is",
+     95.628,
+     95.688,
+     0.695
+    ],
+    [
+     "said",
+     95.688,
+     95.888,
+     0.143
+    ],
+    [
+     "by",
+     95.888,
+     96.048,
+     0.931
+    ],
+    [
+     "the",
+     96.048,
+     96.168,
+     0.979
+    ],
+    [
+     "keeper?",
+     96.168,
+     96.388,
+     0.5
+    ]
+   ],
+   "asr_conf": 0.672,
+   "speaker_id": "S1",
+   "speaker_sim": 0.094,
+   "speaker_conf": "low",
+   "emotion": "peak",
+   "arousal": 2.079,
+   "features": {
+    "loudness_db": -10.534,
+    "loudness_mean_db": -12.062,
+    "duration_s": 1.6,
+    "pitch_hz_median": 174.225,
+    "pitch_hz_p75": 233.136,
+    "pitch_range": 229.546,
+    "rate_wps": 5.224,
+    "text_cue": 0.5,
+    "z_loudness": 2.859,
+    "z_pitch": 1.836,
+    "z_rate": 1.277,
+    "arousal_raw": 2.079
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "merged",
+   "error": null,
+   "times": {
+    "created": 97.258,
+    "asr_done": 100.112,
+    "speaker_done": 97.428,
+    "emotion_done": 100.113,
+    "complete": 100.113,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000031",
+   "t_start": 97.664,
+   "t_end": 99.04,
+   "close_reason": "level_change",
+   "text": "That was rapping, it's not cool.",
+   "words": [
+    [
+     "That",
+     97.544,
+     97.644,
+     0.664
+    ],
+    [
+     "was",
+     97.644,
+     97.844,
+     0.803
+    ],
+    [
+     "rapping,",
+     97.844,
+     98.184,
+     0.343
+    ],
+    [
+     "it's",
+     98.364,
+     98.404,
+     0.565
+    ],
+    [
+     "not",
+     98.404,
+     98.484,
+     0.725
+    ],
+    [
+     "cool.",
+     98.484,
+     98.744,
+     0.32
+    ]
+   ],
+   "asr_conf": 0.612,
+   "speaker_id": "S2",
+   "speaker_sim": 0.331,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 0.922,
+   "features": {
+    "loudness_db": -14.796,
+    "loudness_mean_db": -15.093,
+    "duration_s": 1.376,
+    "pitch_hz_median": 217.288,
+    "pitch_hz_p75": 239.963,
+    "pitch_range": 179.503,
+    "rate_wps": 5.0,
+    "text_cue": 0.0,
+    "z_loudness": 1.341,
+    "z_pitch": 0.669,
+    "z_rate": 0.782,
+    "arousal_raw": 0.922
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000031_am_adam_67b2cb5c_x1.15.wav",
+   "tts_duration": 2.913,
+   "schedule_action": "merged",
+   "error": null,
+   "times": {
+    "created": 99.506,
+    "asr_done": 101.523,
+    "speaker_done": 99.617,
+    "emotion_done": 101.523,
+    "complete": 101.523,
+    "tts_start": 114.097,
+    "tts_ready": 116.661,
+    "play_at": 227.825,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000032",
+   "t_start": 99.2,
+   "t_end": 100.736,
+   "close_reason": "pause",
+   "text": "An incredible reaction store.",
+   "words": [
+    [
+     "An",
+     99.08,
+     99.3,
+     0.737
+    ],
+    [
+     "incredible",
+     99.3,
+     99.8,
+     0.987
+    ],
+    [
+     "reaction",
+     99.8,
+     100.3,
+     0.956
+    ],
+    [
+     "store.",
+     100.3,
+     100.6,
+     0.607
+    ]
+   ],
+   "asr_conf": 0.742,
+   "speaker_id": "S2",
+   "speaker_sim": 0.335,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 0.871,
+   "features": {
+    "loudness_db": -13.925,
+    "loudness_mean_db": -15.245,
+    "duration_s": 1.536,
+    "pitch_hz_median": 208.726,
+    "pitch_hz_p75": 245.719,
+    "pitch_range": 204.062,
+    "rate_wps": 2.632,
+    "text_cue": 0.7,
+    "z_loudness": 1.533,
+    "z_pitch": 0.964,
+    "z_rate": -1.336,
+    "arousal_raw": 0.849
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "merged",
+   "error": null,
+   "times": {
+    "created": 101.257,
+    "asr_done": 102.857,
+    "speaker_done": 101.365,
+    "emotion_done": 102.857,
+    "complete": 102.857,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000033",
+   "t_start": 101.568,
+   "t_end": 104.448,
+   "close_reason": "pause",
+   "text": "The Corner comes to nothing, and the game settles again.",
+   "words": [
+    [
+     "The",
+     101.448,
+     101.648,
+     0.946
+    ],
+    [
+     "Corner",
+     101.648,
+     101.968,
+     0.006
+    ],
+    [
+     "comes",
+     101.968,
+     102.288,
+     0.975
+    ],
+    [
+     "to",
+     102.288,
+     102.468,
+     0.994
+    ],
+    [
+     "nothing,",
+     102.468,
+     102.868,
+     0.978
+    ],
+    [
+     "and",
+     103.148,
+     103.228,
+     0.984
+    ],
+    [
+     "the",
+     103.228,
+     103.268,
+     0.984
+    ],
+    [
+     "game",
+     103.268,
+     103.548,
+     0.972
+    ],
+    [
+     "settles",
+     103.548,
+     103.888,
+     0.998
+    ],
+    [
+     "again.",
+     103.888,
+     104.288,
+     0.998
+    ]
+   ],
+   "asr_conf": 0.888,
+   "speaker_id": "S1",
+   "speaker_sim": 0.57,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.382,
+   "features": {
+    "loudness_db": -19.99,
+    "loudness_mean_db": -22.391,
+    "duration_s": 2.88,
+    "pitch_hz_median": 137.917,
+    "pitch_hz_p75": 188.358,
+    "pitch_range": 216.763,
+    "rate_wps": 3.521,
+    "text_cue": 0.0,
+    "z_loudness": -0.796,
+    "z_pitch": 0.194,
+    "z_rate": -0.3,
+    "arousal_raw": -0.345
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000033_bm_george_8cfc6e42_x1.15.wav",
+   "tts_duration": 2.513,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 105.004,
+    "asr_done": 106.461,
+    "speaker_done": 105.32,
+    "emotion_done": 106.462,
+    "complete": 106.462,
+    "tts_start": 116.661,
+    "tts_ready": 118.875,
+    "play_at": 230.818,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000034",
+   "t_start": 105.12,
+   "t_end": 107.968,
+   "close_reason": "pause",
+   "text": "North Gate looked happen to slow it down until the ground, you",
+   "words": [
+    [
+     "North",
+     105.0,
+     105.42,
+     0.96
+    ],
+    [
+     "Gate",
+     105.42,
+     105.7,
+     0.715
+    ],
+    [
+     "looked",
+     105.7,
+     105.88,
+     0.033
+    ],
+    [
+     "happen",
+     105.88,
+     106.24,
+     0.784
+    ],
+    [
+     "to",
+     106.24,
+     106.38,
+     0.989
+    ],
+    [
+     "slow",
+     106.38,
+     106.62,
+     0.886
+    ],
+    [
+     "it",
+     106.62,
+     106.72,
+     0.986
+    ],
+    [
+     "down",
+     106.72,
+     107.04,
+     0.994
+    ],
+    [
+     "until",
+     107.04,
+     107.34,
+     0.837
+    ],
+    [
+     "the",
+     107.34,
+     107.5,
+     0.986
+    ],
+    [
+     "ground,",
+     107.5,
+     107.78,
+     0.051
+    ],
+    [
+     "you",
+     107.78,
+     107.88,
+     0.095
+    ]
+   ],
+   "asr_conf": 0.509,
+   "speaker_id": "S2",
+   "speaker_sim": 0.592,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.121,
+   "features": {
+    "loudness_db": -19.711,
+    "loudness_mean_db": -22.042,
+    "duration_s": 2.848,
+    "pitch_hz_median": 200.273,
+    "pitch_hz_p75": 218.055,
+    "pitch_range": 166.552,
+    "rate_wps": 4.167,
+    "text_cue": 0.0,
+    "z_loudness": -0.729,
+    "z_pitch": -0.806,
+    "z_rate": 0.154,
+    "arousal_raw": -0.547
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000034_am_adam_b12a2725_x1.15.wav",
+   "tts_duration": 2.591,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 108.504,
+    "asr_done": 111.428,
+    "speaker_done": 108.81,
+    "emotion_done": 111.429,
+    "complete": 111.429,
+    "tts_start": 118.875,
+    "tts_ready": 121.22,
+    "play_at": 233.411,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000035",
+   "t_start": 108.544,
+   "t_end": 110.944,
+   "close_reason": "pause",
+   "text": "Delgado winds up through near the corner flat.",
+   "words": [
+    [
+     "Delgado",
+     108.424,
+     108.964,
+     0.971
+    ],
+    [
+     "winds",
+     108.964,
+     109.244,
+     0.618
+    ],
+    [
+     "up",
+     109.244,
+     109.344,
+     0.003
+    ],
+    [
+     "through",
+     109.344,
+     109.684,
+     0.127
+    ],
+    [
+     "near",
+     109.684,
+     110.044,
+     0.027
+    ],
+    [
+     "the",
+     110.044,
+     110.184,
+     0.997
+    ],
+    [
+     "corner",
+     110.184,
+     110.464,
+     0.997
+    ],
+    [
+     "flat.",
+     110.464,
+     110.844,
+     0.991
+    ]
+   ],
+   "asr_conf": 0.637,
+   "speaker_id": "S1",
+   "speaker_sim": 0.758,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.245,
+   "features": {
+    "loudness_db": -19.008,
+    "loudness_mean_db": -19.975,
+    "duration_s": 2.4,
+    "pitch_hz_median": 135.419,
+    "pitch_hz_p75": 165.875,
+    "pitch_range": 131.401,
+    "rate_wps": 3.306,
+    "text_cue": 0.0,
+    "z_loudness": -0.555,
+    "z_pitch": -0.653,
+    "z_rate": -0.452,
+    "arousal_raw": -0.513
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000035_bm_george_4554bcfc_x1.15.wav",
+   "tts_duration": 2.243,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 111.505,
+    "asr_done": 114.236,
+    "speaker_done": 111.746,
+    "emotion_done": 114.237,
+    "complete": 114.237,
+    "tts_start": 121.22,
+    "tts_ready": 123.215,
+    "play_at": 236.082,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000036",
+   "t_start": 111.52,
+   "t_end": 114.464,
+   "close_reason": "pause",
+   "text": "Quick Throw into Marry. Clever play, they caught Riverside sleeping.",
+   "words": [
+    [
+     "Quick",
+     111.4,
+     111.66,
+     0.559
+    ],
+    [
+     "Throw",
+     111.66,
+     111.92,
+     0.056
+    ],
+    [
+     "into",
+     111.92,
+     112.18,
+     0.947
+    ],
+    [
+     "Marry.",
+     112.18,
+     112.32,
+     0.115
+    ],
+    [
+     "Clever",
+     112.56,
+     112.56,
+     0.789
+    ],
+    [
+     "play,",
+     112.56,
+     112.86,
+     0.967
+    ],
+    [
+     "they",
+     113.1,
+     113.1,
+     0.982
+    ],
+    [
+     "caught",
+     113.1,
+     113.36,
+     0.995
+    ],
+    [
+     "Riverside",
+     113.36,
+     113.8,
+     0.938
+    ],
+    [
+     "sleeping.",
+     113.8,
+     114.26,
+     0.995
+    ]
+   ],
+   "asr_conf": 0.655,
+   "speaker_id": "S2",
+   "speaker_sim": 0.437,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": -0.091,
+   "features": {
+    "loudness_db": -18.192,
+    "loudness_mean_db": -20.35,
+    "duration_s": 2.944,
+    "pitch_hz_median": 191.826,
+    "pitch_hz_p75": 224.695,
+    "pitch_range": 161.226,
+    "rate_wps": 3.497,
+    "text_cue": 0.0,
+    "z_loudness": 0.161,
+    "z_pitch": -0.326,
+    "z_rate": -0.436,
+    "arousal_raw": -0.091
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000036_am_adam_dd4e48d8_x1.15.wav",
+   "tts_duration": 3.191,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 115.004,
+    "asr_done": 116.545,
+    "speaker_done": 115.381,
+    "emotion_done": 116.546,
+    "complete": 116.546,
+    "tts_start": 123.215,
+    "tts_ready": 126.1,
+    "play_at": 238.406,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000037",
+   "t_start": 114.976,
+   "t_end": 120.864,
+   "close_reason": "max_len",
+   "text": "Morel shoots for range. Of the Crossbar. So close to a second goal. The whole stadium is a bit.",
+   "words": [
+    [
+     "Morel",
+     114.856,
+     115.316,
+     0.073
+    ],
+    [
+     "shoots",
+     115.316,
+     115.516,
+     0.96
+    ],
+    [
+     "for",
+     115.516,
+     115.656,
+     0.95
+    ],
+    [
+     "range.",
+     115.656,
+     116.076,
+     0.937
+    ],
+    [
+     "Of",
+     116.396,
+     116.516,
+     0.69
+    ],
+    [
+     "the",
+     116.516,
+     116.616,
+     0.956
+    ],
+    [
+     "Crossbar.",
+     116.616,
+     117.176,
+     0.583
+    ],
+    [
+     "So",
+     118.116,
+     118.376,
+     0.868
+    ],
+    [
+     "close",
+     118.376,
+     118.696,
+     0.95
+    ],
+    [
+     "to",
+     118.696,
+     118.856,
+     0.938
+    ],
+    [
+     "a",
+     118.856,
+     118.916,
+     0.714
+    ],
+    [
+     "second",
+     118.916,
+     119.136,
+     0.988
+    ],
+    [
+     "goal.",
+     119.136,
+     119.456,
+     0.993
+    ],
+    [
+     "The",
+     119.836,
+     119.836,
+     0.985
+    ],
+    [
+     "whole",
+     119.836,
+     120.036,
+     0.986
+    ],
+    [
+     "stadium",
+     120.036,
+     120.496,
+     0.994
+    ],
+    [
+     "is",
+     120.496,
+     120.716,
+     0.817
+    ],
+    [
+     "a",
+     120.716,
+     120.836,
+     0.011
+    ],
+    [
+     "bit.",
+     120.836,
+     120.956,
+     0.0
+    ]
+   ],
+   "asr_conf": 0.486,
+   "speaker_id": "S2",
+   "speaker_sim": 0.352,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": 0.535,
+   "features": {
+    "loudness_db": -12.729,
+    "loudness_mean_db": -14.816,
+    "duration_s": 5.888,
+    "pitch_hz_median": 189.475,
+    "pitch_hz_p75": 228.036,
+    "pitch_range": 184.307,
+    "rate_wps": 3.115,
+    "text_cue": 1.0,
+    "z_loudness": 1.326,
+    "z_pitch": -0.066,
+    "z_rate": -0.944,
+    "arousal_raw": 0.535
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000037_am_adam_1986e502_x1.15.wav",
+   "tts_duration": 5.4,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 121.004,
+    "asr_done": 124.066,
+    "speaker_done": 121.664,
+    "emotion_done": 124.073,
+    "complete": 124.073,
+    "tts_start": 126.101,
+    "tts_ready": 130.36,
+    "play_at": 241.677,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000038",
+   "t_start": 120.864,
+   "t_end": 121.408,
+   "close_reason": "pause",
+   "text": "That's it.",
+   "words": [
+    [
+     "That's",
+     120.744,
+     121.084,
+     0.481
+    ],
+    [
+     "it.",
+     121.084,
+     121.204,
+     0.956
+    ]
+   ],
+   "asr_conf": 0.536,
+   "speaker_id": "S2",
+   "speaker_sim": 0.159,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": -0.121,
+   "features": {
+    "loudness_db": -23.678,
+    "loudness_mean_db": -23.678,
+    "duration_s": 0.544,
+    "pitch_hz_median": 198.562,
+    "pitch_hz_p75": 242.422,
+    "pitch_range": 221.78,
+    "rate_wps": 4.348,
+    "text_cue": 0.0,
+    "z_loudness": -1.691,
+    "z_pitch": 0.849,
+    "z_rate": 0.694,
+    "arousal_raw": -0.402
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "dropped",
+   "error": null,
+   "times": {
+    "created": 122.004,
+    "asr_done": 125.49,
+    "speaker_done": 122.096,
+    "emotion_done": 125.491,
+    "complete": 125.491,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000039",
+   "t_start": 122.144,
+   "t_end": 124.736,
+   "close_reason": "pause",
+   "text": "The Referee checks his watch, almost half-time. you.",
+   "words": [
+    [
+     "The",
+     122.024,
+     122.204,
+     0.958
+    ],
+    [
+     "Referee",
+     122.204,
+     122.604,
+     0.354
+    ],
+    [
+     "checks",
+     122.604,
+     122.844,
+     0.967
+    ],
+    [
+     "his",
+     122.844,
+     123.004,
+     0.991
+    ],
+    [
+     "watch,",
+     123.004,
+     123.364,
+     0.992
+    ],
+    [
+     "almost",
+     123.484,
+     123.804,
+     0.987
+    ],
+    [
+     "half",
+     123.804,
+     124.104,
+     0.971
+    ],
+    [
+     "-time.",
+     124.104,
+     124.384,
+     0.783
+    ],
+    [
+     "you.",
+     124.384,
+     124.564,
+     0.13
+    ]
+   ],
+   "asr_conf": 0.617,
+   "speaker_id": "S1",
+   "speaker_sim": 0.572,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.433,
+   "features": {
+    "loudness_db": -20.886,
+    "loudness_mean_db": -22.54,
+    "duration_s": 2.592,
+    "pitch_hz_median": 140.002,
+    "pitch_hz_p75": 179.161,
+    "pitch_range": 148.196,
+    "rate_wps": 3.543,
+    "text_cue": 0.0,
+    "z_loudness": -0.938,
+    "z_pitch": -0.123,
+    "z_rate": -0.363,
+    "arousal_raw": -0.513
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000039_bm_george_8734866f_x1.15.wav",
+   "tts_duration": 2.617,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 125.264,
+    "asr_done": 128.2,
+    "speaker_done": 125.465,
+    "emotion_done": 128.201,
+    "complete": 128.201,
+    "tts_start": 130.361,
+    "tts_ready": 132.508,
+    "play_at": 247.157,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000040",
+   "t_start": 125.44,
+   "t_end": 128.8,
+   "close_reason": "pause",
+   "text": "A fair score so far, but there is plenty still to play for.",
+   "words": [
+    [
+     "A",
+     125.32,
+     125.54,
+     0.554
+    ],
+    [
+     "fair",
+     125.54,
+     125.82,
+     0.925
+    ],
+    [
+     "score",
+     125.82,
+     126.14,
+     0.963
+    ],
+    [
+     "so",
+     126.14,
+     126.36,
+     0.984
+    ],
+    [
+     "far,",
+     126.36,
+     126.74,
+     0.997
+    ],
+    [
+     "but",
+     127.14,
+     127.14,
+     0.847
+    ],
+    [
+     "there",
+     127.14,
+     127.14,
+     0.249
+    ],
+    [
+     "is",
+     127.14,
+     127.22,
+     0.893
+    ],
+    [
+     "plenty",
+     127.22,
+     127.58,
+     0.907
+    ],
+    [
+     "still",
+     127.58,
+     127.88,
+     0.998
+    ],
+    [
+     "to",
+     127.88,
+     128.04,
+     0.992
+    ],
+    [
+     "play",
+     128.04,
+     128.28,
+     0.597
+    ],
+    [
+     "for.",
+     128.28,
+     128.52,
+     0.993
+    ]
+   ],
+   "asr_conf": 0.767,
+   "speaker_id": "S2",
+   "speaker_sim": 0.527,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": -0.27,
+   "features": {
+    "loudness_db": -20.315,
+    "loudness_mean_db": -22.495,
+    "duration_s": 3.36,
+    "pitch_hz_median": 196.432,
+    "pitch_hz_p75": 217.455,
+    "pitch_range": 171.633,
+    "rate_wps": 4.062,
+    "text_cue": 0.6,
+    "z_loudness": -0.508,
+    "z_pitch": -0.752,
+    "z_rate": 0.398,
+    "arousal_raw": -0.335
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000040_am_adam_83e207a8_x1.15.wav",
+   "tts_duration": 2.626,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 129.254,
+    "asr_done": 130.823,
+    "speaker_done": 129.683,
+    "emotion_done": 130.824,
+    "complete": 130.824,
+    "tts_start": 132.509,
+    "tts_ready": 134.832,
+    "play_at": 249.854,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000041",
+   "t_start": 129.216,
+   "t_end": 132.736,
+   "close_reason": "pause",
+   "text": "One last attack, Linde Fist carries it forward.",
+   "words": [
+    [
+     "One",
+     129.096,
+     129.396,
+     0.958
+    ],
+    [
+     "last",
+     129.396,
+     129.756,
+     0.987
+    ],
+    [
+     "attack,",
+     129.756,
+     130.136,
+     0.989
+    ],
+    [
+     "Linde",
+     130.776,
+     131.496,
+     0.014
+    ],
+    [
+     "Fist",
+     131.496,
+     131.636,
+     0.536
+    ],
+    [
+     "carries",
+     131.636,
+     131.976,
+     0.899
+    ],
+    [
+     "it",
+     131.976,
+     132.156,
+     0.998
+    ],
+    [
+     "forward.",
+     132.156,
+     132.556,
+     0.992
+    ]
+   ],
+   "asr_conf": 0.692,
+   "speaker_id": "S1",
+   "speaker_sim": 0.763,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.414,
+   "features": {
+    "loudness_db": -18.863,
+    "loudness_mean_db": -19.978,
+    "duration_s": 3.52,
+    "pitch_hz_median": 138.165,
+    "pitch_hz_p75": 174.596,
+    "pitch_range": 220.215,
+    "rate_wps": 2.312,
+    "text_cue": 0.0,
+    "z_loudness": -0.056,
+    "z_pitch": -0.288,
+    "z_rate": -2.014,
+    "arousal_raw": -0.414
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000041_bm_george_246e16ca_x1.15.wav",
+   "tts_duration": 2.322,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 133.254,
+    "asr_done": 135.948,
+    "speaker_done": 133.63,
+    "emotion_done": 135.949,
+    "complete": 135.949,
+    "tts_start": 135.949,
+    "tts_ready": 138.084,
+    "play_at": 252.56,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000042",
+   "t_start": 133.216,
+   "t_end": 136.192,
+   "close_reason": "pause",
+   "text": "He has Okafro on his left and Brennan arriving late.",
+   "words": [
+    [
+     "He",
+     133.096,
+     133.296,
+     0.859
+    ],
+    [
+     "has",
+     133.296,
+     133.456,
+     0.884
+    ],
+    [
+     "Okafro",
+     133.456,
+     133.896,
+     0.526
+    ],
+    [
+     "on",
+     133.896,
+     134.016,
+     0.993
+    ],
+    [
+     "his",
+     134.016,
+     134.136,
+     0.995
+    ],
+    [
+     "left",
+     134.136,
+     134.496,
+     0.998
+    ],
+    [
+     "and",
+     134.496,
+     134.796,
+     0.915
+    ],
+    [
+     "Brennan",
+     134.796,
+     135.156,
+     0.713
+    ],
+    [
+     "arriving",
+     135.156,
+     135.556,
+     0.996
+    ],
+    [
+     "late.",
+     135.556,
+     135.896,
+     0.997
+    ]
+   ],
+   "asr_conf": 0.617,
+   "speaker_id": "S2",
+   "speaker_sim": 0.569,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.018,
+   "features": {
+    "loudness_db": -18.962,
+    "loudness_mean_db": -20.381,
+    "duration_s": 2.976,
+    "pitch_hz_median": 199.846,
+    "pitch_hz_p75": 230.201,
+    "pitch_range": 171.883,
+    "rate_wps": 3.571,
+    "text_cue": 0.0,
+    "z_loudness": -0.064,
+    "z_pitch": 0.103,
+    "z_rate": -0.136,
+    "arousal_raw": -0.018
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000042_am_adam_82c29142_x1.15.wav",
+   "tts_duration": 2.539,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 136.754,
+    "asr_done": 139.533,
+    "speaker_done": 137.049,
+    "emotion_done": 139.534,
+    "complete": 139.534,
+    "tts_start": 139.534,
+    "tts_ready": 141.961,
+    "play_at": 254.962,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000043",
+   "t_start": 136.672,
+   "t_end": 140.128,
+   "close_reason": "level_change",
+   "text": "Linkis slips it through to Akkapher. Auk ever takes a touch and shoots.",
+   "words": [
+    [
+     "Linkis",
+     136.552,
+     137.092,
+     0.294
+    ],
+    [
+     "slips",
+     137.092,
+     137.272,
+     0.964
+    ],
+    [
+     "it",
+     137.272,
+     137.432,
+     0.992
+    ],
+    [
+     "through",
+     137.432,
+     137.652,
+     0.994
+    ],
+    [
+     "to",
+     137.652,
+     137.812,
+     0.996
+    ],
+    [
+     "Akkapher.",
+     137.812,
+     138.312,
+     0.309
+    ],
+    [
+     "Auk",
+     138.312,
+     138.792,
+     0.148
+    ],
+    [
+     "ever",
+     138.792,
+     138.952,
+     0.094
+    ],
+    [
+     "takes",
+     138.952,
+     139.172,
+     0.988
+    ],
+    [
+     "a",
+     139.172,
+     139.292,
+     0.996
+    ],
+    [
+     "touch",
+     139.292,
+     139.512,
+     0.992
+    ],
+    [
+     "and",
+     139.512,
+     139.672,
+     0.96
+    ],
+    [
+     "shoots.",
+     139.672,
+     139.892,
+     0.985
+    ]
+   ],
+   "asr_conf": 0.558,
+   "speaker_id": "S1",
+   "speaker_sim": 0.494,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.038,
+   "features": {
+    "loudness_db": -15.545,
+    "loudness_mean_db": -16.943,
+    "duration_s": 3.456,
+    "pitch_hz_median": 154.613,
+    "pitch_hz_p75": 206.96,
+    "pitch_range": 204.57,
+    "rate_wps": 3.892,
+    "text_cue": 0.0,
+    "z_loudness": 1.306,
+    "z_pitch": 1.263,
+    "z_rate": 0.477,
+    "arousal_raw": 1.038
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000043_bm_george_d46dc32f_x1.15.wav",
+   "tts_duration": 2.948,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 140.506,
+    "asr_done": 143.256,
+    "speaker_done": 140.872,
+    "emotion_done": 143.257,
+    "complete": 143.257,
+    "tts_start": 143.257,
+    "tts_ready": 145.719,
+    "play_at": 257.581,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000044",
+   "t_start": 140.32,
+   "t_end": 140.736,
+   "close_reason": "burst",
+   "text": "Go, Go!",
+   "words": [
+    [
+     "Go,",
+     140.2,
+     140.48,
+     0.855
+    ],
+    [
+     "Go!",
+     140.66,
+     140.68,
+     0.246
+    ]
+   ],
+   "asr_conf": 0.677,
+   "speaker_id": "S1",
+   "speaker_sim": 0.085,
+   "speaker_conf": "low",
+   "emotion": "peak",
+   "arousal": 2.431,
+   "features": {
+    "loudness_db": -8.761,
+    "loudness_mean_db": -8.761,
+    "duration_s": 0.416,
+    "pitch_hz_median": 211.433,
+    "pitch_hz_p75": 220.628,
+    "pitch_range": 59.274,
+    "rate_wps": 4.167,
+    "text_cue": 0.5,
+    "z_loudness": 3.883,
+    "z_pitch": 1.672,
+    "z_rate": 0.879,
+    "arousal_raw": 2.431
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000044_bm_george_5e4db99e_x1.15.wav",
+   "tts_duration": 0.609,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 141.007,
+    "asr_done": 144.472,
+    "speaker_done": 141.099,
+    "emotion_done": 144.473,
+    "complete": 144.473,
+    "tts_start": 144.473,
+    "tts_ready": 145.38,
+    "play_at": 260.609,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000045",
+   "t_start": 140.736,
+   "t_end": 141.024,
+   "close_reason": "pause",
+   "text": "So!",
+   "words": [
+    [
+     "So!",
+     140.616,
+     140.796,
+     0.657
+    ]
+   ],
+   "asr_conf": 0.52,
+   "speaker_id": "S1",
+   "speaker_sim": 0.016,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": 0.072,
+   "features": {
+    "loudness_db": -21.291,
+    "loudness_mean_db": -21.291,
+    "duration_s": 0.288,
+    "pitch_hz_median": 114.504,
+    "pitch_hz_p75": 117.815,
+    "pitch_range": 28.209,
+    "rate_wps": 5.0,
+    "text_cue": 0.5,
+    "z_loudness": -0.878,
+    "z_pitch": -3.0,
+    "z_rate": 2.044,
+    "arousal_raw": -0.938
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000045_bm_george_e2edc22a.wav",
+   "tts_duration": 0.58,
+   "schedule_action": "dropped",
+   "error": null,
+   "times": {
+    "created": 141.508,
+    "asr_done": 145.847,
+    "speaker_done": 141.566,
+    "emotion_done": 145.847,
+    "complete": 145.848,
+    "tts_start": 145.848,
+    "tts_ready": 146.592,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000046",
+   "t_start": 141.568,
+   "t_end": 141.856,
+   "close_reason": "burst",
+   "text": "Bell.",
+   "words": [
+    [
+     "Bell.",
+     141.448,
+     141.808,
+     0.04
+    ]
+   ],
+   "asr_conf": 0.646,
+   "speaker_id": "S1",
+   "speaker_sim": 0.082,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.357,
+   "features": {
+    "loudness_db": -8.627,
+    "loudness_mean_db": -8.627,
+    "duration_s": 0.288,
+    "pitch_hz_median": 186.173,
+    "pitch_hz_p75": 192.505,
+    "pitch_range": 17.775,
+    "rate_wps": 2.778,
+    "text_cue": 0.0,
+    "z_loudness": 3.21,
+    "z_pitch": 0.429,
+    "z_rate": -1.445,
+    "arousal_raw": 1.357
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000046_bm_george_6fb3e315_x1.15.wav",
+   "tts_duration": 0.478,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 142.26,
+    "asr_done": 146.929,
+    "speaker_done": 142.297,
+    "emotion_done": 146.929,
+    "complete": 146.929,
+    "tts_start": 146.93,
+    "tts_ready": 147.712,
+    "play_at": 261.298,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000047",
+   "t_start": 141.856,
+   "t_end": 144.48,
+   "close_reason": "pause",
+   "text": "I've never utilized for Riverside Rovers.",
+   "words": [
+    [
+     "I've",
+     141.736,
+     142.356,
+     0.329
+    ],
+    [
+     "never",
+     142.356,
+     142.536,
+     0.812
+    ],
+    [
+     "utilized",
+     142.536,
+     142.956,
+     0.202
+    ],
+    [
+     "for",
+     142.956,
+     143.276,
+     0.386
+    ],
+    [
+     "Riverside",
+     143.276,
+     143.616,
+     0.845
+    ],
+    [
+     "Rovers.",
+     143.616,
+     144.096,
+     0.811
+    ]
+   ],
+   "asr_conf": 0.557,
+   "speaker_id": "S1",
+   "speaker_sim": 0.119,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.079,
+   "features": {
+    "loudness_db": -10.122,
+    "loudness_mean_db": -12.136,
+    "duration_s": 2.624,
+    "pitch_hz_median": 146.475,
+    "pitch_hz_p75": 196.876,
+    "pitch_range": 172.029,
+    "rate_wps": 2.542,
+    "text_cue": 0.0,
+    "z_loudness": 2.163,
+    "z_pitch": 0.552,
+    "z_rate": -1.192,
+    "arousal_raw": 0.96
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000047_bm_george_2570860f_x1.15.wav",
+   "tts_duration": 1.922,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 145.007,
+    "asr_done": 148.069,
+    "speaker_done": 145.299,
+    "emotion_done": 148.069,
+    "complete": 148.069,
+    "tts_start": 148.069,
+    "tts_ready": 149.805,
+    "play_at": 261.856,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000048",
+   "t_start": 145.376,
+   "t_end": 150.72,
+   "close_reason": "max_len",
+   "text": "What a time to score, right on the stroke of half-time. That is exactly what it said, I've needed.",
+   "words": [
+    [
+     "What",
+     145.256,
+     145.496,
+     0.877
+    ],
+    [
+     "a",
+     145.496,
+     145.576,
+     0.912
+    ],
+    [
+     "time",
+     145.576,
+     145.816,
+     0.991
+    ],
+    [
+     "to",
+     145.816,
+     145.936,
+     0.844
+    ],
+    [
+     "score,",
+     145.936,
+     146.316,
+     0.976
+    ],
+    [
+     "right",
+     146.676,
+     146.756,
+     0.82
+    ],
+    [
+     "on",
+     146.756,
+     146.956,
+     0.823
+    ],
+    [
+     "the",
+     146.956,
+     146.956,
+     0.992
+    ],
+    [
+     "stroke",
+     146.956,
+     147.216,
+     0.976
+    ],
+    [
+     "of",
+     147.216,
+     147.296,
+     0.988
+    ],
+    [
+     "half",
+     147.296,
+     147.516,
+     0.947
+    ],
+    [
+     "-time.",
+     147.516,
+     147.856,
+     0.597
+    ],
+    [
+     "That",
+     148.496,
+     148.696,
+     0.982
+    ],
+    [
+     "is",
+     148.696,
+     148.856,
+     0.979
+    ],
+    [
+     "exactly",
+     148.856,
+     149.376,
+     0.984
+    ],
+    [
+     "what",
+     149.376,
+     149.576,
+     0.997
+    ],
+    [
+     "it",
+     149.576,
+     149.796,
+     0.031
+    ],
+    [
+     "said,",
+     149.796,
+     150.056,
+     0.542
+    ],
+    [
+     "I've",
+     150.396,
+     150.416,
+     0.442
+    ],
+    [
+     "needed.",
+     150.416,
+     150.416,
+     0.42
+    ]
+   ],
+   "asr_conf": 0.736,
+   "speaker_id": "S2",
+   "speaker_sim": 0.441,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.464,
+   "features": {
+    "loudness_db": -10.654,
+    "loudness_mean_db": -13.385,
+    "duration_s": 5.344,
+    "pitch_hz_median": 226.33,
+    "pitch_hz_p75": 255.965,
+    "pitch_range": 205.201,
+    "rate_wps": 3.876,
+    "text_cue": 1.2,
+    "z_loudness": 1.805,
+    "z_pitch": 1.601,
+    "z_rate": 0.345,
+    "arousal_raw": 1.464
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000048_am_adam_4316c209_x1.15.wav",
+   "tts_duration": 4.339,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 151.504,
+    "asr_done": 153.483,
+    "speaker_done": 152.162,
+    "emotion_done": 153.484,
+    "complete": 153.484,
+    "tts_start": 153.485,
+    "tts_ready": 157.269,
+    "play_at": 263.858,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000049",
+   "t_start": 150.72,
+   "t_end": 151.808,
+   "close_reason": "pause",
+   "text": "and the fans know it.",
+   "words": [
+    [
+     "and",
+     150.6,
+     150.9,
+     0.725
+    ],
+    [
+     "the",
+     150.9,
+     150.98,
+     0.988
+    ],
+    [
+     "fans",
+     150.98,
+     151.28,
+     0.987
+    ],
+    [
+     "know",
+     151.28,
+     151.5,
+     0.988
+    ],
+    [
+     "it.",
+     151.5,
+     151.68,
+     0.997
+    ]
+   ],
+   "asr_conf": 0.806,
+   "speaker_id": "S2",
+   "speaker_sim": 0.308,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 0.826,
+   "features": {
+    "loudness_db": -16.245,
+    "loudness_mean_db": -16.599,
+    "duration_s": 1.088,
+    "pitch_hz_median": 246.057,
+    "pitch_hz_p75": 250.882,
+    "pitch_range": 98.856,
+    "rate_wps": 4.63,
+    "text_cue": 0.0,
+    "z_loudness": -0.106,
+    "z_pitch": 1.276,
+    "z_rate": 1.453,
+    "arousal_raw": 0.553
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000049_am_adam_9f39e2d5_x1.15.wav",
+   "tts_duration": 0.983,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 152.256,
+    "asr_done": 154.675,
+    "speaker_done": 152.366,
+    "emotion_done": 154.675,
+    "complete": 154.675,
+    "tts_start": 154.675,
+    "tts_ready": 156.039,
+    "play_at": 268.277,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000050",
+   "t_start": 152.576,
+   "t_end": 154.432,
+   "close_reason": "pause",
+   "text": "So it is one all here at Riverside Park.",
+   "words": [
+    [
+     "So",
+     152.456,
+     152.636,
+     0.715
+    ],
+    [
+     "it",
+     152.636,
+     152.716,
+     0.95
+    ],
+    [
+     "is",
+     152.716,
+     152.856,
+     0.975
+    ],
+    [
+     "one",
+     152.856,
+     152.996,
+     0.987
+    ],
+    [
+     "all",
+     152.996,
+     153.236,
+     0.907
+    ],
+    [
+     "here",
+     153.236,
+     153.496,
+     0.994
+    ],
+    [
+     "at",
+     153.496,
+     153.556,
+     0.981
+    ],
+    [
+     "Riverside",
+     153.556,
+     153.936,
+     0.987
+    ],
+    [
+     "Park.",
+     153.936,
+     154.276,
+     0.981
+    ]
+   ],
+   "asr_conf": 0.842,
+   "speaker_id": "S1",
+   "speaker_sim": 0.795,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.228,
+   "features": {
+    "loudness_db": -19.233,
+    "loudness_mean_db": -20.498,
+    "duration_s": 1.856,
+    "pitch_hz_median": 133.188,
+    "pitch_hz_p75": 170.805,
+    "pitch_range": 120.39,
+    "rate_wps": 4.945,
+    "text_cue": 0.0,
+    "z_loudness": -0.569,
+    "z_pitch": -0.495,
+    "z_rate": 1.789,
+    "arousal_raw": -0.136
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000050_bm_george_1b40438b_x1.15.wav",
+   "tts_duration": 2.174,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 155.004,
+    "asr_done": 157.517,
+    "speaker_done": 155.24,
+    "emotion_done": 157.518,
+    "complete": 157.518,
+    "tts_start": 157.518,
+    "tts_ready": 159.462,
+    "play_at": 269.34,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000051",
+   "t_start": 155.072,
+   "t_end": 158.112,
+   "close_reason": "pause",
+   "text": "Both managers will have plenty to play in the dressing room.",
+   "words": [
+    [
+     "Both",
+     154.952,
+     155.332,
+     0.896
+    ],
+    [
+     "managers",
+     155.332,
+     155.872,
+     0.993
+    ],
+    [
+     "will",
+     155.872,
+     156.072,
+     0.956
+    ],
+    [
+     "have",
+     156.072,
+     156.232,
+     0.997
+    ],
+    [
+     "plenty",
+     156.232,
+     156.552,
+     0.997
+    ],
+    [
+     "to",
+     156.552,
+     156.772,
+     0.998
+    ],
+    [
+     "play",
+     156.772,
+     157.072,
+     0.946
+    ],
+    [
+     "in",
+     157.072,
+     157.232,
+     0.993
+    ],
+    [
+     "the",
+     157.232,
+     157.332,
+     0.98
+    ],
+    [
+     "dressing",
+     157.332,
+     157.592,
+     0.976
+    ],
+    [
+     "room.",
+     157.592,
+     157.912,
+     0.975
+    ]
+   ],
+   "asr_conf": 0.904,
+   "speaker_id": "S2",
+   "speaker_sim": 0.63,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.078,
+   "features": {
+    "loudness_db": -19.984,
+    "loudness_mean_db": -23.051,
+    "duration_s": 3.04,
+    "pitch_hz_median": 199.273,
+    "pitch_hz_p75": 226.55,
+    "pitch_range": 165.166,
+    "rate_wps": 3.716,
+    "text_cue": 0.0,
+    "z_loudness": -0.384,
+    "z_pitch": -0.231,
+    "z_rate": -0.01,
+    "arousal_raw": -0.243
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000051_am_adam_76accb81_x1.15.wav",
+   "tts_duration": 2.487,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 158.504,
+    "asr_done": 160.485,
+    "speaker_done": 158.84,
+    "emotion_done": 160.486,
+    "complete": 160.486,
+    "tts_start": 160.486,
+    "tts_ready": 162.89,
+    "play_at": 271.593,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000052",
+   "t_start": 158.72,
+   "t_end": 161.568,
+   "close_reason": "pause",
+   "text": "Northgate kick off again, but there is barely a minute left.",
+   "words": [
+    [
+     "Northgate",
+     158.6,
+     159.12,
+     0.905
+    ],
+    [
+     "kick",
+     159.12,
+     159.36,
+     0.457
+    ],
+    [
+     "off",
+     159.36,
+     159.62,
+     0.931
+    ],
+    [
+     "again,",
+     159.62,
+     159.9,
+     0.994
+    ],
+    [
+     "but",
+     160.02,
+     160.14,
+     0.99
+    ],
+    [
+     "there",
+     160.14,
+     160.3,
+     0.991
+    ],
+    [
+     "is",
+     160.3,
+     160.4,
+     0.976
+    ],
+    [
+     "barely",
+     160.4,
+     160.76,
+     0.99
+    ],
+    [
+     "a",
+     160.76,
+     160.98,
+     0.987
+    ],
+    [
+     "minute",
+     160.98,
+     161.16,
+     0.998
+    ],
+    [
+     "left.",
+     161.16,
+     161.46,
+     0.996
+    ]
+   ],
+   "asr_conf": 0.889,
+   "speaker_id": "S1",
+   "speaker_sim": 0.638,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.317,
+   "features": {
+    "loudness_db": -20.835,
+    "loudness_mean_db": -22.387,
+    "duration_s": 2.848,
+    "pitch_hz_median": 129.602,
+    "pitch_hz_p75": 161.995,
+    "pitch_range": 136.807,
+    "rate_wps": 3.846,
+    "text_cue": 0.0,
+    "z_loudness": -0.657,
+    "z_pitch": -0.947,
+    "z_rate": 0.195,
+    "arousal_raw": -0.55
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000052_bm_george_e5cb1514_x1.15.wav",
+   "tts_duration": 2.73,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 162.005,
+    "asr_done": 164.029,
+    "speaker_done": 162.229,
+    "emotion_done": 164.029,
+    "complete": 164.029,
+    "tts_start": 164.03,
+    "tts_ready": 166.41,
+    "play_at": 274.16,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000053",
+   "t_start": 162.24,
+   "t_end": 165.056,
+   "close_reason": "pause",
+   "text": "I expect they will just play it safe until you will just play it safe and safe.",
+   "words": [
+    [
+     "I",
+     162.12,
+     162.38,
+     0.959
+    ],
+    [
+     "expect",
+     162.38,
+     162.8,
+     0.969
+    ],
+    [
+     "they",
+     162.8,
+     163.02,
+     0.975
+    ],
+    [
+     "will",
+     163.02,
+     163.2,
+     0.952
+    ],
+    [
+     "just",
+     163.2,
+     163.32,
+     0.996
+    ],
+    [
+     "play",
+     163.32,
+     163.62,
+     0.524
+    ],
+    [
+     "it",
+     163.62,
+     163.76,
+     0.885
+    ],
+    [
+     "safe",
+     163.76,
+     164.1,
+     0.972
+    ],
+    [
+     "until",
+     164.1,
+     164.34,
+     0.971
+    ],
+    [
+     "you",
+     164.34,
+     164.56,
+     0.638
+    ],
+    [
+     "will",
+     164.56,
+     164.72,
+     0.0
+    ],
+    [
+     "just",
+     164.72,
+     164.96,
+     0.0
+    ],
+    [
+     "play",
+     164.96,
+     164.96,
+     0.037
+    ],
+    [
+     "it",
+     164.96,
+     164.96,
+     0.993
+    ],
+    [
+     "safe",
+     164.96,
+     164.96,
+     0.71
+    ],
+    [
+     "and",
+     164.96,
+     164.96,
+     0.026
+    ],
+    [
+     "safe.",
+     164.96,
+     164.96,
+     0.0
+    ]
+   ],
+   "asr_conf": 0.729,
+   "speaker_id": "S2",
+   "speaker_sim": 0.711,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.19,
+   "features": {
+    "loudness_db": -20.695,
+    "loudness_mean_db": -22.553,
+    "duration_s": 2.816,
+    "pitch_hz_median": 197.182,
+    "pitch_hz_p75": 222.518,
+    "pitch_range": 177.274,
+    "rate_wps": 5.986,
+    "text_cue": 0.0,
+    "z_loudness": -0.607,
+    "z_pitch": -0.455,
+    "z_rate": 4.0,
+    "arousal_raw": 0.19
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000053_am_adam_6525aa24_x1.15.wav",
+   "tts_duration": 3.096,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 165.504,
+    "asr_done": 167.544,
+    "speaker_done": 165.759,
+    "emotion_done": 167.545,
+    "complete": 167.545,
+    "tts_start": 167.545,
+    "tts_ready": 170.479,
+    "play_at": 276.971,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000054",
+   "t_start": 165.536,
+   "t_end": 168.704,
+   "close_reason": "pause",
+   "text": "Morel passes at Square to Delgato. No risks, no risks, no risks, no risks, no risks, no risks, no risks, no risks, no risks, no risks, no risks, no risks,",
+   "words": [
+    [
+     "Morel",
+     165.416,
+     165.856,
+     0.175
+    ],
+    [
+     "passes",
+     165.856,
+     166.136,
+     0.993
+    ],
+    [
+     "at",
+     166.136,
+     166.316,
+     0.087
+    ],
+    [
+     "Square",
+     166.316,
+     166.536,
+     0.271
+    ],
+    [
+     "to",
+     166.536,
+     166.716,
+     0.972
+    ],
+    [
+     "Delgato.",
+     166.716,
+     167.016,
+     0.401
+    ],
+    [
+     "No",
+     167.036,
+     167.176,
+     0.943
+    ],
+    [
+     "risks,",
+     167.176,
+     167.496,
+     0.982
+    ],
+    [
+     "no",
+     167.696,
+     167.756,
+     0.001
+    ],
+    [
+     "risks,",
+     167.756,
+     167.756,
+     0.0
+    ],
+    [
+     "no",
+     167.856,
+     167.856,
+     0.004
+    ],
+    [
+     "risks,",
+     167.856,
+     167.956,
+     0.0
+    ],
+    [
+     "no",
+     167.956,
+     167.996,
+     0.0
+    ],
+    [
+     "risks,",
+     167.996,
+     168.036,
+     0.0
+    ],
+    [
+     "no",
+     168.296,
+     168.296,
+     0.0
+    ],
+    [
+     "risks,",
+     168.296,
+     168.296,
+     0.0
+    ],
+    [
+     "no",
+     168.296,
+     168.296,
+     0.076
+    ],
+    [
+     "risks,",
+     168.296,
+     168.336,
+     0.001
+    ],
+    [
+     "no",
+     168.336,
+     168.336,
+     0.068
+    ],
+    [
+     "risks,",
+     168.336,
+     168.336,
+     0.0
+    ],
+    [
+     "no",
+     168.336,
+     168.336,
+     0.033
+    ],
+    [
+     "risks,",
+     168.336,
+     168.516,
+     0.0
+    ],
+    [
+     "no",
+     168.636,
+     168.796,
+     0.033
+    ],
+    [
+     "risks,",
+     168.796,
+     168.796,
+     0.0
+    ],
+    [
+     "no",
+     168.796,
+     168.796,
+     0.032
+    ],
+    [
+     "risks,",
+     168.796,
+     168.796,
+     0.0
+    ],
+    [
+     "no",
+     168.796,
+     168.796,
+     0.036
+    ],
+    [
+     "risks,",
+     168.796,
+     168.796,
+     0.0
+    ],
+    [
+     "no",
+     168.796,
+     168.796,
+     0.043
+    ],
+    [
+     "risks,",
+     168.796,
+     168.796,
+     0.0
+    ]
+   ],
+   "asr_conf": 0.56,
+   "speaker_id": "S1",
+   "speaker_sim": 0.478,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.162,
+   "features": {
+    "loudness_db": -18.127,
+    "loudness_mean_db": -19.907,
+    "duration_s": 3.168,
+    "pitch_hz_median": 181.002,
+    "pitch_hz_p75": 216.82,
+    "pitch_range": 168.021,
+    "rate_wps": 8.876,
+    "text_cue": 0.0,
+    "z_loudness": 0.293,
+    "z_pitch": 1.434,
+    "z_rate": 4.0,
+    "arousal_raw": 1.162
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000054_bm_george_b9e94929_x1.15.wav",
+   "tts_duration": 7.713,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 169.255,
+    "asr_done": 171.47,
+    "speaker_done": 169.59,
+    "emotion_done": 171.471,
+    "complete": 171.471,
+    "tts_start": 171.471,
+    "tts_ready": 177.7,
+    "play_at": 280.147,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000055",
+   "t_start": 169.28,
+   "t_end": 171.68,
+   "close_reason": "pause",
+   "text": "and there is the whistle for the end of the first half. you",
+   "words": [
+    [
+     "and",
+     169.16,
+     169.4,
+     0.769
+    ],
+    [
+     "there",
+     169.4,
+     169.6,
+     0.98
+    ],
+    [
+     "is",
+     169.6,
+     169.8,
+     0.984
+    ],
+    [
+     "the",
+     169.8,
+     169.88,
+     0.986
+    ],
+    [
+     "whistle",
+     169.88,
+     170.28,
+     0.989
+    ],
+    [
+     "for",
+     170.28,
+     170.56,
+     0.982
+    ],
+    [
+     "the",
+     170.56,
+     170.6,
+     0.995
+    ],
+    [
+     "end",
+     170.6,
+     170.82,
+     0.997
+    ],
+    [
+     "of",
+     170.82,
+     170.96,
+     0.993
+    ],
+    [
+     "the",
+     170.96,
+     171.04,
+     0.995
+    ],
+    [
+     "first",
+     171.04,
+     171.26,
+     0.995
+    ],
+    [
+     "half.",
+     171.26,
+     171.6,
+     0.996
+    ],
+    [
+     "you",
+     171.6,
+     171.7,
+     0.126
+    ]
+   ],
+   "asr_conf": 0.589,
+   "speaker_id": "S1",
+   "speaker_sim": 0.843,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.699,
+   "features": {
+    "loudness_db": -18.494,
+    "loudness_mean_db": -19.923,
+    "duration_s": 2.4,
+    "pitch_hz_median": 145.631,
+    "pitch_hz_p75": 198.05,
+    "pitch_range": 165.226,
+    "rate_wps": 5.118,
+    "text_cue": 0.0,
+    "z_loudness": 0.123,
+    "z_pitch": 0.595,
+    "z_rate": 1.776,
+    "arousal_raw": 0.5
+   },
+   "voice_id": "bm_george",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000055_bm_george_54cd0ded_x1.15.wav",
+   "tts_duration": 2.696,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 172.254,
+    "asr_done": 174.768,
+    "speaker_done": 172.481,
+    "emotion_done": 174.769,
+    "complete": 174.769,
+    "tts_start": 174.769,
+    "tts_ready": 177.223,
+    "play_at": 287.94,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000056",
+   "t_start": 172.224,
+   "t_end": 175.968,
+   "close_reason": "pause",
+   "text": "Athral, one goal, one goal, each one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one goal, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one, one,",
+   "words": [
+    [
+     "Athral,",
+     172.104,
+     172.544,
+     0.172
+    ],
+    [
+     "one",
+     172.784,
+     173.044,
+     0.012
+    ],
+    [
+     "goal,",
+     173.044,
+     173.524,
+     0.002
+    ],
+    [
+     "one",
+     173.524,
+     173.564,
+     0.102
+    ],
+    [
+     "goal,",
+     173.564,
+     173.884,
+     0.986
+    ],
+    [
+     "each",
+     174.064,
+     174.244,
+     0.993
+    ],
+    [
+     "one",
+     174.244,
+     174.684,
+     0.0
+    ],
+    [
+     "goal,",
+     174.684,
+     174.684,
+     0.0
+    ],
+    [
+     "one",
+     174.684,
+     174.684,
+     0.0
+    ],
+    [
+     "goal,",
+     174.684,
+     174.784,
+     0.002
+    ],
+    [
+     "one",
+     174.784,
+     174.784,
+     0.0
+    ],
+    [
+     "goal,",
+     174.784,
+     175.124,
+     0.004
+    ],
+    [
+     "one",
+     175.124,
+     175.124,
+     0.002
+    ],
+    [
+     "goal,",
+     175.124,
+     175.124,
+     0.002
+    ],
+    [
+     "one",
+     175.124,
+     175.124,
+     0.183
+    ],
+    [
+     "goal,",
+     175.124,
+     175.124,
+     0.002
+    ],
+    [
+     "one",
+     175.124,
+     175.124,
+     0.374
+    ],
+    [
+     "goal,",
+     175.124,
+     175.124,
+     0.002
+    ],
+    [
+     "one",
+     175.124,
+     175.124,
+     0.324
+    ],
+    [
+     "goal,",
+     175.124,
+     175.124,
+     0.001
+    ],
+    [
+     "one",
+     175.264,
+     175.264,
+     0.259
+    ],
+    [
+     "goal,",
+     175.264,
+     175.264,
+     0.0
+    ],
+    [
+     "one",
+     175.724,
+     176.064,
+     0.287
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.0
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.335
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.0
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.443
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.0
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.557
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.0
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.699
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.0
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.743
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.001
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.831
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.009
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.866
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.106
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.868
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.611
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.884
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.648
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.822
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.965
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.823
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.949
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.826
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.969
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.821
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.962
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.843
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.896
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.814
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.933
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.812
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.909
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.79
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.904
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.832
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.96
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.799
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.858
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.776
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.782
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.853
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.749
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.827
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.699
+    ],
+    [
+     "one",
+     176.064,
+     176.064,
+     0.75
+    ],
+    [
+     "goal,",
+     176.064,
+     176.064,
+     0.656
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.726
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.767
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.717
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.731
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.677
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.711
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.745
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.629
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.668
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.627
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.686
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.747
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.648
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.68
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.652
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.639
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.655
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.677
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.713
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.69
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.695
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.682
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.624
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.65
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.668
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.674
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.686
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.715
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.684
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.672
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.676
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.706
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.674
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.648
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.662
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.681
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.658
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.651
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.636
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.661
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.654
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.636
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.632
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.639
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.726
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.651
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.629
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.679
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.668
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.648
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.669
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.676
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.67
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.687
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.696
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.698
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.669
+    ],
+    [
+     "one,",
+     176.064,
+     176.064,
+     0.666
+    ]
+   ],
+   "asr_conf": 0.684,
+   "speaker_id": "S2",
+   "speaker_sim": 0.778,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.308,
+   "features": {
+    "loudness_db": -20.67,
+    "loudness_mean_db": -23.508,
+    "duration_s": 3.744,
+    "pitch_hz_median": 200.174,
+    "pitch_hz_p75": 217.681,
+    "pitch_range": 175.86,
+    "rate_wps": 32.323,
+    "text_cue": 2.0,
+    "z_loudness": -0.603,
+    "z_pitch": -0.737,
+    "z_rate": 4.0,
+    "arousal_raw": 0.308
+   },
+   "voice_id": "am_adam",
+   "tts_path": "outputs/20261105-063116_synthetic_match_distil1/tts/L000056_am_adam_3097bc25_x1.15.wav",
+   "tts_duration": 29.183,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 176.507,
+    "asr_done": 179.733,
+    "speaker_done": 176.944,
+    "emotion_done": 179.734,
+    "complete": 179.734,
+    "tts_start": 179.734,
+    "tts_ready": 206.505,
+    "play_at": 290.715,
+    "played": null
+   }
+  }
+ ],
+ "warnings": [
+  "delay drift 0.155 s/s at t=120 s"
+ ]
+}

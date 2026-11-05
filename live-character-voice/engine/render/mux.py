@@ -21,13 +21,39 @@ def mux(video: Path, audio_wav: Path, out: Path, video_delay: float = 0.0) -> di
         if video_delay > 0:
             vf = f"tpad=start_duration={video_delay:.3f}:start_mode=clone,{vf}"
         cmd = [
-            "ffmpeg", "-y", "-nostdin", "-hide_banner", "-loglevel", "error",
-            "-i", str(video), "-i", str(audio_wav),
-            "-map", "0:v:0", "-map", "1:a:0",
-            "-vf", vf, "-c:v", "libx264", "-preset", "veryfast", "-crf", str(crf),
-            "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k",
-            "-shortest", "-movflags", "+faststart", str(out),
-        ]  # fmt: skip
+            "ffmpeg",
+            "-y",
+            "-nostdin",
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-i",
+            str(video),
+            "-i",
+            str(audio_wav),
+            "-map",
+            "0:v:0",
+            "-map",
+            "1:a:0",
+            "-vf",
+            vf,
+            "-c:v",
+            "libx264",
+            "-preset",
+            "veryfast",
+            "-crf",
+            str(crf),
+            "-pix_fmt",
+            "yuv420p",
+            "-c:a",
+            "aac",
+            "-b:a",
+            "128k",
+            "-shortest",
+            "-movflags",
+            "+faststart",
+            str(out),
+        ]
         subprocess.run(cmd, check=True)
         size = out.stat().st_size
         tried.append({"height": height, "crf": crf, "mb": round(size / 1e6, 2)})

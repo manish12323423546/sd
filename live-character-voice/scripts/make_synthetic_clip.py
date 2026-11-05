@@ -235,14 +235,38 @@ def render_video(audio_wav: Path, ass: Path, duration: float, out: Path) -> None
     )
     vf = f"{clock},subtitles={ass.as_posix()}"
     cmd = [
-        "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
-        "-f", "lavfi", "-i", f"testsrc2=size=1280x720:rate=25:duration={duration:.3f}",
-        "-i", str(audio_wav),
-        "-vf", vf,
-        "-c:v", "libx264", "-preset", "veryfast", "-crf", "30", "-pix_fmt", "yuv420p",
-        "-c:a", "aac", "-b:a", "160k", "-ar", str(OUT_SR),
-        "-shortest", "-movflags", "+faststart", str(out),
-    ]  # fmt: skip
+        "ffmpeg",
+        "-y",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-f",
+        "lavfi",
+        "-i",
+        f"testsrc2=size=1280x720:rate=25:duration={duration:.3f}",
+        "-i",
+        str(audio_wav),
+        "-vf",
+        vf,
+        "-c:v",
+        "libx264",
+        "-preset",
+        "veryfast",
+        "-crf",
+        "30",
+        "-pix_fmt",
+        "yuv420p",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "160k",
+        "-ar",
+        str(OUT_SR),
+        "-shortest",
+        "-movflags",
+        "+faststart",
+        str(out),
+    ]
     subprocess.run(cmd, check=True)
 
 

@@ -1,0 +1,48 @@
+{
+  "live": {
+    "orig_change_inside_db": -12.04,
+    "orig_change_outside_db": 0.0,
+    "duck_depth_db": 12.04,
+    "mix_peak_dbfs": -1.11
+  },
+  "demo_live": {
+    "file": "demo_live.mp4",
+    "mb": 19.5,
+    "encodes": [
+      {
+        "height": 720,
+        "crf": 28,
+        "mb": 25.18
+      },
+      {
+        "height": 720,
+        "crf": 32,
+        "mb": 19.5
+      }
+    ]
+  },
+  "synced": {
+    "orig_change_inside_db": -12.04,
+    "orig_change_outside_db": 0.0,
+    "duck_depth_db": 12.04,
+    "mix_peak_dbfs": -1.08
+  },
+  "demo_synced": {
+    "file": "demo_synced.mp4",
+    "mb": 19.53,
+    "encodes": [
+      {
+        "height": 720,
+        "crf": 28,
+        "mb": 25.21
+      },
+      {
+        "height": 720,
+        "crf": 32,
+        "mb": 19.53
+      }
+    ]
+  },
+  "synced_delay_D_s": 9.36,
+  "voices_placed": 55
+}

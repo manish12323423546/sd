@@ -1,0 +1,201 @@
+{
+  "session_id": "20261105-052751_synthetic_match_3spk_devtest",
+  "speed": 4.0,
+  "source": "asr",
+  "duration_s": 111.28,
+  "delay": {
+    "delay_ready": {
+      "p50": 91.931,
+      "p95": 150.491,
+      "max": 154.822,
+      "mean": 92.78,
+      "n": 33
+    },
+    "delay_play": {
+      "p50": 30.889,
+      "p95": 38.053,
+      "max": 38.167,
+      "mean": 30.222,
+      "n": 4
+    },
+    "stages": {
+      "close_wait": {
+        "p50": 0.646,
+        "p95": 0.84,
+        "max": 0.851,
+        "mean": 0.629,
+        "n": 36
+      },
+      "asr": {
+        "p50": 82.82,
+        "p95": 139.907,
+        "max": 144.805,
+        "mean": 81.627,
+        "n": 36
+      },
+      "speaker": {
+        "p50": 0.813,
+        "p95": 2.199,
+        "max": 3.667,
+        "mean": 1.049,
+        "n": 36
+      },
+      "emotion": {
+        "p50": 82.822,
+        "p95": 139.911,
+        "max": 144.807,
+        "mean": 81.631,
+        "n": 36
+      },
+      "complete": {
+        "p50": 82.822,
+        "p95": 139.911,
+        "max": 144.807,
+        "mean": 81.631,
+        "n": 36
+      },
+      "tts_queue": {
+        "p50": 0.001,
+        "p95": 0.01,
+        "max": 0.023,
+        "mean": 0.002,
+        "n": 33
+      },
+      "tts": {
+        "p50": 9.836,
+        "p95": 12.765,
+        "max": 15.056,
+        "mean": 9.633,
+        "n": 33
+      },
+      "schedule_wait": {
+        "p50": 0.0,
+        "p95": 0.0,
+        "max": 0.0,
+        "mean": 0.0,
+        "n": 4
+      }
+    },
+    "drift_slope_s_per_s": 1.33261,
+    "delay_after_10min_s": 818.436,
+    "drift_ok": false
+  },
+  "schedule": {
+    "actions": {
+      "speedup": 4,
+      "dropped": 3,
+      "none": 29
+    },
+    "errors": 0,
+    "lines_with_text": 36,
+    "lines_played": 4
+  },
+  "voice_quality": {
+    "tts_duration_ratio": {
+      "p50": 1.414,
+      "p95": 1.927,
+      "max": 4.199,
+      "mean": 1.531,
+      "n": 33
+    },
+    "lines_ratio_over_1_6": 10,
+    "files_checked": 33,
+    "files_with_clipping": 0,
+    "files_with_silence_over_400ms": 0,
+    "max_peak_dbfs": -1.04
+  },
+  "warnings": 0,
+  "wer": {
+    "wer": 0.0921,
+    "substitutions": 20,
+    "deletions": 5,
+    "insertions": 3,
+    "ref_words": 304,
+    "hyp_words": 302
+  },
+  "speaker": {
+    "speaker_accuracy": 0.9602,
+    "speaker_accuracy_lines": 0.9722,
+    "mapping": {
+      "S1": "A",
+      "S2": "B",
+      "S3": "C"
+    },
+    "n_truth_speakers": 3,
+    "n_output_speakers": 3,
+    "speech_covered_by_lines": 0.9388,
+    "low_confidence_lines": 17
+  },
+  "emotion": {
+    "emotion_exact": 0.6944,
+    "emotion_within_one": 1.0,
+    "matched_truth_lines": 36,
+    "peaks_detected": 6,
+    "peaks_total": 7,
+    "confusion": {
+      "calm": {
+        "neutral": 8
+      },
+      "neutral": {
+        "neutral": 15
+      },
+      "excited": {
+        "excited": 4,
+        "neutral": 2
+      },
+      "peak": {
+        "peak": 6,
+        "excited": 1
+      }
+    }
+  },
+  "segmentation": {
+    "lines_out": 36,
+    "lines_truth": 36,
+    "lines_ratio": 1.0,
+    "close_reasons": {
+      "pause": 30,
+      "level_change": 5,
+      "burst": 1
+    },
+    "boundaries_inside_truth_lines": 13,
+    "short_shouts_total": 3,
+    "short_shouts_detected": 3,
+    "short_shouts_own_line": 1
+  },
+  "coverage": {
+    "coverage": 0.1199
+  },
+  "run": {
+    "run_id": "20261105-052751_synthetic_match_3spk_devtest",
+    "clip": "data/clips/synthetic_match_3spk.mp4",
+    "truth": "data/clips/synthetic_match_3spk.truth.json",
+    "enroll": null,
+    "clip_duration_s": 111.28,
+    "wall_s": 66.4,
+    "live_wall_s": -2530.51,
+    "speed": 4.0,
+    "stop_after": "all",
+    "crashes": 1,
+    "crash": "ParameterError: t_out values must be in the range [0, D.shape[-1])",
+    "models": {
+      "asr": "faster_whisper:small.en (int8)",
+      "speaker": "ecapa",
+      "tts": "kokoro"
+    },
+    "model_load_s": {
+      "asr": 1.32,
+      "speaker": 2.02,
+      "tts": 7.54,
+      "warmup": 2.02
+    },
+    "cpu_count": 4,
+    "config_hash": "35d37e65a383",
+    "max_speakers": 3,
+    "voice_map": {
+      "S1": "bm_george",
+      "S2": "am_adam",
+      "S3": "af_bella"
+    }
+  }
+}

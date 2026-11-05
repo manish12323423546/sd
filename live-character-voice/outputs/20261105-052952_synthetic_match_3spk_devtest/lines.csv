@@ -1,0 +1,37 @@
+line_id,t_start,t_end,close_reason,speaker_id,speaker_sim,speaker_conf,emotion,arousal,text,voice_id,tts_duration,schedule_action,error,created,asr_done,speaker_done,emotion_done,complete,tts_start,tts_ready,play_at,played,delay_ready,delay_play
+L000001,1.536,4.384,pause,S1,1.0,high,neutral,0.0,Welcome back for the second half here at Riverside Park.,bm_george,3.739,speedup,,5.011,8.046,6.578,8.047,8.047,8.047,14.274,14.274,,9.89,9.89
+L000002,5.12,6.976,pause,S2,1.0,high,neutral,0.0,Riverside made a change at the break.,am_adam,2.457,speedup,,7.512,10.999,7.748,11.0,11.0,11.002,14.925,18.093,,7.949,11.117
+L000003,7.328,8.448,pause,S2,0.466,low,neutral,0.0,Brennan has come off.,am_adam,2.025,dropped,,9.026,14.323,9.211,14.323,14.323,14.324,17.085,,,8.637,
+L000004,9.152,12.128,pause,S3,1.0,high,neutral,0.78,I spoke to the bench and it was a small knock on his ankle.,af_bella,3.674,speedup,,12.512,17.594,13.161,17.595,17.596,17.596,23.481,23.481,,11.353,11.353
+L000005,13.376,16.032,pause,S1,0.788,high,neutral,-0.087,Thank you for that Northgate kickoff the second half.,bm_george,3.543,speedup,,16.512,20.335,16.845,20.336,20.336,20.337,25.907,27.235,,9.875,11.203
+L000006,16.576,18.112,pause,S1,0.669,high,neutral,-0.111,Tanaka plays it back tomorrow.,bm_george,2.581,speedup,,18.52,23.702,18.761,23.703,23.703,23.704,27.648,30.858,,9.536,12.746
+L000007,18.656,21.728,pause,S2,0.387,low,neutral,-0.082,They will try to keep the ball and frustrate them themselves.,am_adam,3.087,speedup,,22.511,27.141,23.108,27.142,27.142,27.142,31.811,33.519,,10.083,11.791
+L000008,22.368,24.384,pause,S1,0.753,high,neutral,0.039,Lindqvist presses forcing the long ball.,bm_george,3.196,speedup,,25.02,30.283,25.344,30.284,30.285,30.285,35.288,36.686,,10.904,12.302
+L000009,24.864,28.768,pause,S3,0.699,high,neutral,0.526,The Riverside manager is on the edge of his area shouting instructions.,af_bella,4.348,speedup,,29.51,33.48,30.477,33.481,33.481,33.481,39.664,39.962,,10.896,11.194
+L000010,29.824,33.472,level_change,S1,0.502,low,excited,1.263,Okafor wins in the midfield. He drives forward only one man to beat.,bm_george,4.652,speedup,,34.011,37.714,34.761,37.716,37.716,37.721,44.725,44.725,,11.253,11.253
+L000011,33.76,34.016,burst,S1,-0.063,low,peak,1.867,Go!,bm_george,0.935,speedup,,34.524,40.657,34.825,40.659,40.659,40.66,42.441,49.457,,8.425,15.441
+L000012,34.016,36.352,pause,S1,0.105,low,peak,2.137,On every level is it for Riverside Rovers.,bm_george,3.0,speedup,,37.024,44.002,37.317,44.014,44.014,44.018,48.684,50.472,,12.332,14.12
+L000013,37.472,39.072,pause,S2,0.138,low,peak,3.0,What a girl! He did it all on his own.,am_adam,2.087,speedup,,39.512,47.194,39.846,47.195,47.195,47.196,50.867,53.552,,11.795,14.48
+L000014,39.84,41.664,level_change,S3,0.292,low,excited,0.823,The noise down here is incredible.,af_bella,2.304,speedup,,42.012,50.248,42.317,50.249,50.249,50.25,53.891,55.719,,12.227,14.055
+L000015,41.76,43.392,pause,S3,0.375,low,neutral,0.589,The fans are jumping in the stands.,af_bella,2.174,speedup,,44.013,53.387,44.411,53.389,53.389,53.389,56.803,58.103,,13.411,14.711
+L000016,44.608,46.752,pause,S1,0.724,high,neutral,0.449,One all with 35 minutes left to play.,bm_george,3.109,speedup,,47.524,56.513,47.849,56.514,56.514,56.515,60.974,60.974,,14.222,14.222
+L000017,47.456,50.976,pause,S2,0.557,high,neutral,0.605,"Northgate need to calm things down now, and find their rhythm.",am_adam,3.652,speedup,,51.517,59.761,52.074,59.763,59.763,59.763,65.041,65.041,,14.065,14.065
+L000018,51.488,53.696,pause,S1,0.727,high,neutral,0.032,Delgado on the ball looking for a way through.,bm_george,3.304,speedup,,54.511,63.051,54.872,63.053,63.053,63.054,67.788,68.773,,14.092,15.077
+L000019,54.144,56.832,pause,S1,0.439,low,neutral,0.533,Into Tanaka he turns his mane. Lovely touch there.,bm_george,3.717,speedup,,57.522,66.477,57.918,66.479,66.479,66.48,72.036,72.157,,15.204,15.325
+L000020,57.472,58.272,level_change,S1,0.27,low,neutral,0.551,Tanaka Shoots.,,,dropped,,59.022,69.912,59.135,69.914,69.914,,,,,,
+L000021,58.528,60.224,pause,S1,0.16,low,peak,2.165,Why just write in the post?,bm_george,2.043,speedup,,61.027,72.805,61.252,72.806,72.807,72.807,75.862,75.955,,15.638,15.731
+L000022,60.768,62.528,level_change,S3,0.674,high,neutral,0.41,Tanaka has his hands on his head.,af_bella,2.581,speedup,,63.012,75.781,63.45,75.782,75.782,75.783,79.309,79.309,,16.781,16.781
+L000023,62.72,63.744,pause,S3,0.601,high,neutral,-0.064,He thought that was in.,,,dropped,,64.531,78.777,64.747,78.778,78.778,,,,,,
+L000024,65.056,67.648,pause,S2,0.511,low,neutral,0.208,He picked his spot but it was a touch too far.,am_adam,2.783,speedup,,68.013,81.184,68.416,81.186,81.186,81.187,85.397,85.397,,17.749,17.749
+L000025,68.096,70.144,pause,S1,0.709,high,neutral,0.679,Moreau goes into the book for a late challenge.,bm_george,3.13,speedup,,70.532,84.283,70.837,84.285,84.285,84.286,88.952,88.952,,18.808,18.808
+L000026,70.656,74.208,pause,S3,0.41,low,neutral,0.769,"That is his first year of current season, so no suspension.",af_bella,3.696,speedup,,75.021,87.455,75.617,87.456,87.456,87.457,92.785,92.785,,18.577,18.577
+L000027,75.584,77.952,pause,S1,0.779,high,neutral,0.067,"Free kick to Riverside, 30 yards from goal.",bm_george,3.348,speedup,,78.511,90.756,78.845,90.756,90.757,90.757,95.837,96.561,,17.885,18.609
+L000028,78.4,81.76,pause,S2,0.465,low,neutral,-0.046,Lindqvist fancies this one. He has scored from here before.,am_adam,3.609,speedup,,82.512,94.113,83.045,94.115,94.115,94.115,99.565,99.988,,17.805,18.228
+L000029,82.208,83.776,level_change,S1,0.396,low,neutral,0.795,Lindqvist steps up and curls it.,bm_george,2.674,speedup,,84.544,97.235,84.779,97.237,97.237,97.237,101.431,103.677,,17.655,19.901
+L000030,83.968,86.976,pause,S3,0.161,low,peak,2.361,"Yes, yes, to the top corner of Riverside Lee.",af_bella,3.13,speedup,,87.526,100.9,88.426,100.901,100.901,100.902,105.103,106.431,,18.127,19.455
+L000031,87.712,90.144,pause,S2,0.258,low,excited,1.713,"Incredible, that is a brilliant free kick.",am_adam,2.478,speedup,,90.517,103.973,90.866,103.974,103.974,103.975,107.824,109.642,,17.68,19.498
+L000032,90.528,93.184,pause,S3,0.551,high,excited,1.611,"The whole bench is out on the pitch, celebrating with him.",af_bella,3.196,speedup,,94.01,107.37,94.479,107.378,107.378,107.378,112.011,112.2,,18.827,19.016
+L000033,94.528,97.888,pause,S1,0.585,high,neutral,0.071,"Northgate restart, two goals to one and the clock keeps ticking.",bm_george,4.13,speedup,,98.523,110.457,99.155,110.46,110.46,110.46,116.116,116.116,,18.228,18.228
+L000034,98.56,101.088,pause,S2,0.613,high,neutral,0.079,Now Riverside has something to hold onto.,am_adam,2.761,speedup,,101.513,113.389,101.89,113.391,113.391,113.391,117.497,120.326,,16.409,19.238
+L000035,101.632,105.12,pause,S3,0.561,high,neutral,0.581,The fourth official is getting the board ready for substitution.,af_bella,3.913,speedup,,105.511,116.662,106.064,116.663,116.663,116.664,121.938,123.167,,16.818,18.047
+L000036,106.464,108.832,pause,S1,0.722,high,neutral,0.019,And that is the end of our second half highlights.,bm_george,3.37,speedup,,109.509,119.592,109.812,119.592,119.592,119.593,124.011,127.16,,15.179,18.328

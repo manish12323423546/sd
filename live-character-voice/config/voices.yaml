@@ -1,13 +1,17 @@
 # Approved voice catalog (docs/08 §8.2). Only built-in Kokoro-82M voices (Apache-2.0).
 # Display names are our own invented characters; never real people or known characters.
-# M1 confirms each voice_id exists in the downloaded model before it is used.
+# All six voice_ids confirmed present in Kokoro-82M (M1, outputs/models.json).
+# base_speed (M5): set so a voice's speech length ≈ the original commentator's, measured as the
+# median of TTS duration ÷ original line duration at speed 1.0 after silence trimming:
+#   bm_george 1.33, bm_lewis 1.22, am_michael 1.16, bf_emma 1.06, am_adam 1.04, af_bella 1.04.
+# A voice slower than the original makes playback fall behind on busy commentary.
 preview_text: "And that's a brilliant start to the second half!"
 voices:
   - voice_id: bm_george
     name: The Veteran
     description: Warm, measured British broadcaster
     lang_code: b
-    base_speed: 1.0
+    base_speed: 1.25
     enabled_in_pilot: true
   - voice_id: am_adam
     name: Hype Host
@@ -25,7 +29,7 @@ voices:
     name: Coach
     description: Steady, confident analyst
     lang_code: a
-    base_speed: 1.0
+    base_speed: 1.1
     enabled_in_pilot: true
   - voice_id: bf_emma
     name: The Pro
@@ -37,5 +41,5 @@ voices:
     name: Night Shift
     description: Deep, calm late-night voice
     lang_code: b
-    base_speed: 1.0
+    base_speed: 1.15
     enabled_in_pilot: false

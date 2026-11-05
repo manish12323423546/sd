@@ -42,7 +42,7 @@ class AsrConfig(_Strict):
     provider: str = "faster_whisper"
     model: str = "small.en"
     compute_type: str = "int8"
-    cpu_threads: int = 4
+    cpu_threads: int = 2
     beam_size: int = 1
     fallback_model: str = "base.en"
 
@@ -73,7 +73,9 @@ class TtsConfig(_Strict):
     provider: str = "kokoro"
     workers: int = Field(2, ge=1)
     lang_code: str = "a"
-    voice_map: dict[str, str] = Field(default_factory=dict)
+    voice_map: dict[str, str] = Field(
+        default_factory=lambda: {"S1": "bm_george", "S2": "am_adam", "S3": "af_bella"}
+    )
 
 
 class StyleConfig(_Strict):
@@ -95,6 +97,13 @@ class RenderConfig(_Strict):
     voice_gain_db: float = 0.0
 
 
+class RuntimeConfig(_Strict):
+    # CPU split measured in M7: ASR 2 threads + torch (Kokoro, ECAPA) 2 threads beats 4 + 4
+    # (oversubscription) on a 4-vCPU VM. See BUILD_LOG.
+    torch_threads: int = Field(4, ge=1)
+    compute_lane: bool = False  # ASR + TTS serialized on one priority lane (oldest line first)
+
+
 class EngineConfig(_Strict):
     mode: Literal["poc", "pilot"] = "poc"
     source: Literal["asr", "captions"] = "asr"
@@ -109,6 +118,7 @@ class EngineConfig(_Strict):
     style: StyleConfig = Field(default_factory=StyleConfig)
     schedule: ScheduleConfig = Field(default_factory=ScheduleConfig)
     render: RenderConfig = Field(default_factory=RenderConfig)
+    runtime: RuntimeConfig = Field(default_factory=RuntimeConfig)
 
     def snapshot(self) -> dict[str, Any]:
         return self.model_dump(mode="json")

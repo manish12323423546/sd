@@ -33,7 +33,7 @@ setup-python: $(PY)
 
 # Light install for CI: no torch, no model libraries.
 setup-ci: $(PY)
-	uv pip install --python $(PY) -e ".[dev]"
+	uv pip install --python $(PY) -e ".[api,dev]"
 
 setup-web:
 	cd web && npm install --no-audit --no-fund

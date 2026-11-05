@@ -156,3 +156,114 @@ scheduler maths, TTS worker + cache, renderer, metrics. 42 unit tests pass.
 **Pilot clips generated:** `synthetic_match_3spk.mp4` (111 s, 36 lines, A/B/C) and
 `synthetic_match_20min.mp4` (1299 s = 21.7 min, 432 lines; the generator now measures real audio
 length instead of estimating words/s, which first produced only 16 min).
+
+
+## 2026-11-05 — M3: ASR + speaker ID
+
+**Built:** faster-whisper provider (glossary + last ~25 words as `initial_prompt`, noise rejection),
+captions provider (SRT/VTT, word-proportional split), ECAPA provider (1.5 s windows averaged for
+lines > 3 s), online clustering with the short-line rule and enrollment, speaker-change soft split.
+ASR, speaker and prosody run concurrently per line; every stage is stamped and logged.
+
+**Accept** (speed 1.0, `--stop-after understand`):
+| Run | WER (≤ 15 %) | Speaker accuracy (≥ 85 %) |
+|---|---|---|
+| no enroll — `outputs/20261105-051931_synthetic_match_m3` | **10.9 %** ✅ | **92.9 %** ✅ (line-level 96.4 %) |
+| enroll — `outputs/20261105-052242_synthetic_match_m3_enroll` | **11.2 %** ✅ | **93.8 %** ✅ (line-level 96.6 %) |
+Stage timings (no enroll): close-wait p50 0.54 / p95 0.81 s, ASR p50 1.30 / p95 2.40 s,
+speaker p50 0.23 / p95 0.57 s. With enrollment the speaker-change split fired twice (it needs
+centroids to confirm a change). 24–27 lines are "low confidence" (best similarity < 0.55) but are
+still assigned correctly in most cases.
+
+## 2026-11-05 — M4: Emotion
+
+**Built:** prosody provider — loudness vs 60 s running median, pitch (YIN) vs the speaker's running
+median, words/s, keyword + "!" cues; weights 0.45/0.30/0.15/0.10; arousal clipped to [−2, 3];
+smoothing with the same speaker's previous line except upward jumps.
+
+**Measured & changed** (offline replay on the M3 lines, `scratchpad emo_eval`; same text/audio):
+| Variant | exact | within one | peaks |
+|---|---|---|---|
+| spec: whole-line RMS, median pitch | 48.4 % | 96.8 % | 5/10 |
+| loudest 1 s window + pitch p75 | **59.7 %** | 95.2 % | **7/10** |
+| fixed scales (4 dB / 2 st / 1 wps per unit) | 45.2 % | 98.4 % | 4/10 |
+Kept: loudness = loudest 1 s window (speech level of the most intense moment, not diluted by
+pauses), pitch = 75th percentile of voiced frames, robust (MAD) z-scores. Spec thresholds kept.
+
+**Accept** (final POC runs): within one step **96.8 %** ✅ (≥ 80 %), exact 59.7 %; peaks
+**7/10** ❌ (target: every truth peak). Why: the 3 missed peaks ("Off the crossbar!", "Okafor
+equalises…", "What a time to score…") are merged by the segmenter into longer lines that also hold
+calmer speech or a crowd roar, so the line's arousal (0.5–1.4) stays below the 1.8 peak threshold.
+Also Whisper almost never transcribes "!" (it writes "."), so the punctuation cue rarely fires.
+Top fixes: (1) emotion per sub-line window with the TTS delivery switching mid-line, (2) better
+peak isolation in the segmenter (lower level_split_db for very loud onsets), (3) a learned emotion
+model (e.g. emotion2vec, licence to check) instead of rules.
+
+## 2026-11-05 — M5: TTS + voices + emotion delivery
+
+**Built:** Kokoro provider (per-language pipelines, sentence-chunked synthesis with 60 ms gaps,
+silence trimmed, soft limiter at −1 dBFS), text normalisation (scores, numbers, ordinals, minutes,
+fillers, glossary protection), style mapping (speed/gain/punctuation per emotion, intensity scaled
+by arousal; pitch shift off by default), TTS worker pool with a `(line, voice, style)` cache,
+3-second voice previews at API start-up, catch-up time-stretch (librosa, with a workaround for a
+librosa 1.0 bug on some lengths at 1.15×).
+
+**Measured & changed:** generated speech was 1.3–1.45× longer than the original lines → playback
+fell behind on busy commentary. (1) Kokoro adds ~0.2–0.3 s silence at both ends → trimmed.
+(2) Voices differ in pace: median TTS/original duration at speed 1.0 after trimming: bm_george
+1.33, bm_lewis 1.22, am_michael 1.16, bf_emma 1.06, am_adam 1.04, af_bella 1.04 → `base_speed`
+1.25 / 1.15 / 1.1 for the slow ones (`config/voices.yaml`). Final runs: TTS/original ratio p50 0.93.
+
+**Accept** (final POC runs): every complete line got audio except 1 dropped filler (55/56) ✅;
+`voices_only.wav` produced ✅; no clipping (0 files, max peak −2.4 dBFS) ✅; TTS p95 for a line
+**3.28 s** ❌ (target 1.6 s). Isolated, Kokoro needs 0.81–0.84 s for a 3 s line (meets the target);
+live it shares 4 vCPUs with Whisper (see M7).
+
+## 2026-11-05 — M6: Scheduler + renderer
+
+**Built:** fast-mode scheduler in line order (gap 80 ms, ≤ 300 ms cross-speaker overlap only where
+the originals overlapped), catch-up (speed-up between lag 3.5 and 6 s, filler drop and same-speaker
+merge beyond 6 s), drift check every 60 s, per-line error isolation (a failing line never stops the
+session). Renderer: numpy mix at 48 kHz, ducking envelope (80 ms ramps, 150 ms hold), FFmpeg mux at
+720p CRF 28 with an automatic size ladder, synced-mode render, optional Demucs path (`--separate`,
+not installed by default).
+
+**Deviation:** synced-mode D = p95 of (tts_ready − t_start), not p95 of the delay after t_end — only
+then would 95 % of lines actually be ready when played at t_start + D (D ≈ 10.1–10.3 s here).
+
+**Accept** (final runs): `demo_live.mp4` and `demo_synced.mp4` produced, durations match the clip
+(+D for synced) ✅; ducking: original −12.04 dB inside voice lines vs 0.0 dB outside → depth
+**12.0 dB** ✅ (≥ 9 dB, measured on the mix before encoding). Demo files 19.5 MB each (< 25 MB).
+
+## 2026-11-05 — M7: Metrics + report → POC complete
+
+**Built:** `engine/metrics/compute.py` (delay ready/play, stage breakdown, drift + 10-min
+extrapolation, WER via jiwer with number normalisation, speaker accuracy by Hungarian matching on
+10 ms grid, emotion exact/within-one/confusion/peaks, segmentation, coverage, schedule actions,
+voice-quality checks), `report.md` (8 sections, human listen-test checklist) + `delay_over_time.png`,
+`lines.csv`, `python -m engine.cli report --run …`.
+
+**Delay tuning (every run live at speed 1.0, nothing else running unless noted):**
+| Run | Change | median / p95 delay | ASR p50/p95 | TTS p50/p95 | WER |
+|---|---|---|---|---|---|
+| `…_poc1` | baseline: 4 ASR + 4 torch threads | 4.09 / 5.21 | 1.41 / 2.80 | 2.03 / 3.09 | 10.9 % |
+| `…_poc2` | 2 + 2 threads (npm install ran meanwhile → confounded) | 4.68 / 6.63 | 1.85 / 3.85 | 2.13 / 3.27 | 10.9 % |
+| `…_poc3_base` | ASR base.en | **3.54** / 4.65 | 0.77 / 1.71 | 2.09 / 3.26 | **19.8 %** ❌ |
+| `…_poc4_lane` | one priority compute lane (ASR+TTS serial) | 8.86 / 11.75 (drift +0.03) | 5.09 queued | 3.34 | 11.4 % |
+| `…_poc5_nolane` | incremental speaker-split embeddings | 4.25 / 5.49 | 1.52 / 3.19 | 2.04 / 3.24 | 10.9 % |
+| `…_poc6_lane` | lane again, cheaper split | 8.59 / 10.83 | 4.51 queued | 3.26 | 11.4 % |
+| `…_final1-3` | + feeder chunk 250 ms | **4.14** / 5.42 (median of 3) | 1.48 / 2.80 | 2.10 / 3.28 | 10.9 % |
+| `…_distil1` | ASR distil-small.en | 5.59 / 25.4 | — | — | 137 % (hallucination) |
+Findings: (a) the speaker-change check embedded the whole line-so-far every second (0.5–0.7 s CPU
+for 4.5–6 s of audio) → now only the newest 1.5 s window (0.12 s); (b) running ASR and TTS
+concurrently uses the 4 cores better than taking turns (lane) even though each call is slower;
+(c) OMP_WAIT_POLICY=PASSIVE made no difference (thread spinning is not the cause); (d) G2P is 3 ms,
+Kokoro's acoustic model is the TTS cost; ONNX Runtime fp32 is ~15 % faster at 2 threads and equal at
+4 → kept as the optional `kokoro_onnx` provider, not the default; (e) Whisper word timestamps cost
+only ~6 %; (f) distil-small.en hallucinates with an initial prompt and has 16–17 % WER without.
+Final config: ASR small.en int8 4 threads, torch 4 threads, compute lane off, chunk 250 ms.
+
+**Accept (POC), three runs `outputs/20261105-061712/062141/062601_synthetic_match_final1-3`:**
+median delay **4.14 s ❌ (target ≤ 4.0, missed by 0.14 s)**, p95 5.42 s ✅, drift −0.0009 s/s ✅,
+WER 10.9 % ✅, speaker accuracy 92.9 % ✅, crashes 0 ✅. Full table + top 3 fixes:
+`outputs/poc_summary.md`. Demo files committed from the median run (`…_final2`).

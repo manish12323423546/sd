@@ -1,0 +1,5708 @@
+{
+ "session_id": "20261105-052242_synthetic_match_m3_enroll",
+ "clip_path": "data/clips/synthetic_match.mp4",
+ "mode": "poc",
+ "speed": 1.0,
+ "source": "asr",
+ "started_at_iso": "2026-11-05T05:22:47+00:00",
+ "config_snapshot": {
+  "mode": "poc",
+  "source": "asr",
+  "speed": 1.0,
+  "audio": {
+   "analysis_sr": 16000,
+   "chunk_ms": 500
+  },
+  "vad": {
+   "threshold": 0.5
+  },
+  "segment": {
+   "end_silence_ms": 350,
+   "max_line_s": 6.0,
+   "min_line_ms": 250,
+   "pad_ms": 120,
+   "burst_db": 10.0,
+   "split_sim": 0.45,
+   "level_split_db": 6.0,
+   "speaker_split": true
+  },
+  "asr": {
+   "provider": "faster_whisper",
+   "model": "small.en",
+   "compute_type": "int8",
+   "cpu_threads": 4,
+   "beam_size": 1,
+   "fallback_model": "base.en"
+  },
+  "speaker": {
+   "provider": "ecapa",
+   "max_speakers": 2,
+   "assign_sim": 0.55,
+   "ema_alpha": 0.1,
+   "enroll_file": null
+  },
+  "emotion": {
+   "provider": "prosody",
+   "weights": {
+    "loudness": 0.45,
+    "pitch": 0.3,
+    "rate": 0.15,
+    "text": 0.1
+   },
+   "thresholds": {
+    "calm": -0.5,
+    "excited": 0.8,
+    "peak": 1.8
+   }
+  },
+  "tts": {
+   "provider": "kokoro",
+   "workers": 2,
+   "lang_code": "a",
+   "voice_map": {
+    "S1": "bm_george",
+    "S2": "am_adam",
+    "S3": "af_bella"
+   }
+  },
+  "style": {
+   "pitch_shift": false
+  },
+  "schedule": {
+   "mode": "fast",
+   "gap_ms": 80,
+   "lag_soft_s": 3.5,
+   "lag_hard_s": 6.0,
+   "max_speedup": 1.15
+  },
+  "render": {
+   "out_sr": 48000,
+   "duck_gain": 0.25,
+   "duck_ramp_ms": 80,
+   "voice_gain_db": 0.0
+  }
+ },
+ "speakers": {
+  "S1": {
+   "speaker_id": "S1",
+   "display_name": "Commentator A",
+   "color": "#4FA3FF",
+   "centroid_n": 25,
+   "voice_id": "bm_george"
+  },
+  "S2": {
+   "speaker_id": "S2",
+   "display_name": "Commentator B",
+   "color": "#F5A524",
+   "centroid_n": 14,
+   "voice_id": "am_adam"
+  }
+ },
+ "lines": [
+  {
+   "line_id": "L000001",
+   "t_start": 1.504,
+   "t_end": 4.96,
+   "close_reason": "pause",
+   "text": "Good evening and welcome to Riverside Park for this evening's match.",
+   "words": [
+    [
+     "Good",
+     1.384,
+     1.604,
+     0.839
+    ],
+    [
+     "evening",
+     1.604,
+     1.924,
+     0.974
+    ],
+    [
+     "and",
+     1.924,
+     2.264,
+     0.77
+    ],
+    [
+     "welcome",
+     2.264,
+     2.584,
+     0.989
+    ],
+    [
+     "to",
+     2.584,
+     2.864,
+     0.994
+    ],
+    [
+     "Riverside",
+     2.864,
+     3.144,
+     0.996
+    ],
+    [
+     "Park",
+     3.144,
+     3.644,
+     0.979
+    ],
+    [
+     "for",
+     3.644,
+     3.884,
+     0.992
+    ],
+    [
+     "this",
+     3.884,
+     4.044,
+     0.998
+    ],
+    [
+     "evening's",
+     4.044,
+     4.464,
+     0.942
+    ],
+    [
+     "match.",
+     4.464,
+     4.704,
+     0.986
+    ]
+   ],
+   "asr_conf": 0.833,
+   "speaker_id": "S1",
+   "speaker_sim": 0.909,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.0,
+   "features": {
+    "loudness_db": -20.006,
+    "duration_s": 3.456,
+    "pitch_hz_median": 137.845,
+    "pitch_range": 213.073,
+    "rate_wps": 3.313,
+    "text_cue": 0.0,
+    "z_loudness": 0.0,
+    "z_pitch": 0.0,
+    "z_rate": 0.0,
+    "arousal_raw": 0.0
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 5.505,
+    "asr_done": 7.153,
+    "speaker_done": 6.567,
+    "emotion_done": 7.153,
+    "complete": 7.153,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000002",
+   "t_start": 5.6,
+   "t_end": 9.088,
+   "close_reason": "pause",
+   "text": "It's a lovely night for football and both sides need it once.",
+   "words": [
+    [
+     "It's",
+     5.48,
+     5.78,
+     0.902
+    ],
+    [
+     "a",
+     5.78,
+     5.88,
+     0.995
+    ],
+    [
+     "lovely",
+     5.88,
+     6.2,
+     0.998
+    ],
+    [
+     "night",
+     6.2,
+     6.48,
+     0.994
+    ],
+    [
+     "for",
+     6.48,
+     6.66,
+     0.647
+    ],
+    [
+     "football",
+     6.66,
+     7.08,
+     0.976
+    ],
+    [
+     "and",
+     7.08,
+     7.64,
+     0.469
+    ],
+    [
+     "both",
+     7.64,
+     7.84,
+     0.997
+    ],
+    [
+     "sides",
+     7.84,
+     8.24,
+     0.998
+    ],
+    [
+     "need",
+     8.24,
+     8.54,
+     0.683
+    ],
+    [
+     "it",
+     8.54,
+     8.7,
+     0.776
+    ],
+    [
+     "once.",
+     8.7,
+     8.94,
+     0.996
+    ]
+   ],
+   "asr_conf": 0.797,
+   "speaker_id": "S2",
+   "speaker_sim": 0.88,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.0,
+   "features": {
+    "loudness_db": -22.192,
+    "duration_s": 3.488,
+    "pitch_hz_median": 199.866,
+    "pitch_range": 172.598,
+    "rate_wps": 3.468,
+    "text_cue": 0.0,
+    "z_loudness": 0.0,
+    "z_pitch": 0.0,
+    "z_rate": 0.0,
+    "arousal_raw": 0.0
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 9.505,
+    "asr_done": 11.055,
+    "speaker_done": 10.154,
+    "emotion_done": 11.055,
+    "complete": 11.055,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000003",
+   "t_start": 9.824,
+   "t_end": 13.312,
+   "close_reason": "pause",
+   "text": "Riverside Rovers get us underway, playing from left to right.",
+   "words": [
+    [
+     "Riverside",
+     9.704,
+     10.244,
+     0.978
+    ],
+    [
+     "Rovers",
+     10.244,
+     10.824,
+     0.689
+    ],
+    [
+     "get",
+     10.824,
+     11.004,
+     0.965
+    ],
+    [
+     "us",
+     11.004,
+     11.184,
+     0.996
+    ],
+    [
+     "underway,",
+     11.184,
+     11.604,
+     0.906
+    ],
+    [
+     "playing",
+     11.964,
+     12.224,
+     0.994
+    ],
+    [
+     "from",
+     12.224,
+     12.504,
+     0.992
+    ],
+    [
+     "left",
+     12.504,
+     12.724,
+     0.993
+    ],
+    [
+     "to",
+     12.724,
+     12.944,
+     0.995
+    ],
+    [
+     "right.",
+     12.944,
+     13.164,
+     0.999
+    ]
+   ],
+   "asr_conf": 0.828,
+   "speaker_id": "S1",
+   "speaker_sim": 0.913,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.0,
+   "features": {
+    "loudness_db": -20.312,
+    "duration_s": 3.488,
+    "pitch_hz_median": 137.497,
+    "pitch_range": 152.727,
+    "rate_wps": 2.89,
+    "text_cue": 0.0,
+    "z_loudness": 0.0,
+    "z_pitch": 0.0,
+    "z_rate": 0.0,
+    "arousal_raw": 0.0
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 14.005,
+    "asr_done": 15.607,
+    "speaker_done": 14.693,
+    "emotion_done": 15.607,
+    "complete": 15.607,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000004",
+   "t_start": 13.824,
+   "t_end": 16.096,
+   "close_reason": "pause",
+   "text": "Okafor finds Lindqvist on the halfway line.",
+   "words": [
+    [
+     "Okafor",
+     13.704,
+     14.164,
+     0.033
+    ],
+    [
+     "finds",
+     14.164,
+     14.504,
+     0.982
+    ],
+    [
+     "Lindqvist",
+     14.504,
+     15.004,
+     0.59
+    ],
+    [
+     "on",
+     15.004,
+     15.144,
+     0.995
+    ],
+    [
+     "the",
+     15.144,
+     15.264,
+     0.996
+    ],
+    [
+     "halfway",
+     15.264,
+     15.504,
+     0.869
+    ],
+    [
+     "line.",
+     15.504,
+     15.924,
+     0.996
+    ]
+   ],
+   "asr_conf": 0.813,
+   "speaker_id": "S1",
+   "speaker_sim": 0.857,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.096,
+   "features": {
+    "loudness_db": -20.806,
+    "duration_s": 2.272,
+    "pitch_hz_median": 138.254,
+    "pitch_range": 134.219,
+    "rate_wps": 3.153,
+    "text_cue": 0.0,
+    "z_loudness": -0.198,
+    "z_pitch": 0.0,
+    "z_rate": -0.32,
+    "arousal_raw": -0.137
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 16.506,
+    "asr_done": 17.875,
+    "speaker_done": 16.937,
+    "emotion_done": 17.876,
+    "complete": 17.876,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000005",
+   "t_start": 16.864,
+   "t_end": 21.472,
+   "close_reason": "pause",
+   "text": "Lindqvist has been in fine form this season, always looking for the pass forward.",
+   "words": [
+    [
+     "Lindqvist",
+     16.744,
+     17.504,
+     0.551
+    ],
+    [
+     "has",
+     17.504,
+     17.624,
+     0.992
+    ],
+    [
+     "been",
+     17.624,
+     17.824,
+     0.997
+    ],
+    [
+     "in",
+     17.824,
+     17.984,
+     0.994
+    ],
+    [
+     "fine",
+     17.984,
+     18.244,
+     0.949
+    ],
+    [
+     "form",
+     18.244,
+     18.564,
+     0.992
+    ],
+    [
+     "this",
+     18.564,
+     18.784,
+     0.985
+    ],
+    [
+     "season,",
+     18.784,
+     19.144,
+     0.996
+    ],
+    [
+     "always",
+     19.664,
+     19.904,
+     0.992
+    ],
+    [
+     "looking",
+     19.904,
+     20.224,
+     0.998
+    ],
+    [
+     "for",
+     20.224,
+     20.424,
+     0.997
+    ],
+    [
+     "the",
+     20.424,
+     20.544,
+     0.9
+    ],
+    [
+     "pass",
+     20.544,
+     20.784,
+     0.837
+    ],
+    [
+     "forward.",
+     20.784,
+     21.164,
+     0.884
+    ]
+   ],
+   "asr_conf": 0.872,
+   "speaker_id": "S2",
+   "speaker_sim": 0.852,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.324,
+   "features": {
+    "loudness_db": -23.021,
+    "duration_s": 4.608,
+    "pitch_hz_median": 197.28,
+    "pitch_range": 196.735,
+    "rate_wps": 3.167,
+    "text_cue": 0.0,
+    "z_loudness": -0.985,
+    "z_pitch": 0.0,
+    "z_rate": -0.132,
+    "arousal_raw": -0.463
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 22.005,
+    "asr_done": 23.812,
+    "speaker_done": 22.951,
+    "emotion_done": 23.813,
+    "complete": 23.813,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000006",
+   "t_start": 22.048,
+   "t_end": 24.672,
+   "close_reason": "pause",
+   "text": "Northgate United sit deep and wait for the press.",
+   "words": [
+    [
+     "Northgate",
+     21.928,
+     22.428,
+     0.942
+    ],
+    [
+     "United",
+     22.428,
+     22.808,
+     0.969
+    ],
+    [
+     "sit",
+     22.808,
+     23.088,
+     0.972
+    ],
+    [
+     "deep",
+     23.088,
+     23.408,
+     0.998
+    ],
+    [
+     "and",
+     23.408,
+     23.688,
+     0.946
+    ],
+    [
+     "wait",
+     23.688,
+     23.868,
+     0.998
+    ],
+    [
+     "for",
+     23.868,
+     24.068,
+     0.999
+    ],
+    [
+     "the",
+     24.068,
+     24.168,
+     0.998
+    ],
+    [
+     "press.",
+     24.168,
+     24.408,
+     0.999
+    ]
+   ],
+   "asr_conf": 0.834,
+   "speaker_id": "S1",
+   "speaker_sim": 0.721,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.177,
+   "features": {
+    "loudness_db": -20.651,
+    "duration_s": 2.624,
+    "pitch_hz_median": 138.183,
+    "pitch_range": 180.225,
+    "rate_wps": 3.629,
+    "text_cue": 0.0,
+    "z_loudness": 0.062,
+    "z_pitch": 0.035,
+    "z_rate": 0.923,
+    "arousal_raw": 0.177
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 25.506,
+    "asr_done": 26.903,
+    "speaker_done": 25.941,
+    "emotion_done": 26.904,
+    "complete": 26.904,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000007",
+   "t_start": 25.216,
+   "t_end": 29.216,
+   "close_reason": "pause",
+   "text": "Moreau steps in and wins it back cleanly. That's the kind of tackle the manager will love.",
+   "words": [
+    [
+     "Moreau",
+     25.096,
+     25.536,
+     0.4
+    ],
+    [
+     "steps",
+     25.536,
+     25.696,
+     0.988
+    ],
+    [
+     "in",
+     25.696,
+     25.936,
+     0.99
+    ],
+    [
+     "and",
+     25.936,
+     26.056,
+     0.982
+    ],
+    [
+     "wins",
+     26.056,
+     26.216,
+     0.903
+    ],
+    [
+     "it",
+     26.216,
+     26.356,
+     0.994
+    ],
+    [
+     "back",
+     26.356,
+     26.576,
+     0.997
+    ],
+    [
+     "cleanly.",
+     26.576,
+     26.856,
+     0.987
+    ],
+    [
+     "That's",
+     26.976,
+     27.136,
+     0.691
+    ],
+    [
+     "the",
+     27.136,
+     27.256,
+     0.994
+    ],
+    [
+     "kind",
+     27.256,
+     27.416,
+     0.993
+    ],
+    [
+     "of",
+     27.416,
+     27.596,
+     0.998
+    ],
+    [
+     "tackle",
+     27.596,
+     27.916,
+     0.974
+    ],
+    [
+     "the",
+     27.916,
+     28.176,
+     0.752
+    ],
+    [
+     "manager",
+     28.176,
+     28.436,
+     0.929
+    ],
+    [
+     "will",
+     28.436,
+     28.736,
+     0.763
+    ],
+    [
+     "love.",
+     28.736,
+     29.016,
+     0.991
+    ]
+   ],
+   "asr_conf": 0.802,
+   "speaker_id": "S1",
+   "speaker_sim": 0.532,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.354,
+   "features": {
+    "loudness_db": -21.525,
+    "duration_s": 4.0,
+    "pitch_hz_median": 180.796,
+    "pitch_range": 158.152,
+    "rate_wps": 4.337,
+    "text_cue": 0.0,
+    "z_loudness": -0.319,
+    "z_pitch": 3.896,
+    "z_rate": 2.193,
+    "arousal_raw": 1.354
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 30.005,
+    "asr_done": 31.78,
+    "speaker_done": 30.776,
+    "emotion_done": 31.78,
+    "complete": 31.78,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000008",
+   "t_start": 30.048,
+   "t_end": 32.448,
+   "close_reason": "pause",
+   "text": "Tanaka down the right wing past one past two.",
+   "words": [
+    [
+     "Tanaka",
+     29.928,
+     30.248,
+     0.0
+    ],
+    [
+     "down",
+     30.248,
+     30.528,
+     0.971
+    ],
+    [
+     "the",
+     30.528,
+     30.648,
+     0.987
+    ],
+    [
+     "right",
+     30.648,
+     30.808,
+     0.999
+    ],
+    [
+     "wing",
+     30.808,
+     31.148,
+     0.989
+    ],
+    [
+     "past",
+     31.148,
+     31.368,
+     0.824
+    ],
+    [
+     "one",
+     31.368,
+     31.688,
+     0.738
+    ],
+    [
+     "past",
+     31.688,
+     31.968,
+     0.727
+    ],
+    [
+     "two.",
+     31.968,
+     32.268,
+     0.963
+    ]
+   ],
+   "asr_conf": 0.736,
+   "speaker_id": "S1",
+   "speaker_sim": 0.759,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.538,
+   "features": {
+    "loudness_db": -20.085,
+    "duration_s": 2.4,
+    "pitch_hz_median": 134.987,
+    "pitch_range": 129.249,
+    "rate_wps": 3.846,
+    "text_cue": 0.0,
+    "z_loudness": 0.288,
+    "z_pitch": -0.338,
+    "z_rate": 1.066,
+    "arousal_raw": 0.188
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 33.005,
+    "asr_done": 34.34,
+    "speaker_done": 33.382,
+    "emotion_done": 34.34,
+    "complete": 34.34,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000009",
+   "t_start": 32.896,
+   "t_end": 34.336,
+   "close_reason": "level_change",
+   "text": "He cuts it back for Delgado.",
+   "words": [
+    [
+     "He",
+     32.776,
+     32.976,
+     0.853
+    ],
+    [
+     "cuts",
+     32.976,
+     33.136,
+     0.996
+    ],
+    [
+     "it",
+     33.136,
+     33.296,
+     0.994
+    ],
+    [
+     "back",
+     33.296,
+     33.476,
+     0.996
+    ],
+    [
+     "for",
+     33.476,
+     33.656,
+     0.993
+    ],
+    [
+     "Delgado.",
+     33.656,
+     34.056,
+     0.964
+    ]
+   ],
+   "asr_conf": 0.751,
+   "speaker_id": "S1",
+   "speaker_sim": 0.407,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.451,
+   "features": {
+    "loudness_db": -17.096,
+    "duration_s": 1.44,
+    "pitch_hz_median": 151.673,
+    "pitch_range": 129.553,
+    "rate_wps": 4.688,
+    "text_cue": 0.0,
+    "z_loudness": 1.453,
+    "z_pitch": 1.362,
+    "z_rate": 2.594,
+    "arousal_raw": 1.451
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 35.005,
+    "asr_done": 36.449,
+    "speaker_done": 35.285,
+    "emotion_done": 36.45,
+    "complete": 36.45,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000010",
+   "t_start": 34.656,
+   "t_end": 35.136,
+   "close_reason": "burst",
+   "text": "Oh what a chance.",
+   "words": [
+    [
+     "Oh",
+     34.536,
+     34.756,
+     0.698
+    ],
+    [
+     "what",
+     34.756,
+     34.896,
+     0.56
+    ],
+    [
+     "a",
+     34.896,
+     34.976,
+     0.995
+    ],
+    [
+     "chance.",
+     34.976,
+     35.116,
+     0.916
+    ]
+   ],
+   "asr_conf": 0.631,
+   "speaker_id": "S1",
+   "speaker_sim": 0.017,
+   "speaker_conf": "low",
+   "emotion": "peak",
+   "arousal": 3.0,
+   "features": {
+    "loudness_db": -10.551,
+    "duration_s": 0.48,
+    "pitch_hz_median": 200.26,
+    "pitch_range": 80.443,
+    "rate_wps": 6.897,
+    "text_cue": 0.6,
+    "z_loudness": 4.0,
+    "z_pitch": 4.0,
+    "z_rate": 4.0,
+    "arousal_raw": 3.0
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 35.511,
+    "asr_done": 37.606,
+    "speaker_done": 35.631,
+    "emotion_done": 37.606,
+    "complete": 37.606,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000011",
+   "t_start": 35.136,
+   "t_end": 35.552,
+   "close_reason": "level_change",
+   "text": "Dance.",
+   "words": [
+    [
+     "Dance.",
+     35.016,
+     35.236,
+     0.179
+    ]
+   ],
+   "asr_conf": 0.572,
+   "speaker_id": "S1",
+   "speaker_sim": -0.024,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": 0.154,
+   "features": {
+    "loudness_db": -23.148,
+    "duration_s": 0.416,
+    "pitch_hz_median": 113.7,
+    "pitch_range": 292.256,
+    "rate_wps": 4.545,
+    "text_cue": 0.0,
+    "z_loudness": -1.067,
+    "z_pitch": -2.817,
+    "z_rate": 1.731,
+    "arousal_raw": -1.065
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 36.008,
+    "asr_done": 38.793,
+    "speaker_done": 36.118,
+    "emotion_done": 38.794,
+    "complete": 38.794,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000012",
+   "t_start": 35.648,
+   "t_end": 37.984,
+   "close_reason": "pause",
+   "text": "He has to slow down, the goal is wide open.",
+   "words": [
+    [
+     "He",
+     35.528,
+     35.768,
+     0.154
+    ],
+    [
+     "has",
+     35.768,
+     35.888,
+     0.897
+    ],
+    [
+     "to",
+     35.888,
+     36.028,
+     0.962
+    ],
+    [
+     "slow",
+     36.028,
+     36.268,
+     0.232
+    ],
+    [
+     "down,",
+     36.268,
+     36.508,
+     0.682
+    ],
+    [
+     "the",
+     36.628,
+     36.728,
+     0.934
+    ],
+    [
+     "goal",
+     36.728,
+     36.888,
+     0.725
+    ],
+    [
+     "is",
+     36.888,
+     37.088,
+     0.965
+    ],
+    [
+     "wide",
+     37.088,
+     37.348,
+     0.728
+    ],
+    [
+     "open.",
+     37.348,
+     37.768,
+     0.995
+    ]
+   ],
+   "asr_conf": 0.563,
+   "speaker_id": "S2",
+   "speaker_sim": 0.491,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.335,
+   "features": {
+    "loudness_db": -14.775,
+    "duration_s": 2.336,
+    "pitch_hz_median": 205.35,
+    "pitch_range": 182.307,
+    "rate_wps": 4.464,
+    "text_cue": 1.0,
+    "z_loudness": 2.35,
+    "z_pitch": 0.0,
+    "z_rate": 1.184,
+    "arousal_raw": 1.335
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 38.506,
+    "asr_done": 40.104,
+    "speaker_done": 38.766,
+    "emotion_done": 40.105,
+    "complete": 40.105,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000013",
+   "t_start": 38.784,
+   "t_end": 41.12,
+   "close_reason": "pause",
+   "text": "A goal kick then, and a lid off for Riverside.",
+   "words": [
+    [
+     "A",
+     38.664,
+     38.844,
+     0.566
+    ],
+    [
+     "goal",
+     38.844,
+     39.084,
+     0.778
+    ],
+    [
+     "kick",
+     39.084,
+     39.304,
+     0.537
+    ],
+    [
+     "then,",
+     39.304,
+     39.624,
+     0.892
+    ],
+    [
+     "and",
+     39.744,
+     39.864,
+     0.87
+    ],
+    [
+     "a",
+     39.864,
+     39.944,
+     0.803
+    ],
+    [
+     "lid",
+     39.944,
+     40.064,
+     0.179
+    ],
+    [
+     "off",
+     40.064,
+     40.264,
+     0.89
+    ],
+    [
+     "for",
+     40.264,
+     40.444,
+     0.918
+    ],
+    [
+     "Riverside.",
+     40.444,
+     40.784,
+     0.993
+    ]
+   ],
+   "asr_conf": 0.641,
+   "speaker_id": "S1",
+   "speaker_sim": 0.618,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.194,
+   "features": {
+    "loudness_db": -22.648,
+    "duration_s": 2.336,
+    "pitch_hz_median": 131.324,
+    "pitch_range": 208.563,
+    "rate_wps": 4.717,
+    "text_cue": 1.0,
+    "z_loudness": -0.867,
+    "z_pitch": -0.734,
+    "z_rate": 1.116,
+    "arousal_raw": -0.343
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 41.508,
+    "asr_done": 42.848,
+    "speaker_done": 41.927,
+    "emotion_done": 42.849,
+    "complete": 42.849,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000014",
+   "t_start": 41.856,
+   "t_end": 44.576,
+   "close_reason": "pause",
+   "text": "Delgado will be thinking about that one for a while.",
+   "words": [
+    [
+     "Delgado",
+     41.736,
+     42.356,
+     0.971
+    ],
+    [
+     "will",
+     42.356,
+     42.576,
+     0.953
+    ],
+    [
+     "be",
+     42.576,
+     42.696,
+     0.997
+    ],
+    [
+     "thinking",
+     42.696,
+     42.956,
+     0.997
+    ],
+    [
+     "about",
+     42.956,
+     43.356,
+     0.981
+    ],
+    [
+     "that",
+     43.356,
+     43.556,
+     0.925
+    ],
+    [
+     "one",
+     43.556,
+     43.776,
+     0.896
+    ],
+    [
+     "for",
+     43.776,
+     43.996,
+     0.996
+    ],
+    [
+     "a",
+     43.996,
+     44.136,
+     0.855
+    ],
+    [
+     "while.",
+     44.136,
+     44.316,
+     0.999
+    ]
+   ],
+   "asr_conf": 0.801,
+   "speaker_id": "S2",
+   "speaker_sim": 0.578,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.07,
+   "features": {
+    "loudness_db": -22.528,
+    "duration_s": 2.72,
+    "pitch_hz_median": 193.567,
+    "pitch_range": 174.743,
+    "rate_wps": 3.876,
+    "text_cue": 0.0,
+    "z_loudness": -0.751,
+    "z_pitch": -0.462,
+    "z_rate": 0.03,
+    "arousal_raw": -0.472
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 45.006,
+    "asr_done": 46.4,
+    "speaker_done": 45.471,
+    "emotion_done": 46.4,
+    "complete": 46.4,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000015",
+   "t_start": 45.12,
+   "t_end": 48.576,
+   "close_reason": "pause",
+   "text": "Brennan with the long ball forward, headed away by the center back.",
+   "words": [
+    [
+     "Brennan",
+     45.0,
+     45.36,
+     0.935
+    ],
+    [
+     "with",
+     45.36,
+     45.6,
+     0.971
+    ],
+    [
+     "the",
+     45.6,
+     45.76,
+     0.988
+    ],
+    [
+     "long",
+     45.76,
+     46.02,
+     0.98
+    ],
+    [
+     "ball",
+     46.02,
+     46.34,
+     0.998
+    ],
+    [
+     "forward,",
+     46.34,
+     46.84,
+     0.996
+    ],
+    [
+     "headed",
+     47.2,
+     47.3,
+     0.994
+    ],
+    [
+     "away",
+     47.3,
+     47.62,
+     0.998
+    ],
+    [
+     "by",
+     47.62,
+     47.82,
+     0.998
+    ],
+    [
+     "the",
+     47.82,
+     47.96,
+     0.996
+    ],
+    [
+     "center",
+     47.96,
+     48.18,
+     0.958
+    ],
+    [
+     "back.",
+     48.18,
+     48.46,
+     0.809
+    ]
+   ],
+   "asr_conf": 0.806,
+   "speaker_id": "S1",
+   "speaker_sim": 0.753,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.217,
+   "features": {
+    "loudness_db": -20.166,
+    "duration_s": 3.456,
+    "pitch_hz_median": 143.791,
+    "pitch_range": 134.335,
+    "rate_wps": 3.468,
+    "text_cue": 0.0,
+    "z_loudness": 0.225,
+    "z_pitch": 0.592,
+    "z_rate": -0.412,
+    "arousal_raw": 0.217
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 49.006,
+    "asr_done": 50.534,
+    "speaker_done": 49.713,
+    "emotion_done": 50.535,
+    "complete": 50.535,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000016",
+   "t_start": 49.152,
+   "t_end": 54.208,
+   "close_reason": "pause",
+   "text": "It drops to Okafor on the edge of the area, and he shoots. Straight at the keeper, you should have done better.",
+   "words": [
+    [
+     "It",
+     49.032,
+     49.232,
+     0.763
+    ],
+    [
+     "drops",
+     49.232,
+     49.472,
+     0.998
+    ],
+    [
+     "to",
+     49.472,
+     49.692,
+     0.997
+    ],
+    [
+     "Okafor",
+     49.692,
+     50.092,
+     0.057
+    ],
+    [
+     "on",
+     50.092,
+     50.292,
+     0.965
+    ],
+    [
+     "the",
+     50.292,
+     50.392,
+     0.998
+    ],
+    [
+     "edge",
+     50.392,
+     50.552,
+     0.998
+    ],
+    [
+     "of",
+     50.552,
+     50.672,
+     0.997
+    ],
+    [
+     "the",
+     50.672,
+     50.792,
+     0.997
+    ],
+    [
+     "area,",
+     50.792,
+     51.092,
+     0.999
+    ],
+    [
+     "and",
+     51.332,
+     51.432,
+     0.994
+    ],
+    [
+     "he",
+     51.432,
+     51.592,
+     0.998
+    ],
+    [
+     "shoots.",
+     51.592,
+     51.832,
+     0.997
+    ],
+    [
+     "Straight",
+     52.032,
+     52.272,
+     0.743
+    ],
+    [
+     "at",
+     52.272,
+     52.452,
+     0.85
+    ],
+    [
+     "the",
+     52.452,
+     52.552,
+     0.993
+    ],
+    [
+     "keeper,",
+     52.552,
+     52.812,
+     0.989
+    ],
+    [
+     "you",
+     53.072,
+     53.172,
+     0.635
+    ],
+    [
+     "should",
+     53.172,
+     53.292,
+     0.998
+    ],
+    [
+     "have",
+     53.292,
+     53.392,
+     0.72
+    ],
+    [
+     "done",
+     53.392,
+     53.552,
+     0.991
+    ],
+    [
+     "better.",
+     53.552,
+     53.812,
+     1.0
+    ]
+   ],
+   "asr_conf": 0.802,
+   "speaker_id": "S1",
+   "speaker_sim": 0.674,
+   "speaker_conf": "high",
+   "emotion": "excited",
+   "arousal": 1.443,
+   "features": {
+    "loudness_db": -18.667,
+    "duration_s": 5.056,
+    "pitch_hz_median": 172.575,
+    "pitch_range": 169.052,
+    "rate_wps": 4.603,
+    "text_cue": 0.0,
+    "z_loudness": 0.793,
+    "z_pitch": 3.206,
+    "z_rate": 0.825,
+    "arousal_raw": 1.443
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 55.006,
+    "asr_done": 57.176,
+    "speaker_done": 56.086,
+    "emotion_done": 57.177,
+    "complete": 57.177,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000017",
+   "t_start": 54.848,
+   "t_end": 57.504,
+   "close_reason": "pause",
+   "text": "Northgate keep the ball now, passing it around the back.",
+   "words": [
+    [
+     "Northgate",
+     54.728,
+     55.288,
+     0.85
+    ],
+    [
+     "keep",
+     55.288,
+     55.488,
+     0.707
+    ],
+    [
+     "the",
+     55.488,
+     55.668,
+     0.996
+    ],
+    [
+     "ball",
+     55.668,
+     55.868,
+     0.945
+    ],
+    [
+     "now,",
+     55.868,
+     56.228,
+     0.93
+    ],
+    [
+     "passing",
+     56.288,
+     56.688,
+     0.933
+    ],
+    [
+     "it",
+     56.688,
+     56.888,
+     0.933
+    ],
+    [
+     "around",
+     56.888,
+     57.068,
+     0.968
+    ],
+    [
+     "the",
+     57.068,
+     57.228,
+     0.973
+    ],
+    [
+     "back.",
+     57.228,
+     57.428,
+     0.948
+    ]
+   ],
+   "asr_conf": 0.766,
+   "speaker_id": "S1",
+   "speaker_sim": 0.618,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.33,
+   "features": {
+    "loudness_db": -22.169,
+    "duration_s": 2.656,
+    "pitch_hz_median": 143.691,
+    "pitch_range": 225.347,
+    "rate_wps": 3.704,
+    "text_cue": 0.0,
+    "z_loudness": -0.646,
+    "z_pitch": 0.56,
+    "z_rate": -0.165,
+    "arousal_raw": -0.147
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 58.005,
+    "asr_done": 59.382,
+    "speaker_done": 58.441,
+    "emotion_done": 59.383,
+    "complete": 59.383,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000018",
+   "t_start": 58.368,
+   "t_end": 60.64,
+   "close_reason": "pause",
+   "text": "20 minutes gone, and it is still 0-0.",
+   "words": [
+    [
+     "20",
+     58.248,
+     58.608,
+     0.711
+    ],
+    [
+     "minutes",
+     58.608,
+     58.828,
+     0.966
+    ],
+    [
+     "gone,",
+     58.828,
+     59.168,
+     0.993
+    ],
+    [
+     "and",
+     59.428,
+     59.448,
+     0.991
+    ],
+    [
+     "it",
+     59.448,
+     59.548,
+     0.996
+    ],
+    [
+     "is",
+     59.548,
+     59.688,
+     0.985
+    ],
+    [
+     "still",
+     59.688,
+     59.908,
+     0.997
+    ],
+    [
+     "0",
+     59.908,
+     60.108,
+     0.178
+    ],
+    [
+     "-0.",
+     60.108,
+     60.368,
+     0.954
+    ]
+   ],
+   "asr_conf": 0.726,
+   "speaker_id": "S2",
+   "speaker_sim": 0.616,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.225,
+   "features": {
+    "loudness_db": -20.657,
+    "duration_s": 2.272,
+    "pitch_hz_median": 206.065,
+    "pitch_range": 169.735,
+    "rate_wps": 4.245,
+    "text_cue": 0.0,
+    "z_loudness": -0.002,
+    "z_pitch": 0.535,
+    "z_rate": 0.436,
+    "arousal_raw": 0.225
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 61.005,
+    "asr_done": 62.327,
+    "speaker_done": 61.409,
+    "emotion_done": 62.328,
+    "complete": 62.328,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000019",
+   "t_start": 61.152,
+   "t_end": 63.104,
+   "close_reason": "pause",
+   "text": "Moreau into the middle, now Tanaka again.",
+   "words": [
+    [
+     "Moreau",
+     61.032,
+     61.432,
+     0.304
+    ],
+    [
+     "into",
+     61.432,
+     61.592,
+     0.923
+    ],
+    [
+     "the",
+     61.592,
+     61.712,
+     0.996
+    ],
+    [
+     "middle,",
+     61.712,
+     61.892,
+     0.979
+    ],
+    [
+     "now",
+     62.132,
+     62.212,
+     0.988
+    ],
+    [
+     "Tanaka",
+     62.212,
+     62.572,
+     0.914
+    ],
+    [
+     "again.",
+     62.572,
+     62.972,
+     0.995
+    ]
+   ],
+   "asr_conf": 0.81,
+   "speaker_id": "S1",
+   "speaker_sim": 0.779,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.114,
+   "features": {
+    "loudness_db": -20.506,
+    "duration_s": 1.952,
+    "pitch_hz_median": 129.421,
+    "pitch_range": 125.404,
+    "rate_wps": 3.608,
+    "text_cue": 0.0,
+    "z_loudness": 0.059,
+    "z_pitch": -0.952,
+    "z_rate": -0.296,
+    "arousal_raw": -0.304
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 63.505,
+    "asr_done": 64.757,
+    "speaker_done": 63.862,
+    "emotion_done": 64.757,
+    "complete": 64.757,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000020",
+   "t_start": 63.616,
+   "t_end": 65.984,
+   "close_reason": "level_change",
+   "text": "Tanaka through on goal. He goes around the keeper.",
+   "words": [
+    [
+     "Tanaka",
+     63.496,
+     63.816,
+     0.684
+    ],
+    [
+     "through",
+     63.816,
+     64.096,
+     0.212
+    ],
+    [
+     "on",
+     64.096,
+     64.276,
+     0.985
+    ],
+    [
+     "goal.",
+     64.276,
+     64.536,
+     0.821
+    ],
+    [
+     "He",
+     64.916,
+     64.976,
+     0.988
+    ],
+    [
+     "goes",
+     64.976,
+     65.116,
+     0.998
+    ],
+    [
+     "around",
+     65.116,
+     65.336,
+     0.506
+    ],
+    [
+     "the",
+     65.336,
+     65.496,
+     0.768
+    ],
+    [
+     "keeper.",
+     65.496,
+     65.696,
+     0.987
+    ]
+   ],
+   "asr_conf": 0.685,
+   "speaker_id": "S1",
+   "speaker_sim": 0.473,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.692,
+   "features": {
+    "loudness_db": -17.415,
+    "duration_s": 2.368,
+    "pitch_hz_median": 172.784,
+    "pitch_range": 153.707,
+    "rate_wps": 4.091,
+    "text_cue": 1.0,
+    "z_loudness": 1.296,
+    "z_pitch": 3.22,
+    "z_rate": 0.287,
+    "arousal_raw": 1.692
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 66.506,
+    "asr_done": 67.809,
+    "speaker_done": 66.893,
+    "emotion_done": 67.81,
+    "complete": 67.81,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000021",
+   "t_start": 66.112,
+   "t_end": 68.832,
+   "close_reason": "pause",
+   "text": "Go, go. Tanaka scores for Northgate United.",
+   "words": [
+    [
+     "Go,",
+     65.992,
+     66.252,
+     0.75
+    ],
+    [
+     "go.",
+     66.572,
+     66.572,
+     0.688
+    ],
+    [
+     "Tanaka",
+     67.092,
+     67.152,
+     0.0
+    ],
+    [
+     "scores",
+     67.152,
+     67.532,
+     0.85
+    ],
+    [
+     "for",
+     67.532,
+     67.772,
+     0.975
+    ],
+    [
+     "Northgate",
+     67.772,
+     68.092,
+     0.715
+    ],
+    [
+     "United.",
+     68.092,
+     68.372,
+     0.969
+    ]
+   ],
+   "asr_conf": 0.642,
+   "speaker_id": "S1",
+   "speaker_sim": 0.117,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.664,
+   "features": {
+    "loudness_db": -12.091,
+    "duration_s": 2.72,
+    "pitch_hz_median": 147.572,
+    "pitch_range": 152.123,
+    "rate_wps": 2.941,
+    "text_cue": 0.6,
+    "z_loudness": 3.424,
+    "z_pitch": 0.856,
+    "z_rate": -1.368,
+    "arousal_raw": 1.652
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 69.506,
+    "asr_done": 70.868,
+    "speaker_done": 69.941,
+    "emotion_done": 70.869,
+    "complete": 70.869,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000022",
+   "t_start": 69.76,
+   "t_end": 69.888,
+   "close_reason": "burst",
+   "text": "And the-",
+   "words": [
+    [
+     "And",
+     69.64,
+     69.9,
+     0.175
+    ],
+    [
+     "the",
+     69.9,
+     69.98,
+     0.097
+    ],
+    [
+     "-",
+     69.98,
+     69.98,
+     0.07
+    ]
+   ],
+   "asr_conf": 0.458,
+   "speaker_id": "S1",
+   "speaker_sim": 0.075,
+   "speaker_conf": "low",
+   "emotion": "peak",
+   "arousal": 2.4,
+   "features": {
+    "loudness_db": -4.265,
+    "duration_s": 0.128,
+    "rate_wps": 8.824,
+    "text_cue": 0.0,
+    "z_loudness": 4.0,
+    "z_pitch": 0.0,
+    "z_rate": 4.0,
+    "arousal_raw": 2.4
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 70.506,
+    "asr_done": 71.951,
+    "speaker_done": 70.609,
+    "emotion_done": 71.952,
+    "complete": 71.952,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000023",
+   "t_start": 69.888,
+   "t_end": 75.52,
+   "close_reason": "pause",
+   "text": "Unbelievable. What a finish from Tanaka. Look at the pace, look at the car. You made that look so easy.",
+   "words": [
+    [
+     "Unbelievable.",
+     69.768,
+     70.408,
+     0.952
+    ],
+    [
+     "What",
+     70.588,
+     70.628,
+     0.969
+    ],
+    [
+     "a",
+     70.628,
+     70.748,
+     0.995
+    ],
+    [
+     "finish",
+     70.748,
+     70.988,
+     0.995
+    ],
+    [
+     "from",
+     70.988,
+     71.188,
+     0.973
+    ],
+    [
+     "Tanaka.",
+     71.188,
+     71.488,
+     0.955
+    ],
+    [
+     "Look",
+     72.368,
+     72.548,
+     0.905
+    ],
+    [
+     "at",
+     72.548,
+     72.668,
+     0.994
+    ],
+    [
+     "the",
+     72.668,
+     72.748,
+     0.989
+    ],
+    [
+     "pace,",
+     72.748,
+     72.988,
+     0.675
+    ],
+    [
+     "look",
+     73.188,
+     73.228,
+     0.961
+    ],
+    [
+     "at",
+     73.228,
+     73.368,
+     0.994
+    ],
+    [
+     "the",
+     73.368,
+     73.408,
+     0.996
+    ],
+    [
+     "car.",
+     73.408,
+     73.688,
+     0.337
+    ],
+    [
+     "You",
+     73.988,
+     74.168,
+     0.781
+    ],
+    [
+     "made",
+     74.168,
+     74.308,
+     0.894
+    ],
+    [
+     "that",
+     74.308,
+     74.488,
+     0.989
+    ],
+    [
+     "look",
+     74.488,
+     74.688,
+     0.993
+    ],
+    [
+     "so",
+     74.688,
+     74.908,
+     0.998
+    ],
+    [
+     "easy.",
+     74.908,
+     75.188,
+     0.999
+    ]
+   ],
+   "asr_conf": 0.798,
+   "speaker_id": "S2",
+   "speaker_sim": 0.396,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.385,
+   "features": {
+    "loudness_db": -14.956,
+    "duration_s": 5.632,
+    "pitch_hz_median": 224.139,
+    "pitch_range": 204.254,
+    "rate_wps": 3.69,
+    "text_cue": 1.4,
+    "z_loudness": 1.851,
+    "z_pitch": 1.654,
+    "z_rate": -0.56,
+    "arousal_raw": 1.385
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 76.012,
+    "asr_done": 77.896,
+    "speaker_done": 77.189,
+    "emotion_done": 77.897,
+    "complete": 77.897,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000024",
+   "t_start": 76.224,
+   "t_end": 78.592,
+   "close_reason": "pause",
+   "text": "So Northgate United lead by one goal to know.",
+   "words": [
+    [
+     "So",
+     76.104,
+     76.304,
+     0.832
+    ],
+    [
+     "Northgate",
+     76.304,
+     76.664,
+     0.943
+    ],
+    [
+     "United",
+     76.664,
+     77.004,
+     0.371
+    ],
+    [
+     "lead",
+     77.004,
+     77.344,
+     0.988
+    ],
+    [
+     "by",
+     77.344,
+     77.624,
+     0.987
+    ],
+    [
+     "one",
+     77.624,
+     77.904,
+     0.873
+    ],
+    [
+     "goal",
+     77.904,
+     78.084,
+     0.999
+    ],
+    [
+     "to",
+     78.084,
+     78.284,
+     0.997
+    ],
+    [
+     "know.",
+     78.284,
+     78.484,
+     0.695
+    ]
+   ],
+   "asr_conf": 0.752,
+   "speaker_id": "S1",
+   "speaker_sim": 0.752,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.687,
+   "features": {
+    "loudness_db": -19.937,
+    "duration_s": 2.368,
+    "pitch_hz_median": 136.658,
+    "pitch_range": 117.126,
+    "rate_wps": 3.782,
+    "text_cue": 1.0,
+    "z_loudness": 0.062,
+    "z_pitch": -0.357,
+    "z_rate": -0.452,
+    "arousal_raw": -0.047
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 79.005,
+    "asr_done": 80.349,
+    "speaker_done": 79.353,
+    "emotion_done": 80.35,
+    "complete": 80.35,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000025",
+   "t_start": 79.264,
+   "t_end": 82.784,
+   "close_reason": "pause",
+   "text": "Riverside have to respond now, they can't let the aim drift.",
+   "words": [
+    [
+     "Riverside",
+     79.144,
+     79.704,
+     0.961
+    ],
+    [
+     "have",
+     79.704,
+     80.004,
+     0.974
+    ],
+    [
+     "to",
+     80.004,
+     80.144,
+     0.997
+    ],
+    [
+     "respond",
+     80.144,
+     80.484,
+     0.991
+    ],
+    [
+     "now,",
+     80.484,
+     80.884,
+     0.993
+    ],
+    [
+     "they",
+     81.284,
+     81.364,
+     0.979
+    ],
+    [
+     "can't",
+     81.364,
+     81.644,
+     0.993
+    ],
+    [
+     "let",
+     81.644,
+     81.804,
+     0.996
+    ],
+    [
+     "the",
+     81.804,
+     81.944,
+     0.998
+    ],
+    [
+     "aim",
+     81.944,
+     82.144,
+     0.368
+    ],
+    [
+     "drift.",
+     82.144,
+     82.484,
+     0.999
+    ]
+   ],
+   "asr_conf": 0.789,
+   "speaker_id": "S2",
+   "speaker_sim": 0.709,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.001,
+   "features": {
+    "loudness_db": -23.42,
+    "duration_s": 3.52,
+    "pitch_hz_median": 202.571,
+    "pitch_range": 192.305,
+    "rate_wps": 3.293,
+    "text_cue": 0.0,
+    "z_loudness": -0.921,
+    "z_pitch": -0.001,
+    "z_rate": -1.183,
+    "arousal_raw": -0.592
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 83.508,
+    "asr_done": 84.982,
+    "speaker_done": 84.123,
+    "emotion_done": 84.983,
+    "complete": 84.983,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000026",
+   "t_start": 83.36,
+   "t_end": 87.136,
+   "close_reason": "pause",
+   "text": "Lindqvist tries to lift his team, pointing for everyone to push up.",
+   "words": [
+    [
+     "Lindqvist",
+     83.24,
+     83.94,
+     0.654
+    ],
+    [
+     "tries",
+     83.94,
+     84.14,
+     0.996
+    ],
+    [
+     "to",
+     84.14,
+     84.42,
+     0.999
+    ],
+    [
+     "lift",
+     84.42,
+     84.58,
+     0.997
+    ],
+    [
+     "his",
+     84.58,
+     84.78,
+     0.999
+    ],
+    [
+     "team,",
+     84.78,
+     85.14,
+     0.999
+    ],
+    [
+     "pointing",
+     85.42,
+     85.7,
+     0.996
+    ],
+    [
+     "for",
+     85.7,
+     86.02,
+     0.996
+    ],
+    [
+     "everyone",
+     86.02,
+     86.36,
+     0.998
+    ],
+    [
+     "to",
+     86.36,
+     86.6,
+     0.999
+    ],
+    [
+     "push",
+     86.6,
+     86.78,
+     0.999
+    ],
+    [
+     "up.",
+     86.78,
+     87.0,
+     0.983
+    ]
+   ],
+   "asr_conf": 0.895,
+   "speaker_id": "S1",
+   "speaker_sim": 0.85,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.158,
+   "features": {
+    "loudness_db": -20.358,
+    "duration_s": 3.776,
+    "pitch_hz_median": 144.131,
+    "pitch_range": 285.481,
+    "rate_wps": 3.191,
+    "text_cue": 0.0,
+    "z_loudness": -0.072,
+    "z_pitch": 0.546,
+    "z_rate": -1.335,
+    "arousal_raw": -0.069
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 87.506,
+    "asr_done": 89.12,
+    "speaker_done": 88.361,
+    "emotion_done": 89.121,
+    "complete": 89.121,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000027",
+   "t_start": 87.584,
+   "t_end": 91.2,
+   "close_reason": "pause",
+   "text": "A free kick on the right side for Riverside. This is a good area for Brennan.",
+   "words": [
+    [
+     "A",
+     87.464,
+     87.664,
+     0.661
+    ],
+    [
+     "free",
+     87.664,
+     87.864,
+     0.987
+    ],
+    [
+     "kick",
+     87.864,
+     88.064,
+     0.973
+    ],
+    [
+     "on",
+     88.064,
+     88.224,
+     0.99
+    ],
+    [
+     "the",
+     88.224,
+     88.324,
+     0.996
+    ],
+    [
+     "right",
+     88.324,
+     88.484,
+     0.995
+    ],
+    [
+     "side",
+     88.484,
+     88.804,
+     0.983
+    ],
+    [
+     "for",
+     88.804,
+     89.044,
+     0.97
+    ],
+    [
+     "Riverside.",
+     89.044,
+     89.364,
+     0.964
+    ],
+    [
+     "This",
+     89.544,
+     89.544,
+     0.916
+    ],
+    [
+     "is",
+     89.544,
+     89.684,
+     0.993
+    ],
+    [
+     "a",
+     89.684,
+     89.804,
+     0.995
+    ],
+    [
+     "good",
+     89.804,
+     89.924,
+     0.999
+    ],
+    [
+     "area",
+     89.924,
+     90.324,
+     0.995
+    ],
+    [
+     "for",
+     90.324,
+     90.604,
+     0.998
+    ],
+    [
+     "Brennan.",
+     90.604,
+     90.824,
+     0.959
+    ]
+   ],
+   "asr_conf": 0.842,
+   "speaker_id": "S1",
+   "speaker_sim": 0.734,
+   "speaker_conf": "high",
+   "emotion": "excited",
+   "arousal": 1.212,
+   "features": {
+    "loudness_db": -20.136,
+    "duration_s": 3.616,
+    "pitch_hz_median": 180.253,
+    "pitch_range": 143.957,
+    "rate_wps": 4.762,
+    "text_cue": 0.0,
+    "z_loudness": -0.013,
+    "z_pitch": 3.549,
+    "z_rate": 1.026,
+    "arousal_raw": 1.212
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 92.006,
+    "asr_done": 93.547,
+    "speaker_done": 92.681,
+    "emotion_done": 93.548,
+    "complete": 93.548,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000028",
+   "t_start": 91.776,
+   "t_end": 94.688,
+   "close_reason": "level_change",
+   "text": "Brennan whips it in. Okafor rises in the far post.",
+   "words": [
+    [
+     "Brennan",
+     91.656,
+     92.016,
+     0.749
+    ],
+    [
+     "whips",
+     92.016,
+     92.336,
+     0.981
+    ],
+    [
+     "it",
+     92.336,
+     92.436,
+     0.997
+    ],
+    [
+     "in.",
+     92.436,
+     92.936,
+     0.998
+    ],
+    [
+     "Okafor",
+     93.196,
+     93.496,
+     0.044
+    ],
+    [
+     "rises",
+     93.496,
+     93.736,
+     0.679
+    ],
+    [
+     "in",
+     93.736,
+     93.916,
+     0.803
+    ],
+    [
+     "the",
+     93.916,
+     94.036,
+     0.983
+    ],
+    [
+     "far",
+     94.036,
+     94.196,
+     0.808
+    ],
+    [
+     "post.",
+     94.196,
+     94.496,
+     0.944
+    ]
+   ],
+   "asr_conf": 0.819,
+   "speaker_id": "S1",
+   "speaker_sim": 0.661,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.524,
+   "features": {
+    "loudness_db": -18.277,
+    "duration_s": 2.912,
+    "pitch_hz_median": 146.881,
+    "pitch_range": 142.231,
+    "rate_wps": 3.521,
+    "text_cue": 0.0,
+    "z_loudness": 0.519,
+    "z_pitch": 0.274,
+    "z_rate": -0.579,
+    "arousal_raw": 0.229
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 95.506,
+    "asr_done": 97.054,
+    "speaker_done": 96.005,
+    "emotion_done": 97.055,
+    "complete": 97.055,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000029",
+   "t_start": 94.976,
+   "t_end": 95.168,
+   "close_reason": "burst",
+   "text": "Dave.",
+   "words": [
+    [
+     "Dave.",
+     94.856,
+     95.156,
+     0.377
+    ]
+   ],
+   "asr_conf": 0.67,
+   "speaker_id": "S1",
+   "speaker_sim": 0.052,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.445,
+   "features": {
+    "loudness_db": -8.929,
+    "duration_s": 0.192,
+    "rate_wps": 3.333,
+    "text_cue": 0.0,
+    "z_loudness": 3.445,
+    "z_pitch": 0.0,
+    "z_rate": -0.702,
+    "arousal_raw": 1.445
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 95.506,
+    "asr_done": 98.259,
+    "speaker_done": 96.096,
+    "emotion_done": 98.26,
+    "complete": 98.26,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000030",
+   "t_start": 95.168,
+   "t_end": 96.768,
+   "close_reason": "pause",
+   "text": "Save what is saved by the keeper.",
+   "words": [
+    [
+     "Save",
+     95.048,
+     95.268,
+     0.071
+    ],
+    [
+     "what",
+     95.268,
+     95.608,
+     0.405
+    ],
+    [
+     "is",
+     95.608,
+     95.708,
+     0.881
+    ],
+    [
+     "saved",
+     95.708,
+     95.868,
+     0.963
+    ],
+    [
+     "by",
+     95.868,
+     96.048,
+     0.996
+    ],
+    [
+     "the",
+     96.048,
+     96.148,
+     0.963
+    ],
+    [
+     "keeper.",
+     96.148,
+     96.308,
+     0.657
+    ]
+   ],
+   "asr_conf": 0.641,
+   "speaker_id": "S1",
+   "speaker_sim": 0.093,
+   "speaker_conf": "low",
+   "emotion": "peak",
+   "arousal": 2.271,
+   "features": {
+    "loudness_db": -12.062,
+    "duration_s": 1.6,
+    "pitch_hz_median": 174.225,
+    "pitch_range": 229.546,
+    "rate_wps": 5.556,
+    "text_cue": 0.5,
+    "z_loudness": 2.326,
+    "z_pitch": 2.489,
+    "z_rate": 2.849,
+    "arousal_raw": 2.271
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 97.505,
+    "asr_done": 99.384,
+    "speaker_done": 97.802,
+    "emotion_done": 99.385,
+    "complete": 99.385,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000031",
+   "t_start": 97.664,
+   "t_end": 99.04,
+   "close_reason": "level_change",
+   "text": "That was right on the top corner.",
+   "words": [
+    [
+     "That",
+     97.544,
+     97.624,
+     0.503
+    ],
+    [
+     "was",
+     97.624,
+     97.764,
+     0.803
+    ],
+    [
+     "right",
+     97.764,
+     98.024,
+     0.312
+    ],
+    [
+     "on",
+     98.024,
+     98.204,
+     0.296
+    ],
+    [
+     "the",
+     98.204,
+     98.324,
+     0.829
+    ],
+    [
+     "top",
+     98.324,
+     98.464,
+     0.994
+    ],
+    [
+     "corner.",
+     98.464,
+     98.764,
+     0.152
+    ]
+   ],
+   "asr_conf": 0.55,
+   "speaker_id": "S2",
+   "speaker_sim": 0.366,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.423,
+   "features": {
+    "loudness_db": -15.093,
+    "duration_s": 1.376,
+    "pitch_hz_median": 217.288,
+    "pitch_range": 179.503,
+    "rate_wps": 5.738,
+    "text_cue": 0.0,
+    "z_loudness": 1.442,
+    "z_pitch": 1.012,
+    "z_rate": 3.135,
+    "arousal_raw": 1.423
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 99.506,
+    "asr_done": 100.781,
+    "speaker_done": 99.779,
+    "emotion_done": 100.782,
+    "complete": 100.782,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000032",
+   "t_start": 99.2,
+   "t_end": 100.736,
+   "close_reason": "pause",
+   "text": "An incredible reaction stop.",
+   "words": [
+    [
+     "An",
+     99.08,
+     99.28,
+     0.691
+    ],
+    [
+     "incredible",
+     99.28,
+     99.7,
+     0.986
+    ],
+    [
+     "reaction",
+     99.7,
+     100.22,
+     0.968
+    ],
+    [
+     "stop.",
+     100.22,
+     100.6,
+     0.316
+    ]
+   ],
+   "asr_conf": 0.613,
+   "speaker_id": "S2",
+   "speaker_sim": 0.46,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": 0.766,
+   "features": {
+    "loudness_db": -15.245,
+    "duration_s": 1.536,
+    "pitch_hz_median": 208.726,
+    "pitch_range": 204.062,
+    "rate_wps": 2.632,
+    "text_cue": 0.7,
+    "z_loudness": 1.255,
+    "z_pitch": 0.334,
+    "z_rate": -1.672,
+    "arousal_raw": 0.484
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 101.505,
+    "asr_done": 102.68,
+    "speaker_done": 101.831,
+    "emotion_done": 102.68,
+    "complete": 102.68,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000033",
+   "t_start": 101.568,
+   "t_end": 104.448,
+   "close_reason": "pause",
+   "text": "The corner comes to nothing and the game settles again.",
+   "words": [
+    [
+     "The",
+     101.448,
+     101.648,
+     0.763
+    ],
+    [
+     "corner",
+     101.648,
+     101.908,
+     0.986
+    ],
+    [
+     "comes",
+     101.908,
+     102.248,
+     0.991
+    ],
+    [
+     "to",
+     102.248,
+     102.448,
+     0.992
+    ],
+    [
+     "nothing",
+     102.448,
+     102.728,
+     0.985
+    ],
+    [
+     "and",
+     102.728,
+     103.168,
+     0.535
+    ],
+    [
+     "the",
+     103.168,
+     103.288,
+     0.991
+    ],
+    [
+     "game",
+     103.288,
+     103.488,
+     0.985
+    ],
+    [
+     "settles",
+     103.488,
+     103.888,
+     0.992
+    ],
+    [
+     "again.",
+     103.888,
+     104.268,
+     0.994
+    ]
+   ],
+   "asr_conf": 0.787,
+   "speaker_id": "S1",
+   "speaker_sim": 0.588,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.312,
+   "features": {
+    "loudness_db": -22.391,
+    "duration_s": 2.88,
+    "pitch_hz_median": 137.917,
+    "pitch_range": 216.763,
+    "rate_wps": 3.546,
+    "text_cue": 0.0,
+    "z_loudness": -0.734,
+    "z_pitch": -0.527,
+    "z_rate": -0.259,
+    "arousal_raw": -0.527
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 105.005,
+    "asr_done": 106.343,
+    "speaker_done": 105.559,
+    "emotion_done": 106.343,
+    "complete": 106.343,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000034",
+   "t_start": 105.12,
+   "t_end": 107.968,
+   "close_reason": "pause",
+   "text": "Northgate look happened to slow it down until the breath.",
+   "words": [
+    [
+     "Northgate",
+     105.0,
+     105.64,
+     0.657
+    ],
+    [
+     "look",
+     105.64,
+     105.88,
+     0.652
+    ],
+    [
+     "happened",
+     105.88,
+     106.12,
+     0.902
+    ],
+    [
+     "to",
+     106.12,
+     106.36,
+     0.826
+    ],
+    [
+     "slow",
+     106.36,
+     106.6,
+     0.947
+    ],
+    [
+     "it",
+     106.6,
+     106.72,
+     0.988
+    ],
+    [
+     "down",
+     106.72,
+     107.0,
+     0.995
+    ],
+    [
+     "until",
+     107.0,
+     107.34,
+     0.585
+    ],
+    [
+     "the",
+     107.34,
+     107.52,
+     0.912
+    ],
+    [
+     "breath.",
+     107.52,
+     107.74,
+     0.277
+    ]
+   ],
+   "asr_conf": 0.706,
+   "speaker_id": "S2",
+   "speaker_sim": 0.715,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.063,
+   "features": {
+    "loudness_db": -22.042,
+    "duration_s": 2.848,
+    "pitch_hz_median": 200.273,
+    "pitch_range": 166.552,
+    "rate_wps": 3.65,
+    "text_cue": 0.0,
+    "z_loudness": -0.665,
+    "z_pitch": -0.361,
+    "z_rate": -0.068,
+    "arousal_raw": -0.418
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 108.505,
+    "asr_done": 109.846,
+    "speaker_done": 108.971,
+    "emotion_done": 109.847,
+    "complete": 109.847,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000035",
+   "t_start": 108.544,
+   "t_end": 110.944,
+   "close_reason": "pause",
+   "text": "Delgado wins a throw in near the corner flat.",
+   "words": [
+    [
+     "Delgado",
+     108.424,
+     108.924,
+     0.959
+    ],
+    [
+     "wins",
+     108.924,
+     109.164,
+     0.99
+    ],
+    [
+     "a",
+     109.164,
+     109.344,
+     0.989
+    ],
+    [
+     "throw",
+     109.344,
+     109.624,
+     0.992
+    ],
+    [
+     "in",
+     109.624,
+     109.864,
+     0.907
+    ],
+    [
+     "near",
+     109.864,
+     110.044,
+     0.992
+    ],
+    [
+     "the",
+     110.044,
+     110.184,
+     0.965
+    ],
+    [
+     "corner",
+     110.184,
+     110.444,
+     0.996
+    ],
+    [
+     "flat.",
+     110.444,
+     110.804,
+     0.885
+    ]
+   ],
+   "asr_conf": 0.809,
+   "speaker_id": "S1",
+   "speaker_sim": 0.752,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.133,
+   "features": {
+    "loudness_db": -19.975,
+    "duration_s": 2.4,
+    "pitch_hz_median": 135.419,
+    "pitch_range": 131.401,
+    "rate_wps": 3.782,
+    "text_cue": 0.0,
+    "z_loudness": -0.258,
+    "z_pitch": -0.772,
+    "z_rate": 0.154,
+    "arousal_raw": -0.324
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 111.507,
+    "asr_done": 112.836,
+    "speaker_done": 111.946,
+    "emotion_done": 112.837,
+    "complete": 112.837,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000036",
+   "t_start": 111.52,
+   "t_end": 113.888,
+   "close_reason": "speaker_change",
+   "text": "Quick throw into Mar. Clever play, they caught Riverside's.",
+   "words": [
+    [
+     "Quick",
+     111.4,
+     111.62,
+     0.376
+    ],
+    [
+     "throw",
+     111.62,
+     111.86,
+     0.58
+    ],
+    [
+     "into",
+     111.86,
+     112.12,
+     0.928
+    ],
+    [
+     "Mar.",
+     112.12,
+     112.28,
+     0.198
+    ],
+    [
+     "Clever",
+     112.28,
+     112.46,
+     0.62
+    ],
+    [
+     "play,",
+     112.46,
+     112.82,
+     0.995
+    ],
+    [
+     "they",
+     113.04,
+     113.1,
+     0.982
+    ],
+    [
+     "caught",
+     113.1,
+     113.34,
+     0.974
+    ],
+    [
+     "Riverside's.",
+     113.34,
+     113.98,
+     0.592
+    ]
+   ],
+   "asr_conf": 0.524,
+   "speaker_id": "S2",
+   "speaker_sim": 0.47,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": -0.194,
+   "features": {
+    "loudness_db": -19.611,
+    "duration_s": 2.368,
+    "pitch_hz_median": 196.347,
+    "pitch_range": 136.64,
+    "rate_wps": 3.488,
+    "text_cue": 0.0,
+    "z_loudness": -0.074,
+    "z_pitch": -0.549,
+    "z_rate": -0.353,
+    "arousal_raw": -0.251
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 114.806,
+    "asr_done": 116.278,
+    "speaker_done": 115.168,
+    "emotion_done": 116.279,
+    "complete": 116.279,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000037",
+   "t_start": 113.888,
+   "t_end": 114.464,
+   "close_reason": "pause",
+   "text": "The",
+   "words": [
+    [
+     "The",
+     113.768,
+     114.448,
+     0.0
+    ]
+   ],
+   "asr_conf": 0.144,
+   "speaker_id": "S2",
+   "speaker_sim": 0.462,
+   "speaker_conf": "low",
+   "emotion": "calm",
+   "arousal": -1.458,
+   "features": {
+    "loudness_db": -26.59,
+    "duration_s": 0.576,
+    "pitch_hz_median": 169.815,
+    "pitch_range": 153.275,
+    "rate_wps": 1.471,
+    "text_cue": 0.0,
+    "z_loudness": -1.934,
+    "z_pitch": -2.545,
+    "z_rate": -3.0,
+    "arousal_raw": -2.0
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 115.009,
+    "asr_done": 117.349,
+    "speaker_done": 115.31,
+    "emotion_done": 117.35,
+    "complete": 117.35,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000038",
+   "t_start": 114.976,
+   "t_end": 120.864,
+   "close_reason": "max_len",
+   "text": "Mar. Shoots for range. Off the crossbar.",
+   "words": [
+    [
+     "Mar.",
+     114.856,
+     115.116,
+     0.036
+    ],
+    [
+     "Shoots",
+     115.296,
+     115.496,
+     0.486
+    ],
+    [
+     "for",
+     115.496,
+     115.656,
+     0.842
+    ],
+    [
+     "range.",
+     115.656,
+     115.976,
+     0.653
+    ],
+    [
+     "Off",
+     116.396,
+     116.496,
+     0.532
+    ],
+    [
+     "the",
+     116.496,
+     116.616,
+     0.89
+    ],
+    [
+     "crossbar.",
+     116.616,
+     117.156,
+     0.989
+    ]
+   ],
+   "asr_conf": 0.486,
+   "speaker_id": "S2",
+   "speaker_sim": 0.364,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": 0.09,
+   "features": {
+    "loudness_db": -14.816,
+    "duration_s": 5.888,
+    "pitch_hz_median": 189.475,
+    "pitch_range": 184.307,
+    "rate_wps": 3.043,
+    "text_cue": 0.0,
+    "z_loudness": 1.164,
+    "z_pitch": -0.882,
+    "z_rate": -1.13,
+    "arousal_raw": 0.09
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 121.005,
+    "asr_done": 122.69,
+    "speaker_done": 122.106,
+    "emotion_done": 122.691,
+    "complete": 122.691,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000039",
+   "t_start": 120.864,
+   "t_end": 121.408,
+   "close_reason": "pause",
+   "text": "White House, Northgate, Northgate,",
+   "words": [
+    [
+     "White",
+     120.744,
+     120.884,
+     0.0
+    ],
+    [
+     "House,",
+     120.884,
+     121.084,
+     0.025
+    ],
+    [
+     "Northgate,",
+     121.104,
+     121.244,
+     0.005
+    ],
+    [
+     "Northgate,",
+     121.504,
+     121.504,
+     0.428
+    ]
+   ],
+   "asr_conf": 0.254,
+   "speaker_id": "S2",
+   "speaker_sim": 0.252,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": 0.073,
+   "features": {
+    "loudness_db": -23.678,
+    "duration_s": 0.544,
+    "pitch_hz_median": 198.562,
+    "pitch_range": 221.78,
+    "rate_wps": 5.263,
+    "text_cue": 0.0,
+    "z_loudness": -0.894,
+    "z_pitch": -0.124,
+    "z_rate": 3.372,
+    "arousal_raw": 0.067
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 122.005,
+    "asr_done": 124.643,
+    "speaker_done": 122.237,
+    "emotion_done": 124.643,
+    "complete": 124.643,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000040",
+   "t_start": 122.144,
+   "t_end": 124.736,
+   "close_reason": "pause",
+   "text": "the referee checks his watch almost half time here.",
+   "words": [
+    [
+     "the",
+     122.024,
+     122.224,
+     0.185
+    ],
+    [
+     "referee",
+     122.224,
+     122.484,
+     0.997
+    ],
+    [
+     "checks",
+     122.484,
+     122.784,
+     0.991
+    ],
+    [
+     "his",
+     122.784,
+     123.004,
+     0.997
+    ],
+    [
+     "watch",
+     123.004,
+     123.344,
+     0.987
+    ],
+    [
+     "almost",
+     123.344,
+     123.764,
+     0.914
+    ],
+    [
+     "half",
+     123.764,
+     124.084,
+     0.987
+    ],
+    [
+     "time",
+     124.084,
+     124.364,
+     0.683
+    ],
+    [
+     "here.",
+     124.364,
+     124.624,
+     0.804
+    ]
+   ],
+   "asr_conf": 0.709,
+   "speaker_id": "S1",
+   "speaker_sim": 0.581,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.332,
+   "features": {
+    "loudness_db": -22.54,
+    "duration_s": 2.592,
+    "pitch_hz_median": 140.002,
+    "pitch_range": 148.196,
+    "rate_wps": 3.462,
+    "text_cue": 0.0,
+    "z_loudness": -0.642,
+    "z_pitch": -0.324,
+    "z_rate": -0.204,
+    "arousal_raw": -0.417
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 125.506,
+    "asr_done": 126.751,
+    "speaker_done": 125.978,
+    "emotion_done": 126.751,
+    "complete": 126.751,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000041",
+   "t_start": 125.44,
+   "t_end": 128.8,
+   "close_reason": "pause",
+   "text": "A fair score so far, but the extension still to play for.",
+   "words": [
+    [
+     "A",
+     125.32,
+     125.54,
+     0.654
+    ],
+    [
+     "fair",
+     125.54,
+     125.76,
+     0.986
+    ],
+    [
+     "score",
+     125.76,
+     126.08,
+     0.98
+    ],
+    [
+     "so",
+     126.08,
+     126.32,
+     0.989
+    ],
+    [
+     "far,",
+     126.32,
+     126.72,
+     0.999
+    ],
+    [
+     "but",
+     126.84,
+     126.96,
+     0.951
+    ],
+    [
+     "the",
+     126.96,
+     127.16,
+     0.46
+    ],
+    [
+     "extension",
+     127.16,
+     127.46,
+     0.432
+    ],
+    [
+     "still",
+     127.46,
+     127.84,
+     0.791
+    ],
+    [
+     "to",
+     127.84,
+     128.0,
+     0.954
+    ],
+    [
+     "play",
+     128.0,
+     128.26,
+     0.522
+    ],
+    [
+     "for.",
+     128.26,
+     128.5,
+     0.985
+    ]
+   ],
+   "asr_conf": 0.694,
+   "speaker_id": "S2",
+   "speaker_sim": 0.555,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.094,
+   "features": {
+    "loudness_db": -22.495,
+    "duration_s": 3.36,
+    "pitch_hz_median": 196.432,
+    "pitch_range": 171.633,
+    "rate_wps": 3.774,
+    "text_cue": 0.6,
+    "z_loudness": -0.486,
+    "z_pitch": -0.265,
+    "z_rate": 0.48,
+    "arousal_raw": -0.166
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 129.506,
+    "asr_done": 130.853,
+    "speaker_done": 130.169,
+    "emotion_done": 130.854,
+    "complete": 130.854,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000042",
+   "t_start": 129.216,
+   "t_end": 132.736,
+   "close_reason": "pause",
+   "text": "One last attack before the break, Lindqvist carries it forward.",
+   "words": [
+    [
+     "One",
+     129.096,
+     129.396,
+     0.901
+    ],
+    [
+     "last",
+     129.396,
+     129.696,
+     0.999
+    ],
+    [
+     "attack",
+     129.696,
+     130.016,
+     0.989
+    ],
+    [
+     "before",
+     130.016,
+     130.396,
+     0.996
+    ],
+    [
+     "the",
+     130.396,
+     130.556,
+     0.998
+    ],
+    [
+     "break,",
+     130.556,
+     130.816,
+     0.9
+    ],
+    [
+     "Lindqvist",
+     131.196,
+     131.616,
+     0.528
+    ],
+    [
+     "carries",
+     131.616,
+     131.936,
+     0.991
+    ],
+    [
+     "it",
+     131.936,
+     132.196,
+     0.998
+    ],
+    [
+     "forward.",
+     132.196,
+     132.476,
+     0.995
+    ]
+   ],
+   "asr_conf": 0.828,
+   "speaker_id": "S1",
+   "speaker_sim": 0.766,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.29,
+   "features": {
+    "loudness_db": -19.978,
+    "duration_s": 3.52,
+    "pitch_hz_median": 138.165,
+    "pitch_range": 220.215,
+    "rate_wps": 2.959,
+    "text_cue": 0.0,
+    "z_loudness": -0.001,
+    "z_pitch": -0.378,
+    "z_rate": -1.175,
+    "arousal_raw": -0.29
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 133.505,
+    "asr_done": 134.919,
+    "speaker_done": 134.154,
+    "emotion_done": 134.92,
+    "complete": 134.92,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000043",
+   "t_start": 133.216,
+   "t_end": 136.192,
+   "close_reason": "pause",
+   "text": "He has Okafor on his left and Brennan arriving late.",
+   "words": [
+    [
+     "He",
+     133.096,
+     133.296,
+     0.77
+    ],
+    [
+     "has",
+     133.296,
+     133.456,
+     0.987
+    ],
+    [
+     "Okafor",
+     133.456,
+     133.836,
+     0.555
+    ],
+    [
+     "on",
+     133.836,
+     133.996,
+     0.98
+    ],
+    [
+     "his",
+     133.996,
+     134.136,
+     0.998
+    ],
+    [
+     "left",
+     134.136,
+     134.456,
+     0.998
+    ],
+    [
+     "and",
+     134.456,
+     134.796,
+     0.882
+    ],
+    [
+     "Brennan",
+     134.796,
+     135.076,
+     0.368
+    ],
+    [
+     "arriving",
+     135.076,
+     135.516,
+     0.999
+    ],
+    [
+     "late.",
+     135.516,
+     135.876,
+     0.998
+    ]
+   ],
+   "asr_conf": 0.822,
+   "speaker_id": "S2",
+   "speaker_sim": 0.681,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.026,
+   "features": {
+    "loudness_db": -20.381,
+    "duration_s": 2.976,
+    "pitch_hz_median": 199.846,
+    "pitch_range": 171.883,
+    "rate_wps": 3.597,
+    "text_cue": 0.0,
+    "z_loudness": -0.108,
+    "z_pitch": -0.001,
+    "z_rate": 0.152,
+    "arousal_raw": -0.026
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 137.006,
+    "asr_done": 138.306,
+    "speaker_done": 137.489,
+    "emotion_done": 138.306,
+    "complete": 138.306,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000044",
+   "t_start": 136.672,
+   "t_end": 140.128,
+   "close_reason": "level_change",
+   "text": "Lindqvist slips it through to Okafor. Okafor takes a touch and shoots.",
+   "words": [
+    [
+     "Lindqvist",
+     136.552,
+     137.072,
+     0.344
+    ],
+    [
+     "slips",
+     137.072,
+     137.272,
+     0.978
+    ],
+    [
+     "it",
+     137.272,
+     137.432,
+     0.996
+    ],
+    [
+     "through",
+     137.432,
+     137.592,
+     0.984
+    ],
+    [
+     "to",
+     137.592,
+     137.792,
+     0.996
+    ],
+    [
+     "Okafor.",
+     137.792,
+     138.252,
+     0.094
+    ],
+    [
+     "Okafor",
+     138.612,
+     138.932,
+     0.994
+    ],
+    [
+     "takes",
+     138.932,
+     139.132,
+     0.995
+    ],
+    [
+     "a",
+     139.132,
+     139.292,
+     0.987
+    ],
+    [
+     "touch",
+     139.292,
+     139.472,
+     0.995
+    ],
+    [
+     "and",
+     139.472,
+     139.672,
+     0.983
+    ],
+    [
+     "shoots.",
+     139.672,
+     139.892,
+     0.997
+    ]
+   ],
+   "asr_conf": 0.919,
+   "speaker_id": "S1",
+   "speaker_sim": 0.496,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 0.862,
+   "features": {
+    "loudness_db": -16.943,
+    "duration_s": 3.456,
+    "pitch_hz_median": 154.613,
+    "pitch_range": 204.57,
+    "rate_wps": 3.593,
+    "text_cue": 0.0,
+    "z_loudness": 0.913,
+    "z_pitch": 1.432,
+    "z_rate": 0.143,
+    "arousal_raw": 0.862
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 140.505,
+    "asr_done": 142.134,
+    "speaker_done": 141.193,
+    "emotion_done": 142.134,
+    "complete": 142.134,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000045",
+   "t_start": 140.32,
+   "t_end": 140.736,
+   "close_reason": "burst",
+   "text": "Go Go!",
+   "words": [
+    [
+     "Go",
+     140.2,
+     140.46,
+     0.604
+    ],
+    [
+     "Go!",
+     140.46,
+     140.72,
+     0.425
+    ]
+   ],
+   "asr_conf": 0.635,
+   "speaker_id": "S1",
+   "speaker_sim": 0.089,
+   "speaker_conf": "low",
+   "emotion": "peak",
+   "arousal": 2.737,
+   "features": {
+    "loudness_db": -8.761,
+    "duration_s": 0.416,
+    "pitch_hz_median": 211.433,
+    "pitch_range": 59.274,
+    "rate_wps": 3.846,
+    "text_cue": 0.5,
+    "z_loudness": 3.095,
+    "z_pitch": 4.0,
+    "z_rate": 0.625,
+    "arousal_raw": 2.737
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 141.017,
+    "asr_done": 143.129,
+    "speaker_done": 141.326,
+    "emotion_done": 143.13,
+    "complete": 143.13,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000046",
+   "t_start": 140.736,
+   "t_end": 141.024,
+   "close_reason": "pause",
+   "text": "Go!",
+   "words": [
+    [
+     "Go!",
+     140.616,
+     140.796,
+     0.188
+    ]
+   ],
+   "asr_conf": 0.527,
+   "speaker_id": "S1",
+   "speaker_sim": 0.021,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": 0.458,
+   "features": {
+    "loudness_db": -21.291,
+    "duration_s": 0.288,
+    "pitch_hz_median": 114.504,
+    "pitch_range": 28.209,
+    "rate_wps": 5.0,
+    "text_cue": 0.5,
+    "z_loudness": -0.346,
+    "z_pitch": -2.833,
+    "z_rate": 2.908,
+    "arousal_raw": -0.519
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 141.507,
+    "asr_done": 144.031,
+    "speaker_done": 141.629,
+    "emotion_done": 144.032,
+    "complete": 144.032,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000047",
+   "t_start": 141.568,
+   "t_end": 141.856,
+   "close_reason": "burst",
+   "text": "Bell.",
+   "words": [
+    [
+     "Bell.",
+     141.448,
+     141.788,
+     0.359
+    ]
+   ],
+   "asr_conf": 0.618,
+   "speaker_id": "S1",
+   "speaker_sim": 0.075,
+   "speaker_conf": "low",
+   "emotion": "peak",
+   "arousal": 2.37,
+   "features": {
+    "loudness_db": -8.627,
+    "duration_s": 0.288,
+    "pitch_hz_median": 186.173,
+    "pitch_range": 17.775,
+    "rate_wps": 2.941,
+    "text_cue": 0.0,
+    "z_loudness": 3.132,
+    "z_pitch": 3.831,
+    "z_rate": -1.257,
+    "arousal_raw": 2.37
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 142.512,
+    "asr_done": 145.228,
+    "speaker_done": 142.623,
+    "emotion_done": 145.228,
+    "complete": 145.228,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000048",
+   "t_start": 141.856,
+   "t_end": 144.48,
+   "close_reason": "pause",
+   "text": "Okafor utilizes for Riverside Rovers.",
+   "words": [
+    [
+     "Okafor",
+     141.736,
+     142.516,
+     0.01
+    ],
+    [
+     "utilizes",
+     142.516,
+     142.956,
+     0.22
+    ],
+    [
+     "for",
+     142.956,
+     143.256,
+     0.914
+    ],
+    [
+     "Riverside",
+     143.256,
+     143.596,
+     0.936
+    ],
+    [
+     "Rovers.",
+     143.596,
+     144.096,
+     0.695
+    ]
+   ],
+   "asr_conf": 0.693,
+   "speaker_id": "S1",
+   "speaker_sim": 0.105,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.108,
+   "features": {
+    "loudness_db": -12.136,
+    "duration_s": 2.624,
+    "pitch_hz_median": 146.475,
+    "pitch_range": 172.029,
+    "rate_wps": 2.119,
+    "text_cue": 0.0,
+    "z_loudness": 2.08,
+    "z_pitch": 0.218,
+    "z_rate": -2.902,
+    "arousal_raw": 0.566
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 145.005,
+    "asr_done": 146.375,
+    "speaker_done": 145.389,
+    "emotion_done": 146.375,
+    "complete": 146.375,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000049",
+   "t_start": 145.376,
+   "t_end": 150.72,
+   "close_reason": "max_len",
+   "text": "What a time to score, right on the stroke of half time. That is exactly what Riverside needed.",
+   "words": [
+    [
+     "What",
+     145.256,
+     145.476,
+     0.774
+    ],
+    [
+     "a",
+     145.476,
+     145.596,
+     0.972
+    ],
+    [
+     "time",
+     145.596,
+     145.776,
+     0.989
+    ],
+    [
+     "to",
+     145.776,
+     145.916,
+     0.971
+    ],
+    [
+     "score,",
+     145.916,
+     146.256,
+     0.987
+    ],
+    [
+     "right",
+     146.676,
+     146.716,
+     0.944
+    ],
+    [
+     "on",
+     146.716,
+     146.876,
+     0.781
+    ],
+    [
+     "the",
+     146.876,
+     146.956,
+     0.992
+    ],
+    [
+     "stroke",
+     146.956,
+     147.156,
+     0.98
+    ],
+    [
+     "of",
+     147.156,
+     147.336,
+     0.993
+    ],
+    [
+     "half",
+     147.336,
+     147.476,
+     0.95
+    ],
+    [
+     "time.",
+     147.476,
+     147.776,
+     0.746
+    ],
+    [
+     "That",
+     148.516,
+     148.696,
+     0.969
+    ],
+    [
+     "is",
+     148.696,
+     148.836,
+     0.961
+    ],
+    [
+     "exactly",
+     148.836,
+     149.216,
+     0.992
+    ],
+    [
+     "what",
+     149.216,
+     149.596,
+     0.994
+    ],
+    [
+     "Riverside",
+     149.596,
+     149.956,
+     0.029
+    ],
+    [
+     "needed.",
+     149.956,
+     150.376,
+     0.86
+    ]
+   ],
+   "asr_conf": 0.803,
+   "speaker_id": "S2",
+   "speaker_sim": 0.476,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.34,
+   "features": {
+    "loudness_db": -13.385,
+    "duration_s": 5.344,
+    "pitch_hz_median": 226.33,
+    "pitch_range": 205.201,
+    "rate_wps": 3.516,
+    "text_cue": 1.2,
+    "z_loudness": 1.544,
+    "z_pitch": 1.795,
+    "z_rate": -0.09,
+    "arousal_raw": 1.34
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 151.506,
+    "asr_done": 153.38,
+    "speaker_done": 152.702,
+    "emotion_done": 153.381,
+    "complete": 153.381,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000050",
+   "t_start": 150.72,
+   "t_end": 151.808,
+   "close_reason": "pause",
+   "text": "And the fans know it.",
+   "words": [
+    [
+     "And",
+     150.6,
+     150.88,
+     0.227
+    ],
+    [
+     "the",
+     150.88,
+     150.98,
+     0.981
+    ],
+    [
+     "fans",
+     150.98,
+     151.26,
+     0.993
+    ],
+    [
+     "know",
+     151.26,
+     151.5,
+     0.996
+    ],
+    [
+     "it.",
+     151.5,
+     151.68,
+     0.999
+    ]
+   ],
+   "asr_conf": 0.654,
+   "speaker_id": "S2",
+   "speaker_sim": 0.402,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.424,
+   "features": {
+    "loudness_db": -16.599,
+    "duration_s": 1.088,
+    "pitch_hz_median": 246.057,
+    "pitch_range": 98.856,
+    "rate_wps": 4.63,
+    "text_cue": 0.0,
+    "z_loudness": 0.434,
+    "z_pitch": 3.0,
+    "z_rate": 2.192,
+    "arousal_raw": 1.424
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 152.511,
+    "asr_done": 154.403,
+    "speaker_done": 152.929,
+    "emotion_done": 154.404,
+    "complete": 154.404,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000051",
+   "t_start": 152.576,
+   "t_end": 154.432,
+   "close_reason": "pause",
+   "text": "So it is one all here at Riverside Park.",
+   "words": [
+    [
+     "So",
+     152.456,
+     152.636,
+     0.553
+    ],
+    [
+     "it",
+     152.636,
+     152.716,
+     0.914
+    ],
+    [
+     "is",
+     152.716,
+     152.816,
+     0.968
+    ],
+    [
+     "one",
+     152.816,
+     152.996,
+     0.93
+    ],
+    [
+     "all",
+     152.996,
+     153.156,
+     0.854
+    ],
+    [
+     "here",
+     153.156,
+     153.396,
+     0.988
+    ],
+    [
+     "at",
+     153.396,
+     153.536,
+     0.987
+    ],
+    [
+     "Riverside",
+     153.536,
+     153.816,
+     0.993
+    ],
+    [
+     "Park.",
+     153.816,
+     154.256,
+     0.985
+    ]
+   ],
+   "asr_conf": 0.825,
+   "speaker_id": "S1",
+   "speaker_sim": 0.795,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.322,
+   "features": {
+    "loudness_db": -20.498,
+    "duration_s": 1.856,
+    "pitch_hz_median": 133.188,
+    "pitch_range": 120.39,
+    "rate_wps": 5.0,
+    "text_cue": 0.0,
+    "z_loudness": -0.398,
+    "z_pitch": -0.907,
+    "z_rate": 2.908,
+    "arousal_raw": -0.015
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 155.004,
+    "asr_done": 156.213,
+    "speaker_done": 155.339,
+    "emotion_done": 156.214,
+    "complete": 156.214,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000052",
+   "t_start": 155.072,
+   "t_end": 158.112,
+   "close_reason": "pause",
+   "text": "Both managers will have plenty to play in the dressing room.",
+   "words": [
+    [
+     "Both",
+     154.952,
+     155.292,
+     0.829
+    ],
+    [
+     "managers",
+     155.292,
+     155.792,
+     0.953
+    ],
+    [
+     "will",
+     155.792,
+     156.052,
+     0.989
+    ],
+    [
+     "have",
+     156.052,
+     156.212,
+     0.999
+    ],
+    [
+     "plenty",
+     156.212,
+     156.512,
+     0.996
+    ],
+    [
+     "to",
+     156.512,
+     156.752,
+     0.994
+    ],
+    [
+     "play",
+     156.752,
+     157.052,
+     0.99
+    ],
+    [
+     "in",
+     157.052,
+     157.232,
+     0.989
+    ],
+    [
+     "the",
+     157.232,
+     157.332,
+     0.959
+    ],
+    [
+     "dressing",
+     157.332,
+     157.532,
+     0.998
+    ],
+    [
+     "room.",
+     157.532,
+     157.912,
+     0.988
+    ]
+   ],
+   "asr_conf": 0.831,
+   "speaker_id": "S2",
+   "speaker_sim": 0.726,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.215,
+   "features": {
+    "loudness_db": -23.051,
+    "duration_s": 3.04,
+    "pitch_hz_median": 199.273,
+    "pitch_range": 165.166,
+    "rate_wps": 3.716,
+    "text_cue": 0.0,
+    "z_loudness": -0.684,
+    "z_pitch": -0.058,
+    "z_rate": 0.152,
+    "arousal_raw": -0.302
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 158.506,
+    "asr_done": 159.905,
+    "speaker_done": 159.134,
+    "emotion_done": 159.905,
+    "complete": 159.905,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000053",
+   "t_start": 158.72,
+   "t_end": 161.568,
+   "close_reason": "pause",
+   "text": "Northgate kick off again, but there is barely a minute left.",
+   "words": [
+    [
+     "Northgate",
+     158.6,
+     159.08,
+     0.905
+    ],
+    [
+     "kick",
+     159.08,
+     159.34,
+     0.784
+    ],
+    [
+     "off",
+     159.34,
+     159.58,
+     0.9
+    ],
+    [
+     "again,",
+     159.58,
+     159.88,
+     0.998
+    ],
+    [
+     "but",
+     160.0,
+     160.1,
+     0.996
+    ],
+    [
+     "there",
+     160.1,
+     160.28,
+     0.996
+    ],
+    [
+     "is",
+     160.28,
+     160.42,
+     0.888
+    ],
+    [
+     "barely",
+     160.42,
+     160.68,
+     0.996
+    ],
+    [
+     "a",
+     160.68,
+     160.98,
+     0.992
+    ],
+    [
+     "minute",
+     160.98,
+     161.12,
+     0.998
+    ],
+    [
+     "left.",
+     161.12,
+     161.46,
+     0.998
+    ]
+   ],
+   "asr_conf": 0.832,
+   "speaker_id": "S1",
+   "speaker_sim": 0.654,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.277,
+   "features": {
+    "loudness_db": -22.387,
+    "duration_s": 2.848,
+    "pitch_hz_median": 129.602,
+    "pitch_range": 136.807,
+    "rate_wps": 3.846,
+    "text_cue": 0.0,
+    "z_loudness": -0.569,
+    "z_pitch": -1.174,
+    "z_rate": 0.502,
+    "arousal_raw": -0.533
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 162.005,
+    "asr_done": 163.249,
+    "speaker_done": 162.465,
+    "emotion_done": 163.249,
+    "complete": 163.249,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000054",
+   "t_start": 162.24,
+   "t_end": 165.056,
+   "close_reason": "pause",
+   "text": "I expect they will just play it safe until you whistle.",
+   "words": [
+    [
+     "I",
+     162.12,
+     162.38,
+     0.938
+    ],
+    [
+     "expect",
+     162.38,
+     162.74,
+     0.989
+    ],
+    [
+     "they",
+     162.74,
+     163.0,
+     0.981
+    ],
+    [
+     "will",
+     163.0,
+     163.16,
+     0.975
+    ],
+    [
+     "just",
+     163.16,
+     163.32,
+     0.992
+    ],
+    [
+     "play",
+     163.32,
+     163.62,
+     0.477
+    ],
+    [
+     "it",
+     163.62,
+     163.76,
+     0.996
+    ],
+    [
+     "safe",
+     163.76,
+     163.98,
+     0.991
+    ],
+    [
+     "until",
+     163.98,
+     164.34,
+     0.968
+    ],
+    [
+     "you",
+     164.34,
+     164.52,
+     0.559
+    ],
+    [
+     "whistle.",
+     164.52,
+     164.76,
+     0.987
+    ]
+   ],
+   "asr_conf": 0.786,
+   "speaker_id": "S2",
+   "speaker_sim": 0.744,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.055,
+   "features": {
+    "loudness_db": -22.553,
+    "duration_s": 2.816,
+    "pitch_hz_median": 197.182,
+    "pitch_range": 177.274,
+    "rate_wps": 4.167,
+    "text_cue": 0.0,
+    "z_loudness": -0.612,
+    "z_pitch": -0.195,
+    "z_rate": 1.087,
+    "arousal_raw": -0.171
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 165.506,
+    "asr_done": 166.795,
+    "speaker_done": 165.95,
+    "emotion_done": 166.796,
+    "complete": 166.796,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000055",
+   "t_start": 165.536,
+   "t_end": 167.456,
+   "close_reason": "speaker_change",
+   "text": "Moreau passes it square to Delgado.",
+   "words": [
+    [
+     "Moreau",
+     165.416,
+     165.816,
+     0.456
+    ],
+    [
+     "passes",
+     165.816,
+     166.096,
+     0.969
+    ],
+    [
+     "it",
+     166.096,
+     166.276,
+     0.881
+    ],
+    [
+     "square",
+     166.276,
+     166.516,
+     0.885
+    ],
+    [
+     "to",
+     166.516,
+     166.676,
+     0.948
+    ],
+    [
+     "Delgado.",
+     166.676,
+     166.996,
+     0.49
+    ]
+   ],
+   "asr_conf": 0.733,
+   "speaker_id": "S1",
+   "speaker_sim": 0.682,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.649,
+   "features": {
+    "loudness_db": -18.847,
+    "duration_s": 1.92,
+    "pitch_hz_median": 158.058,
+    "pitch_range": 170.65,
+    "rate_wps": 3.797,
+    "text_cue": 0.0,
+    "z_loudness": 0.477,
+    "z_pitch": 1.3,
+    "z_rate": 0.296,
+    "arousal_raw": 0.649
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 168.787,
+    "asr_done": 170.02,
+    "speaker_done": 169.113,
+    "emotion_done": 170.021,
+    "complete": 170.021,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000056",
+   "t_start": 167.456,
+   "t_end": 168.704,
+   "close_reason": "pause",
+   "text": "Risks now keep the ball.",
+   "words": [
+    [
+     "Risks",
+     167.336,
+     167.476,
+     0.524
+    ],
+    [
+     "now",
+     167.476,
+     167.776,
+     0.986
+    ],
+    [
+     "keep",
+     167.776,
+     168.036,
+     0.535
+    ],
+    [
+     "the",
+     168.036,
+     168.196,
+     0.997
+    ],
+    [
+     "ball.",
+     168.196,
+     168.416,
+     0.94
+    ]
+   ],
+   "asr_conf": 0.572,
+   "speaker_id": "S2",
+   "speaker_sim": 0.594,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.134,
+   "features": {
+    "loudness_db": -22.314,
+    "duration_s": 1.248,
+    "pitch_hz_median": 192.321,
+    "pitch_range": 176.796,
+    "rate_wps": 4.63,
+    "text_cue": 0.0,
+    "z_loudness": -0.612,
+    "z_pitch": -0.554,
+    "z_rate": 1.827,
+    "arousal_raw": -0.168
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 169.505,
+    "asr_done": 171.055,
+    "speaker_done": 169.734,
+    "emotion_done": 171.056,
+    "complete": 171.056,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000057",
+   "t_start": 169.28,
+   "t_end": 171.68,
+   "close_reason": "pause",
+   "text": "And there is the whistle for the end of the first half.",
+   "words": [
+    [
+     "And",
+     169.16,
+     169.4,
+     0.62
+    ],
+    [
+     "there",
+     169.4,
+     169.58,
+     0.989
+    ],
+    [
+     "is",
+     169.58,
+     169.74,
+     0.956
+    ],
+    [
+     "the",
+     169.74,
+     169.88,
+     0.989
+    ],
+    [
+     "whistle",
+     169.88,
+     170.22,
+     0.99
+    ],
+    [
+     "for",
+     170.22,
+     170.5,
+     0.981
+    ],
+    [
+     "the",
+     170.5,
+     170.6,
+     0.998
+    ],
+    [
+     "end",
+     170.6,
+     170.8,
+     0.989
+    ],
+    [
+     "of",
+     170.8,
+     170.94,
+     0.997
+    ],
+    [
+     "the",
+     170.94,
+     171.06,
+     0.995
+    ],
+    [
+     "first",
+     171.06,
+     171.26,
+     0.992
+    ],
+    [
+     "half.",
+     171.26,
+     171.58,
+     0.996
+    ]
+   ],
+   "asr_conf": 0.834,
+   "speaker_id": "S1",
+   "speaker_sim": 0.841,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.465,
+   "features": {
+    "loudness_db": -19.923,
+    "duration_s": 2.4,
+    "pitch_hz_median": 145.631,
+    "pitch_range": 165.226,
+    "rate_wps": 4.959,
+    "text_cue": 0.0,
+    "z_loudness": 0.142,
+    "z_pitch": 0.145,
+    "z_rate": 1.86,
+    "arousal_raw": 0.387
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 172.505,
+    "asr_done": 173.807,
+    "speaker_done": 172.94,
+    "emotion_done": 173.808,
+    "complete": 173.808,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000058",
+   "t_start": 172.224,
+   "t_end": 175.968,
+   "close_reason": "pause",
+   "text": "A thrilling first half, one goal each, and so much still to come.",
+   "words": [
+    [
+     "A",
+     172.104,
+     172.344,
+     0.419
+    ],
+    [
+     "thrilling",
+     172.344,
+     172.584,
+     0.998
+    ],
+    [
+     "first",
+     172.584,
+     172.984,
+     0.983
+    ],
+    [
+     "half,",
+     172.984,
+     173.344,
+     0.854
+    ],
+    [
+     "one",
+     173.564,
+     173.604,
+     0.967
+    ],
+    [
+     "goal",
+     173.604,
+     173.824,
+     0.998
+    ],
+    [
+     "each,",
+     173.824,
+     174.164,
+     0.998
+    ],
+    [
+     "and",
+     174.464,
+     174.584,
+     0.959
+    ],
+    [
+     "so",
+     174.584,
+     174.824,
+     0.991
+    ],
+    [
+     "much",
+     174.824,
+     175.084,
+     0.999
+    ],
+    [
+     "still",
+     175.084,
+     175.324,
+     0.997
+    ],
+    [
+     "to",
+     175.324,
+     175.504,
+     0.998
+    ],
+    [
+     "come.",
+     175.504,
+     175.764,
+     1.0
+    ]
+   ],
+   "asr_conf": 0.84,
+   "speaker_id": "S2",
+   "speaker_sim": 0.813,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.293,
+   "features": {
+    "loudness_db": -23.508,
+    "duration_s": 3.744,
+    "pitch_hz_median": 200.174,
+    "pitch_range": 175.86,
+    "rate_wps": 3.552,
+    "text_cue": 1.0,
+    "z_loudness": -0.948,
+    "z_pitch": 0.024,
+    "z_rate": -0.281,
+    "arousal_raw": -0.362
+   },
+   "voice_id": null,
+   "tts_path": null,
+   "tts_duration": null,
+   "schedule_action": "none",
+   "error": null,
+   "times": {
+    "created": 176.505,
+    "asr_done": 177.964,
+    "speaker_done": 177.18,
+    "emotion_done": 177.965,
+    "complete": 177.965,
+    "tts_start": null,
+    "tts_ready": null,
+    "play_at": null,
+    "played": null
+   }
+  }
+ ],
+ "warnings": []
+}

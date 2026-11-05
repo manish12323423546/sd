@@ -16,10 +16,20 @@ from typing import Any
 from engine.record.models import Line, SessionRecord, Speaker
 
 EVENTS = (
-    "line.created", "line.updated", "line.asr_done", "line.speaker_done", "line.emotion_done",
-    "line.complete", "tts.ready", "line.scheduled", "speaker.new", "speaker.updated",
-    "session.warning", "session.metrics", "session.ended",
-)  # fmt: skip
+    "line.created",
+    "line.updated",
+    "line.asr_done",
+    "line.speaker_done",
+    "line.emotion_done",
+    "line.complete",
+    "tts.ready",
+    "line.scheduled",
+    "speaker.new",
+    "speaker.updated",
+    "session.warning",
+    "session.metrics",
+    "session.ended",
+)
 
 
 @dataclass

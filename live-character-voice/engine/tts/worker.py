@@ -75,13 +75,27 @@ def synthesize_line(
     return out
 
 
-def stretch_file(path: Path, rate: float) -> tuple[Path, float]:
-    """Time-stretch a wav by `rate` (> 1 = faster) for catch-up. Returns (new path, duration)."""
+def time_stretch(audio: F32, sr: int, rate: float) -> F32:
+    """Phase-vocoder time-stretch (pitch kept). librosa 1.0 rejects some (length, rate) pairs, so
+    retry with a little zero padding; as a last resort speed up by resampling (pitch rises
+    slightly, ≈ +2.4 semitones at 1.15×)."""
     import librosa
 
+    for pad in (0, 256, 1024):
+        try:
+            x = np.pad(audio, (0, pad)) if pad else audio
+            return as_f32(librosa.effects.time_stretch(as_f32(x), rate=rate))
+        except Exception:
+            continue
+    from engine.audio import resample
+
+    return resample(audio, round(sr * rate), sr)
+
+
+def stretch_file(path: Path, rate: float) -> tuple[Path, float]:
+    """Time-stretch a wav by `rate` (> 1 = faster) for catch-up. Returns (new path, duration)."""
     audio, sr = sf.read(path, dtype="float32")
-    fast: F32 = as_f32(librosa.effects.time_stretch(as_f32(audio), rate=rate))
-    fast = soft_limit(fast, -1.0)
+    fast = soft_limit(time_stretch(as_f32(audio), int(sr), rate), -1.0)
     new = path.with_name(f"{path.stem}_x{rate:.2f}.wav")
     sf.write(new, fast, sr, subtype="PCM_16")
     return new, fast.size / sr
