@@ -73,3 +73,11 @@ Shot list (src/shots.js): 01 hero bay · 02 aerial · 03 harbour · 04 temple lo
 - Sanchi torana (a Buddhist form, off-brief for Dwarka) replaced with a Gujarati kirti-torana of the Vadnagar/Modhera type: square-to-octagonal-to-round carved pillars, bracket capitals, a seven-lobed cusped arch, a banded architrave, and a crest of miniature pediments. The chakra prop is gone.
 - Vegetation kept 13 m clear of avenue centrelines (no more giant palm in the middle of shot 05).
 - Temple hall interior now dimly lamplit instead of black voids between the pillars.
+
+## Round 11: realism pass at the user's request ("make it insanely real in every scene")
+- Live, explorable page published as a private artifact (drag to orbit, scroll to zoom, keys 1–0 or the dots fly between the ten shots; `#shot-N` links).
+- GTAO (ground-truth ambient occlusion) in the post chain: contact shadows in every recess, course, parapet corner and doorway.
+- Lens depth of field (BokehPass) on the close shots 03, 04, 05 and 10, for stills and film only.
+- Organic coastline: headlands and bays from k=4 and k=8 harmonics whose zero-crossings land on the ghats and harbour, so framed shots stay put. The middle ring road is removed, so the aerial no longer reads as a game map.
+- Rooftop life on about half the houses: washing lines, terracotta water pots, charpai beds, cloth shades.
+- No figures within 16 m of the avenue camera (they read as mannequins up close).

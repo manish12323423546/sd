@@ -175,6 +175,7 @@ water.camera.layers.set(0);
 
 // ---------- camera ----------
 let controls = null;
+let bokeh = null;
 function applyShot(i) {
   const s = SHOTS[i];
   camera.fov = s.fov;
@@ -183,7 +184,7 @@ function applyShot(i) {
   camera.updateProjectionMatrix();
   fitShadow(new THREE.Vector3(...(s.shadow?.c || s.target)), s.shadow?.r || 500);
   if (s.exposure) renderer.toneMappingExposure = s.exposure;
-  if (typeof bokeh !== 'undefined') {
+  if (bokeh) {
     bokeh.enabled = !!s.dof && shotIndex !== null;
     if (s.dof) { bokeh.uniforms.focus.value = s.dof.focus; bokeh.uniforms.aperture.value = s.dof.aperture; }
   }
@@ -214,7 +215,7 @@ gtao.updateGtaoMaterial({ radius: 3.0, distanceExponent: 1.6, thickness: 4.0, sc
 gtao.updatePdMaterial({ lumaPhi: 10, depthPhi: 2, normalPhi: 3, radius: 6, rings: 2, samples: 16 });
 composer.addPass(gtao);
 // lens depth of field on close shots (stills/film only)
-const bokeh = new BokehPass(scene, camera, { focus: 100, aperture: 0.00002, maxblur: 0.004 });
+bokeh = new BokehPass(scene, camera, { focus: 100, aperture: 0.00002, maxblur: 0.004 });
 bokeh.enabled = false;
 composer.addPass(bokeh);
 const bloom = new UnrealBloomPass(new THREE.Vector2(W, Hh), 0.22, 0.55, 2.2);
