@@ -153,7 +153,7 @@ export function buildVegetation(mats) {
     if (r > R(th) - 32 || r < PRECINCT * 1.25) continue;
     const g = fbm(x * 0.008 + 3, z * 0.008, 3, 8);
     let ok = g > 0.6 || rnd() < 0.08;
-    for (const a of AVENUES) { const d = Math.atan2(Math.sin(th - a), Math.cos(th - a)); if (Math.cos(d) > 0 && Math.abs(Math.sin(d)) * r < 12 && Math.abs(Math.sin(d)) * r > 7) ok = rnd() < 0.5; }
+    for (const a of AVENUES) { const d = Math.atan2(Math.sin(th - a), Math.cos(th - a)); if (Math.cos(d) > 0 && Math.abs(Math.sin(d)) * r < 13) ok = false; }
     for (const rr of RINGS) if (Math.abs(r - rr) < 4) ok = false;
     if (ok) spots.push([x, z, rnd() < 0.55 ? 'palm' : 'tree']);
   }

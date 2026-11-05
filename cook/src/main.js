@@ -159,13 +159,17 @@ const city = buildCity(mats);
 city.group.getObjectByName('terrain').material = mats.terrain;
 scene.add(city.group);
 scene.add(buildBoats(mats));
-scene.add(buildVegetation(mats));
+{ const veg = buildVegetation(mats); veg.traverse((o) => o.layers.set(1)); scene.add(veg); }
 scene.add(buildPeople(mats));
 scene.add(buildFlags(city.flags, flagMaterial(clothTex, uniforms)));
 scene.add(buildBirds(null, uniforms));
 
 const water = makeWater(renderer, FOG_DENSITY);
 scene.add(water);
+// foliage stays out of the planar reflection (it read as floating weeds); still lit, seen and shadow-casting
+camera.layers.enable(1);
+sun.shadow.camera.layers.enable(1);
+water.camera.layers.set(0);
 
 // ---------- camera ----------
 let controls = null;

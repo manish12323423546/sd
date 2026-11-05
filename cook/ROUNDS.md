@@ -10,6 +10,8 @@ Shot list (src/shots.js): 01 hero bay · 02 aerial · 03 harbour · 04 temple lo
 | 1 | 52 | 45 | 30 | 48 | 50 | 55 | 38 | 35 | 70 | materials | AO/grime, anti-tiling, post grade (r2) |
 | 4 | 62 | 55 | 38 | 50 | 58 | 60 | 45 | 40 | 80 | materials | lime washes, paving (r5) |
 | 5 | 62 | 45 | 35 | 52 | 42 | 55 | 45 | 38 | 82 | materials | anti-tiling scale bug, clouds, plaster share (r6-r7) |
+| 7 | 58 | 48 | 32 | 52 | 60 | 55 | 40 | 36 | 74 | materials | lamplit windows, 720p critic input (r8-r9) |
+| 9 | 58 | 45 | 38 | 62 | 60 | 55 | 42 | 40 | 80 | materials | reflection blobs, gateway, tower clones (r10) |
 
 ## Round 0: baseline
 - First full build: procedural sky/clouds, planar-reflection sea with sun glitter and shore foam, a Jagat-Mandir-style main temple, precinct, ~1500 houses, ramparts with bastions, ghats, harbour, boats, palms, flags.
@@ -64,3 +66,10 @@ Shot list (src/shots.js): 01 hero bay · 02 aerial · 03 harbour · 04 temple lo
 - Torana volutes were reading as "C-hooks". They're replaced with face-on drum ends carrying spiral relief, as at Sanchi.
 - Hero reframed (fov 36 to 28, closer): the main shikhara is about twice its former size in frame.
 - r8 blew the windows out to white; r9 drops the emissive from 2.4 to 0.75.
+
+## Round 10: fixing named defects (critic r9 weakest: materials 38, but its top concrete bugs were these)
+- Palm crowns reflected as dark "floating weeds": foliage moved to its own render layer that the reflection camera skips. It still renders, lights and casts shadows.
+- Twin harbour towers made distinct: the north pier now has a tall square tower with a gallery and pyramidal roof.
+- Sanchi torana (a Buddhist form, off-brief for Dwarka) replaced with a Gujarati kirti-torana of the Vadnagar/Modhera type: square-to-octagonal-to-round carved pillars, bracket capitals, a seven-lobed cusped arch, a banded architrave, and a crest of miniature pediments. The chakra prop is gone.
+- Vegetation kept 13 m clear of avenue centrelines (no more giant palm in the middle of shot 05).
+- Temple hall interior now dimly lamplit instead of black voids between the pillars.

@@ -225,7 +225,7 @@ function mainTemple(B, T, flags) {
   const levels = [[MW, 6.0], [MW - 3, 5.0], [MW - 6, 4.4]];
   for (const [w, h] of levels) {
     // inner wall (dark interior)
-    box(dark, chain(Mm, M(0, ly, 0)), w - 4, h, w - 4, [1, 1, 1]);
+    box(B.lamp, chain(Mm, M(0, ly, 0)), w - 4, h, w - 4, [0.12, 0.1, 0.12]);
     // pillars around
     const n = Math.round(w / 3.2);
     for (let i = 0; i <= n; i++) {
@@ -622,6 +622,14 @@ function harbour(B) {
     for (let i = 0; i < 12; i++) stone2.add(CYL8, chain(P, M(-55 + i * 10, 8.6, -s * 4)), shade(c, 0.8), 'world');
     // lighthouse-like tower at the end
     const L = chain(P, M(62, 0, 0));
+    if (s > 0) {
+      box(stone2, L, 12, 22, 12, shade(c, 0.9));
+      box(stone2, chain(L, M(0, 19, 0)), 13.4, 2.2, 13.4, shade(c, 0.98));
+      for (let m = 0; m < 4; m++) box(dark, chain(L, M(0, 15, 0, (m * Math.PI) / 2)), 1.0, 2.2, 12.1, [1, 1, 1]);
+      box(stone2, chain(L, M(0, 22, 0)), 14, 0.5, 14, shade(c, 1.06));
+      samvarana(stone2, B.gold, chain(L, M(0, 22.5, 0)), 9, 9, 6, shade(c, 1.02));
+      continue;
+    }
     stone2.add(new THREE.CylinderGeometry(0.42, 0.5, 1, 24), chain(L, M(0, 8, 0, 0, 14, 16, 14)), shade(c, 0.92), 'world');
     stone2.add(CYL16, chain(L, M(0, 16.3, 0, 0, 13.2, 0.6, 13.2)), shade(c, 1.06), 'world');
     for (let m = 0; m < 14; m++) { const a = (m / 14) * Math.PI * 2; stone2.add(BOX, chain(L, M(Math.cos(a) * 6.1, 17.3, Math.sin(a) * 6.1, -a, 0.7, 1.4, 1.4)), shade(c, 0.95), 'world'); }
@@ -641,52 +649,53 @@ function harbour(B) {
 }
 
 // ---------------- torana ----------------
-// Sanchi-type gateway: square carved posts, elephant-block capitals, three straight
-// architraves whose ends curl into volutes beyond the posts, uprights between them.
+// Gujarati kirti-torana (Vadnagar / Modhera type): two tall carved pillars joined by a
+// cusped (multi-lobed) arch, a heavy architrave, and a crest of miniature pediments.
 function torana(B) {
   const { stone, gold } = B;
   const c = [1.08, 0.94, 0.8];
   const r = PRECINCT + 46;
   const x = Math.cos(GHAT_TH) * r, z = Math.sin(GHAT_TH) * r;
   const T = M(x, groundHeight(x, z) - 0.3, z, -GHAT_TH + Math.PI / 2);
-  const span = 5.2, postH = 9.5;
+  const span = 4.6, H = 10.5;
   for (const s of [-1, 1]) {
     const P = chain(T, M(s * span, 0, 0));
-    box(stone, P, 2.2, 0.9, 2.2, shade(c, 0.9));
-    box(stone, chain(P, M(0, 0.9, 0)), 1.3, postH, 1.3, c);
-    // carved relief panels: alternating inset/outset bands
-    for (let k = 0; k < 5; k++) box(stone, chain(P, M(0, 1.6 + k * 1.75, 0)), 1.42, 1.25, 1.42, shade(c, k % 2 ? 1.05 : 0.95));
-    // capital: four addorsed blocks (elephants / dwarves)
-    box(stone, chain(P, M(0, 0.9 + postH, 0)), 1.9, 0.4, 1.9, shade(c, 1.06));
-    box(stone, chain(P, M(0, 1.3 + postH, 0)), 1.6, 1.3, 2.4, shade(c, 0.98));
-    box(stone, chain(P, M(0, 2.6 + postH, 0)), 2.0, 0.3, 2.0, shade(c, 1.08));
+    // stepped base
+    box(stone, P, 2.6, 0.6, 2.6, shade(c, 0.9));
+    box(stone, chain(P, M(0, 0.6, 0)), 2.2, 0.8, 2.2, shade(c, 0.97));
+    // shaft changes from square to octagonal to round, with banded carving
+    box(stone, chain(P, M(0, 1.4, 0)), 1.5, H * 0.35, 1.5, c);
+    stone.add(new THREE.CylinderGeometry(0.72, 0.72, H * 0.3, 8), chain(P, M(0, 1.4 + H * 0.35 + H * 0.15, 0)), shade(c, 1.02), 'world');
+    stone.add(new THREE.CylinderGeometry(0.6, 0.66, H * 0.25, 16), chain(P, M(0, 1.4 + H * 0.65 + H * 0.125, 0)), c, 'world');
+    for (const by of [0.12, 0.35, 0.5, 0.65, 0.78, 0.9]) stone.add(new THREE.CylinderGeometry(0.82, 0.82, 0.22, 16), chain(P, M(0, 1.4 + H * by, 0)), shade(c, 1.08), 'world');
+    // bracket capital (ghata-pallava) and bracket arms toward the arch
+    stone.add(new THREE.CylinderGeometry(0.95, 0.6, 0.9, 16), chain(P, M(0, 1.4 + H + 0.45, 0)), shade(c, 1.04), 'world');
+    box(stone, chain(P, M(-s * 0.6, 1.4 + H + 0.9, 0)), 2.6, 0.5, 1.4, shade(c, 1.06));
   }
-  const ys = [postH + 2.9, postH + 5.2, postH + 7.5];
-  ys.forEach((y, k) => {
-    const len = span * 2 + 5.4 - k * 0.3;
-    box(stone, chain(T, M(0, y, 0)), len, 1.05, 0.95, shade(c, 1.02 - k * 0.02));
-    box(stone, chain(T, M(0, y + 1.05, 0)), len - 0.4, 0.15, 1.05, shade(c, 1.08));
-    // volute ends
-    for (const s of [-1, 1]) {
-      const drum = new THREE.CylinderGeometry(0.62, 0.62, 1.0, 18);
-      drum.rotateX(Math.PI / 2);
-      stone.add(drum, chain(T, M(s * (len / 2 + 0.1), y + 0.52, 0)), shade(c, 0.97), 'world');
-      const spiral = new THREE.TorusGeometry(0.36, 0.09, 5, 16);
-      for (const f of [-1, 1]) stone.add(spiral, chain(T, M(s * (len / 2 + 0.1), y + 0.52, f * 0.52)), shade(c, 1.1), 'world');
-    }
-    // short posts carrying the architrave above, with small figures between
-    if (k < 2) {
-      for (const s of [-1, 1]) box(stone, chain(T, M(s * span, y + 1.2, 0)), 0.75, 1.1, 0.75, c);
-      for (const xx of [-2.6, 0, 2.6]) box(stone, chain(T, M(xx, y + 1.2, 0)), 0.38, 1.1, 0.38, shade(c, 1.04));
-    }
-  });
-  // crowning dharmachakra on posts and trident finials
-  const wheel = new THREE.TorusGeometry(0.95, 0.16, 6, 20);
-  stone.add(wheel, chain(T, M(0, ys[2] + 2.4, 0)), shade(c, 1.05), 'world');
-  for (let i = 0; i < 6; i++) box(stone, chain(T, M(0, ys[2] + 2.4 - 0.85, 0, 0, 1, 1, 1, 0, (i / 6) * Math.PI)), 0.1, 1.7, 0.1, c);
-  box(stone, chain(T, M(0, ys[2] + 1.2, 0)), 0.5, 0.4, 0.5, c);
-  for (const s of [-1, 1]) {
-    gold.add(new THREE.ConeGeometry(0.3, 1.4, 6), chain(T, M(s * span, ys[2] + 1.9, 0)), [1, 1, 1]);
-    for (const t of [-1, 1]) gold.add(new THREE.ConeGeometry(0.16, 0.9, 5), chain(T, M(s * span + t * 0.45, ys[2] + 1.65, 0)), [1, 1, 1]);
+  // cusped arch: seven lobes between the pillars
+  const archY = 1.4 + H - 0.4;
+  const pts = [];
+  const lobes = 7;
+  for (let i = 0; i <= 140; i++) {
+    const t = i / 140;
+    const xx = -span + 0.7 + t * (2 * span - 1.4);
+    const base = Math.sin(Math.PI * t) * 2.8; // overall arch rise
+    const lobe = Math.abs(Math.sin(Math.PI * t * lobes)) * 0.45;
+    pts.push(new THREE.Vector3(xx, archY - 3.0 + base + lobe, 0));
   }
+  const arch = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 160, 0.22, 6, false);
+  arch.applyMatrix4(new THREE.Matrix4().makeScale(1, 1, 2.2));
+  stone.add(arch, T, shade(c, 1.05), 'world');
+  // architrave with carved bands
+  const ay = 1.4 + H + 1.15;
+  box(stone, chain(T, M(0, ay, 0)), 2 * span + 3.2, 1.3, 1.5, c);
+  box(stone, chain(T, M(0, ay + 1.3, 0)), 2 * span + 3.6, 0.3, 1.7, shade(c, 1.1));
+  for (let i = 0; i < 9; i++) box(stone, chain(T, M(-span - 0.9 + i * ((2 * span + 1.8) / 8), ay + 0.3, 0.78)), 0.55, 0.75, 0.1, shade(c, i % 2 ? 1.1 : 0.9));
+  // crest: miniature temple pediments (udgama), the central one tallest
+  for (let i = -2; i <= 2; i++) {
+    const hgt = i === 0 ? 3.2 : 1.9 - Math.abs(i) * 0.3;
+    const g = new THREE.ConeGeometry(0.9 - Math.abs(i) * 0.1, hgt, 4, 1);
+    stone.add(g, chain(T, M(i * 2.3, ay + 1.6 + hgt / 2, 0, Math.PI / 4, 1, 1, 0.6)), shade(c, 1.04), 'world');
+  }
+  gold.add(new THREE.ConeGeometry(0.22, 1.1, 8), chain(T, M(0, ay + 1.6 + 3.2 + 0.5, 0)), [1, 1, 1]);
 }
