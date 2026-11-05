@@ -6,7 +6,7 @@ import { Batch, M, chain, box, shikhara, samvarana, chhatri, pillar, shade, BOX,
 export const GHAT_TH = -2.95; // ghats face the setting sun
 export const HARBOUR_TH = 1.0;
 export const AVENUES = Array.from({ length: 8 }, (_, k) => GHAT_TH + (k * Math.PI) / 4);
-export const RINGS = [190, 290, 372];
+export const RINGS = [205, 372];
 export const PRECINCT = 96; // half-size of the temple precinct square
 export const TEMPLE_ROT = -GHAT_TH + Math.PI; // local +x points away from ghats (sanctum at back)
 
@@ -436,6 +436,29 @@ function houses(B, flags) {
       if (rnd() < 0.55) {
         const nm = Math.floor(w / 1.4);
         for (let i = 0; i < nm; i++) box(bat, chain(X, M(-w / 2 + (i + 0.5) * (w / nm), py + 0.9, d / 2)), 0.5, 0.5, 0.35, col);
+      }
+      // rooftop life: washing lines, water pots, a charpai, a cloth shade
+      if (rnd() < 0.45) {
+        const a = awn[Math.floor(rnd() * awn.length)], a2 = awn[Math.floor(rnd() * awn.length)];
+        const lx = (rnd() - 0.5) * (w - 3), ll = Math.min(d - 1.5, 3 + rnd() * 3);
+        for (const e of [-1, 1]) wood.add(BOX, chain(X, M(lx, py + 0.9, e * ll / 2, 0, 0.06, 1.8, 0.06)), [1, 1, 1]);
+        const n = 2 + Math.floor(rnd() * 3);
+        for (let k = 0; k < n; k++) cloth.add(BOX, chain(X, M(lx, py + 1.25, -ll / 2 + (k + 0.5) * (ll / n), 0, 0.02, 1.0 + rnd() * 0.5, ll / n * 0.85, 0, (rnd() - 0.5) * 0.2)), k % 2 ? a : a2);
+      }
+      if (rnd() < 0.4) for (let k = 0; k < 1 + Math.floor(rnd() * 4); k++) {
+        const g = new THREE.LatheGeometry([[0, 0], [0.22, 0.02], [0.3, 0.22], [0.24, 0.42], [0.12, 0.5], [0.14, 0.56], [0, 0.56]].map(([u, v]) => new THREE.Vector2(u, v)), 10);
+        wood.add(g, chain(X, M(-w / 2 + 0.8 + rnd() * 1.6, py, -d / 2 + 0.8 + k * 0.7)), [2.6, 1.7, 1.5]);
+      }
+      if (rnd() < 0.18) {
+        const C = chain(X, M((rnd() - 0.5) * (w - 4), py, (rnd() - 0.5) * (d - 4), rnd() * 3));
+        wood.add(BOX, chain(C, M(0, 0.45, 0, 0, 1.9, 0.08, 0.9)), [1.6, 1.3, 1.0]);
+        for (const [cx, cz] of [[-0.9, -0.4], [0.9, -0.4], [-0.9, 0.4], [0.9, 0.4]]) wood.add(BOX, chain(C, M(cx, 0.22, cz, 0, 0.07, 0.45, 0.07)), [1, 1, 1]);
+        cloth.add(BOX, chain(C, M(0, 0.5, 0, 0, 1.7, 0.04, 0.8)), [0.92, 0.85, 0.72]);
+      }
+      if (rnd() < 0.12) {
+        const C = chain(X, M((rnd() - 0.5) * (w - 4), py, (rnd() - 0.5) * (d - 4)));
+        for (const [cx, cz] of [[-1.3, -1.3], [1.3, -1.3], [-1.3, 1.3], [1.3, 1.3]]) wood.add(BOX, chain(C, M(cx, 1.1, cz, 0, 0.08, 2.2, 0.08)), [1, 1, 1]);
+        cloth.add(BOX, chain(C, M(0, 2.25, 0, 0, 3, 0.04, 3, 0.06)), awn[Math.floor(rnd() * awn.length)]);
       }
       // roof variety
       const roll = rnd();

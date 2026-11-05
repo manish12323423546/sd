@@ -5,6 +5,8 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
+import { BokehPass } from 'three/addons/postprocessing/BokehPass.js';
 import { SUN_DIR, SUN_COLOR, installFog } from './shared.js';
 import { makeSky } from './sky.js';
 import { makeWater } from './water.js';
@@ -181,6 +183,10 @@ function applyShot(i) {
   camera.updateProjectionMatrix();
   fitShadow(new THREE.Vector3(...(s.shadow?.c || s.target)), s.shadow?.r || 500);
   if (s.exposure) renderer.toneMappingExposure = s.exposure;
+  if (typeof bokeh !== 'undefined') {
+    bokeh.enabled = !!s.dof && shotIndex !== null;
+    if (s.dof) { bokeh.uniforms.focus.value = s.dof.focus; bokeh.uniforms.aperture.value = s.dof.aperture; }
+  }
 }
 if (shotIndex !== null) applyShot(shotIndex);
 else {
@@ -200,6 +206,17 @@ function setTime(t) {
 const rt = new THREE.WebGLRenderTarget(W, Hh, { type: THREE.HalfFloatType, samples: 4 });
 const composer = new EffectComposer(renderer, rt);
 composer.addPass(new RenderPass(scene, camera));
+// ground-truth ambient occlusion: contact shadows in every recess, joint and corner
+const gtao = new GTAOPass(scene, camera, W, Hh);
+gtao.output = GTAOPass.OUTPUT.Default;
+gtao.blendIntensity = 0.85;
+gtao.updateGtaoMaterial({ radius: 3.0, distanceExponent: 1.6, thickness: 4.0, scale: 1.2, samples: 16, distanceFallOff: 0.6 });
+gtao.updatePdMaterial({ lumaPhi: 10, depthPhi: 2, normalPhi: 3, radius: 6, rings: 2, samples: 16 });
+composer.addPass(gtao);
+// lens depth of field on close shots (stills/film only)
+const bokeh = new BokehPass(scene, camera, { focus: 100, aperture: 0.00002, maxblur: 0.004 });
+bokeh.enabled = false;
+composer.addPass(bokeh);
 const bloom = new UnrealBloomPass(new THREE.Vector2(W, Hh), 0.22, 0.55, 2.2);
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
@@ -231,15 +248,67 @@ const grade = new ShaderPass({
 composer.addPass(grade);
 function render() { composer.render(); }
 
-window.__scene = { scene, camera, renderer, applyShot, setTime, SHOTS, groundHeight, render };
+// ---------- interactive viewer: smooth flights between the ten shots ----------
+let flight = null;
+function goShot(i) {
+  if (!controls) return applyShot(i);
+  const s = SHOTS[i];
+  flight = {
+    t0: performance.now(), dur: 3200, i,
+    p0: camera.position.clone(), p1: new THREE.Vector3(...s.pos),
+    q0: controls.target.clone(), q1: new THREE.Vector3(...s.target),
+    f0: camera.fov, f1: s.fov,
+  };
+  fitShadow(new THREE.Vector3(...(s.shadow?.c || s.target)), Math.max(s.shadow?.r || 500, 300));
+  try { history.replaceState(null, '', '#shot-' + (i + 1)); } catch (e) {}
+  window.dispatchEvent(new CustomEvent('dwarka:shot', { detail: i }));
+}
+function updateFlight(now) {
+  if (!flight) return;
+  let t = Math.min(1, (now - flight.t0) / flight.dur);
+  const e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; // ease in-out
+  // arc upward mid-flight so long moves clear the rooftops
+  const lift = Math.sin(Math.PI * e) * Math.min(120, flight.p0.distanceTo(flight.p1) * 0.25);
+  camera.position.lerpVectors(flight.p0, flight.p1, e).y += lift;
+  controls.target.lerpVectors(flight.q0, flight.q1, e);
+  camera.fov = flight.f0 + (flight.f1 - flight.f0) * e;
+  camera.updateProjectionMatrix();
+  if (t >= 1) flight = null;
+}
+function resize() {
+  if (shotIndex !== null) return;
+  const w = window.innerWidth, h = window.innerHeight;
+  renderer.setSize(w, h); composer.setSize(w, h);
+  gtao.setSize(w, h); grade.uniforms.uRes.value.set(w, h);
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+if (controls) {
+  window.addEventListener('resize', resize);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.06;
+  controls.maxPolarAngle = Math.PI * 0.495;
+  controls.addEventListener('start', () => { flight = null; });
+  window.addEventListener('keydown', (ev) => {
+    const k = ev.key === '0' ? 9 : parseInt(ev.key, 10) - 1;
+    if (k >= 0 && k <= 9) goShot(k);
+  });
+  const m = /^#shot-(\d+)$/.exec(location.hash);
+  if (m) { const i = Math.min(10, Math.max(1, +m[1])) - 1; applyShot(i); controls.target.set(...SHOTS[i].target); }
+}
+
+window.__scene = { scene, camera, renderer, applyShot, setTime, SHOTS, groundHeight, render, goShot };
 
 setTime(12.0);
 let frames = 0;
-function loop() {
-  if (shotIndex === null) setTime(performance.now() / 1000);
+function loop(now) {
+  if (shotIndex === null) {
+    setTime(12.0 + performance.now() / 1000);
+    updateFlight(performance.now());
+    controls.update();
+  }
   render();
   frames++;
-  if (frames === 2) window.__ready = true;
+  if (frames === 2) { window.__ready = true; window.dispatchEvent(new Event('dwarka:ready')); }
   if (shotIndex === null || frames < 3) requestAnimationFrame(loop);
 }
 loop();

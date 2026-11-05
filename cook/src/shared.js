@@ -12,6 +12,8 @@ const H = [
   [5, 15, 2.3],
   [8, 7, 0.4],
   [13, 3.5, 4.1],
+  [4, 28, -4.0], // headlands and bays; nodes fall on the ghats and harbour
+  [8, 10, -8.0],
 ];
 export function islandRadius(theta) {
   let r = 430;

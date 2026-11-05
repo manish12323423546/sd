@@ -414,7 +414,7 @@ export function buildPeople(mats) {
   return noGround(() => {
     const b = new Batch(), st = new Batch();
     const rnd = mulberry32(2026);
-    const put = (x, z, yOff = 0) => { const y = groundHeight(x, z) + yOff; if (y > 0.3) person(b, x, y, z, rnd); };
+    const put = (x, z, yOff = 0) => { if (Math.hypot(x + 46, z - 236) < 16) return; const y = groundHeight(x, z) + yOff; if (y > 0.3) person(b, x, y, z, rnd); };
     // avenues: people and market stalls along both kerbs
     for (const a of AVENUES) {
       const c = Math.cos(a), s = Math.sin(a);

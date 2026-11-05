@@ -1,0 +1,40 @@
+<title>Dwarka at Dusk</title>
+<style>
+  /* One deliberate look: a full-bleed film frame. No text over the picture. */
+  :root { --ink: #0b0806; --dot: rgba(255, 226, 180, 0.38); --dot-on: #ffd79a; --bar: #e8b46a; color-scheme: dark; }
+  html, body { height: 100%; background: var(--ink); overflow: hidden; }
+  body > canvas { position: fixed; inset: 0; width: 100vw !important; height: 100vh !important; display: block; touch-action: none; }
+  .shots { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); display: flex; gap: 10px; padding: 8px 12px; border-radius: 999px; background: rgba(11, 8, 6, 0.28); backdrop-filter: blur(6px); z-index: 5; }
+  .shots button { width: 9px; height: 9px; padding: 0; border: 0; border-radius: 50%; background: var(--dot); cursor: pointer; transition: transform .2s, background .2s; }
+  .shots button:hover { transform: scale(1.4); }
+  .shots button[aria-current="true"] { background: var(--dot-on); transform: scale(1.3); }
+  .shots button:focus-visible { outline: 2px solid var(--dot-on); outline-offset: 3px; }
+  .load { position: fixed; left: 0; top: 0; height: 2px; width: 100%; background: linear-gradient(90deg, transparent, var(--bar), transparent); background-size: 40% 100%; background-repeat: no-repeat; animation: sweep 1.4s ease-in-out infinite; z-index: 6; }
+  @keyframes sweep { from { background-position: -40% 0; } to { background-position: 140% 0; } }
+  @media (prefers-reduced-motion: reduce) { .load { animation: none; background: var(--bar); opacity: .5; } }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+<div class="load" id="load" role="progressbar" aria-label="Building the city"></div>
+<nav class="shots" id="shots" aria-label="Camera shots"></nav>
+<script type="module">
+  const names = ['Hero bay', 'Aerial', 'Harbour', 'Temple', 'Avenue', 'Ramparts', 'Ghats', 'Into the sun', 'Rooftops', 'Gateway'];
+  const nav = document.getElementById('shots');
+  names.forEach((n, i) => {
+    const b = document.createElement('button');
+    b.id = 'shot-btn-' + (i + 1);
+    b.setAttribute('aria-label', (i + 1) + '. ' + n);
+    b.title = n;
+    b.addEventListener('click', () => window.__scene && window.__scene.goShot(i));
+    nav.appendChild(b);
+  });
+  const mark = (i) => [...nav.children].forEach((b, k) => b.setAttribute('aria-current', String(k === i)));
+  mark(0);
+  window.addEventListener('dwarka:shot', (e) => mark(e.detail));
+  window.addEventListener('dwarka:ready', () => { document.getElementById('load').hidden = true; });
+  await import('./src/main.js');
+</script>
