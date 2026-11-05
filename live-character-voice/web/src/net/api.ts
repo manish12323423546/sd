@@ -15,6 +15,7 @@ export interface Voice {
   description: string;
   lang: string;
   preview_url: string;
+  custom?: boolean;
 }
 
 export interface Health {
@@ -23,6 +24,7 @@ export interface Health {
   model_info: Record<string, string>;
   load_s: Record<string, number>;
   active_session: string | null;
+  voice_cloning?: boolean;
 }
 
 export interface CreateSessionBody {
@@ -55,6 +57,17 @@ export const api = {
     const form = new FormData();
     form.append("file", file);
     return json<Clip>(await fetch("/api/clips", { method: "POST", body: form }));
+  },
+  addVoice: async (name: string, file: File, consent: boolean, transcript: string): Promise<Voice> => {
+    const form = new FormData();
+    form.append("name", name);
+    form.append("consent", consent ? "true" : "false");
+    form.append("transcript", transcript);
+    form.append("file", file);
+    return json<Voice>(await fetch("/api/voices/custom", { method: "POST", body: form }));
+  },
+  deleteVoice: async (voiceId: string): Promise<void> => {
+    await json(await fetch(`/api/voices/custom/${voiceId}`, { method: "DELETE" }));
   },
   createSession: async (body: CreateSessionBody): Promise<{ session_id: string; ws_url: string }> =>
     json(

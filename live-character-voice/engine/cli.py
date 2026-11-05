@@ -406,6 +406,9 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
+    from engine.env import load_env
+
+    load_env()
     args = build_parser().parse_args(argv)
     rc: int = args.func(args)
     return rc

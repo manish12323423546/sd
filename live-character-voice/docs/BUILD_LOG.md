@@ -402,3 +402,34 @@ their planned time.
 
 **Remaining delay** is mostly queuing: dense commentary (the synthetic clip is 81 % speech) means a
 line often waits for the previous voice to finish (schedule wait p50 0.7 s, p95 3.8 s).
+
+## 2026-11-05 — V2.1: your own cloned voice + emotion fix
+
+**Built**
+- `engine/voices_custom.py`: instant voice cloning from an uploaded sample (audio or video).
+  Consent checkbox required; the steadiest 15 s window with the most speech is picked
+  automatically, loudness-normalised, auto-transcribed and stored in `data/voices/custom/<name>/`
+  (git-ignored). Voice ids are `cu_<name>`; they appear in the voice list next to the built-ins.
+- API: `POST /api/voices/custom`, `DELETE /api/voices/custom/{id}`; `/api/health` reports
+  `voice_cloning`. Web: "Add your own voice" panel on the home page.
+- Fish TTS clones custom voices per request with emotion tags; without a Fish key the line falls
+  back to Kokoro (no cloning, no emotion — Kokoro cannot act).
+- `engine/env.py`: keys are read from the git-ignored `.env`; `install_mac.sh` now asks for them
+  (with the sign-up links) and stores them with `chmod 600`.
+- `scripts/ws_client.py --voices S1=cu_test-voice` to run a scripted session with a custom voice.
+
+**Measured**
+- Reference length (same AI test voice, Fish): 8 s → similarity 0.47, first audio 0.94 s;
+  15 s → 0.53, 1.17 s; 29 s → 0.36, 1.40 s. 15 s chosen (best likeness, small latency cost).
+- Clone vs sample ECAPA similarity 0.46 (other voices ≈ 0). Emotion: calm line −25 dB vs peak
+  line −16.6 dB loudness.
+- Live session `20261105-121008_3568b3` (`outputs/pilot_custom_voice/ws_client.json`),
+  S1 = cloned Test Voice, S2 = am_adam: 56 lines, audio coverage 100 %, WER 6.86 %, speaker
+  accuracy 92.9 %, 0 crashes, 0 stalls; voice start p50 2.24 s / p95 3.21 s; voice playing
+  p50 4.66 s / p95 7.75 s. Emotions used: neutral 36, excited 14, peak 6.
+- Why "playing" is slower than with built-in voices: the cloned voice speaks slowly — its lines are
+  a median 1.32× (p90 3.15×) the original length vs 0.92× for am_adam, so lines queue up; first
+  audio 1.22 s vs 0.86 s.
+
+**Open issues**: cloned-voice pacing (try a faster-speaking sample or a higher base speed);
+`ws_client` `delay_ready_from_ws` is empty with streaming (server metrics are correct).

@@ -43,6 +43,22 @@ if [ ! -f data/clips/synthetic_match_3spk.mp4 ]; then
     --name synthetic_match_3spk
 fi
 
+say "Optional: free API keys (better voices + emotion + voice cloning, faster text)"
+if [ ! -f .env ]; then cp .env.example .env; fi
+ask_key() {  # $1 = variable, $2 = what it is, $3 = where to get it
+  if grep -q "^$1=." .env; then echo "$1 already set in .env"; return; fi
+  echo; echo "$2"; echo "Get a free key here: $3  (sign in, click Create / New key, copy it)"
+  read -r -s -p "Paste $1 and press Enter (or just Enter to skip): " val < /dev/tty || val=""
+  echo
+  if [ -n "$val" ]; then
+    grep -v "^$1=" .env > .env.tmp || true; echo "$1=$val" >> .env.tmp; mv .env.tmp .env
+    echo "Saved to $(pwd)/.env (this file never leaves your Mac)."
+  fi
+}
+ask_key FISH_API_KEY "Fish Audio: emotional voices and cloning your own voice" "https://fish.audio/app/api-keys"
+ask_key GROQ_API_KEY "Groq: fast, accurate speech-to-text" "https://console.groq.com/keys"
+chmod 600 .env
+
 say "6/6  Starting the app — your browser will open at http://localhost:8000"
 echo "Leave this window open while you use the app. Press Ctrl+C here to stop it."
 ( sleep 25 && open "http://localhost:8000" ) &

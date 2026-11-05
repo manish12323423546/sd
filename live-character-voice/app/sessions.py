@@ -14,7 +14,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from engine.config import EngineConfig, load_engine_config, load_voice_catalog
+from engine.config import EngineConfig, VoiceCatalog, load_engine_config, load_voice_catalog
 from engine.ingest.decode import probe
 from engine.metrics.compute import compute_all
 from engine.metrics.export import write_lines_csv
@@ -84,10 +84,36 @@ class PilotSession:
 class SessionManager:
     def __init__(self, cfg: EngineConfig | None = None) -> None:
         self.cfg = cfg or load_engine_config()
-        self.catalog = load_voice_catalog()
         self.models: Models | None = None
         self.sessions: dict[str, PilotSession] = {}
         self.load_log: list[str] = []
+
+    @property
+    def catalog(self) -> VoiceCatalog:
+        """Re-read on every use so custom voices added while the server runs appear at once."""
+        return load_voice_catalog()
+
+    @property
+    def cloning(self) -> bool:
+        return bool(self.models and getattr(self.models.tts, "supports_cloning", False))
+
+    def preview_name(self, voice_id: str) -> str:
+        """Previews are per engine: a Fish clone sounds different from the local Kokoro voice."""
+        return f"{voice_id}.{'fish' if self.cloning else 'local'}.wav"
+
+    def make_preview(self, voice_id: str, speed: float = 1.0) -> Path:
+        import soundfile as sf
+
+        from engine.providers.base import DeliveryStyle
+
+        assert self.models is not None and self.models.tts is not None
+        PREVIEWS_DIR.mkdir(parents=True, exist_ok=True)
+        path = PREVIEWS_DIR / self.preview_name(voice_id)
+        res = self.models.tts.synthesize(
+            self.catalog.preview_text, voice_id, DeliveryStyle(speed=speed)
+        )
+        sf.write(path, res.audio, res.sr, subtype="PCM_16")
+        return path
 
     # ---- startup
     def load_models(self) -> None:
@@ -95,22 +121,13 @@ class SessionManager:
         self.make_previews()
 
     def make_previews(self) -> None:
-        """3-second preview per enabled voice (docs/08 §8.2), generated once."""
-        import soundfile as sf
-
-        from engine.providers.base import DeliveryStyle
-
-        assert self.models is not None and self.models.tts is not None
-        PREVIEWS_DIR.mkdir(parents=True, exist_ok=True)
+        """3-second preview per enabled voice (docs/08 §8.2), generated once per engine."""
         for v in self.catalog.pilot_voices():
-            path = PREVIEWS_DIR / f"{v.voice_id}.wav"
-            if path.exists():
+            if v.voice_id.startswith("cu_") and not self.cloning:
                 continue
-            res = self.models.tts.synthesize(
-                self.catalog.preview_text, v.voice_id, DeliveryStyle(speed=v.base_speed)
-            )
-            sf.write(path, res.audio, res.sr, subtype="PCM_16")
-            self.load_log.append(f"preview {v.voice_id} {res.duration_s:.2f} s")
+            if not (PREVIEWS_DIR / self.preview_name(v.voice_id)).exists():
+                self.make_preview(v.voice_id, v.base_speed)
+                self.load_log.append(f"preview {v.voice_id}")
 
     # ---- sessions
     def active(self) -> PilotSession | None:

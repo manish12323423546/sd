@@ -81,6 +81,8 @@ async def run(args: argparse.Namespace) -> dict[str, Any]:
             "use_enroll": args.enroll,
             "speed": args.speed,
         }
+        if args.voices:
+            body["voice_map"] = dict(kv.split("=", 1) for kv in args.voices.split(","))
         r = await http.post("/api/sessions", json=body)
         r.raise_for_status()
         sid = r.json()["session_id"]
@@ -201,6 +203,7 @@ def main() -> int:
     p.add_argument("--enroll", action="store_true")
     p.add_argument("--switch-every", type=float, default=0.0, help="seconds between voice switches")
     p.add_argument("--out", default=None, help="directory for ws_client.json")
+    p.add_argument("--voices", default=None, help="S1=cu_my-voice,S2=am_adam")
     args = p.parse_args()
     res = asyncio.run(run(args))
     out_dir = Path(args.out) if args.out else ROOT / "outputs" / "sessions" / res["session_id"]

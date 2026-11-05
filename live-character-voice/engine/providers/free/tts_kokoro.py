@@ -59,6 +59,9 @@ class KokoroTTS:
     def _synth_raw(self, text: str, voice_id: str, speed: float) -> F32:
         import torch
 
+        if voice_id not in self._voice_ids:  # e.g. a custom cloned voice: Kokoro cannot clone
+            voice_id = "am_adam"
+
         pipe = self._pipeline_for(voice_id)
         with self._voice_lock:  # voice tensors are cached in a dict inside KPipeline
             pipe.load_voice(voice_id)

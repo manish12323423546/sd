@@ -50,6 +50,13 @@ With both keys set, `provider: auto` (default) uses them and falls back to the l
 error. Measured: the new voice starts 1.8 s (median) after the commentator's line ends, vs 4.1 s
 fully local.
 
+## Your own voice (instant voice cloning)
+Needs a Fish Audio key in `.env`. On the home page open **Add your own voice**, give it a name,
+upload a clip, tick the permission box. Best sample: **10–20 s (15 s is ideal) of one person
+speaking clearly**, no music, no other voices, a little variety in tone. Longer files are fine —
+the app picks the best 15 s itself. Then choose the new voice for a commentator and press Start.
+Only clone voices you own or have permission to use.
+
 ## Where the results are
 
 | What | Where |

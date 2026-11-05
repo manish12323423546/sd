@@ -44,3 +44,10 @@ web/e2e/*.png
 
 # Pilot session working folders (the pilot report copies what matters into outputs/pilot_<date>/)
 outputs/sessions/
+
+# local API keys and cloned voices (never committed)
+.env
+data/voices/
+
+# Fish previews are made at startup (and may contain your cloned voice)
+media/previews/*.fish.wav

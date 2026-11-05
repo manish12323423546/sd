@@ -23,7 +23,7 @@ def test_engine_config_loads_with_spec_defaults() -> None:
 
 
 def test_voice_catalog_has_four_pilot_voices_and_tts_map_uses_catalog() -> None:
-    cat = load_voice_catalog()
+    cat = load_voice_catalog(include_custom=False)
     assert [v.name for v in cat.pilot_voices()] == ["The Veteran", "Hype Host", "Spark", "Coach"]
     cfg = load_engine_config()
     for voice_id in cfg.tts.voice_map.values():

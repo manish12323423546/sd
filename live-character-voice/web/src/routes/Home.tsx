@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { VoiceUpload } from "../components/VoiceUpload";
 import { api, type Clip, type Health } from "../net/api";
 
 function dur(s: number): string {
@@ -85,8 +86,14 @@ export function Home() {
           Upload clip (.mp4 / .mkv / .mov)
           <input type="file" accept=".mp4,.mkv,.mov" className="sr-only" disabled={busy} onChange={(e) => void upload(e.target.files?.[0])} />
         </label>
-        <p className="mt-2 text-xs text-muted">Only use footage you are allowed to use.</p>
+        <p className="mt-2 text-xs text-muted">
+          Any video works: speakers, words, emotion and delay are analysed live while it plays, and a full report is written at the end.
+          Only use footage you are allowed to use.
+        </p>
       </section>
+      <div className="lg:col-start-1">
+        <VoiceUpload cloning={Boolean(health?.voice_cloning)} />
+      </div>
 
       <aside className="flex flex-col gap-4">
         <section className="rounded-panel border border-line bg-panel p-4">

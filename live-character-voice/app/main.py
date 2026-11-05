@@ -7,12 +7,13 @@ from __future__ import annotations
 
 import asyncio
 import os
+import tempfile
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from pathlib import Path
 
 import markdown
-from fastapi import FastAPI, File, HTTPException, UploadFile, WebSocket
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile, WebSocket
 from fastapi.responses import FileResponse, HTMLResponse, PlainTextResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -28,7 +29,9 @@ from app.sessions import (
     SessionManager,
     list_clips,
 )
+from engine.env import load_env
 from engine.metrics.export import lines_csv
+from engine.voices_custom import VoiceUploadError, add_custom_voice, remove_custom_voice
 
 MAX_UPLOAD = 2 * 1024**3
 manager = SessionManager()
@@ -36,6 +39,7 @@ manager = SessionManager()
 
 @asynccontextmanager
 async def lifespan(_: FastAPI) -> AsyncIterator[None]:
+    load_env()  # keys from live-character-voice/.env (git-ignored)
     if os.environ.get("LCV_SKIP_MODELS") != "1":
         manager.load_models()
     yield
@@ -63,6 +67,7 @@ def health() -> dict[str, object]:
         "load_s": m.load_s if m else {},
         "active_session": active.session_id if active else None,
         "rss_mb": _rss_mb(),
+        "voice_cloning": manager.cloning,
     }
 
 
@@ -83,10 +88,63 @@ def voices() -> list[VoiceOut]:
             name=v.name,
             description=v.description,
             lang=v.lang_code,
-            preview_url=f"/media/previews/{v.voice_id}.wav",
+            preview_url=f"/media/previews/{manager.preview_name(v.voice_id)}",
+            custom=v.voice_id.startswith("cu_"),
         )
         for v in manager.catalog.pilot_voices()
     ]
+
+
+@app.post("/api/voices/custom", response_model=VoiceOut)
+async def add_voice(
+    name: str = Form(...),
+    consent: bool = Form(False),
+    transcript: str = Form(""),
+    file: UploadFile = File(...),
+) -> VoiceOut:
+    """Instant voice cloning: upload 6–30 s of a voice you own or may use."""
+    suffix = Path(file.filename or "voice.wav").suffix.lower() or ".wav"
+    if suffix not in {".wav", ".mp3", ".m4a", ".aac", ".ogg", ".flac", ".webm", ".mp4", ".mov"}:
+        raise HTTPException(400, "upload an audio file (wav, mp3, m4a, ogg, flac) or a video")
+    data = await file.read()
+    if len(data) > 50 * 1024**2:
+        raise HTTPException(413, "sample larger than 50 MB")
+    with tempfile.TemporaryDirectory() as tmp:
+        src = Path(tmp) / f"sample{suffix}"
+        src.write_bytes(data)
+        try:
+            meta = await asyncio.get_running_loop().run_in_executor(
+                None,
+                lambda: add_custom_voice(
+                    name,
+                    src,
+                    consent,
+                    transcript or None,
+                    manager.models.asr if manager.models else None,
+                ),
+            )
+        except VoiceUploadError as e:
+            raise HTTPException(400, str(e)) from e
+    vid = meta["voice_id"]
+    if manager.cloning:
+        await asyncio.get_running_loop().run_in_executor(None, manager.make_preview, vid, 1.0)
+    return VoiceOut(
+        voice_id=vid,
+        name=meta["name"],
+        description=f"Your cloned voice ({meta['seconds']:.0f} s sample)",
+        lang="a",
+        preview_url=f"/media/previews/{manager.preview_name(vid)}",
+        custom=True,
+    )
+
+
+@app.delete("/api/voices/custom/{voice_id}")
+def delete_voice(voice_id: str) -> dict[str, str]:
+    try:
+        remove_custom_voice(voice_id)
+    except KeyError as e:
+        raise HTTPException(404, "unknown custom voice") from e
+    return {"deleted": voice_id}
 
 
 @app.get("/api/clips", response_model=list[ClipOut])

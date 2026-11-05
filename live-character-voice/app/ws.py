@@ -112,7 +112,11 @@ async def handle(ws: WebSocket, manager: SessionManager, sid: str) -> None:
         await ws.close()
         return
     voices = [
-        {"voice_id": v.voice_id, "name": v.name, "preview_url": f"/media/previews/{v.voice_id}.wav"}
+        {
+            "voice_id": v.voice_id,
+            "name": v.name,
+            "preview_url": f"/media/previews/{manager.preview_name(v.voice_id)}",
+        }
         for v in manager.catalog.pilot_voices()
     ]
     await ws.send_json(

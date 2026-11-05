@@ -25,9 +25,10 @@ def client() -> TestClient:
 def test_health_and_voices(client: TestClient) -> None:
     h = client.get("/api/health").json()
     assert h["ok"] is True and h["models_loaded"] == {"asr": False, "speaker": False, "tts": False}
-    voices = client.get("/api/voices").json()
+    voices = [v for v in client.get("/api/voices").json() if not v["custom"]]
     assert [v["name"] for v in voices] == ["The Veteran", "Hype Host", "Spark", "Coach"]
-    assert voices[0]["preview_url"] == "/media/previews/bm_george.wav"
+    assert voices[0]["preview_url"] == "/media/previews/bm_george.local.wav"
+    assert h["voice_cloning"] is False
 
 
 def test_clips_list_is_a_list(client: TestClient) -> None:
@@ -85,3 +86,42 @@ def test_protocol_shapes_match_docs() -> None:
         "emotion": "peak",
         "arousal": 2.1,
     }
+
+
+def test_custom_voice_upload_needs_consent_and_enough_audio(
+    client: TestClient,
+    tmp_path,
+    monkeypatch,  # type: ignore[no-untyped-def]
+) -> None:
+    import io
+
+    import numpy as np
+    import soundfile as sf
+
+    import engine.voices_custom as vc
+
+    monkeypatch.setattr(vc, "CUSTOM_DIR", tmp_path / "custom")
+    sr = 16000
+    t = np.arange(sr * 8) / sr
+    voice = (0.2 * np.sin(2 * np.pi * 180 * t) * (1 + np.sin(2 * np.pi * 3 * t))).astype("float32")
+
+    def wav(x):  # type: ignore[no-untyped-def]
+        buf = io.BytesIO()
+        sf.write(buf, x, sr, format="WAV")
+        return ("me.wav", buf.getvalue(), "audio/wav")
+
+    no_consent = client.post("/api/voices/custom", data={"name": "Me"}, files={"file": wav(voice)})
+    assert no_consent.status_code == 400 and "permission" in no_consent.json()["detail"]
+    short = client.post("/api/voices/custom", data={"name": "Me", "consent": "true"},
+                        files={"file": wav(voice[: sr * 3])})  # fmt: skip
+    assert short.status_code == 400 and "at least" in short.json()["detail"]
+    ok = client.post("/api/voices/custom", data={"name": "My Voice", "consent": "true",
+                     "transcript": "hello"}, files={"file": wav(voice)})  # fmt: skip
+    assert ok.status_code == 200, ok.text
+    assert ok.json()["voice_id"] == "cu_my-voice" and ok.json()["custom"] is True
+    assert (tmp_path / "custom" / "my-voice" / "ref.mp3").exists()
+    listed = client.get("/api/voices").json()
+    assert any(v["voice_id"] == "cu_my-voice" for v in listed)
+    assert vc.reference("cu_my-voice")[1] == "hello"
+    assert client.delete("/api/voices/custom/cu_my-voice").status_code == 200
+    assert client.delete("/api/voices/custom/cu_my-voice").status_code == 404

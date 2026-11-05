@@ -11,6 +11,7 @@ class VoiceOut(BaseModel):
     description: str
     lang: str
     preview_url: str
+    custom: bool = False
 
 
 class ClipOut(BaseModel):

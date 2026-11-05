@@ -74,7 +74,9 @@ class FishTTS:
         self._lock = threading.Lock()
         from engine.config import load_voice_catalog
 
-        self._base_speed = {v.voice_id: v.base_speed for v in load_voice_catalog().voices}
+        self._base_speed = {
+            v.voice_id: v.base_speed for v in load_voice_catalog(include_custom=False).voices
+        }
         self.n_fish = 0
         self.n_fallback = 0
         self.first_audio_s: list[float] = []
@@ -86,10 +88,16 @@ class FishTTS:
         return voices
 
     # ---- character references -------------------------------------------------------------
-    def _reference(self, voice_id: str) -> bytes:
+    def _reference(self, voice_id: str) -> tuple[bytes, str]:
+        """(reference audio, its transcript). Custom voices use the user's own sample; built-in
+        characters use a clip recorded with the matching Kokoro voice."""
+        from engine.voices_custom import is_custom, reference
+
+        if is_custom(voice_id):
+            return reference(voice_id)
         with self._lock:
             if voice_id in self._refs:
-                return self._refs[voice_id]
+                return self._refs[voice_id], REFERENCE_TEXT
             path = CACHE_DIR / "fish_refs_v2" / f"{voice_id}.mp3"
             if not path.exists():
                 import soundfile as sf
@@ -106,7 +114,9 @@ class FishTTS:
                 )  # fmt: skip
                 wav.unlink()
             self._refs[voice_id] = path.read_bytes()
-            return self._refs[voice_id]
+            return self._refs[voice_id], REFERENCE_TEXT
+
+    supports_cloning = True
 
     # ---- synthesis --------------------------------------------------------------------------
     def _request(self, text: str, voice_id: str, style: DeliveryStyle) -> Any:
@@ -114,6 +124,7 @@ class FishTTS:
 
         base = self._base_speed.get(voice_id, 1.0)
         speed = float(np.clip(style.speed / base, 0.85, 1.25))
+        ref_audio, ref_text = self._reference(voice_id)
         body = {
             "text": EMOTION_TAGS.get(style.emotion, "") + text,
             "format": "pcm",
@@ -121,7 +132,7 @@ class FishTTS:
             "latency": self.latency,
             "normalize": True,
             "prosody": {"speed": round(speed, 3), "volume": 0},
-            "references": [{"audio": self._reference(voice_id), "text": REFERENCE_TEXT}],
+            "references": [{"audio": ref_audio, "text": ref_text}],
         }
         headers = {
             "Authorization": f"Bearer {self.key}",
@@ -155,7 +166,12 @@ class FishTTS:
                 break
         if resp is None:
             self.n_fallback += 1
-            yield self.fallback.synthesize(text, voice_id, style).audio
+            local_voice = (
+                voice_id
+                if voice_id in self._base_speed and not voice_id.startswith("cu_")
+                else "am_adam"
+            )
+            yield self.fallback.synthesize(text, local_voice, style).audio
             return
         self.n_fish += 1
         started = False
