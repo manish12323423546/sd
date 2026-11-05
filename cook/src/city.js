@@ -364,7 +364,7 @@ function houses(B, flags) {
       const floors = Math.max(1, Math.round(1 + rnd() * 1.6 + near * 2.2));
       const fh = 3.2 + rnd() * 0.5;
       const H = floors * fh;
-      const usePlaster = rnd() < 0.7;
+      const usePlaster = rnd() < 0.85;
       const bat = usePlaster ? plaster : stone;
       let col;
       if (usePlaster) {

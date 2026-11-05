@@ -30,11 +30,12 @@ export function makeSky() {
         vec2 q = vec2(p.x * 0.55 + p.y * 0.25, p.y * 1.25 - p.x * 0.1);
         // domain-warped base gives rounded, heaped cloud masses rather than pure streaks
         vec2 wq = q * 0.55 + 3.1;
-        wq += vec2(fbm2(wq * 0.8 + 1.7, 3), fbm2(wq * 0.8 - 4.2, 3)) * 0.9;
+        wq += vec2(fbm2(wq * 0.8 + 1.7, 3), fbm2(wq * 0.8 - 4.2, 3)) * 0.4;
         float base = fbm2(wq, 6);
         float detail = fbm2(q * 3.2 - 7.0, 5);
         float streak = fbm2(vec2(q.x * 0.25, q.y * 3.0) + 11.0, 4);
-        float dens = base * 1.0 + detail * 0.22 + streak * 0.25;
+        float dens = base * 1.0 + streak * 0.3;
+        dens -= (0.5 - 0.5 * detail) * 0.35; // erode edges into wisps
         dens = smoothstep(0.05, 0.85, dens);
         dens = dens * dens * (3.0 - 2.0 * dens) * 0.95;
         // fewer clouds right above the sun, a band at mid-height

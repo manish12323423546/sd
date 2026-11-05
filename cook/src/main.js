@@ -104,7 +104,7 @@ function weather(m, scale) {
         return mix(mix(vh(i), vh(i+vec2(1,0)), f.x), mix(vh(i+vec2(0,1)), vh(i+vec2(1,1)), f.x), f.y); }`)
       .replace('#include <map_fragment>', `
       vec4 t1 = texture2D(map, vMapUv);
-      vec4 t2 = texture2D(map, vMapUv * 0.371 + vec2(0.13, 0.57));
+      vec4 t2 = texture2D(map, mat2(0.0, 1.0, -1.0, 0.0) * vMapUv * 1.618 + vec2(0.13, 0.57));
       float bl = vn(vWP.xz * 0.05 + vWP.y * 0.03);
       vec4 sampledDiffuseColor = mix(t1, t2, 0.35 * bl);
       float macro = vn(vWP.xz * ${(0.02 * scale).toFixed(4)}) * 0.6 + vn(vWP.xz * 0.11 + 7.0) * 0.4;

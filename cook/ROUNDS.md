@@ -7,6 +7,9 @@ Shot list (src/shots.js): 01 hero bay · 02 aerial · 03 harbour · 04 temple lo
 | Round | Comp | Scale | Mat | Colour | Sky | Water | Detail | Variety | Slop | Weakest | Fix applied |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 0 | 45 | 40 | 30 | 35 | 40 | 50 | 35 | 25 | 55 | variety | (baseline) |
+| 1 | 52 | 45 | 30 | 48 | 50 | 55 | 38 | 35 | 70 | materials | AO/grime, anti-tiling, post grade (r2) |
+| 4 | 62 | 55 | 38 | 50 | 58 | 60 | 45 | 40 | 80 | materials | lime washes, paving (r5) |
+| 5 | 62 | 45 | 35 | 52 | 42 | 55 | 45 | 38 | 82 | materials | anti-tiling scale bug, clouds, plaster share (r6-r7) |
 
 ## Round 0: baseline
 - First full build: procedural sky/clouds, planar-reflection sea with sun glitter and shore foam, a Jagat-Mandir-style main temple, precinct, ~1500 houses, ramparts with bastions, ghats, harbour, boats, palms, flags.
@@ -45,4 +48,12 @@ Shot list (src/shots.js): 01 hero bay · 02 aerial · 03 harbour · 04 temple lo
 - Cooler sky-blue hemisphere fill and a teal-violet shadow lift in the grade, against the warm key.
 - Zenith darkened so upward shots (04, 10) read as dusk, not midday blue.
 - Palms: 30% short, dense date palms; coconut palms taller, with fuller fronds.
-- In progress for r6: softer cloud edges; carved niche friezes and lotus cornices on the temple platform.
+
+## Round 6: materials (critic r5 weakest: materials 35, "blocks read as toy bricks")
+- Root cause: the anti-tiling pass sampled the masonry at 0.37× UVs, overlaying a ghost block pattern 2.7× too large. It now samples at 1.618× with a 90° rotation.
+- Carved niche friezes and twin lotus cornices on every tier of the temple platform.
+- Zenith shifted to a dusk violet (critics kept calling 04 and 10 "midday blue").
+
+## Round 7: sky (critic r5: clouds read as paint daubs, sky 42)
+- Cloud domain warp cut from 0.9 to 0.4; detail noise erodes the edges into wisps; softer density ramp.
+- 85% of houses now lime-plastered (was 70%), so brick-looking ashlar is mostly kept for temples and fortifications.

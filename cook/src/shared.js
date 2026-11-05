@@ -126,7 +126,7 @@ vec3 skyBase(vec3 d){
   float h = d.y;
   float sd = max(dot(d, SUN_DIR), 0.0);
   float az = max(dot(normalize(vec3(d.x, 0.0, d.z) + 1e-5), normalize(vec3(SUN_DIR.x, 0.0, SUN_DIR.z))), 0.0);
-  vec3 zenith  = vec3(0.065, 0.08, 0.125);
+  vec3 zenith  = vec3(0.085, 0.075, 0.125);
   vec3 upper   = vec3(0.36, 0.30, 0.26);
   vec3 low     = vec3(1.08, 0.58, 0.24);
   vec3 horizon = vec3(1.55, 0.80, 0.33);
