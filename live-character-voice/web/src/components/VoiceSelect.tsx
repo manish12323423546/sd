@@ -11,7 +11,7 @@ export function VoiceSelect({ voices, value, onChange, label }: Props) {
   return (
     <select
       aria-label={label}
-      className="rounded-md border border-line bg-bg px-2 py-1 text-sm"
+      className="field min-w-0 flex-1 !py-1.5"
       value={value}
       onChange={(e) => onChange(e.target.value)}
     >

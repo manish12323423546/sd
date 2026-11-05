@@ -50,11 +50,16 @@ With both keys set, `provider: auto` (default) uses them and falls back to the l
 error. Measured: the new voice starts 1.8 s (median) after the commentator's line ends, vs 4.1 s
 fully local.
 
-## Your own voice (instant voice cloning)
-Needs a Fish Audio key in `.env`. On the home page open **Add your own voice**, give it a name,
-upload a clip, tick the permission box. Best sample: **10–20 s (15 s is ideal) of one person
-speaking clearly**, no music, no other voices, a little variety in tone. Longer files are fine —
-the app picks the best 15 s itself. Then choose the new voice for a commentator and press Start.
+## Your own voice — Voice Lab (instant or professional cloning)
+Needs a Fish Audio key (`make keys`). Open **Voice Lab** in the top bar:
+- **Instant clone** — 10–30 s of one voice (15 s ideal), ready in ~5 s.
+- **Professional clone** — 1–10 min recording (2–5 min is the sweet spot), ready in ~1 min. Keeps
+  only the main speaker, picks the cleanest speech, sorts calm / normal / excited delivery, tests
+  the clone in every mood and shows a likeness score (measured 0.68 vs 0.45 for instant on the
+  same recording).
+Upload a file or record in the browser (a reading script is shown). Then try any line in any mood
+in the **Playground**, and cast the voice on a commentator in **Studio → Cast the voices**.
+Best sample: one person, no music or other voices, quiet room, natural variety in tone.
 Only clone voices you own or have permission to use.
 
 ## Where the results are

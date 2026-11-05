@@ -16,6 +16,53 @@ export interface Voice {
   lang: string;
   preview_url: string;
   custom?: boolean;
+  tier?: "builtin" | "instant" | "pro";
+  score?: number | null;
+}
+
+export interface CloneJob {
+  job_id: string;
+  name: string;
+  stage: string;
+  progress: number;
+  steps: { key: string; label: string }[];
+  log: string[];
+  error: string | null;
+  result: VoiceDetail | null;
+  elapsed_s: number;
+}
+
+export interface RefClip {
+  file: string;
+  text: string;
+  seconds: number;
+  url?: string;
+  similarity?: number;
+  snr_db?: number;
+  arousal?: number;
+}
+
+export interface VoiceDetail {
+  voice_id: string;
+  name: string;
+  tier: "instant" | "pro";
+  transcript: string;
+  seconds: number;
+  source_seconds?: number;
+  speech_seconds?: number;
+  main_speaker_seconds?: number;
+  dropped_parts?: number;
+  refs?: Record<string, RefClip[]>;
+  ref_url?: string;
+  quality?: {
+    tested: boolean;
+    score?: number;
+    similarity?: number;
+    reason?: string;
+    moods?: Record<string, { similarity: number; seconds: number; loudness_db: number; made_in_s: number; url?: string }>;
+  };
+  fish_model?: { trained: boolean; reason?: string; model_id?: string };
+  created: string;
 }
 
 export interface Health {
@@ -70,6 +117,28 @@ export const api = {
   },
   deleteVoice: async (voiceId: string): Promise<void> => {
     await json(await fetch(`/api/voices/custom/${voiceId}`, { method: "DELETE" }));
+  },
+  startProClone: async (name: string, file: File, consent: boolean): Promise<CloneJob> => {
+    const form = new FormData();
+    form.append("name", name);
+    form.append("consent", consent ? "true" : "false");
+    form.append("file", file);
+    return json<CloneJob>(await fetch("/api/voices/pro", { method: "POST", body: form }));
+  },
+  cloneJob: async (jobId: string): Promise<CloneJob> => json<CloneJob>(await fetch(`/api/voices/jobs/${jobId}`)),
+  voiceDetail: async (voiceId: string): Promise<VoiceDetail> =>
+    json<VoiceDetail>(await fetch(`/api/voices/custom/${voiceId}`)),
+  /** Speak a line; resolves to an object URL of the WAV and how long generation took. */
+  say: async (voiceId: string, text: string, emotion: string): Promise<{ url: string; seconds: number }> => {
+    const t = performance.now();
+    const res = await fetch(`/api/voices/${voiceId}/say`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text, emotion }),
+    });
+    if (!res.ok) await json(res);
+    const blob = await res.blob();
+    return { url: URL.createObjectURL(blob), seconds: (performance.now() - t) / 1000 };
   },
   createSession: async (body: CreateSessionBody): Promise<{ session_id: string; ws_url: string }> =>
     json(

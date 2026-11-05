@@ -1,0 +1,12 @@
+{
+  "lines": 14,
+  "audioReady": 13,
+  "switchedTo": "am_adam",
+  "videoTime": 43.169328,
+  "sentTypes": [
+    "start",
+    "ping",
+    "played",
+    "set_voice"
+  ]
+}

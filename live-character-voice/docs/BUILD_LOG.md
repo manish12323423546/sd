@@ -443,3 +443,41 @@ line often waits for the previous voice to finish (schedule wait p50 0.7 s, p95 
   `/api/health` gains `engines` and `fish_fallback_lines`.
 - `make keys` (`scripts/setup_keys.sh`): asks for both keys, writes `.env` (chmod 600), checks them.
 - Verified here: valid keys → both online; bad Fish key → "rejected (HTTP 401)", Kokoro used.
+
+## 2026-11-05 — V2.3: professional voice cloning + redesigned UI (Studio / Voice Lab)
+
+**Fish "professional" trained voices** need paid API credit: `POST /model` on the free account →
+HTTP 403 "API model creation limit reached (0/0)". The app tries it once per pro voice and uses it
+automatically (`reference_id`) on accounts that allow it.
+
+**Built — free professional cloning** (`engine/voices_pro.py`, 1–10 min recording, background job):
+VAD utterances (2.5–12 s) → main speaker only (ECAPA voice prints, medoid of the largest group,
+cosine ≥ 0.45) → score (SNR, clipping, similarity) → calm/neutral/excited by robust z of loudness +
+pitch (floors 1.5 dB / 10 Hz) → best ~12 s of references, one shared gain, light FFT denoise for
+noisy sources → transcripts (Groq) → quality test in every mood (ECAPA similarity → 0–100 score).
+API: `POST /api/voices/pro`, `GET /api/voices/jobs/{id}`, `GET /api/voices/custom/{id}`,
+`POST /api/voices/{id}/say` (playground).
+
+**Measured** on `synthetic_match.mp4` audio (178 s, two commentators + crowd):
+- kept 75.6 s of the main voice, dropped 17 parts (the other commentator scored < 0.35 similarity,
+  the main one 0.59–0.91); first version kept only 23 s because an 8 dB SNR gate removed speech over
+  the crowd → gate lowered to 3 dB, SNR used for ranking only.
+- references per mood, 3 runs each (similarity to the real voice):
+  excited line with excited refs 0.33 (0.11–0.48), with neutral refs **0.69** (0.66–0.71);
+  peak 0.30 vs **0.68**; calm 0.68 vs **0.75**. → live lines use the steady neutral references in
+  every mood; emotion comes from Fish's tags (`mood_refs: true` re-enables per-mood references).
+- instant vs professional on the same file (2 runs per mood): instant 0.54 / 0.44 / 0.37
+  (calm / neutral / excited, mean 0.45 — its 15 s window included the other commentator) vs
+  professional **0.74 / 0.61 / 0.69 (mean 0.68)**; quality score 84.
+- pro clone through the browser UI: 44 s end to end; playground line (peak mood) 3.4 s.
+
+**UI/UX redesign**: new design system (glass panels, gradient accent, Inter/Sora/JetBrains Mono),
+app shell with Studio / Voice Lab navigation and live engine status pills.
+Studio: hero, footage cards with video thumbnails + drag-and-drop upload, new "Cast the voices"
+step (voice per commentator before starting, sent as `voice_map`), sticky "Go live" summary.
+Voice Lab: Instant vs Professional mode cards, upload (waveform + duration check) or record in the
+browser with a reading script (calm / normal / excited), live step-by-step progress with log, voice
+detail (likeness ring, test per mood, the clips picked from the recording), playground (any line,
+any voice, calm → peak, history + download), library with filters. Player/report restyled.
+Checks: tsc + eslint clean, vitest 13/13, pytest 66 passed, e2e smoke OK (delay p50 1.9 s,
+p95 2.4 s, voice switch OK), no horizontal scroll at 390 px, no console errors.

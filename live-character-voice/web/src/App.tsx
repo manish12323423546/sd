@@ -1,19 +1,70 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, NavLink, Route, Routes } from "react-router-dom";
+import { api, type Health } from "./net/api";
 import { Home } from "./routes/Home";
 import { Player } from "./routes/Player";
 import { Report } from "./routes/Report";
+import { VoiceLab } from "./routes/VoiceLab";
+import { Dot } from "./ui/kit";
+
+function EnginePills() {
+  const [h, setH] = useState<Health | null>(null);
+  useEffect(() => {
+    const load = () => api.health().then(setH).catch(() => setH(null));
+    void load();
+    const t = window.setInterval(load, 15000);
+    return () => window.clearInterval(t);
+  }, []);
+  const e = h?.engines ?? {};
+  const items = [
+    { k: "voices", label: e.voices?.online ? "Fish Audio" : "Offline voices" },
+    { k: "text", label: e.text?.online ? "Groq" : "Offline text" },
+  ];
+  if (!h) return <span className="text-xs text-muted">connecting…</span>;
+  return (
+    <div className="hidden items-center gap-2 md:flex" data-testid="engine-pills">
+      {items.map((it) => (
+        <span key={it.k} title={e[it.k]?.note ?? ""} className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-muted">
+          <Dot ok={Boolean(e[it.k]?.online)} />
+          {it.label}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+const tab = ({ isActive }: { isActive: boolean }) =>
+  `whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition ${isActive ? "bg-white/10 text-ink" : "text-muted hover:text-ink"}`;
 
 export function App() {
   return (
-    <div className="min-h-screen bg-bg text-ink">
-      <header className="flex items-center justify-between border-b border-line px-4 py-3">
-        <Link to="/" className="text-[20px] font-semibold">
-          Live Sports Character Voice <span className="text-muted">— Pilot</span>
-        </Link>
-        <span className="text-xs text-muted">free, CPU-only engine · original voices only</span>
+    <div className="min-h-screen text-ink">
+      <header className="sticky top-0 z-30 border-b border-white/[0.06] bg-bg/70 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6">
+          <Link to="/" className="flex items-center gap-2.5">
+            <span className="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-accent to-violet shadow-glow">
+              <span className="flex h-3.5 items-end gap-[2px]">
+                {[0.5, 1, 0.7, 0.9].map((h, i) => (
+                  <span key={i} className="w-[3px] rounded-full bg-white" style={{ height: `${h * 100}%` }} />
+                ))}
+              </span>
+            </span>
+            <span className="hidden font-display text-[15px] font-semibold tracking-tight sm:inline">
+              Live Character Voice
+            </span>
+          </Link>
+          <nav className="ml-2 flex items-center gap-1">
+            <NavLink to="/" end className={tab}>Studio</NavLink>
+            <NavLink to="/voices" className={tab}>Voice Lab</NavLink>
+          </nav>
+          <div className="ml-auto">
+            <EnginePills />
+          </div>
+        </div>
       </header>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/voices" element={<VoiceLab />} />
         <Route path="/session/:id" element={<Player />} />
         <Route path="/session/:id/report" element={<Report />} />
       </Routes>

@@ -40,7 +40,8 @@ page.on("pageerror", (e) => console.error("page error:", e.message));
 
 await page.goto(`${BASE}/?speed=${SPEED}`);
 await page.getByTestId("clips").waitFor();
-await page.locator(`input[value="${CLIP}"]`).check();
+// the clip card (a label) wraps a visually hidden radio input
+await page.locator("label", { has: page.locator(`input[value="${CLIP}"]`) }).click();
 await page.getByLabel("Max commentators").selectOption(SPEAKERS);
 await page.waitForFunction(() => {
   const b = document.querySelector('[data-testid="start-session"]');

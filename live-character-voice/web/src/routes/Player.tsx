@@ -156,36 +156,37 @@ export function Player() {
   const speakers = s.speakerOrder.map((k) => s.speakers[k]).filter((x) => x !== undefined);
 
   return (
-    <main className="mx-auto grid max-w-[1400px] gap-4 p-4 xl:grid-cols-[1fr_420px]">
+    <main className="mx-auto grid max-w-[1400px] gap-5 px-4 pb-12 pt-5 sm:px-6 xl:grid-cols-[1fr_420px]">
       <section className="flex flex-col gap-3">
-        <div className="relative overflow-hidden rounded-panel border border-line bg-black" style={{ aspectRatio: "16 / 9" }}>
+        <div className="relative overflow-hidden rounded-[20px] border border-white/10 bg-black shadow-card" style={{ aspectRatio: "16 / 9" }}>
           {s.mediaUrl && (
             <video ref={videoRef} src={s.mediaUrl} playsInline preload="auto" className="h-full w-full" data-testid="video"
               onContextMenu={(e) => e.preventDefault()} />
           )}
           {s.status === "ready" && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/60">
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gradient-to-b from-black/40 to-black/80 backdrop-blur-[2px]">
               <button type="button" data-testid="start-live" onClick={() => void startPlayback()}
-                className="rounded-panel bg-accent px-6 py-3 text-lg font-semibold text-bg">
+                className="btn-primary !rounded-full !px-8 !py-4 text-lg">
                 ▶ Start live playback
               </button>
+              <p className="text-xs text-white/70">Voices start about 2 s behind the action · use headphones for the best mix</p>
             </div>
           )}
           {s.status === "idle" && <div className="absolute inset-0 flex items-center justify-center text-muted">{connError ?? "connecting…"}</div>}
         </div>
-        <div className="flex flex-col gap-3 rounded-panel border border-line bg-panel p-3">
+        <div className="panel flex flex-col gap-3 p-4">
           <div className="flex flex-wrap items-center gap-3">
             {s.status === "live" ? (
-              <button type="button" onClick={stop} aria-label="Stop session" className="rounded-md border border-line px-3 py-1 hover:border-peak">❚❚ stop</button>
+              <button type="button" onClick={stop} aria-label="Stop session" className="btn-ghost !py-1.5 hover:!border-peak/60 hover:!text-peak">❚❚ Stop</button>
             ) : (
-              <span className="rounded-md border border-line px-3 py-1 text-muted">▶</span>
+              <span className="btn-ghost !py-1.5 text-muted">▶</span>
             )}
             <DelayHud status={s.status} mediaTime={mediaTime} metrics={s.metrics} />
           </div>
           <Controls levels={s.levels} onChange={(p) => useSession.getState().setLevels(p)} />
           {s.status === "ended" && (
             <p className="text-sm">
-              Session ended. <Link className="text-accent" to={`/session/${id}/report`}>Open the session report →</Link>
+              Session ended. <Link className="btn-primary ml-2 !py-1.5" to={`/session/${id}/report`}>Open the session report →</Link>
             </p>
           )}
           {s.warnings[0] && <p className="text-xs text-excited" role="status">⚠ {s.warnings[0]}</p>}
@@ -193,22 +194,22 @@ export function Player() {
       </section>
 
       <aside className="flex flex-col gap-4">
-        <section className="rounded-panel border border-line bg-panel p-3">
-          <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">Commentators</h2>
+        <section className="panel p-4">
+          <h2 className="eyebrow mb-3">Commentators</h2>
           <div className="flex flex-col gap-2">
             {speakers.length === 0 && <p className="text-sm text-muted">Commentators appear when they first speak.</p>}
             {speakers.map((sp) => (
               <SpeakerCard key={sp.id} speaker={sp} voices={s.voices} onVoice={(v) => changeVoice(sp.id, v)} onPreview={preview} />
             ))}
           </div>
-          {toast && <p className="mt-2 rounded-md bg-accent/15 px-2 py-1 text-xs text-accent" role="status">{toast}</p>}
+          {toast && <p className="mt-3 animate-rise rounded-lg bg-accent/15 px-3 py-2 text-xs text-accent" role="status">{toast}</p>}
         </section>
-        <section className="rounded-panel border border-line bg-panel p-3">
-          <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">Live transcript</h2>
+        <section className="panel p-4">
+          <h2 className="eyebrow mb-3">Live transcript</h2>
           <Transcript lines={s.lines} speakers={s.speakers} />
         </section>
-        <section className="rounded-panel border border-line bg-panel p-3">
-          <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">Delay (last 2 min)</h2>
+        <section className="panel p-4">
+          <h2 className="eyebrow mb-3">Delay (last 2 min)</h2>
           <Sparkline points={recentDelays(s)} />
           <a className="mt-2 inline-block text-sm text-accent" href={`/api/sessions/${id}/lines.csv`} download>
             Export delay log CSV

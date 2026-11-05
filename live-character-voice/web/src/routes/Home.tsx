@@ -1,8 +1,11 @@
+// Studio: pick footage → cast a voice for each commentator → go live.
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { EngineBanner } from "../components/EngineBanner";
-import { VoiceUpload } from "../components/VoiceUpload";
-import { api, type Clip, type Health } from "../net/api";
+import { api, type Clip, type Health, type Voice } from "../net/api";
+import { Avatar, DropZone, PlayButton, TierBadge } from "../ui/kit";
+
+const SPEAKER_COLORS = ["#4FA3FF", "#F5A524", "#5BC0BE"];
 
 function dur(s: number): string {
   return `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
@@ -12,18 +15,22 @@ export function Home() {
   const nav = useNavigate();
   const [health, setHealth] = useState<Health | null>(null);
   const [clips, setClips] = useState<Clip[]>([]);
+  const [voices, setVoices] = useState<Voice[]>([]);
   const [clipId, setClipId] = useState<string>("");
   const [speakers, setSpeakers] = useState(2);
+  const [cast, setCast] = useState<Record<string, string>>({});
   const [enroll, setEnroll] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const speed = Number(new URLSearchParams(window.location.search).get("speed") ?? "1") || 1;
 
   const refresh = async () => {
     try {
-      const [h, c] = await Promise.all([api.health(), api.clips()]);
+      const [h, c, v] = await Promise.all([api.health(), api.clips(), api.voices()]);
       setHealth(h);
       setClips(c);
+      setVoices(v);
       setClipId((cur) => cur || c[0]?.clip_id || "");
     } catch (e) {
       setError(`Backend not reachable: ${(e as Error).message}`);
@@ -35,10 +42,12 @@ export function Home() {
   }, []);
 
   const selected = clips.find((c) => c.clip_id === clipId);
+  const ready = health?.models_loaded && Object.values(health.models_loaded).every(Boolean);
+  const ids = Array.from({ length: speakers }, (_, i) => `S${i + 1}`);
 
   const upload = async (file: File | undefined) => {
     if (!file) return;
-    setBusy(true);
+    setUploading(true);
     setError(null);
     try {
       const c = await api.uploadClip(file);
@@ -47,7 +56,7 @@ export function Home() {
     } catch (e) {
       setError((e as Error).message);
     } finally {
-      setBusy(false);
+      setUploading(false);
     }
   };
 
@@ -56,7 +65,8 @@ export function Home() {
     setBusy(true);
     setError(null);
     try {
-      const s = await api.createSession({ clip_id: clipId, max_speakers: speakers, use_enroll: enroll, speed });
+      const voice_map = Object.fromEntries(ids.filter((k) => cast[k]).map((k) => [k, cast[k] as string]));
+      const s = await api.createSession({ clip_id: clipId, max_speakers: speakers, use_enroll: enroll, speed, voice_map });
       nav(`/session/${s.session_id}`);
     } catch (e) {
       setError((e as Error).message);
@@ -64,79 +74,180 @@ export function Home() {
     }
   };
 
-  const ready = health?.models_loaded && Object.values(health.models_loaded).every(Boolean);
-
   return (
-    <main className="mx-auto grid max-w-5xl gap-4 p-4 lg:grid-cols-[1fr_320px]">
-      <EngineBanner health={health} />
-      <section className="rounded-panel border border-line bg-panel p-4">
-        <h2 className="mb-3 text-[20px] font-semibold">1. Pick a clip</h2>
-        <ul className="flex flex-col gap-2" data-testid="clips">
-          {clips.map((c) => (
-            <li key={c.clip_id}>
-              <label className={`flex cursor-pointer items-center gap-3 rounded-md border p-2 ${c.clip_id === clipId ? "border-accent" : "border-line"}`}>
-                <input type="radio" name="clip" value={c.clip_id} checked={c.clip_id === clipId} onChange={() => setClipId(c.clip_id)} />
-                <span className="flex-1">{c.name}</span>
-                <span className="font-mono text-xs text-muted">{dur(c.duration)}</span>
-                {c.has_truth && <span className="text-xs text-calm">truth</span>}
-              </label>
-            </li>
+    <main className="mx-auto flex max-w-7xl flex-col gap-6 px-4 pb-16 pt-6 sm:px-6">
+      <section className="relative overflow-hidden rounded-[24px] border border-white/[0.07] bg-gradient-to-br from-[#0f1a2c] via-[#0c111b] to-[#170f26] px-6 py-8 sm:px-10 sm:py-10">
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 items-center justify-end gap-1 pr-10 opacity-70 md:flex">
+          {Array.from({ length: 48 }, (_, i) => (
+            <span key={i} className="w-1 animate-bar rounded-full bg-gradient-to-t from-accent via-violet to-peak"
+              style={{ height: `${18 + Math.abs(Math.sin(i * 0.45) * Math.cos(i * 0.13)) * 150}px`, animationDelay: `${(i % 12) * 0.09}s`, animationDuration: `${0.9 + (i % 6) * 0.18}s` }} />
           ))}
-          {clips.length === 0 && <li className="text-muted">No clips yet — run <code>make synth</code> or upload one.</li>}
-        </ul>
-        <label className="mt-3 inline-flex cursor-pointer items-center gap-2 rounded-md border border-line px-3 py-1.5 text-sm hover:border-accent">
-          Upload clip (.mp4 / .mkv / .mov)
-          <input type="file" accept=".mp4,.mkv,.mov" className="sr-only" disabled={busy} onChange={(e) => void upload(e.target.files?.[0])} />
-        </label>
-        <p className="mt-2 text-xs text-muted">
-          Any video works: speakers, words, emotion and delay are analysed live while it plays, and a full report is written at the end.
-          Only use footage you are allowed to use.
+        </div>
+        <p className="eyebrow">Studio</p>
+        <h1 className="mt-2 max-w-2xl font-display text-3xl font-semibold leading-tight sm:text-5xl">
+          <span className="gradient-text">Re-voice live commentary in any character.</span>
+        </h1>
+        <p className="mt-3 max-w-xl text-[15px] text-muted">
+          Words, speakers and emotion are detected as the match plays — every line is re-spoken in the voice you cast, about two
+          seconds behind the action.
         </p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a href="#step-footage" className="btn-primary">Start a session</a>
+          <Link to="/voices" className="btn-ghost">Clone a voice →</Link>
+        </div>
       </section>
-      <div className="lg:col-start-1">
-        <VoiceUpload cloning={Boolean(health?.voice_cloning)} />
-      </div>
 
-      <aside className="flex flex-col gap-4">
-        <section className="rounded-panel border border-line bg-panel p-4">
-          <h2 className="mb-3 text-[20px] font-semibold">2. Session</h2>
-          <label className="mb-2 flex items-center justify-between gap-2 text-sm">
-            Max commentators
-            <select aria-label="Max commentators" className="rounded-md border border-line bg-bg px-2 py-1" value={speakers} onChange={(e) => setSpeakers(Number(e.target.value))}>
-              <option value={2}>2</option>
-              <option value={3}>3</option>
-            </select>
-          </label>
-          <label className={`mb-3 flex items-center gap-2 text-sm ${selected?.has_enroll ? "" : "opacity-50"}`}>
-            <input type="checkbox" disabled={!selected?.has_enroll} checked={enroll && !!selected?.has_enroll} onChange={(e) => setEnroll(e.target.checked)} />
-            Use enrollment file (known commentators)
-          </label>
-          {speed !== 1 && <p className="mb-2 text-xs text-excited">Dev speed {speed}× — not a live measurement.</p>}
-          <button type="button" data-testid="start-session" disabled={!clipId || busy || !ready}
-            className="w-full rounded-md bg-accent px-3 py-2 font-semibold text-bg disabled:opacity-40" onClick={() => void start()}>
-            {busy ? "Starting…" : "Start session"}
-          </button>
-          {error && <p className="mt-2 text-sm text-peak" role="alert">{error}</p>}
-        </section>
-        <section className="rounded-panel border border-line bg-panel p-4 text-sm" data-testid="health">
-          <h2 className="mb-2 font-semibold">Backend</h2>
-          {!health && <p className="text-muted">checking…</p>}
-          {health && (
-            <ul className="flex flex-col gap-1">
-              {Object.entries(health.models_loaded).map(([k, v]) => (
-                <li key={k} className="flex justify-between">
-                  <span>{k}</span>
-                  <span className={v ? "text-calm" : "text-peak"}>{v ? "loaded" : "not loaded"}</span>
-                </li>
-              ))}
-              {Object.entries(health.model_info).map(([k, v]) => (
-                <li key={`i-${k}`} className="text-xs text-muted">{k}: {v}</li>
-              ))}
-              {health.active_session && <li className="text-xs text-excited">active session: {health.active_session}</li>}
-            </ul>
-          )}
-        </section>
-      </aside>
+      <EngineBanner health={health} />
+
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_380px]">
+        <div className="flex flex-col gap-6">
+          {/* 1. footage */}
+          <section id="step-footage" className="panel scroll-mt-20 p-5 sm:p-6">
+            <StepTitle n={1} title="Choose footage" hint="Any match video — analysed live while it plays." />
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3" data-testid="clips">
+              {clips.map((c) => {
+                const on = c.clip_id === clipId;
+                return (
+                  <label key={c.clip_id}
+                    className={`group relative cursor-pointer overflow-hidden rounded-2xl border transition ${on ? "border-accent shadow-glow" : "border-white/10 hover:border-white/30"}`}>
+                    <input type="radio" name="clip" value={c.clip_id} checked={on} onChange={() => setClipId(c.clip_id)} className="sr-only" />
+                    <div className="relative aspect-video bg-black">
+                      <video src={`${c.url}#t=4`} preload="metadata" muted playsInline className="h-full w-full object-cover opacity-80 transition group-hover:opacity-100" />
+                      <span className="absolute bottom-2 right-2 rounded-md bg-black/70 px-1.5 py-0.5 font-mono text-[11px]">{dur(c.duration)}</span>
+                      {on && <span className="absolute left-2 top-2 grid h-6 w-6 place-items-center rounded-full bg-accent text-xs font-bold text-white">✓</span>}
+                    </div>
+                    <div className="flex items-center justify-between gap-2 px-3 py-2.5">
+                      <span className="truncate text-sm font-medium">{c.name}</span>
+                      {c.has_truth && <span className="shrink-0 rounded-full bg-calm/15 px-2 py-0.5 text-[10px] font-semibold uppercase text-calm">scored</span>}
+                    </div>
+                  </label>
+                );
+              })}
+              <DropZone accept=".mp4,.mkv,.mov" onFile={(f) => void upload(f)} disabled={uploading}>
+                <div className="flex aspect-video flex-col items-center justify-center">
+                  <div className="mb-2 grid h-10 w-10 place-items-center rounded-full bg-accent/15 text-xl text-accent transition group-hover:scale-110">+</div>
+                  <p className="text-sm font-medium">{uploading ? "Uploading…" : "Upload a video"}</p>
+                  <p className="text-[11px] text-muted">.mp4 · .mkv · .mov · drop or click</p>
+                </div>
+              </DropZone>
+            </div>
+            <p className="mt-3 text-xs text-muted">Only use footage you are allowed to use. “Scored” clips have a ground truth, so the report includes accuracy.</p>
+          </section>
+
+          {/* 2. cast */}
+          <section className="panel p-5 sm:p-6" data-testid="cast">
+            <StepTitle n={2} title="Cast the voices" hint="Who re-speaks each commentator. You can still switch live." />
+            <div className="mb-4 flex items-center gap-3 text-sm">
+              <label htmlFor="max-commentators" className="text-muted">Commentators</label>
+              <select id="max-commentators" aria-label="Max commentators" className="field !w-auto !py-1.5" value={speakers}
+                onChange={(e) => setSpeakers(Number(e.target.value))}>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+              </select>
+            </div>
+            <div className="grid gap-3 md:grid-cols-2">
+              {ids.map((sid, i) => {
+                const vid = cast[sid] ?? "";
+                const v = voices.find((x) => x.voice_id === vid);
+                return (
+                  <div key={sid} className="flex flex-col gap-3 rounded-2xl border border-white/[0.07] bg-black/25 p-4">
+                    <div className="flex items-center gap-2 text-sm">
+                      <span className="h-2.5 w-2.5 rounded-full" style={{ background: SPEAKER_COLORS[i] }} />
+                      <span className="font-semibold">Commentator {i + 1}</span>
+                      <span className="ml-auto text-[11px] text-muted">{sid}</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      {v ? <Avatar name={v.name} id={v.voice_id} size={40} /> : <span className="grid h-10 w-10 place-items-center rounded-2xl border border-dashed border-white/15 text-[10px] text-muted">auto</span>}
+                      <select aria-label={`Cast voice for commentator ${i + 1}`} className="field min-w-0 flex-1 !py-2" value={vid}
+                        onChange={(e) => setCast((c) => ({ ...c, [sid]: e.target.value }))}>
+                        <option value="">Automatic</option>
+                        <optgroup label="Your clones">
+                          {voices.filter((x) => x.custom).map((x) => <option key={x.voice_id} value={x.voice_id}>{x.name}</option>)}
+                        </optgroup>
+                        <optgroup label="Built-in">
+                          {voices.filter((x) => !x.custom).map((x) => <option key={x.voice_id} value={x.voice_id}>{x.name}</option>)}
+                        </optgroup>
+                      </select>
+                      <PlayButton url={v?.preview_url} label={`${v?.name ?? "voice"} preview`} size="sm" />
+                    </div>
+                    {v && <div className="flex items-center gap-2"><TierBadge tier={v.tier} />{typeof v.score === "number" && <span className="text-[11px] text-muted">likeness {v.score}</span>}</div>}
+                  </div>
+                );
+              })}
+            </div>
+            {voices.every((v) => !v.custom) && (
+              <p className="mt-3 text-xs text-muted">Tip: <Link to="/voices" className="text-accent">clone your own voice</Link> in the Voice Lab and cast it here.</p>
+            )}
+          </section>
+        </div>
+
+        {/* 3. go live */}
+        <aside className="flex flex-col gap-4 lg:sticky lg:top-20 lg:self-start">
+          <section className="panel overflow-hidden">
+            <div className="p-5 sm:p-6">
+              <StepTitle n={3} title="Go live" />
+              <dl className="mb-4 space-y-2 text-sm">
+                <Row k="Footage" v={selected ? selected.name : "—"} />
+                <Row k="Length" v={selected ? dur(selected.duration) : "—"} />
+                <Row k="Commentators" v={String(speakers)} />
+                <Row k="Voices" v={ids.map((k) => voices.find((x) => x.voice_id === cast[k])?.name ?? "auto").join(" · ")} />
+              </dl>
+              <label className={`mb-4 flex items-center gap-2 text-sm ${selected?.has_enroll ? "" : "opacity-40"}`}>
+                <input type="checkbox" className="h-4 w-4 accent-accent" disabled={!selected?.has_enroll} checked={enroll && !!selected?.has_enroll} onChange={(e) => setEnroll(e.target.checked)} />
+                Known commentators (enrollment file)
+              </label>
+              {speed !== 1 && <p className="mb-2 text-xs text-excited">Dev speed {speed}× — not a live measurement.</p>}
+              <button type="button" data-testid="start-session" disabled={!clipId || busy || !ready} className="btn-primary w-full !py-3.5 text-base" onClick={() => void start()}>
+                {busy ? "Starting…" : ready ? "● Start live session" : "Loading models…"}
+              </button>
+              {error && <p className="mt-3 text-sm text-peak" role="alert">{error}</p>}
+            </div>
+            <div className="border-t border-white/[0.06] bg-black/20 p-5 text-sm" data-testid="health">
+              <p className="eyebrow mb-2">Engine</p>
+              {!health && <p className="text-muted">checking…</p>}
+              {health && (
+                <ul className="space-y-1.5 text-[13px]">
+                  <EngineRow label="Speech-to-text" value={health.engines?.text?.name ?? health.model_info.asr ?? "—"} ok={health.models_loaded.asr ?? false} />
+                  <EngineRow label="Speaker ID" value={health.model_info.speaker ?? "—"} ok={health.models_loaded.speaker ?? false} />
+                  <EngineRow label="Voices" value={health.engines?.voices?.name ?? health.model_info.tts ?? "—"} ok={health.models_loaded.tts ?? false} />
+                  {health.active_session && <li className="text-xs text-excited">active session: {health.active_session}</li>}
+                </ul>
+              )}
+            </div>
+          </section>
+        </aside>
+      </div>
     </main>
+  );
+}
+
+function StepTitle({ n, title, hint }: { n: number; title: string; hint?: string }) {
+  return (
+    <div className="mb-4 flex items-start gap-3">
+      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-gradient-to-br from-accent to-violet text-xs font-bold text-white">{n}</span>
+      <div>
+        <h2 className="font-display text-lg font-semibold leading-7">{title}</h2>
+        {hint && <p className="text-xs text-muted">{hint}</p>}
+      </div>
+    </div>
+  );
+}
+
+function Row({ k, v }: { k: string; v: string }) {
+  return (
+    <div className="flex justify-between gap-3">
+      <dt className="text-muted">{k}</dt>
+      <dd className="truncate text-right font-medium">{v}</dd>
+    </div>
+  );
+}
+
+function EngineRow({ label, value, ok }: { label: string; value: string; ok: boolean }) {
+  return (
+    <li className="flex items-center gap-2">
+      <span className={`h-1.5 w-1.5 rounded-full ${ok ? "bg-ok" : "bg-peak"}`} />
+      <span className="text-muted">{label}</span>
+      <span className="ml-auto truncate text-right text-xs">{value}</span>
+    </li>
   );
 }

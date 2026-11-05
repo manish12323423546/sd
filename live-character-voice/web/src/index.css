@@ -4,10 +4,20 @@
 
 html,
 body {
-  background: #0b0f14;
-  color: #e6edf5;
-  font-family: Sora, system-ui, sans-serif;
+  background: #06080c;
+  color: #eef3fa;
+  font-family: Inter, system-ui, sans-serif;
   font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(79, 163, 255, 0.12), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(139, 108, 255, 0.1), transparent 60%),
+    #06080c;
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
 :focus-visible {
@@ -17,4 +27,40 @@ body {
 
 input[type="range"] {
   accent-color: #4fa3ff;
+}
+
+@layer components {
+  .panel {
+    @apply rounded-panel border border-white/[0.07] bg-panel/80 shadow-card backdrop-blur-xl;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition
+      disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-accent to-violet text-white shadow-glow hover:brightness-110 active:scale-[.98];
+  }
+  .btn-ghost {
+    @apply btn border border-white/10 bg-white/[0.03] text-ink hover:border-accent/60 hover:bg-white/[0.06];
+  }
+  .field {
+    @apply w-full rounded-xl border border-white/10 bg-black/30 px-3 py-2.5 text-sm text-ink placeholder:text-muted/60
+      focus:border-accent/70 focus:outline-none focus:ring-2 focus:ring-accent/20;
+  }
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-muted;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-white via-[#cfe3ff] to-violet bg-clip-text text-transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
