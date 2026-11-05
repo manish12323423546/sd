@@ -18,7 +18,7 @@ segment:
   level_split_db: 6      # split at a micro-pause when the level jumps ≥ 6 dB (M2)
   speaker_split: true     # embedding check on long open lines (from M3)
 asr:
-  provider: faster_whisper
+  provider: auto           # groq if GROQ_API_KEY is set (free tier), else local faster_whisper
   model: small.en
   compute_type: int8
   cpu_threads: 4
@@ -35,7 +35,7 @@ emotion:
   weights: {loudness: 0.45, pitch: 0.30, rate: 0.15, text: 0.10}
   thresholds: {calm: -0.5, excited: 0.8, peak: 1.8}
 tts:
-  provider: kokoro
+  provider: auto           # fish if FISH_API_KEY is set (s2.1-pro-free), else local kokoro
   workers: 2
   lang_code: a
   voice_map: {S1: bm_george, S2: am_adam, S3: af_bella}

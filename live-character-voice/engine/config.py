@@ -45,6 +45,7 @@ class AsrConfig(_Strict):
     cpu_threads: int = 2
     beam_size: int = 1
     fallback_model: str = "base.en"
+    groq_model: str = "whisper-large-v3-turbo"  # provider "groq" (free tier)
 
 
 class SpeakerConfig(_Strict):
@@ -76,6 +77,9 @@ class TtsConfig(_Strict):
     voice_map: dict[str, str] = Field(
         default_factory=lambda: {"S1": "bm_george", "S2": "am_adam", "S3": "af_bella"}
     )
+    fish_model: str = "s2.1-pro-free"  # provider "fish": $0 free tier
+    fish_latency: str = "balanced"  # normal | balanced | low
+    streaming: bool = True  # start playback on the first audio chunk (providers with .stream)
 
 
 class StyleConfig(_Strict):

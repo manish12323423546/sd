@@ -362,3 +362,43 @@ pass: each provider on a 3 s line + a 30 s end-to-end live run).
 - Licences outside the permissive list (accepted by the user in this session): espeak-ng (GPL-3)
   and soxr (LGPL-2.1, via librosa).
 - GitHub Actions workflow lives in `ci/` (the Claude GitHub App cannot push workflow files).
+
+
+## 2026-11-05 — V2: hosted free providers + streaming playback
+
+User supplied a Fish Audio key (free model `s2.1-pro-free`, $0) and a Groq key (free tier). Keys are
+never written to the repo: Fish is read from FISH_API_KEY / FISH_API_KEY_FILE, Groq is injected by
+the cloud proxy (locally: GROQ_API_KEY). `provider: auto` picks the hosted provider when its key is
+present, else the local one; both hosted providers fall back to the local model per line on any
+error (429 limit, 401, network), so a session never stops because of an API.
+
+**Built**
+- `providers/free/tts_fish.py`: Fish S2.1 with emotion tags (calm → [calm], excited → [excited],
+  peak → [excited][shouting]); characters cloned per request from a ~6 s reference recorded with
+  our own Kokoro voice (free tier cannot store voice models: HTTP 403 "model creation limit 0/0");
+  streaming generator with chunk-consistent soft limiter.
+- `providers/free/asr_groq.py`: Groq whisper-large-v3-turbo with word timestamps.
+- Streaming TTS end to end: worker writes `<line>.part.wav` as chunks arrive and marks the line
+  playable on the first chunk; scheduler starts it 0.15 s after first audio; server streams the
+  growing file (`/media/tts/...part.wav`); player plays it through an <audio> element routed into
+  the Web Audio graph. New metrics: delay to voice start (first audio, or the latest stall-free
+  start), stream stalls; catch-up for streams = request faster speech (no time-stretch possible).
+
+**Measured** (all live at speed 1.0, `data/clips/synthetic_match.mp4`):
+| Run | Median / p95 delay to voice start | Median / p95 delay to voice playing | WER | Speaker acc. |
+|---|---|---|---|---|
+| POC baseline (local Whisper + Kokoro), median of 3 | 4.14 / 5.42 (ready) | 5.26 / 7.71 | 10.9 % | 92.9 % |
+| `…_fish1` (Fish TTS, local ASR) | 4.06 / 5.30 (ready) | 4.94 | 10.7 % | 92.9 % |
+| `…_groqfish1` (Groq ASR + Fish) | 3.21 / 4.41 (ready) | 4.20 | **7.2 %** | 92.9 % |
+| `…_stream1` (+ streaming) | **1.80** / 2.65 | 3.76 / 6.00 | 6.9 % | 92.9 % |
+| `…_stream2` (+ stream catch-up) | **1.80** / 2.86 | **2.83** / 5.62 | **6.9 %** | 92.9 % |
+Stages (stream2): end-of-line detection 0.49 s, Groq ASR p50 0.40 s (p95 1.4), Fish first audio p50
+0.77 s, Fish complete 1.96 s. 0 stream stalls, 0 clipped files, voice/original length ratio p50 0.98.
+Fish quick tests: first audio 0.8–1.0 s, full 3 s line 1.8–2.1 s; reference 6 s vs 15 s saves ~0.3 s;
+`latency: low` no faster than `balanced`. Cloned characters: 8/8 test lines closest (ECAPA) to their
+own character reference; all intelligible to Whisper.
+Browser (Playwright, Chromium on the same 4 vCPU): streamed lines started a median 23 ms after
+their planned time.
+
+**Remaining delay** is mostly queuing: dense commentary (the synthetic clip is 81 % speech) means a
+line often waits for the previous voice to finish (schedule wait p50 0.7 s, p95 3.8 s).

@@ -84,8 +84,13 @@ def write_chart(rec: SessionRecord, path: Path) -> bool:
     return True
 
 
+def _head(m: dict[str, Any]) -> dict[str, Any]:
+    d: dict[str, Any] = m["delay"][m["delay"].get("headline", "delay_ready")]
+    return d
+
+
 def _verdicts(m: dict[str, Any]) -> dict[str, bool | None]:
-    d = m["delay"]["delay_ready"]
+    d = _head(m)
     out: dict[str, bool | None] = {
         "median_delay": None if d["p50"] is None else d["p50"] <= TARGETS["median_delay"],
         "p95_delay": None if d["p95"] is None else d["p95"] <= TARGETS["p95_delay"],
@@ -104,7 +109,8 @@ def _verdicts(m: dict[str, Any]) -> dict[str, bool | None]:
 def build_report(run_dir: Path, m: dict[str, Any], rec: SessionRecord) -> str:
     run = m.get("run", {})
     v = _verdicts(m)
-    d = m["delay"]["delay_ready"]
+    d = _head(m)
+    streaming = m["delay"].get("headline") == "delay_start"
     dp = m["delay"]["delay_play"]
     st = m["delay"]["stages"]
     live = rec.speed == 1.0
@@ -180,7 +186,8 @@ def build_report(run_dir: Path, m: dict[str, Any], rec: SessionRecord) -> str:
         "emotion": "line closed → emotion known (needs text)",
         "complete": "line closed → all three ready",
         "tts_queue": "complete → TTS started (waiting for a worker)",
-        "tts": "TTS synthesis time",
+        "tts_first_audio": "TTS start → first streamed audio",
+        "tts": "TTS start → audio complete",
         "schedule_wait": "voice ready → voice plays (ordering, gaps)",
     }
     for k, desc in meaning.items():
@@ -196,6 +203,11 @@ def build_report(run_dir: Path, m: dict[str, Any], rec: SessionRecord) -> str:
         f"**Drift:** slope {_fmt(m['delay']['drift_slope_s_per_s'], ' s/s', nd=4)} → {drift_txt}; "
         f"extrapolated delay after 10 min: {_fmt(m['delay']['delay_after_10min_s'], ' s')}.\n"
     )
+    if streaming:
+        w(
+            f"Streaming: {m['delay']['streamed_lines']} lines started on their first audio; "
+            f"{m['delay']['stream_stalls']} would have stalled (max {m['delay']['stream_stall_max_s']} s).\n"
+        )
     sched = m["schedule"]
     w(f"Schedule actions: {sched['actions']}. Lines with errors: {sched['errors']}.\n")
     # ---- 4. Accuracy
@@ -307,7 +319,7 @@ def build_report(run_dir: Path, m: dict[str, Any], rec: SessionRecord) -> str:
 def _assess(m: dict[str, Any], v: dict[str, bool | None]) -> tuple[list[str], list[str]]:
     good: list[str] = []
     bad: list[str] = []
-    d = m["delay"]["delay_ready"]
+    d = _head(m)
     if v["median_delay"]:
         good.append(f"Median delay {d['p50']} s is inside the {TARGETS['median_delay']} s target.")
     elif v["median_delay"] is False:

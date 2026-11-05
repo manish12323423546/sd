@@ -39,6 +39,17 @@ make dev              # API on :8000, web app on :5173 → open http://localhost
 Or serve everything from one port: `cd web && npm run build`, then
 `.venv/bin/python -m uvicorn app.main:app --port 8000` and open http://localhost:8000.
 
+## Faster, better: free hosted providers (optional)
+
+| Provider | What it improves | Free key | Set |
+|---|---|---|---|
+| Groq Whisper large-v3-turbo | speech-to-text 1.4 s → 0.4 s, WER 10.9 % → 6.9 % | https://console.groq.com/keys | `GROQ_API_KEY` |
+| Fish Audio S2.1 (`s2.1-pro-free`) | expressive voices with emotion tags, streamed (first audio ≈ 0.8 s) | https://fish.audio/app/api-keys | `FISH_API_KEY` |
+
+With both keys set, `provider: auto` (default) uses them and falls back to the local models on any
+error. Measured: the new voice starts 1.8 s (median) after the commentator's line ends, vs 4.1 s
+fully local.
+
 ## Where the results are
 
 | What | Where |

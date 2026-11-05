@@ -82,6 +82,30 @@ export class AudioGraph {
     return plan;
   }
 
+  /** Streamed line (still being generated on the server): an <audio> element starts playing as
+   *  soon as data arrives; routed through voiceGain and ducking like any other line. */
+  playStream(
+    url: string,
+    playAtMedia: number,
+    durationEst: number,
+    video: HTMLVideoElement,
+    onStart?: () => void,
+  ): StartPlan {
+    const plan = planStart(playAtMedia, video.currentTime, this.ctx.currentTime, video.playbackRate || 1);
+    const el = new Audio();
+    el.preload = "auto";
+    el.src = url;
+    const node = this.ctx.createMediaElementSource(el);
+    node.connect(this.voiceGain);
+    const delayMs = Math.max(0, (plan.when - this.ctx.currentTime) * 1000);
+    window.setTimeout(() => {
+      void el.play().then(() => onStart?.()).catch(() => undefined);
+    }, delayMs);
+    el.addEventListener("ended", () => node.disconnect());
+    this.duck(plan.when, plan.when + durationEst);
+    return plan;
+  }
+
   /** Ramp the original down for [start, end] (+150 ms hold), merging with lines already playing. */
   private duck(start: number, end: number): void {
     if (!this.ducking) {

@@ -251,3 +251,42 @@ def test_voice_switch_applies_to_lines_not_yet_synthesized(tmp_path: Path) -> No
     rec = asyncio.run(s.run())
     assert rec.lines[0].voice_id == "af_bella" and rec.lines[2].voice_id == "af_bella"
     assert rec.lines[1].voice_id == "am_adam"
+
+
+class FakeStreamingTTS(FakeTTS):
+    """Yields audio in chunks like a hosted streaming API."""
+
+    def stream(self, text: str, voice_id: str, style: DeliveryStyle):  # type: ignore[no-untyped-def]
+        audio = self.synthesize(text, voice_id, style).audio
+        for i in range(0, audio.size, 2400):
+            yield audio[i : i + 2400]
+
+
+def test_streaming_tts_starts_lines_on_first_audio(tmp_path: Path) -> None:
+    from engine.metrics.compute import compute_all
+
+    cfg = EngineConfig()
+    cfg.speed = 0.0
+    models = Models(asr=FakeASR(), speaker=FakeSpeaker(), tts=FakeStreamingTTS())  # type: ignore[arg-type]
+    s = Session(
+        cfg,
+        "fake.mp4",
+        models,
+        tmp_path,
+        emotion=FakeEmotion(),  # type: ignore[arg-type]
+        vad_factory=EnergyVAD,
+    )
+    s.audio_override = _clip()
+    rec = asyncio.run(s.run())
+    assert len(rec.lines) == 4
+    for ln in rec.lines:
+        t = ln.times
+        assert t.tts_first is not None and t.tts_ready is not None and t.play_at is not None
+        assert t.tts_start <= t.tts_first <= t.tts_ready  # type: ignore[operator]
+        assert (
+            ln.tts_path and ln.tts_path.endswith(".wav") and not ln.tts_path.endswith(".part.wav")
+        )
+        assert Path(ln.tts_path).exists()
+        assert Path(ln.tts_path.replace(".wav", ".part.wav")).exists()
+    m = compute_all(rec, None, 10.0)
+    assert m["delay"]["headline"] == "delay_start" and m["delay"]["streamed_lines"] == 4

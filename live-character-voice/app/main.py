@@ -5,6 +5,7 @@ Set LCV_SKIP_MODELS=1 to start without loading models (API tests); sessions then
 
 from __future__ import annotations
 
+import asyncio
 import os
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
@@ -12,7 +13,7 @@ from pathlib import Path
 
 import markdown
 from fastapi import FastAPI, File, HTTPException, UploadFile, WebSocket
-from fastapi.responses import FileResponse, HTMLResponse, PlainTextResponse
+from fastapi.responses import FileResponse, HTMLResponse, PlainTextResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
 from app import ws as ws_handler
@@ -229,12 +230,34 @@ def session_file(sid: str, name: str) -> FileResponse:
     return FileResponse(path)
 
 
-@app.get("/media/tts/{sid}/{name}")
-def tts_file(sid: str, name: str) -> FileResponse:
+@app.get("/media/tts/{sid}/{name}", response_model=None)
+def tts_file(sid: str, name: str) -> FileResponse | StreamingResponse:
     path = (SESSIONS_DIR / sid / "tts" / Path(name).name).resolve()
     if not path.is_relative_to(SESSIONS_DIR.resolve()) or not path.exists():
         raise HTTPException(404)
+    if path.name.endswith(".part.wav"):
+        final = path.with_name(path.name.replace(".part.wav", ".wav"))
+        return StreamingResponse(_follow(path, final), media_type="audio/wav",
+                                 headers={"Cache-Control": "no-store"})  # fmt: skip
     return FileResponse(path, media_type="audio/wav")
+
+
+async def _follow(part: Path, final: Path, poll_s: float = 0.03) -> AsyncIterator[bytes]:
+    """Stream a TTS file that is still being written: send what exists, then keep sending new
+    bytes until the line's final file appears and everything has been read (or 30 s pass)."""
+    sent = 0
+    waited = 0.0
+    with part.open("rb") as fh:
+        while waited < 30.0:
+            chunk = fh.read()
+            if chunk:
+                sent += len(chunk)
+                yield chunk
+                continue
+            if final.exists() and sent >= part.stat().st_size:
+                return
+            await asyncio.sleep(poll_s)
+            waited += poll_s
 
 
 @app.websocket("/ws/sessions/{sid}")

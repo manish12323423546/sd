@@ -226,6 +226,12 @@ def cmd_poc(args: argparse.Namespace) -> int:
         cfg.segment.speaker_split = False
     if args.no_lane:
         cfg.runtime.compute_lane = False
+    if args.asr:
+        cfg.asr.provider = args.asr
+    if args.tts:
+        cfg.tts.provider = args.tts
+        if args.tts == "fish":
+            cfg.tts.workers = max(cfg.tts.workers, 3)  # network-bound: more requests in flight
     clip = Path(args.clip)
     info = probe(clip)
     run_id = f"{datetime.now():%Y%m%d-%H%M%S}_{clip.stem}" + (
@@ -388,6 +394,8 @@ def build_parser() -> argparse.ArgumentParser:
     pc.add_argument("--no-split", action="store_true", help="disable speaker-change split")
     pc.add_argument("--no-render", action="store_true")
     pc.add_argument("--no-lane", action="store_true", help="ASR/TTS on separate pools")
+    pc.add_argument("--tts", choices=["kokoro", "kokoro_onnx", "fish"], default=None)
+    pc.add_argument("--asr", choices=["faster_whisper", "groq"], default=None)
     pc.add_argument("--stop-after", choices=["segment", "understand", "tts", "all"], default="all")
     pc.set_defaults(func=cmd_poc)
     rp = sub.add_parser("report", help="recompute metrics + report from record.json")

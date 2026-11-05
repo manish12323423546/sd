@@ -37,6 +37,7 @@ class StageTimes(BaseModel):
     emotion_done: float | None = None
     complete: float | None = None
     tts_start: float | None = None
+    tts_first: float | None = None  # first streamed audio arrived (streaming providers)
     tts_ready: float | None = None
     play_at: float | None = None
     played: float | None = None
@@ -66,6 +67,18 @@ class Line(BaseModel):
     @property
     def delay_ready(self) -> float | None:
         return None if self.times.tts_ready is None else self.times.tts_ready - self.t_end
+
+    @property
+    def delay_first(self) -> float | None:
+        """Seconds after the line ended until its voice could START playing: the first streamed
+        audio, or — if the stream was slower than playback — the latest start without a stall."""
+        t = self.times
+        if t.tts_first is None:
+            return self.delay_ready
+        start = t.tts_first
+        if t.tts_ready is not None and self.tts_duration is not None:
+            start = max(start, t.tts_ready - self.tts_duration)
+        return start - self.t_end
 
     @property
     def is_complete(self) -> bool:

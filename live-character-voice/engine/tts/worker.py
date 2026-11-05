@@ -10,6 +10,7 @@ from __future__ import annotations
 import threading
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 import soundfile as sf
@@ -99,3 +100,56 @@ def stretch_file(path: Path, rate: float) -> tuple[Path, float]:
     new = path.with_name(f"{path.stem}_x{rate:.2f}.wav")
     sf.write(new, fast, sr, subtype="PCM_16")
     return new, fast.size / sr
+
+
+def wav_stream_header(sr: int) -> bytes:
+    """16-bit mono WAV header with an open-ended length, for a file that is still growing."""
+    import struct
+
+    size = 0x7FFFFFF0
+    return (
+        b"RIFF" + struct.pack("<I", size + 36) + b"WAVEfmt "
+        + struct.pack("<IHHIIHH", 16, 1, 1, sr, sr * 2, 2, 16)
+        + b"data" + struct.pack("<I", size)
+    )  # fmt: skip
+
+
+def estimate_duration(text: str, speed: float = 1.0) -> float:
+    """Rough speech length before the audio is complete (≈ 2.8 words/s at speed 1.0)."""
+    return max(0.4, len(text.split()) / (2.8 * max(0.5, speed)))
+
+
+def stream_line(
+    stream: Any,
+    sr: int,
+    out_dir: Path,
+    line_id: str,
+    text: str,
+    voice_id: str,
+    style: DeliveryStyle,
+    on_first: Any,
+) -> tuple[Path, Path, float]:
+    """Write streamed chunks to `<name>.part.wav` as they arrive (served live to the player), call
+    `on_first()` on the first chunk, then write the trimmed final `<name>.wav`.
+    Returns (part path, final path, final duration)."""
+    h = style_hash(text, style)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    final = out_dir / f"{line_id}_{voice_id}_{h}.wav"
+    part = out_dir / f"{line_id}_{voice_id}_{h}.part.wav"
+    chunks: list[F32] = []
+    with part.open("wb") as f:
+        f.write(wav_stream_header(sr))
+        for x in stream(text, voice_id, style):
+            if x.size == 0:
+                continue
+            f.write((np.clip(x, -1.0, 1.0) * 32767).astype("<i2").tobytes())
+            f.flush()
+            if not chunks:
+                on_first()
+            chunks.append(as_f32(x))
+    audio = as_f32(np.concatenate(chunks)) if chunks else np.zeros(0, dtype=np.float32)
+    from engine.audio import fade, trim_silence
+
+    audio = fade(trim_silence(audio, sr, threshold_db=-50.0, pad_s=0.03), sr)
+    sf.write(final, audio, sr, subtype="PCM_16")
+    return part, final, audio.size / sr

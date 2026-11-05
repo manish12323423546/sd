@@ -30,6 +30,8 @@ models = [
   "webvtt-py>=0.5",
   "srt>=3.5",
   "psutil>=5.9",
+  "requests>=2.31",
+  "msgpack>=1.0",
 ]
 # Pilot web API.
 api = [
@@ -76,7 +78,7 @@ plugins = ["pydantic.mypy"]
 module = [
   "soundfile.*", "scipy.*", "jiwer.*", "librosa.*", "silero_vad.*", "faster_whisper.*",
   "speechbrain.*", "kokoro.*", "webvtt.*", "srt.*", "psutil.*", "matplotlib.*",
-  "torch.*", "uvicorn.*", "demucs.*", "onnxruntime.*", "markdown.*",
+  "torch.*", "uvicorn.*", "demucs.*", "onnxruntime.*", "markdown.*", "msgpack.*", "requests.*",
 ]
 ignore_missing_imports = true
 

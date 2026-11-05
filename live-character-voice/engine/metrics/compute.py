@@ -39,12 +39,13 @@ def _played(ln: Line) -> bool:
 def delay_metrics(rec: SessionRecord) -> dict[str, Any]:
     lines = [ln for ln in rec.lines if ln.schedule_action != "dropped"]
     ready = [(ln.t_end, ln.delay_ready) for ln in lines if ln.delay_ready is not None]
+    starts = [(ln.t_end, ln.delay_first) for ln in lines if ln.delay_first is not None]
     play = [(ln.t_end, ln.times.play_at - ln.t_end) for ln in lines if ln.times.play_at is not None]
-    slope = drift_slope([t for t, _ in ready], [d for _, d in ready if d is not None])
+    slope = drift_slope([t for t, _ in starts], [d for _, d in starts if d is not None])
     intercept = 0.0
-    if len(ready) >= 3:
-        x = np.asarray([t for t, _ in ready])
-        y = np.asarray([d for _, d in ready], dtype=np.float64)
+    if len(starts) >= 3:
+        x = np.asarray([t for t, _ in starts])
+        y = np.asarray([d for _, d in starts], dtype=np.float64)
         slope_fit, intercept = np.polyfit(x, y, 1)
         slope = float(slope_fit)
     t = rec.lines
@@ -58,7 +59,15 @@ def delay_metrics(rec: SessionRecord) -> dict[str, Any]:
         return out
 
     close_wait = [ln.times.created - ln.t_end for ln in t if ln.times.created is not None]
+    start = [ln.delay_first for ln in lines if ln.delay_first is not None]
+    streamed = [ln for ln in lines if ln.times.tts_first is not None]
+    stalls = [ln.features.get("stream_stall_s", 0.0) for ln in streamed]
     return {
+        "headline": "delay_start" if streamed else "delay_ready",
+        "delay_start": pct([d for d in start if d is not None]),
+        "streamed_lines": len(streamed),
+        "stream_stalls": sum(1 for x in stalls if x > 0),
+        "stream_stall_max_s": round(max(stalls), 3) if stalls else 0.0,
         "delay_ready": pct([d for _, d in ready if d is not None]),
         "delay_play": pct([d for _, d in play]),
         "stages": {
@@ -68,11 +77,12 @@ def delay_metrics(rec: SessionRecord) -> dict[str, Any]:
             "emotion": pct(stage("created", "emotion_done")),
             "complete": pct(stage("created", "complete")),
             "tts_queue": pct(stage("complete", "tts_start")),
+            "tts_first_audio": pct(stage("tts_start", "tts_first")),
             "tts": pct(stage("tts_start", "tts_ready")),
             "schedule_wait": pct(stage("tts_ready", "play_at")),
         },
         "drift_slope_s_per_s": round(slope, 5),
-        "delay_after_10min_s": round(float(intercept + slope * 600), 3) if ready else None,
+        "delay_after_10min_s": round(float(intercept + slope * 600), 3) if starts else None,
         "drift_ok": abs(slope) <= 0.02,
     }
 

@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import asyncio
 import contextlib
+import os
 import time
 from collections import deque
 from collections.abc import Callable
@@ -53,8 +54,15 @@ from engine.schedule.scheduler import (
 from engine.segment.segmenter import LineCandidate, LineSegmenter
 from engine.speakers.enroll import EnrollFile
 from engine.speakers.online_cluster import OnlineClusterer
-from engine.tts.style import style_for
-from engine.tts.worker import TtsCache, stretch_file, synthesize_line
+from engine.tts.style import style_for, style_hash
+from engine.tts.worker import (
+    TtsCache,
+    estimate_duration,
+    prepare_text,
+    stream_line,
+    stretch_file,
+    synthesize_line,
+)
 
 T = TypeVar("T")
 STOP_AFTER = ("segment", "understand", "tts", "all")
@@ -65,6 +73,8 @@ NOISE_NO_SPEECH = 0.6
 SPLIT_MIN_LINE_S = 2.5
 SPLIT_CHECK_EVERY_S = 1.0
 SPLIT_WINDOW_S = 1.5
+STREAM_BACKLOG_S = 1.0  # voices queued longer than this → request faster speech
+STREAM_MARGIN_S = 0.15  # start a streamed line this long after its first audio arrived
 
 
 def _t(**stamps: float) -> dict[str, Any]:
@@ -113,28 +123,53 @@ class Models:
             log(f"loaded {name} in {m.load_s[name]} s")
             return obj
 
+        # "auto": use the hosted providers when their keys are configured, else the local ones
+        if cfg.asr.provider == "auto":
+            cfg.asr.provider = "groq" if os.environ.get("GROQ_API_KEY") else "faster_whisper"
+        if cfg.tts.provider == "auto":
+            has_fish = os.environ.get("FISH_API_KEY") or os.environ.get("FISH_API_KEY_FILE")
+            cfg.tts.provider = "fish" if has_fish else "kokoro"
+            if has_fish:
+                cfg.tts.workers = max(cfg.tts.workers, 3)
         if "asr" in stages and cfg.source == "asr":
-            m.asr = timed(
-                "asr",
-                lambda: registry.create(
+            if cfg.asr.provider == "groq":
+                m.asr = timed(
                     "asr",
-                    cfg.asr.provider,
-                    model=cfg.asr.model,
-                    compute_type=cfg.asr.compute_type,
-                    cpu_threads=cfg.asr.cpu_threads,
-                    beam_size=cfg.asr.beam_size,
-                ),
-            )
+                    lambda: registry.create(
+                        "asr", "groq", model=cfg.asr.groq_model, fallback_model=cfg.asr.model
+                    ),
+                )
+            else:
+                m.asr = timed(
+                    "asr",
+                    lambda: registry.create(
+                        "asr",
+                        cfg.asr.provider,
+                        model=cfg.asr.model,
+                        compute_type=cfg.asr.compute_type,
+                        cpu_threads=cfg.asr.cpu_threads,
+                        beam_size=cfg.asr.beam_size,
+                    ),
+                )
             m.info["asr"] = (
-                f"{cfg.asr.provider}:{cfg.asr.model} ({cfg.asr.compute_type}, "
+                f"groq:{cfg.asr.groq_model} (fallback local {cfg.asr.model})"
+                if cfg.asr.provider == "groq"
+                else f"{cfg.asr.provider}:{cfg.asr.model} ({cfg.asr.compute_type}, "
                 f"{cfg.asr.cpu_threads} threads)"
             )
         if "speaker" in stages:
             m.speaker = timed("speaker", lambda: registry.create("speaker", cfg.speaker.provider))
             m.info["speaker"] = cfg.speaker.provider
         if "tts" in stages:
-            m.tts = timed("tts", lambda: registry.create("tts", cfg.tts.provider))
-            m.info["tts"] = cfg.tts.provider
+            kwargs: dict[str, Any] = {}
+            if cfg.tts.provider == "fish":
+                kwargs = {"model": cfg.tts.fish_model, "latency": cfg.tts.fish_latency}
+            m.tts = timed("tts", lambda: registry.create("tts", cfg.tts.provider, **kwargs))
+            m.info["tts"] = cfg.tts.provider + (
+                f":{cfg.tts.fish_model} ({cfg.tts.fish_latency})"
+                if cfg.tts.provider == "fish"
+                else ""
+            )
         m.warm(log)
         return m
 
@@ -254,6 +289,7 @@ class Session:
         self._tts_event = asyncio.Event()
         self._tts_busy = 0
         self._prev_play: PrevPlayback | None = None
+        self._prev_line: str | None = None
         self._stop = asyncio.Event()
         self._feed_done = False
         self._split_busy = False
@@ -286,10 +322,10 @@ class Session:
 
     def metrics_snapshot(self) -> dict[str, float | int]:
         lines = self.store.record.lines
-        delays = [ln.delay_ready for ln in lines if ln.delay_ready is not None]
+        delays = [d for ln in lines if (d := ln.delay_first) is not None]
         played = [ln for ln in lines if ln.times.play_at is not None]
         slope = drift_slope(
-            [ln.t_end for ln in lines if ln.delay_ready is not None],
+            [ln.t_end for ln in lines if ln.delay_first is not None],
             [d for d in delays],
         )
         return {
@@ -721,6 +757,9 @@ class Session:
                 start = self.clock.now()
                 self.store.update_line(lid, voice_id=voice, **_t(tts_start=round(start, 3)))
                 t = time.monotonic()
+                if self.cfg.tts.streaming and hasattr(tts, "stream"):
+                    await self._tts_streamed(lid, tts, text, voice, style, idx, merged)
+                    continue
                 out = await self._heavy(
                     lid,
                     partial(
@@ -763,6 +802,78 @@ class Session:
                 self._line_error(lid, "tts", e)
             finally:
                 self._tts_busy -= 1
+
+    async def _tts_streamed(
+        self,
+        lid: str,
+        tts: Any,
+        raw_text: str,
+        voice: str,
+        style: Any,
+        idx: int,
+        merged: list[str],
+    ) -> None:
+        """Streaming TTS: the line becomes playable on its FIRST audio chunk (the player streams the
+        growing file); the final trimmed file replaces it when the stream ends."""
+        loop = asyncio.get_running_loop()
+        # catch-up for streams (they cannot be time-stretched): if voices are queued up behind
+        # each other, ask the provider to speak this line faster (up to max_speedup).
+        backlog = 0.0
+        if self._prev_play is not None:
+            backlog = max(0.0, self._prev_play.play_end - self.clock.now())
+        if backlog > STREAM_BACKLOG_S:
+            factor = min(self.cfg.schedule.max_speedup + 0.1, 1.0 + 0.06 * backlog)
+            style = style.model_copy(update={"speed": round(style.speed * factor, 3)})
+            self.store.update_line(lid, schedule_action="speedup")
+            self.log.log("schedule", line_id=lid, action="speedup", backlog=round(backlog, 2),
+                         factor=round(factor, 3))  # fmt: skip
+        text = prepare_text(raw_text, style, self.glossary)
+        first_evt = asyncio.Event()
+        t0 = time.monotonic()
+        fut = loop.run_in_executor(
+            self.tts_pool,
+            partial(stream_line, tts.stream, 24000, self.tts_dir, lid, text, voice, style,
+                    lambda: loop.call_soon_threadsafe(first_evt.set)),
+        )  # fmt: skip
+        waiter: asyncio.Future[Any] = asyncio.ensure_future(first_evt.wait())
+        pending: set[asyncio.Future[Any]] = {fut, waiter}
+        await asyncio.wait(pending, return_when=asyncio.FIRST_COMPLETED)
+        streamed = first_evt.is_set()
+        if streamed:
+            first_t = self.clock.now()
+            est = estimate_duration(text, style.speed)
+            part_path = self.tts_dir / f"{lid}_{voice}_{style_hash(text, style)}.part.wav"
+            self.store.update_line(
+                lid, event="tts.first", tts_duration=round(est, 3),
+                tts_path=str(part_path), **_t(tts_first=round(first_t, 3)),
+            )  # fmt: skip
+            self._finish(lid, "ready")  # schedulable now: the player streams the growing file
+        waiter.cancel()
+        _part, final, duration = await fut
+        ready = self.clock.now()
+        line = self.store.get(lid)
+        fields: dict[str, Any] = {"tts_duration": round(duration, 3), "tts_path": str(final)}
+        stall = None
+        if line.times.play_at is not None:
+            stall = (ready - duration) - line.times.play_at
+            if stall > 0:
+                fields["features"] = {**line.features, "stream_stall_s": round(stall, 3)}
+            if self._prev_line == lid and self._prev_play is not None:
+                self._prev_play = PrevPlayback(
+                    line.speaker_id, line.times.play_at + duration, line.t_end
+                )
+        self.store.update_line(lid, event="tts.ready", **fields, **_t(tts_ready=round(ready, 3)))
+        first_ms = 1e3 * ((line.times.tts_first or ready) - (line.times.tts_start or ready))
+        self.log.log(
+            "stage", line_id=lid, stage="tts", streamed=streamed, voice=voice,
+            first_ms=round(first_ms),
+            duration_ms=round((time.monotonic() - t0) * 1000, 1), audio_s=round(duration, 3),
+            stall_s=None if stall is None else round(stall, 3), worker=idx,
+        )  # fmt: skip
+        if merged:
+            self.store.update_line(lid, schedule_action="merged")
+        if not streamed:
+            self._finish(lid, "ready")
 
     def _merge_following(self, line: Line) -> tuple[str, list[str]]:
         """Catch-up: merge queued consecutive lines of the same speaker into one synth call."""
@@ -822,10 +933,15 @@ class Session:
 
     async def _schedule_line(self, lid: str, loop: asyncio.AbstractEventLoop) -> None:
         line = self.store.get(lid)
-        if line.tts_duration is None or line.times.tts_ready is None:
+        streaming = line.times.tts_first is not None and line.times.tts_ready is None
+        ready_at = (
+            line.times.tts_first + STREAM_MARGIN_S if streaming and line.times.tts_first else
+            line.times.tts_ready
+        )  # fmt: skip
+        if line.tts_duration is None or ready_at is None:
             return
         plan = plan_playback(
-            tts_ready=line.times.tts_ready,
+            tts_ready=ready_at,
             t_start=line.t_start,
             t_end=line.t_end,
             speaker_id=line.speaker_id,
@@ -840,8 +956,11 @@ class Session:
             self.log.log("schedule", line_id=lid, action="dropped", lag=round(plan.lag, 2))
             return
         duration = line.tts_duration
-        action = line.schedule_action if line.schedule_action == "merged" else plan.action
-        if plan.speedup > 1.0 and line.tts_path:
+        if line.schedule_action in ("merged", "speedup"):
+            action = line.schedule_action
+        else:
+            action = plan.action
+        if plan.speedup > 1.0 and line.tts_path and not streaming:
             new_path, duration = await loop.run_in_executor(
                 self.misc_pool, stretch_file, Path(line.tts_path), plan.speedup
             )
@@ -856,6 +975,7 @@ class Session:
             **_t(play_at=round(play_at, 3)),
         )
         self._prev_play = PrevPlayback(line.speaker_id, play_at + duration, line.t_end)
+        self._prev_line = lid
         self.log.log(
             "schedule",
             line_id=lid,

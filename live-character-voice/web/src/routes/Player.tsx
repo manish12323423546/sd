@@ -34,6 +34,13 @@ export function Player() {
       pendingRef.current.push(msg);
       return;
     }
+    if (msg.url.endsWith(".part.wav")) {
+      const plan = graph.playStream(msg.url, msg.play_at_media, msg.duration, video, () => {
+        sockRef.current?.send({ type: "played", line_id: msg.line_id, client_media_time: video.currentTime });
+      });
+      useSession.getState().markPlayed(msg.line_id, plan.late);
+      return;
+    }
     graph
       .preload(msg.url)
       .then((buf) => {
@@ -67,7 +74,7 @@ export function Player() {
         const queued = pendingRef.current.splice(0);
         queued.forEach(scheduleLine);
       } else if (msg.type === "audio.ready") {
-        graphRef.current?.preload(msg.url).catch(() => undefined); // pre-load immediately
+        if (!msg.url.endsWith(".part.wav")) graphRef.current?.preload(msg.url).catch(() => undefined);
         scheduleLine(msg);
       } else if (msg.type === "session.ended") {
         videoRef.current?.pause();

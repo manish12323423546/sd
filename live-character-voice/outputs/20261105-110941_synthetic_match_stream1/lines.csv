@@ -1,0 +1,57 @@
+line_id,t_start,t_end,close_reason,speaker_id,speaker_sim,speaker_conf,emotion,arousal,text,voice_id,tts_duration,schedule_action,error,created,asr_done,speaker_done,emotion_done,complete,tts_start,tts_ready,play_at,played,delay_ready,delay_play
+L000001,1.504,4.96,pause,S1,1.0,high,neutral,0.0,Good evening and welcome to Riverside Park for this evening's match.,bm_george,3.29,none,,5.504,6.527,6.371,6.527,6.527,6.528,8.79,7.429,,3.83,2.469
+L000002,5.6,9.088,pause,S2,1.0,high,neutral,0.0,"It's a lovely night for football, and both sides need the points.",am_adam,3.34,none,,9.503,10.414,9.808,10.414,10.414,10.415,12.489,11.297,,3.401,2.209
+L000003,9.824,13.312,pause,S1,0.791,high,neutral,0.0,"Riverside Rovers get us underway, playing from left to right.",bm_george,3.46,none,,13.754,14.409,14.065,14.41,14.41,14.41,16.599,15.303,,3.287,1.991
+L000004,13.824,16.096,pause,S1,0.7,high,neutral,-0.134,Okafor finds Lindqvist on the halfway line.,bm_george,2.61,none,,16.504,16.906,16.65,16.906,16.906,16.907,18.887,18.843,,2.791,2.747
+L000005,16.864,21.472,pause,S2,0.57,high,neutral,-0.06,"Lindqvist has been in fine form this season, always looking for the pass forward.",am_adam,4.29,none,,22.004,22.628,22.491,22.629,22.629,22.629,25.214,23.487,,3.742,2.015
+L000006,22.048,24.672,pause,S1,0.721,high,neutral,0.112,Northgate United sit deep and wait for the press.,bm_george,2.49,none,,25.254,25.656,25.436,25.657,25.657,25.657,27.654,27.857,,2.982,3.185
+L000007,25.216,29.216,pause,S1,0.516,low,excited,1.157,Morrow steps in and wins it back cleanly. That's the kind of tackle the manager will love.,bm_george,4.53,none,,29.754,30.515,30.152,30.516,30.516,30.516,33.815,31.601,,4.599,2.385
+L000008,30.048,32.448,pause,S1,0.734,high,neutral,0.478,Tanaka down the right wing past one past two.,bm_george,2.64,speedup,,33.004,33.571,33.148,33.572,33.572,33.572,35.537,36.211,,3.089,3.763
+L000009,32.896,34.336,level_change,S1,0.405,low,neutral,0.686,He cuts it back for Delgado.,bm_george,1.69,speedup,,35.004,35.756,35.094,35.757,35.757,35.757,37.025,38.931,,2.689,4.595
+L000010,34.656,35.136,burst,S1,0.03,low,peak,2.844,"Oh, what a chance.",bm_george,0.966,speedup,,35.504,36.143,35.56,36.144,36.144,36.144,37.231,40.701,,2.095,5.565
+L000011,35.136,35.552,level_change,S1,-0.036,low,excited,0.933,chance.,bm_george,0.476,speedup,,36.004,36.522,36.055,36.523,36.523,36.523,37.571,41.747,,2.019,6.195
+L000012,35.648,37.984,pause,S2,0.372,low,excited,0.939,"Master Svorka, the goal was wide open.",am_adam,2.47,speedup,,38.504,39.118,38.652,39.119,39.119,39.119,40.939,42.303,,2.955,4.319
+L000013,38.784,41.12,pause,S1,0.566,high,neutral,0.308,A goal kick then and a lead off for Riverside.,bm_george,2.55,speedup,,41.504,41.806,41.655,41.807,41.807,41.807,43.558,44.853,,2.438,3.733
+L000014,41.856,44.576,pause,S2,0.507,low,neutral,0.042,Delgado will be thinking about that one for a while.,am_adam,2.54,none,,45.004,45.357,45.179,45.358,45.358,45.358,47.16,47.483,,2.584,2.907
+L000015,45.12,48.576,pause,S1,0.722,high,neutral,-0.075,"Brennan with the long ball forward, headed away by the centre-back.",bm_george,3.35,none,,49.006,49.331,49.299,49.331,49.331,49.332,51.362,50.247,,2.786,1.671
+L000016,49.152,54.208,pause,S1,0.66,high,peak,1.928,"It drops to Okafor on the edge of the area, and he shoots. Straight at the keeper, he should have done better.",bm_george,5.141,none,,54.754,55.073,55.212,55.213,55.213,55.213,59.162,56.194,,4.954,1.986
+L000017,54.848,57.504,pause,S1,0.591,high,excited,0.877,"Northgate keep the ball now, passing it around the back.",bm_george,2.91,speedup,,58.006,58.354,58.199,58.355,58.355,58.355,60.515,61.968,,3.011,4.464
+L000018,58.368,60.64,pause,S2,0.445,low,neutral,-0.008,20 minutes gone and it is still nil-nil.,am_adam,2.7,speedup,,61.005,61.386,61.182,61.386,61.386,61.386,63.865,64.958,,3.225,4.318
+L000019,61.152,63.104,pause,S1,0.768,high,neutral,0.063,"Moro into the middle, now Tanaka again.",bm_george,2.38,speedup,,63.504,63.806,63.631,63.807,63.807,63.807,65.749,67.738,,2.645,4.634
+L000020,63.616,65.984,level_change,S1,0.488,low,excited,0.899,Tanaka threw on goal. He goes round the keeper.,bm_george,2.833,speedup,,66.505,66.841,66.66,66.842,66.842,66.842,68.977,70.198,,2.993,4.214
+L000021,66.112,68.832,pause,S1,0.148,low,peak,1.869,"Go, go. Tanaka scores for Northgate United.",bm_george,2.58,speedup,,69.254,69.672,69.479,69.672,69.672,69.672,71.833,73.111,,3.001,4.279
+L000022,69.76,69.888,burst,S1,0.058,low,peak,2.17,And,bm_george,0.465,speedup,,70.254,70.558,70.289,70.559,70.559,70.559,71.405,75.005,,1.517,5.117
+L000023,69.888,75.52,pause,S2,0.306,low,excited,1.723,"Unbelievable, what a finish from Tanaka. Look at the pace, look at the calm, he made that look so easy.",am_adam,5.63,none,,76.004,76.383,76.594,76.595,76.595,76.595,80.275,77.524,,4.755,2.004
+L000024,76.224,78.592,pause,S1,0.749,high,neutral,0.402,So Northgate United lead by one goal to nil.,bm_george,2.61,speedup,,79.004,79.389,79.153,79.39,79.39,79.39,81.397,84.127,,2.805,5.535
+L000025,79.264,82.784,pause,S2,0.597,high,neutral,0.21,"Riverside have to respond now, they can't let the aim drift.",am_adam,3.44,speedup,,83.254,83.578,83.54,83.578,83.578,83.579,85.654,86.817,,2.87,4.033
+L000026,83.36,87.136,pause,S1,0.849,high,neutral,0.071,"Lindqvist tries to lift his team, pointing for everyone to push up.",bm_george,3.61,none,,87.504,87.811,87.866,87.867,87.867,87.867,90.038,90.337,,2.902,3.201
+L000027,87.584,91.2,pause,S1,0.724,high,neutral,0.716,A free kick on the right side for Riverside. This is a good area for Brennan.,bm_george,3.99,none,,91.757,92.157,92.036,92.157,92.158,92.158,94.58,94.027,,3.38,2.827
+L000028,91.776,94.688,level_change,S1,0.653,high,neutral,0.518,Brennan whips it in. Okafor rises at the far post.,bm_george,3.21,none,,95.254,95.674,95.434,95.675,95.675,95.675,97.705,98.097,,3.017,3.409
+L000029,94.976,95.168,burst,S1,0.05,low,excited,1.116,Dave.,bm_george,0.477,speedup,,95.504,96.022,95.536,96.022,96.022,96.022,96.856,101.034,,1.688,5.866
+L000030,95.168,96.768,pause,S1,0.094,low,peak,2.123,We're saved by the keeper.,bm_george,1.29,speedup,,97.255,97.604,97.353,97.604,97.604,97.604,98.917,101.591,,2.149,4.823
+L000031,97.664,99.04,level_change,S2,0.331,low,excited,1.17,That is right in the top corner.,am_adam,1.52,speedup,,99.504,99.92,99.597,99.921,99.921,99.921,101.261,102.961,,2.221,3.921
+L000032,99.2,100.736,pause,S2,0.335,low,excited,0.908,An incredible reaction stop.,am_adam,1.546,speedup,,101.255,101.619,101.357,101.62,101.62,101.62,102.894,104.561,,2.158,3.825
+L000033,101.568,104.448,pause,S1,0.57,high,neutral,0.418,The corner comes to nothing and the game settles again.,bm_george,2.74,none,,105.004,105.362,105.18,105.362,105.363,105.363,107.314,106.277,,2.866,1.829
+L000034,105.12,107.968,pause,S2,0.592,high,neutral,-0.035,Northgate look happy to slow it down and take a breath.,am_adam,2.876,none,,108.504,108.878,108.69,108.878,108.878,108.878,110.905,109.766,,2.937,1.798
+L000035,108.544,110.944,pause,S1,0.758,high,neutral,-0.261,Delgado wins a throw in near the corner flat.,bm_george,2.45,none,,111.504,111.826,111.655,111.827,111.827,111.827,113.616,112.761,,2.672,1.817
+L000036,111.52,114.464,pause,S2,0.437,low,neutral,-0.343,Clever play they caught Riverside sleeping.,am_adam,2.226,none,,115.006,115.383,115.197,115.384,115.384,115.384,117.071,116.343,,2.607,1.879
+L000037,114.976,120.864,max_len,S2,0.352,low,neutral,0.649,"Morrow shoots for range. Off the crossbar. So close to a second goal, the whole stadium was on its feet.",am_adam,6.5,none,,121.005,121.38,121.586,121.587,121.587,121.587,125.515,122.639,,4.651,1.775
+L000038,120.864,121.408,pause,S2,0.159,low,neutral,-0.274,on the seat.,am_adam,0.67,dropped,,122.004,122.316,122.059,122.316,122.316,122.316,123.25,,,1.842,
+L000039,122.144,124.736,pause,S1,0.572,high,neutral,-0.446,The referee checks his watch almost half time here.,bm_george,2.7,speedup,,125.255,125.617,125.432,125.618,125.618,125.618,127.569,129.219,,2.833,4.483
+L000040,125.44,128.8,pause,S2,0.527,low,neutral,-0.182,a fair score so far but there is plenty still to play for.,am_adam,3.6,none,,129.254,129.575,129.55,129.575,129.575,129.576,131.746,131.999,,2.946,3.199
+L000041,129.216,132.736,pause,S1,0.763,high,neutral,-0.197,"one last attack before the break, Lindqvist carries it forward.",bm_george,3.23,none,,133.254,133.733,133.543,133.734,133.734,133.734,136.215,135.679,,3.479,2.943
+L000042,133.216,136.192,pause,S2,0.569,high,neutral,-0.057,he has Okafor on his left and Brennan arriving late.,am_adam,3.04,none,,136.754,137.179,136.948,137.18,137.18,137.18,139.13,138.989,,2.938,2.797
+L000043,136.672,140.128,level_change,S1,0.494,low,excited,1.025,Lindqvist slips it through to Okafor. Okafor takes a touch and shoots.,bm_george,3.97,none,,140.504,140.834,140.786,140.835,140.835,140.835,143.285,142.109,,3.157,1.981
+L000044,140.32,140.736,burst,S1,0.085,low,peak,2.357,Go go!,bm_george,0.735,speedup,,141.005,141.296,141.047,141.296,141.296,141.296,142.231,145.443,,1.495,4.707
+L000045,140.736,141.024,pause,S1,0.016,low,neutral,0.073,Go!,bm_george,0.548,speedup,,141.504,141.804,141.542,141.805,141.805,141.805,142.599,146.258,,1.575,5.234
+L000046,141.568,141.856,burst,S1,0.082,low,excited,1.545,Bell,bm_george,0.502,speedup,,142.255,143.715,142.292,143.715,143.715,143.715,144.564,146.886,,2.708,5.03
+L000047,141.856,144.48,pause,S1,0.119,low,excited,1.075,Okafor utilizes for Riverside Rovers.,bm_george,2.17,none,,145.004,146.432,145.185,146.432,146.432,146.432,148.028,147.468,,3.548,2.988
+L000048,145.376,150.72,max_len,S2,0.441,low,excited,1.502,"What a time to score, right on the stroke of half time. That is exactly what Riverside needed.",am_adam,4.81,speedup,,151.504,153.385,152.142,153.385,153.385,153.386,156.749,154.479,,6.029,3.759
+L000049,150.72,151.808,pause,S2,0.308,low,excited,0.922,And the fans know it.,am_adam,1.07,speedup,,152.256,154.473,152.332,154.473,154.474,154.474,155.585,160.5,,3.777,8.692
+L000050,152.576,154.432,pause,S1,0.795,high,neutral,0.317,So it is one all here at Riverside Park.,bm_george,2.3,speedup,,155.004,156.294,155.182,156.295,156.295,156.295,158.068,161.65,,3.636,7.218
+L000051,155.072,158.112,pause,S2,0.63,high,neutral,0.198,Both managers will have plenty to play in the dressing room.,am_adam,2.74,speedup,,158.506,159.898,158.867,159.899,159.899,159.899,161.861,164.03,,3.749,5.918
+L000052,158.72,161.568,pause,S1,0.638,high,neutral,-0.209,"Northgate kick off again, but there is barely a minute left.",bm_george,2.96,speedup,,162.006,163.306,162.23,163.307,163.307,163.307,165.025,166.85,,3.457,5.282
+L000053,162.24,165.056,pause,S2,0.711,high,neutral,-0.138,I expect they will just play it safe until we whistle.,am_adam,2.57,speedup,,165.504,166.261,165.699,166.262,166.262,166.262,168.081,169.89,,3.025,4.834
+L000054,165.536,168.704,pause,S1,0.478,low,neutral,0.67,"Morrow passes it square to Delgado. No risks now, keep the ball.",bm_george,4.43,speedup,,169.256,169.912,169.539,169.913,169.913,169.913,172.475,172.54,,3.771,3.836
+L000055,169.28,171.68,pause,S1,0.843,high,neutral,0.549,And there is the whistle for the end of the first half.,bm_george,2.34,speedup,,172.254,172.764,172.412,172.764,172.765,172.765,174.55,177.05,,2.87,5.37
+L000056,172.224,175.968,pause,S2,0.778,high,neutral,-0.336,"A thrilling first half, one goal each, and so much still to come.",am_adam,3.89,speedup,,176.504,176.976,176.786,176.977,176.977,176.977,179.286,179.47,,3.318,3.502
