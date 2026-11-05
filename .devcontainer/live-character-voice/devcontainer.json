@@ -1,0 +1,16 @@
+{
+  "name": "Live Sports Character Voice (Pilot)",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "22" }
+  },
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/live-character-voice",
+  "postCreateCommand": "sudo apt-get update -y && sudo apt-get install -y ffmpeg espeak-ng libsndfile1 sox && pip install uv && make setup-python setup-web && make download-models && make synth",
+  "forwardPorts": [8000, 5173],
+  "portsAttributes": {
+    "8000": { "label": "Pilot API + built player" },
+    "5173": { "label": "Player (Vite dev)" }
+  },
+  "hostRequirements": { "cpus": 4, "memory": "16gb" },
+  "remoteEnv": { "MALLOC_ARENA_MAX": "2", "HF_HUB_DISABLE_TELEMETRY": "1" }
+}

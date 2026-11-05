@@ -1,0 +1,153 @@
+{
+  "session_id": "20261105-064355_2b6dd7",
+  "clip": "synthetic_match_3spk.mp4",
+  "speed": 1.0,
+  "wall_s": 113.0,
+  "lines_in_record": 36,
+  "lines_with_text": 36,
+  "line_complete_msgs": 36,
+  "audio_ready_msgs": 35,
+  "line_complete_coverage": 1.0,
+  "audio_ready_coverage": 1.0,
+  "delay_ready_from_ws": {
+    "p50": 4.014,
+    "p95": 4.613,
+    "max": 4.756
+  },
+  "server_delay": {
+    "p50": 4.014,
+    "p95": 4.613,
+    "max": 4.756,
+    "mean": 4.031,
+    "n": 35
+  },
+  "drift_slope": -0.00144,
+  "wer": 0.0855,
+  "speaker_accuracy": 0.9602,
+  "crashes": 0,
+  "voice_switch": {
+    "switches": 14,
+    "tested": 13,
+    "passed": 13,
+    "pass_rate": 1.0,
+    "detail": [
+      {
+        "t": 7.55,
+        "speaker": "S1",
+        "voice": "am_adam",
+        "first_line": "L000005",
+        "result": "pass"
+      },
+      {
+        "t": 15.55,
+        "speaker": "S2",
+        "voice": "af_bella",
+        "first_line": "L000007",
+        "result": "pass"
+      },
+      {
+        "t": 23.55,
+        "speaker": "S3",
+        "voice": "am_michael",
+        "first_line": "L000009",
+        "result": "pass"
+      },
+      {
+        "t": 31.55,
+        "speaker": "S1",
+        "voice": "bm_george",
+        "first_line": "L000010",
+        "result": "pass"
+      },
+      {
+        "t": 39.55,
+        "speaker": "S2",
+        "voice": "am_adam",
+        "first_line": "L000013",
+        "result": "pass"
+      },
+      {
+        "t": 47.55,
+        "speaker": "S3",
+        "voice": "af_bella",
+        "first_line": "L000022",
+        "result": "pass"
+      },
+      {
+        "t": 55.55,
+        "speaker": "S1",
+        "voice": "am_michael",
+        "first_line": "L000018",
+        "result": "pass"
+      },
+      {
+        "t": 63.56,
+        "speaker": "S2",
+        "voice": "bm_george",
+        "first_line": "L000024",
+        "result": "pass"
+      },
+      {
+        "t": 71.56,
+        "speaker": "S3",
+        "voice": "am_adam",
+        "first_line": "L000026",
+        "result": "pass"
+      },
+      {
+        "t": 79.56,
+        "speaker": "S1",
+        "voice": "af_bella",
+        "first_line": "L000027",
+        "result": "pass"
+      },
+      {
+        "t": 87.56,
+        "speaker": "S2",
+        "voice": "am_michael",
+        "first_line": "L000031",
+        "result": "pass"
+      },
+      {
+        "t": 95.56,
+        "speaker": "S3",
+        "voice": "bm_george",
+        "first_line": "L000035",
+        "result": "pass"
+      },
+      {
+        "t": 103.57,
+        "speaker": "S1",
+        "voice": "am_adam",
+        "first_line": "L000036",
+        "result": "pass"
+      },
+      {
+        "t": 111.56643450899992,
+        "speaker": "S2",
+        "voice": "af_bella",
+        "result": "no_line"
+      }
+    ]
+  },
+  "client_switches_sent": 14,
+  "memory_mb": {
+    "first": 3069.9,
+    "max": 3671.9,
+    "last": 3536.5,
+    "samples": 12,
+    "growth": 602.0
+  },
+  "message_counts": {
+    "audio.ready": 35,
+    "line.complete": 36,
+    "metrics": 23,
+    "pong": 12,
+    "session.ended": 1,
+    "session.ready": 1,
+    "session.started": 1,
+    "speaker.new": 3,
+    "speaker.updated": 14
+  },
+  "report": "outputs/sessions/20261105-064355_2b6dd7/report.md"
+}

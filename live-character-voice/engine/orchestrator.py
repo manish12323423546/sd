@@ -25,6 +25,7 @@ from typing import Any, TypeVar
 
 import numpy as np
 
+from engine.asr_guard import guard as asr_guard
 from engine.audio import F32
 from engine.config import EngineConfig, load_voice_catalog
 from engine.ingest.decode import decode_audio
@@ -142,15 +143,26 @@ class Models:
         from engine.providers.base import DeliveryStyle
 
         t = time.monotonic()
-        noise = (np.random.default_rng(0).standard_normal(16000) * 0.01).astype(np.float32)
-        if self.asr is not None:
-            with contextlib.suppress(Exception):
-                self.asr.transcribe(noise, 16000)
-        if self.speaker is not None:
-            self.speaker.embed(noise, 16000)
+        rng = np.random.default_rng(0)
+        # short AND worst-case sizes: a max-length line (6 s + padding) and a long sentence, so the
+        # native libraries reach their buffer high-water mark before the first viewer (M10:
+        # the first long line otherwise raised RSS by ~330 MB mid-session).
+        for seconds in (1.0, 6.5):
+            noise = (rng.standard_normal(int(16000 * seconds)) * 0.01).astype(np.float32)
+            if self.asr is not None:
+                with contextlib.suppress(Exception):
+                    self.asr.transcribe(noise, 16000)
+            if self.speaker is not None:
+                self.speaker.embed(noise, 16000)
         if self.tts is not None:
-            self.tts.synthesize("Warming up.", "am_adam", DeliveryStyle())
-            self.tts.synthesize("Warming up.", "bm_george", DeliveryStyle())
+            long_text = (
+                "Okafor takes a touch on the edge of the area, shifts it onto his right foot "
+                "and curls it towards the far corner, and the keeper is beaten all ends up!"
+            )
+            for voice in ("am_adam", "bm_george"):
+                self.tts.synthesize("Warming up.", voice, DeliveryStyle())
+                self.tts.synthesize(long_text, voice, DeliveryStyle())
+        malloc_trim()
         self.load_s["warmup"] = round(time.monotonic() - t, 2)
         log(f"warm-up done in {self.load_s['warmup']} s")
 
@@ -548,9 +560,14 @@ class Session:
             offset = line.t_start
         else:
             assert self.models.asr is not None
-            fn = partial(self.models.asr.transcribe, cand.audio, self.sr, self._asr_prompt(line))
+            # no context prompt for very short lines: Whisper tends to repeat the prompt there
+            prompt = self._asr_prompt(line) if line.t_end - line.t_start >= 0.6 else None
+            fn = partial(self.models.asr.transcribe, cand.audio, self.sr, prompt)
             offset = line.t_start - cand.pad_before_s
         res: ASRResult = await self._heavy(lid, fn, self.asr_pool)
+        res, guard_actions = asr_guard(res, cand.audio.size / self.sr)
+        if guard_actions:
+            self.log.log("asr_guard", line_id=lid, actions=guard_actions)
         ms = (time.monotonic() - t) * 1000
         text = res.text.strip()
         noise = res.no_speech_prob > NOISE_NO_SPEECH and (len(text) < 2 or res.avg_logprob < -1.0)
@@ -849,11 +866,23 @@ class Session:
         )
 
     def _drift_check(self) -> None:
+        malloc_trim()
         lines = [ln for ln in self.store.record.lines if ln.delay_ready is not None]
         slope = drift_slope([ln.t_end for ln in lines], [ln.delay_ready or 0.0 for ln in lines])
         self.log.log("drift", slope=round(slope, 4), n=len(lines))
         if drift_warning(slope) and len(lines) >= 10:
             self.store.warn(f"delay drift {slope:.3f} s/s at t={self.clock.now():.0f} s")
+
+
+def malloc_trim() -> None:
+    """Return freed native memory to the OS (glibc only). Whisper/torch/Kokoro allocate buffers of a
+    different size for every line; without trimming, RSS keeps the high-water mark (M10)."""
+    import ctypes
+    import sys
+
+    if sys.platform.startswith("linux"):
+        with contextlib.suppress(OSError, AttributeError):
+            ctypes.CDLL("libc.so.6").malloc_trim(0)
 
 
 def _make_vad() -> Any:

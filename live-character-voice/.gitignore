@@ -41,3 +41,6 @@ outputs/**/_mix_*.wav
 !outputs/20261105-062141_synthetic_match_final2/demo_synced.mp4
 !outputs/20261105-062141_synthetic_match_final2/voices_only.wav
 web/e2e/*.png
+
+# Pilot session working folders (the pilot report copies what matters into outputs/pilot_<date>/)
+outputs/sessions/

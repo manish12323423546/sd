@@ -267,3 +267,98 @@ Final config: ASR small.en int8 4 threads, torch 4 threads, compute lane off, ch
 median delay **4.14 s ❌ (target ≤ 4.0, missed by 0.14 s)**, p95 5.42 s ✅, drift −0.0009 s/s ✅,
 WER 10.9 % ✅, speaker accuracy 92.9 % ✅, crashes 0 ✅. Full table + top 3 fixes:
 `outputs/poc_summary.md`. Demo files committed from the median run (`…_final2`).
+
+
+## 2026-11-05 — M8: Backend API + WebSocket sessions
+
+**Built:** `app/main.py` (FastAPI: health incl. RSS, voices, clips list/upload ≤ 2 GB, sessions
+create/status/stop/record/lines.csv/report-as-HTML, static clips with HTTP Range (verified: 206),
+TTS files, previews, built SPA served at `/`), `app/sessions.py` (models loaded once per process,
+voice previews generated at start-up, ONE live session at a time → HTTP 409, an unstarted session
+is replaced, metrics + report written at session end), `app/ws.py` (protocol of docs/05 §5.4:
+session.ready/started, speaker.new/updated, line.complete, audio.ready with `play_at_media`,
+metrics every 5 s, warning, session.ended; client start/set_voice/played/stop/ping→pong with
+`server_wall`), `scripts/ws_client.py` (scripted session + scoring). 6 API unit tests (no models).
+
+**Accept** (`scripts/ws_client.py`, `synthetic_match.mp4`, speed 1.0 → `outputs/pilot_m8/`):
+| Check | Target | Result |
+|---|---|---|
+| line.complete received | ≥ 95 % of lines | **56/56 = 100 %** ✅ |
+| audio.ready received | ≥ 95 % of lines | **55/55 = 100 %** ✅ (1 filler dropped by catch-up) |
+| delay vs POC | within 10 % | p50 **4.18 s** vs 4.14 s (+1 %), p95 **5.33** vs 5.42 s (−2 %) ✅ |
+WER 10.9 %, speaker accuracy 92.9 %, 0 crashes — identical to the CLI because it is the same engine.
+
+**Memory finding:** server RSS grew 2.05 → 3.18 GB in the first session and +600 MB in the next.
+Cause: native allocators (CTranslate2, torch, Kokoro allocate differently sized buffers per line)
+across per-thread glibc arenas. Fixes: `MALLOC_ARENA_MAX=2` for the server (Makefile `dev`/`serve`,
+devcontainer) → +739 MB then +248 MB per session (converging), plus `malloc_trim(0)` every 60 s
+and at session end. Also: when the last viewer disconnects from a live session it is stopped after
+15 s (an abandoned tab blocked the single session slot — found when the e2e session caused a 409).
+
+## 2026-11-05 — M9: Web player
+
+**Built** (`web/`, React 18 + TS strict + Vite + Tailwind 3 + Zustand + React Router 6):
+Home (clips, upload, max commentators 2/3, enrollment option, backend health), Player (16:9 video,
+"Start live playback" gesture, speaker cards with voice dropdown + preview, emotion chip with the
+word + intensity meter, live transcript newest-first with per-line delay and catch-up markers,
+delay HUD with LIVE badge, level sliders + ducking toggle, delay sparkline, CSV export, report
+link), Report (iframe of the HTML report + downloads). Audio graph: video → MediaElementSource →
+originalGain, TTS buffers → voiceGain; lines pre-loaded on `audio.ready`, started at
+`ctx.currentTime + (play_at_media − video.currentTime)/rate`, ducking 80 ms / hold 150 ms with
+merged overlaps, `played` reported back. Clock sync: ping/pong every 10 s, playbackRate nudges
+±3 % beyond 300 ms, seek beyond 2 s. 13 vitest tests (doc message parsing, reducer, clock maths,
+start-time maths, ducking envelope).
+
+**Accept:** Playwright smoke (`web/e2e/smoke.mjs`, headless Chromium, speed 1.0, 3-speaker clip):
+**SMOKE OK** — 21 transcript lines, 19 audio.ready, `set_voice` sent (switched to am_adam),
+`played` sent by the browser, video at 65.3 s (H.264 plays in this Chromium). Committed:
+`outputs/ui/player.png`, `outputs/ui/session.webm` (no audio — Playwright recordings are silent;
+listen via the demo MP4s), `outputs/ui/smoke.json`. Note: with Chromium decoding + recording on the
+same 4 vCPUs the delay in that session was higher (p50 5.8 s) than in headless runs.
+
+
+## 2026-11-05 — M10: Voice switching, 3 commentators, stability → Pilot complete
+
+**Built:** `set_voice` end-to-end (applies to every line whose TTS has not started; cache keyed by
+line+voice+style), `max_speakers=3`, three-commentator synthetic clip (speaker C = `bm_fable`),
+20-minute clip (21.7 min, 432 truth lines, names rotated each loop), voice-switch scoring in
+`scripts/ws_client.py`, `scripts/pilot_report.py`, devcontainer for Codespaces
+(`.devcontainer/live-character-voice/`), `make serve`, 5 integration tests (`make test-slow`, all
+pass: each provider on a 3 s line + a 30 s end-to-end live run).
+
+**Found & fixed during the stability runs:**
+1. *Whisper hallucination* (20-min run #1, `outputs/pilot_20min_noguard`): a 0.16 s shout came
+   back as 140 words (the initial prompt repeated) and another line as "Moreau, moreau, …"; their
+   TTS took 23–32 s (max delay 39.8 s, WER 15.9 %). Fix: `engine/asr_guard.py` (drop words timed
+   outside the audio, collapse ≥ 3 repeats, cap at 5 words/s + 3) and no context prompt for lines
+   < 0.6 s. Run #2: max delay 7.9 s, WER 10.0 %.
+2. *Memory:* RSS idle 1.9 GB → ~2.8 GB within the first minute of a session (models' working
+   buffers), then a one-off +330 MB step mid-run #2 on the first very long line. Fixes:
+   `MALLOC_ARENA_MAX=2`, `malloc_trim(0)` every 60 s, and warm-up with worst-case input sizes
+   (6.5 s audio, a long sentence) at start-up. Run #3: +162 MB after the first minute.
+3. *Abandoned sessions:* closing the browser left the single session slot busy (409 for the next
+   viewer) → a live session with no viewers is stopped after 15 s.
+
+**Accept (Pilot)** — `outputs/pilot_20261105/report.md`:
+| Check | Target | Result |
+|---|---|---|
+| voice switch applies to the next unsynthesized line | ≥ 95 % | **56/56 = 100 %** (13 on the 3-speaker clip every 8 s + 43 on the 20-min run every 30 s) ✅ |
+| 3-speaker accuracy | ≥ 85 % | **96.0 %** (3-speaker clip), **93.5 %** (20-min) ✅ |
+| 20-min run: crashes | 0 | **0** ✅ |
+| 20-min run: drift | ≈ 0 | **−0.00003 s/s** ✅ |
+| 20-min run: p95 delay | ≤ 6.0 s | **5.11 s** (median 3.93, max 7.33) ✅ |
+| 20-min run: memory growth | < 300 MB | **+162 MB** after the first minute (2-min troughs 2835 → 2997 MB; last-10-min slope +7 MB/min) ✅ |
+20-min run #3 (`outputs/pilot_20min/`, session `20261105-073936_ad1b3c`): 396 lines, 386 voiced
+(10 dropped/merged by catch-up), WER 10.0 %, line.complete/audio.ready coverage 100 %.
+
+**Open issues / honest notes**
+- POC median delay 4.14 s vs 4.0 s target (POC runs were before the ASR guard; the 20-min Pilot
+  run with the guard measured 3.93 s median). Product-brief Pilot aim (≤ 3.5 s) not reached on 4
+  vCPU — see `outputs/poc_summary.md` for the measured trade-offs and top 3 fixes.
+- Peak emotion: 7/10 peaks detected on the POC clip (M4).
+- TTS stage p95 3.3 s live vs 1.6 s target (CPU contention; isolated it meets the target).
+- A live session uses ~1 GB more RAM than an idle server (working buffers), plateauing; a slow
+  +7 MB/min trend remains in the last 10 minutes and should be re-checked on a 60-min run.
+- Licences outside the permissive list (accepted by the user in this session): espeak-ng (GPL-3)
+  and soxr (LGPL-2.1, via librosa).
+- GitHub Actions workflow lives in `ci/` (the Claude GitHub App cannot push workflow files).

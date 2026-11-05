@@ -87,9 +87,15 @@ bench:
 poc:
 	$(PY) -m engine.cli poc --clip $(CLIP)
 
-# Backend + frontend together (Pilot, M8–M9).
+# Backend + frontend together (Pilot, M8–M9). MALLOC_ARENA_MAX=2 keeps RSS flat (M10).
+
+.PHONY: serve
+serve:
+	cd web && npm run build
+	MALLOC_ARENA_MAX=2 $(PY) -m uvicorn app.main:app --port 8000
+
 dev:
 	@trap 'kill 0' EXIT; \
-	$(PY) -m uvicorn app.main:app --port 8000 & \
+	MALLOC_ARENA_MAX=2 $(PY) -m uvicorn app.main:app --port 8000 & \
 	(cd web && npm run dev) & \
 	wait

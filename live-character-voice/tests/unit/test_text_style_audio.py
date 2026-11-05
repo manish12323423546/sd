@@ -137,3 +137,49 @@ def test_synthetic_truth_if_present() -> None:
     assert all(ln["t_start"] >= lines[i]["t_start"] for i, ln in enumerate(lines[1:]))
     assert {ln["emotion"] for ln in lines} == {"calm", "neutral", "excited", "peak"}
     assert lines[-1]["t_end"] < data["duration"]
+
+
+def test_asr_guard_drops_prompt_regurgitation_and_loops() -> None:
+    from engine.asr_guard import collapse_repeats, guard
+    from engine.providers.base import ASRResult, Word
+
+    def ws(texts: list[str], step: float = 0.3) -> list[Word]:
+        return [
+            Word(word=t, start=i * step, end=i * step + 0.25, prob=0.9) for i, t in enumerate(texts)
+        ]
+
+    loop = ws(["Moreau,"] * 12 + ["shoots."], step=0.05)
+    assert [w.word for w in collapse_repeats(loop)] == ["Moreau,", "Moreau,", "shoots."]
+    phrase = ws(
+        [
+            "wins",
+            "it",
+            "in",
+            "midfield",
+            "wins",
+            "it",
+            "in",
+            "midfield",
+            "wins",
+            "it",
+            "in",
+            "midfield",
+            "now",
+        ]
+    )
+    assert len(collapse_repeats(phrase)) == 9
+    # 0.3 s of audio cannot hold 20 words: cap to 5 w/s * 0.3 + 3 = 4
+    res = ASRResult(text="x", words=ws([f"w{i}" for i in range(20)], step=0.01))
+    out, actions = guard(res, 0.3)
+    assert len(out.words) == 4 and out.text == "w0 w1 w2 w3" and actions
+    # words timed far outside the audio are dropped
+    late = ASRResult(
+        text="a b",
+        words=[
+            Word(word="a", start=0.1, end=0.3, prob=1),
+            Word(word="b", start=5.0, end=5.2, prob=1),
+        ],
+    )
+    assert guard(late, 1.0)[0].text == "a"
+    ok = ASRResult(text="Goal!", words=ws(["Goal!"]))
+    assert guard(ok, 1.0) == (ok, [])

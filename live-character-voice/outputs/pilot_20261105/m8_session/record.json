@@ -1,0 +1,5736 @@
+{
+ "session_id": "20261105-064041_9d7a25",
+ "clip_path": "/home/user/sd/live-character-voice/data/clips/synthetic_match.mp4",
+ "mode": "pilot",
+ "speed": 1.0,
+ "source": "asr",
+ "started_at_iso": "2026-11-05T06:40:41+00:00",
+ "config_snapshot": {
+  "mode": "pilot",
+  "source": "asr",
+  "speed": 1.0,
+  "audio": {
+   "analysis_sr": 16000,
+   "chunk_ms": 250
+  },
+  "vad": {
+   "threshold": 0.5
+  },
+  "segment": {
+   "end_silence_ms": 350,
+   "max_line_s": 6.0,
+   "min_line_ms": 250,
+   "pad_ms": 120,
+   "burst_db": 10.0,
+   "split_sim": 0.45,
+   "level_split_db": 6.0,
+   "speaker_split": true
+  },
+  "asr": {
+   "provider": "faster_whisper",
+   "model": "small.en",
+   "compute_type": "int8",
+   "cpu_threads": 4,
+   "beam_size": 1,
+   "fallback_model": "base.en"
+  },
+  "speaker": {
+   "provider": "ecapa",
+   "max_speakers": 2,
+   "assign_sim": 0.55,
+   "ema_alpha": 0.1,
+   "enroll_file": null
+  },
+  "emotion": {
+   "provider": "prosody",
+   "weights": {
+    "loudness": 0.45,
+    "pitch": 0.3,
+    "rate": 0.15,
+    "text": 0.1
+   },
+   "thresholds": {
+    "calm": -0.5,
+    "excited": 0.8,
+    "peak": 1.8
+   }
+  },
+  "tts": {
+   "provider": "kokoro",
+   "workers": 2,
+   "lang_code": "a",
+   "voice_map": {
+    "S1": "bm_george",
+    "S2": "am_adam",
+    "S3": "af_bella"
+   }
+  },
+  "style": {
+   "pitch_shift": false
+  },
+  "schedule": {
+   "mode": "fast",
+   "gap_ms": 80,
+   "lag_soft_s": 3.5,
+   "lag_hard_s": 6.0,
+   "max_speedup": 1.15
+  },
+  "render": {
+   "out_sr": 48000,
+   "duck_gain": 0.25,
+   "duck_ramp_ms": 80,
+   "voice_gain_db": 0.0
+  },
+  "runtime": {
+   "torch_threads": 4,
+   "compute_lane": false
+  }
+ },
+ "speakers": {
+  "S1": {
+   "speaker_id": "S1",
+   "display_name": "Commentator 1",
+   "color": "#4FA3FF",
+   "centroid_n": 21,
+   "voice_id": "bm_george"
+  },
+  "S2": {
+   "speaker_id": "S2",
+   "display_name": "Commentator 2",
+   "color": "#F5A524",
+   "centroid_n": 8,
+   "voice_id": "am_adam"
+  }
+ },
+ "lines": [
+  {
+   "line_id": "L000001",
+   "t_start": 1.504,
+   "t_end": 4.96,
+   "close_reason": "pause",
+   "text": "Good evening and welcome to Riverside Park for this evening's match.",
+   "words": [
+    [
+     "Good",
+     1.384,
+     1.604,
+     0.839
+    ],
+    [
+     "evening",
+     1.604,
+     1.924,
+     0.974
+    ],
+    [
+     "and",
+     1.924,
+     2.264,
+     0.77
+    ],
+    [
+     "welcome",
+     2.264,
+     2.584,
+     0.989
+    ],
+    [
+     "to",
+     2.584,
+     2.864,
+     0.994
+    ],
+    [
+     "Riverside",
+     2.864,
+     3.144,
+     0.996
+    ],
+    [
+     "Park",
+     3.144,
+     3.644,
+     0.979
+    ],
+    [
+     "for",
+     3.644,
+     3.884,
+     0.992
+    ],
+    [
+     "this",
+     3.884,
+     4.044,
+     0.998
+    ],
+    [
+     "evening's",
+     4.044,
+     4.464,
+     0.942
+    ],
+    [
+     "match.",
+     4.464,
+     4.704,
+     0.986
+    ]
+   ],
+   "asr_conf": 0.833,
+   "speaker_id": "S1",
+   "speaker_sim": 1.0,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.0,
+   "features": {
+    "loudness_db": -18.434,
+    "loudness_mean_db": -20.006,
+    "duration_s": 3.456,
+    "pitch_hz_median": 137.845,
+    "pitch_hz_p75": 178.909,
+    "pitch_range": 213.073,
+    "rate_wps": 3.313,
+    "text_cue": 0.0,
+    "z_loudness": 0.0,
+    "z_pitch": 0.0,
+    "z_rate": 0.0,
+    "arousal_raw": 0.0
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000001_bm_george_cc5d55b5_x1.08.wav",
+   "tts_duration": 3.272,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 5.502,
+    "asr_done": 7.139,
+    "speaker_done": 6.357,
+    "emotion_done": 7.14,
+    "complete": 7.14,
+    "tts_start": 7.14,
+    "tts_ready": 9.783,
+    "play_at": 9.783,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000002",
+   "t_start": 5.6,
+   "t_end": 9.088,
+   "close_reason": "pause",
+   "text": "It's a lovely night for football and both sides need it once.",
+   "words": [
+    [
+     "It's",
+     5.48,
+     5.78,
+     0.902
+    ],
+    [
+     "a",
+     5.78,
+     5.88,
+     0.995
+    ],
+    [
+     "lovely",
+     5.88,
+     6.2,
+     0.998
+    ],
+    [
+     "night",
+     6.2,
+     6.48,
+     0.994
+    ],
+    [
+     "for",
+     6.48,
+     6.66,
+     0.647
+    ],
+    [
+     "football",
+     6.66,
+     7.08,
+     0.976
+    ],
+    [
+     "and",
+     7.08,
+     7.64,
+     0.469
+    ],
+    [
+     "both",
+     7.64,
+     7.84,
+     0.997
+    ],
+    [
+     "sides",
+     7.84,
+     8.24,
+     0.998
+    ],
+    [
+     "need",
+     8.24,
+     8.54,
+     0.683
+    ],
+    [
+     "it",
+     8.54,
+     8.7,
+     0.776
+    ],
+    [
+     "once.",
+     8.7,
+     8.94,
+     0.996
+    ]
+   ],
+   "asr_conf": 0.797,
+   "speaker_id": "S2",
+   "speaker_sim": 1.0,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.0,
+   "features": {
+    "loudness_db": -19.643,
+    "loudness_mean_db": -22.192,
+    "duration_s": 3.488,
+    "pitch_hz_median": 199.866,
+    "pitch_hz_p75": 229.086,
+    "pitch_range": 172.598,
+    "rate_wps": 3.468,
+    "text_cue": 0.0,
+    "z_loudness": 0.0,
+    "z_pitch": 0.0,
+    "z_rate": 0.0,
+    "arousal_raw": 0.0
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000002_am_adam_3bd2f0e8_x1.07.wav",
+   "tts_duration": 3.098,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 9.503,
+    "asr_done": 10.855,
+    "speaker_done": 9.92,
+    "emotion_done": 10.855,
+    "complete": 10.855,
+    "tts_start": 10.856,
+    "tts_ready": 13.334,
+    "play_at": 13.334,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000003",
+   "t_start": 9.824,
+   "t_end": 13.312,
+   "close_reason": "pause",
+   "text": "Riverside Rovers get us underway, playing from left to right.",
+   "words": [
+    [
+     "Riverside",
+     9.704,
+     10.244,
+     0.978
+    ],
+    [
+     "Rovers",
+     10.244,
+     10.824,
+     0.689
+    ],
+    [
+     "get",
+     10.824,
+     11.004,
+     0.965
+    ],
+    [
+     "us",
+     11.004,
+     11.184,
+     0.996
+    ],
+    [
+     "underway,",
+     11.184,
+     11.604,
+     0.906
+    ],
+    [
+     "playing",
+     11.964,
+     12.224,
+     0.994
+    ],
+    [
+     "from",
+     12.224,
+     12.504,
+     0.992
+    ],
+    [
+     "left",
+     12.504,
+     12.724,
+     0.993
+    ],
+    [
+     "to",
+     12.724,
+     12.944,
+     0.995
+    ],
+    [
+     "right.",
+     12.944,
+     13.164,
+     0.999
+    ]
+   ],
+   "asr_conf": 0.828,
+   "speaker_id": "S1",
+   "speaker_sim": 0.791,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.0,
+   "features": {
+    "loudness_db": -17.905,
+    "loudness_mean_db": -20.312,
+    "duration_s": 3.488,
+    "pitch_hz_median": 137.497,
+    "pitch_hz_p75": 151.55,
+    "pitch_range": 152.727,
+    "rate_wps": 2.89,
+    "text_cue": 0.0,
+    "z_loudness": 0.0,
+    "z_pitch": 0.0,
+    "z_rate": 0.0,
+    "arousal_raw": 0.0
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000003_bm_george_40d29220_x1.07.wav",
+   "tts_duration": 3.005,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 13.753,
+    "asr_done": 15.027,
+    "speaker_done": 14.083,
+    "emotion_done": 15.027,
+    "complete": 15.027,
+    "tts_start": 15.027,
+    "tts_ready": 17.563,
+    "play_at": 17.563,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000004",
+   "t_start": 13.824,
+   "t_end": 16.096,
+   "close_reason": "pause",
+   "text": "Okafor finds Lindqvist on the halfway line.",
+   "words": [
+    [
+     "Okafor",
+     13.704,
+     14.164,
+     0.033
+    ],
+    [
+     "finds",
+     14.164,
+     14.504,
+     0.982
+    ],
+    [
+     "Lindqvist",
+     14.504,
+     15.004,
+     0.59
+    ],
+    [
+     "on",
+     15.004,
+     15.144,
+     0.995
+    ],
+    [
+     "the",
+     15.144,
+     15.264,
+     0.996
+    ],
+    [
+     "halfway",
+     15.264,
+     15.504,
+     0.869
+    ],
+    [
+     "line.",
+     15.504,
+     15.924,
+     0.996
+    ]
+   ],
+   "asr_conf": 0.813,
+   "speaker_id": "S1",
+   "speaker_sim": 0.7,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.166,
+   "features": {
+    "loudness_db": -19.482,
+    "loudness_mean_db": -20.806,
+    "duration_s": 2.272,
+    "pitch_hz_median": 138.254,
+    "pitch_hz_p75": 175.653,
+    "pitch_range": 134.219,
+    "rate_wps": 3.153,
+    "text_cue": 0.0,
+    "z_loudness": -0.419,
+    "z_pitch": 0.0,
+    "z_rate": -0.32,
+    "arousal_raw": -0.237
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000004_bm_george_85acb259_x1.07.wav",
+   "tts_duration": 2.4,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 16.505,
+    "asr_done": 18.111,
+    "speaker_done": 16.702,
+    "emotion_done": 18.112,
+    "complete": 18.112,
+    "tts_start": 18.112,
+    "tts_ready": 20.055,
+    "play_at": 20.648,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000005",
+   "t_start": 16.864,
+   "t_end": 21.472,
+   "close_reason": "pause",
+   "text": "Lindqvist has been in fine form this season, always looking for the pass forward.",
+   "words": [
+    [
+     "Lindqvist",
+     16.744,
+     17.504,
+     0.551
+    ],
+    [
+     "has",
+     17.504,
+     17.624,
+     0.992
+    ],
+    [
+     "been",
+     17.624,
+     17.824,
+     0.997
+    ],
+    [
+     "in",
+     17.824,
+     17.984,
+     0.994
+    ],
+    [
+     "fine",
+     17.984,
+     18.244,
+     0.949
+    ],
+    [
+     "form",
+     18.244,
+     18.564,
+     0.992
+    ],
+    [
+     "this",
+     18.564,
+     18.784,
+     0.985
+    ],
+    [
+     "season,",
+     18.784,
+     19.144,
+     0.996
+    ],
+    [
+     "always",
+     19.664,
+     19.904,
+     0.992
+    ],
+    [
+     "looking",
+     19.904,
+     20.224,
+     0.998
+    ],
+    [
+     "for",
+     20.224,
+     20.424,
+     0.997
+    ],
+    [
+     "the",
+     20.424,
+     20.544,
+     0.9
+    ],
+    [
+     "pass",
+     20.544,
+     20.784,
+     0.837
+    ],
+    [
+     "forward.",
+     20.784,
+     21.164,
+     0.884
+    ]
+   ],
+   "asr_conf": 0.872,
+   "speaker_id": "S2",
+   "speaker_sim": 0.57,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.092,
+   "features": {
+    "loudness_db": -19.581,
+    "loudness_mean_db": -23.021,
+    "duration_s": 4.608,
+    "pitch_hz_median": 197.28,
+    "pitch_hz_p75": 226.563,
+    "pitch_range": 196.735,
+    "rate_wps": 3.167,
+    "text_cue": 0.0,
+    "z_loudness": -0.249,
+    "z_pitch": 0.0,
+    "z_rate": -0.132,
+    "arousal_raw": -0.132
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000005_am_adam_470548a7_x1.11.wav",
+   "tts_duration": 4.054,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 22.004,
+    "asr_done": 23.42,
+    "speaker_done": 22.561,
+    "emotion_done": 23.421,
+    "complete": 23.421,
+    "tts_start": 23.421,
+    "tts_ready": 26.806,
+    "play_at": 26.806,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000006",
+   "t_start": 22.048,
+   "t_end": 24.672,
+   "close_reason": "pause",
+   "text": "Northgate United sit deep and wait for the press.",
+   "words": [
+    [
+     "Northgate",
+     21.928,
+     22.428,
+     0.942
+    ],
+    [
+     "United",
+     22.428,
+     22.808,
+     0.969
+    ],
+    [
+     "sit",
+     22.808,
+     23.088,
+     0.972
+    ],
+    [
+     "deep",
+     23.088,
+     23.408,
+     0.998
+    ],
+    [
+     "and",
+     23.408,
+     23.688,
+     0.946
+    ],
+    [
+     "wait",
+     23.688,
+     23.868,
+     0.998
+    ],
+    [
+     "for",
+     23.868,
+     24.068,
+     0.999
+    ],
+    [
+     "the",
+     24.068,
+     24.168,
+     0.998
+    ],
+    [
+     "press.",
+     24.168,
+     24.408,
+     0.999
+    ]
+   ],
+   "asr_conf": 0.834,
+   "speaker_id": "S1",
+   "speaker_sim": 0.721,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.151,
+   "features": {
+    "loudness_db": -18.636,
+    "loudness_mean_db": -20.651,
+    "duration_s": 2.624,
+    "pitch_hz_median": 138.183,
+    "pitch_hz_p75": 170.061,
+    "pitch_range": 180.225,
+    "rate_wps": 3.629,
+    "text_cue": 0.0,
+    "z_loudness": 0.338,
+    "z_pitch": -0.467,
+    "z_rate": 0.923,
+    "arousal_raw": 0.151
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000006_bm_george_21e3951a_x1.15.wav",
+   "tts_duration": 2.383,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 25.255,
+    "asr_done": 26.906,
+    "speaker_done": 25.537,
+    "emotion_done": 26.906,
+    "complete": 26.906,
+    "tts_start": 26.907,
+    "tts_ready": 28.854,
+    "play_at": 30.94,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000007",
+   "t_start": 25.216,
+   "t_end": 29.216,
+   "close_reason": "pause",
+   "text": "Moreau steps in and wins it back cleanly. That's the kind of tackle the manager will love.",
+   "words": [
+    [
+     "Moreau",
+     25.096,
+     25.536,
+     0.4
+    ],
+    [
+     "steps",
+     25.536,
+     25.696,
+     0.988
+    ],
+    [
+     "in",
+     25.696,
+     25.936,
+     0.99
+    ],
+    [
+     "and",
+     25.936,
+     26.056,
+     0.982
+    ],
+    [
+     "wins",
+     26.056,
+     26.216,
+     0.903
+    ],
+    [
+     "it",
+     26.216,
+     26.356,
+     0.994
+    ],
+    [
+     "back",
+     26.356,
+     26.576,
+     0.997
+    ],
+    [
+     "cleanly.",
+     26.576,
+     26.856,
+     0.987
+    ],
+    [
+     "That's",
+     26.976,
+     27.136,
+     0.691
+    ],
+    [
+     "the",
+     27.136,
+     27.256,
+     0.994
+    ],
+    [
+     "kind",
+     27.256,
+     27.416,
+     0.993
+    ],
+    [
+     "of",
+     27.416,
+     27.596,
+     0.998
+    ],
+    [
+     "tackle",
+     27.596,
+     27.916,
+     0.974
+    ],
+    [
+     "the",
+     27.916,
+     28.176,
+     0.752
+    ],
+    [
+     "manager",
+     28.176,
+     28.436,
+     0.929
+    ],
+    [
+     "will",
+     28.436,
+     28.736,
+     0.763
+    ],
+    [
+     "love.",
+     28.736,
+     29.016,
+     0.991
+    ]
+   ],
+   "asr_conf": 0.802,
+   "speaker_id": "S1",
+   "speaker_sim": 0.516,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.147,
+   "features": {
+    "loudness_db": -19.295,
+    "loudness_mean_db": -21.525,
+    "duration_s": 4.0,
+    "pitch_hz_median": 180.796,
+    "pitch_hz_p75": 210.839,
+    "pitch_range": 158.152,
+    "rate_wps": 4.337,
+    "text_cue": 0.0,
+    "z_loudness": -0.094,
+    "z_pitch": 2.867,
+    "z_rate": 2.193,
+    "arousal_raw": 1.147
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000007_bm_george_87cda071_x1.11.wav",
+   "tts_duration": 4.076,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 29.754,
+    "asr_done": 31.253,
+    "speaker_done": 30.194,
+    "emotion_done": 31.254,
+    "complete": 31.254,
+    "tts_start": 31.254,
+    "tts_ready": 34.538,
+    "play_at": 34.538,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000008",
+   "t_start": 30.048,
+   "t_end": 32.448,
+   "close_reason": "pause",
+   "text": "Tanaka down the right wing past one past two.",
+   "words": [
+    [
+     "Tanaka",
+     29.928,
+     30.248,
+     0.0
+    ],
+    [
+     "down",
+     30.248,
+     30.528,
+     0.971
+    ],
+    [
+     "the",
+     30.528,
+     30.648,
+     0.987
+    ],
+    [
+     "right",
+     30.648,
+     30.808,
+     0.999
+    ],
+    [
+     "wing",
+     30.808,
+     31.148,
+     0.989
+    ],
+    [
+     "past",
+     31.148,
+     31.368,
+     0.824
+    ],
+    [
+     "one",
+     31.368,
+     31.688,
+     0.738
+    ],
+    [
+     "past",
+     31.688,
+     31.968,
+     0.727
+    ],
+    [
+     "two.",
+     31.968,
+     32.268,
+     0.963
+    ]
+   ],
+   "asr_conf": 0.736,
+   "speaker_id": "S1",
+   "speaker_sim": 0.734,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.489,
+   "features": {
+    "loudness_db": -18.081,
+    "loudness_mean_db": -20.085,
+    "duration_s": 2.4,
+    "pitch_hz_median": 134.987,
+    "pitch_hz_p75": 168.84,
+    "pitch_range": 129.249,
+    "rate_wps": 3.846,
+    "text_cue": 0.0,
+    "z_loudness": 0.486,
+    "z_pitch": -0.571,
+    "z_rate": 1.066,
+    "arousal_raw": 0.207
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000008_bm_george_da3d1eea_x1.15.wav",
+   "tts_duration": 2.313,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 33.003,
+    "asr_done": 34.662,
+    "speaker_done": 33.229,
+    "emotion_done": 34.663,
+    "complete": 34.663,
+    "tts_start": 34.663,
+    "tts_ready": 36.905,
+    "play_at": 38.694,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000009",
+   "t_start": 32.896,
+   "t_end": 34.336,
+   "close_reason": "level_change",
+   "text": "He cuts it back for Delgado.",
+   "words": [
+    [
+     "He",
+     32.776,
+     32.976,
+     0.853
+    ],
+    [
+     "cuts",
+     32.976,
+     33.136,
+     0.996
+    ],
+    [
+     "it",
+     33.136,
+     33.296,
+     0.994
+    ],
+    [
+     "back",
+     33.296,
+     33.476,
+     0.996
+    ],
+    [
+     "for",
+     33.476,
+     33.656,
+     0.993
+    ],
+    [
+     "Delgado.",
+     33.656,
+     34.056,
+     0.964
+    ]
+   ],
+   "asr_conf": 0.751,
+   "speaker_id": "S1",
+   "speaker_sim": 0.405,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 0.903,
+   "features": {
+    "loudness_db": -16.26,
+    "loudness_mean_db": -17.096,
+    "duration_s": 1.44,
+    "pitch_hz_median": 151.673,
+    "pitch_hz_p75": 173.91,
+    "pitch_range": 129.553,
+    "rate_wps": 4.688,
+    "text_cue": 0.0,
+    "z_loudness": 1.082,
+    "z_pitch": 0.09,
+    "z_rate": 2.594,
+    "arousal_raw": 0.903
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000009_bm_george_ece5af29_x1.15.wav",
+   "tts_duration": 1.357,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 35.004,
+    "asr_done": 36.636,
+    "speaker_done": 35.171,
+    "emotion_done": 36.637,
+    "complete": 36.637,
+    "tts_start": 36.638,
+    "tts_ready": 38.253,
+    "play_at": 41.087,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000010",
+   "t_start": 34.656,
+   "t_end": 35.136,
+   "close_reason": "burst",
+   "text": "Oh what a chance.",
+   "words": [
+    [
+     "Oh",
+     34.536,
+     34.756,
+     0.698
+    ],
+    [
+     "what",
+     34.756,
+     34.896,
+     0.56
+    ],
+    [
+     "a",
+     34.896,
+     34.976,
+     0.995
+    ],
+    [
+     "chance.",
+     34.976,
+     35.116,
+     0.916
+    ]
+   ],
+   "asr_conf": 0.631,
+   "speaker_id": "S1",
+   "speaker_sim": 0.03,
+   "speaker_conf": "low",
+   "emotion": "peak",
+   "arousal": 3.0,
+   "features": {
+    "loudness_db": -10.551,
+    "loudness_mean_db": -10.551,
+    "duration_s": 0.48,
+    "pitch_hz_median": 200.26,
+    "pitch_hz_p75": 227.059,
+    "pitch_range": 80.443,
+    "rate_wps": 6.897,
+    "text_cue": 0.6,
+    "z_loudness": 3.234,
+    "z_pitch": 3.847,
+    "z_rate": 4.0,
+    "arousal_raw": 3.0
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000010_bm_george_f15f9749_x1.15.wav",
+   "tts_duration": 0.809,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 35.509,
+    "asr_done": 38.121,
+    "speaker_done": 35.601,
+    "emotion_done": 38.123,
+    "complete": 38.123,
+    "tts_start": 38.123,
+    "tts_ready": 39.234,
+    "play_at": 42.523,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000011",
+   "t_start": 35.136,
+   "t_end": 35.552,
+   "close_reason": "level_change",
+   "text": "Dance.",
+   "words": [
+    [
+     "Dance.",
+     35.016,
+     35.236,
+     0.179
+    ]
+   ],
+   "asr_conf": 0.572,
+   "speaker_id": "S1",
+   "speaker_sim": -0.036,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.341,
+   "features": {
+    "loudness_db": -23.148,
+    "loudness_mean_db": -23.148,
+    "duration_s": 0.416,
+    "pitch_hz_median": 113.7,
+    "pitch_hz_p75": 257.297,
+    "pitch_range": 292.256,
+    "rate_wps": 4.545,
+    "text_cue": 0.0,
+    "z_loudness": -1.845,
+    "z_pitch": 4.0,
+    "z_rate": 1.731,
+    "arousal_raw": 0.629
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000011_bm_george_db460b35_x1.15.wav",
+   "tts_duration": 0.53,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 36.004,
+    "asr_done": 39.551,
+    "speaker_done": 36.048,
+    "emotion_done": 39.552,
+    "complete": 39.552,
+    "tts_start": 39.553,
+    "tts_ready": 40.335,
+    "play_at": 43.412,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000012",
+   "t_start": 35.648,
+   "t_end": 37.984,
+   "close_reason": "pause",
+   "text": "He has to slow down, the goal is wide open.",
+   "words": [
+    [
+     "He",
+     35.528,
+     35.768,
+     0.154
+    ],
+    [
+     "has",
+     35.768,
+     35.888,
+     0.897
+    ],
+    [
+     "to",
+     35.888,
+     36.028,
+     0.962
+    ],
+    [
+     "slow",
+     36.028,
+     36.268,
+     0.232
+    ],
+    [
+     "down,",
+     36.268,
+     36.508,
+     0.682
+    ],
+    [
+     "the",
+     36.628,
+     36.728,
+     0.934
+    ],
+    [
+     "goal",
+     36.728,
+     36.888,
+     0.725
+    ],
+    [
+     "is",
+     36.888,
+     37.088,
+     0.965
+    ],
+    [
+     "wide",
+     37.088,
+     37.348,
+     0.728
+    ],
+    [
+     "open.",
+     37.348,
+     37.768,
+     0.995
+    ]
+   ],
+   "asr_conf": 0.563,
+   "speaker_id": "S2",
+   "speaker_sim": 0.372,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.193,
+   "features": {
+    "loudness_db": -13.55,
+    "loudness_mean_db": -14.775,
+    "duration_s": 2.336,
+    "pitch_hz_median": 205.35,
+    "pitch_hz_p75": 232.182,
+    "pitch_range": 182.307,
+    "rate_wps": 4.464,
+    "text_cue": 1.0,
+    "z_loudness": 2.034,
+    "z_pitch": 0.0,
+    "z_rate": 1.184,
+    "arousal_raw": 1.193
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000012_am_adam_076b37d4_x1.15.wav",
+   "tts_duration": 2.0,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 38.513,
+    "asr_done": 40.919,
+    "speaker_done": 38.681,
+    "emotion_done": 40.92,
+    "complete": 40.92,
+    "tts_start": 40.92,
+    "tts_ready": 43.065,
+    "play_at": 44.022,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000013",
+   "t_start": 38.784,
+   "t_end": 41.12,
+   "close_reason": "pause",
+   "text": "A goal kick then, and a lid off for Riverside.",
+   "words": [
+    [
+     "A",
+     38.664,
+     38.844,
+     0.566
+    ],
+    [
+     "goal",
+     38.844,
+     39.084,
+     0.778
+    ],
+    [
+     "kick",
+     39.084,
+     39.304,
+     0.537
+    ],
+    [
+     "then,",
+     39.304,
+     39.624,
+     0.892
+    ],
+    [
+     "and",
+     39.744,
+     39.864,
+     0.87
+    ],
+    [
+     "a",
+     39.864,
+     39.944,
+     0.803
+    ],
+    [
+     "lid",
+     39.944,
+     40.064,
+     0.179
+    ],
+    [
+     "off",
+     40.064,
+     40.264,
+     0.89
+    ],
+    [
+     "for",
+     40.264,
+     40.444,
+     0.918
+    ],
+    [
+     "Riverside.",
+     40.444,
+     40.784,
+     0.993
+    ]
+   ],
+   "asr_conf": 0.641,
+   "speaker_id": "S1",
+   "speaker_sim": 0.566,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.37,
+   "features": {
+    "loudness_db": -21.166,
+    "loudness_mean_db": -22.648,
+    "duration_s": 2.336,
+    "pitch_hz_median": 131.324,
+    "pitch_hz_p75": 182.264,
+    "pitch_range": 208.563,
+    "rate_wps": 4.717,
+    "text_cue": 1.0,
+    "z_loudness": -1.052,
+    "z_pitch": 0.533,
+    "z_rate": 1.116,
+    "arousal_raw": -0.046
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000013_bm_george_a6399f1f_x1.09.wav",
+   "tts_duration": 2.268,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 41.505,
+    "asr_done": 43.203,
+    "speaker_done": 41.73,
+    "emotion_done": 43.204,
+    "complete": 43.204,
+    "tts_start": 43.204,
+    "tts_ready": 45.171,
+    "play_at": 46.102,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000014",
+   "t_start": 41.856,
+   "t_end": 44.576,
+   "close_reason": "pause",
+   "text": "Delgado will be thinking about that one for a while.",
+   "words": [
+    [
+     "Delgado",
+     41.736,
+     42.356,
+     0.971
+    ],
+    [
+     "will",
+     42.356,
+     42.576,
+     0.953
+    ],
+    [
+     "be",
+     42.576,
+     42.696,
+     0.997
+    ],
+    [
+     "thinking",
+     42.696,
+     42.956,
+     0.997
+    ],
+    [
+     "about",
+     42.956,
+     43.356,
+     0.981
+    ],
+    [
+     "that",
+     43.356,
+     43.556,
+     0.925
+    ],
+    [
+     "one",
+     43.556,
+     43.776,
+     0.896
+    ],
+    [
+     "for",
+     43.776,
+     43.996,
+     0.996
+    ],
+    [
+     "a",
+     43.996,
+     44.136,
+     0.855
+    ],
+    [
+     "while.",
+     44.136,
+     44.316,
+     0.999
+    ]
+   ],
+   "asr_conf": 0.801,
+   "speaker_id": "S2",
+   "speaker_sim": 0.507,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": 0.135,
+   "features": {
+    "loudness_db": -20.17,
+    "loudness_mean_db": -22.528,
+    "duration_s": 2.72,
+    "pitch_hz_median": 193.567,
+    "pitch_hz_p75": 226.603,
+    "pitch_range": 174.743,
+    "rate_wps": 3.876,
+    "text_cue": 0.0,
+    "z_loudness": -0.614,
+    "z_pitch": -0.157,
+    "z_rate": 0.03,
+    "arousal_raw": -0.319
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000014_am_adam_7a6287e9_x1.07.wav",
+   "tts_duration": 2.437,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 45.006,
+    "asr_done": 46.267,
+    "speaker_done": 45.235,
+    "emotion_done": 46.268,
+    "complete": 46.268,
+    "tts_start": 46.268,
+    "tts_ready": 48.445,
+    "play_at": 48.451,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000015",
+   "t_start": 45.12,
+   "t_end": 48.576,
+   "close_reason": "pause",
+   "text": "Brennan with the long ball forward, headed away by the center back.",
+   "words": [
+    [
+     "Brennan",
+     45.0,
+     45.36,
+     0.935
+    ],
+    [
+     "with",
+     45.36,
+     45.6,
+     0.971
+    ],
+    [
+     "the",
+     45.6,
+     45.76,
+     0.988
+    ],
+    [
+     "long",
+     45.76,
+     46.02,
+     0.98
+    ],
+    [
+     "ball",
+     46.02,
+     46.34,
+     0.998
+    ],
+    [
+     "forward,",
+     46.34,
+     46.84,
+     0.996
+    ],
+    [
+     "headed",
+     47.2,
+     47.3,
+     0.994
+    ],
+    [
+     "away",
+     47.3,
+     47.62,
+     0.998
+    ],
+    [
+     "by",
+     47.62,
+     47.82,
+     0.998
+    ],
+    [
+     "the",
+     47.82,
+     47.96,
+     0.996
+    ],
+    [
+     "center",
+     47.96,
+     48.18,
+     0.958
+    ],
+    [
+     "back.",
+     48.18,
+     48.46,
+     0.809
+    ]
+   ],
+   "asr_conf": 0.806,
+   "speaker_id": "S1",
+   "speaker_sim": 0.722,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.042,
+   "features": {
+    "loudness_db": -18.487,
+    "loudness_mean_db": -20.166,
+    "duration_s": 3.456,
+    "pitch_hz_median": 143.791,
+    "pitch_hz_p75": 167.581,
+    "pitch_range": 134.335,
+    "rate_wps": 3.468,
+    "text_cue": 0.0,
+    "z_loudness": 0.192,
+    "z_pitch": -0.811,
+    "z_rate": -0.412,
+    "arousal_raw": -0.219
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000015_bm_george_e2f0874c_x1.07.wav",
+   "tts_duration": 3.191,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 49.004,
+    "asr_done": 50.298,
+    "speaker_done": 49.355,
+    "emotion_done": 50.299,
+    "complete": 50.299,
+    "tts_start": 50.299,
+    "tts_ready": 52.775,
+    "play_at": 52.775,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000016",
+   "t_start": 49.152,
+   "t_end": 54.208,
+   "close_reason": "pause",
+   "text": "It drops to Okafor on the edge of the area, and he shoots. Straight at the keeper, you should have done better.",
+   "words": [
+    [
+     "It",
+     49.032,
+     49.232,
+     0.763
+    ],
+    [
+     "drops",
+     49.232,
+     49.472,
+     0.998
+    ],
+    [
+     "to",
+     49.472,
+     49.692,
+     0.997
+    ],
+    [
+     "Okafor",
+     49.692,
+     50.092,
+     0.057
+    ],
+    [
+     "on",
+     50.092,
+     50.292,
+     0.965
+    ],
+    [
+     "the",
+     50.292,
+     50.392,
+     0.998
+    ],
+    [
+     "edge",
+     50.392,
+     50.552,
+     0.998
+    ],
+    [
+     "of",
+     50.552,
+     50.672,
+     0.997
+    ],
+    [
+     "the",
+     50.672,
+     50.792,
+     0.997
+    ],
+    [
+     "area,",
+     50.792,
+     51.092,
+     0.999
+    ],
+    [
+     "and",
+     51.332,
+     51.432,
+     0.994
+    ],
+    [
+     "he",
+     51.432,
+     51.592,
+     0.998
+    ],
+    [
+     "shoots.",
+     51.592,
+     51.832,
+     0.997
+    ],
+    [
+     "Straight",
+     52.032,
+     52.272,
+     0.743
+    ],
+    [
+     "at",
+     52.272,
+     52.452,
+     0.85
+    ],
+    [
+     "the",
+     52.452,
+     52.552,
+     0.993
+    ],
+    [
+     "keeper,",
+     52.552,
+     52.812,
+     0.989
+    ],
+    [
+     "you",
+     53.072,
+     53.172,
+     0.635
+    ],
+    [
+     "should",
+     53.172,
+     53.292,
+     0.998
+    ],
+    [
+     "have",
+     53.292,
+     53.392,
+     0.72
+    ],
+    [
+     "done",
+     53.392,
+     53.552,
+     0.991
+    ],
+    [
+     "better.",
+     53.552,
+     53.812,
+     1.0
+    ]
+   ],
+   "asr_conf": 0.802,
+   "speaker_id": "S1",
+   "speaker_sim": 0.66,
+   "speaker_conf": "high",
+   "emotion": "excited",
+   "arousal": 1.661,
+   "features": {
+    "loudness_db": -16.468,
+    "loudness_mean_db": -18.667,
+    "duration_s": 5.056,
+    "pitch_hz_median": 172.575,
+    "pitch_hz_p75": 228.962,
+    "pitch_range": 169.052,
+    "rate_wps": 4.603,
+    "text_cue": 0.0,
+    "z_loudness": 0.867,
+    "z_pitch": 3.824,
+    "z_rate": 0.825,
+    "arousal_raw": 1.661
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000016_bm_george_f33dd761_x1.11.wav",
+   "tts_duration": 4.009,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 54.754,
+    "asr_done": 56.297,
+    "speaker_done": 55.244,
+    "emotion_done": 56.298,
+    "complete": 56.298,
+    "tts_start": 56.298,
+    "tts_ready": 59.535,
+    "play_at": 59.535,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000017",
+   "t_start": 54.848,
+   "t_end": 57.504,
+   "close_reason": "pause",
+   "text": "Northgate keep the ball now, passing it around the back.",
+   "words": [
+    [
+     "Northgate",
+     54.728,
+     55.288,
+     0.85
+    ],
+    [
+     "keep",
+     55.288,
+     55.488,
+     0.707
+    ],
+    [
+     "the",
+     55.488,
+     55.668,
+     0.996
+    ],
+    [
+     "ball",
+     55.668,
+     55.868,
+     0.945
+    ],
+    [
+     "now,",
+     55.868,
+     56.228,
+     0.93
+    ],
+    [
+     "passing",
+     56.288,
+     56.688,
+     0.933
+    ],
+    [
+     "it",
+     56.688,
+     56.888,
+     0.933
+    ],
+    [
+     "around",
+     56.888,
+     57.068,
+     0.968
+    ],
+    [
+     "the",
+     57.068,
+     57.228,
+     0.973
+    ],
+    [
+     "back.",
+     57.228,
+     57.428,
+     0.948
+    ]
+   ],
+   "asr_conf": 0.766,
+   "speaker_id": "S1",
+   "speaker_sim": 0.591,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.742,
+   "features": {
+    "loudness_db": -20.049,
+    "loudness_mean_db": -22.169,
+    "duration_s": 2.656,
+    "pitch_hz_median": 143.691,
+    "pitch_hz_p75": 209.293,
+    "pitch_range": 225.347,
+    "rate_wps": 3.704,
+    "text_cue": 0.0,
+    "z_loudness": -0.595,
+    "z_pitch": 2.134,
+    "z_rate": -0.165,
+    "arousal_raw": 0.348
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000017_bm_george_6ed174b2_x1.15.wav",
+   "tts_duration": 2.426,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 58.003,
+    "asr_done": 59.795,
+    "speaker_done": 58.307,
+    "emotion_done": 59.795,
+    "complete": 59.795,
+    "tts_start": 59.796,
+    "tts_ready": 62.079,
+    "play_at": 63.624,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000018",
+   "t_start": 58.368,
+   "t_end": 60.64,
+   "close_reason": "pause",
+   "text": "20 minutes gone, and it is still 0-0.",
+   "words": [
+    [
+     "20",
+     58.248,
+     58.608,
+     0.711
+    ],
+    [
+     "minutes",
+     58.608,
+     58.828,
+     0.966
+    ],
+    [
+     "gone,",
+     58.828,
+     59.168,
+     0.993
+    ],
+    [
+     "and",
+     59.428,
+     59.448,
+     0.991
+    ],
+    [
+     "it",
+     59.448,
+     59.548,
+     0.996
+    ],
+    [
+     "is",
+     59.548,
+     59.688,
+     0.985
+    ],
+    [
+     "still",
+     59.688,
+     59.908,
+     0.997
+    ],
+    [
+     "0",
+     59.908,
+     60.108,
+     0.178
+    ],
+    [
+     "-0.",
+     60.108,
+     60.368,
+     0.954
+    ]
+   ],
+   "asr_conf": 0.726,
+   "speaker_id": "S2",
+   "speaker_sim": 0.445,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": -0.03,
+   "features": {
+    "loudness_db": -19.506,
+    "loudness_mean_db": -20.657,
+    "duration_s": 2.272,
+    "pitch_hz_median": 206.065,
+    "pitch_hz_p75": 227.373,
+    "pitch_range": 169.735,
+    "rate_wps": 4.245,
+    "text_cue": 0.0,
+    "z_loudness": -0.348,
+    "z_pitch": -0.03,
+    "z_rate": 0.436,
+    "arousal_raw": -0.1
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000018_am_adam_cbf863bf_x1.12.wav",
+   "tts_duration": 2.315,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 61.003,
+    "asr_done": 62.543,
+    "speaker_done": 61.236,
+    "emotion_done": 62.544,
+    "complete": 62.544,
+    "tts_start": 62.544,
+    "tts_ready": 64.906,
+    "play_at": 66.13,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000019",
+   "t_start": 61.152,
+   "t_end": 63.104,
+   "close_reason": "pause",
+   "text": "Moreau into the middle, now Tanaka again.",
+   "words": [
+    [
+     "Moreau",
+     61.032,
+     61.432,
+     0.304
+    ],
+    [
+     "into",
+     61.432,
+     61.592,
+     0.923
+    ],
+    [
+     "the",
+     61.592,
+     61.712,
+     0.996
+    ],
+    [
+     "middle,",
+     61.712,
+     61.892,
+     0.979
+    ],
+    [
+     "now",
+     62.132,
+     62.212,
+     0.988
+    ],
+    [
+     "Tanaka",
+     62.212,
+     62.572,
+     0.914
+    ],
+    [
+     "again.",
+     62.572,
+     62.972,
+     0.995
+    ]
+   ],
+   "asr_conf": 0.81,
+   "speaker_id": "S1",
+   "speaker_sim": 0.768,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.052,
+   "features": {
+    "loudness_db": -19.123,
+    "loudness_mean_db": -20.506,
+    "duration_s": 1.952,
+    "pitch_hz_median": 129.421,
+    "pitch_hz_p75": 161.376,
+    "pitch_range": 125.404,
+    "rate_wps": 3.608,
+    "text_cue": 0.0,
+    "z_loudness": -0.063,
+    "z_pitch": -1.064,
+    "z_rate": -0.296,
+    "arousal_raw": -0.392
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000019_bm_george_79b338c5_x1.11.wav",
+   "tts_duration": 2.135,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 63.505,
+    "asr_done": 65.149,
+    "speaker_done": 63.717,
+    "emotion_done": 65.149,
+    "complete": 65.149,
+    "tts_start": 65.149,
+    "tts_ready": 67.042,
+    "play_at": 68.525,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000020",
+   "t_start": 63.616,
+   "t_end": 65.984,
+   "close_reason": "level_change",
+   "text": "Tanaka through on goal. He goes around the keeper.",
+   "words": [
+    [
+     "Tanaka",
+     63.496,
+     63.816,
+     0.684
+    ],
+    [
+     "through",
+     63.816,
+     64.096,
+     0.212
+    ],
+    [
+     "on",
+     64.096,
+     64.276,
+     0.985
+    ],
+    [
+     "goal.",
+     64.276,
+     64.536,
+     0.821
+    ],
+    [
+     "He",
+     64.916,
+     64.976,
+     0.988
+    ],
+    [
+     "goes",
+     64.976,
+     65.116,
+     0.998
+    ],
+    [
+     "around",
+     65.116,
+     65.336,
+     0.506
+    ],
+    [
+     "the",
+     65.336,
+     65.496,
+     0.768
+    ],
+    [
+     "keeper.",
+     65.496,
+     65.696,
+     0.987
+    ]
+   ],
+   "asr_conf": 0.685,
+   "speaker_id": "S1",
+   "speaker_sim": 0.488,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 0.846,
+   "features": {
+    "loudness_db": -16.706,
+    "loudness_mean_db": -17.415,
+    "duration_s": 2.368,
+    "pitch_hz_median": 172.784,
+    "pitch_hz_p75": 194.689,
+    "pitch_range": 153.707,
+    "rate_wps": 4.091,
+    "text_cue": 1.0,
+    "z_loudness": 1.001,
+    "z_pitch": 0.842,
+    "z_rate": 0.287,
+    "arousal_raw": 0.846
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000020_bm_george_68f99b9f_x1.07.wav",
+   "tts_duration": 2.521,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 66.504,
+    "asr_done": 67.814,
+    "speaker_done": 66.742,
+    "emotion_done": 67.814,
+    "complete": 67.814,
+    "tts_start": 67.815,
+    "tts_ready": 69.997,
+    "play_at": 70.739,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000021",
+   "t_start": 66.112,
+   "t_end": 68.832,
+   "close_reason": "pause",
+   "text": "Go, go. Tanaka scores for Northgate United.",
+   "words": [
+    [
+     "Go,",
+     65.992,
+     66.252,
+     0.75
+    ],
+    [
+     "go.",
+     66.572,
+     66.572,
+     0.688
+    ],
+    [
+     "Tanaka",
+     67.092,
+     67.152,
+     0.0
+    ],
+    [
+     "scores",
+     67.152,
+     67.532,
+     0.85
+    ],
+    [
+     "for",
+     67.532,
+     67.772,
+     0.975
+    ],
+    [
+     "Northgate",
+     67.772,
+     68.092,
+     0.715
+    ],
+    [
+     "United.",
+     68.092,
+     68.372,
+     0.969
+    ]
+   ],
+   "asr_conf": 0.642,
+   "speaker_id": "S1",
+   "speaker_sim": 0.148,
+   "speaker_conf": "low",
+   "emotion": "peak",
+   "arousal": 1.808,
+   "features": {
+    "loudness_db": -10.042,
+    "loudness_mean_db": -12.091,
+    "duration_s": 2.72,
+    "pitch_hz_median": 147.572,
+    "pitch_hz_p75": 204.395,
+    "pitch_range": 152.123,
+    "rate_wps": 2.941,
+    "text_cue": 0.6,
+    "z_loudness": 3.632,
+    "z_pitch": 1.063,
+    "z_rate": -1.368,
+    "arousal_raw": 1.808
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000021_bm_george_e6b6ca4e_x1.07.wav",
+   "tts_duration": 1.972,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 69.254,
+    "asr_done": 70.63,
+    "speaker_done": 69.491,
+    "emotion_done": 70.631,
+    "complete": 70.631,
+    "tts_start": 70.632,
+    "tts_ready": 72.343,
+    "play_at": 73.34,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000022",
+   "t_start": 69.76,
+   "t_end": 69.888,
+   "close_reason": "burst",
+   "text": "And the-",
+   "words": [
+    [
+     "And",
+     69.64,
+     69.9,
+     0.175
+    ],
+    [
+     "the",
+     69.9,
+     69.98,
+     0.097
+    ],
+    [
+     "-",
+     69.98,
+     69.98,
+     0.07
+    ]
+   ],
+   "asr_conf": 0.458,
+   "speaker_id": "S1",
+   "speaker_sim": 0.058,
+   "speaker_conf": "low",
+   "emotion": "peak",
+   "arousal": 2.4,
+   "features": {
+    "loudness_db": -4.265,
+    "loudness_mean_db": -4.265,
+    "duration_s": 0.128,
+    "rate_wps": 8.824,
+    "text_cue": 0.0,
+    "z_loudness": 4.0,
+    "z_pitch": 0.0,
+    "z_rate": 4.0,
+    "arousal_raw": 2.4
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000022_bm_george_9ceb6de4_x1.12.wav",
+   "tts_duration": 0.527,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 70.254,
+    "asr_done": 72.101,
+    "speaker_done": 70.289,
+    "emotion_done": 72.101,
+    "complete": 72.101,
+    "tts_start": 72.102,
+    "tts_ready": 72.842,
+    "play_at": 75.392,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000023",
+   "t_start": 69.888,
+   "t_end": 75.52,
+   "close_reason": "pause",
+   "text": "Unbelievable. What a finish from Tanaka. Look at the pace, look at the car. You made that look so easy.",
+   "words": [
+    [
+     "Unbelievable.",
+     69.768,
+     70.408,
+     0.952
+    ],
+    [
+     "What",
+     70.588,
+     70.628,
+     0.969
+    ],
+    [
+     "a",
+     70.628,
+     70.748,
+     0.995
+    ],
+    [
+     "finish",
+     70.748,
+     70.988,
+     0.995
+    ],
+    [
+     "from",
+     70.988,
+     71.188,
+     0.973
+    ],
+    [
+     "Tanaka.",
+     71.188,
+     71.488,
+     0.955
+    ],
+    [
+     "Look",
+     72.368,
+     72.548,
+     0.905
+    ],
+    [
+     "at",
+     72.548,
+     72.668,
+     0.994
+    ],
+    [
+     "the",
+     72.668,
+     72.748,
+     0.989
+    ],
+    [
+     "pace,",
+     72.748,
+     72.988,
+     0.675
+    ],
+    [
+     "look",
+     73.188,
+     73.228,
+     0.961
+    ],
+    [
+     "at",
+     73.228,
+     73.368,
+     0.994
+    ],
+    [
+     "the",
+     73.368,
+     73.408,
+     0.996
+    ],
+    [
+     "car.",
+     73.408,
+     73.688,
+     0.337
+    ],
+    [
+     "You",
+     73.988,
+     74.168,
+     0.781
+    ],
+    [
+     "made",
+     74.168,
+     74.308,
+     0.894
+    ],
+    [
+     "that",
+     74.308,
+     74.488,
+     0.989
+    ],
+    [
+     "look",
+     74.488,
+     74.688,
+     0.993
+    ],
+    [
+     "so",
+     74.688,
+     74.908,
+     0.998
+    ],
+    [
+     "easy.",
+     74.908,
+     75.188,
+     0.999
+    ]
+   ],
+   "asr_conf": 0.798,
+   "speaker_id": "S2",
+   "speaker_sim": 0.306,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.619,
+   "features": {
+    "loudness_db": -13.215,
+    "loudness_mean_db": -14.956,
+    "duration_s": 5.632,
+    "pitch_hz_median": 224.139,
+    "pitch_hz_p75": 260.407,
+    "pitch_range": 204.254,
+    "rate_wps": 3.69,
+    "text_cue": 1.4,
+    "z_loudness": 2.168,
+    "z_pitch": 1.957,
+    "z_rate": -0.56,
+    "arousal_raw": 1.619
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000023_am_adam_5c1c7155_x1.15.wav",
+   "tts_duration": 5.165,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 76.006,
+    "asr_done": 77.651,
+    "speaker_done": 76.634,
+    "emotion_done": 77.652,
+    "complete": 77.652,
+    "tts_start": 77.652,
+    "tts_ready": 82.043,
+    "play_at": 82.043,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000024",
+   "t_start": 76.224,
+   "t_end": 78.592,
+   "close_reason": "pause",
+   "text": "So Northgate United lead by one goal to know.",
+   "words": [
+    [
+     "So",
+     76.104,
+     76.304,
+     0.832
+    ],
+    [
+     "Northgate",
+     76.304,
+     76.664,
+     0.943
+    ],
+    [
+     "United",
+     76.664,
+     77.004,
+     0.371
+    ],
+    [
+     "lead",
+     77.004,
+     77.344,
+     0.988
+    ],
+    [
+     "by",
+     77.344,
+     77.624,
+     0.987
+    ],
+    [
+     "one",
+     77.624,
+     77.904,
+     0.873
+    ],
+    [
+     "goal",
+     77.904,
+     78.084,
+     0.999
+    ],
+    [
+     "to",
+     78.084,
+     78.284,
+     0.997
+    ],
+    [
+     "know.",
+     78.284,
+     78.484,
+     0.695
+    ]
+   ],
+   "asr_conf": 0.752,
+   "speaker_id": "S1",
+   "speaker_sim": 0.749,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.476,
+   "features": {
+    "loudness_db": -18.848,
+    "loudness_mean_db": -19.937,
+    "duration_s": 2.368,
+    "pitch_hz_median": 136.658,
+    "pitch_hz_p75": 155.724,
+    "pitch_range": 117.126,
+    "rate_wps": 3.782,
+    "text_cue": 1.0,
+    "z_loudness": -0.137,
+    "z_pitch": -1.064,
+    "z_rate": -0.452,
+    "arousal_raw": -0.349
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000024_bm_george_0e089255_x1.15.wav",
+   "tts_duration": 2.348,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 79.003,
+    "asr_done": 80.684,
+    "speaker_done": 79.171,
+    "emotion_done": 80.685,
+    "complete": 80.685,
+    "tts_start": 80.685,
+    "tts_ready": 82.663,
+    "play_at": 87.288,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000025",
+   "t_start": 79.264,
+   "t_end": 82.784,
+   "close_reason": "pause",
+   "text": "Riverside have to respond now, they can't let the aim drift.",
+   "words": [
+    [
+     "Riverside",
+     79.144,
+     79.704,
+     0.961
+    ],
+    [
+     "have",
+     79.704,
+     80.004,
+     0.974
+    ],
+    [
+     "to",
+     80.004,
+     80.144,
+     0.997
+    ],
+    [
+     "respond",
+     80.144,
+     80.484,
+     0.991
+    ],
+    [
+     "now,",
+     80.484,
+     80.884,
+     0.993
+    ],
+    [
+     "they",
+     81.284,
+     81.364,
+     0.979
+    ],
+    [
+     "can't",
+     81.364,
+     81.644,
+     0.993
+    ],
+    [
+     "let",
+     81.644,
+     81.804,
+     0.996
+    ],
+    [
+     "the",
+     81.804,
+     81.944,
+     0.998
+    ],
+    [
+     "aim",
+     81.944,
+     82.144,
+     0.368
+    ],
+    [
+     "drift.",
+     82.144,
+     82.484,
+     0.999
+    ]
+   ],
+   "asr_conf": 0.789,
+   "speaker_id": "S2",
+   "speaker_sim": 0.597,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.153,
+   "features": {
+    "loudness_db": -20.494,
+    "loudness_mean_db": -23.42,
+    "duration_s": 3.52,
+    "pitch_hz_median": 202.571,
+    "pitch_hz_p75": 230.579,
+    "pitch_range": 192.305,
+    "rate_wps": 3.293,
+    "text_cue": 0.0,
+    "z_loudness": -0.76,
+    "z_pitch": 0.148,
+    "z_rate": -1.183,
+    "arousal_raw": -0.475
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000025_am_adam_20c0e68d_x1.15.wav",
+   "tts_duration": 2.817,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 83.254,
+    "asr_done": 84.625,
+    "speaker_done": 83.565,
+    "emotion_done": 84.625,
+    "complete": 84.625,
+    "tts_start": 84.626,
+    "tts_ready": 87.02,
+    "play_at": 89.716,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000026",
+   "t_start": 83.36,
+   "t_end": 87.136,
+   "close_reason": "pause",
+   "text": "Lindqvist tries to lift his team, pointing for everyone to push up.",
+   "words": [
+    [
+     "Lindqvist",
+     83.24,
+     83.94,
+     0.654
+    ],
+    [
+     "tries",
+     83.94,
+     84.14,
+     0.996
+    ],
+    [
+     "to",
+     84.14,
+     84.42,
+     0.999
+    ],
+    [
+     "lift",
+     84.42,
+     84.58,
+     0.997
+    ],
+    [
+     "his",
+     84.58,
+     84.78,
+     0.999
+    ],
+    [
+     "team,",
+     84.78,
+     85.14,
+     0.999
+    ],
+    [
+     "pointing",
+     85.42,
+     85.7,
+     0.996
+    ],
+    [
+     "for",
+     85.7,
+     86.02,
+     0.996
+    ],
+    [
+     "everyone",
+     86.02,
+     86.36,
+     0.998
+    ],
+    [
+     "to",
+     86.36,
+     86.6,
+     0.999
+    ],
+    [
+     "push",
+     86.6,
+     86.78,
+     0.999
+    ],
+    [
+     "up.",
+     86.78,
+     87.0,
+     0.983
+    ]
+   ],
+   "asr_conf": 0.895,
+   "speaker_id": "S1",
+   "speaker_sim": 0.849,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.018,
+   "features": {
+    "loudness_db": -18.636,
+    "loudness_mean_db": -20.358,
+    "duration_s": 3.776,
+    "pitch_hz_median": 144.131,
+    "pitch_hz_p75": 182.973,
+    "pitch_range": 285.481,
+    "rate_wps": 3.191,
+    "text_cue": 0.0,
+    "z_loudness": -0.05,
+    "z_pitch": 0.147,
+    "z_rate": -1.335,
+    "arousal_raw": -0.179
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000026_bm_george_f8a2076d_x1.12.wav",
+   "tts_duration": 3.226,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 87.503,
+    "asr_done": 89.006,
+    "speaker_done": 87.894,
+    "emotion_done": 89.007,
+    "complete": 89.007,
+    "tts_start": 89.007,
+    "tts_ready": 91.51,
+    "play_at": 92.613,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000027",
+   "t_start": 87.584,
+   "t_end": 91.2,
+   "close_reason": "pause",
+   "text": "A free kick on the right side for Riverside. This is a good area for Brennan.",
+   "words": [
+    [
+     "A",
+     87.464,
+     87.664,
+     0.661
+    ],
+    [
+     "free",
+     87.664,
+     87.864,
+     0.987
+    ],
+    [
+     "kick",
+     87.864,
+     88.064,
+     0.973
+    ],
+    [
+     "on",
+     88.064,
+     88.224,
+     0.99
+    ],
+    [
+     "the",
+     88.224,
+     88.324,
+     0.996
+    ],
+    [
+     "right",
+     88.324,
+     88.484,
+     0.995
+    ],
+    [
+     "side",
+     88.484,
+     88.804,
+     0.983
+    ],
+    [
+     "for",
+     88.804,
+     89.044,
+     0.97
+    ],
+    [
+     "Riverside.",
+     89.044,
+     89.364,
+     0.964
+    ],
+    [
+     "This",
+     89.544,
+     89.544,
+     0.916
+    ],
+    [
+     "is",
+     89.544,
+     89.684,
+     0.993
+    ],
+    [
+     "a",
+     89.684,
+     89.804,
+     0.995
+    ],
+    [
+     "good",
+     89.804,
+     89.924,
+     0.999
+    ],
+    [
+     "area",
+     89.924,
+     90.324,
+     0.995
+    ],
+    [
+     "for",
+     90.324,
+     90.604,
+     0.998
+    ],
+    [
+     "Brennan.",
+     90.604,
+     90.824,
+     0.959
+    ]
+   ],
+   "asr_conf": 0.842,
+   "speaker_id": "S1",
+   "speaker_sim": 0.724,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.566,
+   "features": {
+    "loudness_db": -18.757,
+    "loudness_mean_db": -20.136,
+    "duration_s": 3.616,
+    "pitch_hz_median": 180.253,
+    "pitch_hz_p75": 222.751,
+    "pitch_range": 143.957,
+    "rate_wps": 4.762,
+    "text_cue": 0.0,
+    "z_loudness": -0.091,
+    "z_pitch": 1.509,
+    "z_rate": 1.026,
+    "arousal_raw": 0.566
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000027_bm_george_cc85c897_x1.09.wav",
+   "tts_duration": 3.837,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 91.754,
+    "asr_done": 93.162,
+    "speaker_done": 92.088,
+    "emotion_done": 93.162,
+    "complete": 93.163,
+    "tts_start": 93.163,
+    "tts_ready": 96.237,
+    "play_at": 96.237,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000028",
+   "t_start": 91.776,
+   "t_end": 94.688,
+   "close_reason": "level_change",
+   "text": "Brennan whips it in. Okafor rises in the far post.",
+   "words": [
+    [
+     "Brennan",
+     91.656,
+     92.016,
+     0.749
+    ],
+    [
+     "whips",
+     92.016,
+     92.336,
+     0.981
+    ],
+    [
+     "it",
+     92.336,
+     92.436,
+     0.997
+    ],
+    [
+     "in.",
+     92.436,
+     92.936,
+     0.998
+    ],
+    [
+     "Okafor",
+     93.196,
+     93.496,
+     0.044
+    ],
+    [
+     "rises",
+     93.496,
+     93.736,
+     0.679
+    ],
+    [
+     "in",
+     93.736,
+     93.916,
+     0.803
+    ],
+    [
+     "the",
+     93.916,
+     94.036,
+     0.983
+    ],
+    [
+     "far",
+     94.036,
+     94.196,
+     0.808
+    ],
+    [
+     "post.",
+     94.196,
+     94.496,
+     0.944
+    ]
+   ],
+   "asr_conf": 0.819,
+   "speaker_id": "S1",
+   "speaker_sim": 0.653,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.437,
+   "features": {
+    "loudness_db": -15.376,
+    "loudness_mean_db": -18.277,
+    "duration_s": 2.912,
+    "pitch_hz_median": 146.881,
+    "pitch_hz_p75": 175.841,
+    "pitch_range": 142.231,
+    "rate_wps": 3.521,
+    "text_cue": 0.0,
+    "z_loudness": 1.183,
+    "z_pitch": -0.211,
+    "z_rate": -0.579,
+    "arousal_raw": 0.382
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000028_bm_george_e3b68a26_x1.12.wav",
+   "tts_duration": 2.683,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 95.255,
+    "asr_done": 96.777,
+    "speaker_done": 95.532,
+    "emotion_done": 96.778,
+    "complete": 96.778,
+    "tts_start": 96.779,
+    "tts_ready": 99.086,
+    "play_at": 100.154,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000029",
+   "t_start": 94.976,
+   "t_end": 95.168,
+   "close_reason": "burst",
+   "text": "Dave.",
+   "words": [
+    [
+     "Dave.",
+     94.856,
+     95.156,
+     0.377
+    ]
+   ],
+   "asr_conf": 0.67,
+   "speaker_id": "S1",
+   "speaker_sim": 0.05,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.46,
+   "features": {
+    "loudness_db": -8.929,
+    "loudness_mean_db": -8.929,
+    "duration_s": 0.192,
+    "rate_wps": 3.333,
+    "text_cue": 0.0,
+    "z_loudness": 3.479,
+    "z_pitch": 0.0,
+    "z_rate": -0.702,
+    "arousal_raw": 1.46
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000029_bm_george_10ffcd92_x1.15.wav",
+   "tts_duration": 0.496,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 95.52,
+    "asr_done": 98.122,
+    "speaker_done": 95.565,
+    "emotion_done": 98.122,
+    "complete": 98.122,
+    "tts_start": 98.123,
+    "tts_ready": 98.919,
+    "play_at": 102.917,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000030",
+   "t_start": 95.168,
+   "t_end": 96.768,
+   "close_reason": "pause",
+   "text": "Save what is saved by the keeper.",
+   "words": [
+    [
+     "Save",
+     95.048,
+     95.268,
+     0.071
+    ],
+    [
+     "what",
+     95.268,
+     95.608,
+     0.405
+    ],
+    [
+     "is",
+     95.608,
+     95.708,
+     0.881
+    ],
+    [
+     "saved",
+     95.708,
+     95.868,
+     0.963
+    ],
+    [
+     "by",
+     95.868,
+     96.048,
+     0.996
+    ],
+    [
+     "the",
+     96.048,
+     96.148,
+     0.963
+    ],
+    [
+     "keeper.",
+     96.148,
+     96.308,
+     0.657
+    ]
+   ],
+   "asr_conf": 0.641,
+   "speaker_id": "S1",
+   "speaker_sim": 0.094,
+   "speaker_conf": "low",
+   "emotion": "peak",
+   "arousal": 2.315,
+   "features": {
+    "loudness_db": -10.534,
+    "loudness_mean_db": -12.062,
+    "duration_s": 1.6,
+    "pitch_hz_median": 174.225,
+    "pitch_hz_p75": 233.136,
+    "pitch_range": 229.546,
+    "rate_wps": 5.556,
+    "text_cue": 0.5,
+    "z_loudness": 2.859,
+    "z_pitch": 1.836,
+    "z_rate": 2.849,
+    "arousal_raw": 2.315
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000030_bm_george_73ec0b45_x1.15.wav",
+   "tts_duration": 1.33,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 97.255,
+    "asr_done": 99.617,
+    "speaker_done": 97.364,
+    "emotion_done": 99.618,
+    "complete": 99.618,
+    "tts_start": 99.619,
+    "tts_ready": 100.947,
+    "play_at": 103.493,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000031",
+   "t_start": 97.664,
+   "t_end": 99.04,
+   "close_reason": "level_change",
+   "text": "That was right on the top for me.",
+   "words": [
+    [
+     "That",
+     97.544,
+     97.624,
+     0.503
+    ],
+    [
+     "was",
+     97.624,
+     97.764,
+     0.803
+    ],
+    [
+     "right",
+     97.764,
+     98.024,
+     0.312
+    ],
+    [
+     "on",
+     98.024,
+     98.204,
+     0.296
+    ],
+    [
+     "the",
+     98.204,
+     98.324,
+     0.829
+    ],
+    [
+     "top",
+     98.324,
+     98.484,
+     0.994
+    ],
+    [
+     "for",
+     98.484,
+     98.724,
+     0.228
+    ],
+    [
+     "me.",
+     98.724,
+     98.884,
+     0.916
+    ]
+   ],
+   "asr_conf": 0.553,
+   "speaker_id": "S2",
+   "speaker_sim": 0.331,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.329,
+   "features": {
+    "loudness_db": -14.796,
+    "loudness_mean_db": -15.093,
+    "duration_s": 1.376,
+    "pitch_hz_median": 217.288,
+    "pitch_hz_p75": 239.963,
+    "pitch_range": 179.503,
+    "rate_wps": 5.97,
+    "text_cue": 0.0,
+    "z_loudness": 1.341,
+    "z_pitch": 0.669,
+    "z_rate": 3.5,
+    "arousal_raw": 1.329
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000031_am_adam_3bab44da_x1.14.wav",
+   "tts_duration": 1.27,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 99.504,
+    "asr_done": 101.071,
+    "speaker_done": 99.596,
+    "emotion_done": 101.072,
+    "complete": 101.072,
+    "tts_start": 101.072,
+    "tts_ready": 102.601,
+    "play_at": 104.903,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000032",
+   "t_start": 99.2,
+   "t_end": 100.736,
+   "close_reason": "pause",
+   "text": "An incredible reaction stop.",
+   "words": [
+    [
+     "An",
+     99.08,
+     99.28,
+     0.691
+    ],
+    [
+     "incredible",
+     99.28,
+     99.7,
+     0.986
+    ],
+    [
+     "reaction",
+     99.7,
+     100.22,
+     0.968
+    ],
+    [
+     "stop.",
+     100.22,
+     100.6,
+     0.316
+    ]
+   ],
+   "asr_conf": 0.602,
+   "speaker_id": "S2",
+   "speaker_sim": 0.335,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 0.958,
+   "features": {
+    "loudness_db": -13.925,
+    "loudness_mean_db": -15.245,
+    "duration_s": 1.536,
+    "pitch_hz_median": 208.726,
+    "pitch_hz_p75": 245.719,
+    "pitch_range": 204.062,
+    "rate_wps": 2.632,
+    "text_cue": 0.7,
+    "z_loudness": 1.533,
+    "z_pitch": 0.964,
+    "z_rate": -1.672,
+    "arousal_raw": 0.798
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000032_am_adam_03871710_x1.12.wav",
+   "tts_duration": 1.418,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 101.254,
+    "asr_done": 102.703,
+    "speaker_done": 101.425,
+    "emotion_done": 102.703,
+    "complete": 102.703,
+    "tts_start": 102.704,
+    "tts_ready": 104.172,
+    "play_at": 106.253,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000033",
+   "t_start": 101.568,
+   "t_end": 104.448,
+   "close_reason": "pause",
+   "text": "The corner comes to nothing and the game settles again.",
+   "words": [
+    [
+     "The",
+     101.448,
+     101.648,
+     0.763
+    ],
+    [
+     "corner",
+     101.648,
+     101.908,
+     0.986
+    ],
+    [
+     "comes",
+     101.908,
+     102.248,
+     0.991
+    ],
+    [
+     "to",
+     102.248,
+     102.448,
+     0.992
+    ],
+    [
+     "nothing",
+     102.448,
+     102.728,
+     0.985
+    ],
+    [
+     "and",
+     102.728,
+     103.168,
+     0.535
+    ],
+    [
+     "the",
+     103.168,
+     103.288,
+     0.991
+    ],
+    [
+     "game",
+     103.288,
+     103.488,
+     0.985
+    ],
+    [
+     "settles",
+     103.488,
+     103.888,
+     0.992
+    ],
+    [
+     "again.",
+     103.888,
+     104.268,
+     0.994
+    ]
+   ],
+   "asr_conf": 0.786,
+   "speaker_id": "S1",
+   "speaker_sim": 0.57,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.457,
+   "features": {
+    "loudness_db": -19.99,
+    "loudness_mean_db": -22.391,
+    "duration_s": 2.88,
+    "pitch_hz_median": 137.917,
+    "pitch_hz_p75": 188.358,
+    "pitch_range": 216.763,
+    "rate_wps": 3.546,
+    "text_cue": 0.0,
+    "z_loudness": -0.796,
+    "z_pitch": 0.194,
+    "z_rate": -0.259,
+    "arousal_raw": -0.339
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000033_bm_george_d5b371c2_x1.07.wav",
+   "tts_duration": 2.688,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 105.005,
+    "asr_done": 106.192,
+    "speaker_done": 105.23,
+    "emotion_done": 106.193,
+    "complete": 106.193,
+    "tts_start": 106.193,
+    "tts_ready": 108.265,
+    "play_at": 108.265,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000034",
+   "t_start": 105.12,
+   "t_end": 107.968,
+   "close_reason": "pause",
+   "text": "Northgate look happened to slow it down until the breath.",
+   "words": [
+    [
+     "Northgate",
+     105.0,
+     105.64,
+     0.657
+    ],
+    [
+     "look",
+     105.64,
+     105.88,
+     0.652
+    ],
+    [
+     "happened",
+     105.88,
+     106.12,
+     0.902
+    ],
+    [
+     "to",
+     106.12,
+     106.36,
+     0.826
+    ],
+    [
+     "slow",
+     106.36,
+     106.6,
+     0.947
+    ],
+    [
+     "it",
+     106.6,
+     106.72,
+     0.988
+    ],
+    [
+     "down",
+     106.72,
+     107.0,
+     0.995
+    ],
+    [
+     "until",
+     107.0,
+     107.34,
+     0.585
+    ],
+    [
+     "the",
+     107.34,
+     107.52,
+     0.912
+    ],
+    [
+     "breath.",
+     107.52,
+     107.74,
+     0.277
+    ]
+   ],
+   "asr_conf": 0.706,
+   "speaker_id": "S2",
+   "speaker_sim": 0.592,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.119,
+   "features": {
+    "loudness_db": -19.711,
+    "loudness_mean_db": -22.042,
+    "duration_s": 2.848,
+    "pitch_hz_median": 200.273,
+    "pitch_hz_p75": 218.055,
+    "pitch_range": 166.552,
+    "rate_wps": 3.65,
+    "text_cue": 0.0,
+    "z_loudness": -0.729,
+    "z_pitch": -0.806,
+    "z_rate": -0.068,
+    "arousal_raw": -0.58
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000034_am_adam_31c87fa9_x1.07.wav",
+   "tts_duration": 2.484,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 108.504,
+    "asr_done": 109.712,
+    "speaker_done": 108.69,
+    "emotion_done": 109.713,
+    "complete": 109.713,
+    "tts_start": 109.713,
+    "tts_ready": 111.997,
+    "play_at": 111.997,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000035",
+   "t_start": 108.544,
+   "t_end": 110.944,
+   "close_reason": "pause",
+   "text": "Delgado wins a throw in near the corner flat.",
+   "words": [
+    [
+     "Delgado",
+     108.424,
+     108.924,
+     0.959
+    ],
+    [
+     "wins",
+     108.924,
+     109.164,
+     0.99
+    ],
+    [
+     "a",
+     109.164,
+     109.344,
+     0.989
+    ],
+    [
+     "throw",
+     109.344,
+     109.624,
+     0.992
+    ],
+    [
+     "in",
+     109.624,
+     109.864,
+     0.907
+    ],
+    [
+     "near",
+     109.864,
+     110.044,
+     0.992
+    ],
+    [
+     "the",
+     110.044,
+     110.184,
+     0.965
+    ],
+    [
+     "corner",
+     110.184,
+     110.444,
+     0.996
+    ],
+    [
+     "flat.",
+     110.444,
+     110.804,
+     0.885
+    ]
+   ],
+   "asr_conf": 0.809,
+   "speaker_id": "S1",
+   "speaker_sim": 0.758,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.159,
+   "features": {
+    "loudness_db": -19.008,
+    "loudness_mean_db": -19.975,
+    "duration_s": 2.4,
+    "pitch_hz_median": 135.419,
+    "pitch_hz_p75": 165.875,
+    "pitch_range": 131.401,
+    "rate_wps": 3.782,
+    "text_cue": 0.0,
+    "z_loudness": -0.555,
+    "z_pitch": -0.653,
+    "z_rate": 0.154,
+    "arousal_raw": -0.422
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000035_bm_george_49e4d541_x1.07.wav",
+   "tts_duration": 2.558,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 111.503,
+    "asr_done": 112.808,
+    "speaker_done": 111.701,
+    "emotion_done": 112.808,
+    "complete": 112.808,
+    "tts_start": 112.809,
+    "tts_ready": 114.893,
+    "play_at": 114.893,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000036",
+   "t_start": 111.52,
+   "t_end": 114.464,
+   "close_reason": "pause",
+   "text": "Quick throw into Mar. Clever play, they caught Riverside sleeping.",
+   "words": [
+    [
+     "Quick",
+     111.4,
+     111.62,
+     0.294
+    ],
+    [
+     "throw",
+     111.62,
+     111.86,
+     0.68
+    ],
+    [
+     "into",
+     111.86,
+     112.14,
+     0.939
+    ],
+    [
+     "Mar.",
+     112.14,
+     112.28,
+     0.236
+    ],
+    [
+     "Clever",
+     112.54,
+     112.54,
+     0.845
+    ],
+    [
+     "play,",
+     112.54,
+     112.82,
+     0.995
+    ],
+    [
+     "they",
+     113.0,
+     113.1,
+     0.981
+    ],
+    [
+     "caught",
+     113.1,
+     113.34,
+     0.996
+    ],
+    [
+     "Riverside",
+     113.34,
+     113.78,
+     0.966
+    ],
+    [
+     "sleeping.",
+     113.78,
+     114.18,
+     0.99
+    ]
+   ],
+   "asr_conf": 0.623,
+   "speaker_id": "S2",
+   "speaker_sim": 0.437,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": -0.049,
+   "features": {
+    "loudness_db": -18.192,
+    "loudness_mean_db": -20.35,
+    "duration_s": 2.944,
+    "pitch_hz_median": 191.826,
+    "pitch_hz_p75": 224.695,
+    "pitch_range": 161.226,
+    "rate_wps": 3.597,
+    "text_cue": 0.0,
+    "z_loudness": 0.161,
+    "z_pitch": -0.326,
+    "z_rate": -0.158,
+    "arousal_raw": -0.049
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000036_am_adam_deefa106_x1.07.wav",
+   "tts_duration": 3.181,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 115.003,
+    "asr_done": 116.218,
+    "speaker_done": 115.196,
+    "emotion_done": 116.219,
+    "complete": 116.219,
+    "tts_start": 116.219,
+    "tts_ready": 118.651,
+    "play_at": 118.651,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000037",
+   "t_start": 114.976,
+   "t_end": 120.864,
+   "close_reason": "max_len",
+   "text": "Moreau shoots for range. Off the crossbar.",
+   "words": [
+    [
+     "Moreau",
+     114.856,
+     115.296,
+     0.015
+    ],
+    [
+     "shoots",
+     115.296,
+     115.456,
+     0.859
+    ],
+    [
+     "for",
+     115.456,
+     115.656,
+     0.961
+    ],
+    [
+     "range.",
+     115.656,
+     115.996,
+     0.97
+    ],
+    [
+     "Off",
+     116.396,
+     116.496,
+     0.613
+    ],
+    [
+     "the",
+     116.496,
+     116.616,
+     0.887
+    ],
+    [
+     "crossbar.",
+     116.616,
+     117.156,
+     0.99
+    ]
+   ],
+   "asr_conf": 0.7,
+   "speaker_id": "S2",
+   "speaker_sim": 0.352,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": 0.401,
+   "features": {
+    "loudness_db": -12.729,
+    "loudness_mean_db": -14.816,
+    "duration_s": 5.888,
+    "pitch_hz_median": 189.475,
+    "pitch_hz_p75": 228.036,
+    "pitch_range": 184.307,
+    "rate_wps": 3.043,
+    "text_cue": 0.0,
+    "z_loudness": 1.326,
+    "z_pitch": -0.066,
+    "z_rate": -1.171,
+    "arousal_raw": 0.401
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000037_am_adam_ec4ae27f_x1.07.wav",
+   "tts_duration": 2.186,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 121.003,
+    "asr_done": 122.265,
+    "speaker_done": 121.592,
+    "emotion_done": 122.266,
+    "complete": 122.266,
+    "tts_start": 122.267,
+    "tts_ready": 124.378,
+    "play_at": 124.378,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000038",
+   "t_start": 120.864,
+   "t_end": 121.408,
+   "close_reason": "pause",
+   "text": "That's it.",
+   "words": [
+    [
+     "That's",
+     120.744,
+     121.024,
+     0.515
+    ],
+    [
+     "it.",
+     121.024,
+     121.184,
+     0.964
+    ]
+   ],
+   "asr_conf": 0.458,
+   "speaker_id": "S2",
+   "speaker_sim": 0.159,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": -0.037,
+   "features": {
+    "loudness_db": -23.678,
+    "loudness_mean_db": -23.678,
+    "duration_s": 0.544,
+    "pitch_hz_median": 198.562,
+    "pitch_hz_p75": 242.422,
+    "pitch_range": 221.78,
+    "rate_wps": 4.545,
+    "text_cue": 0.0,
+    "z_loudness": -1.691,
+    "z_pitch": 0.849,
+    "z_rate": 1.874,
+    "arousal_raw": -0.225
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000038_am_adam_f874789a_x1.10.wav",
+   "tts_duration": 0.625,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 122.003,
+    "asr_done": 123.758,
+    "speaker_done": 122.055,
+    "emotion_done": 123.758,
+    "complete": 123.758,
+    "tts_start": 123.759,
+    "tts_ready": 124.68,
+    "play_at": 126.644,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000039",
+   "t_start": 122.144,
+   "t_end": 124.736,
+   "close_reason": "pause",
+   "text": "The referee checks his watch almost half time here.",
+   "words": [
+    [
+     "The",
+     122.024,
+     122.224,
+     0.782
+    ],
+    [
+     "referee",
+     122.224,
+     122.484,
+     0.997
+    ],
+    [
+     "checks",
+     122.484,
+     122.784,
+     0.994
+    ],
+    [
+     "his",
+     122.784,
+     123.004,
+     0.998
+    ],
+    [
+     "watch",
+     123.004,
+     123.324,
+     0.985
+    ],
+    [
+     "almost",
+     123.324,
+     123.764,
+     0.859
+    ],
+    [
+     "half",
+     123.764,
+     124.084,
+     0.991
+    ],
+    [
+     "time",
+     124.084,
+     124.344,
+     0.665
+    ],
+    [
+     "here.",
+     124.344,
+     124.624,
+     0.818
+    ]
+   ],
+   "asr_conf": 0.773,
+   "speaker_id": "S1",
+   "speaker_sim": 0.572,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.399,
+   "features": {
+    "loudness_db": -20.886,
+    "loudness_mean_db": -22.54,
+    "duration_s": 2.592,
+    "pitch_hz_median": 140.002,
+    "pitch_hz_p75": 179.161,
+    "pitch_range": 148.196,
+    "rate_wps": 3.462,
+    "text_cue": 0.0,
+    "z_loudness": -0.938,
+    "z_pitch": -0.123,
+    "z_rate": -0.288,
+    "arousal_raw": -0.502
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000039_bm_george_fd9dbdd6_x1.07.wav",
+   "tts_duration": 2.567,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 125.254,
+    "asr_done": 126.342,
+    "speaker_done": 125.451,
+    "emotion_done": 126.343,
+    "complete": 126.343,
+    "tts_start": 126.343,
+    "tts_ready": 128.377,
+    "play_at": 128.377,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000040",
+   "t_start": 125.44,
+   "t_end": 128.8,
+   "close_reason": "pause",
+   "text": "A fair score so far, but the extension still to play for.",
+   "words": [
+    [
+     "A",
+     125.32,
+     125.54,
+     0.654
+    ],
+    [
+     "fair",
+     125.54,
+     125.76,
+     0.986
+    ],
+    [
+     "score",
+     125.76,
+     126.08,
+     0.98
+    ],
+    [
+     "so",
+     126.08,
+     126.32,
+     0.989
+    ],
+    [
+     "far,",
+     126.32,
+     126.72,
+     0.999
+    ],
+    [
+     "but",
+     126.84,
+     126.96,
+     0.951
+    ],
+    [
+     "the",
+     126.96,
+     127.16,
+     0.46
+    ],
+    [
+     "extension",
+     127.16,
+     127.46,
+     0.432
+    ],
+    [
+     "still",
+     127.46,
+     127.84,
+     0.791
+    ],
+    [
+     "to",
+     127.84,
+     128.0,
+     0.954
+    ],
+    [
+     "play",
+     128.0,
+     128.26,
+     0.522
+    ],
+    [
+     "for.",
+     128.26,
+     128.5,
+     0.985
+    ]
+   ],
+   "asr_conf": 0.686,
+   "speaker_id": "S2",
+   "speaker_sim": 0.527,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": -0.25,
+   "features": {
+    "loudness_db": -20.315,
+    "loudness_mean_db": -22.495,
+    "duration_s": 3.36,
+    "pitch_hz_median": 196.432,
+    "pitch_hz_p75": 217.455,
+    "pitch_range": 171.633,
+    "rate_wps": 3.774,
+    "text_cue": 0.6,
+    "z_loudness": -0.508,
+    "z_pitch": -0.752,
+    "z_rate": 0.353,
+    "arousal_raw": -0.341
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000040_am_adam_281ec862_x1.07.wav",
+   "tts_duration": 2.93,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 129.255,
+    "asr_done": 130.486,
+    "speaker_done": 129.543,
+    "emotion_done": 130.487,
+    "complete": 130.487,
+    "tts_start": 130.487,
+    "tts_ready": 132.977,
+    "play_at": 132.977,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000041",
+   "t_start": 129.216,
+   "t_end": 132.736,
+   "close_reason": "pause",
+   "text": "One last attack before the break, Lindqvist carries it forward.",
+   "words": [
+    [
+     "One",
+     129.096,
+     129.396,
+     0.901
+    ],
+    [
+     "last",
+     129.396,
+     129.696,
+     0.999
+    ],
+    [
+     "attack",
+     129.696,
+     130.016,
+     0.989
+    ],
+    [
+     "before",
+     130.016,
+     130.396,
+     0.996
+    ],
+    [
+     "the",
+     130.396,
+     130.556,
+     0.998
+    ],
+    [
+     "break,",
+     130.556,
+     130.816,
+     0.9
+    ],
+    [
+     "Lindqvist",
+     131.196,
+     131.616,
+     0.528
+    ],
+    [
+     "carries",
+     131.616,
+     131.936,
+     0.991
+    ],
+    [
+     "it",
+     131.936,
+     132.196,
+     0.998
+    ],
+    [
+     "forward.",
+     132.196,
+     132.476,
+     0.995
+    ]
+   ],
+   "asr_conf": 0.855,
+   "speaker_id": "S1",
+   "speaker_sim": 0.763,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.311,
+   "features": {
+    "loudness_db": -18.863,
+    "loudness_mean_db": -19.978,
+    "duration_s": 3.52,
+    "pitch_hz_median": 138.165,
+    "pitch_hz_p75": 174.596,
+    "pitch_range": 220.215,
+    "rate_wps": 2.959,
+    "text_cue": 0.0,
+    "z_loudness": -0.056,
+    "z_pitch": -0.288,
+    "z_rate": -1.33,
+    "arousal_raw": -0.311
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000041_bm_george_c9513276_x1.07.wav",
+   "tts_duration": 3.116,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 133.255,
+    "asr_done": 134.605,
+    "speaker_done": 133.553,
+    "emotion_done": 134.605,
+    "complete": 134.605,
+    "tts_start": 134.606,
+    "tts_ready": 137.091,
+    "play_at": 137.091,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000042",
+   "t_start": 133.216,
+   "t_end": 136.192,
+   "close_reason": "pause",
+   "text": "He has Okafor on his left and Brennan arriving late.",
+   "words": [
+    [
+     "He",
+     133.096,
+     133.296,
+     0.77
+    ],
+    [
+     "has",
+     133.296,
+     133.456,
+     0.987
+    ],
+    [
+     "Okafor",
+     133.456,
+     133.836,
+     0.555
+    ],
+    [
+     "on",
+     133.836,
+     133.996,
+     0.98
+    ],
+    [
+     "his",
+     133.996,
+     134.136,
+     0.998
+    ],
+    [
+     "left",
+     134.136,
+     134.456,
+     0.998
+    ],
+    [
+     "and",
+     134.456,
+     134.796,
+     0.882
+    ],
+    [
+     "Brennan",
+     134.796,
+     135.076,
+     0.368
+    ],
+    [
+     "arriving",
+     135.076,
+     135.516,
+     0.999
+    ],
+    [
+     "late.",
+     135.516,
+     135.876,
+     0.998
+    ]
+   ],
+   "asr_conf": 0.822,
+   "speaker_id": "S2",
+   "speaker_sim": 0.569,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.01,
+   "features": {
+    "loudness_db": -18.962,
+    "loudness_mean_db": -20.381,
+    "duration_s": 2.976,
+    "pitch_hz_median": 199.846,
+    "pitch_hz_p75": 230.201,
+    "pitch_range": 171.883,
+    "rate_wps": 3.597,
+    "text_cue": 0.0,
+    "z_loudness": -0.064,
+    "z_pitch": 0.103,
+    "z_rate": 0.051,
+    "arousal_raw": 0.01
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000042_am_adam_bf255a2f_x1.07.wav",
+   "tts_duration": 2.688,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 136.753,
+    "asr_done": 138.209,
+    "speaker_done": 137.044,
+    "emotion_done": 138.21,
+    "complete": 138.21,
+    "tts_start": 138.21,
+    "tts_ready": 140.457,
+    "play_at": 140.457,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000043",
+   "t_start": 136.672,
+   "t_end": 140.128,
+   "close_reason": "level_change",
+   "text": "Lindqvist slips it through to Okafor. Okafor takes a touch and shoots.",
+   "words": [
+    [
+     "Lindqvist",
+     136.552,
+     137.072,
+     0.344
+    ],
+    [
+     "slips",
+     137.072,
+     137.272,
+     0.978
+    ],
+    [
+     "it",
+     137.272,
+     137.432,
+     0.996
+    ],
+    [
+     "through",
+     137.432,
+     137.592,
+     0.984
+    ],
+    [
+     "to",
+     137.592,
+     137.792,
+     0.996
+    ],
+    [
+     "Okafor.",
+     137.792,
+     138.252,
+     0.094
+    ],
+    [
+     "Okafor",
+     138.612,
+     138.932,
+     0.994
+    ],
+    [
+     "takes",
+     138.932,
+     139.132,
+     0.995
+    ],
+    [
+     "a",
+     139.132,
+     139.292,
+     0.987
+    ],
+    [
+     "touch",
+     139.292,
+     139.472,
+     0.995
+    ],
+    [
+     "and",
+     139.472,
+     139.672,
+     0.983
+    ],
+    [
+     "shoots.",
+     139.672,
+     139.892,
+     0.997
+    ]
+   ],
+   "asr_conf": 0.919,
+   "speaker_id": "S1",
+   "speaker_sim": 0.494,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 0.973,
+   "features": {
+    "loudness_db": -15.545,
+    "loudness_mean_db": -16.943,
+    "duration_s": 3.456,
+    "pitch_hz_median": 154.613,
+    "pitch_hz_p75": 206.96,
+    "pitch_range": 204.57,
+    "rate_wps": 3.593,
+    "text_cue": 0.0,
+    "z_loudness": 1.306,
+    "z_pitch": 1.263,
+    "z_rate": 0.042,
+    "arousal_raw": 0.973
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000043_bm_george_7474cd23_x1.07.wav",
+   "tts_duration": 3.284,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 140.504,
+    "asr_done": 141.984,
+    "speaker_done": 140.795,
+    "emotion_done": 141.985,
+    "complete": 141.985,
+    "tts_start": 141.985,
+    "tts_ready": 144.638,
+    "play_at": 144.638,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000044",
+   "t_start": 140.32,
+   "t_end": 140.736,
+   "close_reason": "burst",
+   "text": "Go Go!",
+   "words": [
+    [
+     "Go",
+     140.2,
+     140.46,
+     0.604
+    ],
+    [
+     "Go!",
+     140.46,
+     140.72,
+     0.425
+    ]
+   ],
+   "asr_conf": 0.635,
+   "speaker_id": "S1",
+   "speaker_sim": 0.085,
+   "speaker_conf": "low",
+   "emotion": "peak",
+   "arousal": 2.375,
+   "features": {
+    "loudness_db": -8.761,
+    "loudness_mean_db": -8.761,
+    "duration_s": 0.416,
+    "pitch_hz_median": 211.433,
+    "pitch_hz_p75": 220.628,
+    "pitch_range": 59.274,
+    "rate_wps": 3.846,
+    "text_cue": 0.5,
+    "z_loudness": 3.883,
+    "z_pitch": 1.672,
+    "z_rate": 0.507,
+    "arousal_raw": 2.375
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000044_bm_george_02325b0d_x1.15.wav",
+   "tts_duration": 0.557,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 141.004,
+    "asr_done": 143.487,
+    "speaker_done": 141.054,
+    "emotion_done": 143.488,
+    "complete": 143.488,
+    "tts_start": 143.488,
+    "tts_ready": 144.393,
+    "play_at": 148.002,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000045",
+   "t_start": 140.736,
+   "t_end": 141.024,
+   "close_reason": "pause",
+   "text": "Go!",
+   "words": [
+    [
+     "Go!",
+     140.616,
+     140.796,
+     0.188
+    ]
+   ],
+   "asr_conf": 0.527,
+   "speaker_id": "S1",
+   "speaker_sim": 0.016,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": 0.136,
+   "features": {
+    "loudness_db": -21.291,
+    "loudness_mean_db": -21.291,
+    "duration_s": 0.288,
+    "pitch_hz_median": 114.504,
+    "pitch_hz_p75": 117.815,
+    "pitch_range": 28.209,
+    "rate_wps": 5.0,
+    "text_cue": 0.5,
+    "z_loudness": -0.878,
+    "z_pitch": -3.0,
+    "z_rate": 2.81,
+    "arousal_raw": -0.824
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000045_bm_george_1f12a711.wav",
+   "tts_duration": 0.58,
+   "schedule_action": "dropped",
+   "error": null,
+   "times": {
+    "created": 141.503,
+    "asr_done": 144.967,
+    "speaker_done": 141.538,
+    "emotion_done": 144.967,
+    "complete": 144.967,
+    "tts_start": 144.968,
+    "tts_ready": 145.735,
+    "play_at": null,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000046",
+   "t_start": 141.568,
+   "t_end": 141.856,
+   "close_reason": "burst",
+   "text": "Bell.",
+   "words": [
+    [
+     "Bell.",
+     141.448,
+     141.788,
+     0.359
+    ]
+   ],
+   "asr_conf": 0.618,
+   "speaker_id": "S1",
+   "speaker_sim": 0.082,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.377,
+   "features": {
+    "loudness_db": -8.627,
+    "loudness_mean_db": -8.627,
+    "duration_s": 0.288,
+    "pitch_hz_median": 186.173,
+    "pitch_hz_p75": 192.505,
+    "pitch_range": 17.775,
+    "rate_wps": 2.941,
+    "text_cue": 0.0,
+    "z_loudness": 3.21,
+    "z_pitch": 0.429,
+    "z_rate": -1.312,
+    "arousal_raw": 1.377
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000046_bm_george_396ff805_x1.15.wav",
+   "tts_duration": 0.478,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 142.254,
+    "asr_done": 146.269,
+    "speaker_done": 142.29,
+    "emotion_done": 146.27,
+    "complete": 146.27,
+    "tts_start": 146.27,
+    "tts_ready": 147.069,
+    "play_at": 148.638,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000047",
+   "t_start": 141.856,
+   "t_end": 144.48,
+   "close_reason": "pause",
+   "text": "Okafor utilizes for Riverside Rovers.",
+   "words": [
+    [
+     "Okafor",
+     141.736,
+     142.516,
+     0.01
+    ],
+    [
+     "utilizes",
+     142.516,
+     142.956,
+     0.22
+    ],
+    [
+     "for",
+     142.956,
+     143.256,
+     0.914
+    ],
+    [
+     "Riverside",
+     143.256,
+     143.596,
+     0.936
+    ],
+    [
+     "Rovers.",
+     143.596,
+     144.096,
+     0.695
+    ]
+   ],
+   "asr_conf": 0.693,
+   "speaker_id": "S1",
+   "speaker_sim": 0.119,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 0.9,
+   "features": {
+    "loudness_db": -10.122,
+    "loudness_mean_db": -12.136,
+    "duration_s": 2.624,
+    "pitch_hz_median": 146.475,
+    "pitch_hz_p75": 196.876,
+    "pitch_range": 172.029,
+    "rate_wps": 2.119,
+    "text_cue": 0.0,
+    "z_loudness": 2.163,
+    "z_pitch": 0.552,
+    "z_rate": -2.957,
+    "arousal_raw": 0.696
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000047_bm_george_e8fde1e0_x1.08.wav",
+   "tts_duration": 2.213,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 145.006,
+    "asr_done": 147.588,
+    "speaker_done": 145.231,
+    "emotion_done": 147.589,
+    "complete": 147.589,
+    "tts_start": 147.589,
+    "tts_ready": 149.321,
+    "play_at": 149.321,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000048",
+   "t_start": 145.376,
+   "t_end": 150.72,
+   "close_reason": "max_len",
+   "text": "What a time to score, right on the stroke of half time. That is exactly what Riverside needed.",
+   "words": [
+    [
+     "What",
+     145.256,
+     145.476,
+     0.774
+    ],
+    [
+     "a",
+     145.476,
+     145.596,
+     0.972
+    ],
+    [
+     "time",
+     145.596,
+     145.776,
+     0.989
+    ],
+    [
+     "to",
+     145.776,
+     145.916,
+     0.971
+    ],
+    [
+     "score,",
+     145.916,
+     146.256,
+     0.987
+    ],
+    [
+     "right",
+     146.676,
+     146.716,
+     0.944
+    ],
+    [
+     "on",
+     146.716,
+     146.876,
+     0.781
+    ],
+    [
+     "the",
+     146.876,
+     146.956,
+     0.992
+    ],
+    [
+     "stroke",
+     146.956,
+     147.156,
+     0.98
+    ],
+    [
+     "of",
+     147.156,
+     147.336,
+     0.993
+    ],
+    [
+     "half",
+     147.336,
+     147.476,
+     0.95
+    ],
+    [
+     "time.",
+     147.476,
+     147.776,
+     0.746
+    ],
+    [
+     "That",
+     148.516,
+     148.696,
+     0.969
+    ],
+    [
+     "is",
+     148.696,
+     148.836,
+     0.961
+    ],
+    [
+     "exactly",
+     148.836,
+     149.216,
+     0.992
+    ],
+    [
+     "what",
+     149.216,
+     149.596,
+     0.994
+    ],
+    [
+     "Riverside",
+     149.596,
+     149.956,
+     0.029
+    ],
+    [
+     "needed.",
+     149.956,
+     150.376,
+     0.86
+    ]
+   ],
+   "asr_conf": 0.803,
+   "speaker_id": "S2",
+   "speaker_sim": 0.441,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 1.388,
+   "features": {
+    "loudness_db": -10.654,
+    "loudness_mean_db": -13.385,
+    "duration_s": 5.344,
+    "pitch_hz_median": 226.33,
+    "pitch_hz_p75": 255.965,
+    "pitch_range": 205.201,
+    "rate_wps": 3.516,
+    "text_cue": 1.2,
+    "z_loudness": 1.805,
+    "z_pitch": 1.601,
+    "z_rate": -0.163,
+    "arousal_raw": 1.388
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000048_am_adam_828df31d_x1.15.wav",
+   "tts_duration": 4.296,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 151.503,
+    "asr_done": 153.084,
+    "speaker_done": 152.12,
+    "emotion_done": 153.085,
+    "complete": 153.085,
+    "tts_start": 153.085,
+    "tts_ready": 156.777,
+    "play_at": 156.777,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000049",
+   "t_start": 150.72,
+   "t_end": 151.808,
+   "close_reason": "pause",
+   "text": "And the fans know it.",
+   "words": [
+    [
+     "And",
+     150.6,
+     150.88,
+     0.227
+    ],
+    [
+     "the",
+     150.88,
+     150.98,
+     0.981
+    ],
+    [
+     "fans",
+     150.98,
+     151.26,
+     0.993
+    ],
+    [
+     "know",
+     151.26,
+     151.5,
+     0.996
+    ],
+    [
+     "it.",
+     151.5,
+     151.68,
+     0.999
+    ]
+   ],
+   "asr_conf": 0.654,
+   "speaker_id": "S2",
+   "speaker_sim": 0.308,
+   "speaker_conf": "low",
+   "emotion": "excited",
+   "arousal": 0.869,
+   "features": {
+    "loudness_db": -16.245,
+    "loudness_mean_db": -16.599,
+    "duration_s": 1.088,
+    "pitch_hz_median": 246.057,
+    "pitch_hz_p75": 250.882,
+    "pitch_range": 98.856,
+    "rate_wps": 4.63,
+    "text_cue": 0.0,
+    "z_loudness": -0.106,
+    "z_pitch": 1.276,
+    "z_rate": 2.074,
+    "arousal_raw": 0.646
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000049_am_adam_87b6f86b_x1.15.wav",
+   "tts_duration": 0.991,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 152.258,
+    "asr_done": 154.554,
+    "speaker_done": 152.337,
+    "emotion_done": 154.555,
+    "complete": 154.555,
+    "tts_start": 154.555,
+    "tts_ready": 155.949,
+    "play_at": 161.153,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000050",
+   "t_start": 152.576,
+   "t_end": 154.432,
+   "close_reason": "pause",
+   "text": "So it is one all here at Riverside Park.",
+   "words": [
+    [
+     "So",
+     152.456,
+     152.636,
+     0.553
+    ],
+    [
+     "it",
+     152.636,
+     152.716,
+     0.914
+    ],
+    [
+     "is",
+     152.716,
+     152.816,
+     0.968
+    ],
+    [
+     "one",
+     152.816,
+     152.996,
+     0.93
+    ],
+    [
+     "all",
+     152.996,
+     153.156,
+     0.854
+    ],
+    [
+     "here",
+     153.156,
+     153.396,
+     0.988
+    ],
+    [
+     "at",
+     153.396,
+     153.536,
+     0.987
+    ],
+    [
+     "Riverside",
+     153.536,
+     153.816,
+     0.993
+    ],
+    [
+     "Park.",
+     153.816,
+     154.256,
+     0.985
+    ]
+   ],
+   "asr_conf": 0.825,
+   "speaker_id": "S1",
+   "speaker_sim": 0.795,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.282,
+   "features": {
+    "loudness_db": -19.233,
+    "loudness_mean_db": -20.498,
+    "duration_s": 1.856,
+    "pitch_hz_median": 133.188,
+    "pitch_hz_p75": 170.805,
+    "pitch_range": 120.39,
+    "rate_wps": 5.0,
+    "text_cue": 0.0,
+    "z_loudness": -0.569,
+    "z_pitch": -0.495,
+    "z_rate": 2.81,
+    "arousal_raw": 0.017
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000050_bm_george_1b40438b_x1.15.wav",
+   "tts_duration": 2.174,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 155.004,
+    "asr_done": 156.739,
+    "speaker_done": 155.219,
+    "emotion_done": 156.74,
+    "complete": 156.74,
+    "tts_start": 156.741,
+    "tts_ready": 158.563,
+    "play_at": 162.224,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000051",
+   "t_start": 155.072,
+   "t_end": 158.112,
+   "close_reason": "pause",
+   "text": "Both managers will have plenty to play in the dressing room.",
+   "words": [
+    [
+     "Both",
+     154.952,
+     155.292,
+     0.829
+    ],
+    [
+     "managers",
+     155.292,
+     155.792,
+     0.953
+    ],
+    [
+     "will",
+     155.792,
+     156.052,
+     0.989
+    ],
+    [
+     "have",
+     156.052,
+     156.212,
+     0.999
+    ],
+    [
+     "plenty",
+     156.212,
+     156.512,
+     0.996
+    ],
+    [
+     "to",
+     156.512,
+     156.752,
+     0.994
+    ],
+    [
+     "play",
+     156.752,
+     157.052,
+     0.99
+    ],
+    [
+     "in",
+     157.052,
+     157.232,
+     0.989
+    ],
+    [
+     "the",
+     157.232,
+     157.332,
+     0.959
+    ],
+    [
+     "dressing",
+     157.332,
+     157.532,
+     0.998
+    ],
+    [
+     "room.",
+     157.532,
+     157.912,
+     0.988
+    ]
+   ],
+   "asr_conf": 0.831,
+   "speaker_id": "S2",
+   "speaker_sim": 0.63,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.112,
+   "features": {
+    "loudness_db": -19.984,
+    "loudness_mean_db": -23.051,
+    "duration_s": 3.04,
+    "pitch_hz_median": 199.273,
+    "pitch_hz_p75": 226.55,
+    "pitch_range": 165.166,
+    "rate_wps": 3.716,
+    "text_cue": 0.0,
+    "z_loudness": -0.384,
+    "z_pitch": -0.231,
+    "z_rate": 0.2,
+    "arousal_raw": -0.212
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000051_am_adam_76accb81_x1.15.wav",
+   "tts_duration": 2.487,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 158.504,
+    "asr_done": 159.828,
+    "speaker_done": 158.86,
+    "emotion_done": 159.828,
+    "complete": 159.828,
+    "tts_start": 159.829,
+    "tts_ready": 162.109,
+    "play_at": 164.478,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000052",
+   "t_start": 158.72,
+   "t_end": 161.568,
+   "close_reason": "pause",
+   "text": "Northgate kick off again, but there is barely a minute left.",
+   "words": [
+    [
+     "Northgate",
+     158.6,
+     159.08,
+     0.905
+    ],
+    [
+     "kick",
+     159.08,
+     159.34,
+     0.784
+    ],
+    [
+     "off",
+     159.34,
+     159.58,
+     0.9
+    ],
+    [
+     "again,",
+     159.58,
+     159.88,
+     0.998
+    ],
+    [
+     "but",
+     160.0,
+     160.1,
+     0.996
+    ],
+    [
+     "there",
+     160.1,
+     160.28,
+     0.996
+    ],
+    [
+     "is",
+     160.28,
+     160.42,
+     0.888
+    ],
+    [
+     "barely",
+     160.42,
+     160.68,
+     0.996
+    ],
+    [
+     "a",
+     160.68,
+     160.98,
+     0.992
+    ],
+    [
+     "minute",
+     160.98,
+     161.12,
+     0.998
+    ],
+    [
+     "left.",
+     161.12,
+     161.46,
+     0.998
+    ]
+   ],
+   "asr_conf": 0.832,
+   "speaker_id": "S1",
+   "speaker_sim": 0.638,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.269,
+   "features": {
+    "loudness_db": -20.835,
+    "loudness_mean_db": -22.387,
+    "duration_s": 2.848,
+    "pitch_hz_median": 129.602,
+    "pitch_hz_p75": 161.995,
+    "pitch_range": 136.807,
+    "rate_wps": 3.846,
+    "text_cue": 0.0,
+    "z_loudness": -0.657,
+    "z_pitch": -0.947,
+    "z_rate": 0.498,
+    "arousal_raw": -0.505
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000052_bm_george_e5cb1514_x1.12.wav",
+   "tts_duration": 2.806,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 162.005,
+    "asr_done": 163.228,
+    "speaker_done": 162.241,
+    "emotion_done": 163.229,
+    "complete": 163.229,
+    "tts_start": 163.229,
+    "tts_ready": 165.453,
+    "play_at": 167.045,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000053",
+   "t_start": 162.24,
+   "t_end": 165.056,
+   "close_reason": "pause",
+   "text": "I expect they will just play it safe until you whistle.",
+   "words": [
+    [
+     "I",
+     162.12,
+     162.38,
+     0.938
+    ],
+    [
+     "expect",
+     162.38,
+     162.74,
+     0.989
+    ],
+    [
+     "they",
+     162.74,
+     163.0,
+     0.981
+    ],
+    [
+     "will",
+     163.0,
+     163.16,
+     0.975
+    ],
+    [
+     "just",
+     163.16,
+     163.32,
+     0.992
+    ],
+    [
+     "play",
+     163.32,
+     163.62,
+     0.477
+    ],
+    [
+     "it",
+     163.62,
+     163.76,
+     0.996
+    ],
+    [
+     "safe",
+     163.76,
+     163.98,
+     0.991
+    ],
+    [
+     "until",
+     163.98,
+     164.34,
+     0.968
+    ],
+    [
+     "you",
+     164.34,
+     164.52,
+     0.559
+    ],
+    [
+     "whistle.",
+     164.52,
+     164.76,
+     0.987
+    ]
+   ],
+   "asr_conf": 0.786,
+   "speaker_id": "S2",
+   "speaker_sim": 0.711,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.145,
+   "features": {
+    "loudness_db": -20.695,
+    "loudness_mean_db": -22.553,
+    "duration_s": 2.816,
+    "pitch_hz_median": 197.182,
+    "pitch_hz_p75": 222.518,
+    "pitch_range": 177.274,
+    "rate_wps": 4.167,
+    "text_cue": 0.0,
+    "z_loudness": -0.607,
+    "z_pitch": -0.455,
+    "z_rate": 1.034,
+    "arousal_raw": -0.255
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000053_am_adam_5598034d_x1.08.wav",
+   "tts_duration": 2.357,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 165.504,
+    "asr_done": 166.739,
+    "speaker_done": 165.755,
+    "emotion_done": 166.739,
+    "complete": 166.739,
+    "tts_start": 166.739,
+    "tts_ready": 168.8,
+    "play_at": 169.931,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000054",
+   "t_start": 165.536,
+   "t_end": 168.704,
+   "close_reason": "pause",
+   "text": "Moreau passes it square to Delgado. No risks now, keep the ball.",
+   "words": [
+    [
+     "Moreau",
+     165.416,
+     165.816,
+     0.395
+    ],
+    [
+     "passes",
+     165.816,
+     166.116,
+     0.991
+    ],
+    [
+     "it",
+     166.116,
+     166.276,
+     0.892
+    ],
+    [
+     "square",
+     166.276,
+     166.516,
+     0.912
+    ],
+    [
+     "to",
+     166.516,
+     166.696,
+     0.955
+    ],
+    [
+     "Delgado.",
+     166.696,
+     166.996,
+     0.432
+    ],
+    [
+     "No",
+     167.056,
+     167.156,
+     0.86
+    ],
+    [
+     "risks",
+     167.156,
+     167.456,
+     0.99
+    ],
+    [
+     "now,",
+     167.456,
+     167.776,
+     0.952
+    ],
+    [
+     "keep",
+     167.936,
+     168.036,
+     0.978
+    ],
+    [
+     "the",
+     168.036,
+     168.216,
+     0.998
+    ],
+    [
+     "ball.",
+     168.216,
+     168.436,
+     0.919
+    ]
+   ],
+   "asr_conf": 0.809,
+   "speaker_id": "S1",
+   "speaker_sim": 0.478,
+   "speaker_conf": "low",
+   "emotion": "neutral",
+   "arousal": 0.639,
+   "features": {
+    "loudness_db": -18.127,
+    "loudness_mean_db": -19.907,
+    "duration_s": 3.168,
+    "pitch_hz_median": 181.002,
+    "pitch_hz_p75": 216.82,
+    "pitch_range": 168.021,
+    "rate_wps": 3.974,
+    "text_cue": 0.0,
+    "z_loudness": 0.293,
+    "z_pitch": 1.434,
+    "z_rate": 0.515,
+    "arousal_raw": 0.639
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000054_bm_george_4e53205a_x1.07.wav",
+   "tts_duration": 3.349,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 169.253,
+    "asr_done": 170.599,
+    "speaker_done": 169.615,
+    "emotion_done": 170.6,
+    "complete": 170.6,
+    "tts_start": 170.601,
+    "tts_ready": 173.193,
+    "play_at": 173.193,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000055",
+   "t_start": 169.28,
+   "t_end": 171.68,
+   "close_reason": "pause",
+   "text": "And there is the whistle for the end of the first half.",
+   "words": [
+    [
+     "And",
+     169.16,
+     169.4,
+     0.62
+    ],
+    [
+     "there",
+     169.4,
+     169.58,
+     0.989
+    ],
+    [
+     "is",
+     169.58,
+     169.74,
+     0.956
+    ],
+    [
+     "the",
+     169.74,
+     169.88,
+     0.989
+    ],
+    [
+     "whistle",
+     169.88,
+     170.22,
+     0.99
+    ],
+    [
+     "for",
+     170.22,
+     170.5,
+     0.981
+    ],
+    [
+     "the",
+     170.5,
+     170.6,
+     0.998
+    ],
+    [
+     "end",
+     170.6,
+     170.8,
+     0.989
+    ],
+    [
+     "of",
+     170.8,
+     170.94,
+     0.997
+    ],
+    [
+     "the",
+     170.94,
+     171.06,
+     0.995
+    ],
+    [
+     "first",
+     171.06,
+     171.26,
+     0.992
+    ],
+    [
+     "half.",
+     171.26,
+     171.58,
+     0.996
+    ]
+   ],
+   "asr_conf": 0.844,
+   "speaker_id": "S1",
+   "speaker_sim": 0.843,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": 0.616,
+   "features": {
+    "loudness_db": -18.494,
+    "loudness_mean_db": -19.923,
+    "duration_s": 2.4,
+    "pitch_hz_median": 145.631,
+    "pitch_hz_p75": 198.05,
+    "pitch_range": 165.226,
+    "rate_wps": 4.959,
+    "text_cue": 0.0,
+    "z_loudness": 0.123,
+    "z_pitch": 0.595,
+    "z_rate": 2.485,
+    "arousal_raw": 0.606
+   },
+   "voice_id": "bm_george",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000055_bm_george_1069ff76_x1.09.wav",
+   "tts_duration": 2.511,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 172.254,
+    "asr_done": 173.719,
+    "speaker_done": 172.523,
+    "emotion_done": 173.72,
+    "complete": 173.72,
+    "tts_start": 173.72,
+    "tts_ready": 175.714,
+    "play_at": 176.622,
+    "played": null
+   }
+  },
+  {
+   "line_id": "L000056",
+   "t_start": 172.224,
+   "t_end": 175.968,
+   "close_reason": "pause",
+   "text": "A thrilling first half, one goal each, and so much still to come.",
+   "words": [
+    [
+     "A",
+     172.104,
+     172.344,
+     0.419
+    ],
+    [
+     "thrilling",
+     172.344,
+     172.584,
+     0.998
+    ],
+    [
+     "first",
+     172.584,
+     172.984,
+     0.983
+    ],
+    [
+     "half,",
+     172.984,
+     173.344,
+     0.854
+    ],
+    [
+     "one",
+     173.564,
+     173.604,
+     0.967
+    ],
+    [
+     "goal",
+     173.604,
+     173.824,
+     0.998
+    ],
+    [
+     "each,",
+     173.824,
+     174.164,
+     0.998
+    ],
+    [
+     "and",
+     174.464,
+     174.584,
+     0.959
+    ],
+    [
+     "so",
+     174.584,
+     174.824,
+     0.991
+    ],
+    [
+     "much",
+     174.824,
+     175.084,
+     0.999
+    ],
+    [
+     "still",
+     175.084,
+     175.324,
+     0.997
+    ],
+    [
+     "to",
+     175.324,
+     175.504,
+     0.998
+    ],
+    [
+     "come.",
+     175.504,
+     175.764,
+     1.0
+    ]
+   ],
+   "asr_conf": 0.842,
+   "speaker_id": "S2",
+   "speaker_sim": 0.778,
+   "speaker_conf": "high",
+   "emotion": "neutral",
+   "arousal": -0.358,
+   "features": {
+    "loudness_db": -20.67,
+    "loudness_mean_db": -23.508,
+    "duration_s": 3.744,
+    "pitch_hz_median": 200.174,
+    "pitch_hz_p75": 217.681,
+    "pitch_range": 175.86,
+    "rate_wps": 3.552,
+    "text_cue": 1.0,
+    "z_loudness": -0.603,
+    "z_pitch": -0.737,
+    "z_rate": -0.38,
+    "arousal_raw": -0.449
+   },
+   "voice_id": "am_adam",
+   "tts_path": "/home/user/sd/live-character-voice/outputs/sessions/20261105-064041_9d7a25/tts/L000056_am_adam_a507c845_x1.07.wav",
+   "tts_duration": 3.247,
+   "schedule_action": "speedup",
+   "error": null,
+   "times": {
+    "created": 176.504,
+    "asr_done": 177.857,
+    "speaker_done": 176.811,
+    "emotion_done": 177.857,
+    "complete": 177.857,
+    "tts_start": 177.858,
+    "tts_ready": 180.416,
+    "play_at": 180.416,
+    "played": null
+   }
+  }
+ ],
+ "warnings": []
+}

@@ -72,6 +72,7 @@ class PilotSession:
     error: str | None = None
     task: asyncio.Task[None] | None = None
     report_ready: bool = False
+    clients: int = 0
     metrics: dict[str, Any] = field(default_factory=dict)
     created: float = field(default_factory=time.monotonic)
 

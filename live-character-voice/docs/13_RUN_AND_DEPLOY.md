@@ -35,3 +35,14 @@ The built web app (`web/dist`) is static and could be hosted for free on GitHub 
 | Delay keeps growing | Check `drift_slope` in the report; reduce `max_line_s`, use `base.en`, raise `tts.workers` |
 | Wrong speaker labels | Provide an enroll file with 8–15 s per commentator |
 | Voice sounds too slow / falls behind | Raise style speeds slightly; check TTS duration ratio in the report |
+
+
+## 13.6 Notes from the build (M10)
+- One-port Pilot: `make serve` builds the web app and serves it with the API on :8000.
+- Run the API with `MALLOC_ARENA_MAX=2` (the Makefile targets and the devcontainer set it) — it
+  keeps the server's memory flat over long sessions.
+- Codespaces: the dev container is `.devcontainer/live-character-voice/devcontainer.json` at the
+  repository root (choose it when creating the codespace); it installs everything, downloads the
+  models and generates the synthetic clip.
+- Playwright smoke test of the player: start the API, then `cd web && npm run e2e`
+  (env: `CLIP`, `SPEED`, `SPEAKERS`, `WATCH_S`).

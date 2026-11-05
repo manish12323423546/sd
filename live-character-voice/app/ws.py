@@ -29,6 +29,15 @@ FORWARD = (
 )
 
 
+ABANDON_GRACE_S = 15.0
+
+
+def _stop_if_abandoned(manager: SessionManager, ps: PilotSession) -> None:
+    if ps.clients == 0 and ps.status == "live":
+        ps.engine.store.warn("all viewers disconnected — session stopped")
+        manager.stop(ps)
+
+
 def speaker_msg(sp: Speaker) -> dict[str, Any]:
     return {
         "speaker_id": sp.speaker_id,
@@ -119,6 +128,7 @@ async def handle(ws: WebSocket, manager: SessionManager, sid: str) -> None:
     )
 
     sub = ps.engine.store.subscribe(*FORWARD)
+    ps.clients += 1
 
     async def pump() -> None:
         async for ev in sub:
@@ -170,6 +180,11 @@ async def handle(ws: WebSocket, manager: SessionManager, sid: str) -> None:
     except WebSocketDisconnect:
         pass
     finally:
+        ps.clients -= 1
+        if ps.clients == 0 and ps.status == "live":
+            # nobody is watching any more: stop after a grace period so an abandoned tab does not
+            # block the (single) pilot session slot until the clip ends
+            asyncio.get_running_loop().call_later(ABANDON_GRACE_S, _stop_if_abandoned, manager, ps)
         sub.close()
         pump_task.cancel()
         with contextlib.suppress(asyncio.CancelledError, Exception):
