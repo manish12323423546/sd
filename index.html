@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Live Character Voice</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Sora:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: broadcast gallery — programme monitor + commentator desk, then measured results. */
+:root {
+  --bg: #f2f4f7; --panel: #ffffff; --line: #d8dee7; --ink: #121821; --muted: #5d6878;
+  --accent: #1f6fd6; --live: #d9134f; --ok: #13804b; --miss: #b4561a; --soft: #e8eef7;
+  --calm: #2a9d9a; --neutral: #6b7686; --excited: #c77a00; --peak: #d9134f;
+  --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body: "Sora", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0b0f14; --panel: #121821; --line: #1e2733; --ink: #e6edf5; --muted: #8a97a8;
+  --accent: #4fa3ff; --live: #f31260; --ok: #3ccf8e; --miss: #f5a524; --soft: #18212d;
+  --calm: #5bc0be; --neutral: #8a97a8; --excited: #f5a524; --peak: #f31260; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0b0f14; --panel: #121821; --line: #1e2733; --ink: #e6edf5; --muted: #8a97a8;
+  --accent: #4fa3ff; --live: #f31260; --ok: #3ccf8e; --miss: #f5a524; --soft: #18212d;
+  --calm: #5bc0be; --neutral: #8a97a8; --excited: #f5a524; --peak: #f31260; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font: 15px/1.6 var(--body); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 24px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 28px; }
+.kicker { font: 600 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--live); display: inline-block; }
+h1 { font: 700 clamp(32px, 6vw, 54px)/1 var(--display); margin: 4px 0 6px; text-transform: uppercase; text-wrap: balance; }
+h2 { font: 700 24px/1.1 var(--display); text-transform: uppercase; letter-spacing: .02em; margin: 0 0 10px; }
+.lede { color: var(--muted); max-width: 70ch; margin: 0; }
+.stage { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 16px; align-items: start; }
+@media (max-width: 900px) { .stage { grid-template-columns: 1fr; } }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+.monitor { overflow: hidden; position: relative; }
+video { display: block; width: 100%; max-width: 100%; aspect-ratio: 16 / 9; background: #000; }
+.overlay { position: absolute; left: 0; right: 0; top: 0; aspect-ratio: 16 / 9; display: grid; place-items: center; background: rgba(0,0,0,.55); }
+.overlay[hidden] { display: none !important; }
+.big { font: 700 20px var(--display); letter-spacing: .04em; text-transform: uppercase; background: var(--accent); color: #fff; border: 0; border-radius: 10px; padding: 14px 26px; cursor: pointer; }
+.big:disabled { opacity: .6; cursor: progress; }
+.bar { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; padding: 10px 14px; border-top: 1px solid var(--line); font: 13px var(--mono); }
+.bar button, .btn { font: 600 13px var(--body); border: 1px solid var(--line); background: var(--soft); color: var(--ink); border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+.bar label { display: flex; gap: 6px; align-items: center; color: var(--muted); }
+.bar input[type=range] { width: 110px; accent-color: var(--accent); }
+.livebadge { color: var(--live); font-weight: 600; }
+.desk { display: grid; gap: 12px; padding: 14px; }
+#speakers { display: grid; gap: 10px; }
+.spk { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; gap: 8px; }
+.spk .head { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.swatch { width: 12px; height: 12px; border-radius: 50%; }
+.spk select { font: 14px var(--body); padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); width: 100%; min-width: 0; }
+.chip { font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: .05em; padding: 1px 7px; border-radius: 999px; border: 1px solid currentColor; }
+.chip.calm { color: var(--calm); } .chip.neutral { color: var(--neutral); } .chip.excited { color: var(--excited); } .chip.peak { color: var(--peak); }
+.toast { font-size: 12px; color: var(--accent); min-height: 18px; }
+.mode { display: grid; gap: 6px; font-size: 13px; }
+.mode label { display: flex; gap: 8px; align-items: flex-start; }
+.transcript { max-height: 330px; overflow-y: auto; border-top: 1px solid var(--line); }
+.transcript ol { list-style: none; margin: 0; padding: 6px; display: grid; gap: 2px; }
+.transcript li { display: grid; grid-template-columns: 46px minmax(0, 1fr); gap: 8px; padding: 6px 8px; border-radius: 8px; font-size: 13px; }
+.transcript li.now { background: var(--soft); }
+.transcript li.future { opacity: .45; }
+.t { font: 12px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.board { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.stat { padding: 14px 16px; display: grid; gap: 4px; }
+.stat .v { font: 700 32px/1 var(--display); font-variant-numeric: tabular-nums; }
+.stat .k { font: 12px var(--mono); color: var(--muted); }
+.pill { font: 600 11px var(--mono); text-transform: uppercase; padding: 2px 8px; border-radius: 999px; justify-self: start; border: 1px solid currentColor; }
+.pill.ok { color: var(--ok); } .pill.miss { color: var(--miss); }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; align-items: start; }
+.two > * { min-width: 0; }
+figure { margin: 0; display: grid; gap: 8px; }
+figure img { border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+figcaption, .note { font-size: 13px; color: var(--muted); }
+.cmd { display: block; font: 13px var(--mono); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; overflow-x: auto; white-space: pre; }
+.demos { display: flex; gap: 8px; flex-wrap: wrap; }
+a { color: var(--accent); }
+button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: no-preference) { .dot { animation: pulse 1.6s ease-in-out infinite; } }
+@keyframes pulse { 50% { opacity: .3; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="kicker"><span class="dot" aria-hidden="true"></span> Try it · works in your browser · sound on</div>
+    <h1>Live Character Voice</h1>
+    <p class="lede">Press start. Each commentator is re-spoken in the character voice you choose, with the emotion of the moment, while the crowd keeps going. Change a voice while the match plays and the next line uses it.</p>
+  </header>
+
+  <section class="stage" aria-label="Player">
+    <div class="panel monitor">
+      <video id="video" playsinline preload="auto" src="original.mp4"></video>
+      <div class="overlay" id="overlay">
+        <button class="big" id="start" type="button">▶ Start the match</button>
+      </div>
+      <div class="bar">
+        <button id="playpause" type="button">▶ Play</button>
+        <span id="clock">00:00</span>
+        <span class="livebadge" id="badge">● LIVE VOICES</span>
+        <label for="orig">Original <input id="orig" type="range" min="0" max="1" step="0.05" value="0.35"></label>
+        <label for="voice">Voices <input id="voice" type="range" min="0" max="1.5" step="0.05" value="1"></label>
+        <label for="duck"><input id="duck" type="checkbox" checked> Duck original</label>
+      </div>
+    </div>
+
+    <aside class="panel">
+      <div class="desk">
+        <div class="kicker">Commentators</div>
+        <div id="speakers"><p class="note">Loading…</p></div>
+        <div class="toast" id="toast" role="status"></div>
+        <div class="mode">
+          <div class="kicker">Timing</div>
+          <label><input type="radio" name="mode" id="mode-live" value="live" checked> As measured live: each voice starts when the engine had it ready (about 4 s after the line).</label>
+          <label><input type="radio" name="mode" id="mode-sync" value="sync"> Lip-synced preview: each voice starts on its original moment.</label>
+        </div>
+      </div>
+      <div class="transcript"><ol id="lines"><li class="future"><span class="t">--:--</span><span>Loading the transcript…</span></li></ol></div>
+    </aside>
+  </section>
+
+  <section aria-labelledby="h-results">
+    <h2 id="h-results">Measured results</h2>
+    <div class="board">
+      <div class="panel stat"><span class="k">median delay · target ≤ 4.0 s</span><span class="v">4.14 s</span><span class="pill miss">0.14 s over</span></div>
+      <div class="panel stat"><span class="k">p95 delay · target ≤ 7.0 s</span><span class="v">5.42 s</span><span class="pill ok">met</span></div>
+      <div class="panel stat"><span class="k">word error rate · ≤ 12 %</span><span class="v">10.9 %</span><span class="pill ok">met</span></div>
+      <div class="panel stat"><span class="k">speaker accuracy · ≥ 90 %</span><span class="v">92.9 %</span><span class="pill ok">met</span></div>
+      <div class="panel stat"><span class="k">20-min run · p95 ≤ 6.0 s</span><span class="v">5.11 s</span><span class="pill ok">0 crashes</span></div>
+      <div class="panel stat"><span class="k">voice switches on next line</span><span class="v">56 / 56</span><span class="pill ok">met</span></div>
+    </div>
+  </section>
+
+  <section class="two">
+    <figure>
+      <img src="player.png" alt="The full pilot player running on the server: video, three commentator cards and a live transcript with per-line delay." loading="lazy">
+      <figcaption>The full pilot app (server version) during a live session.</figcaption>
+    </figure>
+    <figure>
+      <img src="delay.png" alt="Delay per line stays between about 3 and 6 seconds with no upward trend." loading="lazy">
+      <figcaption>Delay per line across the clip. Flat means it never builds up.</figcaption>
+    </figure>
+  </section>
+
+  <section class="two">
+    <div>
+      <h2>Rendered demo videos</h2>
+      <p class="note">The engine's own mixes, with the voices it used live.</p>
+      <div class="demos">
+        <button class="btn" type="button" data-demo="demo_live.mp4">Live mix</button>
+        <button class="btn" type="button" data-demo="demo_synced.mp4">Synced mix</button>
+      </div>
+      <video id="demo" controls playsinline preload="none" style="margin-top:10px;border-radius:10px" hidden></video>
+    </div>
+    <div>
+      <h2>Run the full app on a Mac</h2>
+      <p class="note">This page plays voices the engine generated in advance. The full app listens and generates in real time, so it needs your computer. Install <a href="https://brew.sh" target="_blank" rel="noopener">Homebrew</a> first, then in Terminal:</p>
+      <span class="cmd">git clone -b claude/nice-ritchie-5s42u6 https://github.com/manish12323423546/sd.git
+cd sd/live-character-voice
+make setup
+make download-models
+make synth
+make serve</span>
+      <p class="note">Then open http://localhost:8000 in your browser (not in Terminal). The first setup downloads about 2 GB.</p>
+    </div>
+  </section>
+
+  <p class="note">Free, open-source stack: faster-whisper, SpeechBrain ECAPA, Kokoro-82M, Silero VAD. Voices are Kokoro's built-in voices under invented names; no real person or known character is imitated. The match, teams and players are synthetic.</p>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const video = $("video");
+  const DUCK = 0.25, ATTACK = 0.08, HOLD = 0.15;
+  let data = null, ctx = null, origGain = null, voiceGain = null, buffers = {};
+  let choice = {}, mode = "live", scheduled = new Map(), activeUntil = 0, ticking = null, lastRow = "";
+
+  const fmt = (t) => { const s = Math.max(0, Math.floor(t || 0)); return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); };
+  const startAt = (l) => (mode === "live" ? l.play_at : l.t_start);
+
+  fetch("lines.json").then((r) => r.json()).then((d) => {
+    data = d;
+    d.speakers.forEach((s) => (choice[s.id] = s.default));
+    renderSpeakers();
+    renderLines();
+  }).catch(() => { $("lines").innerHTML = "<li><span></span><span>Could not load the transcript. Reload the page.</span></li>"; });
+
+  function renderSpeakers() {
+    const box = $("speakers");
+    box.innerHTML = "";
+    data.speakers.forEach((s) => {
+      const div = document.createElement("div");
+      div.className = "spk";
+      const opts = data.voices.map((v) => `<option value="${v.id}" ${v.id === choice[s.id] ? "selected" : ""}>${v.name} · ${v.desc}</option>`).join("");
+      div.innerHTML = `<div class="head"><span class="swatch" style="background:${s.color}"></span>${s.name} <span class="t">${s.id}</span><span id="emo-${s.id}" style="margin-left:auto"></span></div>
+        <select id="sel-${s.id}" aria-label="Voice for ${s.name}">${opts}</select>`;
+      box.appendChild(div);
+      div.querySelector("select").addEventListener("change", (e) => {
+        choice[s.id] = e.target.value;
+        const name = data.voices.find((v) => v.id === e.target.value).name;
+        $("toast").textContent = `${s.name} is now ${name}, from the next line`;
+        setTimeout(() => ($("toast").textContent = ""), 2500);
+      });
+    });
+  }
+
+  function renderLines() {
+    $("lines").innerHTML = data.lines.map((l) => {
+      const sp = data.speakers.find((s) => s.id === l.speaker);
+      return `<li class="future" id="row-${l.id}"><span class="t">${fmt(l.t_start)}</span><span><b style="color:${sp ? sp.color : "inherit"}">${l.speaker}</b> <span class="chip ${l.emotion}">${l.emotion}</span> ${l.text}</span></li>`;
+    }).join("");
+  }
+
+  function updateRows(t) {
+    let current = "";
+    for (const l of data.lines) {
+      const row = $("row-" + l.id);
+      if (!row) continue;
+      const now = t >= l.t_start && t < l.t_end + 0.5;
+      if (now) current = l.id;
+      row.className = now ? "now" : t < l.t_start ? "future" : "";
+    }
+    if (current && current !== lastRow) {
+      lastRow = current;
+      const row = $("row-" + current), box = row.parentElement.parentElement;
+      box.scrollTop = row.offsetTop - box.clientHeight / 3;
+    }
+  }
+
+  async function initAudio() {
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const src = ctx.createMediaElementSource(video);
+    origGain = ctx.createGain(); voiceGain = ctx.createGain();
+    src.connect(origGain).connect(ctx.destination);
+    voiceGain.connect(ctx.destination);
+    origGain.gain.value = +$("orig").value;
+    voiceGain.gain.value = +$("voice").value;
+    await Promise.all(data.voices.map(async (v) => {
+      const res = await fetch(`v_${v.id}.mp3`);
+      buffers[v.id] = await ctx.decodeAudioData(await res.arrayBuffer());
+    }));
+  }
+
+  function duck(start, end) {
+    if (!$("duck").checked) return;
+    const level = +$("orig").value, g = origGain.gain;
+    const overlapping = start <= activeUntil + HOLD;
+    const holdEnd = Math.max(end, activeUntil);
+    g.cancelScheduledValues(start);
+    if (!overlapping) { g.setValueAtTime(level, start); g.linearRampToValueAtTime(level * DUCK, start + ATTACK); }
+    else g.setValueAtTime(level * DUCK, start);
+    g.setValueAtTime(level * DUCK, holdEnd + HOLD);
+    g.linearRampToValueAtTime(level, holdEnd + HOLD + ATTACK);
+    activeUntil = holdEnd;
+  }
+
+  function stopAll() {
+    scheduled.forEach((n) => { try { n.stop(); } catch (e) { /* already stopped */ } });
+    scheduled.clear();
+    activeUntil = 0;
+    if (origGain) { origGain.gain.cancelScheduledValues(ctx.currentTime); origGain.gain.setValueAtTime(+$("orig").value, ctx.currentTime); }
+  }
+
+  function tick() {
+    const t = video.currentTime;
+    $("clock").textContent = fmt(t) + " / " + fmt(video.duration);
+    if (!video.paused) {
+      for (const l of data.lines) {
+        const at = startAt(l);
+        if (scheduled.has(l.id) || at < t - 0.3 || at > t + 0.6) continue;
+        const voice = choice[l.speaker], seg = l.seg[voice], buf = buffers[voice];
+        if (!seg || !buf) continue;
+        const when = ctx.currentTime + Math.max(0, at - t);
+        const node = ctx.createBufferSource();
+        node.buffer = buf;
+        node.connect(voiceGain);
+        node.start(when, seg[0], seg[1]);
+        scheduled.set(l.id, node);
+        duck(when, when + seg[1]);
+        const emo = $("emo-" + l.speaker);
+        setTimeout(() => { if (emo) emo.innerHTML = `<span class="chip ${l.emotion}">${l.emotion}</span>`; }, (when - ctx.currentTime) * 1000);
+      }
+    }
+    updateRows(t);
+  }
+
+  async function play() {
+    await ctx.resume();
+    await video.play();
+    $("playpause").textContent = "❚❚ Pause";
+  }
+
+  $("start").addEventListener("click", async () => {
+    if (!data) return;
+    $("start").disabled = true;
+    $("start").textContent = "Loading voices…";
+    try {
+      if (!ctx) await initAudio();
+      await play();
+      $("overlay").hidden = true;
+      if (!ticking) ticking = setInterval(tick, 150);
+    } catch (e) {
+      $("start").disabled = false;
+      $("start").textContent = "Tap again to start";
+    }
+  });
+  $("playpause").addEventListener("click", () => {
+    if (!ctx) { $("start").click(); return; }
+    if (video.paused) play().catch(() => {});
+    else { video.pause(); stopAll(); $("playpause").textContent = "▶ Play"; }
+  });
+  video.addEventListener("seeking", stopAll);
+  video.addEventListener("ended", () => { stopAll(); $("playpause").textContent = "▶ Play"; });
+  $("orig").addEventListener("input", (e) => { if (origGain) origGain.gain.setTargetAtTime(+e.target.value, ctx.currentTime, 0.02); });
+  $("voice").addEventListener("input", (e) => { if (voiceGain) voiceGain.gain.setTargetAtTime(+e.target.value, ctx.currentTime, 0.02); });
+  document.querySelectorAll('input[name="mode"]').forEach((r) => r.addEventListener("change", (e) => {
+    mode = e.target.value;
+    $("badge").textContent = mode === "live" ? "● LIVE VOICES" : "● LIP-SYNCED";
+    stopAll();
+  }));
+
+  document.querySelectorAll("[data-demo]").forEach((b) => b.addEventListener("click", () => {
+    const d = $("demo");
+    d.hidden = false;
+    d.src = b.dataset.demo;
+    if (!video.paused) $("playpause").click();
+    d.play().catch(() => {});
+  }));
+})();
+</script>
+
+</html>
