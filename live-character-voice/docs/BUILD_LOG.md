@@ -433,3 +433,13 @@ line often waits for the previous voice to finish (schedule wait p50 0.7 s, p95 
 
 **Open issues**: cloned-voice pacing (try a faster-speaking sample or a higher base speed);
 `ws_client` `delay_ready_from_ws` is empty with streaming (server metrics are correct).
+
+## 2026-11-05 — V2.2: show which engine is running
+- Problem reported: on the Mac the app still used the offline voices. With provider `auto`, a
+  missing/rejected key fell back to Kokoro silently.
+- `engine/keycheck.py` (`make check-keys`): one tiny request per key, plain-language result.
+  The server runs it at startup, prints `>>> VOICES: …` in the terminal and shows an
+  online/offline banner on the home page with the sign-up link when a key is missing or rejected.
+  `/api/health` gains `engines` and `fish_fallback_lines`.
+- `make keys` (`scripts/setup_keys.sh`): asks for both keys, writes `.env` (chmod 600), checks them.
+- Verified here: valid keys → both online; bad Fish key → "rejected (HTTP 401)", Kokoro used.

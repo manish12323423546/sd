@@ -8,7 +8,7 @@ CLIP ?= data/clips/synthetic_match.mp4
 SYS_PKGS := ffmpeg espeak-ng libsndfile1 sox
 
 
-.PHONY: synth-pilot download-models bench
+.PHONY: synth-pilot download-models bench keys check-keys
 .PHONY: setup setup-system setup-python setup-ci setup-web test test-py test-web test-slow \
         lint lint-py lint-web check synth poc dev
 
@@ -99,6 +99,13 @@ poc:
 # Backend + frontend together (Pilot, M8–M9). MALLOC_ARENA_MAX=2 keeps RSS flat (M10).
 
 .PHONY: serve
+# Free API keys (Fish Audio voices, Groq speech-to-text) → .env, then test them.
+keys:
+	bash scripts/setup_keys.sh
+
+check-keys:
+	$(PY) -m engine.keycheck
+
 serve:
 	cd web && npm run build
 	MALLOC_ARENA_MAX=2 $(PY) -m uvicorn app.main:app --port 8000

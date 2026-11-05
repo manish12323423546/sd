@@ -68,6 +68,8 @@ def health() -> dict[str, object]:
         "active_session": active.session_id if active else None,
         "rss_mb": _rss_mb(),
         "voice_cloning": manager.cloning,
+        "engines": m.engines if m else {},
+        "fish_fallback_lines": getattr(m.tts, "n_fallback", 0) if m and m.tts else 0,
     }
 
 

@@ -117,8 +117,13 @@ class SessionManager:
 
     # ---- startup
     def load_models(self) -> None:
-        self.models = Models.load(self.cfg, {"asr", "speaker", "tts"}, log=self.load_log.append)
+        self.models = Models.load(self.cfg, {"asr", "speaker", "tts"}, log=self._log)
         self.make_previews()
+
+    def _log(self, msg: str) -> None:
+        self.load_log.append(msg)
+        if msg.startswith(("VOICES", "speech-to-text")):  # shown in the terminal running the app
+            print(f"\n>>> {msg}\n", flush=True)
 
     def make_previews(self) -> None:
         """3-second preview per enabled voice (docs/08 §8.2), generated once per engine."""

@@ -25,6 +25,8 @@ export interface Health {
   load_s: Record<string, number>;
   active_session: string | null;
   voice_cloning?: boolean;
+  engines?: Record<string, { online: boolean; name: string; note: string }>;
+  fish_fallback_lines?: number;
 }
 
 export interface CreateSessionBody {

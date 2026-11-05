@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { EngineBanner } from "../components/EngineBanner";
 import { VoiceUpload } from "../components/VoiceUpload";
 import { api, type Clip, type Health } from "../net/api";
 
@@ -67,6 +68,7 @@ export function Home() {
 
   return (
     <main className="mx-auto grid max-w-5xl gap-4 p-4 lg:grid-cols-[1fr_320px]">
+      <EngineBanner health={health} />
       <section className="rounded-panel border border-line bg-panel p-4">
         <h2 className="mb-3 text-[20px] font-semibold">1. Pick a clip</h2>
         <ul className="flex flex-col gap-2" data-testid="clips">

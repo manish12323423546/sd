@@ -97,6 +97,7 @@ class Models:
     tts: TTSProvider | None = None
     load_s: dict[str, float] = field(default_factory=dict)
     info: dict[str, str] = field(default_factory=dict)
+    engines: dict[str, dict[str, Any]] = field(default_factory=dict)  # plain-language status
 
     @classmethod
     def load(
@@ -124,13 +125,30 @@ class Models:
             return obj
 
         # "auto": use the hosted providers when their keys are configured, else the local ones
-        if cfg.asr.provider == "auto":
+        # A key that is present but rejected is reported (not silently ignored).
+        if cfg.asr.provider == "auto" and "asr" in stages and cfg.source == "asr":
+            from engine.keycheck import check_groq
+
+            g = check_groq()
+            cfg.asr.provider = "groq" if g.ok else "faster_whisper"
+            m.engines["text"] = {"online": g.ok, "name": "Groq whisper-large-v3-turbo"
+                                 if g.ok else "offline Whisper", "note": g.message}  # fmt: skip
+            log(f"speech-to-text: {m.engines['text']['name']} ({g.message})")
+        elif cfg.asr.provider == "auto":
             cfg.asr.provider = "groq" if os.environ.get("GROQ_API_KEY") else "faster_whisper"
-        if cfg.tts.provider == "auto":
+        if cfg.tts.provider == "auto" and "tts" in stages:
+            from engine.keycheck import check_fish
+
+            f = check_fish()
+            cfg.tts.provider = "fish" if f.ok else "kokoro"
+            if f.ok:
+                cfg.tts.workers = max(cfg.tts.workers, 3)
+            m.engines["voices"] = {"online": f.ok, "name": "Fish Audio s2.1-pro-free"
+                                   if f.ok else "offline Kokoro", "note": f.message}  # fmt: skip
+            log(f"VOICES: {m.engines['voices']['name']} ({f.message})")
+        elif cfg.tts.provider == "auto":
             has_fish = os.environ.get("FISH_API_KEY") or os.environ.get("FISH_API_KEY_FILE")
             cfg.tts.provider = "fish" if has_fish else "kokoro"
-            if has_fish:
-                cfg.tts.workers = max(cfg.tts.workers, 3)
         if "asr" in stages and cfg.source == "asr":
             if cfg.asr.provider == "groq":
                 m.asr = timed(
