@@ -3,7 +3,7 @@
 Every dependency, model and tool used by this project, its licence and link. Versions are the ones
 installed on the build VM at the date shown. Re-checked when each item is installed (CLAUDE.md).
 
-Last updated: 2026-11-05 (M0). Model weights are added in M1 when they are downloaded.
+Last updated: 2026-11-05 (M1).
 
 ## System tools (apt)
 | Tool | Version | Licence | Link | Notes |
@@ -35,6 +35,8 @@ Last updated: 2026-11-05 (M0). Model weights are added in M1 when they are downl
 | spacy (via misaki) | 3.8.18 | MIT | https://spacy.io |
 | torch (CPU build) | 2.15.0+cpu | BSD-3-Clause style (+ bundled Apache/MIT/BSL/Zlib) | https://pytorch.org |
 | torchaudio (CPU build) | 2.11.1+cpu | BSD-2-Clause | https://pytorch.org/audio |
+| huggingface_hub | (via faster-whisper) | Apache-2.0 | https://github.com/huggingface/huggingface_hub |
+| en_core_web_sm (spaCy model, via misaki) | 3.8.0 | MIT | https://github.com/explosion/spacy-models |
 | webvtt-py | 0.7.0 | MIT | https://github.com/glut23/webvtt-py |
 | srt | 3.5.3 | MIT | https://github.com/cdown/srt |
 | psutil | 7.2.2 | BSD-3-Clause | https://github.com/giampaolo/psutil |
@@ -61,6 +63,8 @@ Last updated: 2026-11-05 (M0). Model weights are added in M1 when they are downl
 | @types/react, @types/react-dom | 18.3.x | MIT |
 
 ## Models (downloaded in M1, never committed)
+Sizes measured in M1: small.en 486 MB, base.en 148 MB, ECAPA 89 MB, Kokoro-82M + 54 voices 356 MB.
+
 | Model | Licence | Link |
 |---|---|---|
 | faster-whisper `small.en` / `base.en` | MIT | https://huggingface.co/Systran |

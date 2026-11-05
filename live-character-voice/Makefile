@@ -7,6 +7,8 @@ TORCH_INDEX := https://download.pytorch.org/whl/cpu
 CLIP ?= data/clips/synthetic_match.mp4
 SYS_PKGS := ffmpeg espeak-ng libsndfile1 sox
 
+
+.PHONY: synth-pilot download-models bench
 .PHONY: setup setup-system setup-python setup-ci setup-web test test-py test-web test-slow \
         lint lint-py lint-web check synth poc dev
 
@@ -67,6 +69,19 @@ check:
 # Synthetic test clip + ground truth (M1).
 synth:
 	$(PY) scripts/make_synthetic_clip.py
+
+# Pilot clips (M10): three commentators, and the 20-minute stability clip.
+synth-pilot:
+	$(PY) scripts/make_synthetic_clip.py --script data/scripts/synthetic_match_3spk.yaml \
+	  --name synthetic_match_3spk
+	$(PY) scripts/make_synthetic_clip.py --script data/scripts/synthetic_match_3spk.yaml \
+	  --name synthetic_match_20min --minutes 20
+
+download-models:
+	$(PY) -m engine.cli download-models
+
+bench:
+	$(PY) -m engine.cli bench
 
 # POC at live speed (M2–M7).
 poc:

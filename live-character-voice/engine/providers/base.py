@@ -37,6 +37,17 @@ class EmotionResult(BaseModel):
     features: dict[str, float] = Field(default_factory=dict)
 
 
+class EmotionContext(BaseModel):
+    """Everything the emotion stage may use for one line."""
+
+    features: dict[str, float]
+    text: str
+    words: list[Word] = Field(default_factory=list)
+    speaker_id: str | None = None
+    t_start: float
+    t_end: float
+
+
 class VoiceInfo(BaseModel):
     voice_id: str
     lang_code: str
@@ -62,7 +73,15 @@ class TTSResult(BaseModel):
 
 @runtime_checkable
 class ASRProvider(Protocol):
-    def transcribe(self, audio: AudioArray, sr: int, prompt: str | None = None) -> ASRResult: ...
+    def transcribe(
+        self,
+        audio: AudioArray,
+        sr: int,
+        prompt: str | None = None,
+        span: tuple[float, float] | None = None,
+    ) -> ASRResult:
+        """`span` is the line's (t_start, t_end) in media seconds (used by captions mode)."""
+        ...
 
 
 @runtime_checkable
@@ -72,7 +91,11 @@ class SpeakerProvider(Protocol):
 
 @runtime_checkable
 class EmotionProvider(Protocol):
-    def analyze(self, audio: AudioArray, sr: int, text: str) -> EmotionResult: ...
+    """Two steps so the audio part can run in parallel with ASR (docs/02 concurrency model)."""
+
+    def audio_features(self, audio: AudioArray, sr: int) -> dict[str, float]: ...
+
+    def analyze(self, ctx: EmotionContext) -> EmotionResult: ...
 
 
 @runtime_checkable

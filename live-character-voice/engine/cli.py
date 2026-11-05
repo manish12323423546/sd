@@ -173,6 +173,19 @@ def cmd_check(args: argparse.Namespace) -> int:
     return 1 if failed_required else 0
 
 
+def _run_script(name: str, extra: list[str]) -> int:
+    script = Path(__file__).resolve().parent.parent / "scripts" / name
+    return subprocess.run([sys.executable, str(script), *extra]).returncode
+
+
+def cmd_download_models(args: argparse.Namespace) -> int:
+    return _run_script("download_models.py", [])
+
+
+def cmd_bench(args: argparse.Namespace) -> int:
+    return _run_script("bench_models.py", ["--clip", args.clip, "--runs", str(args.runs)])
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="engine.cli", description="Live Sports Character Voice engine")
     sub = p.add_subparsers(dest="command", required=True)
@@ -180,6 +193,12 @@ def build_parser() -> argparse.ArgumentParser:
     c.add_argument("--json", action="store_true", help="machine-readable output")
     c.add_argument("--no-network", action="store_true", help="skip network checks (CI)")
     c.set_defaults(func=cmd_check)
+    d = sub.add_parser("download-models", help="pre-fetch all models into ~/.cache")
+    d.set_defaults(func=cmd_download_models)
+    b = sub.add_parser("bench", help="time each model on ~3 s samples → outputs/bench.json")
+    b.add_argument("--clip", default="data/clips/synthetic_match.mp4")
+    b.add_argument("--runs", type=int, default=10)
+    b.set_defaults(func=cmd_bench)
     return p
 
 

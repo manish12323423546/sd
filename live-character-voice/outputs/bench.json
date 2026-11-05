@@ -1,0 +1,63 @@
+{
+  "vm": {
+    "cpu_count": 4,
+    "platform": "Linux-6.18.44-fc-v236-x86_64-with-glibc2.39"
+  },
+  "sample_s_mean": 3.299,
+  "runs": 10,
+  "load_s": {
+    "asr_small.en": 2.65,
+    "asr_base.en": 0.68,
+    "ecapa": 2.14,
+    "kokoro": 5.88
+  },
+  "isolated": {
+    "asr_small.en": {
+      "p50": 1.075,
+      "p95": 1.248,
+      "max": 1.249,
+      "n": 10
+    },
+    "asr_base.en": {
+      "p50": 0.448,
+      "p95": 0.54,
+      "max": 0.59,
+      "n": 10
+    },
+    "ecapa": {
+      "p50": 0.33,
+      "p95": 0.368,
+      "max": 0.369,
+      "n": 10
+    },
+    "kokoro": {
+      "p50": 0.835,
+      "p95": 0.944,
+      "max": 0.951,
+      "n": 10
+    }
+  },
+  "contended": {
+    "asr_small.en": {
+      "p50": 2.705,
+      "p95": 3.038,
+      "max": 3.203,
+      "n": 10
+    },
+    "asr_base.en": {
+      "p50": 1.022,
+      "p95": 1.13,
+      "max": 1.134,
+      "n": 10
+    },
+    "kokoro": {
+      "p50": 2.01,
+      "p95": 2.742,
+      "max": 2.773,
+      "n": 10
+    }
+  },
+  "kokoro_realtime_factor": 4.92,
+  "asr_choice": "small.en",
+  "asr_choice_rule": "small.en if isolated p95 on ~3 s \u2264 1.5 s, else base.en"
+}

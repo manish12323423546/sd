@@ -1,0 +1,70 @@
+# Synthetic two-commentator football commentary (invented teams, players and words).
+# speaker: A (play-by-play) | B (analyst); emotion: calm | neutral | excited | peak
+# gap_after_ms: silence after the line; negative = the next line overlaps this one.
+# Used by scripts/make_synthetic_clip.py; ground truth is computed from the rendered audio.
+title: Riverside Rovers v Northgate United (synthetic)
+lead_in_ms: 1500
+tail_ms: 2500
+lines:
+  - {speaker: A, emotion: neutral, gap_after_ms: 700, text: "Good evening and welcome to Riverside Park for this evening's match."}
+  - {speaker: B, emotion: calm, gap_after_ms: 600, text: "It's a lovely night for football, and both sides need the points."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 500, text: "Riverside Rovers get us underway, playing from left to right."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 800, text: "Okafor finds Lindqvist on the halfway line."}
+  - {speaker: B, emotion: calm, gap_after_ms: 700, text: "Lindqvist has been in fine form this season, always looking for the pass forward."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 600, text: "Northgate United sit deep and wait for the press."}
+  - {speaker: A, emotion: neutral, gap_after_ms: -300, text: "Moreau steps in and wins it back cleanly."}
+  - {speaker: B, emotion: calm, gap_after_ms: 800, text: "That's the kind of tackle the manager will love."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 500, text: "Tanaka down the right wing, past one, past two."}
+  - {speaker: A, emotion: excited, gap_after_ms: 400, text: "He cuts it back for Delgado!"}
+  - {speaker: A, emotion: peak, gap_after_ms: 300, text: "Oh, what a chance!"}
+  - {speaker: B, emotion: excited, gap_after_ms: 900, text: "He has to score there, the goal was wide open!"}
+  - {speaker: A, emotion: calm, gap_after_ms: 700, text: "A goal kick then, and a let off for Riverside."}
+  - {speaker: B, emotion: calm, gap_after_ms: 600, text: "Delgado will be thinking about that one for a while."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 500, text: "Brennan with the long ball forward, headed away by the centre back."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 0, text: "It drops to Okafor on the edge of the area, and he shoots"}
+  - {speaker: B, emotion: excited, gap_after_ms: 800, text: "straight at the keeper, he should have done better."}
+  - {speaker: A, emotion: calm, gap_after_ms: 700, text: "Northgate keep the ball now, passing it around the back."}
+  - {speaker: B, emotion: neutral, gap_after_ms: 600, text: "Twenty minutes gone and it is still nil nil."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 500, text: "Moreau into the middle, now Tanaka again."}
+  - {speaker: A, emotion: excited, gap_after_ms: 300, text: "Tanaka through on goal!"}
+  - {speaker: A, emotion: excited, gap_after_ms: 200, text: "He goes round the keeper!"}
+  - {speaker: A, emotion: peak, gap_after_ms: 250, text: "Goal! Goal!"}
+  - {speaker: A, emotion: peak, gap_after_ms: 1200, text: "Tanaka scores for Northgate United!"}
+  - {speaker: B, emotion: peak, gap_after_ms: 700, text: "Unbelievable! What a finish from Tanaka!"}
+  - {speaker: B, emotion: excited, gap_after_ms: 800, text: "Look at the pace, look at the calm, he made that look so easy."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 700, text: "So Northgate United lead by one goal to nil."}
+  - {speaker: B, emotion: calm, gap_after_ms: 600, text: "Riverside have to respond now, they can't let the game drift."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 500, text: "Lindqvist tries to lift his team, pointing for everyone to push up."}
+  - {speaker: A, emotion: neutral, gap_after_ms: -250, text: "A free kick on the right side for Riverside."}
+  - {speaker: B, emotion: neutral, gap_after_ms: 700, text: "This is a good area for Brennan."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 400, text: "Brennan whips it in."}
+  - {speaker: A, emotion: excited, gap_after_ms: 300, text: "Okafor rises at the far post!"}
+  - {speaker: A, emotion: peak, gap_after_ms: 200, text: "Save!"}
+  - {speaker: A, emotion: peak, gap_after_ms: 1000, text: "What a save by the keeper!"}
+  - {speaker: B, emotion: excited, gap_after_ms: 800, text: "That was right in the top corner, an incredible reaction stop."}
+  - {speaker: A, emotion: calm, gap_after_ms: 700, text: "The corner comes to nothing and the game settles again."}
+  - {speaker: B, emotion: calm, gap_after_ms: 600, text: "Northgate look happy to slow it down and take a breath."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 500, text: "Delgado wins a throw in near the corner flag."}
+  - {speaker: A, emotion: neutral, gap_after_ms: -350, text: "Quick throw, into Moreau."}
+  - {speaker: B, emotion: neutral, gap_after_ms: 600, text: "Clever play, they caught Riverside sleeping."}
+  - {speaker: A, emotion: excited, gap_after_ms: 300, text: "Moreau shoots from range!"}
+  - {speaker: A, emotion: peak, gap_after_ms: 1000, text: "Off the crossbar!"}
+  - {speaker: B, emotion: excited, gap_after_ms: 800, text: "So close to a second goal, the whole stadium was on its feet."}
+  - {speaker: A, emotion: calm, gap_after_ms: 700, text: "The referee checks his watch, almost half time here."}
+  - {speaker: B, emotion: calm, gap_after_ms: 600, text: "A fair score so far, but there is plenty still to play for."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 500, text: "One last attack before the break, Lindqvist carries it forward."}
+  - {speaker: B, emotion: neutral, gap_after_ms: 600, text: "He has Okafor on his left and Brennan arriving late."}
+  - {speaker: A, emotion: excited, gap_after_ms: 300, text: "Lindqvist slips it through to Okafor!"}
+  - {speaker: A, emotion: excited, gap_after_ms: 250, text: "Okafor takes a touch, and shoots!"}
+  - {speaker: A, emotion: peak, gap_after_ms: 250, text: "Goal! Goal! Goal!"}
+  - {speaker: A, emotion: peak, gap_after_ms: 1200, text: "Okafor equalises for Riverside Rovers!"}
+  - {speaker: B, emotion: peak, gap_after_ms: 700, text: "What a time to score! Right on the stroke of half time!"}
+  - {speaker: B, emotion: excited, gap_after_ms: 800, text: "That is exactly what Riverside needed, and the fans know it."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 600, text: "So it is one all here at Riverside Park."}
+  - {speaker: B, emotion: calm, gap_after_ms: 700, text: "Both managers will have plenty to say in the dressing room."}
+  - {speaker: A, emotion: calm, gap_after_ms: 600, text: "Northgate kick off again, but there is barely a minute left."}
+  - {speaker: B, emotion: calm, gap_after_ms: 600, text: "I expect they will just play it safe until the whistle."}
+  - {speaker: A, emotion: neutral, gap_after_ms: -300, text: "Moreau passes it square to Delgado."}
+  - {speaker: B, emotion: neutral, gap_after_ms: 700, text: "No risks now, keep the ball."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 500, text: "And there is the whistle for the end of the first half."}
+  - {speaker: B, emotion: calm, gap_after_ms: 500, text: "A thrilling first half, one goal each, and so much still to come."}

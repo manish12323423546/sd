@@ -1,0 +1,41 @@
+# Synthetic three-commentator clip (Pilot, M10): A play-by-play, B analyst, C touchline reporter.
+title: Northgate United v Riverside Rovers, second half (synthetic, three voices)
+lead_in_ms: 1500
+tail_ms: 2500
+lines:
+  - {speaker: A, emotion: neutral, gap_after_ms: 700, text: "Welcome back for the second half here at Riverside Park."}
+  - {speaker: B, emotion: calm, gap_after_ms: 600, text: "Riverside made a change at the break, Brennan has come off."}
+  - {speaker: C, emotion: neutral, gap_after_ms: 700, text: "I spoke to the bench, and it was a small knock on his ankle."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 500, text: "Thank you for that. Northgate kick off the second half."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 600, text: "Tanaka plays it back to Moreau."}
+  - {speaker: B, emotion: calm, gap_after_ms: 700, text: "They will try to keep the ball and frustrate the home side."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 500, text: "Lindqvist presses, forcing the long ball."}
+  - {speaker: C, emotion: neutral, gap_after_ms: 600, text: "The Riverside manager is on the edge of his area, shouting instructions."}
+  - {speaker: A, emotion: excited, gap_after_ms: 300, text: "Okafor wins it in midfield!"}
+  - {speaker: A, emotion: excited, gap_after_ms: 300, text: "He drives forward, only one man to beat!"}
+  - {speaker: A, emotion: peak, gap_after_ms: 250, text: "Goal!"}
+  - {speaker: A, emotion: peak, gap_after_ms: 1200, text: "Okafor levels it for Riverside Rovers!"}
+  - {speaker: B, emotion: peak, gap_after_ms: 700, text: "What a goal! He did it all on his own!"}
+  - {speaker: C, emotion: excited, gap_after_ms: 800, text: "The noise down here is incredible, the fans are jumping in the stands."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 700, text: "One all, with thirty five minutes left to play."}
+  - {speaker: B, emotion: calm, gap_after_ms: 600, text: "Northgate need to calm things down now and find their rhythm."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 500, text: "Delgado on the ball, looking for a way through."}
+  - {speaker: A, emotion: neutral, gap_after_ms: -300, text: "Into Tanaka, who turns his man."}
+  - {speaker: B, emotion: neutral, gap_after_ms: 700, text: "Lovely touch there."}
+  - {speaker: A, emotion: excited, gap_after_ms: 300, text: "Tanaka shoots!"}
+  - {speaker: A, emotion: peak, gap_after_ms: 1000, text: "Wide! Just wide of the post!"}
+  - {speaker: C, emotion: neutral, gap_after_ms: 700, text: "Tanaka has his hands on his head, he thought that was in."}
+  - {speaker: B, emotion: calm, gap_after_ms: 600, text: "He picked his spot, but it was a touch too far."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 500, text: "Moreau goes into the book for a late challenge."}
+  - {speaker: C, emotion: calm, gap_after_ms: 700, text: "That is his first yellow card of the season, so no suspension."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 500, text: "Free kick to Riverside, thirty yards from goal."}
+  - {speaker: B, emotion: neutral, gap_after_ms: 600, text: "Lindqvist fancies this one, he has scored from here before."}
+  - {speaker: A, emotion: excited, gap_after_ms: 300, text: "Lindqvist steps up and curls it!"}
+  - {speaker: A, emotion: peak, gap_after_ms: 250, text: "Yes! Yes!"}
+  - {speaker: A, emotion: peak, gap_after_ms: 1200, text: "Into the top corner, Riverside lead!"}
+  - {speaker: B, emotion: peak, gap_after_ms: 700, text: "Incredible! That is a brilliant free kick!"}
+  - {speaker: C, emotion: excited, gap_after_ms: 800, text: "The whole bench is out on the pitch celebrating with him."}
+  - {speaker: A, emotion: calm, gap_after_ms: 700, text: "Northgate restart, two goals to one, and the clock keeps ticking."}
+  - {speaker: B, emotion: calm, gap_after_ms: 600, text: "Now Riverside have something to hold on to."}
+  - {speaker: C, emotion: calm, gap_after_ms: 700, text: "The fourth official is getting the board ready for a substitution."}
+  - {speaker: A, emotion: neutral, gap_after_ms: 500, text: "And that is the end of our second half highlights."}
