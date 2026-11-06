@@ -2,7 +2,7 @@
 // character voices exactly on each original line. ?test=<video url> uses a local video instead of
 // a tab (automated tests).
 const $ = (id) => document.getElementById(id);
-const EMO = { calm: "#5BC0BE", neutral: "#8A97A8", excited: "#F5A524", peak: "#F31260" };
+const EMO = { calm: "#5BC0BE", neutral: "#8A97A8", excited: "#F5A524", peak: "#FF4D6D" };
 const lines = new Map();
 const speakers = new Map();
 let relay = null, delayed = null, voices = [], settings = null, metrics = null, voiceMuted = false;
@@ -60,7 +60,7 @@ function addLine(ln) {
   el.className = "ln";
   const t = document.createElement("span"); t.className = "t";
   t.textContent = `${String(Math.floor(ln.t_start / 60)).padStart(2, "0")}:${String(Math.floor(ln.t_start % 60)).padStart(2, "0")}`;
-  const who = document.createElement("b"); who.textContent = ln.speaker_id || "?"; who.style.color = sp?.color || "#4FA3FF";
+  const who = document.createElement("b"); who.textContent = ln.speaker_id || "?"; who.style.color = sp?.color || "#8B7BFF";
   const emo = document.createElement("span"); emo.className = "emo";
   emo.textContent = ln.emotion || "—"; emo.style.color = EMO[ln.emotion] || "#8A97A8"; emo.style.borderColor = emo.style.color;
   const tx = document.createElement("span"); tx.textContent = `“${ln.text || ""}”`;
@@ -73,7 +73,7 @@ function showSub(lineId, duration) {
   if (!ln) return;
   const sp = speakers.get(ln.speaker_id);
   $("subWho").textContent = sp?.display_name || ln.speaker_id || "";
-  $("subWho").style.color = sp?.color || "#4FA3FF";
+  $("subWho").style.color = sp?.color || "#8B7BFF";
   $("subText").textContent = ln.text || "";
   $("sub").style.opacity = "1";
   clearTimeout(showSub.t);

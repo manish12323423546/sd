@@ -18,7 +18,7 @@ export function VoiceDetailPanel({ voiceId, onDelete, onTry }: { voiceId: string
   const refs = v.refs ?? {};
   return (
     <section className="panel animate-rise overflow-hidden" data-testid="voice-detail">
-      <div className="flex flex-wrap items-center gap-4 border-b border-white/[0.06] bg-gradient-to-r from-accent/10 via-violet/10 to-transparent p-5">
+      <div className="flex flex-wrap items-center gap-4 border-b border-white/[0.06] bg-gradient-to-r from-accent/10 via-aqua/10 to-transparent p-5">
         <Avatar name={v.name} id={v.voice_id} size={56} />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">

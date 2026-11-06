@@ -12,7 +12,7 @@ import { API_BASE, getCode } from "../net/base";
 import { useSession } from "../store/session";
 import { Avatar, PlayButton } from "../ui/kit";
 
-const SPEAKER_COLORS = ["#4FA3FF", "#F5A524", "#17C964", "#F31260", "#9B7BFF", "#2BD4D4", "#FF8A3D", "#E8E36B"];
+const SPEAKER_COLORS = ["#8B7BFF", "#22D3EE", "#F5A524", "#34D399", "#FF6A3D", "#F472B6", "#E8E36B", "#60A5FA"];
 
 export function LiveCapture() {
   const s = useSession();
@@ -128,7 +128,7 @@ export function LiveCapture() {
 
   return (
     <main className="mx-auto flex max-w-[1400px] flex-col gap-5 px-4 pb-16 pt-5 sm:px-6">
-      <section className="relative overflow-hidden rounded-[24px] border border-white/[0.07] bg-gradient-to-br from-[#0f1a2c] via-[#0c111b] to-[#1b0f22] px-6 py-6 sm:px-8">
+      <section className="relative overflow-hidden rounded-[24px] border border-white/[0.07] bg-gradient-to-br from-[#17133a] via-[#0b0d18] to-[#1b0f22] px-6 py-6 sm:px-8">
         <p className="eyebrow">Live capture</p>
         <h1 className="mt-1 font-display text-3xl font-semibold leading-tight sm:text-4xl">
           <span className="gradient-text">Any tab. Any live stream. Re-voiced live.</span>
@@ -146,7 +146,7 @@ export function LiveCapture() {
             {!running && status?.state !== "ended" && (
               <div className="absolute inset-0 grid place-items-center p-6 text-center">
                 <div>
-                  <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-accent to-violet text-2xl shadow-glow">⦿</div>
+                  <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-accent to-aqua text-2xl shadow-glow">⦿</div>
                   <p className="text-lg font-semibold">Pick a tab to re-voice</p>
                   <p className="mt-1 text-sm text-muted">Choose a <b>Chrome tab</b> in the share dialog and keep <b>“Also share tab audio”</b> on.</p>
                 </div>
@@ -154,7 +154,7 @@ export function LiveCapture() {
             )}
             {running && (
               <div className="pointer-events-none absolute left-3 top-3 flex items-center gap-2">
-                <span className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold tracking-wider text-white ${mode === "synced" ? "bg-violet/90" : "bg-peak/90"}`}>
+                <span className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold tracking-wider text-white ${mode === "synced" ? "bg-aqua/90" : "bg-peak/90"}`}>
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" /> {mode === "synced" ? `SYNCED +${delay}s` : "LIVE"}
                 </span>
               </div>

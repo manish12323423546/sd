@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 300" width="1240" height="300">
+  <g transform="translate(0 22) scale(0.5)">
+<defs>
+    <linearGradient id="bg" x1="64" y1="32" x2="448" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8A6BFF"/>
+      <stop offset="0.55" stop-color="#5B4BFF"/>
+      <stop offset="1" stop-color="#16C7D9"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="150" cy="90" r="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <path d="M256 16c120 0 158 4 199 41s41 79 41 199-4 158-41 199-79 41-199 41-158-4-199-41S16 376 16 256 20 98 57 57 136 16 256 16z" fill="url(#bg)"/>
+  <path d="M256 16c120 0 158 4 199 41s41 79 41 199-4 158-41 199-79 41-199 41-158-4-199-41S16 376 16 256 20 98 57 57 136 16 256 16z" fill="url(#sheen)"/>
+  <path d="M136 400 L256 104 L376 400" fill="none" stroke="#fff" stroke-width="58" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#fff">
+    <rect x="215" y="290" width="24" height="48" rx="12"/>
+    <rect x="244" y="254" width="24" height="112" rx="12"/>
+    <rect x="273" y="280" width="24" height="68" rx="12"/>
+  </g>
+  </g>
+  <text x="300" y="196" font-family="Sora, Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="150" letter-spacing="-4" fill="#F4F6FB">altercast</text>
+</svg>

@@ -26,7 +26,7 @@ function EnginePills() {
   const e = h?.engines ?? {};
   const items = [
     { k: "voices", label: e.voices?.online ? "Fish Audio" : "Offline voices" },
-    { k: "text", label: e.text?.online ? "Groq" : "Offline text" },
+    { k: "text", label: e.text?.online ? (e.text?.name ?? "Online").split(" ")[0] + (/backup: Deepgram/.test(e.text?.note ?? "") ? " + Deepgram" : "") : "Offline text" },
   ];
   if (!h) return <span className="text-xs text-muted">connecting…</span>;
   return (
@@ -61,16 +61,11 @@ export function App() {
     <div className="min-h-screen text-ink">
       <header className="sticky top-0 z-30 border-b border-white/[0.06] bg-bg/70 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6">
-          <Link to="/" className="flex items-center gap-2.5">
-            <span className="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-accent to-violet shadow-glow">
-              <span className="flex h-3.5 items-end gap-[2px]">
-                {[0.5, 1, 0.7, 0.9].map((h, i) => (
-                  <span key={i} className="w-[3px] rounded-full bg-white" style={{ height: `${h * 100}%` }} />
-                ))}
-              </span>
-            </span>
-            <span className="hidden font-display text-[15px] font-semibold tracking-tight sm:inline">
-              Live Character Voice
+          <Link to="/" className="flex items-center gap-2.5" aria-label="Altercast home">
+            <img src="/favicon.svg" alt="" className="brand-mark h-8 w-8" />
+            <span className="hidden leading-none sm:block">
+              <span className="block font-display text-[17px] font-bold tracking-[-0.03em]">altercast</span>
+              <span className="mt-0.5 block text-[10px] font-medium uppercase tracking-[0.16em] text-muted">Live Character Voice</span>
             </span>
           </Link>
           <nav className="ml-2 flex min-w-0 items-center gap-1 overflow-x-auto [scrollbar-width:none]">

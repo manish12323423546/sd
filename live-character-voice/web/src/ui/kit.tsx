@@ -107,7 +107,7 @@ export function Avatar({ name, id, size = 44 }: { name: string; id: string; size
 /* ---------- badges / pills ---------- */
 export function TierBadge({ tier }: { tier?: string }) {
   if (tier === "pro")
-    return <span className="rounded-full bg-gradient-to-r from-violet to-accent px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">Pro clone</span>;
+    return <span className="rounded-full bg-gradient-to-r from-aqua to-accent px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">Pro clone</span>;
   if (tier === "instant")
     return <span className="rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-accent">Instant clone</span>;
   return <span className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted">Built-in</span>;
@@ -126,7 +126,7 @@ export function Dot({ ok }: { ok: boolean }) {
 export function ScoreRing({ score, size = 88, label = "match" }: { score: number; size?: number; label?: string }) {
   const r = (size - 10) / 2;
   const c = 2 * Math.PI * r;
-  const color = score >= 75 ? "#3DDC97" : score >= 55 ? "#4FA3FF" : score >= 35 ? "#F5A524" : "#F31260";
+  const color = score >= 75 ? "#3DDC97" : score >= 55 ? "#7C5CFF" : score >= 35 ? "#F5A524" : "#F31260";
   return (
     <div className="relative grid place-items-center" style={{ width: size, height: size }}>
       <svg width={size} height={size} className="-rotate-90">

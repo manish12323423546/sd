@@ -30,7 +30,7 @@ export function AccessGate({ required }: { required: boolean }) {
           window.location.reload();
         }}
       >
-        <div className="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-accent to-violet text-xl shadow-glow">🔒</div>
+        <div className="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-accent to-aqua text-xl shadow-glow">🔒</div>
         <h2 className="text-center font-display text-xl font-semibold">Access code</h2>
         <p className="mt-1 text-center text-sm text-muted">This engine is private. Enter the access code you set for it.</p>
         <input autoFocus type="password" className="field mt-4 text-center font-mono" placeholder="access code" aria-label="Access code"

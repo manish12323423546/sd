@@ -120,11 +120,11 @@ export function CloneStudio({ cloning, onCreated }: { cloning: boolean; onCreate
           return (
             <button key={m} type="button" role="radio" aria-checked={on} onClick={() => setMode(m)}
               className={`relative flex flex-col justify-start overflow-hidden rounded-2xl border p-4 text-left transition ${
-                on ? "border-accent/70 bg-gradient-to-br from-accent/15 via-violet/10 to-transparent shadow-glow" : "border-white/10 bg-white/[0.02] hover:border-white/25"
+                on ? "border-accent/70 bg-gradient-to-br from-accent/15 via-aqua/10 to-transparent shadow-glow" : "border-white/10 bg-white/[0.02] hover:border-white/25"
               }`}>
               <div className="flex w-full items-center justify-between">
                 <span className="font-display text-base font-semibold">{info.title}</span>
-                <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${m === "pro" ? "bg-gradient-to-r from-violet to-accent text-white" : "bg-white/10 text-ink"}`}>{info.tag}</span>
+                <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${m === "pro" ? "bg-gradient-to-r from-aqua to-accent text-white" : "bg-white/10 text-ink"}`}>{info.tag}</span>
               </div>
               <p className="mt-1 text-xs text-muted">{info.needs} · {info.time}</p>
               <ul className="mt-3 space-y-1 text-[12.5px] text-ink/85">
@@ -216,7 +216,7 @@ export function JobProgress({ job }: { job: CloneJob }) {
       </div>
       <div className="mb-4 h-1.5 overflow-hidden rounded-full bg-white/10">
         <div
-          className={`h-full rounded-full ${done ? "bg-ok" : "bg-[linear-gradient(90deg,#4FA3FF,#8B6CFF,#4FA3FF)] bg-[length:200%_100%] animate-shimmer"}`}
+          className={`h-full rounded-full ${done ? "bg-ok" : "bg-[linear-gradient(90deg,#7C5CFF,#22D3EE,#7C5CFF)] bg-[length:200%_100%] animate-shimmer"}`}
           style={{ width: `${Math.max(4, job.progress * 100)}%`, transition: "width .6s ease" }}
         />
       </div>

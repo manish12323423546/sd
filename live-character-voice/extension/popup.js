@@ -1,4 +1,4 @@
-const COLORS = ["#4FA3FF", "#F5A524", "#17C964", "#F31260", "#9B7BFF", "#2BD4D4", "#FF8A3D", "#E8E36B"];
+const COLORS = ["#8B7BFF", "#22D3EE", "#F5A524", "#34D399", "#FF6A3D", "#F472B6", "#E8E36B", "#60A5FA"];
 const $ = (id) => document.getElementById(id);
 let settings = { engine: "https://manishvk18-live-character-voice.hf.space", code: "", mode: "synced", delay: 6, speakers: 2, cast: {} };
 const hdr = () => (settings.code ? { "X-Access-Code": settings.code } : {});

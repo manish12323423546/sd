@@ -47,7 +47,7 @@ export function VoiceLab() {
       <section className="relative overflow-hidden rounded-[24px] border border-white/[0.07] bg-gradient-to-br from-[#101a2b] via-[#0f1220] to-[#140f24] p-6 sm:p-10">
         <div aria-hidden className="pointer-events-none absolute right-8 top-1/2 hidden -translate-y-1/2 gap-1.5 opacity-60 md:flex">
           {Array.from({ length: 36 }, (_, i) => (
-            <span key={i} className="w-1.5 origin-center animate-bar rounded-full bg-gradient-to-t from-accent to-violet"
+            <span key={i} className="w-1.5 origin-center animate-bar rounded-full bg-gradient-to-t from-accent to-aqua"
               style={{ height: `${30 + Math.abs(Math.sin(i * 0.7)) * 120}px`, animationDelay: `${(i % 9) * 0.12}s`, animationDuration: `${1 + (i % 5) * 0.2}s` }} />
           ))}
         </div>

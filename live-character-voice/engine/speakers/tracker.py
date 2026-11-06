@@ -27,7 +27,7 @@ import numpy.typing as npt
 from engine.config import SpeakerConfig
 
 Vec = npt.NDArray[np.float32]
-COLORS = ["#4FA3FF", "#F5A524", "#17C964", "#F31260", "#9B7BFF", "#2BD4D4", "#FF8A3D", "#E8E36B"]
+COLORS = ["#8B7BFF", "#22D3EE", "#F5A524", "#34D399", "#FF6A3D", "#F472B6", "#E8E36B", "#60A5FA"]
 
 
 def _norm(v: Vec) -> Vec:

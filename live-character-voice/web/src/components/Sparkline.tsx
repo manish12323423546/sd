@@ -18,8 +18,8 @@ export function Sparkline({ points, width = 320, height = 64, target = 4 }: Prop
   const path = points.map((p, i) => `${i ? "L" : "M"}${x(p.t).toFixed(1)},${y(p.d).toFixed(1)}`).join(" ");
   return (
     <svg width="100%" viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Delay over the last two minutes">
-      <line x1={0} x2={width} y1={y(target)} y2={y(target)} stroke="#17C964" strokeDasharray="4 4" strokeWidth={1} />
-      <path d={path} fill="none" stroke="#4FA3FF" strokeWidth={2} />
+      <line x1={0} x2={width} y1={y(target)} y2={y(target)} stroke="#34D399" strokeDasharray="4 4" strokeWidth={1} />
+      <path d={path} fill="none" stroke="#7C5CFF" strokeWidth={2} />
     </svg>
   );
 }

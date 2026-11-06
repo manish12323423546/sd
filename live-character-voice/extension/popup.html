@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8" /><title>Live Character Voice</title><link rel="stylesheet" href="style.css" />
+<head><meta charset="utf-8" /><title>Altercast</title><link rel="stylesheet" href="style.css" />
 <style>
   body { width: 360px; padding: 14px; }
   header { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
-  header img { width:30px; height:30px; border-radius:9px; }
+  
   section { margin-top:12px; }
   .cast { display:grid; grid-template-columns: 12px 1fr; gap:6px 8px; align-items:center; margin-top:6px; }
   .sw { width:10px; height:10px; border-radius:50%; }
@@ -15,10 +15,10 @@
 </style></head>
 <body>
   <header>
-    <img src="icons/icon48.png" alt="" />
-    <div style="flex:1"><h1 style="font-size:15px">Live Character Voice</h1>
-      <div class="row muted" style="font-size:11.5px"><span id="dot" class="dot"></span><span id="engineState">checking engine…</span></div></div>
+    <img src="icons/mark.svg" alt="" style="width:34px;height:34px;filter:drop-shadow(0 6px 14px rgba(124,92,255,.45))" />
+    <div class="brand" style="flex:1"><span><span class="wm">altercast</span><span class="sub">Live Character Voice</span></span></div>
   </header>
+  <div class="row muted" style="font-size:11.5px;margin:-2px 0 4px"><span id="dot" class="dot"></span><span id="engineState">checking engine…</span></div>
 
   <div id="setup">
     <section class="panel" style="padding:12px">

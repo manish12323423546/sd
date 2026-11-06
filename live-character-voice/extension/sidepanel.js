@@ -1,6 +1,6 @@
 // Side panel: live transcript, who is speaking (detected live), emotion, voices and controls.
 const $ = (id) => document.getElementById(id);
-const EMO = { calm: "#5BC0BE", neutral: "#8A97A8", excited: "#F5A524", peak: "#F31260" };
+const EMO = { calm: "#5BC0BE", neutral: "#8A97A8", excited: "#F5A524", peak: "#FF4D6D" };
 let S = { lines: [], speakers: {}, voices: [], metrics: null, status: null, mode: null, originalMode: "full", levels: { original: 0.35, voice: 1 }, voicesMuted: false, subtitles: true, current: null };
 let lastSeen = 0;
 const ctl = (action, value) => chrome.runtime.sendMessage({ type: "lcv-control", action, value }).catch(() => {});
@@ -72,16 +72,16 @@ function renderNow() {
   const ln = S.lines.find((l) => l.line_id === S.current) || S.lines[0];
   if (!ln) return;
   const s = S.speakers[ln.speaker_id];
-  $("nowBar").style.background = s?.color || "#4FA3FF";
+  $("nowBar").style.background = s?.color || "#8B7BFF";
   $("nowWho").textContent = s?.display_name || ln.speaker_id || "—";
   $("nowWho").style.color = s?.color || "";
   $("nowTxt").textContent = ln.text || "";
   const chips = $("nowChips"); chips.innerHTML = "";
   if (ln.emotion) chips.append(chip(ln.emotion, EMO[ln.emotion]));
-  if (ln.speaker_conf) chips.append(chip(`speaker ${ln.speaker_conf}`, ln.speaker_conf === "high" ? "#3DDC97" : ln.speaker_conf === "low" ? "#F5A524" : "#8592A6"));
+  if (ln.speaker_conf) chips.append(chip(`speaker ${ln.speaker_conf}`, ln.speaker_conf === "high" ? "#34D399" : ln.speaker_conf === "low" ? "#F5A524" : "#8592A6"));
   if (ln.asr_by) chips.append(chip(ln.asr_by === "groq" ? "Groq ASR" : "local ASR", "#8592A6"));
   const v = S.voices.find((x) => x.voice_id === (ln.voice_id || s?.voice_id));
-  if (v) chips.append(chip(`voice: ${v.name}`, "#8B6CFF"));
+  if (v) chips.append(chip(`voice: ${v.name}`, "#A48BFF"));
 }
 
 function renderLines() {
@@ -98,7 +98,7 @@ function renderLines() {
     if (ln.emotion) meta.append(chip(ln.emotion, EMO[ln.emotion]));
     const st = document.createElement("span");
     st.textContent = ln.voiced ? `✓ voiced${typeof ln.felt === "number" ? ` +${ln.felt.toFixed(1)}s` : ""}` : "… preparing";
-    st.style.marginLeft = "auto"; st.style.color = ln.voiced ? "#3DDC97" : "";
+    st.style.marginLeft = "auto"; st.style.color = ln.voiced ? "#34D399" : "";
     meta.append(st);
     const tx = document.createElement("div"); tx.textContent = ln.text || "";
     el.append(meta, tx); box.append(el);

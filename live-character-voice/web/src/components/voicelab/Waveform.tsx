@@ -52,8 +52,8 @@ export function Waveform({ peaks, highlight }: { peaks: number[]; highlight?: [n
     g.clearRect(0, 0, w, h);
     const bw = w / Math.max(1, peaks.length);
     const grad = g.createLinearGradient(0, 0, w, 0);
-    grad.addColorStop(0, "#4FA3FF");
-    grad.addColorStop(1, "#8B6CFF");
+    grad.addColorStop(0, "#7C5CFF");
+    grad.addColorStop(1, "#22D3EE");
     peaks.forEach((p, i) => {
       const frac = i / peaks.length;
       const inside = !highlight || (frac >= highlight[0] && frac <= highlight[1]);

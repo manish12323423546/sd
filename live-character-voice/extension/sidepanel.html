@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8" /><title>Live Character Voice</title><link rel="stylesheet" href="style.css" />
+<head><meta charset="utf-8" /><title>Altercast</title><link rel="stylesheet" href="style.css" />
 <style>
   body { padding: 12px; min-height: 100vh; }
   .card { padding: 12px; margin-bottom: 10px; }
@@ -16,7 +16,7 @@
   .meter i { display:block; height:100%; background: linear-gradient(90deg, var(--accent), var(--ok)); }
   .seg3 { display:grid; grid-template-columns: repeat(3,1fr); gap:4px; background: rgba(0,0,0,.3); border:1px solid var(--line); border-radius:10px; padding:3px; }
   .seg3 button { border:0; background:transparent; color: var(--muted); padding:7px 4px; border-radius:8px; font: 600 12px Inter, sans-serif; cursor:pointer; }
-  .seg3 button[aria-pressed="true"] { background: rgba(79,163,255,.18); color: var(--ink); box-shadow: inset 0 0 0 1px rgba(79,163,255,.5); }
+  .seg3 button[aria-pressed="true"] { background: rgba(124,92,255,.22); color: var(--ink); box-shadow: inset 0 0 0 1px rgba(124,92,255,.6); }
   .ctl { display:grid; grid-template-columns: 92px 1fr 36px; align-items:center; gap:8px; margin-top:8px; font-size:12px; color: var(--muted); }
   .lines .ln { padding: 8px 2px; border-bottom: 1px solid var(--line); font-size: 12.5px; }
   .lines .meta { display:flex; gap:6px; align-items:center; font-size:10.5px; color: var(--muted); margin-bottom:2px; }
@@ -29,8 +29,8 @@
 </style></head>
 <body>
   <div class="row" style="margin-bottom:10px">
-    <img src="icons/icon48.png" alt="" style="width:24px;height:24px;border-radius:7px" />
-    <div style="flex:1"><b style="font-size:14px">Live Character Voice</b><div id="mode" class="muted" style="font-size:11px">not running</div></div>
+    <img src="icons/mark.svg" alt="" style="width:26px;height:26px;filter:drop-shadow(0 4px 10px rgba(124,92,255,.45))" />
+    <div style="flex:1"><span class="brand"><span class="wm" style="font-size:15px">altercast</span></span><div id="mode" class="muted" style="font-size:11px">not running</div></div>
     <span id="live" class="dot"></span>
   </div>
 

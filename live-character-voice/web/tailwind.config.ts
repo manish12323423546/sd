@@ -1,33 +1,33 @@
 import type { Config } from "tailwindcss";
 
-// Visual style: docs/07 §7.7, refreshed (V2.3) — deep stage-black, glass panels, electric accent.
+// Altercast brand (brand/BRAND.md): midnight, glass panels, signal violet → aqua.
 export default {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        bg: "#06080C",
-        panel: "#0E131B",
-        raised: "#141B26",
-        line: "#1C2532",
-        ink: "#EEF3FA",
-        muted: "#8592A6",
-        accent: "#4FA3FF",
-        violet: "#8B6CFF",
+        bg: "#070910",
+        panel: "#0F121B",
+        raised: "#161A26",
+        line: "#1E2331",
+        ink: "#F4F6FB",
+        muted: "#8B93A7",
+        accent: "#7C5CFF",
+        aqua: "#22D3EE",
         calm: "#5BC0BE",
         neutral: "#8A97A8",
         excited: "#F5A524",
-        peak: "#F31260",
-        ok: "#3DDC97",
+        peak: "#FF4D6D",
+        ok: "#34D399",
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
         display: ["Sora", "Inter", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "ui-monospace", "monospace"],
       },
-      borderRadius: { panel: "16px" },
+      borderRadius: { panel: "18px" },
       boxShadow: {
-        glow: "0 0 0 1px rgba(79,163,255,.35), 0 8px 40px -8px rgba(79,163,255,.45)",
+        glow: "0 0 0 1px rgba(124,92,255,.4), 0 10px 40px -10px rgba(124,92,255,.55)",
         card: "0 1px 0 0 rgba(255,255,255,.04) inset, 0 20px 40px -24px rgba(0,0,0,.8)",
       },
       keyframes: {

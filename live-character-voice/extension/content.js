@@ -22,7 +22,7 @@
   chrome.runtime.onMessage.addListener((msg) => {
     if (msg.type === "subtitle") {
       who.textContent = msg.speaker || "";
-      who.style.color = msg.color || "#4FA3FF";
+      who.style.color = msg.color || "#8B7BFF";
       text.textContent = msg.text || "";
       box.style.opacity = "1";
       clearTimeout(hideTimer);

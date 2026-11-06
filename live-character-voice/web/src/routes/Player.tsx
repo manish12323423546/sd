@@ -265,7 +265,7 @@ export function Player() {
           {/* top-left badges */}
           {s.status === "live" && (
             <div className="pointer-events-none absolute left-3 top-3 flex items-center gap-2">
-              <span className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold tracking-wider text-white ${synced ? "bg-violet/90" : "bg-peak/90"}`}>
+              <span className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold tracking-wider text-white ${synced ? "bg-aqua/90" : "bg-peak/90"}`}>
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
                 {synced ? "SYNCED" : "LIVE"}
               </span>
@@ -302,7 +302,7 @@ export function Player() {
               <div className="relative grid h-24 w-24 place-items-center">
                 <svg viewBox="0 0 100 100" className="absolute inset-0 -rotate-90">
                   <circle cx="50" cy="50" r="44" stroke="rgba(255,255,255,.12)" strokeWidth="8" fill="none" />
-                  <circle cx="50" cy="50" r="44" stroke="#8B6CFF" strokeWidth="8" fill="none" strokeLinecap="round"
+                  <circle cx="50" cy="50" r="44" stroke="#22D3EE" strokeWidth="8" fill="none" strokeLinecap="round"
                     strokeDasharray={276} strokeDashoffset={276 * (countdown / Math.max(1, s.viewDelay))} />
                 </svg>
                 <span className="font-display text-3xl font-semibold text-white">{Math.ceil(countdown)}</span>

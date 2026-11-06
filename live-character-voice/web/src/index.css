@@ -4,8 +4,8 @@
 
 html,
 body {
-  background: #06080c;
-  color: #eef3fa;
+  background: #070910;
+  color: #f4f6fb;
   font-family: Inter, system-ui, sans-serif;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
@@ -13,20 +13,20 @@ body {
 
 body {
   background:
-    radial-gradient(1200px 600px at 10% -10%, rgba(79, 163, 255, 0.12), transparent 60%),
-    radial-gradient(900px 500px at 100% 0%, rgba(139, 108, 255, 0.1), transparent 60%),
-    #06080c;
+    radial-gradient(1100px 620px at 8% -12%, rgba(124, 92, 255, 0.16), transparent 60%),
+    radial-gradient(900px 520px at 100% 0%, rgba(34, 211, 238, 0.08), transparent 60%),
+    #070910;
   background-attachment: fixed;
   min-height: 100vh;
 }
 
 :focus-visible {
-  outline: 2px solid #4fa3ff;
+  outline: 2px solid #7c5cff;
   outline-offset: 2px;
 }
 
 input[type="range"] {
-  accent-color: #4fa3ff;
+  accent-color: #7c5cff;
 }
 
 @layer components {
@@ -38,7 +38,7 @@ input[type="range"] {
       disabled:cursor-not-allowed disabled:opacity-40;
   }
   .btn-primary {
-    @apply btn bg-gradient-to-r from-accent to-violet text-white shadow-glow hover:brightness-110 active:scale-[.98];
+    @apply btn bg-gradient-to-r from-[#8A6BFF] via-accent to-[#4F46E5] text-white shadow-glow hover:brightness-110 active:scale-[.98];
   }
   .btn-ghost {
     @apply btn border border-white/10 bg-white/[0.03] text-ink hover:border-accent/60 hover:bg-white/[0.06];
@@ -47,11 +47,14 @@ input[type="range"] {
     @apply w-full rounded-xl border border-white/10 bg-black/30 px-3 py-2.5 text-sm text-ink placeholder:text-muted/60
       focus:border-accent/70 focus:outline-none focus:ring-2 focus:ring-accent/20;
   }
+  .brand-mark {
+    @apply block shrink-0 drop-shadow-[0_6px_18px_rgba(124,92,255,.45)];
+  }
   .eyebrow {
     @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-muted;
   }
   .gradient-text {
-    @apply bg-gradient-to-r from-white via-[#cfe3ff] to-violet bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#B9A8FF] via-accent to-aqua bg-clip-text text-transparent;
   }
 }
 

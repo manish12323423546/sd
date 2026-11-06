@@ -5,7 +5,7 @@ import { EngineBanner } from "../components/EngineBanner";
 import { api, type Clip, type Health, type Voice } from "../net/api";
 import { Avatar, DropZone, PlayButton, TierBadge } from "../ui/kit";
 
-const SPEAKER_COLORS = ["#4FA3FF", "#F5A524", "#17C964", "#F31260", "#9B7BFF", "#2BD4D4", "#FF8A3D", "#E8E36B"];
+const SPEAKER_COLORS = ["#8B7BFF", "#22D3EE", "#F5A524", "#34D399", "#FF6A3D", "#F472B6", "#E8E36B", "#60A5FA"];
 const SYNC_DEFAULT_S = 6;
 
 function dur(s: number): string {
@@ -99,10 +99,10 @@ export function Home() {
 
   return (
     <main className="mx-auto flex max-w-7xl flex-col gap-6 px-4 pb-16 pt-6 sm:px-6">
-      <section className="relative overflow-hidden rounded-[24px] border border-white/[0.07] bg-gradient-to-br from-[#0f1a2c] via-[#0c111b] to-[#170f26] px-6 py-8 sm:px-10 sm:py-10">
+      <section className="relative overflow-hidden rounded-[24px] border border-white/[0.07] bg-gradient-to-br from-[#17133a] via-[#0b0d18] to-[#170f26] px-6 py-8 sm:px-10 sm:py-10">
         <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 items-center justify-end gap-1 pr-10 opacity-70 md:flex">
           {Array.from({ length: 48 }, (_, i) => (
-            <span key={i} className="w-1 animate-bar rounded-full bg-gradient-to-t from-accent via-violet to-peak"
+            <span key={i} className="w-1 animate-bar rounded-full bg-gradient-to-t from-accent via-[#8A6BFF] to-aqua"
               style={{ height: `${18 + Math.abs(Math.sin(i * 0.45) * Math.cos(i * 0.13)) * 150}px`, animationDelay: `${(i % 12) * 0.09}s`, animationDuration: `${0.9 + (i % 6) * 0.18}s` }} />
           ))}
         </div>
@@ -245,7 +245,7 @@ export function Home() {
                       className={`rounded-xl border p-3 text-left transition ${mode === k ? "border-accent/70 bg-accent/10 shadow-glow" : "border-white/10 hover:border-white/25"}`}>
                       <div className="flex items-center justify-between gap-1">
                         <span className="text-sm font-semibold">{title}</span>
-                        {tag && <span className="rounded-full bg-gradient-to-r from-violet to-accent px-1.5 py-0.5 text-[9px] font-bold uppercase text-white">{tag}</span>}
+                        {tag && <span className="rounded-full bg-gradient-to-r from-aqua to-accent px-1.5 py-0.5 text-[9px] font-bold uppercase text-white">{tag}</span>}
                       </div>
                       <p className="mt-1 text-[11px] leading-snug text-muted">{desc}</p>
                     </button>
@@ -291,7 +291,7 @@ export function Home() {
 function StepTitle({ n, title, hint }: { n: number; title: string; hint?: string }) {
   return (
     <div className="mb-4 flex items-start gap-3">
-      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-gradient-to-br from-accent to-violet text-xs font-bold text-white">{n}</span>
+      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-gradient-to-br from-accent to-aqua text-xs font-bold text-white">{n}</span>
       <div>
         <h2 className="font-display text-lg font-semibold leading-7">{title}</h2>
         {hint && <p className="text-xs text-muted">{hint}</p>}

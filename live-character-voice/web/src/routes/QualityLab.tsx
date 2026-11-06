@@ -90,7 +90,7 @@ export function QualityLab() {
 
   return (
     <main className="mx-auto flex max-w-7xl flex-col gap-6 px-4 pb-16 pt-6 sm:px-6">
-      <section className="rounded-[24px] border border-white/[0.07] bg-gradient-to-br from-[#0f1a2c] via-[#0c111b] to-[#13201a] p-6 sm:p-8">
+      <section className="rounded-[24px] border border-white/[0.07] bg-gradient-to-br from-[#17133a] via-[#0b0d18] to-[#08202a] p-6 sm:p-8">
         <p className="eyebrow">Quality Lab</p>
         <h1 className="mt-1 font-display text-3xl font-semibold sm:text-4xl"><span className="gradient-text">Measured, not guessed.</span></h1>
         <p className="mt-2 max-w-3xl text-sm text-muted">
@@ -128,7 +128,7 @@ export function QualityLab() {
               <div className="flex justify-between"><b>{r.clip}</b><span className="font-mono text-xs">{Math.round(r.elapsed_s)} s</span></div>
               <div className="mt-1 text-xs text-muted">{r.stage}{r.media_t ? ` · ${Math.round(r.media_t)} s${r.duration ? ` / ${Math.round(r.duration)} s` : ""}` : ""}</div>
               <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10">
-                <div className="h-full rounded-full bg-gradient-to-r from-accent to-violet" style={{ width: `${r.duration && r.media_t ? Math.min(100, (r.media_t / r.duration) * 100) : 8}%` }} />
+                <div className="h-full rounded-full bg-gradient-to-r from-accent to-aqua" style={{ width: `${r.duration && r.media_t ? Math.min(100, (r.media_t / r.duration) * 100) : 8}%` }} />
               </div>
               <Link to={`/session/${r.session_id}`} className="mt-2 inline-block text-xs text-accent underline">Watch and listen to it live →</Link>
             </div>
@@ -147,7 +147,7 @@ export function QualityLab() {
               <Big label="What the voices said" value={pct(latest.spoken_wer === null || latest.spoken_wer === undefined ? null : 1 - latest.spoken_wer)} sub={`${latest.spoken_deletions ?? "–"} of ${latest.ref_words ?? "–"} words missing`} ok={latest.spoken_wer == null ? null : latest.spoken_wer <= 0.12} />
               <Big label="Speaker detection" value={pct(latest.speaker_accuracy)} sub={`live labels · two-pass ${pct(latest.speaker_two_pass)}`} ok={latest.speaker_accuracy === null ? null : latest.speaker_accuracy >= 0.9} />
               <Big label="Emotion" value={pct(latest.emotion_exact, 0)} sub={`within one level ${pct(latest.emotion_within_one, 0)}`} ok={latest.emotion_within_one === null ? null : latest.emotion_within_one >= 0.85} />
-              <Big label="Transcribed by" value={Object.entries(latest.asr_by ?? {}).map(([k, v]) => `${k} ${v}`).join(" · ") || "–"} sub="lines per engine (deepgram · groq · local backup)" ok={null} />
+              <Big label="Transcribed by" value={Object.entries(latest.asr_by ?? {}).map(([k, v]) => `${k} ${v}`).join(" · ") || "–"} sub="lines per speech-to-text engine" ok={null} small />
             </div>
           )}
           {latest?.missing_words && latest.missing_words.length > 0 && (
@@ -171,11 +171,11 @@ export function QualityLab() {
   );
 }
 
-function Big({ label, value, sub, ok }: { label: string; value: string; sub: string; ok: boolean | null }) {
+function Big({ label, value, sub, ok, small = false }: { label: string; value: string; sub: string; ok: boolean | null; small?: boolean }) {
   return (
     <div className="rounded-2xl border border-white/[0.07] bg-black/25 p-4">
       <div className="text-xs text-muted">{label}</div>
-      <div className={`mt-1 font-display text-2xl font-semibold ${tone(ok)}`}>{value}</div>
+      <div className={`mt-1 font-display font-semibold ${small ? "text-base leading-snug" : "text-2xl"} ${tone(ok)}`}>{value}</div>
       <div className="mt-0.5 text-[11px] text-muted">{sub}</div>
     </div>
   );

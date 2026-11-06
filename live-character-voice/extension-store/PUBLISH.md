@@ -1,4 +1,4 @@
-# Publish the extension so anyone can install it
+# Publish Altercast so anyone can install it
 
 `chrome://extensions` only manages extensions already installed — nobody can find new ones there.
 People find and install extensions in the **Chrome Web Store** (also works in Edge, Brave, Opera,
@@ -7,7 +7,8 @@ Arc and other Chromium browsers). Edge users can also get it from **Microsoft Ed
 Everything to upload is in this folder:
 - `live-character-voice-extension.zip` — the upload file (`make extension-zip` rebuilds it)
 - `LISTING.md` — name, summary, description, category, permission reasons, privacy answers, reviewer notes
-- `screenshot-1.png` … `screenshot-4.png` (1280×800) and `promo-small-440x280.png`
+- `screenshot-1.png` … `screenshot-4.png` (1280×800), `promo-small-440x280.png`, `marquee-1400x560.png`,
+  `store-icon-128.png`; promo video `promo/altercast-promo.mp4` (upload to YouTube, paste the link)
 - Privacy policy (hosted): https://manishvk18-live-character-voice.hf.space/privacy.html
 
 ## Chrome Web Store (one-time $5, ~15 minutes, review usually takes a few days)
@@ -15,7 +16,8 @@ Everything to upload is in this folder:
    should own it. Accept the developer agreement and pay the one-time **$5** registration fee.
 2. Click **New item** → upload `live-character-voice-extension.zip`.
 3. **Store listing** tab: paste name, summary and description from LISTING.md; category
-   *Accessibility*; language English; upload the 4 screenshots, the 440×280 promo tile; icon is
+   *Accessibility*; language English; upload `store-icon-128.png`, the 4 screenshots, the 440×280 small tile, the 1400×560 marquee
+   tile and the YouTube link of the promo video; icon is
    taken from the zip.
 4. **Privacy** tab: single purpose and every permission reason from LISTING.md; data usage:
    tick *Website content*; certify the three statements; privacy policy URL above.

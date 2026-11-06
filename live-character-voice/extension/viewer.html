@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8" /><title>Live Character Voice — Synced viewer</title><link rel="stylesheet" href="style.css" />
+<head><meta charset="utf-8" /><title>Altercast — Synced viewer</title><link rel="stylesheet" href="style.css" />
 <style>
   body { height: 100vh; display: grid; grid-template-rows: auto 1fr; overflow: hidden; }
   header { display:flex; align-items:center; gap:12px; padding:10px 16px; border-bottom:1px solid var(--line); background: rgba(6,8,12,.7); }
@@ -9,7 +9,7 @@
   .stage { position:relative; background:#000; border-radius:18px; overflow:hidden; border:1px solid var(--line); }
   video { width:100%; height:100%; object-fit:contain; background:#000; }
   .badge-live { position:absolute; left:12px; top:12px; display:flex; gap:6px; align-items:center; font:800 11px Inter; letter-spacing:.08em;
-    padding:4px 10px; border-radius:999px; background: rgba(139,108,255,.9); }
+    padding:4px 10px; border-radius:999px; background: rgba(124,92,255,.92); }
   .badge-live i { width:6px; height:6px; border-radius:50%; background:#fff; animation: blink 1s infinite; }
   @keyframes blink { 50% { opacity:.25 } }
   .overlay { position:absolute; inset:0; display:grid; place-items:center; background: rgba(0,0,0,.72); backdrop-filter: blur(4px); text-align:center; }
@@ -30,8 +30,8 @@
 </style></head>
 <body>
   <header>
-    <img src="icons/icon48.png" alt="" />
-    <div style="flex:1"><h1 style="font-size:14px">Synced viewer</h1><div id="src" class="muted" style="font-size:11.5px">connecting…</div></div>
+    <img src="icons/mark.svg" alt="" style="width:30px;height:30px;filter:drop-shadow(0 6px 14px rgba(124,92,255,.45))" />
+    <div style="flex:1"><h1 class="brand" style="font-size:14px"><span class="wm">altercast</span><span class="muted" style="font-weight:500;font-size:13px">Synced viewer</span></h1><div id="src" class="muted" style="font-size:11.5px">connecting…</div></div>
     <span class="muted" style="font-size:11.5px"><kbd>Space</kbd> mute voices · <kbd>F</kbd> full screen</span>
   </header>
   <main>
