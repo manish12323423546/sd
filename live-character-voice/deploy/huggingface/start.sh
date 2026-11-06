@@ -29,6 +29,10 @@ while true; do
         --name "synthetic_panel_${n}spk" || true
     fi
   done
+  if [ ! -f data/clips/scenario_comings_goings.mp4 ]; then  # 5 people come and go (V7 scenario)
+    .venv/bin/python scripts/make_synthetic_clip.py --script data/scripts/scenario_comings_goings.yaml \
+      --name scenario_comings_goings || true
+  fi
   if [ ! -f data/clips/synthetic_match_3spk.mp4 ]; then
     .venv/bin/python scripts/make_synthetic_clip.py --script data/scripts/synthetic_match_3spk.yaml \
       --name synthetic_match_3spk || true

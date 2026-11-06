@@ -1,0 +1,248 @@
+title: 'Scenario: 3 speakers, comings and goings, 5 total (synthetic)'
+lead_in_ms: 1500
+tail_ms: 2500
+lines:
+- speaker: A
+  emotion: peak
+  gap_after_ms: 500
+  text: A neat little one-two in midfield. Substitution coming for the home side.
+- speaker: C
+  emotion: calm
+  gap_after_ms: 300
+  text: Patient build-up from the back here. He drives forward into the box.
+- speaker: B
+  emotion: excited
+  gap_after_ms: 500
+  text: They are pressing high right now. The crowd is right behind them now.
+- speaker: C
+  emotion: peak
+  gap_after_ms: 1000
+  text: The referee waves play on. Corner kick, and the big men go forward.
+- speaker: A
+  emotion: neutral
+  gap_after_ms: 500
+  text: Lovely footwork on the touchline. Substitution coming for the home side.
+- speaker: C
+  emotion: calm
+  gap_after_ms: 300
+  text: Corner kick, and the big men go forward. I think that's a clear penalty.
+- speaker: A
+  emotion: neutral
+  gap_after_ms: 300
+  text: That was so close to the opener! I think that's a clear penalty.
+- speaker: B
+  emotion: excited
+  gap_after_ms: 1000
+  text: Patient build-up from the back here. The crowd is right behind them now.
+- speaker: C
+  emotion: calm
+  gap_after_ms: 1000
+  text: The referee waves play on. The crowd is right behind them now.
+- speaker: B
+  emotion: neutral
+  gap_after_ms: 800
+  text: What a ball that is from the left! He drives forward into the box.
+- speaker: A
+  emotion: neutral
+  gap_after_ms: 500
+  text: That was so close to the opener! Corner kick, and the big men go forward.
+- speaker: B
+  emotion: calm
+  gap_after_ms: 800
+  text: The referee waves play on. He has to do better with that.
+- speaker: A
+  emotion: peak
+  gap_after_ms: 800
+  text: He has to do better with that. Patient build-up from the back here.
+- speaker: B
+  emotion: peak
+  gap_after_ms: 500
+  text: Substitution coming for the home side. A neat little one-two in midfield.
+- speaker: A
+  emotion: excited
+  gap_after_ms: 500
+  text: The crowd is right behind them now. Lovely footwork on the touchline.
+- speaker: B
+  emotion: peak
+  gap_after_ms: 300
+  text: The crowd is right behind them now. Corner kick, and the big men go forward.
+- speaker: A
+  emotion: calm
+  gap_after_ms: 800
+  text: That was so close to the opener! What a ball that is from the left!
+- speaker: B
+  emotion: neutral
+  gap_after_ms: 1000
+  text: What a ball that is from the left! A neat little one-two in midfield.
+- speaker: C
+  emotion: neutral
+  gap_after_ms: 500
+  text: He drives forward into the box. That was so close to the opener!
+- speaker: B
+  emotion: neutral
+  gap_after_ms: 300
+  text: He drives forward into the box. Patient build-up from the back here.
+- speaker: C
+  emotion: neutral
+  gap_after_ms: 800
+  text: He has to do better with that. Substitution coming for the home side.
+- speaker: B
+  emotion: peak
+  gap_after_ms: 500
+  text: He drives forward into the box. That was so close to the opener!
+- speaker: C
+  emotion: neutral
+  gap_after_ms: 300
+  text: Patient build-up from the back here. He has to do better with that.
+- speaker: B
+  emotion: neutral
+  gap_after_ms: 1000
+  text: That was so close to the opener! Patient build-up from the back here.
+- speaker: C
+  emotion: neutral
+  gap_after_ms: 300
+  text: Lovely footwork on the touchline. A neat little one-two in midfield.
+- speaker: D
+  emotion: excited
+  gap_after_ms: 500
+  text: Substitution coming for the home side. Lovely footwork on the touchline.
+- speaker: C
+  emotion: neutral
+  gap_after_ms: 1000
+  text: Lovely footwork on the touchline. He has to do better with that.
+- speaker: D
+  emotion: calm
+  gap_after_ms: 300
+  text: Patient build-up from the back here. I think that's a clear penalty.
+- speaker: E
+  emotion: excited
+  gap_after_ms: 1000
+  text: Corner kick, and the big men go forward. The crowd is right behind them now.
+- speaker: D
+  emotion: neutral
+  gap_after_ms: 800
+  text: The referee waves play on. That was so close to the opener!
+- speaker: E
+  emotion: excited
+  gap_after_ms: 800
+  text: He drives forward into the box. I think that's a clear penalty.
+- speaker: C
+  emotion: peak
+  gap_after_ms: 800
+  text: He drives forward into the box. The referee waves play on.
+- speaker: E
+  emotion: peak
+  gap_after_ms: 500
+  text: He drives forward into the box. Corner kick, and the big men go forward.
+- speaker: D
+  emotion: excited
+  gap_after_ms: 1000
+  text: A neat little one-two in midfield. Corner kick, and the big men go forward.
+- speaker: C
+  emotion: peak
+  gap_after_ms: 800
+  text: The crowd is right behind them now. GOAL! An unbelievable strike!
+- speaker: B
+  emotion: peak
+  gap_after_ms: 300
+  text: Corner kick, and the big men go forward. He drives forward into the box.
+- speaker: D
+  emotion: excited
+  gap_after_ms: 1000
+  text: That was so close to the opener! Patient build-up from the back here.
+- speaker: C
+  emotion: neutral
+  gap_after_ms: 800
+  text: The keeper gathers it comfortably. A neat little one-two in midfield.
+- speaker: B
+  emotion: peak
+  gap_after_ms: 800
+  text: That was so close to the opener! I think that's a clear penalty.
+- speaker: C
+  emotion: neutral
+  gap_after_ms: 300
+  text: Patient build-up from the back here. Corner kick, and the big men go forward.
+- speaker: B
+  emotion: excited
+  gap_after_ms: 500
+  text: Corner kick, and the big men go forward. I think that's a clear penalty.
+- speaker: C
+  emotion: neutral
+  gap_after_ms: 800
+  text: The keeper gathers it comfortably. Corner kick, and the big men go forward.
+- speaker: B
+  emotion: calm
+  gap_after_ms: 300
+  text: What a ball that is from the left! Patient build-up from the back here.
+- speaker: C
+  emotion: excited
+  gap_after_ms: 500
+  text: GOAL! An unbelievable strike! I think that's a clear penalty.
+- speaker: A
+  emotion: neutral
+  gap_after_ms: 800
+  text: The crowd is right behind them now. Corner kick, and the big men go forward.
+- speaker: B
+  emotion: peak
+  gap_after_ms: 1000
+  text: That was so close to the opener! They are pressing high right now.
+- speaker: A
+  emotion: neutral
+  gap_after_ms: 500
+  text: A neat little one-two in midfield. I think that's a clear penalty.
+- speaker: B
+  emotion: excited
+  gap_after_ms: 800
+  text: I think that's a clear penalty. Lovely footwork on the touchline.
+- speaker: A
+  emotion: peak
+  gap_after_ms: 800
+  text: Patient build-up from the back here. The keeper gathers it comfortably.
+- speaker: C
+  emotion: excited
+  gap_after_ms: 800
+  text: GOAL! An unbelievable strike! A neat little one-two in midfield.
+- speaker: B
+  emotion: excited
+  gap_after_ms: 1000
+  text: Patient build-up from the back here. The referee waves play on.
+- speaker: A
+  emotion: neutral
+  gap_after_ms: 500
+  text: They are pressing high right now. He drives forward into the box.
+- speaker: C
+  emotion: peak
+  gap_after_ms: 1000
+  text: He has to do better with that. Substitution coming for the home side.
+- speaker: A
+  emotion: neutral
+  gap_after_ms: 1000
+  text: Lovely footwork on the touchline. I think that's a clear penalty.
+- speaker: B
+  emotion: peak
+  gap_after_ms: 800
+  text: Substitution coming for the home side. They are pressing high right now.
+- speaker: A
+  emotion: peak
+  gap_after_ms: 800
+  text: What a ball that is from the left! I think that's a clear penalty.
+- speaker: B
+  emotion: neutral
+  gap_after_ms: 300
+  text: Substitution coming for the home side. I think that's a clear penalty.
+- speaker: A
+  emotion: neutral
+  gap_after_ms: 300
+  text: He drives forward into the box. GOAL! An unbelievable strike!
+- speaker: B
+  emotion: neutral
+  gap_after_ms: 800
+  text: They are pressing high right now. Corner kick, and the big men go forward.
+- speaker: A
+  emotion: peak
+  gap_after_ms: 1000
+  text: He drives forward into the box. Substitution coming for the home side.
+- speaker: B
+  emotion: excited
+  gap_after_ms: 500
+  text: That was so close to the opener! Lovely footwork on the touchline.

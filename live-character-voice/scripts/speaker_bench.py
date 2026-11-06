@@ -114,9 +114,10 @@ def main() -> int:
         "--max", type=int, default=8, help="speaker limit given to the tracker (8 = auto)"
     )
     p.add_argument("--offline", action="store_true")
+    p.add_argument("--clips", nargs="*", default=CLIPS, help="clip names in data/clips")
     a = p.parse_args()
     rows: dict[str, dict[str, Any]] = defaultdict(dict)
-    for clip in CLIPS:
+    for clip in a.clips:
         truth, emb, loud = embeddings(clip)
         n = len({t["speaker"] for t in truth})
         if a.tracker in ("v1", "both"):

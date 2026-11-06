@@ -37,6 +37,28 @@ Tried and rejected (measured): larger voice-print models (WeSpeaker ResNet34 / R
 error 17.4 % / 20.7 % vs ECAPA 13.6 % on the 8-speaker clip, and 4–15× slower); noise reduction
 before the voice-print (pair error 13.6 % → 16.0 %).
 
+## Comings-and-goings scenario (measured, 2026-11-06)
+`data/scripts/scenario_comings_goings.yaml`, 61 lines, 4 min 39 s: A B C talk → only A B → A leaves,
+C returns (B C) → D and E join (B C D E) → D and E leave (B C) → A returns (A B C) → A B.
+Bench: `python scripts/speaker_bench.py --tracker v2 --offline --clips scenario_comings_goings`.
+| Mode | Accuracy | Labels |
+|---|---|---|
+| automatic (live tracker v2) | 76.4 % | 3 for 5 people |
+| automatic, offline two-pass | 54.6 % | 16 for 5 |
+| enrolled (3 lines ≈ 11 s per person), held-out lines | **97.6 %** | 5 for 5 |
+Why automatic loses: the first print of A was an outlier that sat between A and C, so C's next
+line joined A's label, and that mixed label then absorbed D and E when they arrived (they scored
+0.41 against it, far above the 0.18 needed to start a new person). B was tracked perfectly
+(one label, all lines), and returning people kept their label. Threshold tuning (merge 0.34–0.50,
+new 0.18–0.25), moving bank prints between labels and a relative "stranger" pool did not fix it:
+it needs a structural change (see roadmap below).
+Average similarity between people here: same 0.42–0.77, different 0.04–0.29 (C–D 0.29).
+
+Roadmap for unknown panels: (1) online re-clustering every ~10 lines with Hungarian label matching
+so a mixed label can be split and past lines relabelled; (2) a stronger streaming diarizer
+(NVIDIA Streaming Sortformer, ≤ 4 speakers per model, or pyannote) benchmarked here first;
+(3) auto-enrolment: once a label has ≥ 3 clean lines, freeze its print as an enrolment.
+
 ## Scenarios and what to expect
 | Situation | What happens | Accuracy | What helps most |
 |---|---|---|---|
