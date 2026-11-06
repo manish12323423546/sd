@@ -1,0 +1,54 @@
+{
+  "session_id": "20261106-075317_b6ac15",
+  "clip": "synthetic_match_3spk.mp4",
+  "speed": 1.0,
+  "wall_s": 111.9,
+  "lines_in_record": 38,
+  "lines_with_text": 38,
+  "line_complete_msgs": 38,
+  "audio_ready_msgs": 38,
+  "line_complete_coverage": 1.0,
+  "audio_ready_coverage": 1.0,
+  "delay_ready_from_ws": {
+    "p50": 2.436,
+    "p95": 2.775,
+    "max": 2.908
+  },
+  "server_delay": {
+    "p50": 2.905,
+    "p95": 3.865,
+    "max": 4.058,
+    "mean": 2.894,
+    "n": 38
+  },
+  "drift_slope": -0.00208,
+  "wer": 0.0987,
+  "speaker_accuracy": 0.96,
+  "crashes": 0,
+  "voice_switch": {
+    "switches": 0,
+    "tested": 0,
+    "passed": 0,
+    "pass_rate": null,
+    "detail": []
+  },
+  "client_switches_sent": 0,
+  "memory_mb": {
+    "first": 2005.5,
+    "max": 2120.0,
+    "last": 2114.9,
+    "samples": 12,
+    "growth": 114.5
+  },
+  "message_counts": {
+    "audio.ready": 38,
+    "line.complete": 38,
+    "metrics": 23,
+    "pong": 12,
+    "session.ended": 1,
+    "session.ready": 1,
+    "session.started": 1,
+    "speaker.new": 3
+  },
+  "report": "outputs/sessions/20261106-075317_b6ac15/report.md"
+}

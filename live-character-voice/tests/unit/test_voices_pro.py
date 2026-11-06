@@ -82,3 +82,22 @@ def test_pro_endpoint_guard_rails() -> None:
         assert r.status_code == 400 and "loading" in r.json()["detail"]
         assert c.get("/api/voices/jobs/nope").status_code == 404
         assert c.post("/api/voices/bm_george/say", json={"text": "hi"}).status_code == 503
+
+
+def test_keep_own_words_drops_context_and_keeps_punctuation() -> None:
+    from engine.orchestrator import keep_own_words
+    from engine.providers.base import ASRResult, Word
+
+    words = [Word(word=w, start=s, end=e, prob=1.0) for w, s, e in
+             [("ball.", 0.1, 0.4), ("Save!", 1.05, 1.3), ("What", 1.5, 1.6), ("a", 1.6, 1.7),
+              ("save!", 1.7, 2.0)]]  # fmt: skip
+    res = ASRResult(text="ball. Save! What a save!", words=words, avg_logprob=0.0,
+                    no_speech_prob=0.0)  # fmt: skip
+    out = keep_own_words(res, line_start=1.0)
+    assert out.text == "Save! What a save!" and len(out.words) == 4
+    # mismatched tokens → words joined, end punctuation carried over
+    res2 = res.model_copy(update={"text": "ball, save! what a save!"})
+    res2 = res2.model_copy(update={"words": [w.model_copy(update={"word": w.word.strip(".!")})
+                                             for w in words]})  # fmt: skip
+    assert keep_own_words(res2, 1.0).text.endswith("!")
+    assert keep_own_words(res, line_start=0.0) is res  # nothing to drop

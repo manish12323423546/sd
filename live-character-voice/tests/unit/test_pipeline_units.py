@@ -374,3 +374,55 @@ def test_loudest_window_ignores_pauses() -> None:
     x = np.concatenate([silence, tone, silence])
     # whole-line RMS is ~12 dB lower than the speech level; the loudest second is not
     assert loudest_window_db(x, sr) == pytest.approx(-23.0, abs=0.2)
+
+
+def test_segmenter_phrase_break_at_breath() -> None:
+    """V3: a ≥160 ms breath after ≥2 s of speech closes the phrase; shorter phrases stay whole."""
+    seg = LineSegmenter(SegmentConfig(phrase_min_s=2.0, phrase_pause_ms=160))
+    lines = _run(
+        seg,
+        [(0.9, -20, n(2.5)), (0.0, -60, n(0.2)), (0.9, -20, n(1.5)), (0.0, -60, n(0.2)),
+         (0.9, -20, n(1.0)), (0.0, -60, n(0.6))],
+    )  # fmt: skip
+    assert [ln.close_reason for ln in lines] == ["phrase", "pause"]
+    assert lines[0].t_end == pytest.approx(2.5, abs=2 * FD)
+    assert lines[1].t_start == pytest.approx(2.7, abs=2 * FD)  # 1.5 s + 1.0 s kept together
+    off = LineSegmenter(SegmentConfig())  # default: phrase splitting off
+    assert len(_run(off, [(0.9, -20, n(2.5)), (0.0, -60, n(0.2)), (0.9, -20, n(1.0)),
+                          (0.0, -60, n(0.6))])) == 1  # fmt: skip
+
+
+def test_session_clock_pause_freezes_time() -> None:
+    import asyncio
+    import time
+
+    from engine.ingest.feeder import SessionClock
+
+    async def go() -> tuple[float, float, float]:
+        c = SessionClock()
+        c.start()
+        await asyncio.sleep(0.05)
+        c.pause()
+        a = c.now()
+        await asyncio.sleep(0.15)
+        b = c.now()
+        c.resume()
+        t = time.monotonic()
+        await c.sleep_until(b + 0.05)
+        return a, b, time.monotonic() - t
+
+    a, b, waited = asyncio.run(go())
+    assert a == b  # frozen while paused
+    assert 0.03 < waited < 0.15  # resumes counting from where it stopped
+
+
+def test_synced_plan_lands_on_line_start() -> None:
+    """Synced viewing (view delay d): a line whose voice is ready before t_start + d plays at
+    exactly t_start + d — i.e. at the original moment in the viewer's picture."""
+    from engine.config import ScheduleConfig
+    from engine.schedule.scheduler import plan_playback
+
+    d = 6.0
+    plan = plan_playback(tts_ready=7.4, t_start=3.0 + d, t_end=5.5 + d, speaker_id="S1",
+                         duration=2.4, prev=None, cfg=ScheduleConfig())  # fmt: skip
+    assert plan.play_at - d == pytest.approx(3.0) and plan.action == "none"

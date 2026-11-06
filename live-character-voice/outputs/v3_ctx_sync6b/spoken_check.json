@@ -1,0 +1,55 @@
+{
+  "session": "20261106-073615_88cb86",
+  "lines": 60,
+  "actions": {
+    "fit": 29,
+    "none": 28,
+    "noise": 3
+  },
+  "ref_words": 525,
+  "asr": {
+    "wer": 0.1543,
+    "deletions": 56,
+    "substitutions": 23,
+    "insertions": 2
+  },
+  "voiced": {
+    "wer": 0.1543,
+    "deletions": 56,
+    "substitutions": 23,
+    "insertions": 2
+  },
+  "perceived_delay_start": {
+    "p50": 0.0,
+    "p95": 0.538,
+    "max": 1.011
+  },
+  "spoken": {
+    "wer": 0.1714,
+    "deletions": 57,
+    "substitutions": 29,
+    "insertions": 4
+  },
+  "missing_words": [
+    "riverside",
+    "okafor",
+    "lindqvist",
+    "he",
+    "score there",
+    "a",
+    "it drops to okafor on the edge of the area and he shoots",
+    "tanaka",
+    "look",
+    "so northgate",
+    "a free kick on the right side for riverside this",
+    "brennan",
+    "that",
+    "so close to a second goal the whole stadium was on its feet the",
+    "a",
+    "okafor",
+    "lindqvist",
+    "that",
+    "kick off",
+    "moreau"
+  ]
+}

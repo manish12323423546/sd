@@ -41,14 +41,40 @@ class SessionClock:
             raise ValueError("speed must be ≥ 0")
         self.speed = speed
         self.t0: float | None = None
+        self.paused_at: float | None = None
+        self._resumed: asyncio.Event | None = None
 
     def start(self) -> None:
         self.t0 = time.monotonic()
+        self.paused_at = None
+        self._resumed = asyncio.Event()
+        self._resumed.set()
+
+    @property
+    def paused(self) -> bool:
+        return self.paused_at is not None
+
+    def pause(self) -> None:
+        """Freeze session time (the viewer paused): feeding and scheduling stop with it."""
+        if self.t0 is None or self.paused:
+            return
+        self.paused_at = time.monotonic()
+        if self._resumed is not None:
+            self._resumed.clear()
+
+    def resume(self) -> None:
+        if self.t0 is None or self.paused_at is None:
+            return
+        self.t0 += time.monotonic() - self.paused_at
+        self.paused_at = None
+        if self._resumed is not None:
+            self._resumed.set()
 
     def now(self) -> float:
         if self.t0 is None:
             return 0.0
-        elapsed = time.monotonic() - self.t0
+        end = self.paused_at if self.paused_at is not None else time.monotonic()
+        elapsed = end - self.t0
         return elapsed * self.speed if self.speed > 0 else elapsed
 
     def to_wall_delay(self, session_s: float) -> float:
@@ -58,9 +84,13 @@ class SessionClock:
         if self.speed == 0:
             await asyncio.sleep(0)
             return
-        delay = self.to_wall_delay(t - self.now())
-        if delay > 0:
-            await asyncio.sleep(delay)
+        while True:  # re-checked in small steps so a pause holds the feed
+            if self.paused and self._resumed is not None:
+                await self._resumed.wait()
+            delay = self.to_wall_delay(t - self.now())
+            if delay <= 0:
+                return
+            await asyncio.sleep(min(delay, 0.1))
 
 
 class FakeClock:

@@ -6,6 +6,7 @@ import { api, type Clip, type Health, type Voice } from "../net/api";
 import { Avatar, DropZone, PlayButton, TierBadge } from "../ui/kit";
 
 const SPEAKER_COLORS = ["#4FA3FF", "#F5A524", "#5BC0BE"];
+const SYNC_DEFAULT_S = 6;
 
 function dur(s: number): string {
   return `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
@@ -20,6 +21,14 @@ export function Home() {
   const [speakers, setSpeakers] = useState(2);
   const [cast, setCast] = useState<Record<string, string>>({});
   const [enroll, setEnroll] = useState(false);
+  const [mode, setMode] = useState<"synced" | "live">(() => {
+    try {
+      return localStorage.getItem("lcv.mode") === "live" ? "live" : "synced";
+    } catch {
+      return "synced";
+    }
+  });
+  const [syncDelay, setSyncDelay] = useState(SYNC_DEFAULT_S);
   const [busy, setBusy] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -69,7 +78,15 @@ export function Home() {
     setError(null);
     try {
       const voice_map = Object.fromEntries(ids.filter((k) => cast[k]).map((k) => [k, cast[k] as string]));
-      const s = await api.createSession({ clip_id: clipId, max_speakers: speakers, use_enroll: enroll, speed, voice_map });
+      try {
+        localStorage.setItem("lcv.mode", mode);
+      } catch {
+        /* private mode: fine */
+      }
+      const s = await api.createSession({
+        clip_id: clipId, max_speakers: speakers, use_enroll: enroll, speed, voice_map,
+        view_delay_s: mode === "synced" ? syncDelay : 0,
+      });
       nav(`/session/${s.session_id}`);
     } catch (e) {
       setError((e as Error).message);
@@ -91,8 +108,8 @@ export function Home() {
           <span className="gradient-text">Re-voice live commentary in any character.</span>
         </h1>
         <p className="mt-3 max-w-xl text-[15px] text-muted">
-          Words, speakers and emotion are detected as the match plays — every line is re-spoken in the voice you cast, about two
-          seconds behind the action.
+          Words, speakers and emotion are detected as the match plays and every line is re-spoken in the voice you cast. In
+          Synced mode each voice lands right on its moment — no lag, nothing skipped.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <a href="#step-footage" className="btn-primary">Start a session</a>
@@ -194,7 +211,33 @@ export function Home() {
                 <Row k="Length" v={selected ? dur(selected.duration) : "—"} />
                 <Row k="Commentators" v={String(speakers)} />
                 <Row k="Voices" v={ids.map((k) => voices.find((x) => x.voice_id === cast[k])?.name ?? "auto").join(" · ")} />
+                <Row k="Mode" v={mode === "synced" ? `Synced (${syncDelay} s picture delay)` : "Live"} />
               </dl>
+              <div className="mb-4" role="radiogroup" aria-label="Playback mode">
+                <p className="mb-2 text-sm text-muted">Playback</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {([
+                    ["synced", "Synced", "Voices land exactly on the action. Picture starts a few seconds later.", "Recommended"],
+                    ["live", "Live", "Lowest latency. Voices follow the commentary by a moment.", ""],
+                  ] as const).map(([k, title, desc, tag]) => (
+                    <button key={k} type="button" role="radio" aria-checked={mode === k} onClick={() => setMode(k)}
+                      className={`rounded-xl border p-3 text-left transition ${mode === k ? "border-accent/70 bg-accent/10 shadow-glow" : "border-white/10 hover:border-white/25"}`}>
+                      <div className="flex items-center justify-between gap-1">
+                        <span className="text-sm font-semibold">{title}</span>
+                        {tag && <span className="rounded-full bg-gradient-to-r from-violet to-accent px-1.5 py-0.5 text-[9px] font-bold uppercase text-white">{tag}</span>}
+                      </div>
+                      <p className="mt-1 text-[11px] leading-snug text-muted">{desc}</p>
+                    </button>
+                  ))}
+                </div>
+                {mode === "synced" && (
+                  <label className="mt-3 block text-xs text-muted">
+                    <span className="flex justify-between"><span>Picture delay</span><b className="font-mono text-ink">{syncDelay} s</b></span>
+                    <input type="range" min={3} max={10} step={1} value={syncDelay} onChange={(e) => setSyncDelay(Number(e.target.value))} className="mt-1 w-full" aria-label="Picture delay" />
+                    <span className="text-[11px]">More delay = more lines exactly on time. {SYNC_DEFAULT_S} s is the measured sweet spot.</span>
+                  </label>
+                )}
+              </div>
               <label className={`mb-4 flex items-center gap-2 text-sm ${selected?.has_enroll ? "" : "opacity-40"}`}>
                 <input type="checkbox" className="h-4 w-4 accent-accent" disabled={!selected?.has_enroll} checked={enroll && !!selected?.has_enroll} onChange={(e) => setEnroll(e.target.checked)} />
                 Known commentators (enrollment file)

@@ -35,9 +35,15 @@ export interface SessionReady {
   voices: VoiceRef[];
   speed?: number;
   speakers?: SpeakerMsg[];
+  /** synced mode: the picture runs this many seconds behind live (0 = live) */
+  view_delay_s?: number;
 }
 export interface SessionStarted {
   type: "session.started";
+  server_wall: number;
+}
+export interface SessionPaused {
+  type: "session.paused" | "session.resumed";
   server_wall: number;
 }
 export interface SpeakerNew {
@@ -57,6 +63,8 @@ export interface AudioReady {
   play_at_media: number;
   schedule_action: string;
   delay_ready: number | null;
+  t_start?: number;
+  text?: string | null;
 }
 export interface MetricsMsg {
   type: "metrics";
@@ -88,6 +96,7 @@ export interface ErrorMsg {
 export type ServerMessage =
   | SessionReady
   | SessionStarted
+  | SessionPaused
   | SpeakerNew
   | LineComplete
   | AudioReady
@@ -102,6 +111,8 @@ export type ClientMessage =
   | { type: "set_voice"; speaker_id: string; voice_id: string }
   | { type: "played"; line_id: string; client_media_time: number }
   | { type: "stop" }
+  | { type: "pause" }
+  | { type: "resume" }
   | { type: "ping"; t: number };
 
 type Obj = Record<string, unknown>;
@@ -128,6 +139,9 @@ export function parseServerMessage(raw: unknown): ServerMessage | null {
         : null;
     case "session.started":
       return isNum(m.server_wall) ? (m as unknown as SessionStarted) : null;
+    case "session.paused":
+    case "session.resumed":
+      return isNum(m.server_wall) ? (m as unknown as SessionPaused) : null;
     case "speaker.new":
     case "speaker.updated":
       return isSpeaker(m.speaker) ? (m as unknown as SpeakerNew) : null;

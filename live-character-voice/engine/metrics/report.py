@@ -128,8 +128,16 @@ def build_report(run_dir: Path, m: dict[str, Any], rec: SessionRecord) -> str:
         f"was processed at speed {rec.speed} with no look-ahead; {m['schedule']['lines_played']} "
         f"lines were re-voiced and placed back in time; crashes: {run.get('crashes', 0)}."
     )
+    felt = m["delay"].get("headline") == "delay_felt"
+    view = m["delay"].get("view_delay_s") or 0.0
+    what = (
+        "original line starts → its new voice starts, as the viewer sees it"
+        + (f"; picture held back {view:g} s (synced mode)" if view else "; live mode")
+        if felt
+        else "line ended → new voice ready"
+    )
     w(
-        f"- **Median delay** (line ended → new voice ready): **{_fmt(d['p50'], ' s')}** "
+        f"- **Median delay** ({what}): **{_fmt(d['p50'], ' s')}** "
         f"(target ≤ {TARGETS['median_delay']} s) {_ok(v['median_delay'])}"
     )
     w(

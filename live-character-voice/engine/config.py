@@ -36,6 +36,9 @@ class SegmentConfig(_Strict):
     split_sim: float = 0.45
     level_split_db: float = 6.0  # level-change split at micro-pauses (M2)
     speaker_split: bool = True  # soft speaker-change split (docs/04 §2), needs speaker model
+    # V3: close a phrase at a short breath once it is this long, so voicing starts sooner
+    phrase_min_s: float = 0.0  # 0 = off
+    phrase_pause_ms: int = 160
 
 
 class AsrConfig(_Strict):
@@ -46,6 +49,9 @@ class AsrConfig(_Strict):
     beam_size: int = 1
     fallback_model: str = "base.en"
     groq_model: str = "whisper-large-v3-turbo"  # provider "groq" (free tier)
+    # V3: send this much audio from BEFORE the line too (Whisper hears the run-up, so short
+    # shouts and phrase starts are recognised), then keep only the line's own words by timestamp
+    context_s: float = 0.0
 
 
 class SpeakerConfig(_Strict):
@@ -92,6 +98,12 @@ class ScheduleConfig(_Strict):
     lag_soft_s: float = 3.5
     lag_hard_s: float = 6.0
     max_speedup: float = 1.15
+    # V3 "synced" viewing: the viewer's picture runs this many seconds behind live, so every
+    # voice line can start exactly when the original line started (0 = live, lowest latency).
+    broadcast_delay_s: float = Field(0.0, ge=0.0, le=20.0)
+    # V3: ask the voice to fit the original line's length (prevents queues, speed-ups, drops)
+    fit_duration: bool = True
+    max_fit_speed: float = 1.3
 
 
 class RenderConfig(_Strict):

@@ -494,3 +494,57 @@ p95 2.4 s, voice switch OK), no horizontal scroll at 390 px, no console errors.
   (chmod 600), never echoes them, and hot-swaps speech-to-text and voices without a restart.
 - Verified: server started with no keys (cloning False) → key pasted in the dialog → "Connected"
   after 21.6 s → cloning True, no restart; a wrong key → "rejected (HTTP 401)", not saved.
+
+## 2026-11-06 — V3: Synced mode (near-zero felt delay), no dropped lines, pause + player features
+
+**New measurement** — `scripts/spoken_check.py`: re-transcribes every generated voice file (local
+Whisper small.en, beam 5) and scores what was ACTUALLY spoken against the truth script; plus the
+**felt delay** = voice start − ORIGINAL line start in the viewer's timeline (now the headline in
+metrics, the live HUD and reports). The old "voice start" number was measured from the line END,
+which hid ~2.6 s of line length.
+
+**Diagnosis** (baseline `20261106-070640_406eab`, V2 settings): felt delay p50 6.5 s / p95 14.0 s /
+max 16.9 s; 42 of 56 lines sped up, 1 dropped. Lines can only be voiced after they end, commentary
+is 81 % speech, so voices queued behind each other → speed-ups, drops, growing delay.
+
+**Built**
+- Duration fit (`schedule.fit_duration`, `max_fit_speed` 1.3): each line is asked to fit the
+  original line's length, with the speaking rate learned per voice (EMA of s/char); a queue that
+  still forms is absorbed in the next lines. Replaces the V2 backlog speed-up.
+- Phrase splitting (`segment.phrase_min_s` 2.0, `phrase_pause_ms` 160): a phrase closes at a
+  breath once ≥ 2 s long — shorter units, natural cut points instead of mid-word max_len cuts.
+- Synced mode (`schedule.broadcast_delay_s`, API `view_delay_s`): the viewer's picture runs D
+  seconds behind live (like a TV broadcast delay); each line is scheduled at t_start + D, so the
+  voice starts with the original line. No drops in synced mode; lines whose full file will be
+  ready in time play as complete files (no streaming stalls). Client: countdown while the first
+  voices are prepared, video target = server time − D.
+- Pause/resume end to end: `SessionClock.pause/resume` (feed, ASR, TTS scheduling freeze with the
+  picture), WS `pause`/`resume` → `session.paused`/`session.resumed`; browser suspends the
+  AudioContext and streamed lines (now started by the audio clock, not wall-clock timers).
+- Player: Pause/Resume, SYNCED/LIVE badge, live subtitles of the voice that is speaking (speaker
+  colour), shortcuts (Space, M, V, C, F, ?), full screen, mute toggles, voiced/skipped counters,
+  felt-delay HUD. Studio: Synced (recommended, picture delay 3–10 s, default 6) vs Live.
+
+**Measured** (synthetic_match.mp4, 3 min, live speed, Groq + Fish; felt delay p50 / p95 / max):
+| Run | Felt delay | On time (≤0.3 s) | Dropped | ASR WER | Spoken WER (deletions) |
+|---|---|---|---|---|---|
+| baseline V2 `…070640` | 6.47 / 14.03 / 16.85 | 0 % | 1 | 7.2 % | 7.2 % (7) |
+| + fit `…071524` | 5.50 / 8.19 / 9.29 | 0 % | 1 | 6.9 % | 8.2 % (7) |
+| + fit + phrases (= Live mode) `…072008` | 4.91 / 5.92 / 7.09 | 0 % | **0** | 6.5 % | 9.3 % (7) |
+| **Synced 6 s** + fit + phrases `…074053` | **0.00 / 0.43 / 1.22** | **90 %** | **0** | 6.9 % | 9.0 % (4) |
+| Synced 6 s, max fit 1.12 `…074600` | 0.00 / 0.43 / 1.24 | 85 % | 0 | 6.9 % | 9.0 % (4) |
+| **Synced 6 s, 3 commentators** `…075317` (1:51) | **0.00 / 0.14 / 0.28** | **100 %** | 0 | 9.9 % | 9.9 % (4) |
+Live-mode floor: line length (p50 2.6 s) + end detection 0.48 + ASR 0.47 + Fish first audio 0.79 s
+— a line cannot be re-voiced before it has been said, hence Synced mode for "real time".
+
+**Rejected (measured)**
+- ASR context window (`asr.context_s` 1.5 s of audio before the line, words kept by timestamp):
+  WER 15.4 % vs 6.9 % — Whisper word timestamps are too loose at line edges (`…073615`). Off (0).
+  A first run (53 %) also exposed that the hallucination guard used the line length, not the
+  sent audio length — fixed.
+- Emotion threshold re-tuning on 3 sessions: best exact 56.5 % vs 55.9 % now — no real gain;
+  prosody alone does not separate calm from neutral on this clip. Kept as is.
+- Lower fit cap in synced mode (1.12): same spoken WER, fewer lines on time → kept 1.3.
+Remaining word errors are mostly names (Moreau/Lindqvist) and very short shouts ("Save!").
+Browser test: countdown → synced start; Space paused video 0.00 s drift for 3 s and resumed
+exactly; subtitles toggle; e2e smoke OK (15/15 lines voiced). Tests: pytest 72, vitest 13.

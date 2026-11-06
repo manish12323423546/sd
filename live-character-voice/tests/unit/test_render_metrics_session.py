@@ -289,4 +289,4 @@ def test_streaming_tts_starts_lines_on_first_audio(tmp_path: Path) -> None:
         assert Path(ln.tts_path).exists()
         assert Path(ln.tts_path.replace(".wav", ".part.wav")).exists()
     m = compute_all(rec, None, 10.0)
-    assert m["delay"]["headline"] == "delay_start" and m["delay"]["streamed_lines"] == 4
+    assert m["delay"]["headline"] == "delay_felt" and m["delay"]["streamed_lines"] == 4

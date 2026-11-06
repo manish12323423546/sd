@@ -24,6 +24,7 @@ export interface LineView {
   arousal: number | null;
   delay?: number;
   playAt?: number;
+  duration?: number;
   voiceId?: string | null;
   action?: string;
   late?: boolean;
@@ -61,6 +62,8 @@ export interface SessionState {
   warnings: string[];
   reportUrl: string | null;
   serverStartWall: number | null;
+  viewDelay: number;
+  paused: boolean;
 }
 
 export const MAX_LINES = 500;
@@ -81,6 +84,8 @@ export const initialState: SessionState = {
   warnings: [],
   reportUrl: null,
   serverStartWall: null,
+  viewDelay: 0,
+  paused: false,
 };
 
 function upsertSpeaker(state: SessionState, sp: { speaker_id: string; display_name: string; color: string; voice_id: string | null }): SessionState {
@@ -118,13 +123,18 @@ export function reduce(state: SessionState, msg: ServerMessage): SessionState {
         mediaUrl: msg.media_url,
         speakersMax: msg.speakers_max,
         speed: msg.speed ?? 1,
+        viewDelay: msg.view_delay_s ?? 0,
         voices: msg.voices,
       };
       for (const sp of msg.speakers ?? []) s = upsertSpeaker(s, sp);
       return s;
     }
     case "session.started":
-      return { ...state, status: "live", serverStartWall: msg.server_wall };
+      return { ...state, status: "live", serverStartWall: msg.server_wall, paused: false };
+    case "session.paused":
+      return { ...state, paused: true };
+    case "session.resumed":
+      return { ...state, paused: false };
     case "speaker.new":
     case "speaker.updated":
       return upsertSpeaker(state, msg.speaker);
@@ -153,16 +163,18 @@ export function reduce(state: SessionState, msg: ServerMessage): SessionState {
       return s;
     }
     case "audio.ready": {
+      const line = state.lines.find((l) => l.lineId === msg.line_id);
+      const tStart = msg.t_start ?? line?.tStart;
+      const felt = tStart === undefined ? undefined : Math.max(0, msg.play_at_media - tStart);
       const s = patchLine(state, msg.line_id, {
-        delay: msg.delay_ready ?? undefined,
+        delay: felt ?? msg.delay_ready ?? undefined,
         playAt: msg.play_at_media,
+        duration: msg.duration,
         voiceId: msg.voice_id,
         action: msg.schedule_action,
       });
       const delays =
-        msg.delay_ready === null
-          ? s.delays
-          : [...s.delays, { t: msg.play_at_media, d: msg.delay_ready }].slice(-400);
+        felt === undefined ? s.delays : [...s.delays, { t: msg.play_at_media, d: felt }].slice(-400);
       return { ...s, delays };
     }
     case "metrics":

@@ -82,6 +82,7 @@ export interface CreateSessionBody {
   voice_map?: Record<string, string>;
   use_enroll?: boolean;
   speed?: number;
+  view_delay_s?: number;
 }
 
 async function json<T>(res: Response): Promise<T> {

@@ -80,6 +80,7 @@ async def run(args: argparse.Namespace) -> dict[str, Any]:
             "max_speakers": args.speakers,
             "use_enroll": args.enroll,
             "speed": args.speed,
+            "view_delay_s": args.view_delay,
         }
         if args.voices:
             body["voice_map"] = dict(kv.split("=", 1) for kv in args.voices.split(","))
@@ -204,6 +205,7 @@ def main() -> int:
     p.add_argument("--switch-every", type=float, default=0.0, help="seconds between voice switches")
     p.add_argument("--out", default=None, help="directory for ws_client.json")
     p.add_argument("--voices", default=None, help="S1=cu_my-voice,S2=am_adam")
+    p.add_argument("--view-delay", type=float, default=0.0, help="synced mode picture delay (s)")
     args = p.parse_args()
     res = asyncio.run(run(args))
     out_dir = Path(args.out) if args.out else ROOT / "outputs" / "sessions" / res["session_id"]

@@ -15,6 +15,9 @@ export class AudioGraph {
   private ducking = true;
   private activeUntil = 0; // ctx time until which a voice line is playing
   private cache = new Map<string, Promise<AudioBuffer>>();
+  private streams = new Set<HTMLAudioElement>(); // streamed lines that started playing
+  private pendingStreams: { when: number; el: HTMLAudioElement; onStart?: () => void }[] = [];
+  private streamTimer: number | null = null;
 
   constructor() {
     this.ctx = new AudioContext();
@@ -33,6 +36,13 @@ export class AudioGraph {
 
   async resume(): Promise<void> {
     if (this.ctx.state !== "running") await this.ctx.resume();
+    this.streams.forEach((el) => void el.play().catch(() => undefined));
+  }
+
+  /** Pause everything: the audio clock stops, so scheduled lines wait with the picture. */
+  async suspend(): Promise<void> {
+    this.streams.forEach((el) => el.pause());
+    if (this.ctx.state === "running") await this.ctx.suspend();
   }
 
   setOriginalLevel(level: number): void {
@@ -97,13 +107,33 @@ export class AudioGraph {
     el.src = url;
     const node = this.ctx.createMediaElementSource(el);
     node.connect(this.voiceGain);
-    const delayMs = Math.max(0, (plan.when - this.ctx.currentTime) * 1000);
-    window.setTimeout(() => {
-      void el.play().then(() => onStart?.()).catch(() => undefined);
-    }, delayMs);
-    el.addEventListener("ended", () => node.disconnect());
+    // started by the audio clock (not a wall-clock timer) so a pause holds it back too
+    this.pendingStreams.push({ when: plan.when, el, onStart });
+    this.pumpStreams();
+    el.addEventListener("ended", () => {
+      node.disconnect();
+      this.streams.delete(el);
+    });
     this.duck(plan.when, plan.when + durationEst);
     return plan;
+  }
+
+  private pumpStreams(): void {
+    if (this.streamTimer !== null) return;
+    this.streamTimer = window.setInterval(() => {
+      if (this.ctx.state !== "running") return;
+      const now = this.ctx.currentTime;
+      const due = this.pendingStreams.filter((p) => p.when <= now + 0.01);
+      this.pendingStreams = this.pendingStreams.filter((p) => p.when > now + 0.01);
+      for (const p of due) {
+        this.streams.add(p.el);
+        void p.el.play().then(() => p.onStart?.()).catch(() => undefined);
+      }
+      if (this.pendingStreams.length === 0 && this.streamTimer !== null) {
+        window.clearInterval(this.streamTimer);
+        this.streamTimer = null;
+      }
+    }, 15);
   }
 
   /** Ramp the original down for [start, end] (+150 ms hold), merging with lines already playing. */
@@ -139,6 +169,8 @@ export class AudioGraph {
   }
 
   close(): void {
+    if (this.streamTimer !== null) window.clearInterval(this.streamTimer);
+    this.streams.forEach((el) => el.pause());
     void this.ctx.close();
   }
 }

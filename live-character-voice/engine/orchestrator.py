@@ -308,6 +308,7 @@ class Session:
         self._tts_busy = 0
         self._prev_play: PrevPlayback | None = None
         self._prev_line: str | None = None
+        self._rate: dict[str, float] = {}  # V3: seconds per character at speed 1.0, per voice
         self._stop = asyncio.Event()
         self._feed_done = False
         self._split_busy = False
@@ -340,12 +341,12 @@ class Session:
 
     def metrics_snapshot(self) -> dict[str, float | int]:
         lines = self.store.record.lines
-        delays = [d for ln in lines if (d := ln.delay_first) is not None]
         played = [ln for ln in lines if ln.times.play_at is not None]
-        slope = drift_slope(
-            [ln.t_end for ln in lines if ln.delay_first is not None],
-            [d for d in delays],
-        )
+        # V3 headline: FELT delay = voice start − original line start, in the viewer's timeline
+        felt = [(ln.t_start, ln.times.play_at - self.view_delay - ln.t_start) for ln in played
+                if ln.times.play_at is not None]  # fmt: skip
+        delays = [max(0.0, d) for _, d in felt]
+        slope = drift_slope([t for t, _ in felt], delays)
         return {
             "p50_delay": round(float(np.percentile(delays, 50)), 3) if delays else 0.0,
             "p95_delay": round(float(np.percentile(delays, 95)), 3) if delays else 0.0,
@@ -354,6 +355,7 @@ class Session:
             "lines": len(lines),
             "played": len(played),
             "dropped": sum(1 for ln in lines if ln.schedule_action == "dropped"),
+            "view_delay": self.view_delay,
         }
 
     async def run(self) -> SessionRecord:
@@ -607,6 +609,7 @@ class Session:
     async def _run_asr(self, lid: str, line: Line, cand: LineCandidate, core: F32) -> None:
         asyncio.get_running_loop()
         t = time.monotonic()
+        audio = cand.audio
         if self.captions_asr is not None:
             fn = partial(
                 self.captions_asr.transcribe, core, self.sr, None, (line.t_start, line.t_end)
@@ -616,10 +619,23 @@ class Session:
             assert self.models.asr is not None
             # no context prompt for very short lines: Whisper tends to repeat the prompt there
             prompt = self._asr_prompt(line) if line.t_end - line.t_start >= 0.6 else None
-            fn = partial(self.models.asr.transcribe, cand.audio, self.sr, prompt)
+            audio = cand.audio
             offset = line.t_start - cand.pad_before_s
+            ctx_s = self.cfg.asr.context_s
+            if ctx_s > 0 and line.t_start - cand.pad_before_s > 0.2:
+                a0 = max(0.0, offset - ctx_s)
+                before = self.segmenter.recent_audio(a0, offset)
+                if before.size:
+                    audio = np.concatenate([before, cand.audio]).astype(np.float32)
+                    offset -= before.size / self.sr
+                    names = ", ".join(self.glossary)
+                    prompt = f"{names}." if names else None  # the audio itself is the context
+            fn = partial(self.models.asr.transcribe, audio, self.sr, prompt)
+        sent_s = audio.size / self.sr
         res: ASRResult = await self._heavy(lid, fn, self.asr_pool)
-        res, guard_actions = asr_guard(res, cand.audio.size / self.sr)
+        if self.captions_asr is None and offset < line.t_start - cand.pad_before_s - 0.05:
+            res = keep_own_words(res, line.t_start - offset)
+        res, guard_actions = asr_guard(res, sent_s)  # word times are relative to the sent audio
         if guard_actions:
             self.log.log("asr_guard", line_id=lid, actions=guard_actions)
         ms = (time.monotonic() - t) * 1000
@@ -750,8 +766,10 @@ class Session:
                 continue
             lid = self._tts_queue.popleft()
             line = self.store.get(lid)
-            lag_now = self.clock.now() - line.t_end
-            if should_drop(lag_now, line.emotion, line.t_end - line.t_start, self.cfg.schedule):
+            lag_now = self.clock.now() - line.t_end - self.view_delay
+            if self.view_delay <= 0 and should_drop(
+                lag_now, line.emotion, line.t_end - line.t_start, self.cfg.schedule
+            ):
                 self.store.update_line(lid, schedule_action="dropped")
                 self.log.log("schedule", line_id=lid, action="dropped", lag=round(lag_now, 2))
                 self._finish(lid, "skip")
@@ -772,6 +790,7 @@ class Session:
                     base_speed=entry.base_speed,
                     pitch_shift=self.cfg.style.pitch_shift,
                 )
+                style = self._fit_style(self.store.get(lid), text, voice, style, entry)
                 start = self.clock.now()
                 self.store.update_line(lid, voice_id=voice, **_t(tts_start=round(start, 3)))
                 t = time.monotonic()
@@ -794,6 +813,7 @@ class Session:
                     self.tts_pool,
                 )
                 ms = (time.monotonic() - t) * 1000
+                self._learn_rate(voice, text, out.duration, style, entry)
                 ready = self.clock.now()
                 self.store.update_line(
                     lid,
@@ -836,15 +856,14 @@ class Session:
         loop = asyncio.get_running_loop()
         # catch-up for streams (they cannot be time-stretched): if voices are queued up behind
         # each other, ask the provider to speak this line faster (up to max_speedup).
-        backlog = 0.0
-        if self._prev_play is not None:
-            backlog = max(0.0, self._prev_play.play_end - self.clock.now())
-        if backlog > STREAM_BACKLOG_S:
-            factor = min(self.cfg.schedule.max_speedup + 0.1, 1.0 + 0.06 * backlog)
-            style = style.model_copy(update={"speed": round(style.speed * factor, 3)})
-            self.store.update_line(lid, schedule_action="speedup")
-            self.log.log("schedule", line_id=lid, action="speedup", backlog=round(backlog, 2),
-                         factor=round(factor, 3))  # fmt: skip
+        if not self.cfg.schedule.fit_duration:  # legacy catch-up (V2) when fitting is off
+            backlog = 0.0
+            if self._prev_play is not None:
+                backlog = max(0.0, self._prev_play.play_end - self.clock.now())
+            if backlog > STREAM_BACKLOG_S:
+                factor = min(self.cfg.schedule.max_speedup + 0.1, 1.0 + 0.06 * backlog)
+                style = style.model_copy(update={"speed": round(style.speed * factor, 3)})
+                self.store.update_line(lid, schedule_action="speedup")
         text = prepare_text(raw_text, style, self.glossary)
         first_evt = asyncio.Event()
         t0 = time.monotonic()
@@ -857,6 +876,12 @@ class Session:
         pending: set[asyncio.Future[Any]] = {fut, waiter}
         await asyncio.wait(pending, return_when=asyncio.FIRST_COMPLETED)
         streamed = first_evt.is_set()
+        if streamed and self.view_delay > 0:
+            # synced: if the whole file will be ready before the viewer reaches this line, play the
+            # complete file (gapless, exact length) instead of the growing stream
+            line0 = self.store.get(lid)
+            if self.clock.now() + 2.0 < line0.t_start + self.view_delay:
+                streamed = False
         if streamed:
             first_t = self.clock.now()
             est = estimate_duration(text, style.speed)
@@ -868,6 +893,8 @@ class Session:
             self._finish(lid, "ready")  # schedulable now: the player streams the growing file
         waiter.cancel()
         _part, final, duration = await fut
+        entry = self.catalog.get(voice)
+        self._learn_rate(voice, text, duration, style, entry)
         ready = self.clock.now()
         line = self.store.get(lid)
         fields: dict[str, Any] = {"tts_duration": round(duration, 3), "tts_path": str(final)}
@@ -878,7 +905,7 @@ class Session:
                 fields["features"] = {**line.features, "stream_stall_s": round(stall, 3)}
             if self._prev_line == lid and self._prev_play is not None:
                 self._prev_play = PrevPlayback(
-                    line.speaker_id, line.times.play_at + duration, line.t_end
+                    line.speaker_id, line.times.play_at + duration, line.t_end + self.view_delay
                 )
         self.store.update_line(lid, event="tts.ready", **fields, **_t(tts_ready=round(ready, 3)))
         first_ms = 1e3 * ((line.times.tts_first or ready) - (line.times.tts_start or ready))
@@ -892,6 +919,50 @@ class Session:
             self.store.update_line(lid, schedule_action="merged")
         if not streamed:
             self._finish(lid, "ready")
+
+    @property
+    def view_delay(self) -> float:
+        """Synced viewing: the viewer's picture runs this far behind live (0 = live mode)."""
+        return float(self.cfg.schedule.broadcast_delay_s)
+
+    def _fit_style(self, line: Line, text: str, voice: str, style: Any, entry: Any) -> Any:
+        """V3 duration fit: ask the voice to speak at the pace that fits the ORIGINAL line's length
+        (learned per voice from earlier lines), so voices never queue up behind each other — no
+        rushing later, no dropped lines. In live mode a queue that still forms is absorbed too."""
+        sc = self.cfg.schedule
+        if not sc.fit_duration or not text:
+            return style
+        slot = max(0.6, line.t_end - line.t_start)
+        merged_slot = line.features.get("merged_slot_s")
+        if merged_slot:
+            slot = float(merged_slot)
+        backlog = 0.0
+        if self._prev_play is not None:
+            backlog = max(0.0, self._prev_play.play_end - max(self.clock.now(), line.t_start
+                                                                  + self.view_delay))  # fmt: skip
+        target = max(slot * 0.75, slot - 0.5 * backlog)
+        rate = self._rate.get(voice, 0.062)  # ≈ 2.9 words/s until measured
+        natural = rate * len(text)
+        base = entry.base_speed or 1.0
+        emotion_eff = style.speed / base
+        needed = natural / target
+        eff = min(sc.max_fit_speed, max(emotion_eff, needed))
+        if eff <= emotion_eff + 1e-3:
+            return style
+        self.store.update_line(line.line_id, schedule_action="fit")
+        self.log.log(
+            "schedule", line_id=line.line_id, action="fit", slot=round(slot, 2),
+            natural=round(natural, 2), speed=round(eff, 3), backlog=round(backlog, 2),
+        )  # fmt: skip
+        return style.model_copy(update={"speed": round(base * eff, 3)})
+
+    def _learn_rate(self, voice: str, text: str, duration: float, style: Any, entry: Any) -> None:
+        if not text or duration <= 0.3:
+            return
+        eff = style.speed / (entry.base_speed or 1.0)
+        sample = duration * eff / max(1, len(text))
+        old = self._rate.get(voice)
+        self._rate[voice] = sample if old is None else 0.7 * old + 0.3 * sample
 
     def _merge_following(self, line: Line) -> tuple[str, list[str]]:
         """Catch-up: merge queued consecutive lines of the same speaker into one synth call."""
@@ -909,6 +980,7 @@ class Session:
             if other.speaker_id != line.speaker_id:
                 break
             self._tts_queue.popleft()
+            line.features["merged_slot_s"] = round(other.t_end - line.t_start, 3)
             texts.append(other.text or "")
             merged.append(nxt)
             self.store.update_line(nxt, schedule_action="merged", voice_id=None)
@@ -958,23 +1030,26 @@ class Session:
         )  # fmt: skip
         if line.tts_duration is None or ready_at is None:
             return
+        d = self.view_delay  # synced: the viewer reaches media time t at session time t + d
         plan = plan_playback(
             tts_ready=ready_at,
-            t_start=line.t_start,
-            t_end=line.t_end,
+            t_start=line.t_start + d,
+            t_end=line.t_end + d,
             speaker_id=line.speaker_id,
             duration=line.tts_duration,
             prev=self._prev_play,
             cfg=self.cfg.schedule,
         )
-        if line.schedule_action != "merged" and should_drop(
-            plan.lag, line.emotion, line.t_end - line.t_start, self.cfg.schedule
+        if (
+            d <= 0
+            and line.schedule_action != "merged"
+            and should_drop(plan.lag, line.emotion, line.t_end - line.t_start, self.cfg.schedule)
         ):
             self.store.update_line(lid, schedule_action="dropped")
             self.log.log("schedule", line_id=lid, action="dropped", lag=round(plan.lag, 2))
             return
         duration = line.tts_duration
-        if line.schedule_action in ("merged", "speedup"):
+        if line.schedule_action in ("merged", "speedup", "fit"):
             action = line.schedule_action
         else:
             action = plan.action
@@ -992,7 +1067,7 @@ class Session:
             schedule_action=action,
             **_t(play_at=round(play_at, 3)),
         )
-        self._prev_play = PrevPlayback(line.speaker_id, play_at + duration, line.t_end)
+        self._prev_play = PrevPlayback(line.speaker_id, play_at + duration, line.t_end + d)
         self._prev_line = lid
         self.log.log(
             "schedule",
@@ -1010,6 +1085,29 @@ class Session:
         self.log.log("drift", slope=round(slope, 4), n=len(lines))
         if drift_warning(slope) and len(lines) >= 10:
             self.store.warn(f"delay drift {slope:.3f} s/s at t={self.clock.now():.0f} s")
+
+
+def keep_own_words(res: ASRResult, line_start: float, slack: float = 0.08) -> ASRResult:
+    """Context ASR: drop the words that belong to the audio BEFORE the line (word midpoint before
+    `line_start` − slack, both relative to the audio sent). Punctuation is kept from the text when
+    its tokens line up with the timed words; without word timings the result is unchanged."""
+    words = list(res.words)
+    if not words:
+        return res
+    keep = [i for i, w in enumerate(words) if (w.start + w.end) / 2 >= line_start - slack]
+    if len(keep) == len(words):
+        return res
+    tokens = res.text.split()
+    if len(tokens) == len(words):
+        text = " ".join(tokens[i] for i in keep)
+    else:
+        text = " ".join(words[i].word.strip() for i in keep)
+        if text and res.text.rstrip()[-1:] in ".!?" and text[-1] not in ".!?":
+            text += res.text.rstrip()[-1]
+    if text:
+        text = text[0].upper() + text[1:]
+    kept = [words[i] for i in keep]
+    return res.model_copy(update={"text": text, "words": kept})
 
 
 def malloc_trim() -> None:

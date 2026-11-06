@@ -1,0 +1,38 @@
+{
+  "session": "20261106-075317_b6ac15",
+  "lines": 38,
+  "actions": {
+    "fit": 24,
+    "none": 14
+  },
+  "ref_words": 304,
+  "asr": {
+    "wer": 0.0987,
+    "deletions": 5,
+    "substitutions": 24,
+    "insertions": 1
+  },
+  "voiced": {
+    "wer": 0.0987,
+    "deletions": 5,
+    "substitutions": 24,
+    "insertions": 1
+  },
+  "perceived_delay_start": {
+    "p50": 0.0,
+    "p95": 0.142,
+    "max": 0.279
+  },
+  "spoken": {
+    "wer": 0.0987,
+    "deletions": 4,
+    "substitutions": 26,
+    "insertions": 0
+  },
+  "missing_words": [
+    "moreau",
+    "lindqvist",
+    "own",
+    "the"
+  ]
+}

@@ -63,6 +63,14 @@ in the **Playground**, and cast the voice on a commentator in **Studio → Cast 
 Best sample: one person, no music or other voices, quiet room, natural variety in tone.
 Only clone voices you own or have permission to use.
 
+## Synced vs Live mode
+- **Synced (recommended):** the picture is held back a few seconds (default 6 s, like a TV
+  broadcast delay) so every new voice starts exactly with its original line — measured felt delay
+  0.0 s typical, 90–100 % of lines exactly on time, nothing skipped or rushed.
+- **Live:** lowest latency; each line is re-voiced right after it is spoken (≈ 5 s felt delay).
+Player shortcuts: Space pause · M original on/off · V voices on/off · C subtitles · F full screen.
+Check what the voices really said: `python scripts/spoken_check.py outputs/sessions/<id>`.
+
 ## Where the results are
 
 | What | Where |

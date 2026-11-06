@@ -165,6 +165,7 @@ class SessionManager:
         voice_map: dict[str, str] | None = None,
         use_enroll: bool = False,
         speed: float = 1.0,
+        view_delay_s: float = 0.0,
     ) -> PilotSession:
         busy = self.active()
         if busy is not None:
@@ -187,6 +188,7 @@ class SessionManager:
         cfg.mode = "pilot"
         cfg.speed = speed
         cfg.speaker.max_speakers = max_speakers
+        cfg.schedule.broadcast_delay_s = view_delay_s
         sid = time.strftime("%Y%m%d-%H%M%S") + "_" + uuid.uuid4().hex[:6]
         out = SESSIONS_DIR / sid
         out.mkdir(parents=True, exist_ok=True)

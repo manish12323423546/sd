@@ -356,7 +356,12 @@ def create_session(body: CreateSession) -> SessionCreated:
         raise HTTPException(503, "models are not loaded")
     try:
         ps = manager.create(
-            body.clip_id, body.max_speakers, body.voice_map, body.use_enroll, body.speed
+            body.clip_id,
+            body.max_speakers,
+            body.voice_map,
+            body.use_enroll,
+            body.speed,
+            body.view_delay_s,
         )
     except SessionBusyError as e:
         raise HTTPException(409, str(e)) from e

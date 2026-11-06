@@ -10,6 +10,7 @@ A line closes when ANY of these happens:
                  is ≥ level_split_db louder or quieter than the line so far: a shout starting
                  right after a phrase, or the end of a shout. Splits run-on excited commentary.
   speaker_change requested by the orchestrator via `force_split()` (embedding check)
+  phrase         (V3) a breath ≥ phrase_pause_ms once the phrase is ≥ phrase_min_s long
   end            end of stream
 Speech segments shorter than min_line_ms are discarded unless they qualify as a burst.
 Line audio is returned with pad_ms on both sides for ASR; stored times are unpadded. Post-padding
@@ -156,6 +157,9 @@ class LineSegmenter:
         self.levels.append(lvl)
         self.speech.append(is_speech)
         if is_speech:
+            phrase = self._phrase_break(i)
+            if phrase is not None:
+                return phrase
             if self.silence_run >= MICRO_PAUSE_FRAMES:
                 self.resume = (self.last_speech + 1, i)
             self.silence_run = 0
@@ -180,6 +184,19 @@ class LineSegmenter:
         if silence_ms >= self.cfg.end_silence_ms:
             return self._close(self.last_speech + 1, "pause")
         return None
+
+    def _phrase_break(self, i: int) -> LineCandidate | None:
+        """V3: speech resumes after a short breath (≥ phrase_pause_ms) and the phrase so far is
+        ≥ phrase_min_s → close it there. Shorter units start voicing sooner and are cut at a
+        natural boundary instead of mid-word by max_len."""
+        if self.cfg.phrase_min_s <= 0 or self.start is None:
+            return None
+        if self.silence_run * self.fd * 1000 < self.cfg.phrase_pause_ms:
+            return None
+        if (self.last_speech + 1 - self.start) * self.fd < self.cfg.phrase_min_s:
+            return None
+        self.silence_run = 0
+        return self._close(self.last_speech + 1, "phrase", keep_open_from=i)
 
     def _level_change(self, i: int) -> LineCandidate | None:
         if self.resume is None or self.start is None:

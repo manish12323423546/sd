@@ -1,0 +1,39 @@
+{
+  "session": "20261106-071524_1cb3f4",
+  "lines": 56,
+  "actions": {
+    "fit": 41,
+    "none": 9,
+    "speedup": 5,
+    "dropped": 1
+  },
+  "ref_words": 525,
+  "asr": {
+    "wer": 0.0686,
+    "deletions": 7,
+    "substitutions": 24,
+    "insertions": 5
+  },
+  "voiced": {
+    "wer": 0.0629,
+    "deletions": 7,
+    "substitutions": 24,
+    "insertions": 2
+  },
+  "perceived_delay_start": {
+    "p50": 5.495,
+    "p95": 8.188,
+    "max": 9.292
+  },
+  "spoken": {
+    "wer": 0.0819,
+    "deletions": 7,
+    "substitutions": 33,
+    "insertions": 3
+  },
+  "missing_words": [
+    "score there",
+    "save",
+    "quick throw into moreau"
+  ]
+}

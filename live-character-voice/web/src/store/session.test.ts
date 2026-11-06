@@ -29,12 +29,13 @@ describe("session reducer", () => {
     ]);
     expect(s.status).toBe("ended");
     expect(s.lines.map((l) => l.lineId)).toEqual(["L000002", "L000001"]); // newest first
-    expect(s.lines[1]?.delay).toBe(2.0);
+    expect(s.lines[1]?.delay).toBeCloseTo(4.1); // felt delay: voice start (5.1) − line start
     expect(s.lines[1]?.playAt).toBe(5.1);
     expect(s.speakers.S1?.emotion).toBe("calm");
     expect(s.metrics.p95).toBe(3);
     expect(s.reportUrl).toBe("/api/sessions/s1/report");
-    expect(recentDelays(s)).toEqual([{ t: 5.1, d: 2.0 }]);
+    expect(recentDelays(s)[0]?.t).toBe(5.1);
+    expect(recentDelays(s)[0]?.d).toBeCloseTo(4.1);
   });
 
   it("keeps the chosen voice when the server updates a speaker without one", () => {

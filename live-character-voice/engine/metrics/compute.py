@@ -38,6 +38,8 @@ def _played(ln: Line) -> bool:
 
 def delay_metrics(rec: SessionRecord) -> dict[str, Any]:
     lines = [ln for ln in rec.lines if ln.schedule_action != "dropped"]
+    view = float(rec.config_snapshot.get("schedule", {}).get("broadcast_delay_s") or 0.0)
+    felt = [ln.times.play_at - view - ln.t_start for ln in lines if ln.times.play_at is not None]
     ready = [(ln.t_end, ln.delay_ready) for ln in lines if ln.delay_ready is not None]
     starts = [(ln.t_end, ln.delay_first) for ln in lines if ln.delay_first is not None]
     play = [(ln.t_end, ln.times.play_at - ln.t_end) for ln in lines if ln.times.play_at is not None]
@@ -63,7 +65,13 @@ def delay_metrics(rec: SessionRecord) -> dict[str, Any]:
     streamed = [ln for ln in lines if ln.times.tts_first is not None]
     stalls = [ln.features.get("stream_stall_s", 0.0) for ln in streamed]
     return {
-        "headline": "delay_start" if streamed else "delay_ready",
+        "headline": "delay_felt",
+        "view_delay_s": view,
+        # V3: what the viewer feels — voice start vs ORIGINAL line start, in the viewer's timeline
+        "delay_felt": pct([max(0.0, d) for d in felt]),
+        "felt_on_time_share": round(sum(1 for d in felt if d <= 0.3) / len(felt), 4)
+        if felt
+        else None,
         "delay_start": pct([d for d in start if d is not None]),
         "streamed_lines": len(streamed),
         "stream_stalls": sum(1 for x in stalls if x > 0),

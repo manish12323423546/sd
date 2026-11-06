@@ -38,6 +38,10 @@ class CreateSession(BaseModel):
     speed: float = Field(
         1.0, ge=0.25, le=8.0, description="1.0 = live; >1 for dev smoke tests only"
     )
+    view_delay_s: float = Field(
+        0.0, ge=0.0, le=15.0,
+        description="synced viewing: picture held back this long so voices land on time; 0 = live",
+    )  # fmt: skip
 
 
 class SessionCreated(BaseModel):

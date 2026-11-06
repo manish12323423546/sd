@@ -81,7 +81,10 @@ def translate(ps: PilotSession, ev: Event) -> dict[str, Any] | None:
             "voice_id": ln.voice_id,
             "url": tts_url(ps, ln.tts_path),
             "duration": ln.tts_duration,
-            "play_at_media": ln.times.play_at,
+            # the viewer's media time: synced mode runs the picture view_delay behind live
+            "play_at_media": round(ln.times.play_at - ps.engine.view_delay, 3),
+            "t_start": ln.t_start,
+            "text": ln.text,
             "schedule_action": ln.schedule_action,
             "delay_ready": None if ln.delay_ready is None else round(ln.delay_ready, 3),
         }
@@ -127,6 +130,7 @@ async def handle(ws: WebSocket, manager: SessionManager, sid: str) -> None:
             "speakers_max": ps.cfg.speaker.max_speakers,
             "voices": voices,
             "speed": ps.cfg.speed,
+            "view_delay_s": ps.engine.view_delay,
             "speakers": [speaker_msg(s) for s in ps.engine.store.record.speakers.values()],
         }
     )
@@ -177,6 +181,14 @@ async def handle(ws: WebSocket, manager: SessionManager, sid: str) -> None:
                 with contextlib.suppress(KeyError):
                     stamp: dict[str, Any] = {"times.played": round(ps.engine.clock.now(), 3)}
                     ps.engine.store.update_line(lid, **stamp)
+            elif kind in ("pause", "resume"):
+                # the viewer paused: freeze session time so nothing runs ahead of the picture
+                if kind == "pause":
+                    ps.engine.clock.pause()
+                else:
+                    ps.engine.clock.resume()
+                state = "session.paused" if kind == "pause" else "session.resumed"
+                await ws.send_json({"type": state, "server_wall": ps.engine.clock.now()})
             elif kind == "stop":
                 manager.stop(ps)
             else:

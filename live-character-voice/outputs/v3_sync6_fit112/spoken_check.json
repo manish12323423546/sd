@@ -1,0 +1,37 @@
+{
+  "session": "20261106-074600_e1d184",
+  "lines": 60,
+  "actions": {
+    "fit": 40,
+    "none": 20
+  },
+  "ref_words": 525,
+  "asr": {
+    "wer": 0.0686,
+    "deletions": 4,
+    "substitutions": 29,
+    "insertions": 3
+  },
+  "voiced": {
+    "wer": 0.0686,
+    "deletions": 4,
+    "substitutions": 29,
+    "insertions": 3
+  },
+  "perceived_delay_start": {
+    "p50": 0.0,
+    "p95": 0.429,
+    "max": 1.241
+  },
+  "spoken": {
+    "wer": 0.0895,
+    "deletions": 4,
+    "substitutions": 38,
+    "insertions": 5
+  },
+  "missing_words": [
+    "score there",
+    "save",
+    "plenty"
+  ]
+}
