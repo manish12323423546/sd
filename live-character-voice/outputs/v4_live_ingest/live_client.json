@@ -1,0 +1,29 @@
+{
+  "session_id": "20261106-083201_live_462b5e",
+  "source": "data/clips/synthetic_match.mp4",
+  "view_delay_s": 6.0,
+  "audio_sent_s": 178.4,
+  "lines": 60,
+  "voiced": 60,
+  "felt_delay": {
+    "p50": 0.0,
+    "p95": 0.617,
+    "max": 1.28
+  },
+  "on_time_share": 0.85,
+  "arrival_margin_s": {
+    "p50": 1.635,
+    "p95": 4.141,
+    "max": 4.58
+  },
+  "message_counts": {
+    "audio.ready": 60,
+    "line.complete": 60,
+    "metrics": 36,
+    "session.ended": 1,
+    "session.ready": 1,
+    "session.started": 1,
+    "speaker.new": 2
+  },
+  "report": "outputs/sessions/20261106-083201_live_462b5e/report.md"
+}

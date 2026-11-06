@@ -1,0 +1,37 @@
+{
+  "session": "20261106-084107_live_3fc31a",
+  "lines": 61,
+  "actions": {
+    "fit": 42,
+    "none": 18,
+    "noise": 1
+  },
+  "ref_words": 525,
+  "asr": {
+    "wer": 0.0648,
+    "deletions": 7,
+    "substitutions": 26,
+    "insertions": 1
+  },
+  "voiced": {
+    "wer": 0.0648,
+    "deletions": 7,
+    "substitutions": 26,
+    "insertions": 1
+  },
+  "perceived_delay_start": {
+    "p50": 0.0,
+    "p95": 0.863,
+    "max": 1.453
+  },
+  "spoken": {
+    "wer": 0.0781,
+    "deletions": 7,
+    "substitutions": 32,
+    "insertions": 2
+  },
+  "missing_words": [
+    "to score there",
+    "quick throw into moreau"
+  ]
+}

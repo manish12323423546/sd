@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8" /><title>Live Character Voice</title><link rel="stylesheet" href="style.css" />
+<style>
+  body { width: 360px; padding: 14px; }
+  header { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+  header img { width:30px; height:30px; border-radius:9px; }
+  section { margin-top:12px; }
+  .cast { display:grid; grid-template-columns: 12px 1fr; gap:6px 8px; align-items:center; margin-top:6px; }
+  .sw { width:10px; height:10px; border-radius:50%; }
+  #live { display:none; } body.running #setup { display:none; } body.running #live { display:block; }
+  .stat { display:grid; grid-template-columns: repeat(3, 1fr); gap:6px; margin:10px 0; }
+  .stat div { background: rgba(0,0,0,.3); border:1px solid var(--line); border-radius:10px; padding:8px; }
+  .stat b { display:block; font-size:16px; } .stat span { font-size:10.5px; color:var(--muted); }
+</style></head>
+<body>
+  <header>
+    <img src="icons/icon48.png" alt="" />
+    <div style="flex:1"><h1 style="font-size:15px">Live Character Voice</h1>
+      <div class="row muted" style="font-size:11.5px"><span id="dot" class="dot"></span><span id="engineState">checking engine…</span></div></div>
+  </header>
+
+  <div id="setup">
+    <section class="panel" style="padding:12px">
+      <div class="eyebrow" style="margin-bottom:6px">Mode</div>
+      <div class="seg" role="radiogroup" aria-label="Mode">
+        <button id="m-synced" aria-pressed="true"><b>Synced window <span class="badge">best</span></b><small>Opens a viewer held back a few seconds — every voice lands exactly on time.</small></button>
+        <button id="m-overlay" aria-pressed="false"><b>Live overlay</b><small>Voices + subtitles right on this tab, lowest latency.</small></button>
+      </div>
+      <label id="delayRow" style="display:block;margin-top:10px" class="muted">Picture delay <b id="delayVal" class="mono" style="float:right;color:var(--ink)">6 s</b>
+        <input id="delay" type="range" min="3" max="10" step="1" value="6" /></label>
+    </section>
+    <section class="panel" style="padding:12px">
+      <div class="row" style="justify-content:space-between"><span class="eyebrow">Cast</span>
+        <label class="muted" style="font-size:12px">Commentators <select id="speakers" class="field" style="width:auto;padding:3px 6px;margin-left:4px"><option>1</option><option selected>2</option><option>3</option></select></label></div>
+      <div id="cast" class="cast"></div>
+    </section>
+    <section>
+      <button id="start" class="btn btn-primary" style="width:100%;padding:12px">⦿ Start on this tab</button>
+      <p id="err" style="color:var(--peak);margin:8px 0 0;display:none"></p>
+    </section>
+  </div>
+
+  <div id="live">
+    <section class="panel" style="padding:12px">
+      <div class="row"><span class="dot ok"></span><b id="liveMode">Running</b></div>
+      <div class="stat"><div><b id="sSent">0</b><span>seconds heard</span></div><div><b id="sVoiced">0</b><span>lines voiced</span></div><div><b id="sDelay">–</b><span>felt delay</span></div></div>
+      <button id="stop" class="btn btn-stop" style="width:100%">■ Stop</button>
+    </section>
+  </div>
+
+  <section class="row muted" style="justify-content:space-between;font-size:11.5px">
+    <a id="lab" href="#" target="_blank">Voice Lab ↗</a>
+    <details><summary style="cursor:pointer">Engine</summary><input id="engine" class="field" style="margin-top:6px" value="http://localhost:8000" /></details>
+  </section>
+  <script src="popup.js"></script>
+</body></html>

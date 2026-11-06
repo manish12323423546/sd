@@ -76,6 +76,7 @@ class PilotSession:
     clients: int = 0
     metrics: dict[str, Any] = field(default_factory=dict)
     created: float = field(default_factory=time.monotonic)
+    live: Any | None = None  # engine.ingest.live.LiveSource for live-input sessions
 
     @property
     def clip_id(self) -> str:
@@ -199,6 +200,47 @@ class SessionManager:
             cfg, clip, self.models, out, session_id=sid, enroll=enroll, voice_map=voice_map
         )
         ps = PilotSession(sid, clip, cfg, engine, out, use_enroll=enroll is not None)
+        self.sessions[sid] = ps
+        return ps
+
+    def create_live(
+        self,
+        max_speakers: int = 2,
+        voice_map: dict[str, str] | None = None,
+        view_delay_s: float = 0.0,
+        label: str = "live",
+    ) -> PilotSession:
+        """A session fed by live audio from a capture client (extension / Live capture page)."""
+        from engine.ingest.live import LiveSource
+
+        busy = self.active()
+        if busy is not None:
+            if (busy.status == "ready" and busy.task is None) or (
+                busy.live is not None and busy.clients == 0
+            ):
+                busy.engine.stop()
+                busy.status = "ended"
+            else:
+                raise SessionBusyError(
+                    f"session {busy.session_id} is still running; stop it first (one at a time)."
+                )
+        if voice_map:
+            for vid in voice_map.values():
+                self.catalog.get(vid)
+        assert self.models is not None
+        cfg = self.cfg.model_copy(deep=True)
+        cfg.mode = "pilot"
+        cfg.speed = 1.0
+        cfg.speaker.max_speakers = max_speakers
+        cfg.schedule.broadcast_delay_s = view_delay_s
+        sid = time.strftime("%Y%m%d-%H%M%S") + "_live_" + uuid.uuid4().hex[:6]
+        out = SESSIONS_DIR / sid
+        out.mkdir(parents=True, exist_ok=True)
+        safe = "".join(c for c in label if c.isalnum() or c in " -_.")[:60] or "live"
+        source = LiveSource(cfg.audio.analysis_sr, record_path=str(out / "live_input.wav"))
+        engine = Session(cfg, Path("live") / safe, self.models, out, session_id=sid,
+                         voice_map=voice_map, live=source)  # fmt: skip
+        ps = PilotSession(sid, Path("live") / safe, cfg, engine, out, use_enroll=False, live=source)
         self.sessions[sid] = ps
         return ps
 

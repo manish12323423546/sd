@@ -3,6 +3,7 @@ import { Link, NavLink, Route, Routes } from "react-router-dom";
 import { KeysDialog, openKeys } from "./components/KeysDialog";
 import { api, type Health } from "./net/api";
 import { Home } from "./routes/Home";
+import { LiveCapture } from "./routes/LiveCapture";
 import { Player } from "./routes/Player";
 import { Report } from "./routes/Report";
 import { VoiceLab } from "./routes/VoiceLab";
@@ -64,6 +65,7 @@ export function App() {
           </Link>
           <nav className="ml-2 flex items-center gap-1">
             <NavLink to="/" end className={tab}>Studio</NavLink>
+            <NavLink to="/live" className={tab}>Live capture</NavLink>
             <NavLink to="/voices" className={tab}>Voice Lab</NavLink>
           </nav>
           <div className="ml-auto">
@@ -75,6 +77,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/voices" element={<VoiceLab />} />
+        <Route path="/live" element={<LiveCapture />} />
         <Route path="/session/:id" element={<Player />} />
         <Route path="/session/:id/report" element={<Report />} />
       </Routes>

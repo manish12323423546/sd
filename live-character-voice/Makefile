@@ -8,7 +8,7 @@ CLIP ?= data/clips/synthetic_match.mp4
 SYS_PKGS := ffmpeg espeak-ng libsndfile1 sox
 
 
-.PHONY: synth-pilot download-models bench keys check-keys deps doctor
+.PHONY: synth-pilot download-models bench keys check-keys deps doctor extension live-test
 .PHONY: setup setup-system setup-python setup-ci setup-web test test-py test-web test-slow \
         lint lint-py lint-web check synth poc dev
 
@@ -111,6 +111,14 @@ deps:
 	@$(PY) -c "import msgpack, requests, fastapi, multipart, silero_vad" 2>/dev/null || \
 	  { echo ">>> installing missing Python packages (one time)…"; $(MAKE) setup-python; }
 	@[ -d web/node_modules ] || $(MAKE) setup-web
+
+# Rebuild the Chrome extension's shared relay (extension/lib) after changing web/src/live/.
+extension:
+	cd web && npm run build:extension
+
+# Live input test: stream a file or live URL to the engine like the extension does.
+live-test:
+	$(PY) scripts/live_stream_client.py $(or $(SRC),data/clips/synthetic_match.mp4) --view-delay 6
 
 doctor:
 	$(PY) -m engine.doctor

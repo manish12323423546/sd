@@ -10,7 +10,8 @@
     "test": "vitest run",
     "lint": "eslint .",
     "typecheck": "tsc -b --noEmit",
-    "e2e": "node e2e/smoke.mjs"
+    "e2e": "node e2e/smoke.mjs",
+    "build:extension": "vite build --config vite.extension.config.ts && cp public/pcm-worklet.js ../extension/lib/pcm-worklet.js"
   },
   "dependencies": {
     "react": "^18.3.1",

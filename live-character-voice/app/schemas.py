@@ -44,6 +44,13 @@ class CreateSession(BaseModel):
     )  # fmt: skip
 
 
+class LiveSessionCreate(BaseModel):
+    max_speakers: int = Field(2, ge=1, le=3)
+    voice_map: dict[str, str] | None = None
+    view_delay_s: float = Field(0.0, ge=0.0, le=15.0)
+    label: str = Field("live", max_length=120)
+
+
 class SessionCreated(BaseModel):
     session_id: str
     ws_url: str

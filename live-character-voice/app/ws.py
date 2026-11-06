@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import asyncio
 import contextlib
+import json
 from pathlib import Path
 from typing import Any
 
@@ -126,7 +127,8 @@ async def handle(ws: WebSocket, manager: SessionManager, sid: str) -> None:
         {
             "type": "session.ready",
             "session_id": sid,
-            "media_url": f"/media/clips/{ps.clip_id}",
+            "media_url": None if ps.live is not None else f"/media/clips/{ps.clip_id}",
+            "live_input": ps.live is not None,
             "speakers_max": ps.cfg.speaker.max_speakers,
             "voices": voices,
             "speed": ps.cfg.speed,
@@ -153,7 +155,17 @@ async def handle(ws: WebSocket, manager: SessionManager, sid: str) -> None:
     pump_task = asyncio.create_task(pump())
     try:
         while True:
-            msg = await ws.receive_json()
+            raw = await ws.receive()
+            if raw.get("type") == "websocket.disconnect":
+                raise WebSocketDisconnect(raw.get("code", 1000))
+            if raw.get("bytes") is not None:  # live input: PCM16 mono 16 kHz audio
+                if ps.live is not None and ps.status == "live":
+                    ps.live.push_pcm16(raw["bytes"])
+                continue
+            try:
+                msg = json.loads(raw.get("text") or "{}")
+            except ValueError:
+                continue
             kind = msg.get("type")
             if kind == "ping":
                 await ws.send_json(
@@ -197,7 +209,9 @@ async def handle(ws: WebSocket, manager: SessionManager, sid: str) -> None:
         pass
     finally:
         ps.clients -= 1
-        if ps.clients == 0 and ps.status == "live":
+        if ps.live is not None and ps.clients == 0:
+            manager.stop(ps)  # the capture client went away: the live input has ended
+        elif ps.clients == 0 and ps.status == "live":
             # nobody is watching any more: stop after a grace period so an abandoned tab does not
             # block the (single) pilot session slot until the clip ends
             asyncio.get_running_loop().call_later(ABANDON_GRACE_S, _stop_if_abandoned, manager, ps)

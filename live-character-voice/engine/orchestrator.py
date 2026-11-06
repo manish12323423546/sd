@@ -16,7 +16,7 @@ import contextlib
 import os
 import time
 from collections import deque
-from collections.abc import Callable
+from collections.abc import AsyncIterator, Callable
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
@@ -30,7 +30,7 @@ from engine.asr_guard import guard as asr_guard
 from engine.audio import F32
 from engine.config import EngineConfig, load_voice_catalog
 from engine.ingest.decode import decode_audio
-from engine.ingest.feeder import SessionClock, feed
+from engine.ingest.feeder import AudioChunk, SessionClock, feed
 from engine.priority_executor import PriorityExecutor
 from engine.providers.base import (
     ASRProvider,
@@ -243,6 +243,7 @@ class Session:
         echo_log: bool = False,
         emotion: EmotionProvider | None = None,
         vad_factory: Callable[[], Any] | None = None,
+        live: Any | None = None,
     ) -> None:
         if stop_after not in STOP_AFTER:
             raise ValueError(f"stop_after must be one of {STOP_AFTER}")
@@ -260,7 +261,8 @@ class Session:
             Path(__file__).resolve().parent.parent / "config/glossary.txt"
         )
         self.sr = cfg.audio.analysis_sr
-        self.clock = SessionClock(cfg.speed)
+        self.live = live  # engine.ingest.live.LiveSource: audio pushed by a capture client
+        self.clock: Any = live.clock if live is not None else SessionClock(cfg.speed)
         self.session_id = session_id or out_dir.name
         record = SessionRecord(
             session_id=self.session_id,
@@ -325,6 +327,8 @@ class Session:
     # ------------------------------------------------------------------ public
     def stop(self) -> None:
         self._stop.set()
+        if self.live is not None:
+            self.live.close()  # wakes the feed loop even when no audio is arriving
 
     def set_voice(self, speaker_id: str, voice_id: str) -> None:
         """Applies to every line whose TTS has not started (docs/05 voice switch rule)."""
@@ -361,18 +365,23 @@ class Session:
     async def run(self) -> SessionRecord:
         loop = asyncio.get_running_loop()
         t_decode = time.monotonic()
-        if self.audio_override is not None:
-            audio = self.audio_override
+        audio: F32 | None = None
+        if self.live is not None:
+            source: AsyncIterator[AudioChunk] = self.live.chunks(self.cfg.audio.chunk_ms)
         else:
-            audio = await loop.run_in_executor(
-                self.misc_pool, decode_audio, self.clip_path, self.sr
+            if self.audio_override is not None:
+                audio = self.audio_override
+            else:
+                audio = await loop.run_in_executor(
+                    self.misc_pool, decode_audio, self.clip_path, self.sr
+                )
+            self.duration = audio.size / self.sr
+            self.log.log(
+                "decode", seconds=round(time.monotonic() - t_decode, 3), duration=self.duration
             )
-        self.duration = audio.size / self.sr
-        self.log.log(
-            "decode", seconds=round(time.monotonic() - t_decode, 3), duration=self.duration
-        )
-        if self.enroll is not None and self.models.speaker is not None:
-            await self._do_enroll(audio)
+            if self.enroll is not None and self.models.speaker is not None:
+                await self._do_enroll(audio)
+            source = feed(audio, self.sr, self.cfg.audio.chunk_ms, self.clock)
         vad = await loop.run_in_executor(self.misc_pool, self.vad_factory)
 
         workers = []
@@ -390,9 +399,11 @@ class Session:
             DRIFT_EVERY_S,
             METRICS_EVERY_S,
         )
-        async for chunk in feed(audio, self.sr, self.cfg.audio.chunk_ms, self.clock):
+        async for chunk in source:
             if self._stop.is_set():
                 break
+            if self.live is not None:
+                self.duration = chunk.media_end
             probs, frames = vad.process(chunk.samples)
             for cand in self.segmenter.push(probs, frames):
                 self._on_line(cand)

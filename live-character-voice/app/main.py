@@ -14,6 +14,7 @@ from pathlib import Path
 
 import markdown
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile, WebSocket
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse, PlainTextResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -22,6 +23,7 @@ from app import ws as ws_handler
 from app.schemas import (
     ClipOut,
     CreateSession,
+    LiveSessionCreate,
     SayRequest,
     SessionCreated,
     SessionStatus,
@@ -62,6 +64,13 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 
 
 app = FastAPI(title="Live Sports Character Voice — Pilot API", lifespan=lifespan)
+# the Chrome extension (chrome-extension://…) and local dev servers call the engine directly
+app.add_middleware(
+    CORSMiddleware,
+    allow_origin_regex=r"^(chrome-extension://[a-p]{32}|http://(localhost|127\.0\.0\.1)(:\d+)?)$",
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 for d in (CLIPS_DIR, SESSIONS_DIR, PREVIEWS_DIR):
     d.mkdir(parents=True, exist_ok=True)
 app.mount("/media/clips", StaticFiles(directory=CLIPS_DIR), name="clips")
@@ -372,6 +381,21 @@ def create_session(body: CreateSession) -> SessionCreated:
     return SessionCreated(session_id=ps.session_id, ws_url=f"/ws/sessions/{ps.session_id}")
 
 
+@app.post("/api/live/sessions", response_model=SessionCreated)
+def create_live_session(body: LiveSessionCreate) -> SessionCreated:
+    """Live input: after `start`, the client streams mono 16 kHz PCM16 as binary WebSocket frames
+    (the Chrome extension and the Live capture page do this for any tab or live stream)."""
+    if manager.models is None:
+        raise HTTPException(503, "models are not loaded")
+    try:
+        ps = manager.create_live(body.max_speakers, body.voice_map, body.view_delay_s, body.label)
+    except SessionBusyError as e:
+        raise HTTPException(409, str(e)) from e
+    except KeyError as e:
+        raise HTTPException(400, f"unknown voice {e}") from e
+    return SessionCreated(session_id=ps.session_id, ws_url=f"/ws/sessions/{ps.session_id}")
+
+
 def _session(sid: str):  # type: ignore[no-untyped-def]
     try:
         return manager.get(sid)
@@ -511,4 +535,7 @@ if _dist.exists():
 
     @app.get("/{path:path}", include_in_schema=False)
     def spa(path: str) -> FileResponse:
+        f = (_dist / path).resolve()
+        if path and f.is_file() and f.is_relative_to(_dist.resolve()):  # e.g. /pcm-worklet.js
+            return FileResponse(f)
         return FileResponse(_dist / "index.html")

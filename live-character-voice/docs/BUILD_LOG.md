@@ -548,3 +548,32 @@ Live-mode floor: line length (p50 2.6 s) + end detection 0.48 + ASR 0.47 + Fish 
 Remaining word errors are mostly names (Moreau/Lindqvist) and very short shouts ("Save!").
 Browser test: countdown → synced start; Space paused video 0.00 s drift for 3 s and resumed
 exactly; subtitles toggle; e2e smoke OK (15/15 lines voiced). Tests: pytest 72, vitest 13.
+
+## 2026-11-06 — V4: live streams — Chrome extension, Live capture page, live ingest API
+
+**Built** (design and comparison in `docs/LIVE_STREAMING.md`)
+- Engine live input: `engine/ingest/live.py` (`LiveSource`, `MediaClock` = time from received
+  samples), `Session(live=…)`, `POST /api/live/sessions`, binary PCM16 frames on the session
+  WebSocket, input kept as `live_input.wav`, capture-client disconnect ends the session; CORS for
+  the extension; built web files (e.g. `/pcm-worklet.js`) served.
+- Browser relay `web/src/live/relay.ts`: AudioWorklet resampler (`public/pcm-worklet.js`, one-pole
+  LPF + linear interpolation → 16 kHz PCM16), original replayed through a DelayNode and ducked,
+  voices scheduled at t0 + play_at_media + D on the same AudioContext, still-generating lines
+  streamed (`.part.wav` via a media element), `DelayedVideo` (MediaRecorder VP8 → MSE, synced to the
+  audio clock, old video trimmed).
+- Web app **Live capture** page (`/live`): any tab/window via Chrome's share picker
+  (`suppressLocalAudioPlayback`), synced/live, cast, levels, delayed picture, subtitles,
+  transcript, live voice switching, report link.
+- **Chrome extension** (`extension/`, MV3): popup (engine status, mode, delay, cast), background
+  service worker (`tabCapture.getMediaStreamId`), Synced viewer window (tab picture + sound
+  delayed, voices on time, subtitles, transcript, live voice switch), Live overlay (offscreen
+  document + on-page subtitles), shared relay bundle (`make extension`).
+- `scripts/live_stream_client.py` (+ `make live-test`): streams a file or any live URL (ffmpeg;
+  page URLs via yt-dlp `--resolve`) to the live API in real time.
+
+**Measured**: see `docs/LIVE_STREAMING.md` — live ingest 60/60 lines voiced, felt delay p50 0.00 s,
+p95 0.62–1.69 s, 80–85 % on time; Live capture page ASR WER 6.5 %; extension viewer picture held
+exactly 6 s, 0 late lines. Bugs found by testing: worklet URL served as HTML (SPA fallback) →
+real files now served; relay waited for whole streamed files (21/59 late) → streams on first
+bytes (0 late).
+**Not automatable**: Chrome's tab picker and the extension permission click need a real user.

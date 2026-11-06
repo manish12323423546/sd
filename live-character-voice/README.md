@@ -63,6 +63,13 @@ in the **Playground**, and cast the voice on a commentator in **Studio → Cast 
 Best sample: one person, no music or other voices, quiet room, natural variety in tone.
 Only clone voices you own or have permission to use.
 
+## Live streams (any tab)
+- **Chrome extension** (`extension/`, see its README): click it on any tab playing a live stream →
+  *Synced window* (picture held back, voices exactly on time) or *Live overlay* (voices + subtitles on
+  the tab).
+- **No install:** web app → **Live capture** → pick a tab with “Also share tab audio”.
+- **Command line:** `make live-test SRC="https://…/stream.m3u8"`. Design: `docs/LIVE_STREAMING.md`.
+
 ## Synced vs Live mode
 - **Synced (recommended):** the picture is held back a few seconds (default 6 s, like a TV
   broadcast delay) so every new voice starts exactly with its original line — measured felt delay

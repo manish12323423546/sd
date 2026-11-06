@@ -426,3 +426,46 @@ def test_synced_plan_lands_on_line_start() -> None:
     plan = plan_playback(tts_ready=7.4, t_start=3.0 + d, t_end=5.5 + d, speaker_id="S1",
                          duration=2.4, prev=None, cfg=ScheduleConfig())  # fmt: skip
     assert plan.play_at - d == pytest.approx(3.0) and plan.action == "none"
+
+
+def test_live_source_rechunks_and_clocks_by_audio() -> None:
+    import asyncio
+
+    from engine.ingest.live import LiveSource
+
+    async def go() -> tuple[list[tuple[float, float, int]], float]:
+        src = LiveSource(16000)
+        pcm = (np.ones(4000, dtype=np.int16) * 1000).tobytes()  # 0.25 s per push
+        out = []
+
+        async def consume() -> None:
+            async for ch in src.chunks(100):
+                out.append((round(ch.media_start, 3), round(ch.media_end, 3), ch.samples.size))
+
+        task = asyncio.create_task(consume())
+        for _ in range(4):  # 1.0 s of audio in uneven pushes
+            src.push_pcm16(pcm)
+            await asyncio.sleep(0)
+        clock_now = src.clock.now()
+        src.close()
+        await task
+        return out, clock_now
+
+    chunks, now = asyncio.run(go())
+    assert len(chunks) == 10 and chunks[0] == (0.0, 0.1, 1600) and chunks[-1][1] == 1.0
+    assert 1.0 <= now <= 1.3  # media clock = audio received (+ small interpolation)
+
+
+def test_live_session_endpoint_needs_models() -> None:
+    import os
+
+    os.environ["LCV_SKIP_MODELS"] = "1"
+    from fastapi.testclient import TestClient
+
+    from app import main
+
+    with TestClient(main.app) as c:
+        assert c.post("/api/live/sessions", json={"max_speakers": 2}).status_code == 503
+        assert c.post("/api/live/sessions", json={"max_speakers": 7}).status_code == 422
+        r = c.get("/pcm-worklet.js")  # served for the Live capture page (when web is built)
+        assert r.status_code in (200, 404)
