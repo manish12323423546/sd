@@ -577,3 +577,16 @@ exactly 6 s, 0 late lines. Bugs found by testing: worklet URL served as HTML (SP
 real files now served; relay waited for whole streamed files (21/59 late) → streams on first
 bytes (0 late).
 **Not automatable**: Chrome's tab picker and the extension permission click need a real user.
+
+## 2026-11-06 — V5: hosting (Vercel web app + Hugging Face Space engine)
+- Vercel Functions cannot host the engine (500 MB bundle limit vs PyTorch + models; WebSockets
+  close at the function's max duration — 300 s on Hobby; per-request instances vs per-session
+  state). Engine → Docker Space (free CPU basic, 2 vCPU / 16 GB, WebSockets), web app → Vercel.
+- Built: remote engine base for the web app (`VITE_API_BASE`), access code (`LCV_ACCESS_CODE`,
+  HTTP + WebSocket middleware, app gate, extension field), CORS for *.vercel.app / *.hf.space,
+  `deploy/huggingface` (Dockerfile, Space README, `start.sh`), self-update (start.sh pulls on start;
+  the app restarts onto a new GitHub commit when idle), `docs/HOSTING.md`.
+- Tested: separately served build (other origin) + engine with access code — gate, Voice Lab,
+  playground, full synced session; start.sh brings up the engine at the pushed commit.
+- Vercel via the connector: project creation refused (403 on both teams; the connector has no
+  write access and the repo's GitHub account is not linked to Vercel) → import steps in HOSTING.md.
