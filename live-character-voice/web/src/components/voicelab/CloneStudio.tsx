@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { api, type CloneJob, type VoiceDetail } from "../../net/api";
 import { DropZone, fmtTime, PlayButton } from "../../ui/kit";
+import { openKeys } from "../KeysDialog";
 import { Recorder } from "./Recorder";
 import { useDecodedDuration, Waveform } from "./Waveform";
 
@@ -105,10 +106,9 @@ export function CloneStudio({ cloning, onCreated }: { cloning: boolean; onCreate
       </div>
 
       {!cloning && (
-        <div className="rounded-xl border border-excited/40 bg-excited/10 p-3 text-sm text-excited">
-          Voice cloning needs a free Fish Audio key. Get one at{" "}
-          <a className="underline" href="https://fish.audio/app/api-keys" target="_blank" rel="noreferrer">fish.audio/app/api-keys</a>, run{" "}
-          <code className="rounded bg-black/40 px-1">make keys</code> and restart the app.
+        <div className="flex flex-wrap items-center gap-3 rounded-xl border border-excited/40 bg-excited/10 p-3 text-sm text-excited">
+          <span className="flex-1">Voice cloning needs a free Fish Audio key — paste it here, no restart needed.</span>
+          <button type="button" className="btn-primary !py-2" onClick={openKeys} data-testid="connect-fish">Connect Fish Audio</button>
         </div>
       )}
 

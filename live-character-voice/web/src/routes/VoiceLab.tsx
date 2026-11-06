@@ -23,6 +23,9 @@ export function VoiceLab() {
   }, []);
   useEffect(() => {
     void load();
+    const on = () => void load();
+    window.addEventListener("engines-changed", on);
+    return () => window.removeEventListener("engines-changed", on);
   }, [load]);
 
   const created = useCallback(

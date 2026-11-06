@@ -8,7 +8,7 @@ CLIP ?= data/clips/synthetic_match.mp4
 SYS_PKGS := ffmpeg espeak-ng libsndfile1 sox
 
 
-.PHONY: synth-pilot download-models bench keys check-keys
+.PHONY: synth-pilot download-models bench keys check-keys deps doctor
 .PHONY: setup setup-system setup-python setup-ci setup-web test test-py test-web test-slow \
         lint lint-py lint-web check synth poc dev
 
@@ -106,7 +106,16 @@ keys:
 check-keys:
 	$(PY) -m engine.keycheck
 
-serve:
+# Installs anything missing (e.g. after `git pull` added a package) before starting.
+deps:
+	@$(PY) -c "import msgpack, requests, fastapi, multipart, silero_vad" 2>/dev/null || \
+	  { echo ">>> installing missing Python packages (one time)…"; $(MAKE) setup-python; }
+	@[ -d web/node_modules ] || $(MAKE) setup-web
+
+doctor:
+	$(PY) -m engine.doctor
+
+serve: deps
 	cd web && npm run build
 	MALLOC_ARENA_MAX=2 $(PY) -m uvicorn app.main:app --port 8000
 

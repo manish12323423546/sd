@@ -29,3 +29,15 @@ def load_env(path: Path | None = None) -> list[str]:
             os.environ[key] = value
             loaded.append(key)
     return loaded
+
+
+def save_env(key: str, value: str, path: Path | None = None) -> Path:
+    """Write/replace KEY=value in the git-ignored `.env` (chmod 600) and set it for this process."""
+    path = path or PROJECT_ROOT / ".env"
+    lines = path.read_text().splitlines() if path.exists() else []
+    lines = [ln for ln in lines if not ln.strip().startswith(f"{key}=")]
+    lines.append(f"{key}={value}")
+    path.write_text("\n".join(lines) + "\n")
+    path.chmod(0o600)
+    os.environ[key] = value
+    return path

@@ -1,5 +1,6 @@
 // Shown only when an engine is offline: says why and how to fix it (free key links).
 import type { Health } from "../net/api";
+import { openKeys } from "./KeysDialog";
 
 const LINKS: Record<string, { key: string; url: string; what: string }> = {
   voices: { key: "FISH_API_KEY", url: "https://fish.audio/app/api-keys", what: "emotional voices + cloning" },
@@ -22,13 +23,15 @@ export function EngineBanner({ health }: { health: Health | null }) {
             {l && (
               <span className="text-muted">
                 For {l.what}, get a free key at{" "}
-                <a className="text-accent underline" href={l.url} target="_blank" rel="noreferrer">{l.url}</a>, then run{" "}
-                <code className="rounded bg-black/40 px-1 text-ink">make keys</code> and restart.
+                <a className="text-accent underline" href={l.url} target="_blank" rel="noreferrer">{l.url}</a> and paste it with the button below.
               </span>
             )}
           </p>
         );
       })}
+      {off.length > 0 && (
+        <button type="button" className="btn-primary mt-3 !py-2" onClick={openKeys}>Connect keys now</button>
+      )}
       {fallback > 0 && <p className="text-xs text-excited">{fallback} line(s) fell back to offline voices because Fish Audio did not answer in time.</p>}
     </section>
   );

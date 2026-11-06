@@ -125,3 +125,34 @@ def test_custom_voice_upload_needs_consent_and_enough_audio(
     assert vc.reference("cu_my-voice")[1] == "hello"
     assert client.delete("/api/voices/custom/cu_my-voice").status_code == 200
     assert client.delete("/api/voices/custom/cu_my-voice").status_code == 404
+
+
+def test_keys_endpoint_tests_before_saving(client: TestClient, tmp_path, monkeypatch) -> None:  # type: ignore[no-untyped-def]
+    import engine.env as env_mod
+    import engine.keycheck as kc
+
+    saved: dict[str, str] = {}
+    monkeypatch.setattr(env_mod, "save_env", lambda k, v, path=None: saved.__setitem__(k, v))
+    monkeypatch.setattr(kc, "check_fish", lambda: kc.KeyStatus("fish", True, False, "rejected"))
+    monkeypatch.delenv("FISH_API_KEY", raising=False)
+    assert client.post("/api/keys", json={}).status_code == 400
+    r = client.post("/api/keys", json={"fish": " sk-fish-bad "})
+    assert r.status_code == 200 and r.json()["results"]["fish"]["ok"] is False
+    assert saved == {} and "FISH_API_KEY" not in __import__("os").environ  # bad key not kept
+    monkeypatch.setattr(kc, "check_fish", lambda: kc.KeyStatus("fish", True, True, "works"))
+    r = client.post("/api/keys", json={"fish": "sk-fish-good"})
+    assert r.json()["results"]["fish"]["ok"] is True and saved == {"FISH_API_KEY": "sk-fish-good"}
+    assert "sk-fish-good" not in r.text  # never echoed back
+
+
+def test_save_env_replaces_and_restricts(tmp_path, monkeypatch) -> None:  # type: ignore[no-untyped-def]
+    from engine.env import load_env, save_env
+
+    p = tmp_path / ".env"
+    p.write_text("# keys\nFISH_API_KEY=old\nGROQ_API_KEY=g\n")
+    monkeypatch.delenv("FISH_API_KEY", raising=False)
+    save_env("FISH_API_KEY", "new", p)
+    assert p.read_text().count("FISH_API_KEY=") == 1 and "FISH_API_KEY=new" in p.read_text()
+    assert "GROQ_API_KEY=g" in p.read_text() and (p.stat().st_mode & 0o777) == 0o600
+    monkeypatch.delenv("FISH_API_KEY", raising=False)
+    assert "FISH_API_KEY" in load_env(p)

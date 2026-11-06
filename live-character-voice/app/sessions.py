@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import threading
 import time
 import uuid
 from dataclasses import dataclass, field
@@ -119,6 +120,22 @@ class SessionManager:
     def load_models(self) -> None:
         self.models = Models.load(self.cfg, {"asr", "speaker", "tts"}, log=self._log)
         self.make_previews()
+
+    def reload_engines(self) -> dict[str, Any]:
+        """Re-check the keys and switch speech-to-text / voices without restarting (used after a
+        key is entered in the app). Refused while a session is running."""
+        if self.active() is not None:
+            raise SessionBusyError("stop the running session first")
+        if self.models is None:
+            raise RuntimeError("models are still loading")
+        fresh = load_engine_config()
+        m2 = Models.load(fresh, {"asr", "tts"}, log=self._log)
+        self.models.asr, self.models.tts = m2.asr, m2.tts
+        self.models.engines.update(m2.engines)
+        self.models.info.update(m2.info)
+        self.cfg.asr, self.cfg.tts = fresh.asr, fresh.tts
+        threading.Thread(target=self.make_previews, daemon=True).start()
+        return dict(self.models.engines)
 
     def _log(self, msg: str) -> None:
         self.load_log.append(msg)

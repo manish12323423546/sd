@@ -51,7 +51,8 @@ error. Measured: the new voice starts 1.8 s (median) after the commentator's lin
 fully local.
 
 ## Your own voice — Voice Lab (instant or professional cloning)
-Needs a Fish Audio key (`make keys`). Open **Voice Lab** in the top bar:
+Needs a free Fish Audio key: click **Keys** in the top bar (or **Connect Fish Audio** in Voice Lab),
+paste it, and it switches on at once — or use `make keys`. Problems? Run `make doctor`. Open **Voice Lab** in the top bar:
 - **Instant clone** — 10–30 s of one voice (15 s ideal), ready in ~5 s.
 - **Professional clone** — 1–10 min recording (2–5 min is the sweet spot), ready in ~1 min. Keeps
   only the main speaker, picks the cleanest speech, sorts calm / normal / excited delivery, tests

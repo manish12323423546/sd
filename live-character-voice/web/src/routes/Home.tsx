@@ -39,6 +39,9 @@ export function Home() {
 
   useEffect(() => {
     void refresh();
+    const on = () => void refresh();
+    window.addEventListener("engines-changed", on);
+    return () => window.removeEventListener("engines-changed", on);
   }, []);
 
   const selected = clips.find((c) => c.clip_id === clipId);

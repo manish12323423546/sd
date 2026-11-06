@@ -140,6 +140,14 @@ export const api = {
     const blob = await res.blob();
     return { url: URL.createObjectURL(blob), seconds: (performance.now() - t) / 1000 };
   },
+  setKeys: async (fish?: string, groq?: string): Promise<{ results: Record<string, { ok: boolean; message: string }>; voice_cloning: boolean }> =>
+    json(
+      await fetch("/api/keys", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fish, groq }),
+      }),
+    ),
   createSession: async (body: CreateSessionBody): Promise<{ session_id: string; ws_url: string }> =>
     json(
       await fetch("/api/sessions", {

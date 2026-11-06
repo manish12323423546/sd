@@ -13,9 +13,10 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 import markdown
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile, WebSocket
+from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile, WebSocket
 from fastapi.responses import FileResponse, HTMLResponse, PlainTextResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
 
 from app import ws as ws_handler
 from app.schemas import (
@@ -105,6 +106,51 @@ def _tier_score(voice_id: str) -> tuple[str, int | None]:
     except KeyError:
         return "instant", None
     return str(meta.get("tier", "instant")), (meta.get("quality") or {}).get("score")
+
+
+class KeysIn(BaseModel):
+    fish: str | None = None
+    groq: str | None = None
+
+
+@app.post("/api/keys")
+async def set_keys(body: KeysIn, request: Request) -> dict[str, object]:
+    """Paste free API keys in the app: each key is tested, saved to the git-ignored `.env` only
+    if it works, then the engines switch over without a restart. Local machine only; keys are
+    never sent back."""
+    from engine.env import save_env
+    from engine.keycheck import check_fish, check_groq
+
+    host = request.client.host if request.client else ""
+    if host not in {"127.0.0.1", "::1", "localhost", "testclient"}:
+        raise HTTPException(403, "keys can only be set from this computer")
+    results: dict[str, dict[str, object]] = {}
+    for name, value, env, check in (
+        ("fish", body.fish, "FISH_API_KEY", check_fish),
+        ("groq", body.groq, "GROQ_API_KEY", check_groq),
+    ):
+        value = (value or "").strip().strip('"').strip("'")
+        if not value:
+            continue
+        old = os.environ.get(env)
+        os.environ[env] = value
+        st = await asyncio.get_running_loop().run_in_executor(None, check)
+        if st.ok:
+            save_env(env, value)
+        elif old is not None:
+            os.environ[env] = old
+        else:
+            os.environ.pop(env, None)
+        results[name] = {"ok": st.ok, "message": st.message}
+    if not results:
+        raise HTTPException(400, "paste at least one key")
+    engines: dict[str, object] = {}
+    if any(r["ok"] for r in results.values()) and manager.models is not None:
+        try:
+            engines = await asyncio.get_running_loop().run_in_executor(None, manager.reload_engines)
+        except SessionBusyError as e:
+            raise HTTPException(409, str(e)) from e
+    return {"results": results, "engines": engines, "voice_cloning": manager.cloning}
 
 
 @app.get("/api/voices", response_model=list[VoiceOut])

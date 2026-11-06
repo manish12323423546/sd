@@ -481,3 +481,16 @@ detail (likeness ring, test per mood, the clips picked from the recording), play
 any voice, calm → peak, history + download), library with filters. Player/report restyled.
 Checks: tsc + eslint clean, vitest 13/13, pytest 66 passed, e2e smoke OK (delay p50 1.9 s,
 p95 2.4 s, voice switch OK), no horizontal scroll at 390 px, no console errors.
+
+## 2026-11-06 — V2.4: "voice cloning asks for keys" on the Mac
+- Cause: Fish support (V2) added Python packages (msgpack, requests); the Mac install predates it and
+  the update steps only rebuilt the web app → the key check failed on import and the app reported
+  Fish as offline even with a correct key.
+- `make serve` now runs `make deps` first: installs missing Python/web packages automatically.
+- `make doctor`: packages, tools, keys (masked), live key test, port 8000 — one screen to share.
+- Key check names a missing package instead of "could not reach".
+- In-app "Connect your free keys" dialog (header pills / Keys button / Voice Lab / banner):
+  `POST /api/keys` (this computer only) tests each key, saves only working keys to `.env`
+  (chmod 600), never echoes them, and hot-swaps speech-to-text and voices without a restart.
+- Verified: server started with no keys (cloning False) → key pasted in the dialog → "Connected"
+  after 21.6 s → cloning True, no restart; a wrong key → "rejected (HTTP 401)", not saved.

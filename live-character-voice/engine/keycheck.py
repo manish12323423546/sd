@@ -49,7 +49,10 @@ def check_fish(timeout_s: float = 15.0) -> KeyStatus:
     try:
         import msgpack
         import requests
-
+    except ImportError as e:
+        return KeyStatus("fish", True, False, f"a Python package is missing ({e.name}) — run "
+                         "`make setup-python` once, then start the app again")  # fmt: skip
+    try:
         r = requests.post(
             FISH_URL,
             data=msgpack.packb({"text": "OK.", "format": "mp3", "latency": "balanced"}),
@@ -75,7 +78,10 @@ def check_groq(timeout_s: float = 10.0) -> KeyStatus:
         return KeyStatus("groq", False, False, f"no GROQ_API_KEY in {PROJECT_ROOT / '.env'}")
     try:
         import requests
-
+    except ImportError as e:
+        return KeyStatus("groq", True, False, f"a Python package is missing ({e.name}) — run "
+                         "`make setup-python` once, then start the app again")  # fmt: skip
+    try:
         r = requests.get(GROQ_URL, headers={"Authorization": f"Bearer {key}"}, timeout=timeout_s)
     except Exception as e:
         return KeyStatus("groq", True, False, f"could not reach api.groq.com ({type(e).__name__})")

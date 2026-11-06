@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, Route, Routes } from "react-router-dom";
+import { KeysDialog, openKeys } from "./components/KeysDialog";
 import { api, type Health } from "./net/api";
 import { Home } from "./routes/Home";
 import { Player } from "./routes/Player";
@@ -13,7 +14,11 @@ function EnginePills() {
     const load = () => api.health().then(setH).catch(() => setH(null));
     void load();
     const t = window.setInterval(load, 15000);
-    return () => window.clearInterval(t);
+    window.addEventListener("engines-changed", load);
+    return () => {
+      window.clearInterval(t);
+      window.removeEventListener("engines-changed", load);
+    };
   }, []);
   const e = h?.engines ?? {};
   const items = [
@@ -22,13 +27,17 @@ function EnginePills() {
   ];
   if (!h) return <span className="text-xs text-muted">connecting…</span>;
   return (
-    <div className="hidden items-center gap-2 md:flex" data-testid="engine-pills">
+    <div className="flex items-center gap-2" data-testid="engine-pills">
       {items.map((it) => (
-        <span key={it.k} title={e[it.k]?.note ?? ""} className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-muted">
+        <button type="button" key={it.k} title={e[it.k]?.note ?? ""} onClick={openKeys}
+          className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-muted transition hover:border-accent/50 hover:text-ink">
           <Dot ok={Boolean(e[it.k]?.online)} />
           {it.label}
-        </span>
+        </button>
       ))}
+      <button type="button" onClick={openKeys} className="rounded-full border border-white/10 px-3 py-1 text-xs text-muted transition hover:border-accent/50 hover:text-ink">
+        Keys
+      </button>
     </div>
   );
 }
@@ -62,6 +71,7 @@ export function App() {
           </div>
         </div>
       </header>
+      <KeysDialog />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/voices" element={<VoiceLab />} />
