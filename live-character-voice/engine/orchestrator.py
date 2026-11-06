@@ -156,7 +156,9 @@ class Models:
                 cfg.asr.provider, name = "faster_whisper", "offline Whisper"
                 note = "chosen in settings" if want == "local" else (g.message if g else "")
             online = cfg.asr.provider != "faster_whisper"
-            m.engines["text"] = {"online": online, "name": name, "note": note, "choice": want}
+            dg_note = d.message if d is not None else "not checked"
+            m.engines["text"] = {"online": online, "name": name, "note": note, "choice": want,
+                                 "deepgram": dg_note}  # fmt: skip
             log(f"speech-to-text: {name} ({note})")
         elif cfg.asr.provider == "auto":
             cfg.asr.provider = (
