@@ -49,3 +49,11 @@ def test_no_key_skips_api(monkeypatch: Any) -> None:
     monkeypatch.delenv("DEEPGRAM_API_KEY", raising=False)
     asr = DeepgramASR(fallback=_Fallback())
     assert asr.transcribe(np.zeros(160, dtype=np.float32), 16000).source == "groq"
+
+
+def test_empty_result_retried_on_backup(monkeypatch: Any) -> None:
+    monkeypatch.setenv("DEEPGRAM_API_KEY", "x")
+    asr = DeepgramASR(fallback=_Fallback())
+    monkeypatch.setattr(asr, "_deepgram", lambda *a, **k: ASRResult(text="", no_speech_prob=1.0))
+    r = asr.transcribe(np.zeros(16000, dtype=np.float32), 16000)  # 1 s phrase, Deepgram empty
+    assert r.text == "from fallback" and r.source == "groq*" and asr.n_empty_retry == 1

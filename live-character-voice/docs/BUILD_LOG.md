@@ -641,3 +641,22 @@ ECAPA 13.6 %), noise reduction before the voice-print (13.6 → 16.0 %), lowerin
 **Chrome Web Store**: `extension-store/` — upload zip (`make extension-zip`), LISTING.md, PUBLISH.md,
 4 screenshots 1280×800, promo 440×280; privacy policy at `/privacy.html`; manifest 0.6.0 with the
 hosted engine as default.
+
+## 2026-11-06 — V8: Deepgram speech-to-text, Keys & engines dialog
+- New provider `engine/providers/paid/asr_deepgram.py` (Nova-3, per phrase, glossary names as
+  keyterms; failures and empty answers on ≥ 0.6 s phrases go to the backup engine).
+- Choice `LCV_ASR` = auto | deepgram | groq | local, set in the app (Keys & engines dialog) —
+  hosted engines need `LCV_ADMIN_CODE`; with `HF_TOKEN` keys are saved as Space secrets.
+- Per-phrase bench (`scripts/asr_bench.py`, 200 truth lines, 3 clips, no context prompt):
+  Deepgram WER 9.99 % p50 0.42 s p95 1.19 s; Groq 12.53 % p50 0.51 s p95 1.79 s.
+- Live pipeline, Quality Lab, synthetic_match, synced 6 s:
+  | setup | WER | spoken WER | voiced | on time | felt p95 | lines by |
+  |---|---|---|---|---|---|---|
+  | Groq + offline backup (before) | 6.5 % | 7.8 % | 60/60 | 87 % | 0.49 s | groq 54, local 6 |
+  | Deepgram first (no retry) | 10.7 % | 12.4 % | 57/57 | 88 % | 0.53 s | deepgram 61 |
+  | Deepgram first + empty retry | 8.2 % | 9.7 % | 60/60 | 82 % | 0.78 s | deepgram 59, groq 2 |
+  | **Auto: Groq + Deepgram backup** | **6.1 / 6.3 %** | 7.6 / 8.4 % | 60/60, 59/59 | 75 / 85 % | 0.98 / 0.69 s | groq 53–54, deepgram 7–8 |
+  Groq with the context prompt (previous words + names) beats Deepgram on these synthetic
+  voices; Deepgram mishears some short excited phrases ("he has to score there" → "after
+  school") and returned empty text for two 1.4–1.6 s shouts. Default = Auto. On-time share
+  varies run to run with the voice service's speed (Fish), not with speech-to-text.

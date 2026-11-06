@@ -120,7 +120,7 @@ class GroqASR:
                 self.last_error = str(e)
         self.n_fallback += 1
         result: ASRResult = self.fallback.transcribe(audio, sr, prompt, span)
-        return result.model_copy(update={"source": "local"})
+        return result.model_copy(update={"source": result.source or "local"})
 
     def _take_slot(self) -> bool:
         """Sliding 60 s window under the requests-per-minute limit; waits briefly for a slot."""

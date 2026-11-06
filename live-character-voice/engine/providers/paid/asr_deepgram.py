@@ -61,6 +61,7 @@ class DeepgramASR:
         self.keyterms = _keyterms()
         self.n_deepgram = 0
         self.n_fallback = 0
+        self.n_empty_retry = 0
         self.last_error = ""
         self._cooldown_until = 0.0
 
@@ -100,6 +101,14 @@ class DeepgramASR:
             try:
                 res = self._deepgram(audio, sr)
                 self.n_deepgram += 1
+                # measured: Deepgram sometimes returns nothing for short excited phrases
+                # (1.4–1.6 s shouts) that Whisper hears fine — ask the backup for those
+                if res.text or audio.size < 0.6 * sr:
+                    return res.model_copy(update={"source": "deepgram"})
+                self.n_empty_retry += 1
+                back: ASRResult = self.fallback.transcribe(audio, sr, prompt, span)
+                if back.text:
+                    return back.model_copy(update={"source": f"{back.source or 'local'}*"})
                 return res.model_copy(update={"source": "deepgram"})
             except Exception as e:  # any API failure → next engine for this line
                 self.last_error = str(e)

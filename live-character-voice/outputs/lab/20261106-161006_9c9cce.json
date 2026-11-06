@@ -1,0 +1,72 @@
+{
+  "session_id": "20261106-161006_9c9cce",
+  "clip": "synthetic_match.mp4",
+  "view_delay_s": 6.0,
+  "felt_p50": 0.0,
+  "felt_p95": 0.693,
+  "felt_max": 1.13,
+  "on_time": 0.8475,
+  "lines": 59,
+  "voiced": 59,
+  "actions": {
+    "fit": 41,
+    "none": 18,
+    "noise": 2
+  },
+  "asr_by": {
+    "groq": 53,
+    "deepgram": 8
+  },
+  "wer": 0.0629,
+  "speaker_accuracy": 0.9512,
+  "speaker_two_pass": 0.9536,
+  "speakers_found": 3,
+  "emotion_exact": 0.5484,
+  "emotion_within_one": 0.9516,
+  "crashes": 0,
+  "commit": "6ed72b02",
+  "spoken_wer": 0.0838,
+  "spoken_deletions": 8,
+  "ref_words": 525,
+  "missing_words": [
+    "score there",
+    "save",
+    "quick throw into moreau",
+    "equalises"
+  ],
+  "finished": "2026-11-06 16:14:19",
+  "source": "quality-lab",
+  "spoken": {
+    "lines": 61,
+    "actions": {
+      "fit": 41,
+      "none": 18,
+      "noise": 2
+    },
+    "ref_words": 525,
+    "asr": {
+      "wer": 0.0629,
+      "deletions": 8,
+      "substitutions": 25,
+      "insertions": 0
+    },
+    "voiced": {
+      "wer": 0.0629,
+      "deletions": 8,
+      "substitutions": 25,
+      "insertions": 0
+    },
+    "spoken": {
+      "wer": 0.0838,
+      "deletions": 8,
+      "substitutions": 34,
+      "insertions": 2
+    },
+    "missing_words": [
+      "score there",
+      "save",
+      "quick throw into moreau",
+      "equalises"
+    ]
+  }
+}

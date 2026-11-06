@@ -99,6 +99,7 @@ class Models:
     load_s: dict[str, float] = field(default_factory=dict)
     info: dict[str, str] = field(default_factory=dict)
     engines: dict[str, dict[str, Any]] = field(default_factory=dict)  # plain-language status
+    asr_backup: str = "local"  # engine for lines the main speech-to-text can't take
 
     @classmethod
     def load(
@@ -132,12 +133,23 @@ class Models:
 
             # choice: LCV_ASR = auto | deepgram | groq | local (set in the app's Keys dialog)
             want = os.environ.get("LCV_ASR", "auto").strip().lower() or "auto"
-            d = check_deepgram() if want in ("auto", "deepgram") else None
+            d = check_deepgram() if want != "local" else None
             g = check_groq() if want != "local" else None
-            if d is not None and d.ok:
-                cfg.asr.provider, name, note = "deepgram", "Deepgram Nova-3", d.message
-            elif g is not None and g.ok:
-                cfg.asr.provider, name, note = "groq", "Groq whisper-large-v3-turbo", g.message
+            d_ok, g_ok = bool(d and d.ok), bool(g and g.ok)
+            # measured (BUILD_LOG V8): in the live pipeline Groq + context prompt is the most
+            # accurate (WER 6.5 % vs Deepgram 10.7 %), Deepgram is faster per phrase. Auto: Groq
+            # first, Deepgram for the lines Groq's free tier can't take (instead of offline).
+            m.asr_backup = "deepgram" if d_ok else "local"
+            if (want == "deepgram" and d_ok) or (want == "auto" and d_ok and not g_ok):
+                cfg.asr.provider, name, note = (
+                    "deepgram",
+                    "Deepgram Nova-3",
+                    "backup: " + ("Groq" if g_ok else "offline Whisper"),
+                )
+            elif want in ("auto", "groq", "deepgram") and g_ok:
+                cfg.asr.provider = "groq"
+                name = "Groq whisper-large-v3-turbo"
+                note = "backup: Deepgram" if d_ok else "backup: offline Whisper"
                 if want == "deepgram" and d is not None:
                     note = f"Deepgram not used: {d.message}"
             else:
@@ -180,12 +192,27 @@ class Models:
                     ),
                 )
             elif cfg.asr.provider == "groq":
-                m.asr = timed(
-                    "asr",
-                    lambda: registry.create(
-                        "asr", "groq", model=cfg.asr.groq_model, fallback_model=cfg.asr.model
-                    ),
-                )
+
+                def groq() -> Any:
+                    fb = None
+                    if m.asr_backup == "deepgram":
+                        from engine.providers.free.asr_faster_whisper import FasterWhisperASR
+
+                        fb = registry.create(
+                            "asr",
+                            "deepgram",
+                            model=cfg.asr.deepgram_model,
+                            fallback=FasterWhisperASR(cfg.asr.model),
+                        )
+                    return registry.create(
+                        "asr",
+                        "groq",
+                        model=cfg.asr.groq_model,
+                        fallback_model=cfg.asr.model,
+                        fallback=fb,
+                    )
+
+                m.asr = timed("asr", groq)
             else:
                 m.asr = timed(
                     "asr",
@@ -201,7 +228,7 @@ class Models:
             m.info["asr"] = (
                 f"deepgram:{cfg.asr.deepgram_model} (fallback groq/local)"
                 if cfg.asr.provider == "deepgram"
-                else f"groq:{cfg.asr.groq_model} (fallback local {cfg.asr.model})"
+                else f"groq:{cfg.asr.groq_model} (backup {m.asr_backup})"
                 if cfg.asr.provider == "groq"
                 else f"{cfg.asr.provider}:{cfg.asr.model} ({cfg.asr.compute_type}, "
                 f"{cfg.asr.cpu_threads} threads)"
