@@ -538,3 +538,15 @@ def test_tracker_v2_merges_a_split_person_and_keeps_enrolled_apart() -> None:
     en.enroll("Bob", [_pv(5, 0.3, a)])
     en._check_merges()
     assert len(en.spk) == 2 and en.drain_merges() == []
+
+
+def test_unstarted_session_does_not_block_updates() -> None:
+    from types import SimpleNamespace
+
+    from app.sessions import SessionManager
+
+    m = SessionManager.__new__(SessionManager)
+    m.sessions = {"a": SimpleNamespace(status="ready", task=None)}  # type: ignore[dict-item]
+    assert m.is_idle()
+    m.sessions["b"] = SimpleNamespace(status="live", task=SimpleNamespace(done=lambda: False))  # type: ignore[assignment]
+    assert not m.is_idle()

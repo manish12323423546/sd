@@ -71,9 +71,7 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
     if os.environ.get("LCV_SKIP_MODELS") != "1":
         manager.load_models()
     watcher = asyncio.create_task(
-        update_watcher(
-            ROOT, lambda: manager.active() is None, lambda m: print(f">>> {m}", flush=True)
-        )
+        update_watcher(ROOT, manager.is_idle, lambda m: print(f">>> {m}", flush=True))
     )
     yield
     watcher.cancel()

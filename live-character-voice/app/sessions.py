@@ -285,6 +285,12 @@ class SessionManager:
         self.sessions[sid] = ps
         return ps
 
+    def is_idle(self) -> bool:
+        """Nothing is playing (a session that was opened but never started does not count —
+        it would otherwise block automatic updates forever)."""
+        return not any(s.status == "live" and s.task is not None and not s.task.done()
+                       for s in self.sessions.values())  # fmt: skip
+
     def get(self, sid: str) -> PilotSession:
         return self.sessions[sid]
 
