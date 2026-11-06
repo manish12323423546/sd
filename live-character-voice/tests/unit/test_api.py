@@ -156,3 +156,19 @@ def test_save_env_replaces_and_restricts(tmp_path, monkeypatch) -> None:  # type
     assert "GROQ_API_KEY=g" in p.read_text() and (p.stat().st_mode & 0o777) == 0o600
     monkeypatch.delenv("FISH_API_KEY", raising=False)
     assert "FISH_API_KEY" in load_env(p)
+
+
+def test_access_code_protects_api_and_ws(monkeypatch) -> None:  # type: ignore[no-untyped-def]
+    monkeypatch.setenv("LCV_ACCESS_CODE", "s3cret")
+    with TestClient(main.app) as c:
+        assert c.get("/api/health").status_code == 200  # open: lets the app ask for the code
+        assert c.get("/api/health").json()["access_code_required"] is True
+        assert c.get("/api/voices").status_code == 401
+        assert c.get("/api/voices", headers={"X-Access-Code": "s3cret"}).status_code == 200
+        assert c.get("/api/voices?code=s3cret").status_code == 200
+        assert c.get("/api/voices?code=wrong").status_code == 401
+        import pytest as _pt
+        from starlette.websockets import WebSocketDisconnect
+
+        with _pt.raises(WebSocketDisconnect), c.websocket_connect("/ws/sessions/x") as ws:
+            ws.receive_json()

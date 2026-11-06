@@ -40,13 +40,15 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
       (_b = (_a = this.o).onStatus) == null ? void 0 : _b.call(_a, this.status);
     }
     url(path) {
-      return `${this.o.base.replace(/\/$/, "")}${path}`;
+      const u = `${this.o.base.replace(/\/$/, "")}${path}`;
+      const c = this.o.accessCode;
+      return c && path.startsWith("/") ? `${u}${u.includes("?") ? "&" : "?"}code=${encodeURIComponent(c)}` : u;
     }
     async start() {
       await this.ctx.resume();
       const r = await fetch(this.url("/api/live/sessions"), {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...this.o.accessCode ? { "X-Access-Code": this.o.accessCode } : {} },
         body: JSON.stringify({
           max_speakers: this.o.maxSpeakers,
           view_delay_s: this.o.viewDelay,
@@ -61,7 +63,8 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
       const { session_id, ws_url } = await r.json();
       this.set({ sessionId: session_id });
       const wsBase = this.o.base ? this.o.base.replace(/^http/, "ws") : `${location.protocol === "https:" ? "wss" : "ws"}://${location.host}`;
-      const ws = new WebSocket(`${wsBase.replace(/\/$/, "")}${ws_url}`);
+      const code = this.o.accessCode ? `?code=${encodeURIComponent(this.o.accessCode)}` : "";
+      const ws = new WebSocket(`${wsBase.replace(/\/$/, "")}${ws_url}${code}`);
       ws.binaryType = "arraybuffer";
       this.ws = ws;
       await new Promise((res, rej) => {

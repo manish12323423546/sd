@@ -1,12 +1,14 @@
 const COLORS = ["#4FA3FF", "#F5A524", "#5BC0BE"];
 const $ = (id) => document.getElementById(id);
-let settings = { engine: "http://localhost:8000", mode: "synced", delay: 6, speakers: 2, cast: {} };
+let settings = { engine: "http://localhost:8000", code: "", mode: "synced", delay: 6, speakers: 2, cast: {} };
+const hdr = () => (settings.code ? { "X-Access-Code": settings.code } : {});
 let voices = [];
 
 async function load() {
   const s = await chrome.storage.local.get("settings");
   settings = { ...settings, ...(s.settings || {}) };
   $("engine").value = settings.engine;
+  $("code").value = settings.code || "";
   $("delay").value = settings.delay;
   $("speakers").value = String(settings.speakers);
   setMode(settings.mode);
@@ -28,15 +30,22 @@ function setMode(m) {
 
 async function checkEngine() {
   try {
-    const h = await (await fetch(`${settings.engine}/api/health`)).json();
+    const h = await (await fetch(`${settings.engine}/api/health`, { headers: hdr() })).json();
     const ok = Object.values(h.models_loaded || {}).every(Boolean);
     const v = h.engines?.voices;
     $("dot").className = ok ? "dot ok" : "dot";
     $("engineState").textContent = ok ? `Engine ready · ${v?.online ? "Fish Audio voices" : "offline voices"}` : "Engine loading models…";
-    voices = await (await fetch(`${settings.engine}/api/voices`)).json();
+    const vr = await fetch(`${settings.engine}/api/voices`, { headers: hdr() });
+    if (vr.status === 401) throw new Error("code");
+    voices = await vr.json();
     $("start").disabled = !ok;
-  } catch {
+  } catch (e) {
     $("dot").className = "dot";
+    if (String(e?.message) === "code") {
+      $("engineState").textContent = "Engine needs its access code (open Engine below)";
+      $("start").disabled = true;
+      return;
+    }
     $("engineState").textContent = "Engine not running — start it with: make serve";
     $("start").disabled = true;
   }
@@ -98,6 +107,7 @@ $("m-overlay").onclick = () => setMode("overlay");
 $("delay").oninput = (e) => { settings.delay = Number(e.target.value); $("delayVal").textContent = `${settings.delay} s`; save(); };
 $("speakers").onchange = (e) => { settings.speakers = Number(e.target.value); save(); renderCast(); };
 $("engine").onchange = async (e) => { settings.engine = e.target.value.replace(/\/$/, ""); save(); await checkEngine(); renderCast(); };
+$("code").onchange = async (e) => { settings.code = e.target.value.trim(); save(); await checkEngine(); renderCast(); };
 $("start").onclick = start;
 $("stop").onclick = async () => { await chrome.runtime.sendMessage({ type: "stop" }); document.body.classList.remove("running"); };
 load();

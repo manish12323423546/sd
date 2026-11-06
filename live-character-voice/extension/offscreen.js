@@ -19,6 +19,7 @@ async function start({ streamId, settings, label }) {
     maxSpeakers: settings.speakers,
     voiceMap: settings.cast,
     label,
+    accessCode: settings.code || undefined,
     workletUrl: chrome.runtime.getURL("lib/pcm-worklet.js"),
     onMessage: (m) => {
       if (m.type === "line.complete") lines.set(m.line.line_id, m.line);

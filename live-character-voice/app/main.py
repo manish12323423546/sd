@@ -11,6 +11,7 @@ import tempfile
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from pathlib import Path
+from urllib.parse import quote
 
 import markdown
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile, WebSocket
@@ -20,6 +21,14 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from app import ws as ws_handler
+from app.hosting import (
+    ORIGIN_REGEX,
+    AccessCodeMiddleware,
+    access_code,
+    deployed_commit,
+    extra_origins,
+    update_watcher,
+)
 from app.schemas import (
     ClipOut,
     CreateSession,
@@ -60,14 +69,22 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
     load_env()  # keys from live-character-voice/.env (git-ignored)
     if os.environ.get("LCV_SKIP_MODELS") != "1":
         manager.load_models()
+    watcher = asyncio.create_task(
+        update_watcher(
+            ROOT, lambda: manager.active() is None, lambda m: print(f">>> {m}", flush=True)
+        )
+    )
     yield
+    watcher.cancel()
 
 
 app = FastAPI(title="Live Sports Character Voice — Pilot API", lifespan=lifespan)
 # the Chrome extension (chrome-extension://…) and local dev servers call the engine directly
+app.add_middleware(AccessCodeMiddleware)  # LCV_ACCESS_CODE (hosted); inner, so CORS wraps it
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex=r"^(chrome-extension://[a-p]{32}|http://(localhost|127\.0\.0\.1)(:\d+)?)$",
+    allow_origin_regex=ORIGIN_REGEX,
+    allow_origins=extra_origins(),
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -93,6 +110,9 @@ def health() -> dict[str, object]:
         "active_session": active.session_id if active else None,
         "rss_mb": _rss_mb(),
         "voice_cloning": manager.cloning,
+        "access_code_required": bool(access_code()),
+        "hosted": os.environ.get("LCV_HOSTED") == "1",
+        "commit": (deployed_commit(ROOT) or "")[:8],
         "engines": m.engines if m else {},
         "fish_fallback_lines": getattr(m.tts, "n_fallback", 0) if m and m.tts else 0,
     }
@@ -132,7 +152,11 @@ async def set_keys(body: KeysIn, request: Request) -> dict[str, object]:
 
     host = request.client.host if request.client else ""
     if host not in {"127.0.0.1", "::1", "localhost", "testclient"}:
-        raise HTTPException(403, "keys can only be set from this computer")
+        raise HTTPException(
+            403,
+            "keys can only be set from this computer; on a hosted engine add FISH_API_KEY and "
+            "GROQ_API_KEY as secrets (Hugging Face Space → Settings → Variables and secrets)",
+        )
     results: dict[str, dict[str, object]] = {}
     for name, value, env, check in (
         ("fish", body.fish, "FISH_API_KEY", check_fish),
@@ -463,17 +487,20 @@ img{max-width:100%;background:#fff;border-radius:8px}h1,h2{font-weight:600}
 
 
 @app.get("/api/sessions/{sid}/report", response_class=HTMLResponse)
-def session_report(sid: str) -> HTMLResponse:
+def session_report(sid: str, code: str = "") -> HTMLResponse:
     ps = _session(sid)
     path = ps.out_dir / "report.md"
     if not path.exists():
         raise HTTPException(404, "report not ready yet")
     body = markdown.markdown(path.read_text(), extensions=["tables", "fenced_code"])
+    q = (
+        f"?code={quote(code, safe='')}" if code else ""
+    )  # hosted: links inside the report carry the access code
     body = body.replace(
-        'src="delay_over_time.png"', f'src="/api/sessions/{sid}/files/delay_over_time.png"'
+        'src="delay_over_time.png"', f'src="/api/sessions/{sid}/files/delay_over_time.png{q}"'
     )
     for f in ("record.json", "lines.csv", "metrics.json"):
-        body = body.replace(f'href="{f}"', f'href="/api/sessions/{sid}/files/{f}"')
+        body = body.replace(f'href="{f}"', f'href="/api/sessions/{sid}/files/{f}{q}"')
     html = (
         f"<!doctype html><html><head><meta charset='utf-8'><title>Session report</title>"
         f"<meta name='viewport' content='width=device-width,initial-scale=1'>"

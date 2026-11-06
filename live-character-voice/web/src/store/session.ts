@@ -1,6 +1,7 @@
 // Session state (docs/07 §7.6). `reduce` is a pure function of (state, server message) so it can
 // be unit-tested; the Zustand store wraps it.
 import { create } from "zustand";
+import { withBase } from "../net/base";
 import type { Emotion, ServerMessage, VoiceRef } from "../types/protocol";
 
 export type Status = "idle" | "ready" | "live" | "ended" | "error";
@@ -120,11 +121,11 @@ export function reduce(state: SessionState, msg: ServerMessage): SessionState {
         ...state,
         sessionId: msg.session_id,
         status: state.status === "idle" ? "ready" : state.status,
-        mediaUrl: msg.media_url,
+        mediaUrl: withBase(msg.media_url) ?? null,
         speakersMax: msg.speakers_max,
         speed: msg.speed ?? 1,
         viewDelay: msg.view_delay_s ?? 0,
-        voices: msg.voices,
+        voices: msg.voices.map((v) => ({ ...v, preview_url: withBase(v.preview_url) })),
       };
       for (const sp of msg.speakers ?? []) s = upsertSpeaker(s, sp);
       return s;

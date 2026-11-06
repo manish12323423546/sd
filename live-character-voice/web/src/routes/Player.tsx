@@ -8,6 +8,7 @@ import { SpeakerCard } from "../components/SpeakerCard";
 import { Sparkline } from "../components/Sparkline";
 import { Transcript } from "../components/Transcript";
 import { wsUrl } from "../net/api";
+import { withBase } from "../net/base";
 import { ClockSync, syncAction } from "../net/clock";
 import { SessionSocket } from "../net/ws";
 import { recentDelays, useSession } from "../store/session";
@@ -48,13 +49,15 @@ export function Player() {
     window.setTimeout(() => setToast((t) => (t === msg ? null : t)), 2200);
   };
 
-  const scheduleLine = useCallback((msg: AudioReady) => {
+  const scheduleLine = useCallback((input: AudioReady) => {
+    let msg = input;
     const graph = graphRef.current;
     const video = videoRef.current;
     if (!graph || !video || !startedRef.current) {
-      pendingRef.current.push(msg);
+      pendingRef.current.push(input);
       return;
     }
+    msg = { ...msg, url: withBase(msg.url) };
     const played = () =>
       sockRef.current?.send({ type: "played", line_id: msg.line_id, client_media_time: video.currentTime });
     if (msg.url.endsWith(".part.wav")) {
@@ -107,7 +110,7 @@ export function Player() {
         const queued = pendingRef.current.splice(0);
         queued.forEach(scheduleLine);
       } else if (msg.type === "audio.ready") {
-        if (!msg.url.endsWith(".part.wav")) graphRef.current?.preload(msg.url).catch(() => undefined);
+        if (!msg.url.endsWith(".part.wav")) graphRef.current?.preload(withBase(msg.url)).catch(() => undefined);
         scheduleLine(msg);
       } else if (msg.type === "session.ended") {
         videoRef.current?.pause();
@@ -256,7 +259,7 @@ export function Player() {
       <section className="flex flex-col gap-3">
         <div ref={stageRef} className="group relative overflow-hidden rounded-[20px] border border-white/10 bg-black shadow-card" style={{ aspectRatio: "16 / 9" }}>
           {s.mediaUrl && (
-            <video ref={videoRef} src={s.mediaUrl} playsInline preload="auto" className="h-full w-full" data-testid="video"
+            <video ref={videoRef} src={s.mediaUrl} crossOrigin="anonymous" playsInline preload="auto" className="h-full w-full" data-testid="video"
               onContextMenu={(e) => e.preventDefault()} onClick={togglePause} />
           )}
           {/* top-left badges */}
@@ -381,7 +384,7 @@ export function Player() {
         <section className="panel p-4">
           <h2 className="eyebrow mb-3">Felt delay (last 2 min)</h2>
           <Sparkline points={recentDelays(s)} />
-          <a className="mt-3 inline-block text-sm text-accent" href={`/api/sessions/${id}/lines.csv`} download>
+          <a className="mt-3 inline-block text-sm text-accent" href={withBase(`/api/sessions/${id}/lines.csv`)} download>
             Export delay log CSV
           </a>
         </section>

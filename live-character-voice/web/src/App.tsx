@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, Route, Routes } from "react-router-dom";
+import { AccessGate } from "./components/AccessGate";
 import { KeysDialog, openKeys } from "./components/KeysDialog";
 import { api, type Health } from "./net/api";
 import { Home } from "./routes/Home";
@@ -43,6 +44,14 @@ function EnginePills() {
   );
 }
 
+function GateFromHealth() {
+  const [required, setRequired] = useState(false);
+  useEffect(() => {
+    api.health().then((h) => setRequired(Boolean(h.access_code_required))).catch(() => undefined);
+  }, []);
+  return <AccessGate required={required} />;
+}
+
 const tab = ({ isActive }: { isActive: boolean }) =>
   `whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition ${isActive ? "bg-white/10 text-ink" : "text-muted hover:text-ink"}`;
 
@@ -74,6 +83,7 @@ export function App() {
         </div>
       </header>
       <KeysDialog />
+      <GateFromHealth />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/voices" element={<VoiceLab />} />

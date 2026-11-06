@@ -8,6 +8,7 @@ import { SpeakerCard } from "../components/SpeakerCard";
 import { Transcript } from "../components/Transcript";
 import { DelayedVideo, LiveRelay, type RelayStatus } from "../live/relay";
 import { api, type Voice } from "../net/api";
+import { API_BASE, getCode } from "../net/base";
 import { useSession } from "../store/session";
 import { Avatar, PlayButton } from "../ui/kit";
 
@@ -75,7 +76,8 @@ export function LiveCapture() {
     const D = mode === "synced" ? delay : 0;
     useSession.getState().reset();
     const relay = new LiveRelay(stream, {
-      base: "",
+      base: API_BASE,
+      accessCode: getCode(),
       viewDelay: D,
       maxSpeakers: speakers,
       voiceMap: Object.fromEntries(ids.filter((k) => cast[k]).map((k) => [k, cast[k] as string])),

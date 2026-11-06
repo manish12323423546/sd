@@ -1,4 +1,6 @@
-// HTTP API client (docs/06 §6.4). Vite proxies /api, /media and /ws to FastAPI on :8000.
+// HTTP API client (docs/06 §6.4). Vite proxies /api, /media and /ws to FastAPI on :8000;
+// hosted builds point at the engine with VITE_API_BASE (see net/base.ts).
+import { apiFetch, withBase, wsUrl as baseWsUrl } from "./base";
 
 export interface Clip {
   clip_id: string;
@@ -72,6 +74,9 @@ export interface Health {
   load_s: Record<string, number>;
   active_session: string | null;
   voice_cloning?: boolean;
+  access_code_required?: boolean;
+  hosted?: boolean;
+  commit?: string;
   engines?: Record<string, { online: boolean; name: string; note: string }>;
   fish_fallback_lines?: number;
 }
@@ -100,13 +105,15 @@ async function json<T>(res: Response): Promise<T> {
 }
 
 export const api = {
-  health: async (): Promise<Health> => json<Health>(await fetch("/api/health")),
-  clips: async (): Promise<Clip[]> => json<Clip[]>(await fetch("/api/clips")),
-  voices: async (): Promise<Voice[]> => json<Voice[]>(await fetch("/api/voices")),
+  health: async (): Promise<Health> => json<Health>(await apiFetch("/api/health")),
+  clips: async (): Promise<Clip[]> =>
+    (await json<Clip[]>(await apiFetch("/api/clips"))).map((c) => ({ ...c, url: withBase(c.url) })),
+  voices: async (): Promise<Voice[]> =>
+    (await json<Voice[]>(await apiFetch("/api/voices"))).map((v) => ({ ...v, preview_url: withBase(v.preview_url) })),
   uploadClip: async (file: File): Promise<Clip> => {
     const form = new FormData();
     form.append("file", file);
-    return json<Clip>(await fetch("/api/clips", { method: "POST", body: form }));
+    return json<Clip>(await apiFetch("/api/clips", { method: "POST", body: form }));
   },
   addVoice: async (name: string, file: File, consent: boolean, transcript: string): Promise<Voice> => {
     const form = new FormData();
@@ -114,25 +121,30 @@ export const api = {
     form.append("consent", consent ? "true" : "false");
     form.append("transcript", transcript);
     form.append("file", file);
-    return json<Voice>(await fetch("/api/voices/custom", { method: "POST", body: form }));
+    return json<Voice>(await apiFetch("/api/voices/custom", { method: "POST", body: form }));
   },
   deleteVoice: async (voiceId: string): Promise<void> => {
-    await json(await fetch(`/api/voices/custom/${voiceId}`, { method: "DELETE" }));
+    await json(await apiFetch(`/api/voices/custom/${voiceId}`, { method: "DELETE" }));
   },
   startProClone: async (name: string, file: File, consent: boolean): Promise<CloneJob> => {
     const form = new FormData();
     form.append("name", name);
     form.append("consent", consent ? "true" : "false");
     form.append("file", file);
-    return json<CloneJob>(await fetch("/api/voices/pro", { method: "POST", body: form }));
+    return json<CloneJob>(await apiFetch("/api/voices/pro", { method: "POST", body: form }));
   },
-  cloneJob: async (jobId: string): Promise<CloneJob> => json<CloneJob>(await fetch(`/api/voices/jobs/${jobId}`)),
-  voiceDetail: async (voiceId: string): Promise<VoiceDetail> =>
-    json<VoiceDetail>(await fetch(`/api/voices/custom/${voiceId}`)),
+  cloneJob: async (jobId: string): Promise<CloneJob> => json<CloneJob>(await apiFetch(`/api/voices/jobs/${jobId}`)),
+  voiceDetail: async (voiceId: string): Promise<VoiceDetail> => {
+    const v = await json<VoiceDetail>(await apiFetch(`/api/voices/custom/${voiceId}`));
+    for (const list of Object.values(v.refs ?? {})) for (const r of list) r.url = withBase(r.url);
+    for (const m of Object.values(v.quality?.moods ?? {})) m.url = withBase(m.url);
+    v.ref_url = withBase(v.ref_url);
+    return v;
+  },
   /** Speak a line; resolves to an object URL of the WAV and how long generation took. */
   say: async (voiceId: string, text: string, emotion: string): Promise<{ url: string; seconds: number }> => {
     const t = performance.now();
-    const res = await fetch(`/api/voices/${voiceId}/say`, {
+    const res = await apiFetch(`/api/voices/${voiceId}/say`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text, emotion }),
@@ -143,7 +155,7 @@ export const api = {
   },
   setKeys: async (fish?: string, groq?: string): Promise<{ results: Record<string, { ok: boolean; message: string }>; voice_cloning: boolean }> =>
     json(
-      await fetch("/api/keys", {
+      await apiFetch("/api/keys", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ fish, groq }),
@@ -151,18 +163,17 @@ export const api = {
     ),
   createSession: async (body: CreateSessionBody): Promise<{ session_id: string; ws_url: string }> =>
     json(
-      await fetch("/api/sessions", {
+      await apiFetch("/api/sessions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       }),
     ),
   stopSession: async (id: string): Promise<void> => {
-    await fetch(`/api/sessions/${id}/stop`, { method: "POST" });
+    await apiFetch(`/api/sessions/${id}/stop`, { method: "POST" });
   },
 };
 
 export function wsUrl(path: string): string {
-  const proto = window.location.protocol === "https:" ? "wss:" : "ws:";
-  return `${proto}//${window.location.host}${path}`;
+  return baseWsUrl(path);
 }

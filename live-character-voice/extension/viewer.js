@@ -84,7 +84,7 @@ async function main() {
   const p = await getStart();
   settings = p.settings;
   $("src").textContent = `${p.label} · picture and sound held back ${settings.delay} s so every voice lands on time`;
-  voices = await (await fetch(`${settings.engine}/api/voices`)).json().catch(() => []);
+  voices = await (await fetch(`${settings.engine}/api/voices`, { headers: settings.code ? { "X-Access-Code": settings.code } : {} })).json().catch(() => []);
   const stream = await captureStream(p);
   relay = new window.LCV.LiveRelay(stream, {
     base: settings.engine,
@@ -92,6 +92,7 @@ async function main() {
     maxSpeakers: settings.speakers,
     voiceMap: settings.cast,
     label: p.label,
+    accessCode: settings.code || undefined,
     workletUrl: chrome.runtime?.getURL ? chrome.runtime.getURL("lib/pcm-worklet.js") : "lib/pcm-worklet.js",
     onMessage: (m) => {
       if (m.type === "line.complete") addLine(m.line);

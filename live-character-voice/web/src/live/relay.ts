@@ -18,6 +18,8 @@ export interface RelayOptions {
   voiceMap?: Record<string, string>;
   label?: string;
   workletUrl: string;
+  /** hosted engines with LCV_ACCESS_CODE */
+  accessCode?: string;
   onMessage?: (msg: ServerMessage) => void;
   onStatus?: (s: RelayStatus) => void;
   /** a voice line starts playing now (for subtitles): line id + its length in seconds */
@@ -74,14 +76,16 @@ export class LiveRelay {
   }
 
   private url(path: string): string {
-    return `${this.o.base.replace(/\/$/, "")}${path}`;
+    const u = `${this.o.base.replace(/\/$/, "")}${path}`;
+    const c = this.o.accessCode;
+    return c && path.startsWith("/") ? `${u}${u.includes("?") ? "&" : "?"}code=${encodeURIComponent(c)}` : u;
   }
 
   async start(): Promise<void> {
     await this.ctx.resume();
     const r = await fetch(this.url("/api/live/sessions"), {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...(this.o.accessCode ? { "X-Access-Code": this.o.accessCode } : {}) },
       body: JSON.stringify({
         max_speakers: this.o.maxSpeakers,
         view_delay_s: this.o.viewDelay,
@@ -96,7 +100,8 @@ export class LiveRelay {
     const { session_id, ws_url } = (await r.json()) as { session_id: string; ws_url: string };
     this.set({ sessionId: session_id });
     const wsBase = this.o.base ? this.o.base.replace(/^http/, "ws") : `${location.protocol === "https:" ? "wss" : "ws"}://${location.host}`;
-    const ws = new WebSocket(`${wsBase.replace(/\/$/, "")}${ws_url}`);
+    const code = this.o.accessCode ? `?code=${encodeURIComponent(this.o.accessCode)}` : "";
+    const ws = new WebSocket(`${wsBase.replace(/\/$/, "")}${ws_url}${code}`);
     ws.binaryType = "arraybuffer";
     this.ws = ws;
     await new Promise<void>((res, rej) => {

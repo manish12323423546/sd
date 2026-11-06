@@ -103,6 +103,7 @@ export class AudioGraph {
   ): StartPlan {
     const plan = planStart(playAtMedia, video.currentTime, this.ctx.currentTime, video.playbackRate || 1);
     const el = new Audio();
+    el.crossOrigin = "anonymous"; // engine may be on another host (hosted app)
     el.preload = "auto";
     el.src = url;
     const node = this.ctx.createMediaElementSource(el);
