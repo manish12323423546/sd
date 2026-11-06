@@ -70,7 +70,15 @@ function renderCast() {
   }
 }
 
+let currentTab = null;
+chrome.tabs.query({ active: true, currentWindow: true }).then(([t]) => (currentTab = t));
+// the side panel must be opened directly in the click (a user gesture), before any await
+function openPanel() {
+  if (currentTab?.windowId !== undefined) chrome.sidePanel?.open({ windowId: currentTab.windowId }).catch(() => {});
+}
+
 async function start() {
+  openPanel();
   $("err").style.display = "none";
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   if (!tab?.id || /^(chrome|edge|about):/.test(tab.url || "")) {
@@ -109,5 +117,6 @@ $("speakers").onchange = (e) => { settings.speakers = Number(e.target.value); sa
 $("engine").onchange = async (e) => { settings.engine = e.target.value.replace(/\/$/, ""); save(); await checkEngine(); renderCast(); };
 $("code").onchange = async (e) => { settings.code = e.target.value.trim(); save(); await checkEngine(); renderCast(); };
 $("start").onclick = start;
+$("panel").onclick = openPanel;
 $("stop").onclick = async () => { await chrome.runtime.sendMessage({ type: "stop" }); document.body.classList.remove("running"); };
 load();

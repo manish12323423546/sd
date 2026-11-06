@@ -659,6 +659,8 @@ class Session:
             for w in res.words
         ]
         self._work[lid].asr = res
+        line_now = self.store.get(lid)
+        self.store.update_line(lid, features={**line_now.features, "asr_by": res.source or "local"})
         self.store.update_line(
             lid,
             event="line.asr_done",

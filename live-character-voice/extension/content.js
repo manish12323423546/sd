@@ -27,6 +27,8 @@
       box.style.opacity = "1";
       clearTimeout(hideTimer);
       hideTimer = setTimeout(() => (box.style.opacity = "0"), Math.max(1200, (msg.duration || 2) * 1000 + 300));
+    } else if (msg.type === "lcv-subtitles") {
+      box.style.display = msg.on ? "" : "none";
     } else if (msg.type === "lcv-clear") {
       box.style.opacity = "0";
     }

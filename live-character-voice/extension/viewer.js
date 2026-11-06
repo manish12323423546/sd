@@ -95,6 +95,7 @@ async function main() {
     accessCode: settings.code || undefined,
     workletUrl: chrome.runtime?.getURL ? chrome.runtime.getURL("lib/pcm-worklet.js") : "lib/pcm-worklet.js",
     onMessage: (m) => {
+      window.lcvHub.onMessage(m);
       if (m.type === "line.complete") addLine(m.line);
       if (m.type === "speaker.new" || m.type === "speaker.updated") { speakers.set(m.speaker.speaker_id, m.speaker); renderSpeakers(); }
       if (m.type === "metrics") { metrics = m; $("sDelay").textContent = `${m.p50_delay.toFixed(1)} s (p95 ${m.p95_delay.toFixed(1)})`; }
@@ -105,11 +106,13 @@ async function main() {
       $("sLate").textContent = s.late;
       chrome.runtime?.sendMessage?.({ type: "relay-status", info: { ...s, p50: metrics?.p50_delay } }).catch?.(() => {});
       if (s.state === "error") $("waitText").textContent = s.error || "error";
+      window.lcvHub.onStatus(s);
     },
-    onVoiceStart: showSub,
+    onVoiceStart: (id, d) => { window.lcvHub.onVoiceStart(id); showSub(id, d); },
   });
   relay.setOriginalLevel(Number($("orig").value));
   await relay.start();
+  window.lcvHub.attach(relay, "synced", voices, { original: Number($("orig").value) });
   const vt = stream.getVideoTracks()[0];
   delayed = new window.LCV.DelayedVideo(vt, $("video"), relay, settings.delay);
   delayed.start();
@@ -132,6 +135,7 @@ function stop() {
 }
 
 $("stop").onclick = stop;
+window.addEventListener("lcv-stop", stop);
 $("orig").oninput = (e) => relay?.setOriginalLevel(Number(e.target.value));
 $("voice").oninput = (e) => relay?.setVoiceLevel(Number(e.target.value));
 document.addEventListener("keydown", (e) => {

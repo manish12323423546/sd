@@ -71,6 +71,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       if (msg.info?.state === "ended" && sender.tab?.id === state.viewerTabId) state.info = msg.info;
       return false;
     case "subtitle":
+    case "lcv-subtitles":
       if (state.tabId && state.mode === "overlay") chrome.tabs.sendMessage(state.tabId, msg).catch(() => {});
       return false;
     case "viewer-closed":

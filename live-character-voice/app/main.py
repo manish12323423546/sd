@@ -20,6 +20,7 @@ from fastapi.responses import FileResponse, HTMLResponse, PlainTextResponse, Str
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
+from app import lab
 from app import ws as ws_handler
 from app.hosting import (
     ORIGIN_REGEX,
@@ -80,6 +81,8 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 
 app = FastAPI(title="Live Sports Character Voice — Pilot API", lifespan=lifespan)
 # the Chrome extension (chrome-extension://…) and local dev servers call the engine directly
+lab.bind(manager)
+app.include_router(lab.router)
 app.add_middleware(AccessCodeMiddleware)  # LCV_ACCESS_CODE (hosted); inner, so CORS wraps it
 app.add_middleware(
     CORSMiddleware,

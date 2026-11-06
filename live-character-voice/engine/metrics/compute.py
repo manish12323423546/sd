@@ -262,10 +262,14 @@ def coverage_metrics(
 
 def schedule_metrics(rec: SessionRecord) -> dict[str, Any]:
     counts: dict[str, int] = {}
+    asr_by: dict[str, int] = {}
     for ln in rec.lines:
         counts[ln.schedule_action] = counts.get(ln.schedule_action, 0) + 1
+        src = str(ln.features.get("asr_by", "")) or "unknown"
+        asr_by[src] = asr_by.get(src, 0) + 1
     return {
         "actions": counts,
+        "asr_by": asr_by,
         "errors": sum(1 for ln in rec.lines if ln.error),
         "lines_with_text": sum(1 for ln in rec.lines if ln.text),
         "lines_played": sum(1 for ln in rec.lines if _played(ln)),

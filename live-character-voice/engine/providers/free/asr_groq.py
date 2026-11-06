@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import io
 import os
+import threading
 import time
 from typing import Any
 
@@ -49,6 +50,13 @@ class GroqASR:
         self.n_fallback = 0
         self.last_error = ""
         self._cooldown_until = 0.0  # after a 429, use the local model for a while
+        # free tier: ~20 requests/min. Stay under it ourselves (GROQ_RPM; raise it on a paid
+        # plan) instead of collecting 429s: wait ≤ GROQ_MAX_WAIT_S for a free slot, else local.
+        self.rpm = int(os.environ.get("GROQ_RPM", "19"))
+        self.max_wait_s = float(os.environ.get("GROQ_MAX_WAIT_S", "1.5"))
+        self._sent: list[float] = []
+        self._lock = threading.Lock()
+        self.n_waited = 0
 
     def _groq(self, audio: F32, sr: int, prompt: str | None) -> ASRResult:
         buf = io.BytesIO()
@@ -70,7 +78,11 @@ class GroqASR:
             timeout=self.timeout_s,
         )
         if r.status_code == 429:
-            self._cooldown_until = time.monotonic() + 20.0
+            try:
+                retry = float(r.headers.get("retry-after", "10"))
+            except ValueError:
+                retry = 10.0
+            self._cooldown_until = time.monotonic() + min(30.0, max(1.0, retry))
         if r.status_code in (401, 403):
             self._cooldown_until = float("inf")  # bad/missing key: stay on the local model
         if r.status_code != 200:
@@ -99,16 +111,35 @@ class GroqASR:
         prompt: str | None = None,
         span: tuple[float, float] | None = None,
     ) -> ASRResult:
-        if time.monotonic() >= self._cooldown_until:
+        if time.monotonic() >= self._cooldown_until and self._take_slot():
             try:
                 res = self._groq(audio, sr, prompt)
                 self.n_groq += 1
-                return res
+                return res.model_copy(update={"source": "groq"})
             except Exception as e:  # any API failure → local model for this line
                 self.last_error = str(e)
         self.n_fallback += 1
         result: ASRResult = self.fallback.transcribe(audio, sr, prompt, span)
-        return result
+        return result.model_copy(update={"source": "local"})
+
+    def _take_slot(self) -> bool:
+        """Sliding 60 s window under the requests-per-minute limit; waits briefly for a slot."""
+        deadline = time.monotonic() + self.max_wait_s
+        waited = False
+        while True:
+            with self._lock:
+                now = time.monotonic()
+                self._sent = [t for t in self._sent if now - t < 60.0]
+                if len(self._sent) < self.rpm:
+                    self._sent.append(now)
+                    if waited:
+                        self.n_waited += 1
+                    return True
+                free_at = self._sent[0] + 60.0
+            if free_at > deadline:
+                return False
+            waited = True
+            time.sleep(max(0.01, free_at - time.monotonic()))
 
 
 def create(**kwargs: Any) -> GroqASR:

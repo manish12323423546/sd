@@ -469,3 +469,27 @@ def test_live_session_endpoint_needs_models() -> None:
         assert c.post("/api/live/sessions", json={"max_speakers": 7}).status_code == 422
         r = c.get("/pcm-worklet.js")  # served for the Live capture page (when web is built)
         assert r.status_code in (200, 404)
+
+
+def test_groq_limiter_stays_under_requests_per_minute(monkeypatch) -> None:  # type: ignore[no-untyped-def]
+    from engine.providers.free.asr_groq import GroqASR
+
+    monkeypatch.setenv("GROQ_RPM", "3")
+    monkeypatch.setenv("GROQ_MAX_WAIT_S", "0")
+    asr = GroqASR(fallback=object())
+    assert [asr._take_slot() for _ in range(4)] == [True, True, True, False]
+
+
+def test_lab_summary_flags_partial_runs() -> None:
+    from app.lab import _summary
+
+    m = {
+        "delay": {},
+        "schedule": {},
+        "run": {},
+        "wer": {"wer": 0.88, "ref_words": 525, "hyp_words": 60},
+    }
+    s = _summary("x", m, None)
+    assert s["partial"] is True and s["wer"] is None
+    m["wer"] = {"wer": 0.065, "ref_words": 525, "hyp_words": 520}
+    assert _summary("x", m, None)["wer"] == 0.065

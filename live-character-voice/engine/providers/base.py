@@ -29,6 +29,7 @@ class ASRResult(BaseModel):
     words: list[Word] = Field(default_factory=list)
     avg_logprob: float = 0.0
     no_speech_prob: float = 0.0
+    source: str = ""  # which engine transcribed it (e.g. "groq", "local") — for reports
 
 
 class EmotionResult(BaseModel):

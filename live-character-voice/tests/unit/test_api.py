@@ -85,6 +85,9 @@ def test_protocol_shapes_match_docs() -> None:
         "speaker_id": "S1",
         "emotion": "peak",
         "arousal": 2.1,
+        "speaker_conf": None,
+        "speaker_sim": None,
+        "asr_by": None,
     }
 
 

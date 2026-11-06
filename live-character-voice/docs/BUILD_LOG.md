@@ -590,3 +590,27 @@ bytes (0 late).
   playground, full synced session; start.sh brings up the engine at the pushed commit.
 - Vercel via the connector: project creation refused (403 on both teams; the connector has no
   write access and the repo's GitHub account is not linked to Vercel) → import steps in HOSTING.md.
+
+## 2026-11-06 — V6: extension side panel, crowd-only, no overlapping voices, Groq limiter, Quality Lab
+- **Live-stream slowness / missing lines — cause found**: Groq free tier ≈ 20 requests/min; a 3-min
+  match needs ~61 requests (≈ 20/min) → 429s → slow local fallback (8 lines > 2.5 s, max 5.4 s in a
+  browser run). Fix: client-side sliding-window limiter (`GROQ_RPM` 19, waits ≤ 1.5 s for a slot,
+  else local), Retry-After honoured, transcriber recorded per line (`asr_by`) and in metrics.
+- **Overlapping voices**: streamed lines were scheduled with an *estimated* length; a longer real
+  voice overlapped the next. Relay now has a voice lane (next voice waits for the real `ended`).
+- **Crowd only**: centre-channel cancellation (side = (L−R)/2 + <120 Hz body) in the relay; stereo
+  detector. Measured on a synthetic stereo mix (crowd partly correlated): commentary −96 dB when
+  exactly centred, −27 / −21 / −15 dB when 0.5 / 1 / 2 dB off-centre, crowd kept (+1.6 dB).
+  Mono streams cannot be separated this way (detected and explained in the panel) → ML
+  separation is roadmap.
+- **Extension 0.5**: Chrome side panel (speaking now + emotion + speaker match + transcriber +
+  voice, commentators with voice switch and match meter, transcript with voiced/felt delay, original
+  Full / Crowd only / Off, levels, mute voices, page subtitles toggle, stop); hub.js in the relay
+  host; hosted engines (https://*.hf.space) allowed. Tested in Chromium with the extension loaded:
+  panel receives live state, controls reach the relay, stop works.
+- **Quality Lab** (`/lab`, `app/lab.py`, `engine/metrics/spoken.py`): one click runs a scored clip
+  through the live pipeline at real speed and re-listens to the voices; history + all sessions;
+  runs stopped early are marked "partial". First run `20261106-103032_e2493d` (synced 6 s):
+  felt delay p50 0.00 / p95 0.49 s, 87 % on time, 60/60 voiced, ASR WER 6.5 %, spoken WER 7.8 %
+  (7/525 words missing), speakers 94.3 %, emotion 55 % (94 % within one), Groq 54 / local 6.
+- Hosted server now creates the scored clips on first start (start.sh).

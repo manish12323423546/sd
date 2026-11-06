@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8" /><title>Live Character Voice</title><link rel="stylesheet" href="style.css" />
+<style>
+  body { padding: 12px; min-height: 100vh; }
+  .card { padding: 12px; margin-bottom: 10px; }
+  .now { display:grid; grid-template-columns: 6px 1fr; gap: 10px; }
+  .now .bar { border-radius: 4px; background: var(--accent); }
+  .now .who { font-weight: 700; font-size: 14px; }
+  .now .txt { font-size: 15px; line-height: 1.4; margin-top: 4px; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+  .chip { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing:.06em; padding: 2px 7px; border-radius: 999px; border:1px solid; }
+  .spk { display:grid; grid-template-columns: 10px 1fr auto; gap: 6px 8px; align-items:center; padding: 6px 0; border-bottom:1px solid var(--line); }
+  .spk:last-child { border-bottom:0; }
+  .meter { height:5px; border-radius:3px; background: rgba(255,255,255,.08); overflow:hidden; width:64px; }
+  .meter i { display:block; height:100%; background: linear-gradient(90deg, var(--accent), var(--ok)); }
+  .seg3 { display:grid; grid-template-columns: repeat(3,1fr); gap:4px; background: rgba(0,0,0,.3); border:1px solid var(--line); border-radius:10px; padding:3px; }
+  .seg3 button { border:0; background:transparent; color: var(--muted); padding:7px 4px; border-radius:8px; font: 600 12px Inter, sans-serif; cursor:pointer; }
+  .seg3 button[aria-pressed="true"] { background: rgba(79,163,255,.18); color: var(--ink); box-shadow: inset 0 0 0 1px rgba(79,163,255,.5); }
+  .ctl { display:grid; grid-template-columns: 92px 1fr 36px; align-items:center; gap:8px; margin-top:8px; font-size:12px; color: var(--muted); }
+  .lines .ln { padding: 8px 2px; border-bottom: 1px solid var(--line); font-size: 12.5px; }
+  .lines .meta { display:flex; gap:6px; align-items:center; font-size:10.5px; color: var(--muted); margin-bottom:2px; }
+  .empty { color: var(--muted); text-align:center; padding: 30px 10px; }
+  .stats { display:grid; grid-template-columns: repeat(4,1fr); gap:6px; }
+  .stats div { background: rgba(0,0,0,.3); border:1px solid var(--line); border-radius:10px; padding:6px; text-align:center; }
+  .stats b { display:block; font-size:15px; } .stats span { font-size:10px; color: var(--muted); }
+  .hint { font-size:11px; color: var(--muted); margin-top:6px; line-height:1.4; }
+  .toggle { display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:12.5px; }
+</style></head>
+<body>
+  <div class="row" style="margin-bottom:10px">
+    <img src="icons/icon48.png" alt="" style="width:24px;height:24px;border-radius:7px" />
+    <div style="flex:1"><b style="font-size:14px">Live Character Voice</b><div id="mode" class="muted" style="font-size:11px">not running</div></div>
+    <span id="live" class="dot"></span>
+  </div>
+
+  <div id="idle" class="panel card empty">Start the extension on a tab with a live stream (toolbar icon → <b>Start on this tab</b>). The live transcript, speakers and controls appear here.</div>
+
+  <div id="running" style="display:none">
+    <div class="panel card stats">
+      <div><b id="sFelt">–</b><span>felt delay</span></div>
+      <div><b id="sLines">0</b><span>lines</span></div>
+      <div><b id="sVoiced">0</b><span>voiced</span></div>
+      <div><b id="sLate">0</b><span>late</span></div>
+    </div>
+
+    <div class="panel card now" id="nowCard">
+      <div class="bar" id="nowBar"></div>
+      <div><div class="eyebrow">Speaking now</div>
+        <div class="who" id="nowWho">—</div>
+        <div class="txt" id="nowTxt" aria-live="polite">Waiting for the first line…</div>
+        <div class="chips" id="nowChips"></div></div>
+    </div>
+
+    <div class="panel card">
+      <div class="eyebrow" style="margin-bottom:4px">Commentators (detected live)</div>
+      <div id="spk" class="muted" style="font-size:12px">Listening…</div>
+    </div>
+
+    <div class="panel card">
+      <div class="eyebrow" style="margin-bottom:6px">Original sound</div>
+      <div class="seg3" role="radiogroup" aria-label="Original sound">
+        <button data-om="full" aria-pressed="true">Full</button>
+        <button data-om="crowd" aria-pressed="false">Crowd only</button>
+        <button data-om="off" aria-pressed="false">Off</button>
+      </div>
+      <div class="hint" id="stereoHint">Crowd only removes the commentators (centre of a stereo mix) and keeps the stadium.</div>
+      <div class="ctl"><span>Original</span><input id="orig" type="range" min="0" max="1" step="0.05" value="0.35" /><span id="origV">35%</span></div>
+      <div class="ctl"><span>Character voices</span><input id="voice" type="range" min="0" max="1.5" step="0.05" value="1" /><span id="voiceV">100%</span></div>
+      <label class="toggle"><span>Mute character voices</span><input id="vmute" type="checkbox" /></label>
+      <label class="toggle" id="subsRow"><span>Subtitles on the page</span><input id="subs" type="checkbox" checked /></label>
+      <button id="stop" class="btn btn-stop" style="width:100%;margin-top:10px">■ Stop</button>
+    </div>
+
+    <div class="panel card">
+      <div class="eyebrow" style="margin-bottom:4px">Live transcript</div>
+      <div id="lines" class="lines"><div class="empty" style="padding:12px">Lines appear as they are spoken…</div></div>
+    </div>
+  </div>
+  <script src="sidepanel.js"></script>
+</body></html>

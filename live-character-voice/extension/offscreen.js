@@ -22,6 +22,7 @@ async function start({ streamId, settings, label }) {
     accessCode: settings.code || undefined,
     workletUrl: chrome.runtime.getURL("lib/pcm-worklet.js"),
     onMessage: (m) => {
+      window.lcvHub.onMessage(m);
       if (m.type === "line.complete") lines.set(m.line.line_id, m.line);
       if (m.type === "speaker.new" || m.type === "speaker.updated") speakers.set(m.speaker.speaker_id, m.speaker);
       if (m.type === "metrics") report({ ...(relay?.lastStatus || {}), p50: m.p50_delay, p95: m.p95_delay });
@@ -29,8 +30,11 @@ async function start({ streamId, settings, label }) {
     onStatus: (s) => {
       relay && (relay.lastStatus = s);
       report(s);
+      window.lcvHub.onStatus(s);
     },
     onVoiceStart: (lineId, duration) => {
+      window.lcvHub.onVoiceStart(lineId);
+      if (window.lcvHub.state.subtitles === false) return;
       const ln = lines.get(lineId);
       const sp = ln?.speaker_id ? speakers.get(ln.speaker_id) : null;
       chrome.runtime.sendMessage({
@@ -41,8 +45,15 @@ async function start({ streamId, settings, label }) {
   });
   relay.setOriginalLevel(settings.original ?? 0.35);
   await relay.start();
+  const hdr = settings.code ? { "X-Access-Code": settings.code } : {};
+  const voices = await (await fetch(`${settings.engine}/api/voices`, { headers: hdr })).json().catch(() => []);
+  window.lcvHub.attach(relay, "overlay", voices, { original: settings.original ?? 0.35 });
 }
 
+window.addEventListener("lcv-stop", () => {
+  relay?.stop();
+  chrome.runtime.sendMessage({ type: "stop" }).catch(() => {});
+});
 chrome.runtime.onMessage.addListener((msg) => {
   if (msg.target !== "offscreen") return;
   if (msg.type === "offscreen-start") start(msg).catch((e) => report({ state: "error", error: String(e?.message || e) }));

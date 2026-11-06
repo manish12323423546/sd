@@ -57,6 +57,10 @@ def line_msg(ln: Line) -> dict[str, Any]:
         "speaker_id": ln.speaker_id,
         "emotion": ln.emotion.value if ln.emotion else None,
         "arousal": ln.arousal,
+        # extras for live panels (docs/05 additions): speaker match 0–1, which transcriber
+        "speaker_conf": ln.speaker_conf,  # "high" | "medium" | "low" | "new" …
+        "speaker_sim": None if ln.speaker_sim is None else round(float(ln.speaker_sim), 3),
+        "asr_by": ln.features.get("asr_by"),
     }
 
 
@@ -174,15 +178,16 @@ async def handle(ws: WebSocket, manager: SessionManager, sid: str) -> None:
             elif kind == "start":
                 if ps.task is None:
                     manager.start(ps)
-                    # the engine sets t0 right after decode/VAD set-up; wait for it so the
-                    # client starts its video at the same moment
-                    for _ in range(300):
-                        if ps.engine.clock.t0 is not None:
-                            break
-                        await asyncio.sleep(0.02)
-                    await ws.send_json(
-                        {"type": "session.started", "server_wall": ps.engine.clock.now()}
-                    )
+                # the engine sets t0 right after decode/VAD set-up; wait for it so the client
+                # starts its video at the same moment. A viewer joining a session that is
+                # already running (e.g. a Quality Lab run) gets the current time and catches up.
+                for _ in range(300):
+                    if ps.engine.clock.t0 is not None:
+                        break
+                    await asyncio.sleep(0.02)
+                await ws.send_json(
+                    {"type": "session.started", "server_wall": ps.engine.clock.now()}
+                )
             elif kind == "set_voice":
                 try:
                     ps.engine.set_voice(str(msg["speaker_id"]), str(msg["voice_id"]))

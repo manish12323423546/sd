@@ -5,6 +5,7 @@ import { KeysDialog, openKeys } from "./components/KeysDialog";
 import { api, type Health } from "./net/api";
 import { Home } from "./routes/Home";
 import { LiveCapture } from "./routes/LiveCapture";
+import { QualityLab } from "./routes/QualityLab";
 import { Player } from "./routes/Player";
 import { Report } from "./routes/Report";
 import { VoiceLab } from "./routes/VoiceLab";
@@ -29,7 +30,7 @@ function EnginePills() {
   ];
   if (!h) return <span className="text-xs text-muted">connecting…</span>;
   return (
-    <div className="flex items-center gap-2" data-testid="engine-pills">
+    <div className="hidden items-center gap-2 lg:flex" data-testid="engine-pills">
       {items.map((it) => (
         <button type="button" key={it.k} title={e[it.k]?.note ?? ""} onClick={openKeys}
           className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-muted transition hover:border-accent/50 hover:text-ink">
@@ -72,10 +73,11 @@ export function App() {
               Live Character Voice
             </span>
           </Link>
-          <nav className="ml-2 flex items-center gap-1">
+          <nav className="ml-2 flex min-w-0 items-center gap-1 overflow-x-auto [scrollbar-width:none]">
             <NavLink to="/" end className={tab}>Studio</NavLink>
             <NavLink to="/live" className={tab}>Live capture</NavLink>
             <NavLink to="/voices" className={tab}>Voice Lab</NavLink>
+            <NavLink to="/lab" className={tab}>Quality Lab</NavLink>
           </nav>
           <div className="ml-auto">
             <EnginePills />
@@ -88,6 +90,7 @@ export function App() {
         <Route path="/" element={<Home />} />
         <Route path="/voices" element={<VoiceLab />} />
         <Route path="/live" element={<LiveCapture />} />
+        <Route path="/lab" element={<QualityLab />} />
         <Route path="/session/:id" element={<Player />} />
         <Route path="/session/:id/report" element={<Report />} />
       </Routes>

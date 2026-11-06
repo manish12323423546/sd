@@ -20,6 +20,14 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
       // ctx time of the first captured sample
       __publicField(this, "status", { state: "connecting", sentS: 0, voiced: 0, late: 0 });
       __publicField(this, "pingTimer", null);
+      __publicField(this, "fullGain");
+      __publicField(this, "crowdGain");
+      __publicField(this, "anL");
+      __publicField(this, "anR");
+      __publicField(this, "originalMode", "full");
+      // ---- voice lane: one character voice at a time, never on top of each other -------------
+      __publicField(this, "lane", Promise.resolve());
+      __publicField(this, "laneFreeAt", 0);
       this.stream = stream;
       this.o = o;
       this.ctx = new AudioContext({ latencyHint: "interactive" });
@@ -28,8 +36,62 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
       this.originalGain = this.ctx.createGain();
       this.voiceGain = this.ctx.createGain();
       this.originalGain.gain.value = this.origLevel;
-      this.delay.connect(this.originalGain).connect(this.ctx.destination);
+      this.originalGain.connect(this.ctx.destination);
       this.voiceGain.connect(this.ctx.destination);
+      this.fullGain = this.ctx.createGain();
+      this.crowdGain = this.ctx.createGain();
+      this.crowdGain.gain.value = 0;
+      this.delay.connect(this.fullGain).connect(this.originalGain);
+      const split = this.ctx.createChannelSplitter(2);
+      const l = this.ctx.createGain();
+      const r = this.ctx.createGain();
+      l.gain.value = 0.5;
+      r.gain.value = -0.5;
+      const side = this.ctx.createGain();
+      side.gain.value = 1.6;
+      const low = this.ctx.createBiquadFilter();
+      low.type = "lowpass";
+      low.frequency.value = 120;
+      const lowGain = this.ctx.createGain();
+      lowGain.gain.value = 0.5;
+      this.delay.connect(split);
+      split.connect(l, 0);
+      split.connect(r, 1);
+      l.connect(side);
+      r.connect(side);
+      side.connect(this.crowdGain);
+      this.delay.connect(low).connect(lowGain).connect(this.crowdGain);
+      this.crowdGain.connect(this.originalGain);
+      this.anL = this.ctx.createAnalyser();
+      this.anR = this.ctx.createAnalyser();
+      this.anL.fftSize = this.anR.fftSize = 2048;
+      split.connect(this.anL, 0);
+      split.connect(this.anR, 1);
+    }
+    /** "full" original · "crowd" = commentary removed (stereo streams) · "off" = voices only. */
+    setOriginalMode(mode) {
+      this.originalMode = mode;
+      const t = this.ctx.currentTime;
+      this.fullGain.gain.setTargetAtTime(mode === "full" ? 1 : 0, t, 0.05);
+      this.crowdGain.gain.setTargetAtTime(mode === "crowd" ? 1 : 0, t, 0.05);
+    }
+    /** width = energy(L−R)/energy(L+R) of the incoming sound; mono streams cannot be split. */
+    stereoInfo() {
+      const a = new Float32Array(this.anL.fftSize);
+      const b = new Float32Array(this.anR.fftSize);
+      this.anL.getFloatTimeDomainData(a);
+      this.anR.getFloatTimeDomainData(b);
+      let sl = 0, sr = 0, sd = 0, ss = 0;
+      for (let i = 0; i < a.length; i++) {
+        const x = a[i] ?? 0, y = b[i] ?? 0;
+        sl += x * x;
+        sr += y * y;
+        sd += (x - y) ** 2;
+        ss += (x + y) ** 2;
+      }
+      const silent = sl + sr < 1e-7;
+      const mono = silent || sr < sl * 1e-3 || sl < sr * 1e-3 || sd < ss * 1e-4;
+      return { width: ss > 0 ? sd / ss : 0, mono, silent };
     }
     get sessionId() {
       return this.status.sessionId;
@@ -129,48 +191,70 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
         return (_b = (_a = this.o).onVoiceStart) == null ? void 0 : _b.call(_a, lineId, duration);
       }, ms);
     }
-    async playLine(url, playAt, lineId = "") {
-      try {
-        const res = await fetch(this.url(url));
-        const buf = await this.ctx.decodeAudioData(await res.arrayBuffer());
-        const when = this.ctxTimeOf(playAt);
-        if (when === null) return;
-        const now = this.ctx.currentTime;
-        const start = Math.max(when, now + 0.02);
-        if (start - when > 0.3) this.set({ late: this.status.late + 1 });
-        const s = this.ctx.createBufferSource();
-        s.buffer = buf;
-        s.connect(this.voiceGain);
-        s.start(start);
-        this.duck(start, start + buf.duration);
-        this.announce(lineId, start, buf.duration);
-        this.set({ voiced: this.status.voiced + 1 });
-      } catch {
+    // ctx time the previous voice ends (exact for files, live for streams)
+    async waitUntil(t) {
+      while (this.ctx.currentTime < t - 8e-3) {
+        await new Promise((r) => window.setTimeout(r, Math.min(50, Math.max(4, (t - this.ctx.currentTime) * 1e3 - 6))));
       }
     }
+    enqueue(job) {
+      this.lane = this.lane.then(job, job).catch(() => void 0);
+    }
+    playLine(url, playAt, lineId = "") {
+      const buf = fetch(this.url(url)).then((r) => r.arrayBuffer()).then((b) => this.ctx.decodeAudioData(b));
+      this.enqueue(async () => {
+        const when = this.ctxTimeOf(playAt);
+        if (when === null) return;
+        let audio;
+        try {
+          audio = await buf;
+        } catch {
+          return;
+        }
+        const start = Math.max(when, this.laneFreeAt + 0.06);
+        await this.waitUntil(start - 0.05);
+        const at = Math.max(start, this.ctx.currentTime + 0.01);
+        if (at - when > 0.3) this.set({ late: this.status.late + 1 });
+        const s = this.ctx.createBufferSource();
+        s.buffer = audio;
+        s.connect(this.voiceGain);
+        s.start(at);
+        this.laneFreeAt = at + audio.duration;
+        this.duck(at, at + audio.duration);
+        this.announce(lineId, at, audio.duration);
+        this.set({ voiced: this.status.voiced + 1 });
+      });
+    }
     /** A line still being generated: stream it (starts on the first bytes) instead of waiting for
-     *  the whole file; started by the audio clock so it lines up with the delayed original. */
+     *  the whole file. Its real length is unknown, so the lane waits for its `ended` event. */
     playStream(url, playAt, durationEst, lineId = "") {
-      const when = this.ctxTimeOf(playAt);
-      if (when === null) return;
       const el = new Audio();
       el.crossOrigin = "anonymous";
       el.preload = "auto";
       el.src = this.url(url);
       const node = this.ctx.createMediaElementSource(el);
       node.connect(this.voiceGain);
-      el.addEventListener("ended", () => node.disconnect());
-      const go = () => {
+      this.enqueue(async () => {
         var _a, _b;
-        const late = this.ctx.currentTime - when;
-        if (late > 0.3) this.set({ late: this.status.late + 1 });
+        const when = this.ctxTimeOf(playAt);
+        if (when === null) return;
+        await this.waitUntil(Math.max(when, this.laneFreeAt + 0.06));
+        if (this.ctx.currentTime - when > 0.3) this.set({ late: this.status.late + 1 });
+        const ended = new Promise((res) => {
+          el.addEventListener("ended", () => res(), { once: true });
+          el.addEventListener("error", () => res(), { once: true });
+        });
+        const t0 = this.ctx.currentTime;
+        this.laneFreeAt = t0 + durationEst;
         void el.play().catch(() => void 0);
-        this.duck(this.ctx.currentTime, this.ctx.currentTime + durationEst);
+        this.duck(t0, t0 + durationEst);
         (_b = (_a = this.o).onVoiceStart) == null ? void 0 : _b.call(_a, lineId, durationEst);
         this.set({ voiced: this.status.voiced + 1 });
-      };
-      const wait = () => this.ctx.currentTime >= when - 0.01 ? go() : window.setTimeout(wait, 10);
-      wait();
+        await Promise.race([ended, new Promise((r) => window.setTimeout(r, Math.max(4e3, durationEst * 4e3)))]);
+        node.disconnect();
+        this.laneFreeAt = Math.max(this.ctx.currentTime, 0);
+        this.duck(this.ctx.currentTime, this.ctx.currentTime);
+      });
     }
     duck(start, end) {
       const g = this.originalGain.gain;

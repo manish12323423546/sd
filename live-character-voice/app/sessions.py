@@ -274,8 +274,11 @@ class SessionManager:
         truth = json.loads(truth_path.read_text()) if truth_path.exists() else None
         metrics = compute_all(rec, truth, ps.engine.duration)
         assert self.models is not None
+        from app.hosting import deployed_commit
+
         metrics["run"] = {
             "run_id": ps.session_id,
+            "commit": (deployed_commit(ROOT) or "")[:8],
             "clip": str(ps.clip),
             "truth": str(truth_path) if truth else None,
             "enroll": str(enroll_path_for(ps.clip.stem)) if ps.use_enroll else None,
