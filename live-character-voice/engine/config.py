@@ -49,6 +49,7 @@ class AsrConfig(_Strict):
     beam_size: int = 1
     fallback_model: str = "base.en"
     groq_model: str = "whisper-large-v3-turbo"  # provider "groq" (free tier)
+    deepgram_model: str = "nova-3"  # provider "deepgram" (paid, free credit on sign-up)
     # V3: send this much audio from BEFORE the line too (Whisper hears the run-up, so short
     # shouts and phrase starts are recognised), then keep only the line's own words by timestamp
     context_s: float = 0.0

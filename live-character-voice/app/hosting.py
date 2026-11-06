@@ -137,3 +137,41 @@ async def update_watcher(
                 continue
             log(f"update {head[:8]} → {remote[:8]}: restarting to deploy it")
             os._exit(3)  # start.sh pulls the new commit and starts the app again
+
+
+# ---------------------------------------------------------------- settings from the app (V8)
+# LCV_ADMIN_CODE  when set, the app's Keys & engines dialog also works on a hosted engine for
+#                 whoever knows this code (keep it different from LCV_ACCESS_CODE, which you give
+#                 to viewers). Without it, keys can only be set on the computer running the engine.
+# HF_TOKEN        optional, on a Hugging Face Space: a write token. Keys set in the app are then
+#                 also saved as Space secrets, so they survive restarts (the Space restarts once).
+def admin_code() -> str:
+    return os.environ.get("LCV_ADMIN_CODE", "").strip()
+
+
+def admin_ok(given: str | None) -> bool:
+    code = admin_code()
+    return bool(code) and hmac.compare_digest((given or "").strip().encode(), code.encode())
+
+
+def persist_to_space(name: str, value: str, secret: bool = True) -> str:
+    """Save a setting on the Hugging Face Space itself (needs SPACE_ID + HF_TOKEN). Returns a
+    plain-language result; never raises and never logs the value."""
+    space, token = os.environ.get("SPACE_ID", ""), os.environ.get("HF_TOKEN", "").strip()
+    if not space or not token:
+        return "saved until the next restart (add HF_TOKEN to keep keys after restarts)"
+    try:
+        import requests
+
+        kind = "secrets" if secret else "variables"
+        r = requests.post(
+            f"https://huggingface.co/api/spaces/{space}/{kind}",
+            headers={"Authorization": f"Bearer {token}"},
+            json={"key": name, "value": value},
+            timeout=15,
+        )
+    except Exception as e:
+        return f"could not save on the Space ({type(e).__name__}); works until the next restart"
+    if r.status_code in (200, 201):
+        return "saved on the Space for good (it restarts once in about a minute)"
+    return f"the Space refused to save it (HTTP {r.status_code}); works until the next restart"

@@ -154,14 +154,15 @@ export const api = {
     const blob = await res.blob();
     return { url: URL.createObjectURL(blob), seconds: (performance.now() - t) / 1000 };
   },
-  setKeys: async (fish?: string, groq?: string): Promise<{ results: Record<string, { ok: boolean; message: string }>; voice_cloning: boolean }> =>
+  setKeys: async (body: { fish?: string; groq?: string; deepgram?: string; asr?: string; admin_code?: string }): Promise<{ results: Record<string, { ok: boolean; message: string }>; voice_cloning: boolean }> =>
     json(
       await apiFetch("/api/keys", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fish, groq }),
+        body: JSON.stringify(body),
       }),
     ),
+  keysStatus: async (): Promise<KeysStatus> => json(await apiFetch("/api/keys")),
   createSession: async (body: CreateSessionBody): Promise<{ session_id: string; ws_url: string }> =>
     json(
       await apiFetch("/api/sessions", {
@@ -177,4 +178,13 @@ export const api = {
 
 export function wsUrl(path: string): string {
   return baseWsUrl(path);
+}
+
+export interface KeysStatus {
+  connected: { fish: boolean; groq: boolean; deepgram: boolean };
+  asr: string;
+  asr_choices: string[];
+  engines: Record<string, { online?: boolean; name?: string; note?: string }>;
+  needs_admin_code: boolean;
+  admin_enabled: boolean;
 }

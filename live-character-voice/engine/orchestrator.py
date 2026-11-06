@@ -128,15 +128,32 @@ class Models:
         # "auto": use the hosted providers when their keys are configured, else the local ones
         # A key that is present but rejected is reported (not silently ignored).
         if cfg.asr.provider == "auto" and "asr" in stages and cfg.source == "asr":
-            from engine.keycheck import check_groq
+            from engine.keycheck import check_deepgram, check_groq
 
-            g = check_groq()
-            cfg.asr.provider = "groq" if g.ok else "faster_whisper"
-            m.engines["text"] = {"online": g.ok, "name": "Groq whisper-large-v3-turbo"
-                                 if g.ok else "offline Whisper", "note": g.message}  # fmt: skip
-            log(f"speech-to-text: {m.engines['text']['name']} ({g.message})")
+            # choice: LCV_ASR = auto | deepgram | groq | local (set in the app's Keys dialog)
+            want = os.environ.get("LCV_ASR", "auto").strip().lower() or "auto"
+            d = check_deepgram() if want in ("auto", "deepgram") else None
+            g = check_groq() if want != "local" else None
+            if d is not None and d.ok:
+                cfg.asr.provider, name, note = "deepgram", "Deepgram Nova-3", d.message
+            elif g is not None and g.ok:
+                cfg.asr.provider, name, note = "groq", "Groq whisper-large-v3-turbo", g.message
+                if want == "deepgram" and d is not None:
+                    note = f"Deepgram not used: {d.message}"
+            else:
+                cfg.asr.provider, name = "faster_whisper", "offline Whisper"
+                note = "chosen in settings" if want == "local" else (g.message if g else "")
+            online = cfg.asr.provider != "faster_whisper"
+            m.engines["text"] = {"online": online, "name": name, "note": note, "choice": want}
+            log(f"speech-to-text: {name} ({note})")
         elif cfg.asr.provider == "auto":
-            cfg.asr.provider = "groq" if os.environ.get("GROQ_API_KEY") else "faster_whisper"
+            cfg.asr.provider = (
+                "deepgram"
+                if os.environ.get("DEEPGRAM_API_KEY")
+                else "groq"
+                if os.environ.get("GROQ_API_KEY")
+                else "faster_whisper"
+            )
         if cfg.tts.provider == "auto" and "tts" in stages:
             from engine.keycheck import check_fish
 
@@ -151,7 +168,18 @@ class Models:
             has_fish = os.environ.get("FISH_API_KEY") or os.environ.get("FISH_API_KEY_FILE")
             cfg.tts.provider = "fish" if has_fish else "kokoro"
         if "asr" in stages and cfg.source == "asr":
-            if cfg.asr.provider == "groq":
+            if cfg.asr.provider == "deepgram":
+                m.asr = timed(
+                    "asr",
+                    lambda: registry.create(
+                        "asr",
+                        "deepgram",
+                        model=cfg.asr.deepgram_model,
+                        fallback_model=cfg.asr.model,
+                        groq_model=cfg.asr.groq_model,
+                    ),
+                )
+            elif cfg.asr.provider == "groq":
                 m.asr = timed(
                     "asr",
                     lambda: registry.create(
@@ -171,7 +199,9 @@ class Models:
                     ),
                 )
             m.info["asr"] = (
-                f"groq:{cfg.asr.groq_model} (fallback local {cfg.asr.model})"
+                f"deepgram:{cfg.asr.deepgram_model} (fallback groq/local)"
+                if cfg.asr.provider == "deepgram"
+                else f"groq:{cfg.asr.groq_model} (fallback local {cfg.asr.model})"
                 if cfg.asr.provider == "groq"
                 else f"{cfg.asr.provider}:{cfg.asr.model} ({cfg.asr.compute_type}, "
                 f"{cfg.asr.cpu_threads} threads)"

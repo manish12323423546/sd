@@ -14,13 +14,15 @@ from engine.config import PROJECT_ROOT
 
 FISH_URL = "https://api.fish.audio/v1/tts"
 GROQ_URL = "https://api.groq.com/openai/v1/models"
+DEEPGRAM_URL = "https://api.deepgram.com/v1/projects"
+DEEPGRAM_KEYS_PAGE = "https://console.deepgram.com/signup"
 FISH_KEYS_PAGE = "https://fish.audio/app/api-keys"
 GROQ_KEYS_PAGE = "https://console.groq.com/keys"
 
 
 @dataclass
 class KeyStatus:
-    name: str  # "fish" | "groq"
+    name: str  # "fish" | "groq" | "deepgram"
     present: bool
     ok: bool
     message: str
@@ -90,6 +92,27 @@ def check_groq(timeout_s: float = 10.0) -> KeyStatus:
     return KeyStatus("groq", True, r.status_code == 429, _explain(r.status_code, GROQ_KEYS_PAGE))
 
 
+def check_deepgram(timeout_s: float = 10.0) -> KeyStatus:
+    key = os.environ.get("DEEPGRAM_API_KEY", "").strip()
+    if not key:
+        return KeyStatus("deepgram", False, False, "no DEEPGRAM_API_KEY set")
+    try:
+        import requests
+
+        r = requests.get(DEEPGRAM_URL, headers={"Authorization": f"Token {key}"}, timeout=timeout_s)
+    except ImportError as e:
+        return KeyStatus("deepgram", True, False, f"a Python package is missing ({e.name})")
+    except Exception as e:
+        return KeyStatus(
+            "deepgram", True, False, f"could not reach api.deepgram.com ({type(e).__name__})"
+        )
+    if r.status_code == 200:
+        return KeyStatus("deepgram", True, True, "Deepgram key works")
+    return KeyStatus(
+        "deepgram", True, r.status_code == 429, _explain(r.status_code, DEEPGRAM_KEYS_PAGE)
+    )
+
+
 def main() -> int:
     from engine.env import load_env
 
@@ -104,6 +127,11 @@ def main() -> int:
         print("      → offline Kokoro voices instead (flat, no emotion, no cloning).")
         print(f"      Free key: {FISH_KEYS_PAGE}")
     print("Speech-to-text:")
+    dg = check_deepgram()
+    if dg.ok:
+        print("  OK  Deepgram Nova-3 — used first (Groq / offline Whisper as backup)")
+    elif dg.present:
+        print(f"  --  Deepgram not used: {dg.message}")
     if groq.ok:
         print("  OK  Groq whisper-large-v3-turbo — fast and accurate")
     else:

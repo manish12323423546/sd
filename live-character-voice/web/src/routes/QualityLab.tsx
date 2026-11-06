@@ -147,7 +147,7 @@ export function QualityLab() {
               <Big label="What the voices said" value={pct(latest.spoken_wer === null || latest.spoken_wer === undefined ? null : 1 - latest.spoken_wer)} sub={`${latest.spoken_deletions ?? "–"} of ${latest.ref_words ?? "–"} words missing`} ok={latest.spoken_wer == null ? null : latest.spoken_wer <= 0.12} />
               <Big label="Speaker detection" value={pct(latest.speaker_accuracy)} sub={`live labels · two-pass ${pct(latest.speaker_two_pass)}`} ok={latest.speaker_accuracy === null ? null : latest.speaker_accuracy >= 0.9} />
               <Big label="Emotion" value={pct(latest.emotion_exact, 0)} sub={`within one level ${pct(latest.emotion_within_one, 0)}`} ok={latest.emotion_within_one === null ? null : latest.emotion_within_one >= 0.85} />
-              <Big label="Transcribed by" value={Object.entries(latest.asr_by ?? {}).map(([k, v]) => `${k} ${v}`).join(" · ") || "–"} sub="Groq (fast) vs local fallback" ok={null} />
+              <Big label="Transcribed by" value={Object.entries(latest.asr_by ?? {}).map(([k, v]) => `${k} ${v}`).join(" · ") || "–"} sub="lines per engine (deepgram · groq · local backup)" ok={null} />
             </div>
           )}
           {latest?.missing_words && latest.missing_words.length > 0 && (

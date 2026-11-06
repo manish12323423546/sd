@@ -10,6 +10,7 @@ import os
 import tempfile
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+from functools import partial
 from pathlib import Path
 from urllib.parse import quote
 
@@ -141,27 +142,65 @@ def _tier_score(voice_id: str) -> tuple[str, int | None]:
 class KeysIn(BaseModel):
     fish: str | None = None
     groq: str | None = None
+    deepgram: str | None = None
+    asr: str | None = None  # speech-to-text choice: auto | deepgram | groq | local
+    admin_code: str | None = None
+
+
+ASR_CHOICES = ("auto", "deepgram", "groq", "local")
+
+
+def _can_set_keys(request: Request, given: str | None) -> bool:
+    from app.hosting import admin_ok
+
+    host = request.client.host if request.client else ""
+    if host in {"127.0.0.1", "::1", "localhost", "testclient"} and not os.environ.get("SPACE_ID"):
+        return True
+    return admin_ok(given or request.headers.get("x-admin-code"))
+
+
+@app.get("/api/keys")
+async def keys_status(request: Request) -> dict[str, object]:
+    """Which keys are connected (never the keys themselves) and the speech-to-text choice."""
+    from app.hosting import admin_code
+
+    m = manager.models
+    return {
+        "connected": {
+            "fish": bool(os.environ.get("FISH_API_KEY") or os.environ.get("FISH_API_KEY_FILE")),
+            "groq": bool(os.environ.get("GROQ_API_KEY")),
+            "deepgram": bool(os.environ.get("DEEPGRAM_API_KEY")),
+        },
+        "asr": os.environ.get("LCV_ASR", "auto") or "auto",
+        "asr_choices": list(ASR_CHOICES),
+        "engines": m.engines if m else {},
+        "needs_admin_code": not _can_set_keys(request, None),
+        "admin_enabled": bool(admin_code()),
+    }
 
 
 @app.post("/api/keys")
 async def set_keys(body: KeysIn, request: Request) -> dict[str, object]:
-    """Paste free API keys in the app: each key is tested, saved to the git-ignored `.env` only
-    if it works, then the engines switch over without a restart. Local machine only; keys are
-    never sent back."""
+    """Paste API keys in the app: each key is tested, saved (git-ignored `.env`; on a Hugging Face
+    Space also as a Space secret when HF_TOKEN is set) only if it works, then the engines switch
+    over without a restart. Allowed on this computer, or with LCV_ADMIN_CODE on a hosted engine.
+    Keys are never sent back."""
+    from app.hosting import persist_to_space
     from engine.env import save_env
-    from engine.keycheck import check_fish, check_groq
+    from engine.keycheck import check_deepgram, check_fish, check_groq
 
-    host = request.client.host if request.client else ""
-    if host not in {"127.0.0.1", "::1", "localhost", "testclient"}:
+    if not _can_set_keys(request, body.admin_code):
         raise HTTPException(
             403,
-            "keys can only be set from this computer; on a hosted engine add FISH_API_KEY and "
-            "GROQ_API_KEY as secrets (Hugging Face Space → Settings → Variables and secrets)",
+            "enter the admin code to change keys on this hosted engine (set LCV_ADMIN_CODE as a "
+            "Space secret once), or add the keys as Space secrets: "
+            "Settings → Variables and secrets",
         )
     results: dict[str, dict[str, object]] = {}
     for name, value, env, check in (
         ("fish", body.fish, "FISH_API_KEY", check_fish),
         ("groq", body.groq, "GROQ_API_KEY", check_groq),
+        ("deepgram", body.deepgram, "DEEPGRAM_API_KEY", check_deepgram),
     ):
         value = (value or "").strip().strip('"').strip("'")
         if not value:
@@ -169,15 +208,31 @@ async def set_keys(body: KeysIn, request: Request) -> dict[str, object]:
         old = os.environ.get(env)
         os.environ[env] = value
         st = await asyncio.get_running_loop().run_in_executor(None, check)
+        msg = st.message
         if st.ok:
             save_env(env, value)
+            if os.environ.get("SPACE_ID"):
+                msg += "; " + await asyncio.get_running_loop().run_in_executor(
+                    None, persist_to_space, env, value
+                )
         elif old is not None:
             os.environ[env] = old
         else:
             os.environ.pop(env, None)
-        results[name] = {"ok": st.ok, "message": st.message}
+        results[name] = {"ok": st.ok, "message": msg}
+    choice = (body.asr or "").strip().lower()
+    if choice:
+        if choice not in ASR_CHOICES:
+            raise HTTPException(400, f"speech-to-text must be one of {', '.join(ASR_CHOICES)}")
+        save_env("LCV_ASR", choice)
+        msg = f"speech-to-text set to {choice}"
+        if os.environ.get("SPACE_ID"):
+            msg += "; " + await asyncio.get_running_loop().run_in_executor(
+                None, partial(persist_to_space, "LCV_ASR", choice, secret=False)
+            )
+        results["asr"] = {"ok": True, "message": msg}
     if not results:
-        raise HTTPException(400, "paste at least one key")
+        raise HTTPException(400, "paste at least one key or choose a speech-to-text engine")
     engines: dict[str, object] = {}
     if any(r["ok"] for r in results.values()) and manager.models is not None:
         try:

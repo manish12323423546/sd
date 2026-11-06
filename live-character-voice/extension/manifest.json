@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Live Character Voice",
-  "version": "0.6.0",
-  "description": "Re-voice the commentary of any live stream in a Chrome tab with character voices, in sync, with a live transcript and speaker labels.",
+  "version": "0.6.1",
+  "description": "Re-voice live stream commentary in any Chrome tab with character voices, in sync, with live transcript and speaker labels.",
   "minimum_chrome_version": "116",
   "action": {
     "default_popup": "popup.html",

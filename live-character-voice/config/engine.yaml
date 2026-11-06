@@ -20,7 +20,7 @@ segment:
   phrase_min_s: 2.0       # V3: close a phrase at a breath once it is this long (0 = off)
   phrase_pause_ms: 160
 asr:
-  provider: auto           # groq if GROQ_API_KEY is set (free tier), else local faster_whisper
+  provider: auto           # deepgram if its key works, else groq (free tier), else local faster_whisper (LCV_ASR overrides)
   model: small.en
   compute_type: int8
   cpu_threads: 4
