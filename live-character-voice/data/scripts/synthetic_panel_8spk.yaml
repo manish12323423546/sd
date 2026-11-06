@@ -1,0 +1,376 @@
+title: Eight voices incl. two look-alike pairs (synthetic)
+lead_in_ms: 1500
+tail_ms: 2500
+lines:
+- speaker: G
+  emotion: excited
+  gap_after_ms: 300
+  text: Oh no!
+- speaker: A
+  emotion: calm
+  gap_after_ms: 900
+  text: Both managers will be reasonably happy with that.
+- speaker: D
+  emotion: calm
+  gap_after_ms: 900
+  text: It has been a fairly even contest so far.
+- speaker: F
+  emotion: excited
+  gap_after_ms: 300
+  text: Here comes Tanaka again, he skips past one!
+- speaker: F
+  emotion: peak
+  gap_after_ms: 700
+  text: He has scored! Lindqvist with a wonderful finish!
+- speaker: G
+  emotion: calm
+  gap_after_ms: 300
+  text: That was a sensible decision from the referee.
+- speaker: F
+  emotion: neutral
+  gap_after_ms: 600
+  text: Lindqvist takes a touch and lays it off to Moreau.
+- speaker: E
+  emotion: calm
+  gap_after_ms: 450
+  text: That substitution has changed the whole feel of the game.
+- speaker: C
+  emotion: neutral
+  gap_after_ms: 300
+  text: The ball is with Tanaka on the halfway line.
+- speaker: C
+  emotion: peak
+  gap_after_ms: 700
+  text: Goal! Okafor scores!
+- speaker: D
+  emotion: neutral
+  gap_after_ms: 900
+  text: Good pressure there from Lindqvist.
+- speaker: B
+  emotion: calm
+  gap_after_ms: 600
+  text: Tactically they have pushed Delgado higher, and that is opening space for Brennan.
+- speaker: F
+  emotion: calm
+  gap_after_ms: 300
+  text: Both managers will be reasonably happy with that.
+- speaker: A
+  emotion: excited
+  gap_after_ms: 450
+  text: Big chance building here for Moreau!
+- speaker: A
+  emotion: peak
+  gap_after_ms: 600
+  text: Goal! Moreau scores!
+- speaker: C
+  emotion: excited
+  gap_after_ms: 300
+  text: Here comes Okafor again, he skips past one!
+- speaker: C
+  emotion: peak
+  gap_after_ms: 700
+  text: Goal! Okafor scores!
+- speaker: C
+  emotion: excited
+  gap_after_ms: 300
+  text: Okafor breaks forward, he has support either side!
+- speaker: C
+  emotion: neutral
+  gap_after_ms: 900
+  text: Patient build-up from the back now.
+- speaker: B
+  emotion: calm
+  gap_after_ms: 900
+  text: If you look at the shape, they are leaving a gap between the lines.
+- speaker: F
+  emotion: peak
+  gap_after_ms: 900
+  text: What a save! Unbelievable from the keeper!
+- speaker: C
+  emotion: peak
+  gap_after_ms: 450
+  text: He has scored! Delgado with a wonderful finish!
+- speaker: C
+  emotion: peak
+  gap_after_ms: 600
+  text: Off the bar! So close from Moreau!
+- speaker: D
+  emotion: neutral
+  gap_after_ms: 300
+  text: Delgado looks up and switches the play.
+- speaker: F
+  emotion: neutral
+  gap_after_ms: 450
+  text: They are trying to work it down the left through Tanaka.
+- speaker: C
+  emotion: neutral
+  gap_after_ms: 450
+  text: The ball is with Lindqvist on the halfway line.
+- speaker: A
+  emotion: calm
+  gap_after_ms: 600
+  text: A quieter spell in the game at the moment.
+- speaker: G
+  emotion: peak
+  gap_after_ms: 700
+  text: He has scored! Brennan with a wonderful finish!
+- speaker: B
+  emotion: calm
+  gap_after_ms: 600
+  text: If you look at the shape, they are leaving a gap between the lines.
+- speaker: F
+  emotion: calm
+  gap_after_ms: 600
+  text: Both managers will be reasonably happy with that.
+- speaker: D
+  emotion: neutral
+  gap_after_ms: 450
+  text: Moreau plays it square to Okafor.
+- speaker: D
+  emotion: peak
+  gap_after_ms: 700
+  text: Goal! Tanaka scores!
+- speaker: D
+  emotion: peak
+  gap_after_ms: 700
+  text: What a save! Unbelievable from the keeper!
+- speaker: G
+  emotion: neutral
+  gap_after_ms: 700
+  text: Good pressure there from Delgado.
+- speaker: E
+  emotion: calm
+  gap_after_ms: 600
+  text: If you look at the shape, they are leaving a gap between the lines.
+- speaker: F
+  emotion: calm
+  gap_after_ms: 300
+  text: It has been a fairly even contest so far.
+- speaker: C
+  emotion: calm
+  gap_after_ms: 450
+  text: That was a sensible decision from the referee.
+- speaker: D
+  emotion: excited
+  gap_after_ms: 300
+  text: Exactly right.
+- speaker: C
+  emotion: calm
+  gap_after_ms: 900
+  text: Both managers will be reasonably happy with that.
+- speaker: E
+  emotion: peak
+  gap_after_ms: 300
+  text: What a save! Unbelievable from the keeper!
+- speaker: E
+  emotion: peak
+  gap_after_ms: 300
+  text: Off the bar! So close from Brennan!
+- speaker: B
+  emotion: calm
+  gap_after_ms: 700
+  text: I think the key battle is Okafor against Moreau down that flank.
+- speaker: F
+  emotion: neutral
+  gap_after_ms: 300
+  text: The ball is with Moreau on the halfway line.
+- speaker: D
+  emotion: neutral
+  gap_after_ms: 700
+  text: The ball is with Lindqvist on the halfway line.
+- speaker: C
+  emotion: neutral
+  gap_after_ms: 900
+  text: Delgado looks up and switches the play.
+- speaker: B
+  emotion: calm
+  gap_after_ms: 700
+  text: Tactically they have pushed Delgado higher, and that is opening space for Lindqvist.
+- speaker: F
+  emotion: excited
+  gap_after_ms: 300
+  text: Absolutely.
+- speaker: A
+  emotion: excited
+  gap_after_ms: 300
+  text: Absolutely.
+- speaker: G
+  emotion: excited
+  gap_after_ms: 300
+  text: Moreau is through on the right!
+- speaker: G
+  emotion: peak
+  gap_after_ms: 700
+  text: Goal! Lindqvist scores!
+- speaker: E
+  emotion: calm
+  gap_after_ms: 450
+  text: Tactically they have pushed Moreau higher, and that is opening space for Tanaka.
+- speaker: B
+  emotion: excited
+  gap_after_ms: 300
+  text: Oh no!
+- speaker: G
+  emotion: neutral
+  gap_after_ms: 600
+  text: Lindqvist takes a touch and lays it off to Tanaka.
+- speaker: G
+  emotion: excited
+  gap_after_ms: 900
+  text: Big chance building here for Moreau!
+- speaker: G
+  emotion: peak
+  gap_after_ms: 300
+  text: He has scored! Moreau with a wonderful finish!
+- speaker: D
+  emotion: excited
+  gap_after_ms: 300
+  text: Big chance building here for Tanaka!
+- speaker: D
+  emotion: peak
+  gap_after_ms: 450
+  text: Goal! Okafor scores!
+- speaker: F
+  emotion: neutral
+  gap_after_ms: 600
+  text: Patient build-up from the back now.
+- speaker: E
+  emotion: excited
+  gap_after_ms: 300
+  text: Brennan is through on the right!
+- speaker: E
+  emotion: peak
+  gap_after_ms: 700
+  text: Off the bar! So close from Brennan!
+- speaker: G
+  emotion: neutral
+  gap_after_ms: 300
+  text: Tanaka takes a touch and lays it off to Lindqvist.
+- speaker: C
+  emotion: neutral
+  gap_after_ms: 600
+  text: Good pressure there from Moreau.
+- speaker: D
+  emotion: neutral
+  gap_after_ms: 300
+  text: They are trying to work it down the left through Tanaka.
+- speaker: F
+  emotion: neutral
+  gap_after_ms: 600
+  text: Good pressure there from Okafor.
+- speaker: D
+  emotion: calm
+  gap_after_ms: 450
+  text: Both managers will be reasonably happy with that.
+- speaker: C
+  emotion: calm
+  gap_after_ms: 900
+  text: It has been a fairly even contest so far.
+- speaker: E
+  emotion: calm
+  gap_after_ms: 450
+  text: That substitution has changed the whole feel of the game.
+- speaker: D
+  emotion: neutral
+  gap_after_ms: 450
+  text: Patient build-up from the back now.
+- speaker: B
+  emotion: peak
+  gap_after_ms: 700
+  text: Goal! Lindqvist scores!
+- speaker: B
+  emotion: peak
+  gap_after_ms: 700
+  text: Off the bar! So close from Tanaka!
+- speaker: A
+  emotion: neutral
+  gap_after_ms: 900
+  text: The ball is with Okafor on the halfway line.
+- speaker: B
+  emotion: calm
+  gap_after_ms: 300
+  text: I think the key battle is Moreau against Okafor down that flank.
+- speaker: C
+  emotion: excited
+  gap_after_ms: 300
+  text: Absolutely.
+- speaker: A
+  emotion: neutral
+  gap_after_ms: 300
+  text: Patient build-up from the back now.
+- speaker: G
+  emotion: neutral
+  gap_after_ms: 450
+  text: Moreau plays it square to Okafor.
+- speaker: H
+  emotion: neutral
+  gap_after_ms: 900
+  text: Okafor looks up and switches the play.
+- speaker: B
+  emotion: calm
+  gap_after_ms: 700
+  text: Tactically they have pushed Moreau higher, and that is opening space for Brennan.
+- speaker: E
+  emotion: calm
+  gap_after_ms: 450
+  text: That substitution has changed the whole feel of the game.
+- speaker: G
+  emotion: neutral
+  gap_after_ms: 300
+  text: Good pressure there from Lindqvist.
+- speaker: G
+  emotion: neutral
+  gap_after_ms: 300
+  text: Lindqvist plays it square to Brennan.
+- speaker: C
+  emotion: peak
+  gap_after_ms: 900
+  text: Off the bar! So close from Okafor!
+- speaker: C
+  emotion: neutral
+  gap_after_ms: 300
+  text: Good pressure there from Delgado.
+- speaker: G
+  emotion: excited
+  gap_after_ms: 450
+  text: Lindqvist breaks forward, he has support either side!
+- speaker: H
+  emotion: calm
+  gap_after_ms: 300
+  text: That was a sensible decision from the referee.
+- speaker: C
+  emotion: peak
+  gap_after_ms: 900
+  text: What a save! Unbelievable from the keeper!
+- speaker: C
+  emotion: neutral
+  gap_after_ms: 700
+  text: Patient build-up from the back now.
+- speaker: B
+  emotion: peak
+  gap_after_ms: 900
+  text: Goal! Lindqvist scores!
+- speaker: F
+  emotion: calm
+  gap_after_ms: 700
+  text: A quieter spell in the game at the moment.
+- speaker: D
+  emotion: excited
+  gap_after_ms: 700
+  text: Tanaka is through on the right!
+- speaker: D
+  emotion: peak
+  gap_after_ms: 700
+  text: What a save! Unbelievable from the keeper!
+- speaker: H
+  emotion: excited
+  gap_after_ms: 700
+  text: Big chance building here for Lindqvist!
+- speaker: H
+  emotion: peak
+  gap_after_ms: 700
+  text: Off the bar! So close from Lindqvist!
+- speaker: B
+  emotion: calm
+  gap_after_ms: 300
+  text: A quieter spell in the game at the moment.

@@ -26,6 +26,7 @@ EVENTS = (
     "line.scheduled",
     "speaker.new",
     "speaker.updated",
+    "speaker.merged",
     "session.warning",
     "session.metrics",
     "session.ended",

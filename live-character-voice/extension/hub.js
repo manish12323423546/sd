@@ -31,6 +31,9 @@
         state.lines = state.lines.slice(0, 300);
       } else if (m.type === "speaker.new" || m.type === "speaker.updated") {
         state.speakers[m.speaker.speaker_id] = m.speaker;
+      } else if (m.type === "speaker.merged") {
+        delete state.speakers[m.from];
+        for (const l of state.lines) if (l.speaker_id === m.from) l.speaker_id = m.into;
       } else if (m.type === "audio.ready") {
         const ln = state.lines.find((l) => l.line_id === m.line_id);
         if (ln) { ln.voice_id = m.voice_id; ln.felt = Math.max(0, m.play_at_media - ln.t_start); }
@@ -67,6 +70,8 @@
       case "set-voice": relay.setVoice(v.speaker_id, v.voice_id);
         if (state.speakers[v.speaker_id]) state.speakers[v.speaker_id].voice_id = v.voice_id; break;
       case "subtitles": state.subtitles = v; send({ type: "lcv-subtitles", on: v }); break;
+      case "merge": relay.send({ type: "merge_speakers", from: v.from, into: v.into }); break;
+      case "rename": relay.send({ type: "rename_speaker", speaker_id: v.speaker_id, name: v.name }); break;
       case "stop": window.dispatchEvent(new Event("lcv-stop")); break;
     }
     snapshot();

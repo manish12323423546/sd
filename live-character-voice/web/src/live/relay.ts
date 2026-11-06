@@ -16,6 +16,8 @@ export interface RelayOptions {
   viewDelay: number; // seconds (0 = live)
   maxSpeakers: number;
   voiceMap?: Record<string, string>;
+  /** Voice Lab samples of known commentators (enrolled before the stream starts) */
+  knownVoices?: string[];
   label?: string;
   workletUrl: string;
   /** hosted engines with LCV_ACCESS_CODE */
@@ -154,6 +156,7 @@ export class LiveRelay {
         view_delay_s: this.o.viewDelay,
         voice_map: this.o.voiceMap && Object.keys(this.o.voiceMap).length ? this.o.voiceMap : undefined,
         label: this.o.label ?? "live",
+        known_voices: this.o.knownVoices && this.o.knownVoices.length ? this.o.knownVoices : undefined,
       }),
     });
     if (!r.ok) {
@@ -326,6 +329,10 @@ export class LiveRelay {
 
   setVoiceLevel(v: number) {
     this.voiceGain.gain.setTargetAtTime(v, this.ctx.currentTime, 0.03);
+  }
+
+  send(msg: Record<string, unknown>) {
+    if (this.ws?.readyState === WebSocket.OPEN) this.ws.send(JSON.stringify(msg));
   }
 
   setVoice(speakerId: string, voiceId: string) {

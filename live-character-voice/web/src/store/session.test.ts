@@ -61,3 +61,19 @@ describe("session reducer", () => {
     expect(rows[2]).toContain('"say ""519"""');
   });
 });
+
+describe("speaker merges", () => {
+  it("relabels earlier lines and removes the duplicate label", () => {
+    const s = run([
+      { type: "session.ready", session_id: "s1", media_url: "/m.mp4", speakers_max: 8, voices: [] },
+      { type: "speaker.new", speaker: { speaker_id: "S1", display_name: "Commentator 1", color: "#4FA3FF", voice_id: null } },
+      { type: "speaker.new", speaker: { speaker_id: "S3", display_name: "Commentator 3", color: "#F31260", voice_id: null } },
+      { type: "line.complete", line: { line_id: "L1", t_start: 1, t_end: 2, text: "a", speaker_id: "S1", emotion: null, arousal: null } },
+      { type: "line.complete", line: { line_id: "L2", t_start: 3, t_end: 4, text: "b", speaker_id: "S3", emotion: null, arousal: null } },
+      { type: "speaker.merged", from: "S3", into: "S1" },
+    ]);
+    expect(s.lines.map((l) => l.speakerId)).toEqual(["S1", "S1"]);
+    expect(s.speakerOrder).toEqual(["S1"]);
+    expect(s.speakers.S3).toBeUndefined();
+  });
+});

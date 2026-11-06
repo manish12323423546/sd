@@ -55,6 +55,8 @@ def _summary(sid: str, metrics: dict[str, Any], spoken: dict[str, Any] | None) -
         "asr_by": sch.get("asr_by"),
         "wer": (metrics.get("wer") or {}).get("wer"),
         "speaker_accuracy": (metrics.get("speaker") or {}).get("speaker_accuracy"),
+        "speaker_two_pass": (metrics.get("speaker") or {}).get("two_pass_accuracy"),
+        "speakers_found": len(metrics.get("run", {}).get("voice_map") or {}) or None,
         "emotion_exact": (metrics.get("emotion") or {}).get("emotion_exact"),
         "emotion_within_one": (metrics.get("emotion") or {}).get("emotion_within_one"),
         "crashes": metrics.get("run", {}).get("crashes"),

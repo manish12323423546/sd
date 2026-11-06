@@ -614,3 +614,30 @@ bytes (0 late).
   felt delay p50 0.00 / p95 0.49 s, 87 % on time, 60/60 voiced, ASR WER 6.5 %, spoken WER 7.8 %
   (7/525 words missing), speakers 94.3 %, emotion 55 % (94 % within one), Groq 54 / local 6.
 - Hosted server now creates the scored clips on first start (start.sh).
+
+## 2026-11-06 — V7: speaker tracking for many speakers + Chrome Web Store package
+**Diagnosis** (new truth-scored panels `synthetic_panel_6spk` 245 s / 77 lines and
+`synthetic_panel_8spk` 279 s / 93 lines incl. two look-alike pairs A/G, C/F; generator now has 8
+source voices): line-vs-line ECAPA similarity — same person 0.37–0.48 typical but 0.02–0.12 at the
+low end (shouting vs normal); different people 0.05 typical, up to 0.66. Old tracker (one EMA
+centroid, cap 3): 40 % (6 spk), 32 % (8 spk).
+**Built**: `engine/speakers/tracker.py` (voice bank per person, top-k scoring, grey zone, no new
+people from shouts / < 0.8 s, automatic merges with relabelling, enrolled people never merged,
+two-pass `offline_labels`), up to 8 speakers (API, UI, extension), loudness passed to the tracker,
+`speaker.merged` event (app, side panel), viewer fixes ("Same person as…", rename), known
+commentators from Voice Lab samples (`known_voices`), two-pass accuracy in metrics/Lab, mid-phrase
+split gate uses the tracker's threshold, `scripts/speaker_bench.py`, `docs/SPEAKERS.md`.
+**Measured — live sessions** (live mode, `outputs/v7_speakers/`):
+| clip | live | two-pass | enrolled live |
+|---|---|---|---|
+| 2 spk `111546` | 94.3 % | 94.5 % | — |
+| 3 spk `114249` | 96.8 % | 98.5 % | — |
+| 6 spk `112457` / enrolled `113836` | 77.1 % | 85.7 % | 88.2 % |
+| 8 spk `112906` / enrolled `113348` | 66.8 % | 70.4 % | 89.9 % |
+Bench (clean script lines): tuned on 2/3/6 spk; held-out 8 spk 72.9 % (untuned 67.9 %); enrolled
+97.2 % / 93.8 %. Remaining loss: 3–4 % of speech in phrases with two people (hand-overs < 0.35 s),
+the rest voice confusion. **Rejected (measured)**: WeSpeaker ResNet34/293 (pair EER 17.4/20.7 % vs
+ECAPA 13.6 %), noise reduction before the voice-print (13.6 → 16.0 %), lowering thresholds further.
+**Chrome Web Store**: `extension-store/` — upload zip (`make extension-zip`), LISTING.md, PUBLISH.md,
+4 screenshots 1280×800, promo 440×280; privacy policy at `/privacy.html`; manifest 0.6.0 with the
+hosted engine as default.

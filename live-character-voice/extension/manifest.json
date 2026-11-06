@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Live Character Voice",
-  "version": "0.5.0",
-  "description": "Re-voice the commentary of any live stream in a browser tab with character voices \u2014 in sync.",
+  "version": "0.6.0",
+  "description": "Re-voice the commentary of any live stream in a Chrome tab with character voices, in sync, with a live transcript and speaker labels.",
   "minimum_chrome_version": "116",
   "action": {
     "default_popup": "popup.html",
@@ -41,5 +41,6 @@
   },
   "side_panel": {
     "default_path": "sidepanel.html"
-  }
+  },
+  "homepage_url": "https://github.com/manish12323423546/sd/tree/claude/nice-ritchie-5s42u6/live-character-voice/extension"
 }

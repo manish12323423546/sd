@@ -398,6 +398,7 @@ def create_session(body: CreateSession) -> SessionCreated:
             body.use_enroll,
             body.speed,
             body.view_delay_s,
+            body.known_voices,
         )
     except SessionBusyError as e:
         raise HTTPException(409, str(e)) from e
@@ -415,7 +416,9 @@ def create_live_session(body: LiveSessionCreate) -> SessionCreated:
     if manager.models is None:
         raise HTTPException(503, "models are not loaded")
     try:
-        ps = manager.create_live(body.max_speakers, body.voice_map, body.view_delay_s, body.label)
+        ps = manager.create_live(
+            body.max_speakers, body.voice_map, body.view_delay_s, body.label, body.known_voices
+        )
     except SessionBusyError as e:
         raise HTTPException(409, str(e)) from e
     except KeyError as e:

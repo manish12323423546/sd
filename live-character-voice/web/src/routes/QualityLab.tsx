@@ -18,6 +18,7 @@ interface Run {
   asr_by?: Record<string, number>;
   wer: number | null;
   speaker_accuracy: number | null;
+  speaker_two_pass?: number | null;
   emotion_exact: number | null;
   emotion_within_one: number | null;
   spoken_wer?: number | null;
@@ -144,7 +145,7 @@ export function QualityLab() {
               <Big label="Lines voiced" value={`${latest.voiced ?? "–"} / ${latest.lines ?? "–"}`} sub={`dropped ${latest.actions?.dropped ?? 0}`} ok={(latest.actions?.dropped ?? 0) === 0} />
               <Big label="Transcription accuracy" value={pct(latest.wer === null ? null : 1 - latest.wer)} sub={`word error rate ${pct(latest.wer)}`} ok={latest.wer === null ? null : latest.wer <= 0.1} />
               <Big label="What the voices said" value={pct(latest.spoken_wer === null || latest.spoken_wer === undefined ? null : 1 - latest.spoken_wer)} sub={`${latest.spoken_deletions ?? "–"} of ${latest.ref_words ?? "–"} words missing`} ok={latest.spoken_wer == null ? null : latest.spoken_wer <= 0.12} />
-              <Big label="Speaker detection" value={pct(latest.speaker_accuracy)} sub="time with the right commentator" ok={latest.speaker_accuracy === null ? null : latest.speaker_accuracy >= 0.9} />
+              <Big label="Speaker detection" value={pct(latest.speaker_accuracy)} sub={`live labels · two-pass ${pct(latest.speaker_two_pass)}`} ok={latest.speaker_accuracy === null ? null : latest.speaker_accuracy >= 0.9} />
               <Big label="Emotion" value={pct(latest.emotion_exact, 0)} sub={`within one level ${pct(latest.emotion_within_one, 0)}`} ok={latest.emotion_within_one === null ? null : latest.emotion_within_one >= 0.85} />
               <Big label="Transcribed by" value={Object.entries(latest.asr_by ?? {}).map(([k, v]) => `${k} ${v}`).join(" · ") || "–"} sub="Groq (fast) vs local fallback" ok={null} />
             </div>

@@ -370,7 +370,10 @@ export function Player() {
           <div className="flex flex-col gap-2">
             {speakers.length === 0 && <p className="text-sm text-muted">Commentators appear when they first speak.</p>}
             {speakers.map((sp) => (
-              <SpeakerCard key={sp.id} speaker={sp} voices={s.voices} onVoice={(v) => changeVoice(sp.id, v)} onPreview={preview} />
+              <SpeakerCard key={sp.id} speaker={sp} voices={s.voices} onVoice={(v) => changeVoice(sp.id, v)} onPreview={preview}
+                others={speakers.filter((o) => o.id !== sp.id)}
+                onMerge={(into) => { sockRef.current?.send({ type: "merge_speakers", from: sp.id, into }); flash(`${sp.name} merged`); }}
+                onRename={(name) => sockRef.current?.send({ type: "rename_speaker", speaker_id: sp.id, name })} />
             ))}
           </div>
         </section>

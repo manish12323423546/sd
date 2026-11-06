@@ -46,7 +46,12 @@ from engine.providers.base import DeliveryStyle  # noqa: E402
 
 SR = 24000  # Kokoro native
 OUT_SR = 48000
-SOURCE_VOICES = {"A": "am_fenrir", "B": "bf_isabella", "C": "bm_fable"}
+SOURCE_VOICES = {
+    "A": "am_fenrir", "B": "bf_isabella", "C": "bm_fable",
+    # V7 multi-speaker tests: D–H; G (am_eric) is deliberately close to A (both US male) and
+    # F (bm_daniel) close to C (both UK male) — the hardest case for speaker separation.
+    "D": "am_echo", "E": "af_nicole", "F": "bm_daniel", "G": "am_eric", "H": "bf_alice",
+}  # fmt: skip
 # (speed, gain_db, pitch_semitones) shaping of the *source* commentary per emotion.
 SOURCE_STYLE = {
     "calm": (0.92, -3.0, -0.5),

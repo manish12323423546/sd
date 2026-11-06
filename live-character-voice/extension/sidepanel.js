@@ -56,6 +56,15 @@ function renderSpeakers() {
     m.append(meter, label);
     row.append(dot, sel, m);
     box.append(row);
+    if (sp.length > 1) {
+      const fix = document.createElement("select");
+      fix.className = "field"; fix.style.cssText = "grid-column: 2 / 4; padding: 3px 6px; font-size: 11px; color: var(--muted)";
+      fix.setAttribute("aria-label", `${s.display_name} is the same person as`);
+      fix.append(new Option(`${s.display_name} is the same person as…`, ""));
+      for (const o of sp) if (o.speaker_id !== s.speaker_id) fix.append(new Option(o.display_name, o.speaker_id));
+      fix.onchange = () => fix.value && ctl("merge", { from: s.speaker_id, into: fix.value });
+      box.append(fix);
+    }
   }
 }
 
@@ -112,6 +121,10 @@ chrome.runtime.onMessage.addListener((m) => {
     const e = m.msg;
     if (e.type === "line.complete") { S.lines.unshift({ ...e.line, voiced: false }); S.lines = S.lines.slice(0, 300); }
     else if (e.type === "speaker.new" || e.type === "speaker.updated") S.speakers[e.speaker.speaker_id] = e.speaker;
+    else if (e.type === "speaker.merged") {
+      delete S.speakers[e.from];
+      for (const l of S.lines) if (l.speaker_id === e.from) l.speaker_id = e.into;
+    }
     else if (e.type === "audio.ready") { const ln = S.lines.find((l) => l.line_id === e.line_id); if (ln) { ln.voice_id = e.voice_id; ln.felt = Math.max(0, e.play_at_media - ln.t_start); } }
     else if (e.type === "metrics") S.metrics = e;
     else if (e.type === "session.ended") S.status = { ...(S.status || {}), state: "ended" };

@@ -139,6 +139,16 @@ export function reduce(state: SessionState, msg: ServerMessage): SessionState {
     case "speaker.new":
     case "speaker.updated":
       return upsertSpeaker(state, msg.speaker);
+    case "speaker.merged": {
+      // two labels were the same person: relabel earlier lines, drop the duplicate
+      const speakers = Object.fromEntries(Object.entries(state.speakers).filter(([k]) => k !== msg.from));
+      return {
+        ...state,
+        speakers,
+        speakerOrder: state.speakerOrder.filter((k) => k !== msg.from),
+        lines: state.lines.map((l) => (l.speakerId === msg.from ? { ...l, speakerId: msg.into } : l)),
+      };
+    }
     case "line.complete": {
       const l = msg.line;
       const view: LineView = {

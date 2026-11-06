@@ -1,6 +1,6 @@
-const COLORS = ["#4FA3FF", "#F5A524", "#5BC0BE"];
+const COLORS = ["#4FA3FF", "#F5A524", "#17C964", "#F31260", "#9B7BFF", "#2BD4D4", "#FF8A3D", "#E8E36B"];
 const $ = (id) => document.getElementById(id);
-let settings = { engine: "http://localhost:8000", code: "", mode: "synced", delay: 6, speakers: 2, cast: {} };
+let settings = { engine: "https://manishvk18-live-character-voice.hf.space", code: "", mode: "synced", delay: 6, speakers: 2, cast: {} };
 const hdr = () => (settings.code ? { "X-Access-Code": settings.code } : {});
 let voices = [];
 
@@ -54,7 +54,7 @@ async function checkEngine() {
 function renderCast() {
   const box = $("cast");
   box.innerHTML = "";
-  for (let i = 0; i < settings.speakers; i++) {
+  for (let i = 0; i < Math.min(settings.speakers, 4); i++) {
     const sid = `S${i + 1}`;
     const sw = document.createElement("span");
     sw.className = "sw";

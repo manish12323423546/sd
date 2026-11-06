@@ -50,6 +50,11 @@ export interface SpeakerNew {
   type: "speaker.new" | "speaker.updated";
   speaker: SpeakerMsg;
 }
+export interface SpeakerMerged {
+  type: "speaker.merged";
+  from: string;
+  into: string;
+}
 export interface LineComplete {
   type: "line.complete";
   line: LineMsg;
@@ -98,6 +103,7 @@ export type ServerMessage =
   | SessionStarted
   | SessionPaused
   | SpeakerNew
+  | SpeakerMerged
   | LineComplete
   | AudioReady
   | MetricsMsg
@@ -111,6 +117,8 @@ export type ClientMessage =
   | { type: "set_voice"; speaker_id: string; voice_id: string }
   | { type: "played"; line_id: string; client_media_time: number }
   | { type: "stop" }
+  | { type: "merge_speakers"; from: string; into: string }
+  | { type: "rename_speaker"; speaker_id: string; name: string }
   | { type: "pause" }
   | { type: "resume" }
   | { type: "ping"; t: number };
@@ -145,6 +153,8 @@ export function parseServerMessage(raw: unknown): ServerMessage | null {
     case "speaker.new":
     case "speaker.updated":
       return isSpeaker(m.speaker) ? (m as unknown as SpeakerNew) : null;
+    case "speaker.merged":
+      return isStr(m.from) && isStr(m.into) ? (m as unknown as SpeakerMerged) : null;
     case "line.complete":
       return isLine(m.line) ? (m as unknown as LineComplete) : null;
     case "audio.ready":

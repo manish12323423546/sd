@@ -23,6 +23,12 @@ while true; do
   [ -f web/dist/index.html ] || (cd web && npm run build)
   # scored test clips for Studio + Quality Lab (generated once; not stored in git)
   if [ ! -f data/clips/synthetic_match.mp4 ]; then make synth || true; fi
+  for n in 6 8; do  # many-speaker panels (speaker tracking tests, V7)
+    if [ ! -f "data/clips/synthetic_panel_${n}spk.mp4" ]; then
+      .venv/bin/python scripts/make_synthetic_clip.py --script "data/scripts/synthetic_panel_${n}spk.yaml" \
+        --name "synthetic_panel_${n}spk" || true
+    fi
+  done
   if [ ! -f data/clips/synthetic_match_3spk.mp4 ]; then
     .venv/bin/python scripts/make_synthetic_clip.py --script data/scripts/synthetic_match_3spk.yaml \
       --name synthetic_match_3spk || true

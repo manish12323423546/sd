@@ -5,7 +5,7 @@ import { EngineBanner } from "../components/EngineBanner";
 import { api, type Clip, type Health, type Voice } from "../net/api";
 import { Avatar, DropZone, PlayButton, TierBadge } from "../ui/kit";
 
-const SPEAKER_COLORS = ["#4FA3FF", "#F5A524", "#5BC0BE"];
+const SPEAKER_COLORS = ["#4FA3FF", "#F5A524", "#17C964", "#F31260", "#9B7BFF", "#2BD4D4", "#FF8A3D", "#E8E36B"];
 const SYNC_DEFAULT_S = 6;
 
 function dur(s: number): string {
@@ -55,7 +55,9 @@ export function Home() {
 
   const selected = clips.find((c) => c.clip_id === clipId);
   const ready = health?.models_loaded && Object.values(health.models_loaded).every(Boolean);
-  const ids = Array.from({ length: speakers }, (_, i) => `S${i + 1}`);
+  // "Auto" lets the engine find up to 8; the cast list shows the first 4 (switch the rest live)
+  const ids = Array.from({ length: Math.min(speakers, 4) }, (_, i) => `S${i + 1}`);
+  const [known, setKnown] = useState<string[]>([]);
 
   const upload = async (file: File | undefined) => {
     if (!file) return;
@@ -85,6 +87,7 @@ export function Home() {
       }
       const s = await api.createSession({
         clip_id: clipId, max_speakers: speakers, use_enroll: enroll, speed, voice_map,
+        known_voices: known.length ? known : undefined,
         view_delay_s: mode === "synced" ? syncDelay : 0,
       });
       nav(`/session/${s.session_id}`);
@@ -161,8 +164,8 @@ export function Home() {
               <label htmlFor="max-commentators" className="text-muted">Commentators</label>
               <select id="max-commentators" aria-label="Max commentators" className="field !w-auto !py-1.5" value={speakers}
                 onChange={(e) => setSpeakers(Number(e.target.value))}>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
+                {[1, 2, 3, 4, 5, 6, 7].map((n) => <option key={n} value={n}>{n}</option>)}
+                <option value={8}>Auto (up to 8)</option>
               </select>
             </div>
             <div className="grid gap-3 md:grid-cols-2">
@@ -195,6 +198,24 @@ export function Home() {
                 );
               })}
             </div>
+            {voices.some((v) => v.custom) && (
+              <div className="mt-4 rounded-2xl border border-white/[0.07] bg-black/20 p-4" data-testid="known-voices">
+                <p className="text-sm font-semibold">Known commentators <span className="font-normal text-muted">(optional, most accurate)</span></p>
+                <p className="mt-0.5 text-xs text-muted">Pick the people you have a voice sample of in the Voice Lab. They are recognised from their first word and keep their name all match long.</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {voices.filter((v) => v.custom).map((v) => {
+                    const on = known.includes(v.voice_id);
+                    return (
+                      <button key={v.voice_id} type="button" aria-pressed={on}
+                        onClick={() => setKnown((k) => (on ? k.filter((x) => x !== v.voice_id) : [...k, v.voice_id].slice(0, 8)))}
+                        className={`rounded-full border px-3 py-1 text-xs font-semibold transition ${on ? "border-accent/70 bg-accent/15 text-ink" : "border-white/10 text-muted hover:text-ink"}`}>
+                        {on ? "✓ " : ""}{v.name}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
             {voices.every((v) => !v.custom) && (
               <p className="mt-3 text-xs text-muted">Tip: <Link to="/voices" className="text-accent">clone your own voice</Link> in the Voice Lab and cast it here.</p>
             )}

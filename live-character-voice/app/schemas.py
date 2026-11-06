@@ -32,7 +32,7 @@ class ClipOut(BaseModel):
 
 class CreateSession(BaseModel):
     clip_id: str
-    max_speakers: int = Field(2, ge=1, le=3)
+    max_speakers: int = Field(2, ge=1, le=8)
     voice_map: dict[str, str] | None = None
     use_enroll: bool = False
     speed: float = Field(
@@ -42,13 +42,17 @@ class CreateSession(BaseModel):
         0.0, ge=0.0, le=15.0,
         description="synced viewing: picture held back this long so voices land on time; 0 = live",
     )  # fmt: skip
+    known_voices: list[str] | None = Field(
+        None, max_length=8, description="Voice Lab samples of known commentators (enrollment)"
+    )
 
 
 class LiveSessionCreate(BaseModel):
-    max_speakers: int = Field(2, ge=1, le=3)
+    max_speakers: int = Field(2, ge=1, le=8)
     voice_map: dict[str, str] | None = None
     view_delay_s: float = Field(0.0, ge=0.0, le=15.0)
     label: str = Field("live", max_length=120)
+    known_voices: list[str] | None = Field(None, max_length=8)
 
 
 class SessionCreated(BaseModel):

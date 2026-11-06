@@ -56,7 +56,8 @@ class AsrConfig(_Strict):
 
 class SpeakerConfig(_Strict):
     provider: str = "ecapa"
-    max_speakers: int = Field(2, ge=1, le=3)
+    max_speakers: int = Field(2, ge=1, le=8)
+    tracker: Literal["v1", "v2"] = "v2"  # v2: voice banks + merges (V7); v1: one centroid, ≤ 3
     assign_sim: float = 0.55
     ema_alpha: float = 0.1
     enroll_file: str | None = None

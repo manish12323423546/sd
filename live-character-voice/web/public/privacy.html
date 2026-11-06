@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Live Character Voice — Privacy policy</title>
+<style>body{font:16px/1.6 system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 16px;color:#1b1f27;background:#fff}h1{font-size:28px}h2{font-size:19px;margin-top:28px}code{background:#f1f3f6;padding:1px 4px;border-radius:4px}</style></head>
+<body>
+<h1>Privacy policy — Live Character Voice</h1>
+<p>Last updated: 6 November 2026</p>
+<p>Live Character Voice (the Chrome extension and the web app) re-voices the commentary of a video or live stream that you choose, in character voices, and shows a live transcript.</p>
+<h2>What is processed</h2>
+<ul>
+<li><b>Audio of the tab you start it on</b> — only after you click <i>Start on this tab</i>, only that tab, only until you stop. It is sent to the Live Character Voice engine you configure (by default the hosted engine at <code>manishvk18-live-character-voice.hf.space</code>, or your own engine at <code>localhost</code>).</li>
+<li><b>Picture of that tab</b> — only in <i>Synced window</i> mode, and it stays in your browser (used to show the delayed picture). It is never uploaded.</li>
+<li><b>Voice samples you upload</b> in the Voice Lab, to clone a voice you own or may use.</li>
+</ul>
+<h2>Third-party services used by the engine</h2>
+<ul>
+<li>Groq (speech-to-text): short audio clips of the commentary are sent for transcription.</li>
+<li>Fish Audio (text-to-speech): the transcribed text and, for cloned voices, the reference sample are sent to generate the character voice.</li>
+</ul>
+<h2>What is stored</h2>
+<p>The engine keeps each session's transcript, timings, generated voice lines and the received audio so it can produce the session report. Cloned voice samples are kept until you delete them in the Voice Lab. The extension stores only its settings (engine address, access code, mode, chosen voices) in your browser.</p>
+<h2>What is not done</h2>
+<p>No browsing history, no other tabs, no personal data, no advertising, no selling or sharing of data. Nothing is collected when the extension is not running.</p>
+<h2>Contact</h2>
+<p>Questions or deletion requests: open an issue at github.com/manish12323423546/sd.</p>
+</body></html>

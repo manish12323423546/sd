@@ -8,7 +8,7 @@ CLIP ?= data/clips/synthetic_match.mp4
 SYS_PKGS := ffmpeg espeak-ng libsndfile1 sox
 
 
-.PHONY: synth-pilot download-models bench keys check-keys deps doctor extension live-test
+.PHONY: synth-pilot download-models bench keys check-keys deps doctor extension extension-zip live-test
 .PHONY: setup setup-system setup-python setup-ci setup-web test test-py test-web test-slow \
         lint lint-py lint-web check synth poc dev
 
@@ -115,6 +115,10 @@ deps:
 # Rebuild the Chrome extension's shared relay (extension/lib) after changing web/src/live/.
 extension:
 	cd web && npm run build:extension
+
+# Chrome Web Store upload file: extension-store/live-character-voice-extension.zip
+extension-zip: extension
+	cd extension && zip -FSqr ../extension-store/live-character-voice-extension.zip . -x README.md
 
 # Live input test: stream a file or live URL to the engine like the extension does.
 live-test:

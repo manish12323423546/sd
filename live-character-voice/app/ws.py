@@ -22,6 +22,7 @@ from engine.record.store import Event
 FORWARD = (
     "speaker.new",
     "speaker.updated",
+    "speaker.merged",
     "line.complete",
     "line.scheduled",
     "session.metrics",
@@ -71,6 +72,8 @@ def tts_url(ps: PilotSession, path: str) -> str:
 
 def translate(ps: PilotSession, ev: Event) -> dict[str, Any] | None:
     store = ps.engine.store
+    if ev.name == "speaker.merged":  # two labels were one person: relabel earlier lines
+        return {"type": "speaker.merged", "from": ev.data["from"], "into": ev.data["into"]}
     if ev.name in ("speaker.new", "speaker.updated"):
         sp = store.record.speakers[ev.data["speaker_id"]]
         return {"type": ev.name, "speaker": speaker_msg(sp)}
@@ -198,6 +201,14 @@ async def handle(ws: WebSocket, manager: SessionManager, sid: str) -> None:
                 with contextlib.suppress(KeyError):
                     stamp: dict[str, Any] = {"times.played": round(ps.engine.clock.now(), 3)}
                     ps.engine.store.update_line(lid, **stamp)
+            elif kind == "merge_speakers":  # viewer: "these two are the same person"
+                ok = ps.engine.merge_speakers(str(msg.get("from")), str(msg.get("into")))
+                if not ok:
+                    await ws.send_json(
+                        {"type": "error", "message": "could not merge those speakers"}
+                    )
+            elif kind == "rename_speaker":
+                ps.engine.rename_speaker(str(msg.get("speaker_id")), str(msg.get("name", "")))
             elif kind in ("pause", "resume"):
                 # the viewer paused: freeze session time so nothing runs ahead of the picture
                 if kind == "pause":

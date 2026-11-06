@@ -54,6 +54,7 @@ from engine.schedule.scheduler import (
 from engine.segment.segmenter import LineCandidate, LineSegmenter
 from engine.speakers.enroll import EnrollFile
 from engine.speakers.online_cluster import OnlineClusterer
+from engine.speakers.tracker import SpeakerTracker
 from engine.tts.style import style_for, style_hash
 from engine.tts.worker import (
     TtsCache,
@@ -244,6 +245,7 @@ class Session:
         emotion: EmotionProvider | None = None,
         vad_factory: Callable[[], Any] | None = None,
         live: Any | None = None,
+        known_voices: list[tuple[str, list[Any]]] | None = None,
     ) -> None:
         if stop_after not in STOP_AFTER:
             raise ValueError(f"stop_after must be one of {STOP_AFTER}")
@@ -277,7 +279,13 @@ class Session:
         self.log = RunLog(out_dir / "run.log", echo=echo_log)
         self.tts_dir = out_dir / "tts"
         self.segmenter = LineSegmenter(cfg.segment, cfg.vad.threshold, self.sr)
-        self.cluster = OnlineClusterer(cfg.speaker)
+        self.cluster: Any = (
+            SpeakerTracker(cfg.speaker)
+            if cfg.speaker.tracker == "v2"
+            else OnlineClusterer(cfg.speaker)
+        )
+        self.known_voices = known_voices or []  # (name, [audio arrays]) — enrolled before start
+        self.line_embeddings: dict[str, Any] = {}  # for the two-pass report labels
         if emotion is None:
             from engine.providers.free.emotion_prosody import ProsodyEmotion
 
@@ -382,6 +390,8 @@ class Session:
             if self.enroll is not None and self.models.speaker is not None:
                 await self._do_enroll(audio)
             source = feed(audio, self.sr, self.cfg.audio.chunk_ms, self.clock)
+        if self.known_voices and self.models.speaker is not None:
+            await self._enroll_known()
         vad = await loop.run_in_executor(self.misc_pool, self.vad_factory)
 
         workers = []
@@ -468,6 +478,46 @@ class Session:
             )
         self.log.log("enroll", speakers=[s.name for s in self.enroll.speakers])
 
+    async def _enroll_known(self) -> None:
+        """Known commentators (voice samples from the Voice Lab): their voice-prints are learned
+        before the session starts, so they are recognised from their first line."""
+        loop = asyncio.get_running_loop()
+        spk = self.models.speaker
+        assert spk is not None
+        for name, clips in self.known_voices:
+            embs = [await loop.run_in_executor(self.spk_pool, spk.embed, c, self.sr) for c in clips]
+            sid = self.cluster.enroll(name, embs)
+            self.store.upsert_speaker(
+                Speaker(speaker_id=sid, display_name=name, color=self.cluster.color(sid),
+                        centroid_n=len(embs), voice_id=self.voice_map.get(sid))
+            )  # fmt: skip
+        self.log.log("enroll", speakers=[n for n, _ in self.known_voices], source="known voices")
+
+    # ---- speaker corrections (automatic merges and the viewer's manual fixes)
+    def _apply_merge(self, old: str, new: str, manual: bool = False) -> None:
+        for ln in self.store.record.lines:
+            if ln.speaker_id == old:
+                self.store.update_line(ln.line_id, speaker_id=new)
+        self.store.record.speakers.pop(old, None)
+        self.store.bus.publish("speaker.merged", **{"from": old, "into": new})
+        self.log.log("speaker.merge", **{"from": old, "into": new, "manual": manual})
+
+    def merge_speakers(self, drop: str, keep: str) -> bool:
+        if not hasattr(self.cluster, "merge") or not self.cluster.merge(drop, keep):
+            return False
+        for old, new in self.cluster.drain_merges():
+            self._apply_merge(old, new, manual=True)
+        return True
+
+    def rename_speaker(self, sid: str, name: str) -> None:
+        sp = self.store.record.speakers.get(sid)
+        if sp is None:
+            return
+        sp.display_name = name.strip()[:40] or sp.display_name
+        if hasattr(self.cluster, "names"):
+            self.cluster.names[sid] = sp.display_name
+        self.store.bus.publish("speaker.updated", speaker_id=sid)
+
     # ------------------------------------------------------------------ segmentation
     def _on_line(self, cand: LineCandidate) -> None:
         self._n_lines += 1
@@ -547,7 +597,8 @@ class Session:
             if self.cluster.centroids:
                 b1, _ = self.cluster.best_match(mean.astype(np.float32))
                 b2, s2 = self.cluster.best_match(emb)
-                if b1 == b2 or s2 < self.cfg.speaker.assign_sim:
+                need = getattr(self.cluster, "t_assign", self.cfg.speaker.assign_sim)
+                if b1 == b2 or s2 < need:  # the new voice must clearly be another known speaker
                     return
             span = self.segmenter.open_line()
             if span is None or abs(span[0] - line_start) > 1e-6:
@@ -694,7 +745,14 @@ class Session:
         ms = (time.monotonic() - t) * 1000
         prev = self.store.previous(line)
         dur = line.t_end - line.t_start
-        res = self.cluster.assign(emb, dur, prev.speaker_id if prev else None)
+        self.line_embeddings[lid] = emb
+        if isinstance(self.cluster, SpeakerTracker):
+            from engine.providers.free.emotion_prosody import loudest_window_db
+
+            loud = loudest_window_db(core, self.sr) if core.size else None
+            res = self.cluster.assign(emb, dur, prev.speaker_id if prev else None, lid, loud)
+        else:
+            res = self.cluster.assign(emb, dur, prev.speaker_id if prev else None)
         if res.is_new:
             self.store.upsert_speaker(
                 Speaker(
@@ -709,6 +767,9 @@ class Session:
             sp = self.store.record.speakers.get(res.speaker_id)
             if sp is not None:
                 sp.centroid_n = self.cluster.counts.get(res.speaker_id, sp.centroid_n)
+        if hasattr(self.cluster, "drain_merges"):
+            for old, new in self.cluster.drain_merges():
+                self._apply_merge(old, new)
         self.store.update_line(
             lid,
             event="line.speaker_done",

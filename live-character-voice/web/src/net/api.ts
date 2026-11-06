@@ -88,6 +88,7 @@ export interface CreateSessionBody {
   use_enroll?: boolean;
   speed?: number;
   view_delay_s?: number;
+  known_voices?: string[];
 }
 
 async function json<T>(res: Response): Promise<T> {

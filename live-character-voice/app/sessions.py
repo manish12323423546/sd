@@ -83,6 +83,43 @@ class PilotSession:
         return self.clip.name
 
 
+def known_voice_clips(voice_ids: list[str]) -> list[tuple[str, list[Any]]]:
+    """Voice Lab samples of known commentators → (name, [16 kHz clips]) for enrollment."""
+    from engine.ingest.decode import decode_audio
+    from engine.voices_custom import CUSTOM_DIR, get_meta
+
+    out: list[tuple[str, list[Any]]] = []
+    for vid in voice_ids[:8]:
+        meta = get_meta(vid)  # KeyError → unknown voice (API answers 400)
+        d = CUSTOM_DIR / vid[3:]
+        files = [d / r["file"] for rs in (meta.get("refs") or {}).values() for r in rs] or [
+            d / "ref.mp3"
+        ]
+        out.append((str(meta["name"]), [decode_audio(f, 16000) for f in files if f.exists()]))
+    return out
+
+
+def two_pass_accuracy(engine: Session, truth: dict[str, Any]) -> float | None:
+    """Recorded clips: re-label every line with the whole recording known (two-pass clustering)
+    and score it like the live labels — what a post-match report could show."""
+    import numpy as np
+
+    from engine.metrics.compute import speaker_metrics
+    from engine.speakers.tracker import offline_labels
+
+    rec = engine.store.record.model_copy(deep=True)
+    lines = [ln for ln in rec.lines if ln.line_id in engine.line_embeddings]
+    if len(lines) < 3:
+        return None
+    emb = np.stack([engine.line_embeddings[ln.line_id] for ln in lines])
+    labels = offline_labels(emb, [ln.t_end - ln.t_start for ln in lines], 0.85)
+    for ln, lb in zip(lines, labels, strict=True):
+        ln.speaker_id = lb
+    res = speaker_metrics(rec, truth["lines"], engine.duration)
+    acc = res.get("speaker_accuracy")
+    return None if acc is None else float(acc)
+
+
 class SessionManager:
     def __init__(self, cfg: EngineConfig | None = None) -> None:
         self.cfg = cfg or load_engine_config()
@@ -167,6 +204,7 @@ class SessionManager:
         use_enroll: bool = False,
         speed: float = 1.0,
         view_delay_s: float = 0.0,
+        known_voices: list[str] | None = None,
     ) -> PilotSession:
         busy = self.active()
         if busy is not None:
@@ -197,8 +235,9 @@ class SessionManager:
         if use_enroll and enroll_path_for(clip.stem).exists():
             enroll = load_enroll(enroll_path_for(clip.stem))
         engine = Session(
-            cfg, clip, self.models, out, session_id=sid, enroll=enroll, voice_map=voice_map
-        )
+            cfg, clip, self.models, out, session_id=sid, enroll=enroll, voice_map=voice_map,
+            known_voices=known_voice_clips(known_voices or []),
+        )  # fmt: skip
         ps = PilotSession(sid, clip, cfg, engine, out, use_enroll=enroll is not None)
         self.sessions[sid] = ps
         return ps
@@ -209,6 +248,7 @@ class SessionManager:
         voice_map: dict[str, str] | None = None,
         view_delay_s: float = 0.0,
         label: str = "live",
+        known_voices: list[str] | None = None,
     ) -> PilotSession:
         """A session fed by live audio from a capture client (extension / Live capture page)."""
         from engine.ingest.live import LiveSource
@@ -239,7 +279,8 @@ class SessionManager:
         safe = "".join(c for c in label if c.isalnum() or c in " -_.")[:60] or "live"
         source = LiveSource(cfg.audio.analysis_sr, record_path=str(out / "live_input.wav"))
         engine = Session(cfg, Path("live") / safe, self.models, out, session_id=sid,
-                         voice_map=voice_map, live=source)  # fmt: skip
+                         voice_map=voice_map, live=source,
+                         known_voices=known_voice_clips(known_voices or []))  # fmt: skip
         ps = PilotSession(sid, Path("live") / safe, cfg, engine, out, use_enroll=False, live=source)
         self.sessions[sid] = ps
         return ps
@@ -273,6 +314,8 @@ class SessionManager:
         truth_path = ps.clip.with_suffix(".truth.json")
         truth = json.loads(truth_path.read_text()) if truth_path.exists() else None
         metrics = compute_all(rec, truth, ps.engine.duration)
+        if truth is not None and ps.engine.line_embeddings and "speaker" in metrics:
+            metrics["speaker"]["two_pass_accuracy"] = two_pass_accuracy(ps.engine, truth)
         assert self.models is not None
         from app.hosting import deployed_commit
 

@@ -12,7 +12,7 @@ import { API_BASE, getCode } from "../net/base";
 import { useSession } from "../store/session";
 import { Avatar, PlayButton } from "../ui/kit";
 
-const SPEAKER_COLORS = ["#4FA3FF", "#F5A524", "#5BC0BE"];
+const SPEAKER_COLORS = ["#4FA3FF", "#F5A524", "#17C964", "#F31260", "#9B7BFF", "#2BD4D4", "#FF8A3D", "#E8E36B"];
 
 export function LiveCapture() {
   const s = useSession();
@@ -50,7 +50,9 @@ export function LiveCapture() {
     return () => window.clearInterval(t);
   }, []);
 
-  const ids = Array.from({ length: speakers }, (_, i) => `S${i + 1}`);
+  // "Auto" lets the engine find up to 8; the cast list shows the first 4 (switch the rest live)
+  const ids = Array.from({ length: Math.min(speakers, 4) }, (_, i) => `S${i + 1}`);
+  const [known, setKnown] = useState<string[]>([]);
   const running = status?.state === "live" || status?.state === "connecting";
 
   const start = async () => {
@@ -82,6 +84,7 @@ export function LiveCapture() {
       maxSpeakers: speakers,
       voiceMap: Object.fromEntries(ids.filter((k) => cast[k]).map((k) => [k, cast[k] as string])),
       label: stream.getVideoTracks()[0]?.label || "tab",
+      knownVoices: known,
       workletUrl: "/pcm-worklet.js",
       onMessage: (m) => useSession.getState().apply(m),
       onStatus: setStatus,
@@ -231,7 +234,8 @@ export function LiveCapture() {
                 <p className="eyebrow mb-2">Cast</p>
                 <label className="mb-3 flex items-center gap-2 text-sm text-muted">Commentators
                   <select className="field !w-auto !py-1" value={speakers} onChange={(e) => setSpeakers(Number(e.target.value))}>
-                    {[1, 2, 3].map((n) => <option key={n} value={n}>{n}</option>)}
+                    {[1, 2, 3, 4, 5, 6, 7].map((n) => <option key={n} value={n}>{n}</option>)}
+                    <option value={8}>Auto (up to 8)</option>
                   </select>
                 </label>
                 <div className="flex flex-col gap-2">
@@ -252,6 +256,24 @@ export function LiveCapture() {
                   })}
                 </div>
               </div>
+              {voices.some((v) => v.custom) && (
+                <div>
+                  <p className="eyebrow mb-2">Known commentators</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {voices.filter((v) => v.custom).map((v) => {
+                      const on = known.includes(v.voice_id);
+                      return (
+                        <button key={v.voice_id} type="button" aria-pressed={on}
+                          onClick={() => setKnown((k) => (on ? k.filter((x) => x !== v.voice_id) : [...k, v.voice_id].slice(0, 8)))}
+                          className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${on ? "border-accent/70 bg-accent/15 text-ink" : "border-white/10 text-muted"}`}>
+                          {on ? "✓ " : ""}{v.name}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <p className="mt-1 text-[11px] text-muted">Voice Lab samples of the real commentators: recognised from their first word.</p>
+                </div>
+              )}
               <div className="rounded-xl border border-white/[0.06] bg-black/25 p-3 text-xs leading-relaxed text-muted">
                 <b className="text-ink">How it works:</b> the shared tab is muted; you hear its sound here
                 {mode === "synced" ? ` ${delay} s later, with the picture held back by the same amount,` : ","} and each commentator line is
@@ -265,6 +287,9 @@ export function LiveCapture() {
                 {speakerViews.length === 0 && <p className="text-sm text-muted">Listening for the first commentator…</p>}
                 {speakerViews.map((sp) => (
                   <SpeakerCard key={sp.id} speaker={sp} voices={s.voices}
+                    others={speakerViews.filter((o) => o.id !== sp.id)}
+                    onMerge={(into) => relayRef.current?.send({ type: "merge_speakers", from: sp.id, into })}
+                    onRename={(name) => relayRef.current?.send({ type: "rename_speaker", speaker_id: sp.id, name })}
                     onVoice={(v) => { useSession.getState().setSpeakerVoice(sp.id, v); relayRef.current?.setVoice(sp.id, v); }}
                     onPreview={(u) => void new Audio(u).play()} />
                 ))}

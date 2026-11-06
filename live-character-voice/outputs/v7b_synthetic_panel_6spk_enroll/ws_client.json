@@ -1,0 +1,54 @@
+{
+  "session_id": "20261106-113836_903ad5",
+  "clip": "synthetic_panel_6spk.mp4",
+  "speed": 1.0,
+  "wall_s": 251.8,
+  "lines_in_record": 87,
+  "lines_with_text": 86,
+  "line_complete_msgs": 86,
+  "audio_ready_msgs": 86,
+  "line_complete_coverage": 1.0,
+  "audio_ready_coverage": 1.0,
+  "delay_ready_from_ws": {
+    "p50": null,
+    "p95": null,
+    "max": null
+  },
+  "server_delay": {
+    "p50": 3.059,
+    "p95": 4.377,
+    "max": 5.277,
+    "mean": 3.129,
+    "n": 86
+  },
+  "drift_slope": 0.00168,
+  "wer": 0.1179,
+  "speaker_accuracy": 0.8816,
+  "crashes": 0,
+  "voice_switch": {
+    "switches": 0,
+    "tested": 0,
+    "passed": 0,
+    "pass_rate": null,
+    "detail": []
+  },
+  "client_switches_sent": 0,
+  "memory_mb": {
+    "first": 2059.8,
+    "max": 2323.6,
+    "last": 2243.9,
+    "samples": 26,
+    "growth": 263.8
+  },
+  "message_counts": {
+    "audio.ready": 86,
+    "line.complete": 86,
+    "metrics": 50,
+    "pong": 26,
+    "session.ended": 1,
+    "session.ready": 1,
+    "session.started": 1,
+    "speaker.new": 6
+  },
+  "report": "outputs/sessions/20261106-113836_903ad5/report.md"
+}

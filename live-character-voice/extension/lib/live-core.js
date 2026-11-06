@@ -115,7 +115,8 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
           max_speakers: this.o.maxSpeakers,
           view_delay_s: this.o.viewDelay,
           voice_map: this.o.voiceMap && Object.keys(this.o.voiceMap).length ? this.o.voiceMap : void 0,
-          label: this.o.label ?? "live"
+          label: this.o.label ?? "live",
+          known_voices: this.o.knownVoices && this.o.knownVoices.length ? this.o.knownVoices : void 0
         })
       });
       if (!r.ok) {
@@ -276,6 +277,10 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
     }
     setVoiceLevel(v) {
       this.voiceGain.gain.setTargetAtTime(v, this.ctx.currentTime, 0.03);
+    }
+    send(msg) {
+      var _a;
+      if (((_a = this.ws) == null ? void 0 : _a.readyState) === WebSocket.OPEN) this.ws.send(JSON.stringify(msg));
     }
     setVoice(speakerId, voiceId) {
       var _a;

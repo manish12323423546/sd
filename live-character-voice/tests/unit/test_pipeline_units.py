@@ -466,7 +466,7 @@ def test_live_session_endpoint_needs_models() -> None:
 
     with TestClient(main.app) as c:
         assert c.post("/api/live/sessions", json={"max_speakers": 2}).status_code == 503
-        assert c.post("/api/live/sessions", json={"max_speakers": 7}).status_code == 422
+        assert c.post("/api/live/sessions", json={"max_speakers": 9}).status_code == 422
         r = c.get("/pcm-worklet.js")  # served for the Live capture page (when web is built)
         assert r.status_code in (200, 404)
 
@@ -493,3 +493,48 @@ def test_lab_summary_flags_partial_runs() -> None:
     assert s["partial"] is True and s["wer"] is None
     m["wer"] = {"wer": 0.065, "ref_words": 525, "hyp_words": 520}
     assert _summary("x", m, None)["wer"] == 0.065
+
+
+def _pv(seed: int, noise: float = 0.0, base: np.ndarray | None = None) -> np.ndarray:
+    rng = np.random.default_rng(seed)
+    v = rng.standard_normal(192).astype(np.float32) if base is None else base.copy()
+    if noise:
+        v = v + noise * rng.standard_normal(192).astype(np.float32) / np.sqrt(192)
+    return v / np.linalg.norm(v)
+
+
+def test_tracker_v2_new_people_short_lines_and_shouts() -> None:
+    from engine.config import SpeakerConfig
+    from engine.speakers.tracker import SpeakerTracker
+
+    a, b = _pv(1), _pv(2)
+    tr = SpeakerTracker(SpeakerConfig(max_speakers=8))
+    assert tr.assign(_pv(10, 0.6, a), 3.0, None).speaker_id == "S1"
+    assert tr.assign(_pv(11, 0.6, b), 3.0, "S1").is_new  # clearly another voice → S2
+    # a short interjection stays with the current speaker
+    assert tr.assign(_pv(12, 3.0), 0.5, "S2").speaker_id == "S2"
+    # a very different but SHOUTED line does not start a new person
+    for i in range(6):
+        tr.assign(_pv(20 + i, 0.6, a), 2.0, "S1", loudness_db=-24.0)
+    shout = tr.assign(_pv(30), 2.0, "S1", loudness_db=-10.0)
+    assert not shout.is_new and shout.confidence == "low"
+    assert len(tr.spk) == 2
+
+
+def test_tracker_v2_merges_a_split_person_and_keeps_enrolled_apart() -> None:
+    from engine.config import SpeakerConfig
+    from engine.speakers.tracker import SpeakerTracker
+
+    a = _pv(1)
+    tr = SpeakerTracker(SpeakerConfig(max_speakers=8), new=0.9, assign=0.95)  # forces splits
+    tr.assign(_pv(2, 0.45, a), 3.0, None)
+    tr.assign(_pv(3, 0.45, a), 3.0, "S1")  # same person, created as S2 (thresholds forced)
+    merges = tr.drain_merges()
+    assert merges == [("S2", "S1")] and list(tr.spk) == ["S1"]
+    assert tr.merge("S1", "S1") is False
+    # two enrolled people with similar prints stay separate
+    en = SpeakerTracker(SpeakerConfig(max_speakers=8))
+    en.enroll("Ann", [_pv(4, 0.3, a)])
+    en.enroll("Bob", [_pv(5, 0.3, a)])
+    en._check_merges()
+    assert len(en.spk) == 2 and en.drain_merges() == []
