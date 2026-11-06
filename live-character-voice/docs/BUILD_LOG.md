@@ -660,3 +660,11 @@ hosted engine as default.
   voices; Deepgram mishears some short excited phrases ("he has to score there" → "after
   school") and returned empty text for two 1.4–1.6 s shouts. Default = Auto. On-time share
   varies run to run with the voice service's speed (Fish), not with speech-to-text.
+
+## 2026-11-06 — V8b: Altercast brand, premium UI, store graphics, promo video
+- Name **Altercast** (descriptor "Live Character Voice"); `brand/` holds the mark, wordmark,
+  brand guide and `render.js` / `screens.js` that rebuild every icon, tile and screenshot.
+- Web app + extension restyled to the brand (signal violet → aqua, Sora/Inter), new header, favicon,
+  social image; speaker colours updated (engine + extension). Extension v0.7.0.
+- Store: `store-icon-128.png`, 4 new 1280×800 screenshots from real captures, small tile,
+  marquee 1400×560. Promo video `promo/altercast-promo.mp4` (50 s, 1080p, −13.9 LUFS measured).

@@ -1,0 +1,210 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}html,body{width:1920px;height:1080px;overflow:hidden;background:#070910;color:#F4F6FB;font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
+.abs{position:absolute}.scene{position:absolute;inset:0;opacity:0}
+.glow{position:absolute;border-radius:50%;filter:blur(110px)}
+.wm{font-family:Sora;font-weight:700;letter-spacing:-.035em}
+.h{font-family:Sora;font-weight:700;letter-spacing:-.035em;line-height:1.05}
+.grad{background:linear-gradient(135deg,#C2B4FF,#7C5CFF 45%,#22D3EE);-webkit-background-clip:text;color:transparent}
+.card{background:rgba(20,24,36,.82);border:1px solid rgba(255,255,255,.09);border-radius:26px;box-shadow:0 50px 100px -40px rgba(0,0,0,.95),0 0 0 1px rgba(124,92,255,.12)}
+.chip{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:8px 18px;font-weight:600;font-size:22px}
+.mono{font-family:'JetBrains Mono',monospace}
+.bar{border-radius:6px;background:linear-gradient(#B9A8FF,#7C5CFF 50%,#22D3EE)}
+.word{display:inline-block;opacity:0;transform:translateY(18px)}
+</style></head><body>
+<div id="bgA" class="glow" style="width:1100px;height:1100px;background:#5B4BFF;opacity:.38"></div>
+<div id="bgB" class="glow" style="width:900px;height:900px;background:#16C7D9;opacity:.2"></div>
+
+<!-- S1 logo -->
+<div id="s1" class="scene" style="display:flex;flex-direction:column;align-items:center;justify-content:center">
+  <div style="display:flex;align-items:center;gap:40px">
+    <div id="s1mark" style="width:200px;height:200px"></div>
+    <div id="s1wm" class="wm" style="font-size:150px">altercast</div>
+  </div>
+  <div id="s1tag" class="h" style="font-size:76px;margin-top:70px;text-align:center">
+    <span class="word">Any</span> <span class="word">commentary.</span> <span class="word">Any</span> <span class="word">character.</span> <span class="word grad">Live.</span>
+  </div>
+</div>
+
+<!-- S2 listens -->
+<div id="s2" class="scene">
+  <div class="h abs" style="left:160px;top:120px;font-size:84px" id="s2h">Listens. <span style="opacity:.0" id="s2h2">Understands.</span> <span class="grad" style="opacity:0" id="s2h3">Re-speaks.</span></div>
+  <div id="s2wave" class="abs" style="left:160px;top:330px;right:160px;height:200px;display:flex;align-items:center;gap:9px"></div>
+  <div class="card abs" style="left:160px;right:160px;top:600px;padding:44px 52px" id="s2card">
+    <div style="display:flex;gap:16px;align-items:center;margin-bottom:22px;height:48px">
+      <span class="chip" id="c-spk" style="background:rgba(139,123,255,.16);color:#B9A8FF;opacity:0"><span style="width:12px;height:12px;border-radius:50%;background:#8B7BFF"></span>Commentator 1</span>
+      <span class="chip" id="c-emo" style="background:rgba(245,165,36,.16);color:#F5B94A;opacity:0">excited</span>
+      <span class="chip" id="c-arrow" style="color:#8B93A7;opacity:0;font-size:30px">→</span>
+      <span class="chip" id="c-voice" style="background:linear-gradient(90deg,#8A6BFF,#4F46E5);color:#fff;opacity:0">voice: The Veteran</span>
+    </div>
+    <div id="s2text" style="font-size:52px;font-weight:500;line-height:1.25;min-height:66px"></div>
+  </div>
+</div>
+
+<!-- S3 player -->
+<div id="s3" class="scene">
+  <div class="h abs" id="s3h" style="left:160px;top:70px;font-size:60px">Every line, in the character you cast. <span class="grad">On time.</span></div>
+  <div class="card abs" style="left:160px;top:190px;width:1600px;height:820px;overflow:hidden;padding:0" id="s3card">
+    <div style="position:absolute;inset:0" id="pitch">PITCH</div>
+    <div class="abs" style="left:34px;top:30px;display:flex;gap:14px">
+      <span class="chip" style="background:rgba(124,92,255,.92);color:#fff;font-size:20px">● SYNCED +6s</span>
+      <span class="chip" id="mode" style="font-size:20px;background:rgba(0,0,0,.55);color:#C9CFDB">ORIGINAL COMMENTARY</span>
+    </div>
+    <div class="abs mono" style="right:34px;top:30px;display:flex;align-items:center;background:rgba(7,9,16,.82);border-radius:14px;overflow:hidden;font-size:26px">
+      <span style="padding:10px 18px;background:#22D3EE;color:#062026;font-weight:700">67'</span>
+      <span style="padding:10px 18px">RIV <b id="sc1">0</b> – <b id="sc2">0</b> NOR</span>
+    </div>
+    <div id="flash" class="abs" style="inset:0;background:radial-gradient(circle at 50% 45%,rgba(124,92,255,.55),transparent 60%);opacity:0"></div>
+    <div id="goal" class="abs h" style="left:0;right:0;top:250px;text-align:center;font-size:190px;opacity:0;letter-spacing:-.02em">GOAL!</div>
+    <div class="abs" style="left:0;right:0;bottom:46px;display:flex;justify-content:center">
+      <div id="sub" style="max-width:1260px;background:rgba(7,9,16,.84);border-radius:20px;padding:22px 34px;font-size:40px;line-height:1.3;text-align:center;font-weight:500;opacity:0">
+        <span id="subwho" style="font-size:22px;font-weight:700;letter-spacing:.12em;margin-right:14px"></span><span id="subtxt"></span>
+      </div>
+    </div>
+    <div id="s3wave" class="abs" style="right:40px;bottom:200px;height:90px;display:flex;align-items:center;gap:6px;opacity:0"></div>
+  </div>
+</div>
+
+<!-- S4 speakers -->
+<div id="s4" class="scene">
+  <div class="h abs" style="left:160px;top:200px;font-size:72px">Up to 8 commentators.<br><span class="grad">Found automatically.</span></div>
+  <div class="abs" style="left:160px;top:420px;font-size:32px;color:#AAB2C5;max-width:700px;line-height:1.45">Every voice is recognised as it speaks, keeps its label when it comes back, and gets its own character.</div>
+  <div class="card abs" style="right:160px;top:180px;width:780px;padding:40px" id="s4card">
+    <div style="font-size:20px;font-weight:700;letter-spacing:.16em;color:#8B93A7;margin-bottom:26px">COMMENTATORS · DETECTED LIVE</div>
+    <div id="s4list" style="display:flex;flex-direction:column;gap:18px"></div>
+  </div>
+</div>
+
+<!-- S5 features -->
+<div id="s5" class="scene">
+  <div class="h abs" style="left:0;right:0;top:130px;text-align:center;font-size:88px">Keep the crowd. <span class="grad">Swap the voices.</span></div>
+  <div id="s5grid" class="abs" style="left:160px;right:160px;top:380px;display:grid;grid-template-columns:repeat(4,1fr);gap:30px"></div>
+</div>
+
+<!-- S6 measured -->
+<div id="s6" class="scene">
+  <div class="h abs" style="left:0;right:0;top:150px;text-align:center;font-size:96px">Measured, <span class="grad">not guessed.</span></div>
+  <div id="s6grid" class="abs" style="left:160px;right:160px;top:420px;display:grid;grid-template-columns:repeat(4,1fr);gap:30px"></div>
+  <div class="abs" style="left:0;right:0;top:820px;text-align:center;font-size:24px;color:#8B93A7">Quality Lab, scored test match · synced mode · November 2026</div>
+</div>
+
+<!-- S7 end -->
+<div id="s7" class="scene" style="display:flex;flex-direction:column;align-items:center;justify-content:center">
+  <div style="display:flex;align-items:center;gap:36px"><div style="width:170px;height:170px"></div><div class="wm" style="font-size:130px">altercast</div></div>
+  <div class="h" style="font-size:58px;margin-top:40px">Any commentary. Any character. <span class="grad">Live.</span></div>
+  <div id="cta" style="margin-top:70px;display:flex;align-items:center;gap:18px;padding:26px 54px;border-radius:999px;background:linear-gradient(90deg,#8A6BFF,#7C5CFF 50%,#4F46E5);font-size:36px;font-weight:600;box-shadow:0 20px 60px -15px rgba(124,92,255,.8)">
+    <svg width="40" height="40" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#fff"/><circle cx="24" cy="24" r="9" fill="#7C5CFF"/></svg>Add to Chrome — free</div>
+  <div style="margin-top:34px;font-size:24px;color:#8B93A7">Chrome · Edge · Brave · Arc &nbsp;·&nbsp; Live Character Voice</div>
+</div>
+<div id="fade" class="abs" style="inset:0;background:#000;opacity:0;pointer-events:none"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const ease=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const win=(t,a,b,f=.45)=>cl(Math.min((t-a)/f,(b-t)/f));   // fade in at a, out at b
+const ramp=(t,a,d=.6)=>ease((t-a)/d);
+// pitch (original artwork)
+$('pitch').innerHTML=`<svg width="1600" height="820" viewBox="0 0 1600 820"><defs>
+<linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d3b2a"/><stop offset="1" stop-color="#0a2a1f"/></linearGradient>
+<radialGradient id="v" cx=".5" cy=".45" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".75"/></radialGradient></defs>
+<rect width="1600" height="820" fill="url(#g)"/>
+${Array.from({length:10},(_,i)=>`<rect x="${i*160}" y="0" width="80" height="820" fill="#fff" opacity=".025"/>`).join('')}
+<g fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="4"><rect x="80" y="70" width="1440" height="680"/><line x1="800" y1="70" x2="800" y2="750"/><circle cx="800" cy="410" r="110"/>
+<rect x="80" y="230" width="210" height="360"/><rect x="1310" y="230" width="210" height="360"/><rect x="80" y="320" width="80" height="180"/><rect x="1440" y="320" width="80" height="180"/></g>
+<g id="players"></g><circle id="ball" r="11" fill="#fff"/><rect width="1600" height="820" fill="url(#v)"/></svg>`;
+const players=[[620,300,'#8B7BFF'],[700,520,'#8B7BFF'],[900,380,'#8B7BFF'],[1050,250,'#22D3EE'],[1120,470,'#22D3EE'],[1380,410,'#22D3EE'],[1230,330,'#8B7BFF']];
+// waves
+const mkBars=(el,n,w)=>{el.innerHTML=Array.from({length:n},()=>`<div class="bar" style="width:${w}px;height:10px"></div>`).join('')};
+mkBars($('s2wave'),96,9);mkBars($('s3wave'),26,7);
+document.querySelectorAll('[id=s1mark]').forEach(e=>e.innerHTML=MARKSVG(200));
+document.querySelector('#s7 div div').innerHTML=MARKSVG(170);
+function MARKSVG(s){return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="64" y1="32" x2="448" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8A6BFF"/>
+      <stop offset="0.55" stop-color="#5B4BFF"/>
+      <stop offset="1" stop-color="#16C7D9"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="150" cy="90" r="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <path d="M256 16c120 0 158 4 199 41s41 79 41 199-4 158-41 199-79 41-199 41-158-4-199-41S16 376 16 256 20 98 57 57 136 16 256 16z" fill="url(#bg)"/>
+  <path d="M256 16c120 0 158 4 199 41s41 79 41 199-4 158-41 199-79 41-199 41-158-4-199-41S16 376 16 256 20 98 57 57 136 16 256 16z" fill="url(#sheen)"/>
+  <path d="M136 400 L256 104 L376 400" fill="none" stroke="#fff" stroke-width="58" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#fff">
+    <rect x="215" y="290" width="24" height="48" rx="12"/>
+    <rect x="244" y="254" width="24" height="112" rx="12"/>
+    <rect x="273" y="280" width="24" height="68" rx="12"/>
+  </g>
+</svg>
+`.replace('width="512" height="512"',`width="${s}" height="${s}"`)}
+const spk=[['Commentator 1','The Veteran','#8B7BFF'],['Commentator 2','Hype Host','#22D3EE'],['Commentator 3','Spark','#F5A524'],['Commentator 4','Coach','#34D399'],['Commentator 5','Night Shift','#FF6A3D']];
+$('s4list').innerHTML=spk.map(([a,b,c],i)=>`<div id="sp${i}" style="display:flex;align-items:center;gap:20px;padding:18px 22px;border-radius:18px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.07);opacity:0">
+<span style="width:16px;height:16px;border-radius:50%;background:${c};box-shadow:0 0 0 6px ${c}22"></span><b style="font-size:28px;color:${c}">${a}</b><span style="color:#8B93A7;font-size:28px">→</span><span style="font-size:28px">${b}</span>
+<span style="margin-left:auto;display:flex;gap:4px;align-items:center;height:36px" id="spw${i}">${Array.from({length:10},()=>`<i style="display:block;width:5px;border-radius:3px;background:${c};height:8px"></i>`).join('')}</span></div>`).join('');
+const ICO=(d)=>`<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="url(#ig)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="ig" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#C2B4FF"/><stop offset=".5" stop-color="#7C5CFF"/><stop offset="1" stop-color="#22D3EE"/></linearGradient></defs>${d}</svg>`;
+const IC={clock:ICO('<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9.5 2.5h5M12 2.5V5"/>'),
+crowd:ICO('<circle cx="6" cy="9" r="2.2"/><circle cx="12" cy="7.5" r="2.4"/><circle cx="18" cy="9" r="2.2"/><path d="M2.5 18c.4-2.6 1.8-4.2 3.5-4.2s3 1.4 3.4 3M8.6 18c.5-3.2 1.7-5.2 3.4-5.2s2.9 2 3.4 5.2M14.6 16.8c.4-1.6 1.7-3 3.4-3s3.1 1.6 3.5 4.2"/>'),
+globe:ICO('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9S14.6 18.4 12 21C9.4 18.4 8.2 15.4 8.2 12S9.4 5.6 12 3z"/>'),
+mic:ICO('<rect x="9" y="2.5" width="6" height="11.5" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/>')};
+const feats=[[IC.clock,'In sync','Each voice starts when the commentator does. Median felt delay 0.0 s.'],[IC.crowd,'Crowd kept','Original sound full, ducked or crowd-only.'],[IC.globe,'Any tab','YouTube, Twitch, broadcasters — any live stream.'],[IC.mic,'Your voices','Clone a voice you own and cast it.']];
+$('s5grid').innerHTML=feats.map(([i,a,b],k)=>`<div class="card" id="f${k}" style="padding:40px 34px;opacity:0"><div style="height:64px">${i}</div><div class="h" style="font-size:40px;margin-top:22px">${a}</div><div style="font-size:24px;color:#AAB2C5;margin-top:14px;line-height:1.45">${b}</div></div>`).join('');
+const stats=[[93.7,'%','of words right','1'],[95.1,'%','of speech to the right speaker','1'],[59,'/59','lines voiced','0'],[0.0,' s','median felt delay','1']];
+$('s6grid').innerHTML=stats.map(([v,u,l],k)=>`<div class="card" id="st${k}" style="padding:44px 36px;text-align:center;opacity:0"><div class="h grad" style="font-size:96px" id="sv${k}">0</div><div style="font-size:26px;color:#AAB2C5;margin-top:14px">${l}</div></div>`).join('');
+
+const s2txt='Tanaka down the right wing, past one, past two.';
+const origTxt=[[17.01,'Tanaka through on goal!'],[18.32,'He goes round the keeper!'],[19.52,'Goal! Goal! Tanaka scores for Northgate United!']];
+const hypeTxt=[[22.6,'Tanaka through on goal!'],[24.2,'He goes round the keeper!'],[25.7,'GOAL! Tanaka scores for Northgate United!']];
+window.render=(t)=>{
+  $('bgA').style.left=(-300+Math.sin(t*.13)*160)+'px';$('bgA').style.top=(-420+Math.cos(t*.11)*120)+'px';
+  $('bgB').style.right=(-260+Math.cos(t*.09)*140)+'px';$('bgB').style.bottom=(-460+Math.sin(t*.12)*120)+'px';$('bgB').style.position='absolute';
+  // S1 0–6
+  $('s1').style.opacity=win(t,-1,6);
+  const m=ramp(t,.2,1.1);$('s1mark').style.transform=`scale(${.6+.4*m}) rotate(${(1-m)*-8}deg)`;$('s1mark').style.filter=`blur(${(1-m)*14}px)`;$('s1mark').style.opacity=m;
+  const w=ramp(t,.7,1);$('s1wm').style.opacity=w;$('s1wm').style.transform=`translateX(${(1-w)*-40}px)`;
+  document.querySelectorAll('#s1tag .word').forEach((e,i)=>{const k=ramp(t,[2.6,2.95,3.55,3.9,4.55][i],.5);e.style.opacity=k;e.style.transform=`translateY(${(1-k)*18}px)`});
+  // S2 6–12
+  $('s2').style.opacity=win(t,6,12);
+  $('s2h2').style.opacity=ramp(t,8.0,.5);$('s2h3').style.opacity=ramp(t,10.2,.5);
+  document.querySelectorAll('#s2wave .bar').forEach((b,i)=>{const v=.12+.88*Math.abs(Math.sin(i*.31+t*3.1)*Math.sin(i*.07+t*1.3));b.style.height=(18+v*180*cl((t-6.2)*1.5))+'px'});
+  const n=Math.floor(cl((t-6.8)/2.2)*s2txt.length);$('s2text').textContent=s2txt.slice(0,n)+(t<9.2&&t>6.6?'▍':'');
+  [['c-spk',8.3],['c-emo',8.9],['c-arrow',9.8],['c-voice',10.1]].forEach(([id,a])=>{const k=ramp(t,a,.4);$(id).style.opacity=k;$(id).style.transform=`scale(${.85+.15*k})`});
+  // S3 12–29
+  $('s3').style.opacity=win(t,12,29);
+  const z=ramp(t,12,1.2);$('s3card').style.transform=`scale(${.94+.06*z})`;
+  const after=t>=22.3;
+  $('mode').textContent=t<16.8?'MATCH · LIVE':after?'ALTERCAST · HYPE HOST':'ORIGINAL COMMENTARY';
+  $('mode').style.background=after?'linear-gradient(90deg,#8A6BFF,#22D3EE)':'rgba(0,0,0,.55)';$('mode').style.color=after?'#fff':'#C9CFDB';
+  const lines=after?hypeTxt:origTxt;let cur=null;for(const l of lines)if(t>=l[0])cur=l;
+  const show=(t>=17&&t<21.9)||(t>=22.6&&t<28.7);$('sub').style.opacity=show&&cur?1:0;
+  if(cur){$('subtxt').textContent=cur[1];$('subwho').textContent=after?'HYPE HOST':'COMMENTATOR 1';$('subwho').style.color=after?'#22D3EE':'#8B93A7';$('sub').style.border=after?'2px solid rgba(124,92,255,.7)':'2px solid transparent'}
+  const goalT=after?25.7:19.52;const g=t>=goalT&&t<goalT+1.6?Math.sin(cl((t-goalT)/1.6)*Math.PI):0;
+  $('goal').style.opacity=after?g:0;$('goal').style.transform=`scale(${.8+.25*g})`;$('flash').style.opacity=g*(after?1:.4);
+  $('sc2').textContent=t>=19.52&&t<22.3||t>=25.7?'1':'0';
+  $('s3wave').style.opacity=after&&t<28.7?1:0;
+  document.querySelectorAll('#s3wave .bar').forEach((b,i)=>{b.style.height=(12+78*Math.abs(Math.sin(i*.6+t*9)*Math.cos(i*.21+t*4)))+'px'});
+  // ball run (loops through the attack, replays for "after")
+  const lt=after?t-22.6:t-12; const p=cl(lt/5.8);
+  const bx=640+p*800+Math.sin(p*9)*30, by=420-Math.sin(p*3.1)*150*(1-p)+p*-10;
+  const ball=document.getElementById('ball'); if(ball){ball.setAttribute('cx',bx);ball.setAttribute('cy',by);}
+  document.getElementById('players').innerHTML=players.map(([x,y,c],i)=>`<circle cx="${x+Math.sin(t*1.1+i)*24+(i===2?p*480:0)}" cy="${y+Math.cos(t*.9+i*2)*18}" r="16" fill="${c}" stroke="#fff" stroke-width="3"/>`).join('');
+  // S4 29–35
+  $('s4').style.opacity=win(t,29,35);
+  spk.forEach((_,i)=>{const k=ramp(t,29.6+i*.55,.45);const e=$('sp'+i);e.style.opacity=k;e.style.transform=`translateX(${(1-k)*50}px)`;
+    const talk=Math.floor((t-29.6)/.9)%5===i; document.querySelectorAll(`#spw${i} i`).forEach((b,j)=>b.style.height=(talk?6+26*Math.abs(Math.sin(j*.9+t*10)):6)+'px')});
+  // S5 35–40
+  $('s5').style.opacity=win(t,35,40);
+  [0,1,2,3].forEach(k=>{const v=ramp(t,35.4+k*.35,.5);const e=$('f'+k);e.style.opacity=v;e.style.transform=`translateY(${(1-v)*40}px)`});
+  // S6 40–44.6
+  $('s6').style.opacity=win(t,40,44.6);
+  stats.forEach(([v,u,l,d],k)=>{const q=ramp(t,40.5+k*.25,1.3);const e=$('st'+k);e.style.opacity=cl((t-40.4-k*.25)*3);$('sv'+k).textContent=(v*q).toFixed(+d)+u});
+  // S7 44.6–50
+  $('s7').style.opacity=win(t,44.6,60);
+  const c=ramp(t,45.6,.6);$('cta').style.transform=`scale(${.9+.1*c})`;$('cta').style.opacity=c;
+  $('fade').style.opacity=cl((t-49.3)/.7);
+};
+</script></body></html>
