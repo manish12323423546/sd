@@ -110,6 +110,8 @@ def health() -> dict[str, object]:
         "model_info": m.info if m else {},
         "load_s": m.load_s if m else {},
         "active_session": active.session_id if active else None,
+        "active_state": str(active.status) if active else None,
+        "active_actions": active.actions() if active else [],
         "rss_mb": _rss_mb(),
         "voice_cloning": manager.cloning,
         "access_code_required": bool(access_code()),
@@ -237,8 +239,12 @@ async def set_keys(body: KeysIn, request: Request) -> dict[str, object]:
     if any(r["ok"] for r in results.values()) and manager.models is not None:
         try:
             engines = await asyncio.get_running_loop().run_in_executor(None, manager.reload_engines)
-        except SessionBusyError as e:
-            raise HTTPException(409, str(e)) from e
+        except SessionBusyError:
+            # the keys are saved; the engines switch as soon as the running session ends
+            manager.pending_reload = True
+            pending = "saved — the engines switch when the running session ends"
+            return {"results": results, "engines": {}, "voice_cloning": manager.cloning,
+                    "pending": pending}  # fmt: skip
     return {"results": results, "engines": engines, "voice_cloning": manager.cloning}
 
 
@@ -454,7 +460,7 @@ def create_session(body: CreateSession) -> SessionCreated:
             body.known_voices,
         )
     except SessionBusyError as e:
-        raise HTTPException(409, str(e)) from e
+        raise HTTPException(409, e.detail()) from e
     except FileNotFoundError as e:
         raise HTTPException(404, f"clip not found: {e}") from e
     except KeyError as e:
@@ -473,7 +479,7 @@ def create_live_session(body: LiveSessionCreate) -> SessionCreated:
             body.max_speakers, body.voice_map, body.view_delay_s, body.label, body.known_voices
         )
     except SessionBusyError as e:
-        raise HTTPException(409, str(e)) from e
+        raise HTTPException(409, e.detail()) from e
     except KeyError as e:
         raise HTTPException(400, f"unknown voice {e}") from e
     return SessionCreated(session_id=ps.session_id, ws_url=f"/ws/sessions/{ps.session_id}")
@@ -486,14 +492,18 @@ def _session(sid: str):  # type: ignore[no-untyped-def]
         raise HTTPException(404, "unknown session") from e
 
 
-@app.get("/api/sessions/{sid}", response_model=SessionStatus)
-def session_status(sid: str) -> SessionStatus:
-    ps = _session(sid)
+def _status_of(ps) -> SessionStatus:  # type: ignore[no-untyped-def]
     rec = ps.engine.store.record
     return SessionStatus(
-        session_id=sid,
+        session_id=ps.session_id,
         clip_id=ps.clip_id,
-        status=ps.status,
+        status=str(ps.status),
+        paused=ps.paused,
+        actions=ps.actions(),
+        owner=ps.owner,
+        live_input=ps.live is not None,
+        clients=ps.clients,
+        view_delay_s=ps.engine.view_delay,
         speed=ps.cfg.speed,
         max_speakers=ps.cfg.speaker.max_speakers,
         speakers=[
@@ -506,16 +516,28 @@ def session_status(sid: str) -> SessionStatus:
             for s in rec.speakers.values()
         ],
         metrics=ps.engine.metrics_snapshot(),
-        report_url=f"/api/sessions/{sid}/report" if ps.report_ready else None,
+        report_url=f"/api/sessions/{ps.session_id}/report" if ps.report_ready else None,
         error=ps.error,
     )
 
 
-@app.post("/api/sessions/{sid}/stop")
-def stop_session(sid: str) -> dict[str, str]:
+@app.get("/api/sessions", response_model=list[SessionStatus])
+def list_sessions() -> list[SessionStatus]:
+    """Sessions this server process knows (newest first), each with its state and next actions."""
+    return [_status_of(ps) for ps in reversed(list(manager.sessions.values()))][:20]
+
+
+@app.get("/api/sessions/{sid}", response_model=SessionStatus)
+def session_status(sid: str) -> SessionStatus:
+    return _status_of(_session(sid))
+
+
+@app.post("/api/sessions/{sid}/stop", response_model=SessionStatus)
+def stop_session(sid: str) -> SessionStatus:
+    """Idempotent: stopping a stopping/finished session just returns its state."""
     ps = _session(sid)
     manager.stop(ps)
-    return {"status": "stopping"}
+    return _status_of(ps)
 
 
 @app.get("/api/sessions/{sid}/record")

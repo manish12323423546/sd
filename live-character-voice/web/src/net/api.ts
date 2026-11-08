@@ -91,17 +91,44 @@ export interface CreateSessionBody {
   known_voices?: string[];
 }
 
-async function json<T>(res: Response): Promise<T> {
-  if (!res.ok) {
-    let detail = `${res.status} ${res.statusText}`;
-    try {
-      const body = (await res.json()) as { detail?: unknown };
-      if (typeof body.detail === "string") detail = body.detail;
-    } catch {
-      /* keep status text */
-    }
-    throw new Error(detail);
+/** Structured API error. A 409 "session_busy" carries the blocking session and what can be
+ *  done about it: { code, message, session_id, state, actions }. */
+export interface ApiErrorDetail {
+  code?: string;
+  message?: string;
+  session_id?: string | null;
+  state?: string | null;
+  actions?: string[];
+}
+
+export class ApiError extends Error {
+  constructor(
+    message: string,
+    readonly status: number,
+    readonly detail: ApiErrorDetail = {},
+  ) {
+    super(message);
   }
+}
+
+export async function errorFrom(res: Response): Promise<ApiError> {
+  let message = `${res.status} ${res.statusText}`;
+  let detail: ApiErrorDetail = {};
+  try {
+    const body = (await res.json()) as { detail?: unknown };
+    if (typeof body.detail === "string") message = body.detail;
+    else if (body.detail && typeof body.detail === "object") {
+      detail = body.detail as ApiErrorDetail;
+      if (typeof detail.message === "string") message = detail.message;
+    }
+  } catch {
+    /* keep status text */
+  }
+  return new ApiError(message, res.status, detail);
+}
+
+async function json<T>(res: Response): Promise<T> {
+  if (!res.ok) throw await errorFrom(res);
   return (await res.json()) as T;
 }
 

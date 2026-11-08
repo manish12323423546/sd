@@ -1,12 +1,14 @@
 """SessionManager: create / run / stop Pilot sessions (docs/06 §6.5).
 
 Models are loaded once per process and shared. Only ONE active session at a time (CPU budget);
-a second create while one is live raises SessionBusyError (HTTP 409).
+a second create while one is live raises SessionBusyError (HTTP 409). Every status change goes
+through `_set_state` and the explicit state machine in app/lifecycle.py.
 """
 
 from __future__ import annotations
 
 import asyncio
+import contextlib
 import json
 import threading
 import time
@@ -15,6 +17,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+from app.lifecycle import TERMINAL, State, allowed_actions, check
 from engine.config import EngineConfig, VoiceCatalog, load_engine_config, load_voice_catalog
 from engine.ingest.decode import probe
 from engine.metrics.compute import compute_all
@@ -31,7 +34,22 @@ CLIP_EXT = {".mp4", ".mkv", ".mov"}
 
 
 class SessionBusyError(RuntimeError):
-    pass
+    """The one-session slot is taken. Carries the blocking session so a UI or an agent can act
+    on it (HTTP 409 body: code, message, session_id, state, actions)."""
+
+    def __init__(self, message: str, session: PilotSession | None = None) -> None:
+        super().__init__(message)
+        self.session = session
+
+    def detail(self) -> dict[str, Any]:
+        ps = self.session
+        return {
+            "code": "session_busy",
+            "message": str(self),
+            "session_id": ps.session_id if ps else None,
+            "state": str(ps.status) if ps else None,
+            "actions": ps.actions() if ps else [],
+        }
 
 
 def enroll_path_for(clip_stem: str) -> Path:
@@ -69,7 +87,7 @@ class PilotSession:
     engine: Session
     out_dir: Path
     use_enroll: bool
-    status: str = "ready"  # ready | live | ended | error
+    status: State = State.READY  # change only via SessionManager._set_state (app/lifecycle.py)
     error: str | None = None
     task: asyncio.Task[None] | None = None
     report_ready: bool = False
@@ -77,10 +95,18 @@ class PilotSession:
     metrics: dict[str, Any] = field(default_factory=dict)
     created: float = field(default_factory=time.monotonic)
     live: Any | None = None  # engine.ingest.live.LiveSource for live-input sessions
+    owner: str = "viewer"  # viewer | capture | lab — who drives it (lab runs are never abandoned)
 
     @property
     def clip_id(self) -> str:
         return self.clip.name
+
+    @property
+    def paused(self) -> bool:
+        return bool(getattr(self.engine.clock, "paused", False))
+
+    def actions(self) -> list[str]:
+        return allowed_actions(self.status, self.paused, self.report_ready)
 
 
 def known_voice_clips(voice_ids: list[str]) -> list[tuple[str, list[Any]]]:
@@ -126,6 +152,7 @@ class SessionManager:
         self.models: Models | None = None
         self.sessions: dict[str, PilotSession] = {}
         self.load_log: list[str] = []
+        self.pending_reload = False  # keys were saved while a session ran: reload when it ends
 
     @property
     def catalog(self) -> VoiceCatalog:
@@ -162,8 +189,9 @@ class SessionManager:
     def reload_engines(self) -> dict[str, Any]:
         """Re-check the keys and switch speech-to-text / voices without restarting (used after a
         key is entered in the app). Refused while a session is running."""
-        if self.active() is not None:
-            raise SessionBusyError("stop the running session first")
+        busy = self.active()
+        if busy is not None:
+            raise SessionBusyError("stop the running session first", busy)
         if self.models is None:
             raise RuntimeError("models are still loading")
         fresh = load_engine_config()
@@ -190,34 +218,49 @@ class SessionManager:
                 self.load_log.append(f"preview {v.voice_id}")
 
     # ---- sessions
-    def active(self) -> PilotSession | None:
+    def _set_state(self, ps: PilotSession, dst: State) -> None:
+        """The only place a session's status changes (raises on an impossible transition)."""
+        if ps.status == dst:
+            return
+        ps.status = check(ps.status, dst)
+        self.load_log.append(f"session {ps.session_id}: {dst.value}")
+
+    def occupying(self) -> PilotSession | None:
+        """The session holding the one-session slot (ready or live), stuck or not."""
         for s in self.sessions.values():
-            if s.status in ("ready", "live"):
+            if s.status in (State.READY, State.LIVE):
                 return s
         return None
 
+    def active(self) -> PilotSession | None:
+        """The session that really blocks a new one: occupying the slot and not stuck."""
+        s = self.occupying()
+        return None if s is None or self._stuck(s) else s
+
     @staticmethod
     def _stuck(ps: PilotSession) -> bool:
-        """Blocks the one-session slot but can't finish: unstarted, already done, or paused with
-        nobody watching (a viewer paused and closed the tab)."""
-        if ps.status == "ready" and ps.task is None:
-            return True
+        """Holds the slot but can't (or won't) finish: unstarted, already done, or paused / a
+        live input with nobody connected (a viewer paused and closed the tab)."""
+        if ps.status == State.READY and ps.task is None:
+            # just created: give its client a moment to connect before it can be replaced
+            return ps.owner != "capture" or time.monotonic() - ps.created > 10.0
         if ps.task is not None and ps.task.done():
             return True
-        paused = bool(getattr(ps.engine.clock, "paused", False))
-        return ps.clients == 0 and (paused or (ps.live is not None))
+        if ps.owner == "lab":
+            return False  # a Quality Lab run plays with nobody watching on purpose
+        return ps.clients == 0 and (ps.paused or ps.live is not None)
 
     def _replace_stuck(self) -> None:
-        busy = self.active()
+        busy = self.occupying()
         if busy is None:
             return
         if not self._stuck(busy):
             raise SessionBusyError(
                 f"session {busy.session_id} is still running; only one live session at a "
-                "time on this CPU. Stop it first."
+                "time on this CPU. Stop it first.",
+                busy,
             )
-        busy.engine.stop()
-        busy.status = "ended" if busy.status != "error" else busy.status
+        self.stop(busy)
 
     def create(
         self,
@@ -285,38 +328,56 @@ class SessionManager:
         engine = Session(cfg, Path("live") / safe, self.models, out, session_id=sid,
                          voice_map=voice_map, live=source,
                          known_voices=known_voice_clips(known_voices or []))  # fmt: skip
-        ps = PilotSession(sid, Path("live") / safe, cfg, engine, out, use_enroll=False, live=source)
+        ps = PilotSession(sid, Path("live") / safe, cfg, engine, out, use_enroll=False, live=source,
+                          owner="capture")  # fmt: skip
         self.sessions[sid] = ps
         return ps
 
     def is_idle(self) -> bool:
-        """Nothing is playing (a session that was opened but never started does not count —
-        it would otherwise block automatic updates forever)."""
-        return not any(s.status == "live" and s.task is not None and not s.task.done()
-                       and not self._stuck(s) for s in self.sessions.values())  # fmt: skip
+        """Safe to restart the server (auto-update): no session is playing or still writing its
+        report, no Quality Lab run is scoring and no pro voice is being built. A session that was
+        opened but never started, or is stuck, does not count (it would block updates forever)."""
+        for s in self.sessions.values():
+            running = s.task is not None and not s.task.done()
+            if s.status == State.STOPPING and running:
+                return False
+            if s.status == State.LIVE and running and not self._stuck(s):
+                return False
+        from app import lab
+        from engine import voices_pro
+
+        if lab.running_count() > 0:
+            return False
+        return not any(j.stage not in ("done", "error") for j in voices_pro.JOBS.values())
 
     def get(self, sid: str) -> PilotSession:
         return self.sessions[sid]
 
-    def start(self, ps: PilotSession) -> None:
-        if ps.task is not None:
-            return
-        ps.status = "live"
+    def start(self, ps: PilotSession) -> bool:
+        """ready → live. False when it can't start (already started, stopping or finished)."""
+        if ps.task is not None or ps.status != State.READY:
+            return False
+        self._set_state(ps, State.LIVE)
         ps.task = asyncio.create_task(self._run(ps))
+        return True
 
     async def _run(self, ps: PilotSession) -> None:
         crashed = None
         try:
             await ps.engine.run()
-            ps.status = "ended"
+            self._set_state(ps, State.ENDED)
         except Exception as e:
             crashed = f"{type(e).__name__}: {e}"
-            ps.status = "error"
+            self._set_state(ps, State.ERROR)
             ps.error = crashed
             ps.engine.store.bus.publish("session.warning", message=f"session crashed: {crashed}")
             ps.engine.store.bus.publish("session.ended")
         finally:
             await asyncio.get_running_loop().run_in_executor(None, self._finalize, ps, crashed)
+            if self.pending_reload and self.active() is None:  # keys saved during the session
+                self.pending_reload = False
+                with contextlib.suppress(Exception):
+                    await asyncio.get_running_loop().run_in_executor(None, self.reload_engines)
 
     def _finalize(self, ps: PilotSession, crashed: str | None) -> None:
         rec = ps.engine.store.record
@@ -356,4 +417,15 @@ class SessionManager:
         ps.report_ready = True
 
     def stop(self, ps: PilotSession) -> None:
+        """live → stopping (the engine drains, then _run moves it to ended); a session that never
+        started ends at once and tells its clients. Stopping a finished session does nothing."""
+        if ps.status in TERMINAL or ps.status == State.STOPPING:
+            return
         ps.engine.stop()
+        if ps.status == State.READY and ps.task is None:
+            self._set_state(ps, State.ENDED)
+            ps.engine.store.bus.publish("session.ended")
+        elif ps.task is not None and ps.task.done():
+            pass  # _run already set the final state
+        else:
+            self._set_state(ps, State.STOPPING)

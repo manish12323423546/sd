@@ -4,6 +4,12 @@
 export type Emotion = "calm" | "neutral" | "excited" | "peak";
 export const EMOTIONS: readonly Emotion[] = ["calm", "neutral", "excited", "peak"];
 
+/** Server session lifecycle (app/lifecycle.py). Values on the wire are these exact strings. */
+export type SessionLifecycle = "ready" | "live" | "stopping" | "ended" | "error";
+export const SESSION_STATES: readonly SessionLifecycle[] = ["ready", "live", "stopping", "ended", "error"];
+/** Line voicing outcome (Line.schedule_action on the server). */
+export type ScheduleAction = "none" | "fit" | "speedup" | "merged" | "noise" | "dropped";
+
 export interface VoiceRef {
   voice_id: string;
   name: string;
@@ -25,18 +31,29 @@ export interface LineMsg {
   speaker_id: string | null;
   emotion: Emotion | null;
   arousal: number | null;
+  /** speaker decision: "high" | "low" | "new" */
+  speaker_conf?: string | null;
+  speaker_sim?: number | null;
+  /** which speech-to-text engine heard it: "groq" | "deepgram" | "local", "*" = backup retry */
+  asr_by?: string | null;
 }
 
 export interface SessionReady {
   type: "session.ready";
   session_id: string;
-  media_url: string;
+  /** null for live-input sessions (audio streamed by a capture client) */
+  media_url: string | null;
+  live_input?: boolean;
   speakers_max: number;
   voices: VoiceRef[];
   speed?: number;
   speakers?: SpeakerMsg[];
   /** synced mode: the picture runs this many seconds behind live (0 = live) */
   view_delay_s?: number;
+  /** the session's lifecycle state when you joined, and what you may do now */
+  state?: SessionLifecycle;
+  paused?: boolean;
+  actions?: string[];
 }
 export interface SessionStarted {
   type: "session.started";
@@ -87,6 +104,9 @@ export interface WarningMsg {
 export interface SessionEnded {
   type: "session.ended";
   report_url: string;
+  /** "ended" normally, "error" after a crash (then `error` says why) */
+  state?: SessionLifecycle;
+  error?: string;
 }
 export interface ServerPong {
   type: "pong";
@@ -142,7 +162,7 @@ export function parseServerMessage(raw: unknown): ServerMessage | null {
   const m = raw;
   switch (m.type) {
     case "session.ready":
-      return isStr(m.session_id) && isStr(m.media_url) && Array.isArray(m.voices)
+      return isStr(m.session_id) && (isStr(m.media_url) || m.media_url === null) && Array.isArray(m.voices)
         ? (m as unknown as SessionReady)
         : null;
     case "session.started":

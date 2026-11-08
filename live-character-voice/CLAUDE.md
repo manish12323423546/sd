@@ -35,6 +35,13 @@ Then read the doc(s) named by the milestone you are working on.
 - `make poc CLIP=data/clips/<file>` — run the POC at live speed and produce outputs + report
 - `make dev` — run backend + frontend together (Pilot)
 
+## State machines
+- Session states live in `app/lifecycle.py` (ready → live → stopping → ended | error). Change a
+  session's status only through `SessionManager._set_state`; never assign `ps.status` directly.
+- Clients (web, extension, agents) decide what to offer from the `actions` list the API returns.
+- `docs/STATE_MACHINES.md` lists every other state machine, its states and its known risks —
+  update it when you add or change one.
+
 ## Definition of done for any task
 - Code runs, tests pass, lint passes.
 - New behaviour has at least one test.

@@ -104,11 +104,21 @@ export function Player() {
             video.currentTime = 0; // synced mode: hold the first frame while voices are prepared
           }
         }
-        if (msg.type === "session.resumed") void graphRef.current?.resume();
+        if (msg.type === "session.resumed") {
+          pausedRef.current = false; // also when another viewer resumed
+          void graphRef.current?.resume();
+        }
         startedRef.current = true;
         sock.ping();
         const queued = pendingRef.current.splice(0);
         queued.forEach(scheduleLine);
+      } else if (msg.type === "session.paused") {
+        if (!pausedRef.current) {
+          // another viewer paused the shared session: follow it
+          pausedRef.current = true;
+          videoRef.current?.pause();
+          void graphRef.current?.suspend();
+        }
       } else if (msg.type === "audio.ready") {
         if (!msg.url.endsWith(".part.wav")) graphRef.current?.preload(withBase(msg.url)).catch(() => undefined);
         scheduleLine(msg);

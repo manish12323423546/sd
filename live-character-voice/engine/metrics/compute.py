@@ -63,7 +63,7 @@ def delay_metrics(rec: SessionRecord) -> dict[str, Any]:
     close_wait = [ln.times.created - ln.t_end for ln in t if ln.times.created is not None]
     start = [ln.delay_first for ln in lines if ln.delay_first is not None]
     streamed = [ln for ln in lines if ln.times.tts_first is not None]
-    stalls = [ln.features.get("stream_stall_s", 0.0) for ln in streamed]
+    stalls = [float(ln.features.get("stream_stall_s", 0.0)) for ln in streamed]
     return {
         "headline": "delay_felt",
         "view_delay_s": view,

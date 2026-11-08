@@ -550,6 +550,6 @@ def test_unstarted_session_does_not_block_updates() -> None:
     assert m.is_idle()
     m.sessions["b"] = SimpleNamespace(  # type: ignore[assignment]
         status="live", task=SimpleNamespace(done=lambda: False), clients=1, live=None,
-        engine=SimpleNamespace(clock=SimpleNamespace(paused=False)),
+        owner="viewer", paused=False,
     )  # fmt: skip
     assert not m.is_idle()

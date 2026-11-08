@@ -668,3 +668,14 @@ hosted engine as default.
   social image; speaker colours updated (engine + extension). Extension v0.7.0.
 - Store: `store-icon-128.png`, 4 new 1280×800 screenshots from real captures, small tile,
   marquee 1400×560. Promo video `promo/altercast-promo.mp4` (50 s, 1080p, −13.9 LUFS measured).
+
+## 2026-11-08 — V8c: explicit session lifecycle, state-machine inventory
+- Audited the app: 14 implicit state machines (docs/STATE_MACHINES.md, by impact).
+- Session lifecycle made explicit (app/lifecycle.py): ready → live → stopping → ended | error,
+  one transition table, `actions` on HTTP/WS/health, structured 409, `GET /api/sessions`.
+- Fixed: paused-and-abandoned session blocking forever; replaced session restartable; late joiner
+  shown a finished session as live; lab runs killed by a leaving viewer; keys "error" while saved;
+  updater restarting mid-scoring/clone; live start waiting 6 s (now 0.00 s, measured);
+  record.json not reloadable (`features` with `asr_by`); side panel showing Deepgram as local.
+- Tests: 96 pytest (9 new lifecycle), 14 vitest; real-engine end-to-end run of create → start →
+  pause → resume → stop → late joiner, pause-then-close, live start.

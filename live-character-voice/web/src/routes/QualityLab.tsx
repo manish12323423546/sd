@@ -1,7 +1,7 @@
 // Quality Lab: run a scored test in the app and see MEASURED results (never estimates).
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { api, type Clip } from "../net/api";
+import { api, errorFrom, type Clip } from "../net/api";
 import { apiFetch } from "../net/base";
 
 interface Run {
@@ -82,7 +82,7 @@ export function QualityLab() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ clip_id: clip, view_delay_s: mode === "synced" ? 6 : 0 }),
     });
-    if (!r.ok) setError(((await r.json().catch(() => ({}))) as { detail?: string }).detail ?? `error ${r.status}`);
+    if (!r.ok) setError((await errorFrom(r)).message);
     void load();
   };
 

@@ -24,8 +24,7 @@ def test_stop_resumes_a_paused_clock() -> None:
 
 
 def _ps(**kw: object) -> SimpleNamespace:
-    base = dict(status="live", task=None, clients=0, live=None,
-                engine=SimpleNamespace(clock=SimpleNamespace(paused=False)))  # fmt: skip
+    base = dict(status="live", task=None, clients=0, live=None, owner="viewer", paused=False)
     base.update(kw)
     return SimpleNamespace(**base)
 
@@ -34,9 +33,10 @@ def test_stuck_rules() -> None:
     running = SimpleNamespace(done=lambda: False)
     assert SessionManager._stuck(_ps(status="ready"))  # type: ignore[arg-type]
     assert SessionManager._stuck(_ps(task=SimpleNamespace(done=lambda: True)))  # type: ignore[arg-type]
-    paused = SimpleNamespace(clock=SimpleNamespace(paused=True))
-    assert SessionManager._stuck(_ps(task=running, engine=paused))  # type: ignore[arg-type]
+    assert SessionManager._stuck(_ps(task=running, paused=True))  # type: ignore[arg-type]
     # a lab test runs with no viewers and is not paused: never replaced
     assert not SessionManager._stuck(_ps(task=running))  # type: ignore[arg-type]
     # someone is watching a paused session: keep it
-    assert not SessionManager._stuck(_ps(task=running, engine=paused, clients=1))  # type: ignore[arg-type]
+    assert not SessionManager._stuck(_ps(task=running, paused=True, clients=1))  # type: ignore[arg-type]
+    # a Quality Lab run is never "stuck" just because nobody watches it
+    assert not SessionManager._stuck(_ps(task=running, paused=True, owner="lab"))  # type: ignore[arg-type]

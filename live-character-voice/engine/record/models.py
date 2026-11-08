@@ -56,7 +56,7 @@ class Line(BaseModel):
     speaker_conf: str | None = None
     emotion: Emotion | None = None
     arousal: float | None = None
-    features: dict[str, float] = Field(default_factory=dict)
+    features: dict[str, float | str] = Field(default_factory=dict)  # numbers + "asr_by"
     voice_id: str | None = None
     tts_path: str | None = None
     tts_duration: float | None = None

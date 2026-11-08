@@ -25,6 +25,12 @@ LAB_DIR = ROOT / "outputs" / "lab"
 router = APIRouter()
 _manager: SessionManager | None = None
 _running: dict[str, dict[str, Any]] = {}
+_failed: dict[str, dict[str, Any]] = {}  # runs that ended without a report (shown, not hidden)
+
+
+def running_count() -> int:
+    """Runs still playing or scoring (the auto-updater waits for them)."""
+    return len(_running)
 
 
 def bind(manager: SessionManager) -> None:
@@ -82,9 +88,17 @@ async def _score(sid: str, truth: Path) -> None:
     assert _manager is not None
     ps = _manager.get(sid)
     st = _running[sid]
+    done_at: float | None = None
     while not ps.report_ready:
         st["stage"] = "playing" if ps.status == "live" else "finishing"
         st["media_t"] = round(ps.engine.clock.now(), 1)
+        if ps.task is not None and ps.task.done():
+            done_at = done_at or time.monotonic()
+            if time.monotonic() - done_at > 120:  # the report was never written: say so, don't hang
+                st["stage"] = "error"
+                st["error"] = ps.error or "the session ended but its report could not be written"
+                _failed[sid] = _running.pop(sid)
+                return
         await asyncio.sleep(1)
     st["stage"] = "scoring (re-listening to every voice line)"
     loop = asyncio.get_running_loop()
@@ -113,7 +127,8 @@ async def start_run(body: LabRun) -> dict[str, Any]:
     try:
         ps = _manager.create(clip.name, max(1, min(3, n_spk)), None, False, 1.0, body.view_delay_s)
     except SessionBusyError as e:
-        raise HTTPException(409, str(e)) from e
+        raise HTTPException(409, e.detail()) from e
+    ps.owner = "lab"  # plays with nobody watching on purpose: never stopped as "abandoned"
     _manager.start(ps)
     _running[ps.session_id] = {"session_id": ps.session_id, "clip": clip.name, "stage": "starting",
                                "duration": None, "started": time.time()}  # fmt: skip
@@ -139,7 +154,8 @@ def list_runs() -> dict[str, Any]:
             r["duration"] = round(_manager.get(sid).engine.duration, 1) if _manager else None
         r["elapsed_s"] = round(time.time() - st["started"], 1)
         running.append(r)
-    return {"running": running, "runs": done}
+    failed = [dict(v) for v in list(_failed.values())[-10:]]
+    return {"running": running, "runs": done, "failed": failed}
 
 
 @router.get("/api/lab/sessions")

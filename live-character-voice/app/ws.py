@@ -1,8 +1,10 @@
 """WebSocket handler: the live protocol of docs/05 §5.4.
 
-Server → client: session.ready, session.started, speaker.new, speaker.updated, line.complete,
-audio.ready, metrics, warning, session.ended, pong, error.
-Client → server: start, set_voice, played, stop, ping.
+Server → client: session.ready (with `state`, `paused`, `actions`), session.started,
+session.paused / session.resumed (sent to every viewer), speaker.new, speaker.updated,
+speaker.merged, line.complete, audio.ready, metrics, warning, session.ended, pong, error.
+Client → server: start, set_voice, played, merge_speakers, rename_speaker, pause, resume, stop,
+ping, and binary PCM16 frames for live input. Session states: app/lifecycle.py.
 """
 
 from __future__ import annotations
@@ -15,6 +17,7 @@ from typing import Any
 
 from fastapi import WebSocket, WebSocketDisconnect
 
+from app.lifecycle import TERMINAL, State
 from app.sessions import ROOT, PilotSession, SessionManager
 from engine.record.models import Line, Speaker
 from engine.record.store import Event
@@ -28,6 +31,8 @@ FORWARD = (
     "session.metrics",
     "session.warning",
     "session.ended",
+    "session.paused",
+    "session.resumed",
 )
 
 
@@ -35,7 +40,7 @@ ABANDON_GRACE_S = 15.0
 
 
 def _stop_if_abandoned(manager: SessionManager, ps: PilotSession) -> None:
-    if ps.clients == 0 and ps.status == "live":
+    if ps.clients == 0 and ps.status == State.LIVE and ps.owner == "viewer":
         ps.engine.store.warn("all viewers disconnected — session stopped")
         manager.stop(ps)
 
@@ -110,8 +115,19 @@ def translate(ps: PilotSession, ev: Event) -> dict[str, Any] | None:
     if ev.name == "session.warning":
         return {"type": "warning", "message": ev.data.get("message", "")}
     if ev.name == "session.ended":
-        return {"type": "session.ended", "report_url": f"/api/sessions/{ps.session_id}/report"}
+        return ended_msg(ps)
+    if ev.name in ("session.paused", "session.resumed"):
+        return {"type": ev.name, "server_wall": ev.data.get("server_wall", 0.0)}
     return None
+
+
+def ended_msg(ps: PilotSession) -> dict[str, Any]:
+    msg: dict[str, Any] = {"type": "session.ended",
+                           "report_url": f"/api/sessions/{ps.session_id}/report",
+                           "state": str(ps.status)}  # fmt: skip
+    if ps.error:
+        msg["error"] = ps.error
+    return msg
 
 
 async def handle(ws: WebSocket, manager: SessionManager, sid: str) -> None:
@@ -141,8 +157,13 @@ async def handle(ws: WebSocket, manager: SessionManager, sid: str) -> None:
             "speed": ps.cfg.speed,
             "view_delay_s": ps.engine.view_delay,
             "speakers": [speaker_msg(s) for s in ps.engine.store.record.speakers.values()],
+            "state": str(ps.status),
+            "paused": ps.paused,
+            "actions": ps.actions(),
         }
     )
+    if ps.status in TERMINAL:  # a late joiner of a finished session: say so at once
+        await ws.send_json(ended_msg(ps))
 
     sub = ps.engine.store.subscribe(*FORWARD)
     ps.clients += 1
@@ -179,12 +200,16 @@ async def handle(ws: WebSocket, manager: SessionManager, sid: str) -> None:
                     {"type": "pong", "t": msg.get("t"), "server_wall": ps.engine.clock.now()}
                 )
             elif kind == "start":
-                if ps.task is None:
-                    manager.start(ps)
+                manager.start(ps)  # ready → live; a no-op for a session already running
+                if ps.status != State.LIVE:  # stopping / ended / error: it can't (re)start
+                    await ws.send_json(ended_msg(ps))
+                    continue
                 # the engine sets t0 right after decode/VAD set-up; wait for it so the client
                 # starts its video at the same moment. A viewer joining a session that is
                 # already running (e.g. a Quality Lab run) gets the current time and catches up.
-                for _ in range(300):
+                # Live input sets t0 on its first audio, which this loop itself receives — so
+                # don't wait for it there (that only delayed every live start by 6 s).
+                for _ in range(0 if ps.live is not None else 300):
                     if ps.engine.clock.t0 is not None:
                         break
                     await asyncio.sleep(0.02)
@@ -210,13 +235,23 @@ async def handle(ws: WebSocket, manager: SessionManager, sid: str) -> None:
             elif kind == "rename_speaker":
                 ps.engine.rename_speaker(str(msg.get("speaker_id")), str(msg.get("name", "")))
             elif kind in ("pause", "resume"):
-                # the viewer paused: freeze session time so nothing runs ahead of the picture
+                # the viewer paused: freeze session time so nothing runs ahead of the picture.
+                # Every viewer is told (via the bus); a request that changes nothing gets the
+                # true current state back instead of a pretend confirmation.
+                if ps.live is not None or ps.status != State.LIVE:
+                    await ws.send_json({"type": "error", "message": "pause is only available "
+                                        "while a recorded video plays"})  # fmt: skip
+                    continue
+                before = ps.paused
                 if kind == "pause":
                     ps.engine.clock.pause()
                 else:
                     ps.engine.clock.resume()
-                state = "session.paused" if kind == "pause" else "session.resumed"
-                await ws.send_json({"type": state, "server_wall": ps.engine.clock.now()})
+                state = "session.paused" if ps.paused else "session.resumed"
+                if ps.paused != before:
+                    ps.engine.store.bus.publish(state, server_wall=ps.engine.clock.now())
+                else:
+                    await ws.send_json({"type": state, "server_wall": ps.engine.clock.now()})
             elif kind == "stop":
                 manager.stop(ps)
             else:
@@ -227,7 +262,7 @@ async def handle(ws: WebSocket, manager: SessionManager, sid: str) -> None:
         ps.clients -= 1
         if ps.live is not None and ps.clients == 0:
             manager.stop(ps)  # the capture client went away: the live input has ended
-        elif ps.clients == 0 and ps.status == "live":
+        elif ps.clients == 0 and ps.status == State.LIVE and ps.owner == "viewer":
             # nobody is watching any more: stop after a grace period so an abandoned tab does not
             # block the (single) pilot session slot until the clip ends
             asyncio.get_running_loop().call_later(ABANDON_GRACE_S, _stop_if_abandoned, manager, ps)

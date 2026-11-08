@@ -121,6 +121,7 @@ export function reduce(state: SessionState, msg: ServerMessage): SessionState {
         ...state,
         sessionId: msg.session_id,
         status: state.status === "idle" ? "ready" : state.status,
+        paused: msg.paused ?? state.paused,
         mediaUrl: withBase(msg.media_url) ?? null,
         speakersMax: msg.speakers_max,
         speed: msg.speed ?? 1,
@@ -204,7 +205,7 @@ export function reduce(state: SessionState, msg: ServerMessage): SessionState {
     case "error":
       return { ...state, warnings: [msg.message, ...state.warnings].slice(0, 20) };
     case "session.ended":
-      return { ...state, status: "ended", reportUrl: msg.report_url };
+      return { ...state, status: msg.state === "error" ? "error" : "ended", reportUrl: msg.report_url };
     case "pong":
       return state;
   }

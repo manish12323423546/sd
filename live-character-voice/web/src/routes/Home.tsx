@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { EngineBanner } from "../components/EngineBanner";
-import { api, type Clip, type Health, type Voice } from "../net/api";
+import { api, ApiError, type Clip, type Health, type Voice } from "../net/api";
 import { Avatar, DropZone, PlayButton, TierBadge } from "../ui/kit";
 
 const SPEAKER_COLORS = ["#8B7BFF", "#22D3EE", "#F5A524", "#34D399", "#FF6A3D", "#F472B6", "#E8E36B", "#60A5FA"];
@@ -32,6 +32,7 @@ export function Home() {
   const [busy, setBusy] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [busyId, setBusyId] = useState<string | null>(null); // the session blocking a new one (409)
   const speed = Number(new URLSearchParams(window.location.search).get("speed") ?? "1") || 1;
 
   const refresh = async () => {
@@ -78,6 +79,7 @@ export function Home() {
     if (!clipId) return;
     setBusy(true);
     setError(null);
+    setBusyId(null);
     try {
       const voice_map = Object.fromEntries(ids.filter((k) => cast[k]).map((k) => [k, cast[k] as string]));
       try {
@@ -93,6 +95,7 @@ export function Home() {
       nav(`/session/${s.session_id}`);
     } catch (e) {
       setError((e as Error).message);
+      if (e instanceof ApiError && e.detail.actions?.includes("stop")) setBusyId(e.detail.session_id ?? null);
       setBusy(false);
     }
   };
@@ -270,11 +273,13 @@ export function Home() {
               {error && (
                 <div className="mt-3 text-sm text-peak" role="alert">
                   <p>{error}</p>
-                  {/session (\S+) is still running/.test(error) && (
+                  {busyId && (
                     <button type="button" className="btn-ghost mt-2 !py-1.5 text-xs" data-testid="stop-busy"
                       onClick={() => {
-                        const sid = /session (\S+) is still running/.exec(error)?.[1];
-                        if (sid) void api.stopSession(sid).then(() => setError("Stopping it… press Start again in a few seconds."));
+                        void api.stopSession(busyId).then(() => {
+                          setBusyId(null);
+                          setError("Stopping it… press Start again in a few seconds.");
+                        });
                       }}>
                       ■ Stop that session
                     </button>

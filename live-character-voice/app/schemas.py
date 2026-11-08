@@ -70,7 +70,13 @@ class SpeakerOut(BaseModel):
 class SessionStatus(BaseModel):
     session_id: str
     clip_id: str
-    status: str  # ready | live | ended | error
+    status: str  # ready | live | stopping | ended | error  (app/lifecycle.py)
+    paused: bool = False
+    actions: list[str] = []  # what a client may do now, e.g. ["pause", "stop", ...]
+    owner: str = "viewer"  # viewer | capture | lab
+    live_input: bool = False
+    clients: int = 0
+    view_delay_s: float = 0.0
     speed: float
     max_speakers: int
     speakers: list[SpeakerOut]

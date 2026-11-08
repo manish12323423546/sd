@@ -79,7 +79,11 @@ function renderNow() {
   const chips = $("nowChips"); chips.innerHTML = "";
   if (ln.emotion) chips.append(chip(ln.emotion, EMO[ln.emotion]));
   if (ln.speaker_conf) chips.append(chip(`speaker ${ln.speaker_conf}`, ln.speaker_conf === "high" ? "#34D399" : ln.speaker_conf === "low" ? "#F5A524" : "#8592A6"));
-  if (ln.asr_by) chips.append(chip(ln.asr_by === "groq" ? "Groq ASR" : "local ASR", "#8592A6"));
+  if (ln.asr_by) {
+    const base = String(ln.asr_by).replace("*", ""); // "*" = retried on the backup engine
+    const name = { groq: "Groq", deepgram: "Deepgram", local: "offline" }[base] || base;
+    chips.append(chip(`${name} ASR${String(ln.asr_by).endsWith("*") ? " (backup)" : ""}`, "#8592A6"));
+  }
   const v = S.voices.find((x) => x.voice_id === (ln.voice_id || s?.voice_id));
   if (v) chips.append(chip(`voice: ${v.name}`, "#A48BFF"));
 }
