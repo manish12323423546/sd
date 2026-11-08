@@ -267,7 +267,20 @@ export function Home() {
               <button type="button" data-testid="start-session" disabled={!clipId || busy || !ready} className="btn-primary w-full !py-3.5 text-base" onClick={() => void start()}>
                 {busy ? "Starting…" : ready ? "● Start live session" : "Loading models…"}
               </button>
-              {error && <p className="mt-3 text-sm text-peak" role="alert">{error}</p>}
+              {error && (
+                <div className="mt-3 text-sm text-peak" role="alert">
+                  <p>{error}</p>
+                  {/session (\S+) is still running/.test(error) && (
+                    <button type="button" className="btn-ghost mt-2 !py-1.5 text-xs" data-testid="stop-busy"
+                      onClick={() => {
+                        const sid = /session (\S+) is still running/.exec(error)?.[1];
+                        if (sid) void api.stopSession(sid).then(() => setError("Stopping it… press Start again in a few seconds."));
+                      }}>
+                      ■ Stop that session
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
             <div className="border-t border-white/[0.06] bg-black/20 p-5 text-sm" data-testid="health">
               <p className="eyebrow mb-2">Engine</p>

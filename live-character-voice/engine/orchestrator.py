@@ -394,6 +394,9 @@ class Session:
     # ------------------------------------------------------------------ public
     def stop(self) -> None:
         self._stop.set()
+        resume = getattr(self.clock, "resume", None)
+        if callable(resume):  # a paused session would otherwise wait forever and never end
+            resume()
         if self.live is not None:
             self.live.close()  # wakes the feed loop even when no audio is arriving
 

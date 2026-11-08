@@ -196,6 +196,29 @@ class SessionManager:
                 return s
         return None
 
+    @staticmethod
+    def _stuck(ps: PilotSession) -> bool:
+        """Blocks the one-session slot but can't finish: unstarted, already done, or paused with
+        nobody watching (a viewer paused and closed the tab)."""
+        if ps.status == "ready" and ps.task is None:
+            return True
+        if ps.task is not None and ps.task.done():
+            return True
+        paused = bool(getattr(ps.engine.clock, "paused", False))
+        return ps.clients == 0 and (paused or (ps.live is not None))
+
+    def _replace_stuck(self) -> None:
+        busy = self.active()
+        if busy is None:
+            return
+        if not self._stuck(busy):
+            raise SessionBusyError(
+                f"session {busy.session_id} is still running; only one live session at a "
+                "time on this CPU. Stop it first."
+            )
+        busy.engine.stop()
+        busy.status = "ended" if busy.status != "error" else busy.status
+
     def create(
         self,
         clip_id: str,
@@ -206,16 +229,7 @@ class SessionManager:
         view_delay_s: float = 0.0,
         known_voices: list[str] | None = None,
     ) -> PilotSession:
-        busy = self.active()
-        if busy is not None:
-            if busy.status == "ready" and busy.task is None:
-                # an unstarted session is replaced, so an abandoned tab never blocks the pilot
-                busy.status = "ended"
-            else:
-                raise SessionBusyError(
-                    f"session {busy.session_id} is still running; only one live session at a "
-                    "time on this CPU. Stop it first."
-                )
+        self._replace_stuck()  # an abandoned or stuck session never blocks a new one
         clip = CLIPS_DIR / Path(clip_id).name
         if not clip.exists():
             raise FileNotFoundError(clip_id)
@@ -253,17 +267,7 @@ class SessionManager:
         """A session fed by live audio from a capture client (extension / Live capture page)."""
         from engine.ingest.live import LiveSource
 
-        busy = self.active()
-        if busy is not None:
-            if (busy.status == "ready" and busy.task is None) or (
-                busy.live is not None and busy.clients == 0
-            ):
-                busy.engine.stop()
-                busy.status = "ended"
-            else:
-                raise SessionBusyError(
-                    f"session {busy.session_id} is still running; stop it first (one at a time)."
-                )
+        self._replace_stuck()
         if voice_map:
             for vid in voice_map.values():
                 self.catalog.get(vid)
@@ -289,7 +293,7 @@ class SessionManager:
         """Nothing is playing (a session that was opened but never started does not count —
         it would otherwise block automatic updates forever)."""
         return not any(s.status == "live" and s.task is not None and not s.task.done()
-                       for s in self.sessions.values())  # fmt: skip
+                       and not self._stuck(s) for s in self.sessions.values())  # fmt: skip
 
     def get(self, sid: str) -> PilotSession:
         return self.sessions[sid]
