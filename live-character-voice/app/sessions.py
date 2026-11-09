@@ -33,6 +33,17 @@ PREVIEWS_DIR = ROOT / "media" / "previews"
 CLIP_EXT = {".mp4", ".mkv", ".mov"}
 
 
+def _make_library() -> Any:
+    from engine.voice_library import VoiceLibrary, backend_from_env
+
+    try:
+        return VoiceLibrary(backend_from_env())
+    except Exception as e:  # e.g. bad token: run without it and say why
+        lib = VoiceLibrary(None)
+        lib.error = f"voice library unavailable: {type(e).__name__}: {e}"[:300]
+        return lib
+
+
 class SessionBusyError(RuntimeError):
     """The one-session slot is taken. Carries the blocking session so a UI or an agent can act
     on it (HTTP 409 body: code, message, session_id, state, actions)."""
@@ -153,11 +164,13 @@ class SessionManager:
         self.sessions: dict[str, PilotSession] = {}
         self.load_log: list[str] = []
         self.pending_reload = False  # keys were saved while a session ran: reload when it ends
+        self.library = _make_library()  # permanent voice library (engine/voice_library.py)
 
     @property
     def catalog(self) -> VoiceCatalog:
-        """Re-read on every use so custom voices added while the server runs appear at once."""
-        return load_voice_catalog()
+        """Re-read on every use so custom voices added while the server runs appear at once.
+        The public app (role "app") does not offer voices the owner hid in the Voice Studio."""
+        return load_voice_catalog(include_hidden=self.library.role != "app")
 
     @property
     def cloning(self) -> bool:

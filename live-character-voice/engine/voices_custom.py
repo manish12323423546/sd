@@ -11,6 +11,7 @@ Voice ids are "cu_<slug>". Voice generation with a custom voice needs a cloning-
 from __future__ import annotations
 
 import json
+import os
 import re
 import subprocess
 import time
@@ -22,7 +23,8 @@ import numpy as np
 from engine.config import PROJECT_ROOT, VoiceEntry
 from engine.ingest.decode import decode_audio
 
-CUSTOM_DIR = PROJECT_ROOT / "data" / "voices" / "custom"
+# LCV_VOICES_DIR: where this server keeps its working copy of the voices (default in the repo)
+CUSTOM_DIR = Path(os.environ.get("LCV_VOICES_DIR") or PROJECT_ROOT / "data" / "voices" / "custom")
 MIN_S, MAX_S = 6.0, 15.0  # measured: ~15 s clones closest; 29 s was less similar and slower
 PREFIX = "cu_"
 
@@ -61,7 +63,7 @@ def list_custom() -> list[dict[str, Any]]:
     return out
 
 
-def catalog_entries() -> list[VoiceEntry]:
+def catalog_entries(include_hidden: bool = True) -> list[VoiceEntry]:
     return [
         VoiceEntry(
             voice_id=m["voice_id"],
@@ -77,6 +79,7 @@ def catalog_entries() -> list[VoiceEntry]:
             enabled_in_pilot=True,
         )
         for m in list_custom()
+        if include_hidden or m.get("enabled", True) is not False
     ]
 
 

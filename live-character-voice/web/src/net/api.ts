@@ -79,6 +79,32 @@ export interface Health {
   commit?: string;
   engines?: Record<string, { online: boolean; name: string; note: string }>;
   fish_fallback_lines?: number;
+  /** permanent voice library: this server's role and whether voices can be changed here */
+  voice_library?: { enabled: boolean; role: "all" | "app" | "studio"; can_edit: boolean; error: string | null };
+}
+
+export interface LibraryVoice {
+  voice_id: string;
+  name: string;
+  tier: string;
+  /** offered in the public app (false = kept but hidden) */
+  enabled: boolean;
+  /** stored permanently in the library */
+  saved: boolean;
+  created?: string;
+  seconds?: number;
+}
+
+export interface VoiceLibraryStatus {
+  enabled: boolean;
+  where: string | null;
+  role: "all" | "app" | "studio";
+  can_edit: boolean;
+  head: string | null;
+  last_sync: number | null;
+  error: string | null;
+  rescued: string[];
+  voices: LibraryVoice[];
 }
 
 export interface CreateSessionBody {
@@ -151,6 +177,17 @@ export const api = {
     form.append("file", file);
     return json<Voice>(await apiFetch("/api/voices/custom", { method: "POST", body: form }));
   },
+  voiceLibrary: async (): Promise<VoiceLibraryStatus> => json(await apiFetch("/api/voices/library")),
+  setVoiceEnabled: async (voiceId: string, enabled: boolean): Promise<{ enabled: boolean }> =>
+    json(
+      await apiFetch(`/api/voices/library/${voiceId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ enabled }),
+      }),
+    ),
+  syncVoiceLibrary: async (): Promise<{ changed: boolean }> =>
+    json(await apiFetch("/api/voices/library/sync", { method: "POST" })),
   deleteVoice: async (voiceId: string): Promise<void> => {
     await json(await apiFetch(`/api/voices/custom/${voiceId}`, { method: "DELETE" }));
   },
@@ -181,7 +218,7 @@ export const api = {
     const blob = await res.blob();
     return { url: URL.createObjectURL(blob), seconds: (performance.now() - t) / 1000 };
   },
-  setKeys: async (body: { fish?: string; groq?: string; deepgram?: string; asr?: string; admin_code?: string }): Promise<{ results: Record<string, { ok: boolean; message: string }>; voice_cloning: boolean }> =>
+  setKeys: async (body: { fish?: string; groq?: string; deepgram?: string; hf?: string; asr?: string; admin_code?: string }): Promise<{ results: Record<string, { ok: boolean; message: string }>; voice_cloning: boolean }> =>
     json(
       await apiFetch("/api/keys", {
         method: "POST",
@@ -208,7 +245,7 @@ export function wsUrl(path: string): string {
 }
 
 export interface KeysStatus {
-  connected: { fish: boolean; groq: boolean; deepgram: boolean };
+  connected: { fish: boolean; groq: boolean; deepgram: boolean; hf?: boolean };
   asr: string;
   asr_choices: string[];
   engines: Record<string, { online?: boolean; name?: string; note?: string }>;

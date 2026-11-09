@@ -113,6 +113,8 @@ class Job:
 
 
 JOBS: dict[str, Job] = {}
+# called with the voice id after a voice is built (the server saves it to the voice library)
+ON_SAVED: list[Callable[[str], None]] = []
 
 
 def start_job(name: str, source: Path, consent: bool, models: Any) -> Job:
@@ -131,6 +133,11 @@ def start_job(name: str, source: Path, consent: bool, models: Any) -> Job:
     def run() -> None:
         try:
             job.result = build_pro_voice(job.name, source, models, job_progress(job))
+            for cb in ON_SAVED:
+                try:
+                    cb(str(job.result["voice_id"]))
+                except Exception as e:  # the voice works here; say it isn't saved permanently
+                    job.log.append(f"not saved to the voice library: {type(e).__name__}: {e}")
             job.stage, job.progress = "done", 1.0
         except VoiceUploadError as e:
             job.stage, job.error = "error", str(e)

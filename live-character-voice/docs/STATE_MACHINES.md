@@ -72,6 +72,7 @@ as a normal end in the viewer.
 | 10 | Client session store | idle/ready/live/ended/error + paused | web/src/store/session.ts, Player.tsx | no reconnect when the socket drops | M/M/L |
 | 11 | Access gate | open / wrong / required | app/hosting.py, AccessGate.tsx | WS close 4401 shows as a generic connection error | M/L/M |
 | 12 | Auto-update | disabled / waiting-for-idle / exit | app/hosting.py | state not exposed (only `commit`) | L/M/M |
+| 14 | Voice library | role all/app/studio; per voice `enabled` (In app/Hidden), `library` (saved); sync head unchanged/changed/error | engine/voice_library.py, app/main.py (`_library_watcher`) | a Studio edit reaches the app only on its next sync (≤ 60 s); two Studios editing at once: last write wins | M/M/M |
 | 13 | Live source | open/closed | engine/ingest/live.py | pushes after close ignored silently | L/L/L |
 
 Next best steps, in order: (1) split `schedule_action` "merged" into `merged_into` (silent) and

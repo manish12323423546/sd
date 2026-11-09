@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, Route, Routes } from "react-router-dom";
+import { Link, Navigate, NavLink, Route, Routes } from "react-router-dom";
 import { AccessGate } from "./components/AccessGate";
 import { KeysDialog, openKeys } from "./components/KeysDialog";
 import { api, type Health } from "./net/api";
@@ -9,6 +9,7 @@ import { QualityLab } from "./routes/QualityLab";
 import { Player } from "./routes/Player";
 import { Report } from "./routes/Report";
 import { VoiceLab } from "./routes/VoiceLab";
+import { VoiceLibrary } from "./routes/VoiceLibrary";
 import { Dot } from "./ui/kit";
 
 function EnginePills() {
@@ -56,7 +57,16 @@ function GateFromHealth() {
 const tab = ({ isActive }: { isActive: boolean }) =>
   `whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition ${isActive ? "bg-white/10 text-ink" : "text-muted hover:text-ink"}`;
 
+function useRole(): "all" | "app" | "studio" | null {
+  const [role, setRole] = useState<"all" | "app" | "studio" | null>(null);
+  useEffect(() => {
+    api.health().then((h) => setRole(h.voice_library?.role ?? "all")).catch(() => setRole("all"));
+  }, []);
+  return role;
+}
+
 export function App() {
+  const role = useRole(); // "studio" = the owner's private Voice Studio (voices only)
   return (
     <div className="min-h-screen text-ink">
       <header className="sticky top-0 z-30 border-b border-white/[0.06] bg-bg/70 backdrop-blur-xl">
@@ -65,14 +75,24 @@ export function App() {
             <img src="/favicon.svg" alt="" className="brand-mark h-8 w-8" />
             <span className="hidden leading-none sm:block">
               <span className="block font-display text-[17px] font-bold tracking-[-0.03em]">altercast</span>
-              <span className="mt-0.5 block text-[10px] font-medium uppercase tracking-[0.16em] text-muted">Live Character Voice</span>
+              <span className="mt-0.5 block text-[10px] font-medium uppercase tracking-[0.16em] text-muted">{role === "studio" ? "Voice Studio · private" : "Live Character Voice"}</span>
             </span>
           </Link>
           <nav className="ml-2 flex min-w-0 items-center gap-1 overflow-x-auto [scrollbar-width:none]">
-            <NavLink to="/" end className={tab}>Studio</NavLink>
-            <NavLink to="/live" className={tab}>Live capture</NavLink>
-            <NavLink to="/voices" className={tab}>Voice Lab</NavLink>
-            <NavLink to="/lab" className={tab}>Quality Lab</NavLink>
+            {role === "studio" ? (
+              <>
+                <NavLink to="/library" className={tab}>Voice Library</NavLink>
+                <NavLink to="/voices" className={tab}>Clone a voice</NavLink>
+              </>
+            ) : (
+              <>
+                <NavLink to="/" end className={tab}>Studio</NavLink>
+                <NavLink to="/live" className={tab}>Live capture</NavLink>
+                <NavLink to="/voices" className={tab}>Voice Lab</NavLink>
+                <NavLink to="/lab" className={tab}>Quality Lab</NavLink>
+                {role === "all" && <NavLink to="/library" className={tab}>Voice Library</NavLink>}
+              </>
+            )}
           </nav>
           <div className="ml-auto">
             <EnginePills />
@@ -82,7 +102,8 @@ export function App() {
       <KeysDialog />
       <GateFromHealth />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={role === "studio" ? <Navigate to="/library" replace /> : <Home />} />
+        <Route path="/library" element={<VoiceLibrary />} />
         <Route path="/voices" element={<VoiceLab />} />
         <Route path="/live" element={<LiveCapture />} />
         <Route path="/lab" element={<QualityLab />} />

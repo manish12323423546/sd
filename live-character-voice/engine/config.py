@@ -189,11 +189,14 @@ def load_engine_config(path: Path | None = None) -> EngineConfig:
     return EngineConfig.model_validate(_read_yaml(path or CONFIG_DIR / "engine.yaml"))
 
 
-def load_voice_catalog(path: Path | None = None, include_custom: bool = True) -> VoiceCatalog:
-    """Built-in voices (voices.yaml) plus the user's custom cloned voices (data/voices/custom)."""
+def load_voice_catalog(
+    path: Path | None = None, include_custom: bool = True, include_hidden: bool = True
+) -> VoiceCatalog:
+    """Built-in voices (voices.yaml) plus the user's custom cloned voices (data/voices/custom).
+    `include_hidden=False` leaves out voices the owner hid in the Voice Studio (public app)."""
     cat = VoiceCatalog.model_validate(_read_yaml(path or CONFIG_DIR / "voices.yaml"))
     if include_custom:
         from engine.voices_custom import catalog_entries
 
-        cat.voices.extend(catalog_entries())
+        cat.voices.extend(catalog_entries(include_hidden))
     return cat

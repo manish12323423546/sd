@@ -8,7 +8,7 @@ export function openKeys() {
   window.dispatchEvent(new Event("open-keys"));
 }
 
-type KeyId = "fish" | "groq" | "deepgram";
+type KeyId = "fish" | "groq" | "deepgram" | "hf";
 
 const KEYS: { id: KeyId; title: string; what: string; url: string; steps: string[] }[] = [
   {
@@ -26,6 +26,17 @@ const KEYS: { id: KeyId; title: string; what: string; url: string; steps: string
     steps: ["sign up (free credit)", "API Keys → “Create a New API Key”", "Copy the key and paste it here"],
   },
   {
+    id: "hf",
+    title: "Hugging Face",
+    what: "Keeps your cloned voices permanently (private voice library, free)",
+    url: "https://huggingface.co/settings/tokens",
+    steps: [
+      "sign in (free)",
+      "Click “Create new token” → Token type: “Write” → name it “altercast”",
+      "Click “Create token”, copy it (starts with hf_) and paste it here",
+    ],
+  },
+  {
     id: "groq",
     title: "Groq",
     what: "Speech-to-text, Whisper (free tier, ~20 lines/min)",
@@ -41,7 +52,7 @@ const ASR_LABEL: Record<string, string> = {
   local: "Offline Whisper (no key, slower)",
 };
 
-const EMPTY = { fish: "", groq: "", deepgram: "" };
+const EMPTY = { fish: "", groq: "", deepgram: "", hf: "" };
 
 export function KeysDialog() {
   const [open, setOpen] = useState(false);
@@ -98,6 +109,7 @@ export function KeysDialog() {
         fish: vals.fish.trim() || undefined,
         groq: vals.groq.trim() || undefined,
         deepgram: vals.deepgram.trim() || undefined,
+        hf: vals.hf.trim() || undefined,
         asr: asrChanged ? asr : undefined,
         admin_code: admin.trim() || undefined,
       });

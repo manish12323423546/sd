@@ -679,3 +679,17 @@ hosted engine as default.
   record.json not reloadable (`features` with `asr_by`); side panel showing Deepgram as local.
 - Tests: 96 pytest (9 new lifecycle), 14 vitest; real-engine end-to-end run of create → start →
   pause → resume → stop → late joiner, pause-then-close, live start.
+
+## 2026-11-09 — V9: permanent voice library + private Voice Studio
+- Problem: cloned voices were files on the Space disk → wiped on every restart; anyone could
+  clone/delete. Now: private HF dataset `<owner>/altercast-voices` is the source of truth
+  (engine/voice_library.py, Hub or `dir:` backend); roles studio/app/all (`LCV_ROLE`).
+- Studio: clone, In app/Hidden, Delete → saved immediately. App: read-only (403
+  `voices_read_only`), hidden voices not offered, re-sync every 60 s, full sync on start.
+- Rescue: voices on disk never saved are uploaded once; pasting the HF token in Keys starts the
+  library and saves them BEFORE the secret save restarts the Space.
+- Verified: 104 pytest (8 new), 14 vitest; two real servers (Studio :8001 + app :8002, shared
+  `dir:` library): clone in app refused (403); clone in Studio saved; app picked it up; hide →
+  gone from app; app disk wiped + both restarted → voice back. The Hub backend itself is not yet
+  exercised against huggingface.co (needs the owner's token) — check `/api/health` →
+  `voice_library.error` after set-up.

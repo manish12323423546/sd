@@ -8,6 +8,7 @@ from __future__ import annotations
 import asyncio
 import os
 import tempfile
+import threading
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from functools import partial
@@ -69,13 +70,70 @@ manager = SessionManager()
 @asynccontextmanager
 async def lifespan(_: FastAPI) -> AsyncIterator[None]:
     load_env()  # keys from live-character-voice/.env (git-ignored)
+    from app.sessions import _make_library
+
+    manager.library = _make_library()  # after load_env: HF_TOKEN may come from .env
+    voices_pro.ON_SAVED[:] = [manager.library.publish]
+    if manager.library.enabled:  # get the voices before previews are made
+        await asyncio.get_running_loop().run_in_executor(None, manager.library.sync, True)
+        print(f">>> voice library {manager.library.status()}", flush=True)
     if os.environ.get("LCV_SKIP_MODELS") != "1":
         manager.load_models()
     watcher = asyncio.create_task(
         update_watcher(ROOT, manager.is_idle, lambda m: print(f">>> {m}", flush=True))
     )
+    lib_watch = asyncio.create_task(_library_watcher())
     yield
     watcher.cancel()
+    lib_watch.cancel()
+
+
+async def _library_watcher(every_s: float = 60.0) -> None:
+    """Pick up changes made in the Voice Studio (or another server) within a minute."""
+    while True:
+        await asyncio.sleep(every_s)
+        lib = manager.library
+        if not lib.enabled:
+            continue
+        changed = await asyncio.get_running_loop().run_in_executor(None, lib.sync, False)
+        if changed and manager.models is not None:
+            threading.Thread(target=manager.make_previews, daemon=True).start()
+
+
+def _start_library() -> str:
+    from app.sessions import _make_library
+
+    manager.library = _make_library()
+    voices_pro.ON_SAVED[:] = [manager.library.publish]
+    if not manager.library.enabled:
+        return manager.library.error or "voice library not started"
+    manager.library.sync(True)
+    lib = manager.library
+    if lib.error:
+        return f"voice library problem: {lib.error}"
+    saved = (
+        f"saved {len(lib.rescued)} voice(s) from this server: {', '.join(lib.rescued)}"
+        if (lib.rescued)
+        else "no voices on this server needed saving"
+    )
+    return f"voice library ready ({lib.backend.name if lib.backend else ''}); {saved}"
+
+
+def _library_brief() -> dict[str, object]:
+    st = manager.library.status()
+    return {k: st[k] for k in ("enabled", "role", "can_edit", "error")}
+
+
+def _voices_editable() -> None:
+    if not manager.library.can_edit:
+        raise HTTPException(
+            403,
+            {
+                "code": "voices_read_only",
+                "message": "Voices are managed in your private Voice Studio; this app only uses "
+                "the voices you keep there.",
+            },
+        )
 
 
 app = FastAPI(title="Live Sports Character Voice — Pilot API", lifespan=lifespan)
@@ -109,6 +167,7 @@ def health() -> dict[str, object]:
         },
         "model_info": m.info if m else {},
         "load_s": m.load_s if m else {},
+        "voice_library": _library_brief(),
         "active_session": active.session_id if active else None,
         "active_state": str(active.status) if active else None,
         "active_actions": active.actions() if active else [],
@@ -145,6 +204,7 @@ class KeysIn(BaseModel):
     fish: str | None = None
     groq: str | None = None
     deepgram: str | None = None
+    hf: str | None = None  # Hugging Face write token: the permanent voice library
     asr: str | None = None  # speech-to-text choice: auto | deepgram | groq | local
     admin_code: str | None = None
 
@@ -172,6 +232,7 @@ async def keys_status(request: Request) -> dict[str, object]:
             "fish": bool(os.environ.get("FISH_API_KEY") or os.environ.get("FISH_API_KEY_FILE")),
             "groq": bool(os.environ.get("GROQ_API_KEY")),
             "deepgram": bool(os.environ.get("DEEPGRAM_API_KEY")),
+            "hf": manager.library.enabled,
         },
         "asr": os.environ.get("LCV_ASR", "auto") or "auto",
         "asr_choices": list(ASR_CHOICES),
@@ -189,7 +250,7 @@ async def set_keys(body: KeysIn, request: Request) -> dict[str, object]:
     Keys are never sent back."""
     from app.hosting import persist_to_space
     from engine.env import save_env
-    from engine.keycheck import check_deepgram, check_fish, check_groq
+    from engine.keycheck import check_deepgram, check_fish, check_groq, check_hf
 
     if not _can_set_keys(request, body.admin_code):
         raise HTTPException(
@@ -203,6 +264,7 @@ async def set_keys(body: KeysIn, request: Request) -> dict[str, object]:
         ("fish", body.fish, "FISH_API_KEY", check_fish),
         ("groq", body.groq, "GROQ_API_KEY", check_groq),
         ("deepgram", body.deepgram, "DEEPGRAM_API_KEY", check_deepgram),
+        ("hf", body.hf, "HF_TOKEN", check_hf),
     ):
         value = (value or "").strip().strip('"').strip("'")
         if not value:
@@ -213,7 +275,9 @@ async def set_keys(body: KeysIn, request: Request) -> dict[str, object]:
         msg = st.message
         if st.ok:
             save_env(env, value)
-            if os.environ.get("SPACE_ID"):
+            if name == "hf":  # start the voice library now and rescue the voices on this disk
+                msg += "; " + await asyncio.get_running_loop().run_in_executor(None, _start_library)
+            if os.environ.get("SPACE_ID"):  # (saving a secret restarts the Space — rescue first)
                 msg += "; " + await asyncio.get_running_loop().run_in_executor(
                     None, persist_to_space, env, value
                 )
@@ -275,6 +339,7 @@ async def add_pro_voice(
     file: UploadFile = File(...),
 ) -> dict[str, object]:
     """Professional cloning from a 1–10 min recording; runs in the background (poll the job)."""
+    _voices_editable()
     suffix = Path(file.filename or "voice.wav").suffix.lower() or ".wav"
     if suffix not in {".wav", ".mp3", ".m4a", ".aac", ".ogg", ".flac", ".webm", ".mp4", ".mov"}:
         raise HTTPException(400, "upload an audio file (wav, mp3, m4a, ogg, flac) or a video")
@@ -374,6 +439,7 @@ async def add_voice(
     file: UploadFile = File(...),
 ) -> VoiceOut:
     """Instant voice cloning: upload 6–30 s of a voice you own or may use."""
+    _voices_editable()
     suffix = Path(file.filename or "voice.wav").suffix.lower() or ".wav"
     if suffix not in {".wav", ".mp3", ".m4a", ".aac", ".ogg", ".flac", ".webm", ".mp4", ".mov"}:
         raise HTTPException(400, "upload an audio file (wav, mp3, m4a, ogg, flac) or a video")
@@ -397,12 +463,18 @@ async def add_voice(
         except VoiceUploadError as e:
             raise HTTPException(400, str(e)) from e
     vid = meta["voice_id"]
+    saved = "saved to your voice library"
+    try:  # permanent: survives restarts (no-op without a library)
+        await asyncio.get_running_loop().run_in_executor(None, manager.library.publish, vid)
+    except Exception as e:
+        saved = f"NOT saved to the voice library ({type(e).__name__}); it works until a restart"
     if manager.cloning:
         await asyncio.get_running_loop().run_in_executor(None, manager.make_preview, vid, 1.0)
     return VoiceOut(
         voice_id=vid,
         name=meta["name"],
-        description=f"Your cloned voice ({meta['seconds']:.0f} s sample)",
+        description=f"Your cloned voice ({meta['seconds']:.0f} s sample) · "
+        + (saved if manager.library.enabled else "stored on this server"),
         lang="a",
         preview_url=f"/media/previews/{manager.preview_name(vid)}",
         custom=True,
@@ -411,11 +483,45 @@ async def add_voice(
 
 @app.delete("/api/voices/custom/{voice_id}")
 def delete_voice(voice_id: str) -> dict[str, str]:
+    _voices_editable()
     try:
-        remove_custom_voice(voice_id)
+        if manager.library.enabled:
+            manager.library.remove(voice_id)  # from the library too (everywhere)
+        else:
+            remove_custom_voice(voice_id)
     except KeyError as e:
         raise HTTPException(404, "unknown custom voice") from e
     return {"deleted": voice_id}
+
+
+class VoiceSettingsIn(BaseModel):
+    enabled: bool
+
+
+@app.get("/api/voices/library")
+def voice_library() -> dict[str, object]:
+    """Where voices are kept, this server's role, and every custom voice with keep/hide state."""
+    return {**manager.library.status(), "voices": manager.library.listing()}
+
+
+@app.post("/api/voices/library/sync")
+def voice_library_sync() -> dict[str, object]:
+    """Fetch the latest library now (instead of waiting up to a minute)."""
+    changed = manager.library.sync(False)
+    if changed and manager.models is not None:
+        threading.Thread(target=manager.make_previews, daemon=True).start()
+    return {"changed": changed, **manager.library.status()}
+
+
+@app.post("/api/voices/library/{voice_id}")
+def voice_library_set(voice_id: str, body: VoiceSettingsIn) -> dict[str, object]:
+    """Keep a voice in the app (enabled) or hide it. Owner only (Voice Studio / local)."""
+    _voices_editable()
+    try:
+        meta = manager.library.set_enabled(voice_id, body.enabled)
+    except (KeyError, FileNotFoundError) as e:
+        raise HTTPException(404, "unknown custom voice") from e
+    return {"voice_id": voice_id, "enabled": meta.get("enabled", True)}
 
 
 @app.get("/api/clips", response_model=list[ClipOut])

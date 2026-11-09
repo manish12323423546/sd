@@ -39,6 +39,8 @@ export function VoiceLab() {
   );
 
   const mine = voices.filter((v) => v.custom);
+  // public app with a voice library: voices are managed only in the owner's Voice Studio
+  const readOnly = health?.voice_library?.can_edit === false;
   const shown = voices.filter((v) => (filter === "all" ? true : filter === "mine" ? v.custom : !v.custom));
 
   return (
@@ -56,8 +58,9 @@ export function VoiceLab() {
           <span className="gradient-text">Your voice, any moment.</span>
         </h1>
         <p className="mt-3 max-w-xl text-[15px] text-muted">
-          Clone a voice in seconds — or build a professional, emotion-aware voice from a few minutes of audio. Then cast it on any
-          commentator, live.
+          {readOnly
+            ? "Every voice available for this app. Try any of them in any mood, then cast it on a commentator, live."
+            : "Clone a voice in seconds — or build a professional, emotion-aware voice from a few minutes of audio. Then cast it on any commentator, live."}
         </p>
         <div className="mt-6 flex flex-wrap gap-6 text-sm">
           <Stat n={voices.length} label="voices" />
@@ -67,7 +70,18 @@ export function VoiceLab() {
       </section>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
-        <CloneStudio cloning={Boolean(health?.voice_cloning)} onCreated={(id) => void created(id)} />
+        {readOnly ? (
+          <section className="panel flex flex-col gap-2 self-start p-6" data-testid="voices-read-only">
+            <p className="eyebrow">Voices</p>
+            <h2 className="font-display text-xl font-semibold">Curated by the owner</h2>
+            <p className="text-sm text-muted">
+              These are the voices kept for this app. New voices are cloned and managed in the private Voice Studio, and appear here
+              automatically.
+            </p>
+          </section>
+        ) : (
+          <CloneStudio cloning={Boolean(health?.voice_cloning)} onCreated={(id) => void created(id)} />
+        )}
         <div className="flex flex-col gap-6">
           <Playground voices={voices} voiceId={tryVoice} setVoiceId={setTryVoice} />
         </div>
@@ -81,11 +95,15 @@ export function VoiceLab() {
             setTryVoice(selected);
             document.getElementById("playground")?.scrollIntoView({ behavior: "smooth" });
           }}
-          onDelete={async () => {
-            await api.deleteVoice(selected);
-            setSelected(null);
-            await load();
-          }}
+          onDelete={
+            readOnly
+              ? undefined
+              : async () => {
+                  await api.deleteVoice(selected);
+                  setSelected(null);
+                  await load();
+                }
+          }
         />
       )}
 

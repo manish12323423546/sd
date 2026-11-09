@@ -5,7 +5,7 @@ import { Avatar, PlayButton, ScoreRing, TierBadge } from "../../ui/kit";
 
 const MOOD_STYLE: Record<string, string> = { calm: "text-calm", neutral: "text-ink", excited: "text-excited" };
 
-export function VoiceDetailPanel({ voiceId, onDelete, onTry }: { voiceId: string; onDelete: () => void; onTry: () => void }) {
+export function VoiceDetailPanel({ voiceId, onDelete, onTry }: { voiceId: string; onDelete?: () => void; onTry: () => void }) {
   const [v, setV] = useState<VoiceDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {
@@ -33,7 +33,7 @@ export function VoiceDetailPanel({ voiceId, onDelete, onTry }: { voiceId: string
         </div>
         <div className="flex items-center gap-2">
           <button type="button" className="btn-primary" onClick={onTry}>Try it</button>
-          <button type="button" className="btn-ghost hover:!border-peak/60 hover:!text-peak" onClick={() => window.confirm(`Delete “${v.name}”?`) && onDelete()}>Delete</button>
+          {onDelete && <button type="button" className="btn-ghost hover:!border-peak/60 hover:!text-peak" onClick={() => window.confirm(`Delete “${v.name}”?`) && onDelete()}>Delete</button>}
         </div>
       </div>
 

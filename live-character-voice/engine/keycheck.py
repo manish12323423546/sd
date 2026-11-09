@@ -113,6 +113,35 @@ def check_deepgram(timeout_s: float = 10.0) -> KeyStatus:
     )
 
 
+HF_TOKENS_PAGE = "https://huggingface.co/settings/tokens"
+
+
+def check_hf(timeout_s: float = 15.0) -> KeyStatus:
+    """A Hugging Face token that can WRITE (it stores the private voice library)."""
+    token = os.environ.get("HF_TOKEN", "").strip()
+    if not token:
+        return KeyStatus("hf", False, False, "no HF_TOKEN set")
+    try:
+        from huggingface_hub import HfApi
+
+        who = HfApi().whoami(token=token)
+    except ImportError as e:
+        return KeyStatus("hf", True, False, f"a Python package is missing ({e.name})")
+    except Exception as e:
+        bad = "401" in str(e) or "Invalid" in str(e)
+        why = (
+            f"the token was rejected — make a new one at {HF_TOKENS_PAGE}"
+            if bad
+            else (f"could not reach huggingface.co ({type(e).__name__})")
+        )
+        return KeyStatus("hf", True, False, why)
+    role = str(((who.get("auth") or {}).get("accessToken") or {}).get("role", ""))
+    if role == "read":
+        return KeyStatus("hf", True, False, "this token is read-only — create one with type "
+                         f"\"Write\" at {HF_TOKENS_PAGE}")  # fmt: skip
+    return KeyStatus("hf", True, True, f"Hugging Face token works (account {who.get('name')})")
+
+
 def main() -> int:
     from engine.env import load_env
 

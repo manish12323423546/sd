@@ -26,8 +26,9 @@ different instance, but a session keeps its state in one process. So Vercel host
    Optional: `DEEPGRAM_API_KEY` (speech-to-text, used first when it works), `LCV_ADMIN_CODE`
    (a second password: lets you paste/replace keys and pick the speech-to-text engine from the
    app's **Keys & engines** dialog), `HF_TOKEN` (a *write* token from
-   https://huggingface.co/settings/tokens — then keys set in the app are saved as Space secrets
-   and survive restarts).
+   https://huggingface.co/settings/tokens — keeps cloned voices in a permanent private library
+   and saves keys set in the app as Space secrets). Voices: see docs/VOICE_LIBRARY.md
+   (private Voice Studio Space + permanent library; the public app only uses them).
 4. The first build takes ~15–20 min (Python, PyTorch, models). Then
    `https://<user>-live-character-voice.hf.space` is the full app.
 
