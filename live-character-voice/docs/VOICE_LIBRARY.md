@@ -23,35 +23,25 @@ that disk — so they vanished. Anyone using the app could also clone or delete 
   within a minute (or immediately after a restart). Cloning and deleting are switched off there.
 - Both Spaces update themselves from GitHub, like now.
 
-## Set-up (about 10 minutes, once)
+## Set-up: one secret, the app does the rest
 
-### 1. Make a Hugging Face token (free)
-1. Open **https://huggingface.co/settings/tokens** (sign in as manishvk18).
-2. Click **Create new token** → Token type **Write** → name it `altercast` → **Create token**.
-3. Copy it (it starts with `hf_`). Never paste it in a chat — only in the places below.
+1. Open **https://huggingface.co/settings/tokens** → **Create new token** → Token type **Write**
+   → name `altercast` → **Create token** → copy it (starts with `hf_`). Never paste it in a chat.
+2. Open **https://huggingface.co/spaces/manishvk18/live-character-voice/settings** →
+   *Variables and secrets* → **New secret** → Name `HF_TOKEN`, Value = the token → **Save**.
 
-### 2. Save the voices that are on the app right now (before any restart)
-Saving a Space secret restarts the Space and would wipe the voices still on its disk. So first:
-1. Open the app → **Keys** (top right) → enter your **admin code** (`LCV_ADMIN_CODE`).
-2. Paste the token into the **Hugging Face** card → **Save & connect**.
-3. It answers e.g. "voice library ready; saved 2 voice(s) from this server: ace, mickey".
-   The token is then also stored as the Space secret `HF_TOKEN`, and the Space restarts by
-   itself; after ~2 minutes the voices load back from the library.
+The Space restarts and then sets everything up by itself (engine/studio_setup.py):
+- creates the private voice library `manishvk18/altercast-voices`;
+- creates the private Space `manishvk18/altercast-voice-studio` (role `studio`, same keys) — or, if
+  it exists, makes it private and sets its role. First start of the Studio takes 15–20 minutes;
+- from then on the app's voices are read-only and come from the library.
+`/api/health` → `voice_library` shows the result (`studio.state`, `voices`, `error`).
 
-(No admin code set? Then add `HF_TOKEN` directly under Space → Settings → Variables and secrets →
-New secret. The voices currently on the disk can't be saved that way; clone them again in the Studio.)
-
-### 3. Create your private Voice Studio
-1. Open **https://huggingface.co/spaces/manishvk18/live-character-voice**.
-2. Click **⋮** (top right, next to *Settings*) → **Duplicate this Space**.
-3. Owner `manishvk18`, Space name `altercast-voice-studio`, Visibility **Private**,
-   Hardware **CPU basic (free)**.
-4. In the secrets list it shows, fill in `HF_TOKEN` (the same token), `FISH_API_KEY` (needed
-   for previews), and optionally `GROQ_API_KEY` / `DEEPGRAM_API_KEY`. → **Duplicate Space**.
-5. In the new Space: **Settings → Variables and secrets → New variable** →
-   name `LCV_ROLE`, value `studio` → Save (it restarts once).
-6. Open it from **https://huggingface.co/spaces/manishvk18/altercast-voice-studio** (private:
-   only you, signed in). It opens on **Voice Library**.
+Voices that are on the app's disk at that moment are lost by this restart (as with every restart
+until now) unless you first paste the token in the app's **Keys** dialog (needs `LCV_ADMIN_CODE`),
+which saves them to the library before restarting. Other Spaces with "studio" in the name
+(earlier manual duplicates) are never touched; they are listed as `studio.strays` — delete them
+in their own Settings → *Delete this Space*.
 
 ## Daily use
 - **Clone:** Studio → **Clone a voice** → instant (6–15 s) or professional (1–10 min). Saved at once.

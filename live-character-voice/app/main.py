@@ -77,6 +77,11 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
     if manager.library.enabled:  # get the voices before previews are made
         await asyncio.get_running_loop().run_in_executor(None, manager.library.sync, True)
         print(f">>> voice library {manager.library.status()}", flush=True)
+        if manager.library.role == "app":  # create / repair the owner's private Voice Studio
+            from engine.studio_setup import ensure_studio
+
+            manager.studio = await asyncio.get_running_loop().run_in_executor(None, ensure_studio)
+            print(f">>> voice studio {manager.studio}", flush=True)
     if os.environ.get("LCV_SKIP_MODELS") != "1":
         manager.load_models()
     watcher = asyncio.create_task(
@@ -121,7 +126,11 @@ def _start_library() -> str:
 
 def _library_brief() -> dict[str, object]:
     st = manager.library.status()
-    return {k: st[k] for k in ("enabled", "role", "can_edit", "error")}
+    brief: dict[str, object] = {k: st[k] for k in ("enabled", "role", "can_edit", "error")}
+    brief["voices"] = len(manager.library.listing())
+    if manager.studio:
+        brief["studio"] = {k: v for k, v in manager.studio.items() if k != "url"}
+    return brief
 
 
 def _voices_editable() -> None:
@@ -501,7 +510,8 @@ class VoiceSettingsIn(BaseModel):
 @app.get("/api/voices/library")
 def voice_library() -> dict[str, object]:
     """Where voices are kept, this server's role, and every custom voice with keep/hide state."""
-    return {**manager.library.status(), "voices": manager.library.listing()}
+    return {**manager.library.status(), "voices": manager.library.listing(),
+            "studio": manager.studio}  # fmt: skip
 
 
 @app.post("/api/voices/library/sync")

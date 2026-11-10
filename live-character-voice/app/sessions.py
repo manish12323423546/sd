@@ -165,6 +165,7 @@ class SessionManager:
         self.load_log: list[str] = []
         self.pending_reload = False  # keys were saved while a session ran: reload when it ends
         self.library = _make_library()  # permanent voice library (engine/voice_library.py)
+        self.studio: dict[str, Any] = {}  # Voice Studio self set-up result (studio_setup.py)
 
     @property
     def catalog(self) -> VoiceCatalog:

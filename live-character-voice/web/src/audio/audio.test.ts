@@ -34,3 +34,27 @@ describe("ducking envelope", () => {
     expect(buildDuckPlan([{ start: 1, end: 2 }], 1, false)).toEqual([]);
   });
 });
+
+import { LANE_GAP_S, VoiceLane } from "./scheduler";
+
+describe("VoiceLane (no overlapping voices)", () => {
+  it("a line waits for the previous voice to end", () => {
+    const lane = new VoiceLane();
+    expect(lane.startTime(10, 9)).toBe(10); // free lane: starts on its moment
+    lane.occupy(10, 4.5); // ...and runs to 14.5
+    expect(lane.startTime(13.6, 13)).toBeCloseTo(14.5 + LANE_GAP_S); // would have overlapped by 0.9 s
+    expect(lane.startTime(20, 15)).toBe(20); // later lines are unaffected
+  });
+  it("a streamed line holds the lane until it ends", () => {
+    const lane = new VoiceLane();
+    lane.open(5, 10);
+    expect(lane.startTime(6, 6)).toBeNull();
+    lane.closeOpen(8.2);
+    expect(lane.startTime(6, 8.2)).toBeCloseTo(8.2 + LANE_GAP_S);
+  });
+  it("a stream that never reports its end cannot block for ever", () => {
+    const lane = new VoiceLane();
+    lane.open(5, 10);
+    expect(lane.startTime(6, 15.5)).not.toBeNull();
+  });
+});

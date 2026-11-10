@@ -4,7 +4,15 @@
 // Voice lines are pre-loaded on `audio.ready`, scheduled at the AudioContext time that matches
 // play_at_media, and duck the original while they play.
 import { ATTACK_S, DUCK_FACTOR, RELEASE_DELAY_S, RELEASE_S } from "./ducking";
-import { planStart, type StartPlan } from "./scheduler";
+import { planStart, VoiceLane, type StartPlan } from "./scheduler";
+
+interface Queued {
+  when: number;
+  duration: number;
+  buffer?: AudioBuffer;
+  el?: HTMLAudioElement;
+  onStart?: () => void;
+}
 
 export class AudioGraph {
   readonly ctx: AudioContext;
@@ -16,8 +24,12 @@ export class AudioGraph {
   private activeUntil = 0; // ctx time until which a voice line is playing
   private cache = new Map<string, Promise<AudioBuffer>>();
   private streams = new Set<HTMLAudioElement>(); // streamed lines that started playing
-  private pendingStreams: { when: number; el: HTMLAudioElement; onStart?: () => void }[] = [];
+  private queue: Queued[] = []; // voice lines waiting for their moment and a free lane
+  private lane = new VoiceLane();
+  /** actual start/end (audio-clock seconds) of every voice line played — for the overlap check */
+  readonly played: { start: number; end: number | null }[] = [];
   private streamTimer: number | null = null;
+  private streamLog = new Map<HTMLAudioElement, { start: number; end: number | null }>();
 
   constructor() {
     this.ctx = new AudioContext();
@@ -77,18 +89,12 @@ export class AudioGraph {
     return p;
   }
 
-  /** Schedule a decoded line relative to the video clock. Returns the plan (late flag). */
+  /** Schedule a decoded line relative to the video clock. Returns the plan (late flag).
+   *  Lines go through one lane, so a voice never starts on top of the previous one. */
   schedule(buffer: AudioBuffer, playAtMedia: number, video: HTMLVideoElement, onStart?: () => void): StartPlan {
     const plan = planStart(playAtMedia, video.currentTime, this.ctx.currentTime, video.playbackRate || 1);
-    const src = this.ctx.createBufferSource();
-    src.buffer = buffer;
-    src.connect(this.voiceGain);
-    src.start(plan.when);
-    if (onStart) {
-      const delayMs = Math.max(0, (plan.when - this.ctx.currentTime) * 1000);
-      window.setTimeout(onStart, delayMs);
-    }
-    this.duck(plan.when, plan.when + buffer.duration);
+    this.queue.push({ when: plan.when, duration: buffer.duration, buffer, onStart });
+    this.pump();
     return plan;
   }
 
@@ -108,33 +114,65 @@ export class AudioGraph {
     el.src = url;
     const node = this.ctx.createMediaElementSource(el);
     node.connect(this.voiceGain);
-    // started by the audio clock (not a wall-clock timer) so a pause holds it back too
-    this.pendingStreams.push({ when: plan.when, el, onStart });
-    this.pumpStreams();
-    el.addEventListener("ended", () => {
+    const done = () => {
       node.disconnect();
-      this.streams.delete(el);
-    });
-    this.duck(plan.when, plan.when + durationEst);
+      if (!this.streams.delete(el)) return;
+      this.lane.closeOpen(this.ctx.currentTime);
+      const rec = this.streamLog.get(el);
+      if (rec) rec.end = this.ctx.currentTime;
+    };
+    el.addEventListener("ended", done);
+    el.addEventListener("error", done);
+    this.queue.push({ when: plan.when, duration: durationEst, el, onStart });
+    this.pump();
     return plan;
   }
 
-  private pumpStreams(): void {
-    if (this.streamTimer !== null) return;
+  /** Start queued lines by the audio clock (not a wall-clock timer, so a pause holds them too):
+   *  the earliest line starts when its moment has come AND the previous voice has finished. */
+  private pump(): void {
+    this.step();
+    if (this.streamTimer !== null || this.queue.length === 0) return;
     this.streamTimer = window.setInterval(() => {
-      if (this.ctx.state !== "running") return;
-      const now = this.ctx.currentTime;
-      const due = this.pendingStreams.filter((p) => p.when <= now + 0.01);
-      this.pendingStreams = this.pendingStreams.filter((p) => p.when > now + 0.01);
-      for (const p of due) {
-        this.streams.add(p.el);
-        void p.el.play().then(() => p.onStart?.()).catch(() => undefined);
-      }
-      if (this.pendingStreams.length === 0 && this.streamTimer !== null) {
+      this.step();
+      if (this.queue.length === 0 && this.streamTimer !== null) {
         window.clearInterval(this.streamTimer);
         this.streamTimer = null;
       }
     }, 15);
+  }
+
+  private step(): void {
+    if (this.ctx.state !== "running") return;
+    this.queue.sort((a, b) => a.when - b.when);
+    for (;;) {
+      const head = this.queue[0];
+      if (!head) return;
+      const now = this.ctx.currentTime;
+      const at = this.lane.startTime(head.when, now);
+      // buffers can be handed to the audio clock a little early (sample-exact start);
+      // streams start "now", so wait until their moment
+      if (at === null || at > now + (head.buffer ? 0.05 : 0.01)) return;
+      this.queue.shift();
+      if (head.buffer) {
+        const src = this.ctx.createBufferSource();
+        src.buffer = head.buffer;
+        src.connect(this.voiceGain);
+        src.start(at);
+        this.lane.occupy(at, head.duration);
+        this.played.push({ start: at, end: at + head.duration });
+        if (head.onStart) window.setTimeout(head.onStart, Math.max(0, (at - now) * 1000));
+      } else if (head.el) {
+        const el = head.el;
+        this.streams.add(el);
+        this.lane.open(now, head.duration * 2 + 4);
+        const rec = { start: now, end: null };
+        this.played.push(rec);
+        this.streamLog.set(el, rec);
+        void el.play().then(() => head.onStart?.()).catch(() => undefined);
+      }
+      this.duck(at, at + head.duration);
+    }
   }
 
   /** Ramp the original down for [start, end] (+150 ms hold), merging with lines already playing. */

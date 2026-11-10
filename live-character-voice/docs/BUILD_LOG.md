@@ -693,3 +693,13 @@ hosted engine as default.
   gone from app; app disk wiped + both restarted → voice back. The Hub backend itself is not yet
   exercised against huggingface.co (needs the owner's token) — check `/api/health` →
   `voice_library.error` after set-up.
+
+## 2026-11-10 — V9b: Voice Studio self set-up; Player voice lane (no overlapping voices)
+- One owner step (secret `HF_TOKEN`): the app creates the library dataset and the private
+  `altercast-voice-studio` Space itself (engine/studio_setup.py; fake-API tests — not yet run
+  against huggingface.co, which needs the owner's token).
+- Overlaps measured in server schedules of recorded sessions: 1–3 of ~60 lines, up to 0.95 s
+  (a streamed line is scheduled before its real length is known). Player now plays voices through
+  one lane (web/src/audio/scheduler.ts `VoiceLane`). Real playback in headless Chromium, session
+  20261110-052729_b6198d: 59 voices, 0 overlaps (its server schedule had one of 0.61 s).
+- Tests: 107 pytest, 17 vitest.

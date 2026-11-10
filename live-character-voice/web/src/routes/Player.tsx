@@ -178,6 +178,7 @@ export function Player() {
       g.setOriginalLevel(s.levels.original);
       g.setVoiceLevel(s.levels.voice);
       graphRef.current = g;
+      (window as unknown as { __lcvPlayed?: unknown }).__lcvPlayed = g.played; // overlap check (tests)
     }
     await graphRef.current.resume();
     sockRef.current?.send({ type: "start" });

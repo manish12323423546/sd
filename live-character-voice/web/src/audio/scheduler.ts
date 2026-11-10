@@ -21,3 +21,35 @@ export function planStart(
   const lateBy = -ahead * playbackRate;
   return { when: ctxTime, late: lateBy > LATE_TOLERANCE_S, lateBy };
 }
+
+/** One voice at a time: a line never starts while the previous one is still sounding.
+ *  Streamed lines have no known length until they end, so they hold the lane "open".
+ *  (Measured before this: 1–3 of 60 lines overlapped the previous voice by up to 0.95 s.) */
+export const LANE_GAP_S = 0.05;
+
+export class VoiceLane {
+  private busyUntil = 0;
+  private openUntil: number | null = null; // a streamed line is playing (safety limit, ctx time)
+
+  /** When a line wanted at `when` may start (ctx time), or null while a streamed line plays. */
+  startTime(when: number, now: number): number | null {
+    if (this.openUntil !== null) {
+      if (now < this.openUntil) return null;
+      this.closeOpen(now); // the stream never reported its end: don't block for ever
+    }
+    return Math.max(when, now, this.busyUntil > 0 ? this.busyUntil + LANE_GAP_S : 0);
+  }
+
+  occupy(at: number, duration: number): void {
+    this.busyUntil = Math.max(this.busyUntil, at + duration);
+  }
+
+  open(now: number, maxDuration: number): void {
+    this.openUntil = now + maxDuration;
+  }
+
+  closeOpen(now: number): void {
+    this.openUntil = null;
+    this.busyUntil = Math.max(this.busyUntil, now);
+  }
+}
