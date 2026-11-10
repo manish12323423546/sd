@@ -21,21 +21,26 @@ while true; do
     if echo "$changed" | grep -q "engine/cli.py"; then make download-models || true; fi
   fi
   [ -f web/dist/index.html ] || (cd web && npm run build)
-  # scored test clips for Studio + Quality Lab (generated once; not stored in git)
-  if [ ! -f data/clips/synthetic_match.mp4 ]; then make synth || true; fi
-  for n in 6 8; do  # many-speaker panels (speaker tracking tests, V7)
-    if [ ! -f "data/clips/synthetic_panel_${n}spk.mp4" ]; then
-      .venv/bin/python scripts/make_synthetic_clip.py --script "data/scripts/synthetic_panel_${n}spk.yaml" \
-        --name "synthetic_panel_${n}spk" || true
-    fi
-  done
-  if [ ! -f data/clips/scenario_comings_goings.mp4 ]; then  # 5 people come and go (V7 scenario)
-    .venv/bin/python scripts/make_synthetic_clip.py --script data/scripts/scenario_comings_goings.yaml \
-      --name scenario_comings_goings || true
-  fi
-  if [ ! -f data/clips/synthetic_match_3spk.mp4 ]; then
-    .venv/bin/python scripts/make_synthetic_clip.py --script data/scripts/synthetic_match_3spk.yaml \
-      --name synthetic_match_3spk || true
+  # scored test clips for the app's Studio + Quality Lab (generated once; not stored in git).
+  # In the BACKGROUND, after the server starts: making them takes ~20 min on a free CPU and
+  # Hugging Face kills a Space that doesn't answer within 30 min. The Voice Studio never needs them.
+  mkdir -p data/clips
+  if [ "${LCV_ROLE:-}" != "studio" ] && [ ! -f data/clips/.synth_done ] \
+     && mkdir data/clips/.synth_lock 2>/dev/null; then  # once per container
+    (
+      sleep 60  # let the engine load its models first
+      [ -f data/clips/synthetic_match.mp4 ] || make synth || true
+      for n in 6 8; do  # many-speaker panels (speaker tracking tests, V7)
+        [ -f "data/clips/synthetic_panel_${n}spk.mp4" ] || .venv/bin/python scripts/make_synthetic_clip.py \
+          --script "data/scripts/synthetic_panel_${n}spk.yaml" --name "synthetic_panel_${n}spk" || true
+      done
+      for c in scenario_comings_goings synthetic_match_3spk; do
+        [ -f "data/clips/$c.mp4" ] || .venv/bin/python scripts/make_synthetic_clip.py \
+          --script "data/scripts/$c.yaml" --name "$c" || true
+      done
+      touch data/clips/.synth_done
+      echo ">>> test clips ready"
+    ) &
   fi
   echo ">>> starting engine at commit $(git rev-parse --short HEAD) on port $PORT"
   .venv/bin/python -m uvicorn app.main:app --host 0.0.0.0 --port "$PORT" --ws-max-size 16777216

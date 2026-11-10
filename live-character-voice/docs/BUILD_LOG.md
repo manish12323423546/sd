@@ -703,3 +703,8 @@ hosted engine as default.
   one lane (web/src/audio/scheduler.ts `VoiceLane`). Real playback in headless Chromium, session
   20261110-052729_b6198d: 59 voices, 0 overlaps (its server schedule had one of 0.61 s).
 - Tests: 107 pytest, 17 vitest.
+
+## 2026-11-10 — fix: a fresh Space timed out at start
+- start.sh generated 5 synthetic test clips (~20+ min on free CPU) BEFORE starting the server, so a
+  new Space (the Voice Studio) failed Hugging Face's 30-min health limit. Clips are now made in the
+  background after the server starts (once per container), and never on the Voice Studio.
