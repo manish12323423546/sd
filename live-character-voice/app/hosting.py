@@ -26,7 +26,8 @@ ORIGIN_REGEX = (
     r"^(chrome-extension://[a-p]{32}"
     r"|https?://(localhost|127\.0\.0\.1)(:\d+)?"
     r"|https://[a-z0-9-]+(\.[a-z0-9-]+)*\.vercel\.app"
-    r"|https://[a-z0-9-]+\.hf\.space)$"
+    r"|https://[a-z0-9-]+\.hf\.space"
+    r"|https://[a-z0-9-]+\.github\.io)$"
 )
 OPEN_PATHS = ("/api/health",)
 PROTECTED = ("/api/", "/media/", "/ws/")

@@ -8,7 +8,7 @@ CLIP ?= data/clips/synthetic_match.mp4
 SYS_PKGS := ffmpeg espeak-ng libsndfile1 sox
 
 
-.PHONY: synth-pilot download-models bench keys check-keys deps doctor extension extension-zip live-test
+.PHONY: synth-pilot download-models bench keys check-keys deps doctor extension extension-zip live-test pages
 .PHONY: setup setup-system setup-python setup-ci setup-web test test-py test-web test-slow \
         lint lint-py lint-web check synth poc dev
 
@@ -136,3 +136,6 @@ dev:
 	MALLOC_ARENA_MAX=2 $(PY) -m uvicorn app.main:app --port 8000 & \
 	(cd web && npm run dev) & \
 	wait
+
+pages:
+	scripts/build_pages.sh

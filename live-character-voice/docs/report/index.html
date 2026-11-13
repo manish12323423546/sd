@@ -1,0 +1,647 @@
+<title>Live Character Voice Report</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: broadcast control-room report — a timecoded rundown down one column, with a live
+   "monitor" diagram, lower-third labels and tally-light status chips. */
+:root {
+  --bg: #f4f6f8; --panel: #ffffff; --ink: #121721; --muted: #5b6575; --line: #dde2e9;
+  --tally: #d7263d; --signal: #0f7b6c; --amber: #b76e00; --cool: #2b5bd7; --chip: #eef1f5;
+  --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0d1117; --panel: #151b24; --ink: #e8edf4; --muted: #95a1b3; --line: #263041;
+  --tally: #ff4d5e; --signal: #3cc7a9; --amber: #f0a73a; --cool: #7aa2ff; --chip: #1d2531; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0d1117; --panel: #151b24; --ink: #e8edf4; --muted: #95a1b3; --line: #263041;
+  --tally: #ff4d5e; --signal: #3cc7a9; --amber: #f0a73a; --cool: #7aa2ff; --chip: #1d2531; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 15px/1.6 var(--body); margin: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1060px; margin: 0 auto; padding-block: 28px 64px; display: flex; flex-direction: column; gap: 56px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: .01em; text-wrap: balance; margin: 0; line-height: 1.05; }
+h1 { font-size: clamp(38px, 6vw, 64px); text-transform: uppercase; }
+h2 { font-size: clamp(28px, 3.6vw, 38px); text-transform: uppercase; }
+h3 { font-size: 21px; }
+p { margin: 0; max-width: 68ch; }
+a { color: var(--cool); }
+.tc { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+.lower { display: inline-flex; align-items: stretch; font-family: var(--display); text-transform: uppercase; letter-spacing: .06em; font-size: 14px; font-weight: 600; }
+.lower b { background: var(--tally); color: #fff; padding: 2px 10px; }
+.lower span { background: var(--ink); color: var(--bg); padding: 2px 10px; }
+section { display: flex; flex-direction: column; gap: 18px; }
+.sec-head { display: flex; flex-direction: column; gap: 8px; border-top: 3px solid var(--ink); padding-top: 14px; }
+.muted { color: var(--muted); }
+.num { font-variant-numeric: tabular-nums; font-family: var(--mono); }
+
+/* hero */
+.hero { display: grid; gap: 22px; }
+.onair { display: inline-flex; gap: 8px; align-items: center; font-family: var(--display); font-weight: 700; letter-spacing: .12em; font-size: 13px; color: var(--tally); text-transform: uppercase; }
+.onair i { width: 10px; height: 10px; border-radius: 50%; background: var(--tally); box-shadow: 0 0 0 4px color-mix(in srgb, var(--tally) 25%, transparent); }
+.linkbox { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; background: var(--panel); border: 1px solid var(--line); padding: 12px 14px; border-radius: 4px; }
+.linkbox code { font-family: var(--mono); font-size: 13.5px; word-break: break-all; }
+.btn { font: 600 13px var(--body); border: 1px solid var(--line); background: var(--chip); color: var(--ink); border-radius: 3px; padding: 6px 10px; cursor: pointer; }
+.btn:hover { border-color: var(--cool); }
+.btn:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--cool); outline-offset: 2px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.tile { background: var(--panel); padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.tile .v { font-family: var(--display); font-size: 36px; font-weight: 700; line-height: 1; }
+.tile .k { font-size: 12.5px; color: var(--muted); }
+.good { color: var(--signal); } .warn { color: var(--amber); } .bad { color: var(--tally); }
+
+/* workflow */
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.tabs button { font: 600 14px var(--display); text-transform: uppercase; letter-spacing: .06em; padding: 8px 14px; border: 1px solid var(--line); background: var(--panel); color: var(--muted); cursor: pointer; border-radius: 2px; }
+.tabs button[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.monitor { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 16px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); gap: 18px; }
+@media (max-width: 820px) { .monitor { grid-template-columns: 1fr; } }
+.flow { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.lane { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 10px; align-items: stretch; }
+.lane-name { font-family: var(--display); text-transform: uppercase; letter-spacing: .08em; font-size: 12.5px; color: var(--muted); padding-top: 10px; border-right: 2px solid var(--line); }
+.nodes { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; min-width: 0; }
+.node { position: relative; font: 500 13px var(--body); text-align: left; padding: 8px 11px; background: var(--chip); border: 1px solid var(--line); border-left: 4px solid var(--c, var(--cool)); color: var(--ink); cursor: pointer; border-radius: 2px; min-width: 0; }
+.node small { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--muted); }
+.node[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.node[aria-pressed="true"] small { color: var(--bg); opacity: .75; }
+.arrow { color: var(--muted); font-family: var(--mono); font-size: 13px; }
+.detail { border-left: 3px solid var(--tally); padding: 4px 0 4px 14px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.detail dl { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 6px 10px; margin: 0; font-size: 13.5px; }
+.detail dt { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; padding-top: 2px; }
+.detail dd { margin: 0; min-width: 0; }
+.legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--muted); }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 6px; background: var(--c); vertical-align: -1px; }
+
+/* timing calculator */
+.calc { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+.ctrls { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.ctrls label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--muted); }
+.ctrls input[type=range] { accent-color: var(--tally); width: 100%; }
+.track-wrap { overflow-x: auto; }
+svg text { font-family: var(--mono); }
+.verdict { font-size: 15px; }
+
+/* chart + tables */
+.chart-wrap { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 16px; overflow-x: auto; }
+.tbl { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 4px; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 640px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--display); text-transform: uppercase; letter-spacing: .06em; font-size: 13px; color: var(--muted); font-weight: 600; }
+td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Q&A */
+details { background: var(--panel); border: 1px solid var(--line); border-radius: 3px; }
+details + details { margin-top: -10px; }
+summary { cursor: pointer; padding: 13px 16px; font-weight: 600; list-style: none; display: flex; gap: 12px; align-items: baseline; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "+"; font-family: var(--mono); color: var(--tally); width: 12px; flex: none; }
+details[open] summary::before { content: "−"; }
+.ans { padding: 0 16px 16px 40px; display: flex; flex-direction: column; gap: 10px; }
+.ans ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
+
+/* status board */
+.board { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.col { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 14px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.col h3 { display: flex; align-items: center; gap: 8px; }
+.col h3 i { width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
+.item { font-size: 13.5px; padding: 7px 0; border-top: 1px solid var(--line); }
+.item b { font-weight: 600; }
+.pill { display: inline-block; font: 600 10.5px var(--mono); text-transform: uppercase; letter-spacing: .05em; padding: 1px 6px; border-radius: 2px; background: var(--chip); color: var(--muted); margin-left: 6px; }
+
+/* roadmap */
+.road { display: grid; gap: 12px; }
+.ra { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 14px 16px; display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 14px; }
+@media (max-width: 680px) { .ra { grid-template-columns: 1fr; } }
+.ra h3 { font-size: 20px; }
+.ra .now { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+.steps { display: grid; gap: 8px; }
+.step { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; font-size: 13.5px; border-top: 1px dashed var(--line); padding-top: 8px; }
+.step .tag { font: 600 11px var(--mono); white-space: nowrap; }
+.note { font-size: 12.5px; color: var(--muted); }
+.steps-num { counter-reset: s; display: grid; gap: 10px; }
+.steps-num > div { counter-increment: s; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; background: var(--panel); border: 1px solid var(--line); padding: 12px; border-radius: 3px; }
+.steps-num > div::before { content: counter(s); font-family: var(--display); font-size: 26px; font-weight: 700; color: var(--tally); line-height: 1; }
+.sources { font-size: 12.5px; color: var(--muted); display: grid; gap: 4px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="onair"><i></i> Status report · 6 Nov 2026 · build 9d98c593</div>
+  <h1>Live Character Voice</h1>
+  <p>Commentary from a match or a live stream is transcribed, each commentator is recognised, the emotion of the moment is read, and every line is spoken again in a character voice exactly when the commentator says it. This report shows how it works, what has been measured, what is done, what is still missing, and how to take it to a client.</p>
+  <div class="linkbox">
+    <span class="lower"><b>Live</b><span>Hosted app</span></span>
+    <code id="applink">https://manishvk18-live-character-voice.hf.space</code>
+    <button class="btn" type="button" data-copy="applink">Copy link</button>
+    <span class="muted" style="font-size:13px">Needs your access code. Updates itself from GitHub.</span>
+  </div>
+  <div class="tiles" aria-label="Latest measured results">
+    <div class="tile"><span class="v good num">0.00 s</span><span class="k">felt delay, median (95 % within 0.49 s)</span></div>
+    <div class="tile"><span class="v good num">87 %</span><span class="k">lines whose voice starts on time (≤ 0.3 s)</span></div>
+    <div class="tile"><span class="v good num">60 / 60</span><span class="k">lines voiced, none dropped</span></div>
+    <div class="tile"><span class="v num">92.2 %</span><span class="k">words the voices actually said correctly</span></div>
+    <div class="tile"><span class="v num">94.3 %</span><span class="k">time the right commentator was detected</span></div>
+  </div>
+  <p class="tc">Source: Quality Lab run 20261106-103032_e2493d · synthetic_match.mp4 (178 s, 2 commentators, 525 words) · Synced mode, 6 s picture delay · Groq + Fish Audio.</p>
+</header>
+
+<!-- ============ WORKFLOW ============ -->
+<section id="workflow">
+  <div class="sec-head">
+    <span class="tc">00:01 · How it works</span>
+    <h2>The workflow, step by step</h2>
+    <p>Pick a path, then click any box to see what it does, which tool runs it, where the code lives and how long it takes (measured).</p>
+  </div>
+  <div class="tabs" role="tablist" aria-label="Workflow">
+    <button role="tab" aria-selected="true" data-flow="video">Uploaded video</button>
+    <button role="tab" aria-selected="false" data-flow="live">Live stream (extension)</button>
+    <button role="tab" aria-selected="false" data-flow="clone">Voice cloning</button>
+    <button role="tab" aria-selected="false" data-flow="host">Hosting & updates</button>
+  </div>
+  <div class="monitor">
+    <div class="flow" id="flow" aria-live="polite"></div>
+    <div class="detail" id="detail"></div>
+  </div>
+  <div class="legend">
+    <span style="--c: var(--cool)">your browser</span>
+    <span style="--c: var(--signal)">engine (our code)</span>
+    <span style="--c: var(--amber)">paid-API / free-tier service</span>
+    <span style="--c: var(--tally)">output you hear / see</span>
+  </div>
+</section>
+
+<!-- ============ TIMING ============ -->
+<section id="timing">
+  <div class="sec-head">
+    <span class="tc">00:02 · Why "Synced" removes the delay</span>
+    <h2>One line, on a stopwatch</h2>
+    <p>A line can only be re-spoken after the commentator has finished it, because the words have to be heard first. Synced mode holds the picture and the original sound back a few seconds, like a TV broadcast delay, so the new voice can start exactly when the original line starts. Move the sliders. The stage times are the measured medians.</p>
+  </div>
+  <div class="calc">
+    <div class="ctrls">
+      <label for="len">Length of the commentator's line: <b class="num" id="lenV">2.6 s</b>
+        <input id="len" type="range" min="0.6" max="6" step="0.1" value="2.6"></label>
+      <label for="dly">Picture delay (0 = Live mode): <b class="num" id="dlyV">6 s</b>
+        <input id="dly" type="range" min="0" max="10" step="0.5" value="6"></label>
+      <label for="slow">Slow moment (95th-percentile stage times)
+        <span><input id="slow" type="checkbox"> use worst-case times</span></label>
+    </div>
+    <div class="track-wrap"><svg id="track" width="100%" viewBox="0 0 900 190" role="img" aria-label="Timeline of one line"></svg></div>
+    <p class="verdict" id="verdict"></p>
+  </div>
+</section>
+
+<!-- ============ RESULTS ============ -->
+<section id="results">
+  <div class="sec-head">
+    <span class="tc">00:03 · Measured results</span>
+    <h2>How the delay came down</h2>
+    <p>Felt delay = how long after the commentator <em>starts</em> a line its new voice starts, as the viewer experiences it. Every bar is a real run on the same 3-minute match.</p>
+  </div>
+  <div class="chart-wrap"><svg id="chart" viewBox="0 0 900 300" width="100%" role="img" aria-label="Felt delay by version"></svg></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Run</th><th>What changed</th><th>Felt delay p50 / p95</th><th>On time</th><th>Dropped</th><th>Words right (spoken)</th><th>Speakers</th></tr></thead>
+      <tbody>
+        <tr><td class="n">070640</td><td>Before (V2): voice made after the line ends, queued, sped up</td><td class="n">6.47 / 14.03 s</td><td class="n">0 %</td><td class="n">1</td><td class="n">92.8 %</td><td class="n">92.9 %</td></tr>
+        <tr><td class="n">071524</td><td>+ each voice fitted to the original line's length</td><td class="n">5.50 / 8.19 s</td><td class="n">0 %</td><td class="n">1</td><td class="n">91.8 %</td><td class="n">92.9 %</td></tr>
+        <tr><td class="n">072008</td><td>+ phrases cut at breaths (= today's Live mode)</td><td class="n">4.91 / 5.92 s</td><td class="n">0 %</td><td class="n">0</td><td class="n">90.7 %</td><td class="n">94.3 %</td></tr>
+        <tr><td class="n">074053</td><td>Synced mode, 6 s picture delay</td><td class="n">0.00 / 0.43 s</td><td class="n">90 %</td><td class="n">0</td><td class="n">91.1 %</td><td class="n">94.3 %</td></tr>
+        <tr><td class="n">075317</td><td>Synced, 3 commentators (1:51 clip)</td><td class="n">0.00 / 0.14 s</td><td class="n">100 %</td><td class="n">0</td><td class="n">90.1 %</td><td class="n">96.0 %</td></tr>
+        <tr><td class="n">083201</td><td>Live-stream input (audio streamed like the extension)</td><td class="n">0.00 / 0.62 s</td><td class="n">85 %</td><td class="n">0</td><td class="n">—</td><td class="n">—</td></tr>
+        <tr><td class="n">103032</td><td>Quality Lab, latest build (rate limiter, voice lane)</td><td class="n">0.00 / 0.49 s</td><td class="n">87 %</td><td class="n">0</td><td class="n">92.2 %</td><td class="n">94.3 %</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">"Words right (spoken)" = 1 − word error rate of the voices re-listened by a second speech model. Live-stream runs have no script, so word accuracy cannot be scored for them. Two ideas were tested and rejected because they measured worse: sending extra audio before each line to the transcriber (15.4 % word errors vs 6.9 %) and re-tuning emotion thresholds (56.5 % vs 55.9 %, no real gain).</p>
+</section>
+
+<!-- ============ SPEAKERS ============ -->
+<section id="speakers">
+  <div class="sec-head">
+    <span class="tc">00:03b · Many speakers</span>
+    <h2>Keeping one label per person</h2>
+    <p>Up to 8 speakers now. Each person gets a bank of voice-prints; a new person is only created from a clear, long, non-shouted line; two labels that turn out to be one person are merged and earlier lines relabelled; known commentators can be enrolled from Voice Lab samples. Live sessions on scored test panels (share of speech time given to the right person):</p>
+  </div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Clip</th><th>Old tracker</th><th>New, live</th><th>New, two-pass (recordings)</th><th>Known commentators (enrolled)</th></tr></thead>
+      <tbody>
+        <tr><td>2 commentators</td><td class="n">94.3 %</td><td class="n">94.3 %</td><td class="n">94.5 %</td><td class="n">—</td></tr>
+        <tr><td>3 commentators</td><td class="n">96.0 %</td><td class="n">96.8 %</td><td class="n">98.5 %</td><td class="n">—</td></tr>
+        <tr><td>6 speakers, one joins late</td><td class="n">40 %</td><td class="n">77.1 %</td><td class="n">85.7 %</td><td class="n good">88.2 %</td></tr>
+        <tr><td>8 speakers, 2 look-alike pairs</td><td class="n">32 %</td><td class="n">66.8 %</td><td class="n">70.4 %</td><td class="n good">89.9 %</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Why it is hard: two lines of the same person score 0.37–0.48 alike typically but as low as 0.02–0.12 when one is shouted; two different people score 0.05 typically but up to 0.66. Bigger voice-print models (WeSpeaker ResNet34 / ResNet293) and noise reduction were tested and measured worse. What helps most: enrol the commentators (10–20 s each). Remaining errors: similar voices, and 3–4 % of speech in phrases that hold two people during very fast hand-overs. Video (who is on screen) helps only for studio panels where speakers are visible; it needs a GPU and is on the roadmap. Full scenario table: docs/SPEAKERS.md.</p>
+</section>
+
+<!-- ============ Q&A ============ -->
+<section id="answers">
+  <div class="sec-head">
+    <span class="tc">00:04 · Your questions</span>
+    <h2>Straight answers</h2>
+  </div>
+
+  <details open><summary>Is the crowd-noise part solved? Can I mute the commentators and keep only the crowd?</summary>
+    <div class="ans">
+      <p><b>Partly, and only for stereo streams.</b> The extension's side panel now has <i>Original sound: Full / Crowd only / Off</i>. "Crowd only" removes whatever is mixed in the centre of a stereo picture. Commentary usually is; the crowd usually is spread wide.</p>
+      <ul>
+        <li>Measured on a stereo test mix: commentary exactly centred → removed completely; 1 dB off-centre → 21 dB quieter (about a tenth as loud); 2 dB → 15 dB quieter. The crowd stays.</li>
+        <li>Mono streams cannot be split this way. The panel detects mono and says so.</li>
+        <li>Clean separation on <i>any</i> stream needs an AI separation model (Demucs/MDX-style, or a paid API such as AudioShake). That needs a GPU server or a paid API. It is on the roadmap below.</li>
+      </ul>
+    </div></details>
+
+  <details><summary>Why did live streams feel slow, with voices on top of each other and lines missing?</summary>
+    <div class="ans">
+      <p>Two causes were found and both are fixed in this build:</p>
+      <ul>
+        <li><b>Free transcription limit.</b> Groq's free tier allows about 20 requests a minute; a busy commentary needs about 20. When refused, lines fell back to a slower local model (up to 5.4 s per line, slower still on the 2-CPU hosted server). The engine now paces itself under the limit and records which engine handled each line ("Groq 54 · local 6" in the latest test). <b>The full fix is Groq's paid tier at $0.04 per hour of audio</b>, which raises the limit about 20×.</li>
+        <li><b>Overlapping voices.</b> A line still being generated was scheduled with an estimated length. When the real voice ran longer, the next one started on top of it. The relay now plays one voice at a time and waits for the real end.</li>
+      </ul>
+      <p class="note">In <b>Live overlay</b> mode a voice always comes about a line late (≈ 5 s), because a line has to be heard before it can be re-spoken. Use the <b>Synced window</b> for on-time voices.</p>
+    </div></details>
+
+  <details><summary>Is the analysis accurate (transcript, speakers, emotion)?</summary>
+    <div class="ans">
+      <ul>
+        <li><b>Transcript:</b> 93.5 % of words right (Groq Whisper large-v3 turbo). Most errors are player names ("Moreau" → "Morrow") and very short shouts ("Save!" → "Dave").</li>
+        <li><b>What the voices say:</b> 92.2 % right, 7 of 525 words missing in the latest test.</li>
+        <li><b>Speakers:</b> 94.3 % (2 commentators), 96.0 % (3 commentators).</li>
+        <li><b>Emotion:</b> 55 % exactly right, 94 % within one level. Calm lines are usually read as normal. This is the weakest part.</li>
+      </ul>
+      <p class="note">These numbers come from synthetic test matches whose script is known. Real broadcasts with crowd noise, accents and overlapping speech will score lower until tested. The Quality Lab can score any clip that has a script, so a few real minutes with a typed transcript would give real-world numbers.</p>
+    </div></details>
+
+  <details><summary>Hugging Face or Vercel: which is better to host on and send to a client?</summary>
+    <div class="ans">
+      <p><b>Hugging Face, for the engine. Vercel can only host the web pages.</b> Vercel Functions cap code at 500 MB (the engine's AI parts are over 1 GB), cut connections after 300 s on your plan, and do not keep one session on one server. The Space runs the whole app on one link, keeps live connections open, and updates itself from GitHub. Vercel adds a faster front page but no new function. Send the Hugging Face link.</p>
+    </div></details>
+
+  <details><summary>If I send the link to someone, what do they get? Do they see my cloned voices?</summary>
+    <div class="ans">
+      <ul>
+        <li>They get everything you see: Studio, Live capture, Voice Lab, Quality Lab, reports, after entering the access code.</li>
+        <li><b>Yes, they see and can use your cloned voices</b>, and they can delete them or add their own. There are no separate accounts yet; everyone shares one workspace.</li>
+        <li>Only one session runs at a time on the free server. A second person gets "busy".</li>
+        <li>Usage spends <b>your</b> Groq and Fish credit.</li>
+        <li>Cloned voices are lost when the Space is rebuilt from scratch (normal updates keep them).</li>
+        <li>For the extension, send them the <code>extension</code> folder (zip). They load it in Chrome with Developer mode and enter the link + access code in the popup's Engine field.</li>
+      </ul>
+    </div></details>
+
+  <details><summary>Does it need post-training (training our own models)?</summary>
+    <div class="ans">
+      <p><b>Not to work, and not for the next big gains.</b> Everything uses ready models plus our logic. Training helps later, only with data you collect:</p>
+      <ul>
+        <li><b>Emotion</b>: the best candidate. Label 1–2 hours of real commentary lines (calm / normal / excited / peak) and train a small classifier on audio and text. Expected to beat today's rule-based 55 % clearly; to be measured.</li>
+        <li><b>Speaker detection</b>: enrol each commentator's voice before the match (built-in "enrollment file") rather than training.</li>
+        <li><b>Names in transcripts</b>: a team/player name list (glossary) and a small text-correction step, rather than training.</li>
+      </ul>
+    </div></details>
+
+  <details><summary>Can you build the rest, or do we need a developer?</summary>
+    <div class="ans">
+      <p>I can build all the code below in this workspace, including accounts, multiple sessions, separation, better speaker detection and a store-ready extension. What needs a person: paying for and creating accounts (Groq paid tier, GPU hosting, Chrome Web Store $5 developer fee, domain), legal and rights decisions (voice consent, broadcast rights), and testing on real matches you are allowed to use. A developer becomes useful once real clients rely on it (on-call fixes, monitoring, scaling across many servers).</p>
+    </div></details>
+</section>
+
+<!-- ============ STATUS BOARD ============ -->
+<section id="status">
+  <div class="sec-head">
+    <span class="tc">00:05 · Done and not done</span>
+    <h2>Where every part stands</h2>
+  </div>
+  <div class="board">
+    <div class="col" style="--c: var(--signal)"><h3><i></i>Done and measured</h3>
+      <div class="item"><b>Re-voicing engine</b>: speech detection, phrases, transcription, speakers, emotion, voices, scheduling, reports</div>
+      <div class="item"><b>Synced mode</b>: felt delay 0.00 s median <span class="pill">measured</span></div>
+      <div class="item"><b>No dropped or rushed lines</b>: voices fitted to each line's length</div>
+      <div class="item"><b>Voice cloning</b>: Instant (15 s) and Professional (1–10 min, likeness 0.68 vs 0.45)</div>
+      <div class="item"><b>Web app</b>: Studio, Live capture, Voice Lab, Quality Lab, player, reports</div>
+      <div class="item"><b>Chrome extension</b>: any tab, Synced window, Live overlay, side panel with live transcript, speakers, controls</div>
+      <div class="item"><b>Hosted</b> on Hugging Face with access code and auto-update</div>
+      <div class="item"><b>Quality Lab</b>: one-click scored tests</div>
+      <div class="item"><b>Up to 8 speakers</b>, merges, known commentators, viewer fixes <span class="pill">measured</span></div>
+      <div class="item"><b>Chrome Web Store package</b>: zip, listing, screenshots, privacy policy</div>
+    </div>
+    <div class="col" style="--c: var(--amber)"><h3><i></i>Works, with limits</h3>
+      <div class="item"><b>Crowd only</b>: stereo streams only</div>
+      <div class="item"><b>Emotion</b>: 55 % exact</div>
+      <div class="item"><b>Free API tiers</b>: Groq ~20 requests/min, Fish free tier</div>
+      <div class="item"><b>Single session</b> per server, shared workspace, no accounts</div>
+      <div class="item"><b>Free Space</b> sleeps after 48 h idle; 2 CPUs</div>
+      <div class="item"><b>Extension</b>: store package ready; you upload it (Google account, $5)</div>
+      <div class="item"><b>8 unknown speakers</b>: 67 % live without enrolment</div>
+      <div class="item"><b>Tab-capture click</b> could not be tested automatically; everything after the click was</div>
+    </div>
+    <div class="col" style="--c: var(--tally)"><h3><i></i>Not built yet</h3>
+      <div class="item"><b>AI crowd/commentary separation</b> for any stream</div>
+      <div class="item"><b>User accounts</b>, private voice libraries, usage limits per client</div>
+      <div class="item"><b>Several sessions at once</b> (queue / multiple workers)</div>
+      <div class="item"><b>Permanent storage</b> for voices and reports</div>
+      <div class="item"><b>Monitoring and alerts</b>, billing</div>
+      <div class="item"><b>Re-broadcast output</b> (RTMP/SRT) without OBS</div>
+      <div class="item"><b>Desktop audio</b> (apps outside Chrome)</div>
+      <div class="item"><b>Real-match accuracy tests</b> (needs licensed footage + transcripts)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROADMAP ============ -->
+<section id="roadmap">
+  <div class="sec-head">
+    <span class="tc">00:06 · How to make it much better</span>
+    <h2>Improvement plan, part by part</h2>
+    <p>"Now" is measured. "Expected" is a target to verify with the Quality Lab after each change, not a promise.</p>
+  </div>
+  <div class="road">
+    <div class="ra"><div><h3>Speaker detection</h3><div class="now">now 94–96 %</div></div><div class="steps">
+      <div class="step"><span>Enrol each commentator before the match (10–20 s of their voice): voices are recognised from the first line instead of being learned on the fly.</span><span class="tag good">free · I can build</span></div>
+      <div class="step"><span>Add a dedicated diarization model (pyannote 3 / NeMo) as a second opinion on hard cases and overlapping speech.</span><span class="tag warn">free, needs more CPU/GPU</span></div>
+      <div class="step"><span>Handle two commentators talking at once (overlap detection), the main cause of the remaining errors.</span><span class="tag good">I can build</span></div>
+      <div class="note">Expected: 97–99 % on matches with enrolled voices.</div></div></div>
+
+    <div class="ra"><div><h3>Transcription</h3><div class="now">now 93.5 % words right</div></div><div class="steps">
+      <div class="step"><span>Groq paid tier: removes the 20/min limit and the slow local fallback. Biggest single fix for live streams.</span><span class="tag warn">$0.04 / audio hour</span></div>
+      <div class="step"><span>Team and player name list per match (glossary, already supported) plus a small text-fix step for names.</span><span class="tag good">free · I can build</span></div>
+      <div class="step"><span>Streaming speech recognition (words while the commentator is still talking, e.g. Deepgram Nova) to cut the Live-mode delay.</span><span class="tag warn">paid API</span></div>
+      <div class="note">Expected: 95–97 % on clean commentary; names mostly right with a glossary.</div></div></div>
+
+    <div class="ra"><div><h3>Voice quality and expression</h3><div class="now">now Fish S2.1 free, 4 emotion levels</div></div><div class="steps">
+      <div class="step"><span>Fish paid API: trained "professional" voices (more faithful clones), higher limits.</span><span class="tag warn">$15 / 1 M characters</span></div>
+      <div class="step"><span>Pick emotion tags from the words as well as the sound (e.g. "Goal!" → shout, "settles" → calm).</span><span class="tag good">free · I can build</span></div>
+      <div class="step"><span>Emotion classifier trained on 1–2 h of labelled real commentary.</span><span class="tag warn">needs labelled data</span></div>
+    </div></div>
+
+    <div class="ra"><div><h3>Crowd separation</h3><div class="now">now stereo trick only</div></div><div class="steps">
+      <div class="step"><span>AI source separation on a GPU server (commentary vs crowd), works on mono too. Fits inside Synced mode's 6 s budget.</span><span class="tag warn">GPU ≈ $0.40 / h (T4)</span></div>
+      <div class="step"><span>Or a separation API (e.g. AudioShake) per minute of audio.</span><span class="tag warn">paid API</span></div>
+    </div></div>
+
+    <div class="ra"><div><h3>Delay</h3><div class="now">Synced 0.00 s · Live ≈ 4.9 s</div></div><div class="steps">
+      <div class="step"><span>Synced is solved. For Live: streaming transcription and starting the voice on the first words of a phrase. Expected Live ≈ 2–3 s.</span><span class="tag warn">paid APIs + work</span></div>
+      <div class="step"><span>Choose the picture delay automatically from measured timing (shorter on calm commentary, longer on busy moments).</span><span class="tag good">I can build</span></div>
+    </div></div>
+
+    <div class="ra"><div><h3>Hosting and scale</h3><div class="now">1 free Space, 1 session</div></div><div class="steps">
+      <div class="step"><span>Persistent storage (voices and reports survive rebuilds) and CPU upgrade.</span><span class="tag warn">Space upgrade</span></div>
+      <div class="step"><span>Accounts and per-client workspaces; usage limits; API keys per client.</span><span class="tag good">I can build</span></div>
+      <div class="step"><span>Several sessions at once: a queue plus more engine servers (one session per 2 CPUs with paid APIs).</span><span class="tag warn">more servers</span></div>
+      <div class="step"><span>Chrome Web Store listing so clients install in one click.</span><span class="tag warn">$5 one-time fee</span></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============ CLIENT ============ -->
+<section id="client">
+  <div class="sec-head">
+    <span class="tc">00:07 · Taking it to a client</span>
+    <h2>What a client sees today, and the next steps</h2>
+    <p>Today it is a strong <b>pilot / demo</b>: it works end to end and is measured, but it is single-user, uses your free API keys and runs one session at a time. Send it as a pilot, not as a finished product.</p>
+  </div>
+  <div class="steps-num">
+    <div><div><b>Send now (pilot).</b> The Hugging Face link plus an access code made for them, and the <code>extension</code> folder as a zip with the 4-step install from its README. They can: upload a match, re-voice it in synced mode, clone a voice with permission, re-voice any live stream in a Chrome tab with the side panel, run a Quality Lab test and read reports.</div></div>
+    <div><div><b>Before a paid client.</b> Groq paid tier (stops slowdowns), Fish paid tier, persistent storage, a separate access code per client, a fresh copy of the Space for them so they don't see your voices.</div></div>
+    <div><div><b>Production.</b> Accounts, several sessions at once, monitoring, Chrome Web Store, AI crowd separation, rights and consent terms. I can build the software; a person handles accounts, payments, legal and on-call support.</div></div>
+  </div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Service</th><th>Free tier (today)</th><th>Paid</th><th>What paying fixes</th></tr></thead>
+      <tbody>
+        <tr><td>Groq Whisper large-v3 turbo</td><td>≈ 20 requests/min, 2,000/day</td><td class="n">$0.04 / audio hour</td><td>Slow or missed lines on busy live commentary</td></tr>
+        <tr><td>Fish Audio S2.1</td><td>s2.1-pro-free, fair use; no trained voices</td><td class="n">$15 / 1 M UTF-8 bytes</td><td>Trained professional voices, limits</td></tr>
+        <tr><td>Hugging Face Space</td><td>CPU basic: 2 vCPU, 16 GB, sleeps after 48 h idle</td><td class="n">CPU upgrade ≈ $0.03 / h · T4 GPU ≈ $0.40 / h</td><td>Speed, always on, AI separation (GPU)</td></tr>
+        <tr><td>Chrome Web Store</td><td>load unpacked (developer mode)</td><td class="n">$5 one-time</td><td>One-click install for clients</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Rough running cost with paid APIs, one hour of busy commentary: Groq ≈ $0.04 + Fish for ≈ 40,000 characters spoken ≈ $0.60 + server time. Check the providers' pages for current prices.</p>
+</section>
+
+<section id="publish">
+  <div class="sec-head">
+    <span class="tc">00:07b · Publishing the extension</span>
+    <h2>So anyone can install it</h2>
+    <p><code>chrome://extensions</code> only manages installed extensions; people find new ones in the <b>Chrome Web Store</b> (works in Chrome, Edge, Brave, Opera, Arc). Publishing needs your Google account and a one-time $5 fee, so the upload is yours; everything else is ready in <code>live-character-voice/extension-store/</code>.</p>
+  </div>
+  <div class="steps-num">
+    <div><div>Open <a href="https://chrome.google.com/webstore/devconsole">chrome.google.com/webstore/devconsole</a>, sign in, pay the $5 registration.</div></div>
+    <div><div><b>New item</b> → upload <code>live-character-voice-extension.zip</code>.</div></div>
+    <div><div>Paste the name, summary, description and permission reasons from <code>LISTING.md</code>; upload the 4 screenshots and the promo tile; privacy policy URL: <code>https://manishvk18-live-character-voice.hf.space/privacy.html</code>.</div></div>
+    <div><div>Choose <b>Unlisted</b> (only people with the link) or <b>Public</b>, give the reviewer an access code, submit. After approval (usually a few days) anyone clicks <b>Add to Chrome</b>. Edge Add-ons is free and takes the same zip.</div></div>
+  </div>
+</section>
+
+<section id="test">
+  <div class="sec-head">
+    <span class="tc">00:08 · Test it yourself</span>
+    <h2>How to check the numbers live</h2>
+  </div>
+  <div class="steps-num">
+    <div><div>Open the hosted link → <b>Quality Lab</b> → pick a scored clip → <b>Run accuracy test</b>. Click <i>Watch and listen to it live</i> to see and hear the run while it is measured.</div></div>
+    <div><div>After about 4 minutes the result appears: felt delay, lines on time, lines voiced, transcription accuracy, what the voices said, speaker and emotion accuracy, which transcriber was used, missing words. Every past test and every session (including live streams) is listed with a link to its full report.</div></div>
+    <div><div>For live streams: start the extension, open its <b>side panel</b>; each line shows when it was voiced and how late. The session then appears in the Quality Lab list with its delay and line counts.</div></div>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="sec-head"><span class="tc">00:09 · Sources for outside facts</span><h2>Sources</h2></div>
+  <div class="sources">
+    <a href="https://vercel.com/docs/functions/websockets">Vercel: WebSockets on Functions (closes at max duration)</a>
+    <a href="https://vercel.com/docs/functions/runtimes/python">Vercel: Python runtime (500 MB bundle limit)</a>
+    <a href="https://groq.com/pricing">Groq pricing (Whisper large-v3 turbo $0.04 / hour)</a>
+    <a href="https://www.developersdigest.tech/rate-limits/groq">Groq free-tier rate limits (third-party summary)</a>
+    <a href="https://docs.fish.audio/developer-guide/models-pricing/pricing-and-rate-limits">Fish Audio API pricing</a>
+    <a href="https://huggingface.co/docs/hub/main/spaces-gpus">Hugging Face Spaces hardware</a>
+    <a href="https://developer.chrome.com/docs/extensions/mv3/screen_capture">Chrome: audio recording and tab capture</a>
+    <span>All performance numbers: runs listed above, files in <code>live-character-voice/outputs/</code> and <code>docs/BUILD_LOG.md</code>.</span>
+  </div>
+</section>
+</div>
+
+<script>
+// ---------------- workflow data ----------------
+const C = { b: "var(--cool)", e: "var(--signal)", a: "var(--amber)", o: "var(--tally)" };
+const FLOWS = {
+  video: [
+    ["Input", [
+      { id: "upload", t: "Upload / pick a match", s: "browser", c: C.b, d: { What: "Pick a clip in Studio (or upload .mp4/.mkv/.mov), cast a voice per commentator, choose Synced or Live.", Tool: "Web app (React)", Where: "web/src/routes/Home.tsx", Time: "—" } },
+      { id: "decode", t: "Decode audio", s: "16 kHz mono", c: C.e, d: { What: "FFmpeg turns the video's sound into 16 kHz mono and feeds it in 250 ms chunks at real speed. Nothing looks ahead: it behaves exactly like a live broadcast.", Tool: "FFmpeg", Where: "engine/ingest/", Time: "real time" } }]],
+    ["Hear", [
+      { id: "vad", t: "Speech detector", s: "Silero VAD", c: C.e, d: { What: "Marks which 32 ms frames contain speech, so crowd noise is not sent for transcription.", Tool: "Silero VAD (free, CPU)", Where: "engine/segment/vad.py", Time: "< 1 ms per frame" } },
+      { id: "phrase", t: "Cut into phrases", s: "breaths, pauses", c: C.e, d: { What: "Closes a line at a 350 ms pause, at a breath (≥ 160 ms) once the phrase is ≥ 2 s, at a shout, at a speaker change, or at 6 s.", Tool: "Our segmenter", Where: "engine/segment/segmenter.py", Time: "end detected 0.48 s after the line (median)" } }]],
+    ["Understand", [
+      { id: "asr", t: "Transcribe", s: "Groq Whisper", c: C.a, d: { What: "Sends the phrase audio to Groq's Whisper large-v3 turbo; falls back to local faster-whisper small.en. A built-in limiter stays under the free 20 requests/min.", Tool: "Groq (free tier) · faster-whisper", Where: "engine/providers/free/asr_groq.py", Time: "0.47 s median", Accuracy: "93.5 % words right" } },
+      { id: "spk", t: "Who is speaking", s: "ECAPA voice-print", c: C.e, d: { What: "Makes a voice-print of the phrase and matches it to the commentators found so far (or starts a new one). Splits a phrase if the voice changes inside it.", Tool: "SpeechBrain ECAPA (free, CPU)", Where: "engine/speakers/", Time: "0.18 s median", Accuracy: "94–96 % of time correct" } },
+      { id: "emo", t: "Emotion", s: "loudness + pitch", c: C.e, d: { What: "Compares the phrase's loudness and pitch with the commentator's own normal level and picks calm, neutral, excited or peak.", Tool: "Our prosody model (librosa)", Where: "engine/providers/free/emotion_prosody.py", Time: "in parallel with transcription", Accuracy: "55 % exact, 94 % within one level" } }]],
+    ["Speak", [
+      { id: "fit", t: "Fit the length", s: "learned pace", c: C.e, d: { What: "Learns how fast each voice speaks and asks for the speed that fits the original line's length, so voices never queue up or get dropped.", Tool: "Our scheduler", Where: "engine/orchestrator.py (_fit_style)", Time: "—" } },
+      { id: "tts", t: "Character voice", s: "Fish Audio S2.1", c: C.a, d: { What: "Fish Audio speaks the line in the cast voice (built-in or your clone) with an emotion tag ([calm], [excited], [shouting]). Audio streams back while it is generated.", Tool: "Fish Audio s2.1-pro-free · Kokoro fallback", Where: "engine/providers/free/tts_fish.py", Time: "first audio 0.79 s, full line 1.9 s (median)" } }]],
+    ["Play", [
+      { id: "sched", t: "Place in time", s: "start + delay", c: C.e, d: { What: "Synced: plays at the line's original start + picture delay. Live: as soon as ready, never on top of the previous voice.", Tool: "Our scheduler", Where: "engine/schedule/scheduler.py", Time: "Synced felt delay 0.00 s median" } },
+      { id: "mix", t: "Mix and play", s: "browser", c: C.o, d: { What: "The player keeps the video in step with the engine clock, plays each voice, lowers the original commentary under it (ducking), shows subtitles.", Tool: "Web Audio API", Where: "web/src/audio/graph.ts, routes/Player.tsx", Time: "voice started within ±23 ms of plan (browser test)" } },
+      { id: "report", t: "Report", s: "metrics", c: C.o, d: { What: "Every session writes a report: delay over time, per-line timings, transcript, speakers, emotions; scored against the script when one exists.", Tool: "Our metrics", Where: "engine/metrics/, app/lab.py", Time: "a few seconds after the end" } }]],
+  ],
+  live: [
+    ["Capture", [
+      { id: "tab", t: "Any Chrome tab", s: "YouTube, Twitch…", c: C.b, d: { What: "Click the extension on the tab playing the stream. Chrome gives its sound (and picture) and mutes the tab, so the extension can replay it under control.", Tool: "chrome.tabCapture (or Live capture page: share-a-tab)", Where: "extension/background.js", Time: "—" } },
+      { id: "worklet", t: "Turn sound into data", s: "16 kHz PCM", c: C.b, d: { What: "An audio worklet converts the tab's sound to 16 kHz mono and sends it every 100 ms over a WebSocket.", Tool: "AudioWorklet", Where: "web/public/pcm-worklet.js", Time: "100 ms chunks" } }]],
+    ["Engine", [
+      { id: "ingest", t: "Live input", s: "clock = samples", c: C.e, d: { What: "The engine's clock counts received samples, so its timeline and the browser's are the same audio, with no wall-clock guessing.", Tool: "Our live source", Where: "engine/ingest/live.py", Time: "—" } },
+      { id: "same", t: "Same pipeline", s: "hear → speak", c: C.e, d: { What: "Exactly the Uploaded-video steps: phrases, Groq transcription, voice-print, emotion, length fit, Fish voice.", Tool: "Groq · ECAPA · Fish", Where: "engine/orchestrator.py", Time: "voice files arrive 1.6 s before needed (median, synced)" } }]],
+    ["You see", [
+      { id: "synced", t: "Synced window", s: "picture held back", c: C.o, d: { What: "A viewer window shows the tab 6 s behind, with the original sound (ducked) and each voice exactly on its line, plus subtitles. The picture delay uses a compressed recording buffer.", Tool: "MediaRecorder → Media Source", Where: "extension/viewer.js, web/src/live/relay.ts", Time: "felt delay 0.00 s, 95 % within 0.5–1.7 s" } },
+      { id: "overlay", t: "Live overlay", s: "on the tab", c: C.o, d: { What: "Stay on the tab: voices play over it, subtitles appear on the page. A line is voiced after it has been said.", Tool: "Offscreen document + content script", Where: "extension/offscreen.js, content.js", Time: "≈ 4–5 s behind each line" } },
+      { id: "panel", t: "Side panel", s: "transcript + controls", c: C.o, d: { What: "Live transcript, who is speaking with match confidence, emotion, voice per commentator, Original sound Full / Crowd only / Off, levels, mute voices, subtitles, stop.", Tool: "Chrome side panel", Where: "extension/sidepanel.js, hub.js", Time: "updates on every line" } }]],
+  ],
+  clone: [
+    ["Sample", [
+      { id: "rec", t: "Upload or record", s: "consent required", c: C.b, d: { What: "Upload audio/video or record in the browser with a reading script. Consent box required.", Tool: "Voice Lab", Where: "web/src/components/voicelab/", Time: "—" } }]],
+    ["Instant", [
+      { id: "inst", t: "Best 15 s", s: "one clip", c: C.e, d: { What: "Picks the steadiest 15 s with the most speech, normalises it and transcribes it.", Tool: "Our picker + Groq", Where: "engine/voices_custom.py", Time: "≈ 5 s", Accuracy: "likeness 0.45 (mixed file)" } }]],
+    ["Professional", [
+      { id: "pro1", t: "Keep main voice", s: "voice-prints", c: C.e, d: { What: "Cuts the recording into utterances, keeps only the main speaker (drops other voices, crowd, music), scores clarity.", Tool: "Silero VAD + ECAPA", Where: "engine/voices_pro.py", Time: "≈ 10 s" } },
+      { id: "pro2", t: "Choose references", s: "steady speech", c: C.e, d: { What: "Sorts calm/normal/excited, picks the steadiest ~12 s as the voice's identity (measured best in every mood), light noise reduction.", Tool: "Our selector + FFmpeg", Where: "engine/voices_pro.py", Time: "≈ 20 s" } },
+      { id: "pro3", t: "Test in every mood", s: "likeness score", c: C.o, d: { What: "Speaks a calm, a normal and an excited test line and compares them with the real voice.", Tool: "Fish Audio + ECAPA", Where: "engine/voices_pro.py", Time: "≈ 10 s", Accuracy: "likeness 0.68 (vs 0.45 instant)" } }]],
+  ],
+  host: [
+    ["Code", [
+      { id: "gh", t: "GitHub branch", s: "every change", c: C.b, d: { What: "All work is pushed to manish12323423546/sd, branch claude/nice-ritchie-5s42u6.", Tool: "Git", Where: "repository", Time: "—" } }]],
+    ["Server", [
+      { id: "space", t: "Hugging Face Space", s: "Docker, free CPU", c: C.e, d: { What: "Builds the engine and web app from GitHub, runs it with your keys as secrets and an access code.", Tool: "HF Spaces (Docker)", Where: "deploy/huggingface/", Time: "first build 15–20 min" } },
+      { id: "auto", t: "Auto-update", s: "every 5 min", c: C.e, d: { What: "The running app checks GitHub every 5 minutes; on a new commit (and no running session) it restarts, pulls the code and rebuilds what changed.", Tool: "start.sh + app/hosting.py", Where: "deploy/huggingface/start.sh", Time: "tested: new commit picked up in < 20 s at a 20 s check interval" } }]],
+    ["Users", [
+      { id: "users", t: "Browser + extension", s: "access code", c: C.o, d: { What: "Anyone with the link and code uses the full app; the extension points to the same link in its Engine settings.", Tool: "Access-code middleware", Where: "app/hosting.py", Time: "—" } }]],
+  ],
+};
+
+const flowEl = document.getElementById("flow");
+const detailEl = document.getElementById("detail");
+function showDetail(n) {
+  detailEl.innerHTML = "";
+  const h = document.createElement("h3"); h.textContent = n.t; detailEl.append(h);
+  const dl = document.createElement("dl");
+  for (const [k, v] of Object.entries(n.d)) {
+    const dt = document.createElement("dt"); dt.textContent = k;
+    const dd = document.createElement("dd"); dd.textContent = v;
+    if (k === "Where") dd.className = "num";
+    dl.append(dt, dd);
+  }
+  detailEl.append(dl);
+}
+function renderFlow(key) {
+  flowEl.innerHTML = "";
+  let first = null;
+  FLOWS[key].forEach(([lane, nodes], li) => {
+    const row = document.createElement("div"); row.className = "lane";
+    const name = document.createElement("div"); name.className = "lane-name"; name.textContent = lane;
+    const box = document.createElement("div"); box.className = "nodes";
+    nodes.forEach((n, i) => {
+      if (i > 0) { const a = document.createElement("span"); a.className = "arrow"; a.textContent = "→"; a.setAttribute("aria-hidden", "true"); box.append(a); }
+      const b = document.createElement("button"); b.type = "button"; b.className = "node"; b.style.setProperty("--c", n.c);
+      b.setAttribute("aria-pressed", "false");
+      b.innerHTML = ""; b.append(document.createTextNode(n.t));
+      const sm = document.createElement("small"); sm.textContent = n.s; b.append(sm);
+      b.addEventListener("click", () => {
+        flowEl.querySelectorAll(".node").forEach((x) => x.setAttribute("aria-pressed", "false"));
+        b.setAttribute("aria-pressed", "true"); showDetail(n);
+      });
+      if (!first) first = [b, n];
+      box.append(b);
+    });
+    row.append(name, box); flowEl.append(row);
+    if (li < FLOWS[key].length - 1) { const d = document.createElement("div"); d.className = "arrow"; d.style.paddingLeft = "36px"; d.textContent = "↓"; d.setAttribute("aria-hidden", "true"); flowEl.append(d); }
+  });
+  if (first) { first[0].setAttribute("aria-pressed", "true"); showDetail(first[1]); }
+}
+document.querySelectorAll("[data-flow]").forEach((t) => t.addEventListener("click", () => {
+  document.querySelectorAll("[data-flow]").forEach((x) => x.setAttribute("aria-selected", "false"));
+  t.setAttribute("aria-selected", "true"); renderFlow(t.dataset.flow);
+}));
+renderFlow("video");
+
+// ---------------- timing calculator (measured medians / p95) ----------------
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const MED = { end: 0.48, asr: 0.47, tts: 0.79, margin: 0.15 };
+const P95 = { end: 0.57, asr: 1.29, tts: 1.04, margin: 0.15 };
+function drawTrack() {
+  const L = +document.getElementById("len").value, D = +document.getElementById("dly").value;
+  const S = document.getElementById("slow").checked ? P95 : MED;
+  document.getElementById("lenV").textContent = `${L.toFixed(1)} s`;
+  document.getElementById("dlyV").textContent = `${D} s`;
+  const ready = L + S.end + S.asr + S.tts + S.margin;     // seconds after the line started
+  const play = Math.max(D, ready);                         // when the voice can start (session time)
+  const felt = Math.max(0, play - D);                      // as the viewer sees it
+  const total = Math.max(12, play + L + 1);
+  const W = 900, x0 = 150, w = W - x0 - 20, sx = (t) => x0 + (t / total) * w;
+  const ink = css("--ink"), muted = css("--muted"), line = css("--line");
+  const rows = [
+    ["Commentator speaks", 0, L, css("--cool")],
+    ["Line end detected", L, L + S.end, css("--muted")],
+    ["Transcribed (Groq)", L + S.end, L + S.end + S.asr, css("--amber")],
+    ["First voice audio (Fish)", L + S.end + S.asr, ready, css("--amber")],
+    [D > 0 ? `Viewer sees line (+${D} s)` : "Viewer sees line (live)", D, D + L, css("--signal")],
+    ["New voice plays", play, play + L, css("--tally")],
+  ];
+  let svg = "";
+  for (let t = 0; t <= total; t += total > 14 ? 2 : 1) {
+    svg += `<line x1="${sx(t)}" y1="8" x2="${sx(t)}" y2="168" stroke="${line}" stroke-width="1"/>`;
+    svg += `<text x="${sx(t)}" y="184" fill="${muted}" font-size="11" text-anchor="middle">${t}s</text>`;
+  }
+  rows.forEach(([name, a, b, col], i) => {
+    const y = 14 + i * 26;
+    svg += `<text x="0" y="${y + 13}" fill="${ink}" font-size="11.5">${name}</text>`;
+    svg += `<rect x="${sx(a)}" y="${y}" width="${Math.max(3, sx(b) - sx(a))}" height="18" fill="${col}" rx="2"/>`;
+  });
+  document.getElementById("track").innerHTML = svg;
+  const v = document.getElementById("verdict");
+  v.innerHTML = felt <= 0.3
+    ? `<b class="good">On time.</b> The voice is ready ${ready.toFixed(2)} s after the line starts, inside the ${D} s picture delay, so it starts exactly with the line the viewer sees.`
+    : `<b class="${felt > 2 ? "bad" : "warn"}">${felt.toFixed(2)} s late.</b> The voice needs ${ready.toFixed(2)} s from the line's start${D > 0 ? `, more than the ${D} s picture delay` : ""}. ${D > 0 ? "Raise the delay or shorten phrases." : "In Live mode a voice is always at least one line late."}`;
+}
+["len", "dly", "slow"].forEach((id) => document.getElementById(id).addEventListener("input", drawTrack));
+drawTrack();
+
+// ---------------- results chart (felt delay p50 / p95) ----------------
+function drawChart() {
+  const data = [["Before", 6.47, 14.03], ["+ length fit", 5.50, 8.19], ["+ phrases (Live)", 4.91, 5.92], ["Synced 6 s", 0.00, 0.43], ["Synced, 3 spk", 0.00, 0.14], ["Live stream in", 0.00, 0.62], ["Latest (Lab)", 0.00, 0.49]];
+  const W = 900, H = 300, x0 = 48, y0 = 250, top = 20, max = 15, sy = (v) => y0 - (v / max) * (y0 - top);
+  const ink = css("--ink"), muted = css("--muted"), line = css("--line"), p50c = css("--tally"), p95c = css("--cool");
+  let s = "";
+  for (let v = 0; v <= max; v += 3) {
+    s += `<line x1="${x0}" x2="${W - 10}" y1="${sy(v)}" y2="${sy(v)}" stroke="${line}"/>`;
+    s += `<text x="${x0 - 8}" y="${sy(v) + 4}" fill="${muted}" font-size="11" text-anchor="end">${v}s</text>`;
+  }
+  const bw = (W - x0 - 20) / data.length;
+  data.forEach(([name, a, b], i) => {
+    const cx = x0 + i * bw + bw / 2;
+    s += `<rect x="${cx - 26}" y="${sy(b)}" width="22" height="${y0 - sy(b)}" fill="${p95c}" opacity=".55"/>`;
+    s += `<rect x="${cx + 2}" y="${sy(a)}" width="22" height="${Math.max(1.5, y0 - sy(a))}" fill="${p50c}"/>`;
+    s += `<text x="${cx - 15}" y="${sy(b) - 5}" fill="${ink}" font-size="10.5" text-anchor="middle">${b.toFixed(2)}</text>`;
+    s += `<text x="${cx + 13}" y="${sy(a) - 5}" fill="${ink}" font-size="10.5" text-anchor="middle">${a.toFixed(2)}</text>`;
+    s += `<text x="${cx}" y="${y0 + 18}" fill="${muted}" font-size="11" text-anchor="middle">${name}</text>`;
+  });
+  s += `<rect x="${W - 260}" y="6" width="10" height="10" fill="${p50c}"/><text x="${W - 245}" y="15" fill="${ink}" font-size="11">median felt delay</text>`;
+  s += `<rect x="${W - 130}" y="6" width="10" height="10" fill="${p95c}" opacity=".55"/><text x="${W - 115}" y="15" fill="${ink}" font-size="11">95th percentile</text>`;
+  document.getElementById("chart").innerHTML = s;
+}
+drawChart();
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { drawTrack(); drawChart(); });
+new MutationObserver(() => { drawTrack(); drawChart(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+// copy buttons
+document.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", () => {
+  const el = document.getElementById(b.dataset.copy);
+  navigator.clipboard.writeText(el.textContent).then(() => { b.textContent = "Copied"; setTimeout(() => (b.textContent = "Copy link"), 1500); })
+    .catch(() => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); });
+}));
+</script>

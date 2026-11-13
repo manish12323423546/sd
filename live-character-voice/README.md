@@ -1,4 +1,29 @@
-# Live Sports Character Voice
+<p align="center"><img src="brand/wordmark-dark.png" alt="Altercast" width="420"></p>
+
+# Altercast — Live Character Voice
+
+**Any commentary. Any character. Live.** Altercast listens to sports commentary, turns it into
+text, works out who is speaking and how it felt, and re-speaks every line in a character voice —
+in sync with the picture, with the crowd kept.
+
+| | Where |
+|---|---|
+| Web app (GitHub Pages) | https://manish12323423546.github.io/altercast/ |
+| Engine + full app (Hugging Face Space) | https://manishvk18-live-character-voice.hf.space |
+| Voice Studio (private, owner only) | https://huggingface.co/spaces/manishvk18/altercast-voice-studio |
+| Chrome extension (store package + listing) | [`extension-store/`](extension-store/) · source [`extension/`](extension/) |
+| Interactive project report | [`docs/report/`](docs/report/index.html) · on the website: `/altercast/report/` |
+| Promo video | [`promo/altercast-promo.mp4`](promo/altercast-promo.mp4) |
+| Brand (logo, colours, store graphics) | [`brand/`](brand/) · [`brand/BRAND.md`](brand/BRAND.md) |
+| Build log (every measured result) | [`docs/BUILD_LOG.md`](docs/BUILD_LOG.md) |
+| Hosting · voice library · state machines | [`docs/HOSTING.md`](docs/HOSTING.md) · [`docs/VOICE_LIBRARY.md`](docs/VOICE_LIBRARY.md) · [`docs/STATE_MACHINES.md`](docs/STATE_MACHINES.md) |
+
+The website is static (GitHub Pages can't run the Python engine); it talks to the engine on the
+Hugging Face Space and asks for the access code. Rebuild it with `make pages`.
+
+---
+
+## About the engine
 
 Listens to sports commentary, turns it into text, works out which commentator is speaking, reads
 the emotion of the moment, re-speaks every line in an original character voice and places it back

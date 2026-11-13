@@ -72,7 +72,7 @@ export function App() {
       <header className="sticky top-0 z-30 border-b border-white/[0.06] bg-bg/70 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6">
           <Link to="/" className="flex items-center gap-2.5" aria-label="Altercast home">
-            <img src="/favicon.svg" alt="" className="brand-mark h-8 w-8" />
+            <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" className="brand-mark h-8 w-8" />
             <span className="hidden leading-none sm:block">
               <span className="block font-display text-[17px] font-bold tracking-[-0.03em]">altercast</span>
               <span className="mt-0.5 block text-[10px] font-medium uppercase tracking-[0.16em] text-muted">{role === "studio" ? "Voice Studio · private" : "Live Character Voice"}</span>

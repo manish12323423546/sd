@@ -85,7 +85,7 @@ export function LiveCapture() {
       voiceMap: Object.fromEntries(ids.filter((k) => cast[k]).map((k) => [k, cast[k] as string])),
       label: stream.getVideoTracks()[0]?.label || "tab",
       knownVoices: known,
-      workletUrl: "/pcm-worklet.js",
+      workletUrl: `${import.meta.env.BASE_URL}pcm-worklet.js`,
       onMessage: (m) => useSession.getState().apply(m),
       onStatus: setStatus,
     });

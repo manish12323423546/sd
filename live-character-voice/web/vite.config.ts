@@ -3,6 +3,8 @@ import { defineConfig } from "vite";
 
 // Dev server proxies the API and WebSocket to FastAPI on :8000 (docs/02, docs/11).
 export default defineConfig({
+  // VITE_BASE: the path the app is served under, e.g. "/altercast/" on GitHub Pages (default "/")
+  base: (globalThis as { process?: { env: Record<string, string | undefined> } }).process?.env.VITE_BASE ?? "/",
   plugins: [react()],
   server: {
     port: 5173,

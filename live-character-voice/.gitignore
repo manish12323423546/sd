@@ -51,3 +51,4 @@ data/voices/
 
 # Fish previews are made at startup (and may contain your cloned voice)
 media/previews/*.fish.wav
+dist-pages/

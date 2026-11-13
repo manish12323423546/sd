@@ -708,3 +708,11 @@ hosted engine as default.
 - start.sh generated 5 synthetic test clips (~20+ min on free CPU) BEFORE starting the server, so a
   new Space (the Voice Studio) failed Hugging Face's 30-min health limit. Clips are now made in the
   background after the server starts (once per container), and never on the Voice Studio.
+
+## 2026-11-13 — GitHub repository + GitHub Pages website
+- Web app builds for a sub-path (`VITE_BASE`, router basename, asset paths); engine CORS allows
+  `*.github.io`. `make pages` → static site: app (talks to the HF engine, asks for the access
+  code), `/report/` (interactive project report, now in docs/report/), `/download/` (extension zip,
+  promo video). Checked in headless Chromium: loads, reaches the engine, deep links work.
+- README front page links every part. Standalone repository `altercast` = this folder with its
+  full history (git subtree split).
